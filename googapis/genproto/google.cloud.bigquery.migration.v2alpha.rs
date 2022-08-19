@@ -179,6 +179,21 @@ pub mod migration_workflow {
         /// scheduled.
         Completed = 4,
     }
+    impl State {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                State::Unspecified => "STATE_UNSPECIFIED",
+                State::Draft => "DRAFT",
+                State::Running => "RUNNING",
+                State::Paused => "PAUSED",
+                State::Completed => "COMPLETED",
+            }
+        }
+    }
 }
 /// A single task for a migration which has details about the configuration of
 /// the task.
@@ -228,6 +243,23 @@ pub mod migration_task {
         Succeeded = 5,
         /// The task finished unsuccessfully.
         Failed = 6,
+    }
+    impl State {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                State::Unspecified => "STATE_UNSPECIFIED",
+                State::Pending => "PENDING",
+                State::Orchestrating => "ORCHESTRATING",
+                State::Running => "RUNNING",
+                State::Paused => "PAUSED",
+                State::Succeeded => "SUCCEEDED",
+                State::Failed => "FAILED",
+            }
+        }
     }
 }
 /// A subtask for a migration which carries details about the configuration of
@@ -295,6 +327,22 @@ pub mod migration_subtask {
         /// The subtask is paused, i.e., it will not be scheduled. If it was already
         /// assigned,it might still finish but no new lease renewals will be granted.
         Paused = 5,
+    }
+    impl State {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                State::Unspecified => "STATE_UNSPECIFIED",
+                State::Active => "ACTIVE",
+                State::Running => "RUNNING",
+                State::Succeeded => "SUCCEEDED",
+                State::Failed => "FAILED",
+                State::Paused => "PAUSED",
+            }
+        }
     }
 }
 /// Request to create a migration workflow resource.
@@ -421,6 +469,7 @@ pub struct ListMigrationSubtasksResponse {
 pub mod migration_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Service to handle EDW migrations.
     #[derive(Debug, Clone)]
     pub struct MigrationServiceClient<T> {
@@ -435,6 +484,10 @@ pub mod migration_service_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -456,19 +509,19 @@ pub mod migration_service_client {
         {
             MigrationServiceClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Creates a migration workflow.
@@ -646,6 +699,18 @@ pub mod translate_query_request {
         /// Teradata SQL.
         Teradata = 1,
     }
+    impl SqlTranslationSourceDialect {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                SqlTranslationSourceDialect::Unspecified => "SQL_TRANSLATION_SOURCE_DIALECT_UNSPECIFIED",
+                SqlTranslationSourceDialect::Teradata => "TERADATA",
+            }
+        }
+    }
 }
 /// The response of translating a SQL query to Standard SQL.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -700,6 +765,19 @@ pub mod sql_translation_error {
         /// translate.
         UnsupportedSqlFunction = 2,
     }
+    impl SqlTranslationErrorType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                SqlTranslationErrorType::Unspecified => "SQL_TRANSLATION_ERROR_TYPE_UNSPECIFIED",
+                SqlTranslationErrorType::SqlParseError => "SQL_PARSE_ERROR",
+                SqlTranslationErrorType::UnsupportedSqlFunction => "UNSUPPORTED_SQL_FUNCTION",
+            }
+        }
+    }
 }
 /// The detailed warning object if the SQL translation job is completed but not
 /// semantically correct.
@@ -714,6 +792,7 @@ pub struct SqlTranslationWarning {
 pub mod sql_translation_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Provides other SQL dialects to GoogleSQL translation operations.
     #[derive(Debug, Clone)]
     pub struct SqlTranslationServiceClient<T> {
@@ -728,6 +807,10 @@ pub mod sql_translation_service_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -749,19 +832,19 @@ pub mod sql_translation_service_client {
         {
             SqlTranslationServiceClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Translates input queries from source dialects to GoogleSQL.

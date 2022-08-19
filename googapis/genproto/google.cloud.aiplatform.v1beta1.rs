@@ -17,6 +17,23 @@ pub enum AcceleratorType {
     /// Nvidia Tesla A100 GPU.
     NvidiaTeslaA100 = 8,
 }
+impl AcceleratorType {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            AcceleratorType::Unspecified => "ACCELERATOR_TYPE_UNSPECIFIED",
+            AcceleratorType::NvidiaTeslaK80 => "NVIDIA_TESLA_K80",
+            AcceleratorType::NvidiaTeslaP100 => "NVIDIA_TESLA_P100",
+            AcceleratorType::NvidiaTeslaV100 => "NVIDIA_TESLA_V100",
+            AcceleratorType::NvidiaTeslaP4 => "NVIDIA_TESLA_P4",
+            AcceleratorType::NvidiaTeslaT4 => "NVIDIA_TESLA_T4",
+            AcceleratorType::NvidiaTeslaA100 => "NVIDIA_TESLA_A100",
+        }
+    }
+}
 /// References an API call. It contains more information about long running
 /// operation and Jobs that are triggered by the API call.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -92,12 +109,12 @@ pub struct Annotation {
     /// and are immutable. Following system labels exist for each Annotation:
     ///
     /// * "aiplatform.googleapis.com/annotation_set_name":
-    ///   optional, name of the UI's annotation set this Annotation belongs to.
-    ///   If not set, the Annotation is not visible in the UI.
+    ///    optional, name of the UI's annotation set this Annotation belongs to.
+    ///    If not set, the Annotation is not visible in the UI.
     ///
     /// * "aiplatform.googleapis.com/payload_schema":
-    ///   output only, its value is the \[payload_schema's][google.cloud.aiplatform.v1beta1.Annotation.payload_schema_uri\]
-    ///   title.
+    ///    output only, its value is the \[payload_schema's][google.cloud.aiplatform.v1beta1.Annotation.payload_schema_uri\]
+    ///    title.
     #[prost(map="string, string", tag="6")]
     pub labels: ::std::collections::HashMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
 }
@@ -219,6 +236,19 @@ pub mod artifact {
         /// A state indicating that the Artifact should exist, unless something
         /// external to the system deletes it.
         Live = 2,
+    }
+    impl State {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                State::Unspecified => "STATE_UNSPECIFIED",
+                State::Pending => "PENDING",
+                State::Live => "LIVE",
+            }
+        }
     }
 }
 /// Success and error statistics of processing multiple entities
@@ -465,6 +495,19 @@ pub mod explanation_metadata {
                 /// the region.
                 Outlines = 2,
             }
+            impl Type {
+                /// String value of the enum field names used in the ProtoBuf definition.
+                ///
+                /// The values are not transformed in any way and thus are considered stable
+                /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+                pub fn as_str_name(&self) -> &'static str {
+                    match self {
+                        Type::Unspecified => "TYPE_UNSPECIFIED",
+                        Type::Pixels => "PIXELS",
+                        Type::Outlines => "OUTLINES",
+                    }
+                }
+            }
             /// Whether to only highlight pixels with positive contributions, negative
             /// or both. Defaults to POSITIVE.
             #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -480,6 +523,20 @@ pub mod explanation_metadata {
                 Negative = 2,
                 /// Shows both positive and negative attributions.
                 Both = 3,
+            }
+            impl Polarity {
+                /// String value of the enum field names used in the ProtoBuf definition.
+                ///
+                /// The values are not transformed in any way and thus are considered stable
+                /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+                pub fn as_str_name(&self) -> &'static str {
+                    match self {
+                        Polarity::Unspecified => "POLARITY_UNSPECIFIED",
+                        Polarity::Positive => "POSITIVE",
+                        Polarity::Negative => "NEGATIVE",
+                        Polarity::Both => "BOTH",
+                    }
+                }
             }
             /// The color scheme used for highlighting areas.
             #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -502,6 +559,23 @@ pub mod explanation_metadata {
                 /// PiYG palette.
                 PinkWhiteGreen = 5,
             }
+            impl ColorMap {
+                /// String value of the enum field names used in the ProtoBuf definition.
+                ///
+                /// The values are not transformed in any way and thus are considered stable
+                /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+                pub fn as_str_name(&self) -> &'static str {
+                    match self {
+                        ColorMap::Unspecified => "COLOR_MAP_UNSPECIFIED",
+                        ColorMap::PinkGreen => "PINK_GREEN",
+                        ColorMap::Viridis => "VIRIDIS",
+                        ColorMap::Red => "RED",
+                        ColorMap::Green => "GREEN",
+                        ColorMap::RedGreen => "RED_GREEN",
+                        ColorMap::PinkWhiteGreen => "PINK_WHITE_GREEN",
+                    }
+                }
+            }
             /// How the original image is displayed in the visualization.
             #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
             #[repr(i32)]
@@ -518,6 +592,21 @@ pub mod explanation_metadata {
                 /// The attributions are used as a mask to reveal predictive parts of
                 /// the image and hide the un-predictive parts.
                 MaskBlack = 4,
+            }
+            impl OverlayType {
+                /// String value of the enum field names used in the ProtoBuf definition.
+                ///
+                /// The values are not transformed in any way and thus are considered stable
+                /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+                pub fn as_str_name(&self) -> &'static str {
+                    match self {
+                        OverlayType::Unspecified => "OVERLAY_TYPE_UNSPECIFIED",
+                        OverlayType::None => "NONE",
+                        OverlayType::Original => "ORIGINAL",
+                        OverlayType::Grayscale => "GRAYSCALE",
+                        OverlayType::MaskBlack => "MASK_BLACK",
+                    }
+                }
             }
         }
         /// Defines how a feature is encoded. Defaults to IDENTITY.
@@ -569,12 +658,29 @@ pub mod explanation_metadata {
             /// ```
             /// input = ["This", "is", "a", "test", "."]
             /// encoded = [[0.1, 0.2, 0.3, 0.4, 0.5],
-            ///            [0.2, 0.1, 0.4, 0.3, 0.5],
-            ///            [0.5, 0.1, 0.3, 0.5, 0.4],
-            ///            [0.5, 0.3, 0.1, 0.2, 0.4],
-            ///            [0.4, 0.3, 0.2, 0.5, 0.1]]
+            ///             [0.2, 0.1, 0.4, 0.3, 0.5],
+            ///             [0.5, 0.1, 0.3, 0.5, 0.4],
+            ///             [0.5, 0.3, 0.1, 0.2, 0.4],
+            ///             [0.4, 0.3, 0.2, 0.5, 0.1]]
             /// ```
             ConcatEmbedding = 6,
+        }
+        impl Encoding {
+            /// String value of the enum field names used in the ProtoBuf definition.
+            ///
+            /// The values are not transformed in any way and thus are considered stable
+            /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+            pub fn as_str_name(&self) -> &'static str {
+                match self {
+                    Encoding::Unspecified => "ENCODING_UNSPECIFIED",
+                    Encoding::Identity => "IDENTITY",
+                    Encoding::BagOfFeatures => "BAG_OF_FEATURES",
+                    Encoding::BagOfFeaturesSparse => "BAG_OF_FEATURES_SPARSE",
+                    Encoding::Indicator => "INDICATOR",
+                    Encoding::CombinedEmbedding => "COMBINED_EMBEDDING",
+                    Encoding::ConcatEmbedding => "CONCAT_EMBEDDING",
+                }
+            }
         }
     }
     /// Metadata of the prediction output to be explained.
@@ -708,10 +814,10 @@ pub struct ContainerRegistryDestination {
     /// Accepted forms:
     ///
     /// *  Google Container Registry path. For example:
-    ///    `gcr.io/projectId/imageName:tag`.
+    ///     `gcr.io/projectId/imageName:tag`.
     ///
     /// *  Artifact Registry path. For example:
-    ///    `us-central1-docker.pkg.dev/projectId/repoName/imageName:tag`.
+    ///     `us-central1-docker.pkg.dev/projectId/repoName/imageName:tag`.
     ///
     /// If a tag is not specified, "latest" will be used as the default tag.
     #[prost(string, tag="1")]
@@ -794,17 +900,17 @@ pub struct Attribution {
     ///
     /// The format of the value is determined by the feature's input format:
     ///
-    ///   * If the feature is a scalar value, the attribution value is a
-    ///     [floating number]\[google.protobuf.Value.number_value\].
+    ///    * If the feature is a scalar value, the attribution value is a
+    ///      [floating number]\[google.protobuf.Value.number_value\].
     ///
-    ///   * If the feature is an array of scalar values, the attribution value is
-    ///     an \[array][google.protobuf.Value.list_value\].
+    ///    * If the feature is an array of scalar values, the attribution value is
+    ///      an \[array][google.protobuf.Value.list_value\].
     ///
-    ///   * If the feature is a struct, the attribution value is a
-    ///     \[struct][google.protobuf.Value.struct_value\]. The keys in the
-    ///     attribution value struct are the same as the keys in the feature
-    ///     struct. The formats of the values in the attribution struct are
-    ///     determined by the formats of the values in the feature struct.
+    ///    * If the feature is a struct, the attribution value is a
+    ///      \[struct][google.protobuf.Value.struct_value\]. The keys in the
+    ///      attribution value struct are the same as the keys in the feature
+    ///      struct. The formats of the values in the attribution struct are
+    ///      determined by the formats of the values in the feature struct.
     ///
     /// The \[ExplanationMetadata.feature_attributions_schema_uri][google.cloud.aiplatform.v1beta1.ExplanationMetadata.feature_attributions_schema_uri\] field,
     /// pointed to by the \[ExplanationSpec][google.cloud.aiplatform.v1beta1.ExplanationSpec\] field of the
@@ -1136,6 +1242,26 @@ pub enum JobState {
     /// The job has expired.
     Expired = 9,
 }
+impl JobState {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            JobState::Unspecified => "JOB_STATE_UNSPECIFIED",
+            JobState::Queued => "JOB_STATE_QUEUED",
+            JobState::Pending => "JOB_STATE_PENDING",
+            JobState::Running => "JOB_STATE_RUNNING",
+            JobState::Succeeded => "JOB_STATE_SUCCEEDED",
+            JobState::Failed => "JOB_STATE_FAILED",
+            JobState::Cancelling => "JOB_STATE_CANCELLING",
+            JobState::Cancelled => "JOB_STATE_CANCELLED",
+            JobState::Paused => "JOB_STATE_PAUSED",
+            JobState::Expired => "JOB_STATE_EXPIRED",
+        }
+    }
+}
 /// Specification of a single machine.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MachineSpec {
@@ -1435,6 +1561,19 @@ pub mod model_monitoring_objective_config {
                 /// Predictions are in BigQuery.
                 Bigquery = 3,
             }
+            impl PredictionFormat {
+                /// String value of the enum field names used in the ProtoBuf definition.
+                ///
+                /// The values are not transformed in any way and thus are considered stable
+                /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+                pub fn as_str_name(&self) -> &'static str {
+                    match self {
+                        PredictionFormat::Unspecified => "PREDICTION_FORMAT_UNSPECIFIED",
+                        PredictionFormat::Jsonl => "JSONL",
+                        PredictionFormat::Bigquery => "BIGQUERY",
+                    }
+                }
+            }
             /// The configuration specifying of BatchExplain job output. This can be
             /// used to generate the baseline of feature attribution scores.
             #[derive(Clone, PartialEq, ::prost::Oneof)]
@@ -1484,10 +1623,10 @@ pub mod threshold_config {
     pub enum Threshold {
         /// Specify a threshold value that can trigger the alert.
         /// If this threshold config is for feature distribution distance:
-        ///   1. For categorical feature, the distribution distance is calculated by
-        ///      L-inifinity norm.
-        ///   2. For numerical feature, the distribution distance is calculated by
-        ///      Jensen–Shannon divergence.
+        ///    1. For categorical feature, the distribution distance is calculated by
+        ///       L-inifinity norm.
+        ///    2. For numerical feature, the distribution distance is calculated by
+        ///       Jensen–Shannon divergence.
         /// Each feature must have a non-zero threshold if they need to be monitored.
         /// Otherwise no alert will be triggered for that feature.
         #[prost(double, tag="1")]
@@ -1572,12 +1711,12 @@ pub struct BatchPredictionJob {
     /// `predictions_format` field of the
     /// \[BatchPredictionJob.output_config][google.cloud.aiplatform.v1beta1.BatchPredictionJob.output_config\] object:
     ///
-    ///  * `bigquery`: output includes a column named `explanation`. The value
-    ///    is a struct that conforms to the \[Explanation][google.cloud.aiplatform.v1beta1.Explanation\] object.
-    ///  * `jsonl`: The JSON objects on each line include an additional entry
-    ///    keyed `explanation`. The value of the entry is a JSON object that
-    ///    conforms to the \[Explanation][google.cloud.aiplatform.v1beta1.Explanation\] object.
-    ///  * `csv`: Generating explanations for CSV format is not supported.
+    ///   * `bigquery`: output includes a column named `explanation`. The value
+    ///     is a struct that conforms to the \[Explanation][google.cloud.aiplatform.v1beta1.Explanation\] object.
+    ///   * `jsonl`: The JSON objects on each line include an additional entry
+    ///     keyed `explanation`. The value of the entry is a JSON object that
+    ///     conforms to the \[Explanation][google.cloud.aiplatform.v1beta1.Explanation\] object.
+    ///   * `csv`: Generating explanations for CSV format is not supported.
     ///
     /// If this field is set to true, either the \[Model.explanation_spec][google.cloud.aiplatform.v1beta1.Model.explanation_spec\] or
     /// \[explanation_spec][google.cloud.aiplatform.v1beta1.BatchPredictionJob.explanation_spec\] must be populated.
@@ -1952,17 +2091,17 @@ pub struct CustomJobSpec {
     /// The following Vertex AI environment variables will be passed to
     /// containers or python modules when this field is set:
     ///
-    ///   For CustomJob:
+    ///    For CustomJob:
     ///
-    ///   * AIP_MODEL_DIR = `<base_output_directory>/model/`
-    ///   * AIP_CHECKPOINT_DIR = `<base_output_directory>/checkpoints/`
-    ///   * AIP_TENSORBOARD_LOG_DIR = `<base_output_directory>/logs/`
+    ///    * AIP_MODEL_DIR = `<base_output_directory>/model/`
+    ///    * AIP_CHECKPOINT_DIR = `<base_output_directory>/checkpoints/`
+    ///    * AIP_TENSORBOARD_LOG_DIR = `<base_output_directory>/logs/`
     ///
-    ///   For CustomJob backing a Trial of HyperparameterTuningJob:
+    ///    For CustomJob backing a Trial of HyperparameterTuningJob:
     ///
-    ///   * AIP_MODEL_DIR = `<base_output_directory>/<trial_id>/model/`
-    ///   * AIP_CHECKPOINT_DIR = `<base_output_directory>/<trial_id>/checkpoints/`
-    ///   * AIP_TENSORBOARD_LOG_DIR = `<base_output_directory>/<trial_id>/logs/`
+    ///    * AIP_MODEL_DIR = `<base_output_directory>/<trial_id>/model/`
+    ///    * AIP_CHECKPOINT_DIR = `<base_output_directory>/<trial_id>/checkpoints/`
+    ///    * AIP_TENSORBOARD_LOG_DIR = `<base_output_directory>/<trial_id>/logs/`
     #[prost(message, optional, tag="6")]
     pub base_output_directory: ::core::option::Option<GcsDestination>,
     /// Optional. The name of a Vertex AI \[Tensorboard][google.cloud.aiplatform.v1beta1.Tensorboard\] resource to which this CustomJob
@@ -2205,7 +2344,7 @@ pub struct DataLabelingJob {
     /// and are immutable. Following system labels exist for each DataLabelingJob:
     ///
     /// * "aiplatform.googleapis.com/schema": output only, its value is the
-    ///   \[inputs_schema][google.cloud.aiplatform.v1beta1.DataLabelingJob.inputs_schema_uri\]'s title.
+    ///    \[inputs_schema][google.cloud.aiplatform.v1beta1.DataLabelingJob.inputs_schema_uri\]'s title.
     #[prost(map="string, string", tag="11")]
     pub labels: ::std::collections::HashMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
     /// The SpecialistPools' resource names associated with this job.
@@ -2225,8 +2364,8 @@ pub struct DataLabelingJob {
     pub active_learning_config: ::core::option::Option<ActiveLearningConfig>,
 }
 /// Parameters that configure the active learning pipeline. Active learning will
-///  label the data incrementally by several iterations. For every iteration, it
-///  will select a batch of data based on the sampling strategy.
+///   label the data incrementally by several iterations. For every iteration, it
+///   will select a batch of data based on the sampling strategy.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ActiveLearningConfig {
     /// Active learning data sampling config. For every active learning labeling
@@ -2285,6 +2424,18 @@ pub mod sample_config {
         Unspecified = 0,
         /// Sample the most uncertain data to label.
         Uncertainty = 1,
+    }
+    impl SampleStrategy {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                SampleStrategy::Unspecified => "SAMPLE_STRATEGY_UNSPECIFIED",
+                SampleStrategy::Uncertainty => "UNCERTAINTY",
+            }
+        }
     }
     /// Decides sample size for the initial batch. initial_batch_sample_percentage
     /// is used by default.
@@ -2361,7 +2512,7 @@ pub struct Dataset {
     /// and are immutable. Following system labels exist for each Dataset:
     ///
     /// * "aiplatform.googleapis.com/dataset_metadata_schema": output only, its
-    ///   value is the \[metadata_schema's][google.cloud.aiplatform.v1beta1.Dataset.metadata_schema_uri\] title.
+    ///    value is the \[metadata_schema's][google.cloud.aiplatform.v1beta1.Dataset.metadata_schema_uri\] title.
     #[prost(map="string, string", tag="7")]
     pub labels: ::std::collections::HashMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
     /// Customer-managed encryption key spec for a Dataset. If set, this Dataset
@@ -2717,6 +2868,19 @@ pub mod model {
             /// of the \[ExportModelRequest.output_config][google.cloud.aiplatform.v1beta1.ExportModelRequest.output_config\] object.
             Image = 2,
         }
+        impl ExportableContent {
+            /// String value of the enum field names used in the ProtoBuf definition.
+            ///
+            /// The values are not transformed in any way and thus are considered stable
+            /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+            pub fn as_str_name(&self) -> &'static str {
+                match self {
+                    ExportableContent::Unspecified => "EXPORTABLE_CONTENT_UNSPECIFIED",
+                    ExportableContent::Artifact => "ARTIFACT",
+                    ExportableContent::Image => "IMAGE",
+                }
+            }
+        }
     }
     /// Identifies a type of Model's prediction resources.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -2730,6 +2894,19 @@ pub mod model {
         /// Resources that to large degree are decided by Vertex AI, and require
         /// only a modest additional configuration.
         AutomaticResources = 2,
+    }
+    impl DeploymentResourcesType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                DeploymentResourcesType::Unspecified => "DEPLOYMENT_RESOURCES_TYPE_UNSPECIFIED",
+                DeploymentResourcesType::DedicatedResources => "DEDICATED_RESOURCES",
+                DeploymentResourcesType::AutomaticResources => "AUTOMATIC_RESOURCES",
+            }
+        }
     }
 }
 /// Contains the schemata used in Model's predictions and explanations via
@@ -2885,14 +3062,14 @@ pub struct ModelContainerSpec {
     ///
     /// ```json
     /// [
-    ///   {
-    ///     "name": "VAR_1",
-    ///     "value": "foo"
-    ///   },
-    ///   {
-    ///     "name": "VAR_2",
-    ///     "value": "$(VAR_1) bar"
-    ///   }
+    ///    {
+    ///      "name": "VAR_1",
+    ///      "value": "foo"
+    ///    },
+    ///    {
+    ///      "name": "VAR_2",
+    ///      "value": "$(VAR_1) bar"
+    ///    }
     /// ]
     /// ```
     ///
@@ -2915,9 +3092,9 @@ pub struct ModelContainerSpec {
     ///
     /// ```json
     /// [
-    ///   {
-    ///     "containerPort": 8080
-    ///   }
+    ///    {
+    ///      "containerPort": 8080
+    ///    }
     /// ]
     /// ```
     ///
@@ -2945,15 +3122,15 @@ pub struct ModelContainerSpec {
     /// The placeholders in this value are replaced as follows:
     ///
     /// * <var>ENDPOINT</var>: The last segment (following `endpoints/`)of the
-    ///   Endpoint.name][] field of the Endpoint where this Model has been
-    ///   deployed. (Vertex AI makes this value available to your container code
-    ///   as the [`AIP_ENDPOINT_ID` environment
-    ///  variable](<https://cloud.google.com/vertex-ai/docs/predictions/custom-container-requirements#aip-variables>).)
+    ///    Endpoint.name][] field of the Endpoint where this Model has been
+    ///    deployed. (Vertex AI makes this value available to your container code
+    ///    as the [`AIP_ENDPOINT_ID` environment
+    ///   variable](<https://cloud.google.com/vertex-ai/docs/predictions/custom-container-requirements#aip-variables>).)
     ///
     /// * <var>DEPLOYED_MODEL</var>: \[DeployedModel.id][google.cloud.aiplatform.v1beta1.DeployedModel.id\] of the `DeployedModel`.
-    ///   (Vertex AI makes this value available to your container code
-    ///   as the [`AIP_DEPLOYED_MODEL_ID` environment
-    ///   variable](<https://cloud.google.com/vertex-ai/docs/predictions/custom-container-requirements#aip-variables>).)
+    ///    (Vertex AI makes this value available to your container code
+    ///    as the [`AIP_DEPLOYED_MODEL_ID` environment
+    ///    variable](<https://cloud.google.com/vertex-ai/docs/predictions/custom-container-requirements#aip-variables>).)
     #[prost(string, tag="6")]
     pub predict_route: ::prost::alloc::string::String,
     /// Immutable. HTTP path on the container to send health checks to. Vertex AI
@@ -2973,15 +3150,15 @@ pub struct ModelContainerSpec {
     /// The placeholders in this value are replaced as follows:
     ///
     /// * <var>ENDPOINT</var>: The last segment (following `endpoints/`)of the
-    ///   Endpoint.name][] field of the Endpoint where this Model has been
-    ///   deployed. (Vertex AI makes this value available to your container code
-    ///   as the [`AIP_ENDPOINT_ID` environment
-    ///   variable](<https://cloud.google.com/vertex-ai/docs/predictions/custom-container-requirements#aip-variables>).)
+    ///    Endpoint.name][] field of the Endpoint where this Model has been
+    ///    deployed. (Vertex AI makes this value available to your container code
+    ///    as the [`AIP_ENDPOINT_ID` environment
+    ///    variable](<https://cloud.google.com/vertex-ai/docs/predictions/custom-container-requirements#aip-variables>).)
     ///
     /// * <var>DEPLOYED_MODEL</var>: \[DeployedModel.id][google.cloud.aiplatform.v1beta1.DeployedModel.id\] of the `DeployedModel`.
-    ///   (Vertex AI makes this value available to your container code as the
-    ///   [`AIP_DEPLOYED_MODEL_ID` environment
-    ///   variable](<https://cloud.google.com/vertex-ai/docs/predictions/custom-container-requirements#aip-variables>).)
+    ///    (Vertex AI makes this value available to your container code as the
+    ///    [`AIP_DEPLOYED_MODEL_ID` environment
+    ///    variable](<https://cloud.google.com/vertex-ai/docs/predictions/custom-container-requirements#aip-variables>).)
     #[prost(string, tag="7")]
     pub health_route: ::prost::alloc::string::String,
 }
@@ -3018,6 +3195,25 @@ pub enum PipelineState {
     Cancelled = 7,
     /// The pipeline has been stopped, and can be resumed.
     Paused = 8,
+}
+impl PipelineState {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            PipelineState::Unspecified => "PIPELINE_STATE_UNSPECIFIED",
+            PipelineState::Queued => "PIPELINE_STATE_QUEUED",
+            PipelineState::Pending => "PIPELINE_STATE_PENDING",
+            PipelineState::Running => "PIPELINE_STATE_RUNNING",
+            PipelineState::Succeeded => "PIPELINE_STATE_SUCCEEDED",
+            PipelineState::Failed => "PIPELINE_STATE_FAILED",
+            PipelineState::Cancelling => "PIPELINE_STATE_CANCELLING",
+            PipelineState::Cancelled => "PIPELINE_STATE_CANCELLED",
+            PipelineState::Paused => "PIPELINE_STATE_PAUSED",
+        }
+    }
 }
 /// The TrainingPipeline orchestrates tasks associated with training a Model. It
 /// always executes the training task, and optionally may also
@@ -3172,8 +3368,8 @@ pub struct InputDataConfig {
     /// The destination of the training data to be written to.
     ///
     /// Supported destination file formats:
-    ///   * For non-tabular data: "jsonl".
-    ///   * For tabular data: "csv" and "bigquery".
+    ///    * For non-tabular data: "jsonl".
+    ///    * For tabular data: "csv" and "bigquery".
     ///
     /// The following Vertex AI environment variables are passed to containers
     /// or python modules of the training task when this field is set:
@@ -3214,8 +3410,8 @@ pub mod input_data_config {
     /// The destination of the training data to be written to.
     ///
     /// Supported destination file formats:
-    ///   * For non-tabular data: "jsonl".
-    ///   * For tabular data: "csv" and "bigquery".
+    ///    * For non-tabular data: "jsonl".
+    ///    * For tabular data: "csv" and "bigquery".
     ///
     /// The following Vertex AI environment variables are passed to containers
     /// or python modules of the training task when this field is set:
@@ -3401,9 +3597,9 @@ pub struct UpdateDatasetRequest {
     /// For the `FieldMask` definition, see \[google.protobuf.FieldMask][google.protobuf.FieldMask\].
     /// Updatable fields:
     ///
-    ///   * `display_name`
-    ///   * `description`
-    ///   * `labels`
+    ///    * `display_name`
+    ///    * `description`
+    ///    * `labels`
     #[prost(message, optional, tag="2")]
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
@@ -3417,16 +3613,16 @@ pub struct ListDatasetsRequest {
     /// An expression for filtering the results of the request. For field names
     /// both snake_case and camelCase are supported.
     ///
-    ///   * `display_name`: supports = and !=
-    ///   * `metadata_schema_uri`: supports = and !=
-    ///   * `labels` supports general map functions that is:
-    ///     * `labels.key=value` - key:value equality
-    ///     * `labels.key:* or labels:key - key existence
-    ///     * A key including a space must be quoted. `labels."a key"`.
+    ///    * `display_name`: supports = and !=
+    ///    * `metadata_schema_uri`: supports = and !=
+    ///    * `labels` supports general map functions that is:
+    ///      * `labels.key=value` - key:value equality
+    ///      * `labels.key:* or labels:key - key existence
+    ///      * A key including a space must be quoted. `labels."a key"`.
     ///
     /// Some examples:
-    ///   * `displayName="myDisplayName"`
-    ///   * `labels.myKey="myValue"`
+    ///    * `displayName="myDisplayName"`
+    ///    * `labels.myKey="myValue"`
     #[prost(string, tag="2")]
     pub filter: ::prost::alloc::string::String,
     /// The standard list page size.
@@ -3441,9 +3637,9 @@ pub struct ListDatasetsRequest {
     /// A comma-separated list of fields to order by, sorted in ascending order.
     /// Use "desc" after a field name for descending.
     /// Supported fields:
-    ///   * `display_name`
-    ///   * `create_time`
-    ///   * `update_time`
+    ///    * `display_name`
+    ///    * `create_time`
+    ///    * `update_time`
     #[prost(string, tag="6")]
     pub order_by: ::prost::alloc::string::String,
 }
@@ -3606,6 +3802,7 @@ pub struct ListAnnotationsResponse {
 pub mod dataset_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The service that handles the CRUD of Vertex AI Dataset and its child
     /// resources.
     #[derive(Debug, Clone)]
@@ -3621,6 +3818,10 @@ pub mod dataset_service_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -3642,19 +3843,19 @@ pub mod dataset_service_client {
         {
             DatasetServiceClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Creates a Dataset.
@@ -3917,10 +4118,10 @@ pub struct FeatureStatsAnomaly {
     #[prost(string, tag="4")]
     pub anomaly_uri: ::prost::alloc::string::String,
     /// Deviation from the current stats to baseline stats.
-    ///   1. For categorical feature, the distribution distance is calculated by
-    ///      L-inifinity norm.
-    ///   2. For numerical feature, the distribution distance is calculated by
-    ///      Jensen–Shannon divergence.
+    ///    1. For categorical feature, the distribution distance is calculated by
+    ///       L-inifinity norm.
+    ///    2. For numerical feature, the distribution distance is calculated by
+    ///       Jensen–Shannon divergence.
     #[prost(double, tag="5")]
     pub distribution_deviation: f64,
     /// This is the threshold used when detecting anomalies.
@@ -4072,6 +4273,20 @@ pub mod model_deployment_monitoring_job {
         /// The pipeline is running.
         Running = 3,
     }
+    impl MonitoringScheduleState {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                MonitoringScheduleState::Unspecified => "MONITORING_SCHEDULE_STATE_UNSPECIFIED",
+                MonitoringScheduleState::Pending => "PENDING",
+                MonitoringScheduleState::Offline => "OFFLINE",
+                MonitoringScheduleState::Running => "RUNNING",
+            }
+        }
+    }
 }
 /// ModelDeploymentMonitoringBigQueryTable specifies the BigQuery table name
 /// as well as some information of the logs stored in this table.
@@ -4102,6 +4317,19 @@ pub mod model_deployment_monitoring_big_query_table {
         /// Logs coming from Serving traffic.
         Serving = 2,
     }
+    impl LogSource {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                LogSource::Unspecified => "LOG_SOURCE_UNSPECIFIED",
+                LogSource::Training => "TRAINING",
+                LogSource::Serving => "SERVING",
+            }
+        }
+    }
     /// Indicates what type of traffic does the log belong to.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -4112,6 +4340,19 @@ pub mod model_deployment_monitoring_big_query_table {
         Predict = 1,
         /// Explain logs.
         Explain = 2,
+    }
+    impl LogType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                LogType::Unspecified => "LOG_TYPE_UNSPECIFIED",
+                LogType::Predict => "PREDICT",
+                LogType::Explain => "EXPLAIN",
+            }
+        }
     }
 }
 /// ModelDeploymentMonitoringObjectiveConfig contains the pair of
@@ -4187,6 +4428,21 @@ pub enum ModelDeploymentMonitoringObjectiveType {
     /// Feature attribution scores to detect skew between Prediction datasets
     /// collected within different time windows.
     FeatureAttributionDrift = 4,
+}
+impl ModelDeploymentMonitoringObjectiveType {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            ModelDeploymentMonitoringObjectiveType::Unspecified => "MODEL_DEPLOYMENT_MONITORING_OBJECTIVE_TYPE_UNSPECIFIED",
+            ModelDeploymentMonitoringObjectiveType::RawFeatureSkew => "RAW_FEATURE_SKEW",
+            ModelDeploymentMonitoringObjectiveType::RawFeatureDrift => "RAW_FEATURE_DRIFT",
+            ModelDeploymentMonitoringObjectiveType::FeatureAttributionSkew => "FEATURE_ATTRIBUTION_SKEW",
+            ModelDeploymentMonitoringObjectiveType::FeatureAttributionDrift => "FEATURE_ATTRIBUTION_DRIFT",
+        }
+    }
 }
 /// Models are deployed into it, and afterwards Endpoint is called to obtain
 /// predictions and explanations.
@@ -4396,18 +4652,18 @@ pub struct ListEndpointsRequest {
     /// Optional. An expression for filtering the results of the request. For field names
     /// both snake_case and camelCase are supported.
     ///
-    ///   * `endpoint` supports = and !=. `endpoint` represents the Endpoint ID,
-    ///     i.e. the last segment of the Endpoint's [resource name]\[google.cloud.aiplatform.v1beta1.Endpoint.name\].
-    ///   * `display_name` supports = and, !=
-    ///   * `labels` supports general map functions that is:
-    ///     * `labels.key=value` - key:value equality
-    ///     * `labels.key:* or labels:key - key existence
-    ///     * A key including a space must be quoted. `labels."a key"`.
+    ///    * `endpoint` supports = and !=. `endpoint` represents the Endpoint ID,
+    ///      i.e. the last segment of the Endpoint's [resource name]\[google.cloud.aiplatform.v1beta1.Endpoint.name\].
+    ///    * `display_name` supports = and, !=
+    ///    * `labels` supports general map functions that is:
+    ///      * `labels.key=value` - key:value equality
+    ///      * `labels.key:* or labels:key - key existence
+    ///      * A key including a space must be quoted. `labels."a key"`.
     ///
     /// Some examples:
-    ///   * `endpoint=1`
-    ///   * `displayName="myDisplayName"`
-    ///   * `labels.myKey="myValue"`
+    ///    * `endpoint=1`
+    ///    * `displayName="myDisplayName"`
+    ///    * `labels.myKey="myValue"`
     #[prost(string, tag="2")]
     pub filter: ::prost::alloc::string::String,
     /// Optional. The standard list page size.
@@ -4531,6 +4787,7 @@ pub struct UndeployModelOperationMetadata {
 pub mod endpoint_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// A service for managing Vertex AI's Endpoints.
     #[derive(Debug, Clone)]
     pub struct EndpointServiceClient<T> {
@@ -4545,6 +4802,10 @@ pub mod endpoint_service_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -4566,19 +4827,19 @@ pub mod endpoint_service_client {
         {
             EndpointServiceClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Creates an Endpoint.
@@ -4753,14 +5014,14 @@ pub mod featurestore_monitoring_config {
     pub struct SnapshotAnalysis {
         /// The monitoring schedule for snapshot analysis.
         /// For EntityType-level config:
-        ///   unset / disabled = true indicates disabled by
-        ///   default for Features under it; otherwise by default enable snapshot
-        ///   analysis monitoring with monitoring_interval for Features under it.
+        ///    unset / disabled = true indicates disabled by
+        ///    default for Features under it; otherwise by default enable snapshot
+        ///    analysis monitoring with monitoring_interval for Features under it.
         /// Feature-level config:
-        ///   disabled = true indicates disabled regardless of the EntityType-level
-        ///   config; unset monitoring_interval indicates going with EntityType-level
-        ///   config; otherwise run snapshot analysis monitoring with
-        ///   monitoring_interval regardless of the EntityType-level config.
+        ///    disabled = true indicates disabled regardless of the EntityType-level
+        ///    config; unset monitoring_interval indicates going with EntityType-level
+        ///    config; otherwise run snapshot analysis monitoring with
+        ///    monitoring_interval regardless of the EntityType-level config.
         /// Explicitly Disable the snapshot analysis based monitoring.
         #[prost(bool, tag="1")]
         pub disabled: bool,
@@ -4872,6 +5133,26 @@ pub mod feature {
         /// Used for Feature that is bytes.
         Bytes = 13,
     }
+    impl ValueType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ValueType::Unspecified => "VALUE_TYPE_UNSPECIFIED",
+                ValueType::Bool => "BOOL",
+                ValueType::BoolArray => "BOOL_ARRAY",
+                ValueType::Double => "DOUBLE",
+                ValueType::DoubleArray => "DOUBLE_ARRAY",
+                ValueType::Int64 => "INT64",
+                ValueType::Int64Array => "INT64_ARRAY",
+                ValueType::String => "STRING",
+                ValueType::StringArray => "STRING_ARRAY",
+                ValueType::Bytes => "BYTES",
+            }
+        }
+    }
 }
 /// An entity type is a type of object in a system that needs to be modeled and
 /// have stored information about. For example, driver is an entity type, and
@@ -4968,6 +5249,19 @@ pub mod event {
         /// An output of the Execution.
         Output = 2,
     }
+    impl Type {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Type::Unspecified => "TYPE_UNSPECIFIED",
+                Type::Input => "INPUT",
+                Type::Output => "OUTPUT",
+            }
+        }
+    }
 }
 /// Instance of a general execution.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -5047,16 +5341,33 @@ pub mod execution {
         /// The Execution was cancelled.
         Cancelled = 6,
     }
+    impl State {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                State::Unspecified => "STATE_UNSPECIFIED",
+                State::New => "NEW",
+                State::Running => "RUNNING",
+                State::Complete => "COMPLETE",
+                State::Failed => "FAILED",
+                State::Cached => "CACHED",
+                State::Cancelled => "CANCELLED",
+            }
+        }
+    }
 }
 /// Matcher for Features of an EntityType by Feature ID.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct IdMatcher {
     /// Required. The following are accepted as `ids`:
     ///
-    ///  * A single-element list containing only `*`, which selects all Features
-    ///  in the target EntityType, or
-    ///  * A list containing only Feature IDs, which selects only Features with
-    ///  those IDs in the target EntityType.
+    ///   * A single-element list containing only `*`, which selects all Features
+    ///   in the target EntityType, or
+    ///   * A list containing only Feature IDs, which selects only Features with
+    ///   those IDs in the target EntityType.
     #[prost(string, repeated, tag="1")]
     pub ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
@@ -5139,6 +5450,19 @@ pub mod featurestore {
         /// can still be the original value of `fixed_node_count`. The Featurestore
         /// is still usable in this state.
         Updating = 2,
+    }
+    impl State {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                State::Unspecified => "STATE_UNSPECIFIED",
+                State::Stable => "STABLE",
+                State::Updating => "UPDATING",
+            }
+        }
     }
 }
 /// A list of boolean values.
@@ -5352,6 +5676,7 @@ pub struct FeatureValueList {
 pub mod featurestore_online_serving_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// A service for serving online feature values.
     #[derive(Debug, Clone)]
     pub struct FeaturestoreOnlineServingServiceClient<T> {
@@ -5366,6 +5691,10 @@ pub mod featurestore_online_serving_service_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -5389,19 +5718,19 @@ pub mod featurestore_online_serving_service_client {
                 InterceptedService::new(inner, interceptor),
             )
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Reads Feature values of a specific entity of an EntityType. For reading
@@ -5494,10 +5823,10 @@ pub struct ListFeaturestoresRequest {
     ///
     /// * `create_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
     /// Values must be
-    ///   in RFC 3339 format.
+    ///    in RFC 3339 format.
     /// * `update_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
     /// Values must be
-    ///   in RFC 3339 format.
+    ///    in RFC 3339 format.
     /// * `online_serving_config.fixed_node_count`: Supports `=`, `!=`, `<`, `>`,
     /// `<=`, and `>=` comparisons.
     /// * `labels`: Supports key-value equality and key presence.
@@ -5505,9 +5834,9 @@ pub struct ListFeaturestoresRequest {
     /// Examples:
     ///
     /// * `create_time > "2020-01-01" OR update_time > "2020-01-01"`
-    ///    Featurestores created or updated after 2020-01-01.
+    ///     Featurestores created or updated after 2020-01-01.
     /// * `labels.env = "prod"`
-    ///    Featurestores with label "env" set to "prod".
+    ///     Featurestores with label "env" set to "prod".
     #[prost(string, tag="2")]
     pub filter: ::prost::alloc::string::String,
     /// The maximum number of Featurestores to return. The service may return fewer
@@ -5529,9 +5858,9 @@ pub struct ListFeaturestoresRequest {
     /// Use "desc" after a field name for descending.
     /// Supported Fields:
     ///
-    ///   * `create_time`
-    ///   * `update_time`
-    ///   * `online_serving_config.fixed_node_count`
+    ///    * `create_time`
+    ///    * `update_time`
+    ///    * `online_serving_config.fixed_node_count`
     #[prost(string, tag="5")]
     pub order_by: ::prost::alloc::string::String,
     /// Mask specifying which fields to read.
@@ -5569,8 +5898,8 @@ pub struct UpdateFeaturestoreRequest {
     ///
     /// Updatable fields:
     ///
-    ///   * `labels`
-    ///   * `online_serving_config.fixed_node_count`
+    ///    * `labels`
+    ///    * `online_serving_config.fixed_node_count`
     #[prost(message, optional, tag="2")]
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
@@ -5759,7 +6088,7 @@ pub mod batch_read_feature_values_request {
         ///
         /// `csv_read_instances` are read instances stored in a plain-text CSV file.
         /// The header should be:
-        ///     \[ENTITY_TYPE_ID1\], \[ENTITY_TYPE_ID2\], ..., timestamp
+        ///      \[ENTITY_TYPE_ID1\], \[ENTITY_TYPE_ID2\], ..., timestamp
         ///
         /// The columns can be in any order.
         ///
@@ -5841,12 +6170,12 @@ pub mod feature_value_destination {
         /// Below are the mapping from Feature value type
         /// in Featurestore to Feature value type in TFRecord:
         ///
-        ///     Value type in Featurestore                 | Value type in TFRecord
-        ///     DOUBLE, DOUBLE_ARRAY                       | FLOAT_LIST
-        ///     INT64, INT64_ARRAY                         | INT64_LIST
-        ///     STRING, STRING_ARRAY, BYTES                | BYTES_LIST
-        ///     true -> byte_string("true"), false -> byte_string("false")
-        ///     BOOL, BOOL_ARRAY (true, false)             | BYTES_LIST
+        ///      Value type in Featurestore                 | Value type in TFRecord
+        ///      DOUBLE, DOUBLE_ARRAY                       | FLOAT_LIST
+        ///      INT64, INT64_ARRAY                         | INT64_LIST
+        ///      STRING, STRING_ARRAY, BYTES                | BYTES_LIST
+        ///      true -> byte_string("true"), false -> byte_string("false")
+        ///      BOOL, BOOL_ARRAY (true, false)             | BYTES_LIST
         #[prost(message, tag="2")]
         TfrecordDestination(super::TfRecordDestination),
         /// Output in CSV format. Array Feature value types are not allowed in CSV
@@ -5913,12 +6242,12 @@ pub struct ListEntityTypesRequest {
     /// Examples:
     ///
     /// * `create_time > \"2020-01-31T15:30:00.000000Z\" OR
-    ///      update_time > \"2020-01-31T15:30:00.000000Z\"` --> EntityTypes created
-    ///      or updated after 2020-01-31T15:30:00.000000Z.
+    ///       update_time > \"2020-01-31T15:30:00.000000Z\"` --> EntityTypes created
+    ///       or updated after 2020-01-31T15:30:00.000000Z.
     /// * `labels.active = yes AND labels.env = prod` --> EntityTypes having both
-    ///     (active: yes) and (env: prod) labels.
+    ///      (active: yes) and (env: prod) labels.
     /// * `labels.env: *` --> Any EntityType which has a label with 'env' as the
-    ///   key.
+    ///    key.
     #[prost(string, tag="2")]
     pub filter: ::prost::alloc::string::String,
     /// The maximum number of EntityTypes to return. The service may return fewer
@@ -5941,9 +6270,9 @@ pub struct ListEntityTypesRequest {
     ///
     /// Supported fields:
     ///
-    ///   * `entity_type_id`
-    ///   * `create_time`
-    ///   * `update_time`
+    ///    * `entity_type_id`
+    ///    * `create_time`
+    ///    * `update_time`
     #[prost(string, tag="5")]
     pub order_by: ::prost::alloc::string::String,
     /// Mask specifying which fields to read.
@@ -5981,10 +6310,10 @@ pub struct UpdateEntityTypeRequest {
     ///
     /// Updatable fields:
     ///
-    ///   * `description`
-    ///   * `labels`
-    ///   * `monitoring_config.snapshot_analysis.disabled`
-    ///   * `monitoring_config.snapshot_analysis.monitoring_interval`
+    ///    * `description`
+    ///    * `labels`
+    ///    * `monitoring_config.snapshot_analysis.disabled`
+    ///    * `monitoring_config.snapshot_analysis.monitoring_interval`
     #[prost(message, optional, tag="2")]
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
@@ -6075,12 +6404,12 @@ pub struct ListFeaturesRequest {
     ///
     /// * `value_type = DOUBLE` --> Features whose type is DOUBLE.
     /// * `create_time > \"2020-01-31T15:30:00.000000Z\" OR
-    ///      update_time > \"2020-01-31T15:30:00.000000Z\"` --> EntityTypes created
-    ///      or updated after 2020-01-31T15:30:00.000000Z.
+    ///       update_time > \"2020-01-31T15:30:00.000000Z\"` --> EntityTypes created
+    ///       or updated after 2020-01-31T15:30:00.000000Z.
     /// * `labels.active = yes AND labels.env = prod` --> Features having both
-    ///     (active: yes) and (env: prod) labels.
+    ///      (active: yes) and (env: prod) labels.
     /// * `labels.env: *` --> Any Feature which has a label with 'env' as the
-    ///   key.
+    ///    key.
     #[prost(string, tag="2")]
     pub filter: ::prost::alloc::string::String,
     /// The maximum number of Features to return. The service may return fewer
@@ -6102,10 +6431,10 @@ pub struct ListFeaturesRequest {
     /// Use "desc" after a field name for descending.
     /// Supported fields:
     ///
-    ///   * `feature_id`
-    ///   * `value_type`
-    ///   * `create_time`
-    ///   * `update_time`
+    ///    * `feature_id`
+    ///    * `value_type`
+    ///    * `create_time`
+    ///    * `update_time`
     #[prost(string, tag="5")]
     pub order_by: ::prost::alloc::string::String,
     /// Mask specifying which fields to read.
@@ -6147,13 +6476,13 @@ pub struct SearchFeaturesRequest {
     /// and the FIELD are converted to a sequence of words (i.e. tokens) for
     /// comparison. This is done by:
     ///
-    ///   * Removing leading/trailing whitespace and tokenizing the search value.
-    ///   Characters that are not one of alphanumeric `\[a-zA-Z0-9\]`, underscore
-    ///   `_`, or asterisk `*` are treated as delimiters for tokens. `*` is treated
-    ///   as a wildcard that matches characters within a token.
-    ///   * Ignoring case.
-    ///   * Prepending an asterisk to the first and appending an asterisk to the
-    ///   last token in QUERY.
+    ///    * Removing leading/trailing whitespace and tokenizing the search value.
+    ///    Characters that are not one of alphanumeric `\[a-zA-Z0-9\]`, underscore
+    ///    `_`, or asterisk `*` are treated as delimiters for tokens. `*` is treated
+    ///    as a wildcard that matches characters within a token.
+    ///    * Ignoring case.
+    ///    * Prepending an asterisk to the first and appending an asterisk to the
+    ///    last token in QUERY.
     ///
     /// A QUERY must be either a singular token or a phrase. A phrase is one or
     /// multiple words enclosed in double quotation marks ("). With phrases, the
@@ -6194,9 +6523,9 @@ pub struct SearchFeaturesRequest {
     /// to `foo bar`
     /// * `value_type = DOUBLE` --> Features whose type is DOUBLE.
     /// * `labels.active = yes AND labels.env = prod` --> Features having both
-    ///     (active: yes) and (env: prod) labels.
+    ///      (active: yes) and (env: prod) labels.
     /// * `labels.env: *` --> Any Feature which has a label with `env` as the
-    ///   key.
+    ///    key.
     #[prost(string, tag="3")]
     pub query: ::prost::alloc::string::String,
     /// The maximum number of Features to return. The service may return fewer
@@ -6222,11 +6551,11 @@ pub struct SearchFeaturesResponse {
     ///
     /// Fields returned:
     ///
-    ///  * `name`
-    ///  * `description`
-    ///  * `labels`
-    ///  * `create_time`
-    ///  * `update_time`
+    ///   * `name`
+    ///   * `description`
+    ///   * `labels`
+    ///   * `create_time`
+    ///   * `update_time`
     #[prost(message, repeated, tag="1")]
     pub features: ::prost::alloc::vec::Vec<Feature>,
     /// A token, which can be sent as \[SearchFeaturesRequest.page_token][google.cloud.aiplatform.v1beta1.SearchFeaturesRequest.page_token\] to
@@ -6254,10 +6583,10 @@ pub struct UpdateFeatureRequest {
     ///
     /// Updatable fields:
     ///
-    ///   * `description`
-    ///   * `labels`
-    ///   * `monitoring_config.snapshot_analysis.disabled`
-    ///   * `monitoring_config.snapshot_analysis.monitoring_interval`
+    ///    * `description`
+    ///    * `labels`
+    ///    * `monitoring_config.snapshot_analysis.disabled`
+    ///    * `monitoring_config.snapshot_analysis.monitoring_interval`
     #[prost(message, optional, tag="2")]
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
@@ -6343,6 +6672,7 @@ pub struct BatchCreateFeaturesOperationMetadata {
 pub mod featurestore_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The service that handles CRUD and List for resources for Featurestore.
     #[derive(Debug, Clone)]
     pub struct FeaturestoreServiceClient<T> {
@@ -6357,6 +6687,10 @@ pub mod featurestore_service_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -6378,19 +6712,19 @@ pub mod featurestore_service_client {
         {
             FeaturestoreServiceClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Creates a new Featurestore in a given project and location.
@@ -6894,6 +7228,20 @@ pub mod study {
         /// or max_trial_count is reached.
         Completed = 3,
     }
+    impl State {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                State::Unspecified => "STATE_UNSPECIFIED",
+                State::Active => "ACTIVE",
+                State::Inactive => "INACTIVE",
+                State::Completed => "COMPLETED",
+            }
+        }
+    }
 }
 /// A message representing a Trial. A Trial contains a unique set of Parameters
 /// that has been or will be evaluated, along with the objective metrics got by
@@ -6997,6 +7345,22 @@ pub mod trial {
         /// the final_measurement.
         Infeasible = 5,
     }
+    impl State {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                State::Unspecified => "STATE_UNSPECIFIED",
+                State::Requested => "REQUESTED",
+                State::Active => "ACTIVE",
+                State::Stopping => "STOPPING",
+                State::Succeeded => "SUCCEEDED",
+                State::Infeasible => "INFEASIBLE",
+            }
+        }
+    }
 }
 /// Represents specification of a Study.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -7046,6 +7410,19 @@ pub mod study_spec {
             Maximize = 1,
             /// Minimize the goal metric.
             Minimize = 2,
+        }
+        impl GoalType {
+            /// String value of the enum field names used in the ProtoBuf definition.
+            ///
+            /// The values are not transformed in any way and thus are considered stable
+            /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+            pub fn as_str_name(&self) -> &'static str {
+                match self {
+                    GoalType::Unspecified => "GOAL_TYPE_UNSPECIFIED",
+                    GoalType::Maximize => "MAXIMIZE",
+                    GoalType::Minimize => "MINIMIZE",
+                }
+            }
         }
     }
     /// Represents a single parameter to optimize.
@@ -7216,6 +7593,20 @@ pub mod study_spec {
             /// strictly positive.
             UnitReverseLogScale = 3,
         }
+        impl ScaleType {
+            /// String value of the enum field names used in the ProtoBuf definition.
+            ///
+            /// The values are not transformed in any way and thus are considered stable
+            /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+            pub fn as_str_name(&self) -> &'static str {
+                match self {
+                    ScaleType::Unspecified => "SCALE_TYPE_UNSPECIFIED",
+                    ScaleType::UnitLinearScale => "UNIT_LINEAR_SCALE",
+                    ScaleType::UnitLogScale => "UNIT_LOG_SCALE",
+                    ScaleType::UnitReverseLogScale => "UNIT_REVERSE_LOG_SCALE",
+                }
+            }
+        }
         #[derive(Clone, PartialEq, ::prost::Oneof)]
         pub enum ParameterValueSpec {
             /// The value spec for a 'DOUBLE' parameter.
@@ -7311,6 +7702,19 @@ pub mod study_spec {
         /// Simple random search within the feasible space.
         RandomSearch = 3,
     }
+    impl Algorithm {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Algorithm::Unspecified => "ALGORITHM_UNSPECIFIED",
+                Algorithm::GridSearch => "GRID_SEARCH",
+                Algorithm::RandomSearch => "RANDOM_SEARCH",
+            }
+        }
+    }
     /// Describes the noise level of the repeated observations.
     ///
     /// "Noisy" means that the repeated observations with the same Trial parameters
@@ -7328,19 +7732,32 @@ pub mod study_spec {
         /// evaluations, it may repeat the same Trial parameters more than once.
         High = 2,
     }
+    impl ObservationNoise {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ObservationNoise::Unspecified => "OBSERVATION_NOISE_UNSPECIFIED",
+                ObservationNoise::Low => "LOW",
+                ObservationNoise::High => "HIGH",
+            }
+        }
+    }
     /// This indicates which measurement to use if/when the service automatically
     /// selects the final measurement from previously reported intermediate
     /// measurements. Choose this based on two considerations:
-    ///  A) Do you expect your measurements to monotonically improve?
-    ///     If so, choose LAST_MEASUREMENT. On the other hand, if you're in a
-    ///     situation where your system can "over-train" and you expect the
-    ///     performance to get better for a while but then start declining,
-    ///     choose BEST_MEASUREMENT.
-    ///  B) Are your measurements significantly noisy and/or irreproducible?
-    ///     If so, BEST_MEASUREMENT will tend to be over-optimistic, and it
-    ///     may be better to choose LAST_MEASUREMENT.
-    ///  If both or neither of (A) and (B) apply, it doesn't matter which
-    ///  selection type is chosen.
+    ///   A) Do you expect your measurements to monotonically improve?
+    ///      If so, choose LAST_MEASUREMENT. On the other hand, if you're in a
+    ///      situation where your system can "over-train" and you expect the
+    ///      performance to get better for a while but then start declining,
+    ///      choose BEST_MEASUREMENT.
+    ///   B) Are your measurements significantly noisy and/or irreproducible?
+    ///      If so, BEST_MEASUREMENT will tend to be over-optimistic, and it
+    ///      may be better to choose LAST_MEASUREMENT.
+    ///   If both or neither of (A) and (B) apply, it doesn't matter which
+    ///   selection type is chosen.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
     pub enum MeasurementSelectionType {
@@ -7350,6 +7767,19 @@ pub mod study_spec {
         LastMeasurement = 1,
         /// Use the best measurement reported.
         BestMeasurement = 2,
+    }
+    impl MeasurementSelectionType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                MeasurementSelectionType::Unspecified => "MEASUREMENT_SELECTION_TYPE_UNSPECIFIED",
+                MeasurementSelectionType::LastMeasurement => "LAST_MEASUREMENT",
+                MeasurementSelectionType::BestMeasurement => "BEST_MEASUREMENT",
+            }
+        }
     }
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum AutomatedStoppingSpec {
@@ -7748,21 +8178,21 @@ pub struct ListIndexEndpointsRequest {
     /// Optional. An expression for filtering the results of the request. For field names
     /// both snake_case and camelCase are supported.
     ///
-    ///   * `index_endpoint` supports = and !=. `index_endpoint` represents the
-    ///      IndexEndpoint ID, ie. the last segment of the IndexEndpoint's
-    ///      \[resourcename][google.cloud.aiplatform.v1beta1.IndexEndpoint.name\].
-    ///   * `display_name` supports =, != and regex()
-    ///             (uses \[re2\](<https://github.com/google/re2/wiki/Syntax>) syntax)
-    ///   * `labels` supports general map functions that is:
-    ///             `labels.key=value` - key:value equality
-    ///             `labels.key:* or labels:key - key existence
-    ///              A key including a space must be quoted. `labels."a key"`.
+    ///    * `index_endpoint` supports = and !=. `index_endpoint` represents the
+    ///       IndexEndpoint ID, ie. the last segment of the IndexEndpoint's
+    ///       \[resourcename][google.cloud.aiplatform.v1beta1.IndexEndpoint.name\].
+    ///    * `display_name` supports =, != and regex()
+    ///              (uses \[re2\](<https://github.com/google/re2/wiki/Syntax>) syntax)
+    ///    * `labels` supports general map functions that is:
+    ///              `labels.key=value` - key:value equality
+    ///              `labels.key:* or labels:key - key existence
+    ///               A key including a space must be quoted. `labels."a key"`.
     ///
     /// Some examples:
-    ///   * `index_endpoint="1"`
-    ///   * `display_name="myDisplayName"`
-    ///   * `regex(display_name, "^A") -> The display name starts with an A.
-    ///   * `labels.myKey="myValue"`
+    ///    * `index_endpoint="1"`
+    ///    * `display_name="myDisplayName"`
+    ///    * `regex(display_name, "^A") -> The display name starts with an A.
+    ///    * `labels.myKey="myValue"`
     #[prost(string, tag="2")]
     pub filter: ::prost::alloc::string::String,
     /// Optional. The standard list page size.
@@ -7864,6 +8294,7 @@ pub struct UndeployIndexOperationMetadata {
 pub mod index_endpoint_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// A service for managing Vertex AI's IndexEndpoints.
     #[derive(Debug, Clone)]
     pub struct IndexEndpointServiceClient<T> {
@@ -7878,6 +8309,10 @@ pub mod index_endpoint_service_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -7899,19 +8334,19 @@ pub mod index_endpoint_service_client {
         {
             IndexEndpointServiceClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Creates an IndexEndpoint.
@@ -8224,6 +8659,24 @@ pub mod nearest_neighbor_search_operation_metadata {
             /// The `namespace` field is missing.
             NamespaceMissing = 7,
         }
+        impl RecordErrorType {
+            /// String value of the enum field names used in the ProtoBuf definition.
+            ///
+            /// The values are not transformed in any way and thus are considered stable
+            /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+            pub fn as_str_name(&self) -> &'static str {
+                match self {
+                    RecordErrorType::ErrorTypeUnspecified => "ERROR_TYPE_UNSPECIFIED",
+                    RecordErrorType::EmptyLine => "EMPTY_LINE",
+                    RecordErrorType::InvalidJsonSyntax => "INVALID_JSON_SYNTAX",
+                    RecordErrorType::InvalidCsvSyntax => "INVALID_CSV_SYNTAX",
+                    RecordErrorType::InvalidAvroSyntax => "INVALID_AVRO_SYNTAX",
+                    RecordErrorType::InvalidEmbeddingId => "INVALID_EMBEDDING_ID",
+                    RecordErrorType::EmbeddingSizeMismatch => "EMBEDDING_SIZE_MISMATCH",
+                    RecordErrorType::NamespaceMissing => "NAMESPACE_MISSING",
+                }
+            }
+        }
     }
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ContentValidationStats {
@@ -8247,6 +8700,7 @@ pub mod nearest_neighbor_search_operation_metadata {
 pub mod index_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// A service for creating and managing Vertex AI's Index resources.
     #[derive(Debug, Clone)]
     pub struct IndexServiceClient<T> {
@@ -8261,6 +8715,10 @@ pub mod index_service_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -8282,19 +8740,19 @@ pub mod index_service_client {
         {
             IndexServiceClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Creates an Index.
@@ -8441,19 +8899,19 @@ pub struct ListCustomJobsRequest {
     ///
     /// Supported fields:
     ///
-    ///   * `display_name` supports = and !=.
+    ///    * `display_name` supports = and !=.
     ///
-    ///   * `state` supports = and !=.
+    ///    * `state` supports = and !=.
     ///
     /// Some examples of using the filter are:
     ///
-    ///  * `state="JOB_STATE_SUCCEEDED" AND display_name="my_job"`
+    ///   * `state="JOB_STATE_SUCCEEDED" AND display_name="my_job"`
     ///
-    ///  * `state="JOB_STATE_RUNNING" OR display_name="my_job"`
+    ///   * `state="JOB_STATE_RUNNING" OR display_name="my_job"`
     ///
-    ///  * `NOT display_name="my_job"`
+    ///   * `NOT display_name="my_job"`
     ///
-    ///  * `state="JOB_STATE_FAILED"`
+    ///   * `state="JOB_STATE_FAILED"`
     #[prost(string, tag="2")]
     pub filter: ::prost::alloc::string::String,
     /// The standard list page size.
@@ -8529,19 +8987,19 @@ pub struct ListDataLabelingJobsRequest {
     ///
     /// Supported fields:
     ///
-    ///   * `display_name` supports = and !=.
+    ///    * `display_name` supports = and !=.
     ///
-    ///   * `state` supports = and !=.
+    ///    * `state` supports = and !=.
     ///
     /// Some examples of using the filter are:
     ///
-    ///  * `state="JOB_STATE_SUCCEEDED" AND display_name="my_job"`
+    ///   * `state="JOB_STATE_SUCCEEDED" AND display_name="my_job"`
     ///
-    ///  * `state="JOB_STATE_RUNNING" OR display_name="my_job"`
+    ///   * `state="JOB_STATE_RUNNING" OR display_name="my_job"`
     ///
-    ///  * `NOT display_name="my_job"`
+    ///   * `NOT display_name="my_job"`
     ///
-    ///  * `state="JOB_STATE_FAILED"`
+    ///   * `state="JOB_STATE_FAILED"`
     #[prost(string, tag="2")]
     pub filter: ::prost::alloc::string::String,
     /// The standard list page size.
@@ -8622,19 +9080,19 @@ pub struct ListHyperparameterTuningJobsRequest {
     ///
     /// Supported fields:
     ///
-    ///   * `display_name` supports = and !=.
+    ///    * `display_name` supports = and !=.
     ///
-    ///   * `state` supports = and !=.
+    ///    * `state` supports = and !=.
     ///
     /// Some examples of using the filter are:
     ///
-    ///  * `state="JOB_STATE_SUCCEEDED" AND display_name="my_job"`
+    ///   * `state="JOB_STATE_SUCCEEDED" AND display_name="my_job"`
     ///
-    ///  * `state="JOB_STATE_RUNNING" OR display_name="my_job"`
+    ///   * `state="JOB_STATE_RUNNING" OR display_name="my_job"`
     ///
-    ///  * `NOT display_name="my_job"`
+    ///   * `NOT display_name="my_job"`
     ///
-    ///  * `state="JOB_STATE_FAILED"`
+    ///   * `state="JOB_STATE_FAILED"`
     #[prost(string, tag="2")]
     pub filter: ::prost::alloc::string::String,
     /// The standard list page size.
@@ -8712,21 +9170,21 @@ pub struct ListBatchPredictionJobsRequest {
     ///
     /// Supported fields:
     ///
-    ///   * `display_name` supports = and !=.
+    ///    * `display_name` supports = and !=.
     ///
-    ///   * `state` supports = and !=.
+    ///    * `state` supports = and !=.
     ///
-    ///   * `model_display_name` supports = and !=
+    ///    * `model_display_name` supports = and !=
     ///
     /// Some examples of using the filter are:
     ///
-    ///  * `state="JOB_STATE_SUCCEEDED" AND display_name="my_job"`
+    ///   * `state="JOB_STATE_SUCCEEDED" AND display_name="my_job"`
     ///
-    ///  * `state="JOB_STATE_RUNNING" OR display_name="my_job"`
+    ///   * `state="JOB_STATE_RUNNING" OR display_name="my_job"`
     ///
-    ///  * `NOT display_name="my_job"`
+    ///   * `NOT display_name="my_job"`
     ///
-    ///  * `state="JOB_STATE_FAILED"`
+    ///   * `state="JOB_STATE_FAILED"`
     #[prost(string, tag="2")]
     pub filter: ::prost::alloc::string::String,
     /// The standard list page size.
@@ -8921,19 +9379,19 @@ pub struct UpdateModelDeploymentMonitoringJobRequest {
     ///
     /// Updatable fields:
     ///
-    ///   * `display_name`
-    ///   * `model_deployment_monitoring_schedule_config`
-    ///   * `model_monitoring_alert_config`
-    ///   * `logging_sampling_strategy`
-    ///   * `labels`
-    ///   * `log_ttl`
-    ///   * `enable_monitoring_pipeline_logs`
+    ///    * `display_name`
+    ///    * `model_deployment_monitoring_schedule_config`
+    ///    * `model_monitoring_alert_config`
+    ///    * `logging_sampling_strategy`
+    ///    * `labels`
+    ///    * `log_ttl`
+    ///    * `enable_monitoring_pipeline_logs`
     /// .  and
-    ///   * `model_deployment_monitoring_objective_configs`
+    ///    * `model_deployment_monitoring_objective_configs`
     /// .  or
-    ///   * `model_deployment_monitoring_objective_configs.objective_config.training_dataset`
-    ///   * `model_deployment_monitoring_objective_configs.objective_config.training_prediction_skew_detection_config`
-    ///   * `model_deployment_monitoring_objective_configs.objective_config.prediction_drift_detection_config`
+    ///    * `model_deployment_monitoring_objective_configs.objective_config.training_dataset`
+    ///    * `model_deployment_monitoring_objective_configs.objective_config.training_prediction_skew_detection_config`
+    ///    * `model_deployment_monitoring_objective_configs.objective_config.prediction_drift_detection_config`
     #[prost(message, optional, tag="2")]
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
@@ -8979,6 +9437,7 @@ pub struct UpdateModelDeploymentMonitoringJobOperationMetadata {
 pub mod job_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// A service for creating and managing Vertex AI's jobs.
     #[derive(Debug, Clone)]
     pub struct JobServiceClient<T> {
@@ -8993,6 +9452,10 @@ pub mod job_service_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -9014,19 +9477,19 @@ pub mod job_service_client {
         {
             JobServiceClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Creates a CustomJob. A created CustomJob right away
@@ -9743,6 +10206,20 @@ pub mod metadata_schema {
         /// A state indicating that the MetadataSchema will be used by Contexts.
         ContextType = 3,
     }
+    impl MetadataSchemaType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                MetadataSchemaType::Unspecified => "METADATA_SCHEMA_TYPE_UNSPECIFIED",
+                MetadataSchemaType::ArtifactType => "ARTIFACT_TYPE",
+                MetadataSchemaType::ExecutionType => "EXECUTION_TYPE",
+                MetadataSchemaType::ContextType => "CONTEXT_TYPE",
+            }
+        }
+    }
 }
 /// Instance of a metadata store. Contains a set of metadata that can be
 /// queried.
@@ -9929,22 +10406,22 @@ pub struct ListArtifactsRequest {
     /// The supported set of filters include the following:
     ///
     /// *   **Attribute filtering**:
-    ///     For example: `display_name = "test"`.
-    ///     Supported fields include: `name`, `display_name`, `uri`, `state`,
-    ///     `schema_title`, `create_time`, and `update_time`.
-    ///     Time fields, such as `create_time` and `update_time`, require values
-    ///     specified in RFC-3339 format.
-    ///     For example: `create_time = "2020-11-19T11:30:00-04:00"`
+    ///      For example: `display_name = "test"`.
+    ///      Supported fields include: `name`, `display_name`, `uri`, `state`,
+    ///      `schema_title`, `create_time`, and `update_time`.
+    ///      Time fields, such as `create_time` and `update_time`, require values
+    ///      specified in RFC-3339 format.
+    ///      For example: `create_time = "2020-11-19T11:30:00-04:00"`
     /// *   **Metadata field**:
-    ///     To filter on metadata fields use traversal operation as follows:
-    ///     `metadata.<field_name>.<type_value>`.
-    ///     For example: `metadata.field_1.number_value = 10.0`
+    ///      To filter on metadata fields use traversal operation as follows:
+    ///      `metadata.<field_name>.<type_value>`.
+    ///      For example: `metadata.field_1.number_value = 10.0`
     /// *   **Context based filtering**:
-    ///     To filter Artifacts based on the contexts to which they belong, use the
-    ///     function operator with the full resource name
-    ///     `in_context(<context-name>)`.
-    ///     For example:
-    ///     `in_context("projects/<project_number>/locations/<location>/metadataStores/<metadatastore_name>/contexts/<context-id>")`
+    ///      To filter Artifacts based on the contexts to which they belong, use the
+    ///      function operator with the full resource name
+    ///      `in_context(<context-name>)`.
+    ///      For example:
+    ///      `in_context("projects/<project_number>/locations/<location>/metadataStores/<metadatastore_name>/contexts/<context-id>")`
     ///
     /// Each of the above supported filter types can be combined together using
     /// logical operators (`AND` & `OR`).
@@ -10093,26 +10570,26 @@ pub struct ListContextsRequest {
     /// Following are the supported set of filters:
     ///
     /// *  **Attribute filtering**:
-    ///    For example: `display_name = "test"`.
-    ///    Supported fields include: `name`, `display_name`, `schema_title`,
-    ///    `create_time`, and `update_time`.
-    ///    Time fields, such as `create_time` and `update_time`, require values
-    ///    specified in RFC-3339 format.
-    ///    For example: `create_time = "2020-11-19T11:30:00-04:00"`.
+    ///     For example: `display_name = "test"`.
+    ///     Supported fields include: `name`, `display_name`, `schema_title`,
+    ///     `create_time`, and `update_time`.
+    ///     Time fields, such as `create_time` and `update_time`, require values
+    ///     specified in RFC-3339 format.
+    ///     For example: `create_time = "2020-11-19T11:30:00-04:00"`.
     /// *  **Metadata field**:
-    ///    To filter on metadata fields use traversal operation as follows:
-    ///    `metadata.<field_name>.<type_value>`.
-    ///    For example: `metadata.field_1.number_value = 10.0`.
+    ///     To filter on metadata fields use traversal operation as follows:
+    ///     `metadata.<field_name>.<type_value>`.
+    ///     For example: `metadata.field_1.number_value = 10.0`.
     /// *  **Parent Child filtering**:
-    ///    To filter Contexts based on parent-child relationship use the HAS
-    ///    operator as follows:
+    ///     To filter Contexts based on parent-child relationship use the HAS
+    ///     operator as follows:
     ///
-    ///    ```
-    ///    parent_contexts:
-    ///    "projects/<project_number>/locations/<location>/metadataStores/<metadatastore_name>/contexts/<context_id>"
-    ///    child_contexts:
-    ///    "projects/<project_number>/locations/<location>/metadataStores/<metadatastore_name>/contexts/<context_id>"
-    ///    ```
+    ///     ```
+    ///     parent_contexts:
+    ///     "projects/<project_number>/locations/<location>/metadataStores/<metadatastore_name>/contexts/<context_id>"
+    ///     child_contexts:
+    ///     "projects/<project_number>/locations/<location>/metadataStores/<metadatastore_name>/contexts/<context_id>"
+    ///     ```
     ///
     /// Each of the above supported filters can be combined together using
     /// logical operators (`AND` & `OR`).
@@ -10324,22 +10801,22 @@ pub struct ListExecutionsRequest {
     /// Following are the supported set of filters:
     ///
     /// *  **Attribute filtering**:
-    ///    For example: `display_name = "test"`.
-    ///    Supported fields include: `name`, `display_name`, `state`,
-    ///    `schema_title`, `create_time`, and `update_time`.
-    ///    Time fields, such as `create_time` and `update_time`, require values
-    ///    specified in RFC-3339 format.
-    ///    For example: `create_time = "2020-11-19T11:30:00-04:00"`.
+    ///     For example: `display_name = "test"`.
+    ///     Supported fields include: `name`, `display_name`, `state`,
+    ///     `schema_title`, `create_time`, and `update_time`.
+    ///     Time fields, such as `create_time` and `update_time`, require values
+    ///     specified in RFC-3339 format.
+    ///     For example: `create_time = "2020-11-19T11:30:00-04:00"`.
     /// *  **Metadata field**:
-    ///    To filter on metadata fields use traversal operation as follows:
-    ///    `metadata.<field_name>.<type_value>`
-    ///    For example: `metadata.field_1.number_value = 10.0`
+    ///     To filter on metadata fields use traversal operation as follows:
+    ///     `metadata.<field_name>.<type_value>`
+    ///     For example: `metadata.field_1.number_value = 10.0`
     /// *  **Context based filtering**:
-    ///    To filter Executions based on the contexts to which they belong use
-    ///    the function operator with the full resource name:
-    ///    `in_context(<context-name>)`.
-    ///    For example:
-    ///    `in_context("projects/<project_number>/locations/<location>/metadataStores/<metadatastore_name>/contexts/<context-id>")`
+    ///     To filter Executions based on the contexts to which they belong use
+    ///     the function operator with the full resource name:
+    ///     `in_context(<context-name>)`.
+    ///     For example:
+    ///     `in_context("projects/<project_number>/locations/<location>/metadataStores/<metadatastore_name>/contexts/<context-id>")`
     ///
     /// Each of the above supported filters can be combined together using
     /// logical operators (`AND` & `OR`).
@@ -10554,16 +11031,16 @@ pub struct QueryArtifactLineageSubgraphRequest {
     /// The supported set of filters include the following:
     ///
     /// *  **Attribute filtering**:
-    ///    For example: `display_name = "test"`
-    ///    Supported fields include: `name`, `display_name`, `uri`, `state`,
-    ///    `schema_title`, `create_time`, and `update_time`.
-    ///    Time fields, such as `create_time` and `update_time`, require values
-    ///    specified in RFC-3339 format.
-    ///    For example: `create_time = "2020-11-19T11:30:00-04:00"`
+    ///     For example: `display_name = "test"`
+    ///     Supported fields include: `name`, `display_name`, `uri`, `state`,
+    ///     `schema_title`, `create_time`, and `update_time`.
+    ///     Time fields, such as `create_time` and `update_time`, require values
+    ///     specified in RFC-3339 format.
+    ///     For example: `create_time = "2020-11-19T11:30:00-04:00"`
     /// *  **Metadata field**:
-    ///    To filter on metadata fields use traversal operation as follows:
-    ///    `metadata.<field_name>.<type_value>`.
-    ///    For example: `metadata.field_1.number_value = 10.0`
+    ///     To filter on metadata fields use traversal operation as follows:
+    ///     `metadata.<field_name>.<type_value>`.
+    ///     For example: `metadata.field_1.number_value = 10.0`
     ///
     /// Each of the above supported filter types can be combined together using
     /// logical operators (`AND` & `OR`).
@@ -10576,6 +11053,7 @@ pub struct QueryArtifactLineageSubgraphRequest {
 pub mod metadata_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Service for reading and writing metadata entries.
     #[derive(Debug, Clone)]
     pub struct MetadataServiceClient<T> {
@@ -10590,6 +11068,10 @@ pub mod metadata_service_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -10611,19 +11093,19 @@ pub mod metadata_service_client {
         {
             MetadataServiceClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Initializes a MetadataStore, including allocation of resources.
@@ -11419,15 +11901,15 @@ pub struct SearchMigratableResourcesRequest {
     /// A filter for your search. You can use the following types of filters:
     ///
     /// *   Resource type filters. The following strings filter for a specific type
-    ///     of \[MigratableResource][google.cloud.aiplatform.v1beta1.MigratableResource\]:
-    ///     *   `ml_engine_model_version:*`
-    ///     *   `automl_model:*`
-    ///     *   `automl_dataset:*`
-    ///     *   `data_labeling_dataset:*`
+    ///      of \[MigratableResource][google.cloud.aiplatform.v1beta1.MigratableResource\]:
+    ///      *   `ml_engine_model_version:*`
+    ///      *   `automl_model:*`
+    ///      *   `automl_dataset:*`
+    ///      *   `data_labeling_dataset:*`
     /// *   "Migrated or not" filters. The following strings filter for resources
-    ///     that either have or have not already been migrated:
-    ///     *   `last_migrate_time:*` filters for migrated resources.
-    ///     *   `NOT last_migrate_time:*` filters for not yet migrated resources.
+    ///      that either have or have not already been migrated:
+    ///      *   `last_migrate_time:*` filters for migrated resources.
+    ///      *   `NOT last_migrate_time:*` filters for not yet migrated resources.
     #[prost(string, tag="4")]
     pub filter: ::prost::alloc::string::String,
 }
@@ -11649,6 +12131,7 @@ pub mod batch_migrate_resources_operation_metadata {
 pub mod migration_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// A service that migrates resources from automl.googleapis.com,
     /// datalabeling.googleapis.com and ml.googleapis.com to Vertex AI.
     #[derive(Debug, Clone)]
@@ -11664,6 +12147,10 @@ pub mod migration_service_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -11685,19 +12172,19 @@ pub mod migration_service_client {
         {
             MigrationServiceClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Searches all of the resources in automl.googleapis.com,
@@ -11796,8 +12283,8 @@ pub mod model_evaluation {
         ///
         /// For AutoML Image Classification models, possible values are:
         ///
-        ///   * `image-integrated-gradients`
-        ///   * `image-xrai`
+        ///    * `image-integrated-gradients`
+        ///    * `image-xrai`
         #[prost(string, tag="1")]
         pub explanation_type: ::prost::alloc::string::String,
         /// Explanation spec details.
@@ -11836,9 +12323,9 @@ pub mod model_evaluation_slice {
     pub struct Slice {
         /// Output only. The dimension of the slice.
         /// Well-known dimensions are:
-        ///   * `annotationSpec`: This slice is on the test data that has either
-        ///     ground truth or prediction with \[AnnotationSpec.display_name][google.cloud.aiplatform.v1beta1.AnnotationSpec.display_name\]
-        ///     equals to \[value][google.cloud.aiplatform.v1beta1.ModelEvaluationSlice.Slice.value\].
+        ///    * `annotationSpec`: This slice is on the test data that has either
+        ///      ground truth or prediction with \[AnnotationSpec.display_name][google.cloud.aiplatform.v1beta1.AnnotationSpec.display_name\]
+        ///      equals to \[value][google.cloud.aiplatform.v1beta1.ModelEvaluationSlice.Slice.value\].
         #[prost(string, tag="1")]
         pub dimension: ::prost::alloc::string::String,
         /// Output only. The value of the dimension in this slice.
@@ -11890,18 +12377,18 @@ pub struct ListModelsRequest {
     /// An expression for filtering the results of the request. For field names
     /// both snake_case and camelCase are supported.
     ///
-    ///   * `model` supports = and !=. `model` represents the Model ID,
-    ///     i.e. the last segment of the Model's [resource name]\[google.cloud.aiplatform.v1beta1.Model.name\].
-    ///   * `display_name` supports = and !=
-    ///   * `labels` supports general map functions that is:
-    ///     * `labels.key=value` - key:value equality
-    ///     * `labels.key:* or labels:key - key existence
-    ///     * A key including a space must be quoted. `labels."a key"`.
+    ///    * `model` supports = and !=. `model` represents the Model ID,
+    ///      i.e. the last segment of the Model's [resource name]\[google.cloud.aiplatform.v1beta1.Model.name\].
+    ///    * `display_name` supports = and !=
+    ///    * `labels` supports general map functions that is:
+    ///      * `labels.key=value` - key:value equality
+    ///      * `labels.key:* or labels:key - key existence
+    ///      * A key including a space must be quoted. `labels."a key"`.
     ///
     /// Some examples:
-    ///   * `model=1234`
-    ///   * `displayName="myDisplayName"`
-    ///   * `labels.myKey="myValue"`
+    ///    * `model=1234`
+    ///    * `displayName="myDisplayName"`
+    ///    * `labels.myKey="myValue"`
     #[prost(string, tag="2")]
     pub filter: ::prost::alloc::string::String,
     /// The standard list page size.
@@ -12079,7 +12566,7 @@ pub struct ListModelEvaluationSlicesRequest {
     pub parent: ::prost::alloc::string::String,
     /// The standard list filter.
     ///
-    ///   * `slice.dimension` - for =.
+    ///    * `slice.dimension` - for =.
     #[prost(string, tag="2")]
     pub filter: ::prost::alloc::string::String,
     /// The standard list page size.
@@ -12111,6 +12598,7 @@ pub struct ListModelEvaluationSlicesResponse {
 pub mod model_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// A service for managing Vertex AI's machine learning Models.
     #[derive(Debug, Clone)]
     pub struct ModelServiceClient<T> {
@@ -12125,6 +12613,10 @@ pub mod model_service_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -12146,19 +12638,19 @@ pub mod model_service_client {
         {
             ModelServiceClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Uploads a Model artifact into Vertex AI.
@@ -12602,6 +13094,26 @@ pub mod pipeline_task_detail {
         /// `condition` field of \[PipelineJob.pipeline_spec][google.cloud.aiplatform.v1beta1.PipelineJob.pipeline_spec\].
         NotTriggered = 9,
     }
+    impl State {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                State::Unspecified => "STATE_UNSPECIFIED",
+                State::Pending => "PENDING",
+                State::Running => "RUNNING",
+                State::Succeeded => "SUCCEEDED",
+                State::CancelPending => "CANCEL_PENDING",
+                State::Cancelling => "CANCELLING",
+                State::Cancelled => "CANCELLED",
+                State::Failed => "FAILED",
+                State::Skipped => "SKIPPED",
+                State::NotTriggered => "NOT_TRIGGERED",
+            }
+        }
+    }
 }
 /// The runtime detail of a pipeline executor.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -12672,19 +13184,19 @@ pub struct ListTrainingPipelinesRequest {
     /// The standard list filter.
     /// Supported fields:
     ///
-    ///   * `display_name` supports = and !=.
+    ///    * `display_name` supports = and !=.
     ///
-    ///   * `state` supports = and !=.
+    ///    * `state` supports = and !=.
     ///
     /// Some examples of using the filter are:
     ///
-    ///  * `state="PIPELINE_STATE_SUCCEEDED" AND display_name="my_pipeline"`
+    ///   * `state="PIPELINE_STATE_SUCCEEDED" AND display_name="my_pipeline"`
     ///
-    ///  * `state="PIPELINE_STATE_RUNNING" OR display_name="my_pipeline"`
+    ///   * `state="PIPELINE_STATE_RUNNING" OR display_name="my_pipeline"`
     ///
-    ///  * `NOT display_name="my_pipeline"`
+    ///   * `NOT display_name="my_pipeline"`
     ///
-    ///  * `state="PIPELINE_STATE_FAILED"`
+    ///   * `state="PIPELINE_STATE_FAILED"`
     #[prost(string, tag="2")]
     pub filter: ::prost::alloc::string::String,
     /// The standard list page size.
@@ -12770,14 +13282,14 @@ pub struct ListPipelineJobsRequest {
     /// * `pipeline_name`: Supports `=` and `!=` comparisons.
     /// * `display_name`: Supports `=`, `!=` comparisons, and `:` wildcard.
     /// * `pipeline_job_user_id`: Supports `=`, `!=` comparisons, and `:` wildcard.
-    ///  for example, can check if pipeline's display_name contains *step* by doing
-    ///   display_name:\"*step*\"
+    ///   for example, can check if pipeline's display_name contains *step* by doing
+    ///    display_name:\"*step*\"
     /// * `create_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
-    ///   Values must be in RFC 3339 format.
+    ///    Values must be in RFC 3339 format.
     /// * `update_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
-    ///   Values must be in RFC 3339 format.
+    ///    Values must be in RFC 3339 format.
     /// * `end_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
-    ///   Values must be in RFC 3339 format.
+    ///    Values must be in RFC 3339 format.
     /// * `labels`: Supports key-value equality and key presence.
     ///
     /// Filter expressions can be combined together using logical operators
@@ -12790,10 +13302,10 @@ pub struct ListPipelineJobsRequest {
     /// Examples:
     ///
     /// * `create_time>"2021-05-18T00:00:00Z" OR
-    ///   update_time>"2020-05-18T00:00:00Z"` PipelineJobs created or updated
-    ///   after 2020-05-18 00:00:00 UTC.
+    ///    update_time>"2020-05-18T00:00:00Z"` PipelineJobs created or updated
+    ///    after 2020-05-18 00:00:00 UTC.
     /// * `labels.env = "prod"`
-    ///   PipelineJobs with label "env" set to "prod".
+    ///    PipelineJobs with label "env" set to "prod".
     #[prost(string, tag="2")]
     pub filter: ::prost::alloc::string::String,
     /// The standard list page size.
@@ -12813,9 +13325,9 @@ pub struct ListPipelineJobsRequest {
     /// there are multiple jobs having the same create time, order them by the end
     /// time in ascending order. if order_by is not specified, it will order by
     /// default order is create time in descending order. Supported fields:
-    ///   * `create_time`
-    ///   * `update_time`
-    ///   * `end_time`
+    ///    * `create_time`
+    ///    * `update_time`
+    ///    * `end_time`
     #[prost(string, tag="6")]
     pub order_by: ::prost::alloc::string::String,
 }
@@ -12852,6 +13364,7 @@ pub struct CancelPipelineJobRequest {
 pub mod pipeline_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// A service for creating and managing Vertex AI's pipelines. This includes both
     /// `TrainingPipeline` resources (used for AutoML and custom training) and
     /// `PipelineJob` resources (used for Vertex Pipelines).
@@ -12868,6 +13381,10 @@ pub mod pipeline_service_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -12889,19 +13406,19 @@ pub mod pipeline_service_client {
         {
             PipelineServiceClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Creates a TrainingPipeline. A created TrainingPipeline right away will be
@@ -13235,10 +13752,10 @@ pub struct ExplainRequest {
     /// \[explanation_spec][google.cloud.aiplatform.v1beta1.DeployedModel.explanation_spec\] of the DeployedModel.
     /// Can be used for explaining prediction results with different
     /// configurations, such as:
-    ///  - Explaining top-5 predictions results as opposed to top-1;
-    ///  - Increasing path count or step count of the attribution methods to reduce
-    ///    approximate errors;
-    ///  - Using different baselines for explaining the prediction results.
+    ///   - Explaining top-5 predictions results as opposed to top-1;
+    ///   - Increasing path count or step count of the attribution methods to reduce
+    ///     approximate errors;
+    ///   - Using different baselines for explaining the prediction results.
     #[prost(message, optional, tag="5")]
     pub explanation_spec_override: ::core::option::Option<ExplanationSpecOverride>,
     /// If specified, this ExplainRequest will be served by the chosen
@@ -13267,6 +13784,7 @@ pub struct ExplainResponse {
 pub mod prediction_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// A service for online predictions and explanations.
     #[derive(Debug, Clone)]
     pub struct PredictionServiceClient<T> {
@@ -13281,6 +13799,10 @@ pub mod prediction_service_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -13302,19 +13824,19 @@ pub mod prediction_service_client {
         {
             PredictionServiceClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Perform an online prediction.
@@ -13489,6 +14011,7 @@ pub struct UpdateSpecialistPoolOperationMetadata {
 pub mod specialist_pool_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// A service for creating and managing Customer SpecialistPools.
     /// When customers start Data Labeling jobs, they can reuse/create Specialist
     /// Pools to bring their own Specialists to label the data.
@@ -13510,6 +14033,10 @@ pub mod specialist_pool_service_client {
             let inner = tonic::client::Grpc::new(inner);
             Self { inner }
         }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
+            Self { inner }
+        }
         pub fn with_interceptor<F>(
             inner: T,
             interceptor: F,
@@ -13529,19 +14056,19 @@ pub mod specialist_pool_service_client {
         {
             SpecialistPoolServiceClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Creates a SpecialistPool.
@@ -13778,6 +14305,20 @@ pub mod tensorboard_time_series {
         /// E.g. set of sample images with labels over epochs/time.
         BlobSequence = 3,
     }
+    impl ValueType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ValueType::Unspecified => "VALUE_TYPE_UNSPECIFIED",
+                ValueType::Scalar => "SCALAR",
+                ValueType::Tensor => "TENSOR",
+                ValueType::BlobSequence => "BLOB_SEQUENCE",
+            }
+        }
+    }
 }
 /// All the data stored in a TensorboardTimeSeries.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -13894,8 +14435,8 @@ pub struct TensorboardExperiment {
     /// System reserved label keys are prefixed with "aiplatform.googleapis.com/"
     /// and are immutable. Following system labels exist for each Dataset:
     /// * "aiplatform.googleapis.com/dataset_metadata_schema":
-    ///   - output only, its value is the
-    ///   \[metadata_schema's][metadata_schema_uri\] title.
+    ///    - output only, its value is the
+    ///    \[metadata_schema's][metadata_schema_uri\] title.
     #[prost(map="string, string", tag="6")]
     pub labels: ::std::collections::HashMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
     /// Used to perform consistent read-modify-write updates. If not set, a blind
@@ -14554,6 +15095,7 @@ pub struct UpdateTensorboardOperationMetadata {
 pub mod tensorboard_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// TensorboardService
     #[derive(Debug, Clone)]
     pub struct TensorboardServiceClient<T> {
@@ -14568,6 +15110,10 @@ pub mod tensorboard_service_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -14589,19 +15135,19 @@ pub mod tensorboard_service_client {
         {
             TensorboardServiceClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Creates a Tensorboard.
@@ -15506,6 +16052,7 @@ pub struct ListOptimalTrialsResponse {
 pub mod vizier_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Vertex Vizier API.
     ///
     /// Vizier service is a GCP service to solve blackbox optimization problems,
@@ -15524,6 +16071,10 @@ pub mod vizier_service_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -15545,19 +16096,19 @@ pub mod vizier_service_client {
         {
             VizierServiceClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Creates a Study. A resource name will be generated after creation of the

@@ -32,6 +32,26 @@ pub mod access_invitation_error_enum {
         /// <https://support.google.com/google-ads/answer/2375456>
         EmailDomainPolicyViolated = 9,
     }
+    impl AccessInvitationError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AccessInvitationError::Unspecified => "UNSPECIFIED",
+                AccessInvitationError::Unknown => "UNKNOWN",
+                AccessInvitationError::InvalidEmailAddress => "INVALID_EMAIL_ADDRESS",
+                AccessInvitationError::EmailAddressAlreadyHasAccess => "EMAIL_ADDRESS_ALREADY_HAS_ACCESS",
+                AccessInvitationError::InvalidInvitationStatus => "INVALID_INVITATION_STATUS",
+                AccessInvitationError::GoogleConsumerAccountNotAllowed => "GOOGLE_CONSUMER_ACCOUNT_NOT_ALLOWED",
+                AccessInvitationError::InvalidInvitationId => "INVALID_INVITATION_ID",
+                AccessInvitationError::EmailAddressAlreadyHasPendingInvitation => "EMAIL_ADDRESS_ALREADY_HAS_PENDING_INVITATION",
+                AccessInvitationError::PendingInvitationsLimitExceeded => "PENDING_INVITATIONS_LIMIT_EXCEEDED",
+                AccessInvitationError::EmailDomainPolicyViolated => "EMAIL_DOMAIN_POLICY_VIOLATED",
+            }
+        }
+    }
 }
 // Proto file describing account budget proposal errors.
 
@@ -104,6 +124,42 @@ pub mod account_budget_proposal_error_enum {
         /// creation through API. Log in to Google Ads to create budget.
         CannotCreateBudgetThroughApi = 25,
     }
+    impl AccountBudgetProposalError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AccountBudgetProposalError::Unspecified => "UNSPECIFIED",
+                AccountBudgetProposalError::Unknown => "UNKNOWN",
+                AccountBudgetProposalError::FieldMaskNotAllowed => "FIELD_MASK_NOT_ALLOWED",
+                AccountBudgetProposalError::ImmutableField => "IMMUTABLE_FIELD",
+                AccountBudgetProposalError::RequiredFieldMissing => "REQUIRED_FIELD_MISSING",
+                AccountBudgetProposalError::CannotCancelApprovedProposal => "CANNOT_CANCEL_APPROVED_PROPOSAL",
+                AccountBudgetProposalError::CannotRemoveUnapprovedBudget => "CANNOT_REMOVE_UNAPPROVED_BUDGET",
+                AccountBudgetProposalError::CannotRemoveRunningBudget => "CANNOT_REMOVE_RUNNING_BUDGET",
+                AccountBudgetProposalError::CannotEndUnapprovedBudget => "CANNOT_END_UNAPPROVED_BUDGET",
+                AccountBudgetProposalError::CannotEndInactiveBudget => "CANNOT_END_INACTIVE_BUDGET",
+                AccountBudgetProposalError::BudgetNameRequired => "BUDGET_NAME_REQUIRED",
+                AccountBudgetProposalError::CannotUpdateOldBudget => "CANNOT_UPDATE_OLD_BUDGET",
+                AccountBudgetProposalError::CannotEndInPast => "CANNOT_END_IN_PAST",
+                AccountBudgetProposalError::CannotExtendEndTime => "CANNOT_EXTEND_END_TIME",
+                AccountBudgetProposalError::PurchaseOrderNumberRequired => "PURCHASE_ORDER_NUMBER_REQUIRED",
+                AccountBudgetProposalError::PendingUpdateProposalExists => "PENDING_UPDATE_PROPOSAL_EXISTS",
+                AccountBudgetProposalError::MultipleBudgetsNotAllowedForUnapprovedBillingSetup => "MULTIPLE_BUDGETS_NOT_ALLOWED_FOR_UNAPPROVED_BILLING_SETUP",
+                AccountBudgetProposalError::CannotUpdateStartTimeForStartedBudget => "CANNOT_UPDATE_START_TIME_FOR_STARTED_BUDGET",
+                AccountBudgetProposalError::SpendingLimitLowerThanAccruedCostNotAllowed => "SPENDING_LIMIT_LOWER_THAN_ACCRUED_COST_NOT_ALLOWED",
+                AccountBudgetProposalError::UpdateIsNoOp => "UPDATE_IS_NO_OP",
+                AccountBudgetProposalError::EndTimeMustFollowStartTime => "END_TIME_MUST_FOLLOW_START_TIME",
+                AccountBudgetProposalError::BudgetDateRangeIncompatibleWithBillingSetup => "BUDGET_DATE_RANGE_INCOMPATIBLE_WITH_BILLING_SETUP",
+                AccountBudgetProposalError::NotAuthorized => "NOT_AUTHORIZED",
+                AccountBudgetProposalError::InvalidBillingSetup => "INVALID_BILLING_SETUP",
+                AccountBudgetProposalError::OverlapsExistingBudget => "OVERLAPS_EXISTING_BUDGET",
+                AccountBudgetProposalError::CannotCreateBudgetThroughApi => "CANNOT_CREATE_BUDGET_THROUGH_API",
+            }
+        }
+    }
 }
 // Proto file describing AccountLink errors.
 
@@ -123,6 +179,19 @@ pub mod account_link_error_enum {
         Unknown = 1,
         /// The new link status is invalid.
         InvalidStatus = 2,
+    }
+    impl AccountLinkError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AccountLinkError::Unspecified => "UNSPECIFIED",
+                AccountLinkError::Unknown => "UNKNOWN",
+                AccountLinkError::InvalidStatus => "INVALID_STATUS",
+            }
+        }
     }
 }
 // Proto file describing ad customizer errors.
@@ -151,6 +220,23 @@ pub mod ad_customizer_error_enum {
         CountdownInvalidStartDaysBefore = 5,
         /// A user list referenced in an IF function does not exist.
         UnknownUserList = 6,
+    }
+    impl AdCustomizerError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AdCustomizerError::Unspecified => "UNSPECIFIED",
+                AdCustomizerError::Unknown => "UNKNOWN",
+                AdCustomizerError::CountdownInvalidDateFormat => "COUNTDOWN_INVALID_DATE_FORMAT",
+                AdCustomizerError::CountdownDateInPast => "COUNTDOWN_DATE_IN_PAST",
+                AdCustomizerError::CountdownInvalidLocale => "COUNTDOWN_INVALID_LOCALE",
+                AdCustomizerError::CountdownInvalidStartDaysBefore => "COUNTDOWN_INVALID_START_DAYS_BEFORE",
+                AdCustomizerError::UnknownUserList => "UNKNOWN_USER_LIST",
+            }
+        }
     }
 }
 // Proto file describing ad errors.
@@ -492,6 +578,164 @@ pub mod ad_error_enum {
         /// Missing required image aspect ratio.
         MissingRequiredImageAspectRatio = 153,
     }
+    impl AdError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AdError::Unspecified => "UNSPECIFIED",
+                AdError::Unknown => "UNKNOWN",
+                AdError::AdCustomizersNotSupportedForAdType => "AD_CUSTOMIZERS_NOT_SUPPORTED_FOR_AD_TYPE",
+                AdError::ApproximatelyTooLong => "APPROXIMATELY_TOO_LONG",
+                AdError::ApproximatelyTooShort => "APPROXIMATELY_TOO_SHORT",
+                AdError::BadSnippet => "BAD_SNIPPET",
+                AdError::CannotModifyAd => "CANNOT_MODIFY_AD",
+                AdError::CannotSetBusinessNameIfUrlSet => "CANNOT_SET_BUSINESS_NAME_IF_URL_SET",
+                AdError::CannotSetField => "CANNOT_SET_FIELD",
+                AdError::CannotSetFieldWithOriginAdIdSet => "CANNOT_SET_FIELD_WITH_ORIGIN_AD_ID_SET",
+                AdError::CannotSetFieldWithAdIdSetForSharing => "CANNOT_SET_FIELD_WITH_AD_ID_SET_FOR_SHARING",
+                AdError::CannotSetAllowFlexibleColorFalse => "CANNOT_SET_ALLOW_FLEXIBLE_COLOR_FALSE",
+                AdError::CannotSetColorControlWhenNativeFormatSetting => "CANNOT_SET_COLOR_CONTROL_WHEN_NATIVE_FORMAT_SETTING",
+                AdError::CannotSetUrl => "CANNOT_SET_URL",
+                AdError::CannotSetWithoutFinalUrls => "CANNOT_SET_WITHOUT_FINAL_URLS",
+                AdError::CannotSetWithFinalUrls => "CANNOT_SET_WITH_FINAL_URLS",
+                AdError::CannotSetWithUrlData => "CANNOT_SET_WITH_URL_DATA",
+                AdError::CannotUseAdSubclassForOperator => "CANNOT_USE_AD_SUBCLASS_FOR_OPERATOR",
+                AdError::CustomerNotApprovedMobileads => "CUSTOMER_NOT_APPROVED_MOBILEADS",
+                AdError::CustomerNotApprovedThirdpartyAds => "CUSTOMER_NOT_APPROVED_THIRDPARTY_ADS",
+                AdError::CustomerNotApprovedThirdpartyRedirectAds => "CUSTOMER_NOT_APPROVED_THIRDPARTY_REDIRECT_ADS",
+                AdError::CustomerNotEligible => "CUSTOMER_NOT_ELIGIBLE",
+                AdError::CustomerNotEligibleForUpdatingBeaconUrl => "CUSTOMER_NOT_ELIGIBLE_FOR_UPDATING_BEACON_URL",
+                AdError::DimensionAlreadyInUnion => "DIMENSION_ALREADY_IN_UNION",
+                AdError::DimensionMustBeSet => "DIMENSION_MUST_BE_SET",
+                AdError::DimensionNotInUnion => "DIMENSION_NOT_IN_UNION",
+                AdError::DisplayUrlCannotBeSpecified => "DISPLAY_URL_CANNOT_BE_SPECIFIED",
+                AdError::DomesticPhoneNumberFormat => "DOMESTIC_PHONE_NUMBER_FORMAT",
+                AdError::EmergencyPhoneNumber => "EMERGENCY_PHONE_NUMBER",
+                AdError::EmptyField => "EMPTY_FIELD",
+                AdError::FeedAttributeMustHaveMappingForTypeId => "FEED_ATTRIBUTE_MUST_HAVE_MAPPING_FOR_TYPE_ID",
+                AdError::FeedAttributeMappingTypeMismatch => "FEED_ATTRIBUTE_MAPPING_TYPE_MISMATCH",
+                AdError::IllegalAdCustomizerTagUse => "ILLEGAL_AD_CUSTOMIZER_TAG_USE",
+                AdError::IllegalTagUse => "ILLEGAL_TAG_USE",
+                AdError::InconsistentDimensions => "INCONSISTENT_DIMENSIONS",
+                AdError::InconsistentStatusInTemplateUnion => "INCONSISTENT_STATUS_IN_TEMPLATE_UNION",
+                AdError::IncorrectLength => "INCORRECT_LENGTH",
+                AdError::IneligibleForUpgrade => "INELIGIBLE_FOR_UPGRADE",
+                AdError::InvalidAdAddressCampaignTarget => "INVALID_AD_ADDRESS_CAMPAIGN_TARGET",
+                AdError::InvalidAdType => "INVALID_AD_TYPE",
+                AdError::InvalidAttributesForMobileImage => "INVALID_ATTRIBUTES_FOR_MOBILE_IMAGE",
+                AdError::InvalidAttributesForMobileText => "INVALID_ATTRIBUTES_FOR_MOBILE_TEXT",
+                AdError::InvalidCallToActionText => "INVALID_CALL_TO_ACTION_TEXT",
+                AdError::InvalidCharacterForUrl => "INVALID_CHARACTER_FOR_URL",
+                AdError::InvalidCountryCode => "INVALID_COUNTRY_CODE",
+                AdError::InvalidExpandedDynamicSearchAdTag => "INVALID_EXPANDED_DYNAMIC_SEARCH_AD_TAG",
+                AdError::InvalidInput => "INVALID_INPUT",
+                AdError::InvalidMarkupLanguage => "INVALID_MARKUP_LANGUAGE",
+                AdError::InvalidMobileCarrier => "INVALID_MOBILE_CARRIER",
+                AdError::InvalidMobileCarrierTarget => "INVALID_MOBILE_CARRIER_TARGET",
+                AdError::InvalidNumberOfElements => "INVALID_NUMBER_OF_ELEMENTS",
+                AdError::InvalidPhoneNumberFormat => "INVALID_PHONE_NUMBER_FORMAT",
+                AdError::InvalidRichMediaCertifiedVendorFormatId => "INVALID_RICH_MEDIA_CERTIFIED_VENDOR_FORMAT_ID",
+                AdError::InvalidTemplateData => "INVALID_TEMPLATE_DATA",
+                AdError::InvalidTemplateElementFieldType => "INVALID_TEMPLATE_ELEMENT_FIELD_TYPE",
+                AdError::InvalidTemplateId => "INVALID_TEMPLATE_ID",
+                AdError::LineTooWide => "LINE_TOO_WIDE",
+                AdError::MissingAdCustomizerMapping => "MISSING_AD_CUSTOMIZER_MAPPING",
+                AdError::MissingAddressComponent => "MISSING_ADDRESS_COMPONENT",
+                AdError::MissingAdvertisementName => "MISSING_ADVERTISEMENT_NAME",
+                AdError::MissingBusinessName => "MISSING_BUSINESS_NAME",
+                AdError::MissingDescription1 => "MISSING_DESCRIPTION1",
+                AdError::MissingDescription2 => "MISSING_DESCRIPTION2",
+                AdError::MissingDestinationUrlTag => "MISSING_DESTINATION_URL_TAG",
+                AdError::MissingLandingPageUrlTag => "MISSING_LANDING_PAGE_URL_TAG",
+                AdError::MissingDimension => "MISSING_DIMENSION",
+                AdError::MissingDisplayUrl => "MISSING_DISPLAY_URL",
+                AdError::MissingHeadline => "MISSING_HEADLINE",
+                AdError::MissingHeight => "MISSING_HEIGHT",
+                AdError::MissingImage => "MISSING_IMAGE",
+                AdError::MissingMarketingImageOrProductVideos => "MISSING_MARKETING_IMAGE_OR_PRODUCT_VIDEOS",
+                AdError::MissingMarkupLanguages => "MISSING_MARKUP_LANGUAGES",
+                AdError::MissingMobileCarrier => "MISSING_MOBILE_CARRIER",
+                AdError::MissingPhone => "MISSING_PHONE",
+                AdError::MissingRequiredTemplateFields => "MISSING_REQUIRED_TEMPLATE_FIELDS",
+                AdError::MissingTemplateFieldValue => "MISSING_TEMPLATE_FIELD_VALUE",
+                AdError::MissingText => "MISSING_TEXT",
+                AdError::MissingVisibleUrl => "MISSING_VISIBLE_URL",
+                AdError::MissingWidth => "MISSING_WIDTH",
+                AdError::MultipleDistinctFeedsUnsupported => "MULTIPLE_DISTINCT_FEEDS_UNSUPPORTED",
+                AdError::MustUseTempAdUnionIdOnAdd => "MUST_USE_TEMP_AD_UNION_ID_ON_ADD",
+                AdError::TooLong => "TOO_LONG",
+                AdError::TooShort => "TOO_SHORT",
+                AdError::UnionDimensionsCannotChange => "UNION_DIMENSIONS_CANNOT_CHANGE",
+                AdError::UnknownAddressComponent => "UNKNOWN_ADDRESS_COMPONENT",
+                AdError::UnknownFieldName => "UNKNOWN_FIELD_NAME",
+                AdError::UnknownUniqueName => "UNKNOWN_UNIQUE_NAME",
+                AdError::UnsupportedDimensions => "UNSUPPORTED_DIMENSIONS",
+                AdError::UrlInvalidScheme => "URL_INVALID_SCHEME",
+                AdError::UrlInvalidTopLevelDomain => "URL_INVALID_TOP_LEVEL_DOMAIN",
+                AdError::UrlMalformed => "URL_MALFORMED",
+                AdError::UrlNoHost => "URL_NO_HOST",
+                AdError::UrlNotEquivalent => "URL_NOT_EQUIVALENT",
+                AdError::UrlHostNameTooLong => "URL_HOST_NAME_TOO_LONG",
+                AdError::UrlNoScheme => "URL_NO_SCHEME",
+                AdError::UrlNoTopLevelDomain => "URL_NO_TOP_LEVEL_DOMAIN",
+                AdError::UrlPathNotAllowed => "URL_PATH_NOT_ALLOWED",
+                AdError::UrlPortNotAllowed => "URL_PORT_NOT_ALLOWED",
+                AdError::UrlQueryNotAllowed => "URL_QUERY_NOT_ALLOWED",
+                AdError::UrlSchemeBeforeExpandedDynamicSearchAdTag => "URL_SCHEME_BEFORE_EXPANDED_DYNAMIC_SEARCH_AD_TAG",
+                AdError::UserDoesNotHaveAccessToTemplate => "USER_DOES_NOT_HAVE_ACCESS_TO_TEMPLATE",
+                AdError::InconsistentExpandableSettings => "INCONSISTENT_EXPANDABLE_SETTINGS",
+                AdError::InvalidFormat => "INVALID_FORMAT",
+                AdError::InvalidFieldText => "INVALID_FIELD_TEXT",
+                AdError::ElementNotPresent => "ELEMENT_NOT_PRESENT",
+                AdError::ImageError => "IMAGE_ERROR",
+                AdError::ValueNotInRange => "VALUE_NOT_IN_RANGE",
+                AdError::FieldNotPresent => "FIELD_NOT_PRESENT",
+                AdError::AddressNotComplete => "ADDRESS_NOT_COMPLETE",
+                AdError::AddressInvalid => "ADDRESS_INVALID",
+                AdError::VideoRetrievalError => "VIDEO_RETRIEVAL_ERROR",
+                AdError::AudioError => "AUDIO_ERROR",
+                AdError::InvalidYoutubeDisplayUrl => "INVALID_YOUTUBE_DISPLAY_URL",
+                AdError::TooManyProductImages => "TOO_MANY_PRODUCT_IMAGES",
+                AdError::TooManyProductVideos => "TOO_MANY_PRODUCT_VIDEOS",
+                AdError::IncompatibleAdTypeAndDevicePreference => "INCOMPATIBLE_AD_TYPE_AND_DEVICE_PREFERENCE",
+                AdError::CalltrackingNotSupportedForCountry => "CALLTRACKING_NOT_SUPPORTED_FOR_COUNTRY",
+                AdError::CarrierSpecificShortNumberNotAllowed => "CARRIER_SPECIFIC_SHORT_NUMBER_NOT_ALLOWED",
+                AdError::DisallowedNumberType => "DISALLOWED_NUMBER_TYPE",
+                AdError::PhoneNumberNotSupportedForCountry => "PHONE_NUMBER_NOT_SUPPORTED_FOR_COUNTRY",
+                AdError::PhoneNumberNotSupportedWithCalltrackingForCountry => "PHONE_NUMBER_NOT_SUPPORTED_WITH_CALLTRACKING_FOR_COUNTRY",
+                AdError::PremiumRateNumberNotAllowed => "PREMIUM_RATE_NUMBER_NOT_ALLOWED",
+                AdError::VanityPhoneNumberNotAllowed => "VANITY_PHONE_NUMBER_NOT_ALLOWED",
+                AdError::InvalidCallConversionTypeId => "INVALID_CALL_CONVERSION_TYPE_ID",
+                AdError::CannotDisableCallConversionAndSetConversionTypeId => "CANNOT_DISABLE_CALL_CONVERSION_AND_SET_CONVERSION_TYPE_ID",
+                AdError::CannotSetPath2WithoutPath1 => "CANNOT_SET_PATH2_WITHOUT_PATH1",
+                AdError::MissingDynamicSearchAdsSettingDomainName => "MISSING_DYNAMIC_SEARCH_ADS_SETTING_DOMAIN_NAME",
+                AdError::IncompatibleWithRestrictionType => "INCOMPATIBLE_WITH_RESTRICTION_TYPE",
+                AdError::CustomerConsentForCallRecordingRequired => "CUSTOMER_CONSENT_FOR_CALL_RECORDING_REQUIRED",
+                AdError::MissingImageOrMediaBundle => "MISSING_IMAGE_OR_MEDIA_BUNDLE",
+                AdError::ProductTypeNotSupportedInThisCampaign => "PRODUCT_TYPE_NOT_SUPPORTED_IN_THIS_CAMPAIGN",
+                AdError::PlaceholderCannotHaveEmptyDefaultValue => "PLACEHOLDER_CANNOT_HAVE_EMPTY_DEFAULT_VALUE",
+                AdError::PlaceholderCountdownFunctionCannotHaveDefaultValue => "PLACEHOLDER_COUNTDOWN_FUNCTION_CANNOT_HAVE_DEFAULT_VALUE",
+                AdError::PlaceholderDefaultValueMissing => "PLACEHOLDER_DEFAULT_VALUE_MISSING",
+                AdError::UnexpectedPlaceholderDefaultValue => "UNEXPECTED_PLACEHOLDER_DEFAULT_VALUE",
+                AdError::AdCustomizersMayNotBeAdjacent => "AD_CUSTOMIZERS_MAY_NOT_BE_ADJACENT",
+                AdError::UpdatingAdWithNoEnabledAssociation => "UPDATING_AD_WITH_NO_ENABLED_ASSOCIATION",
+                AdError::TooManyAdCustomizers => "TOO_MANY_AD_CUSTOMIZERS",
+                AdError::InvalidAdCustomizerFormat => "INVALID_AD_CUSTOMIZER_FORMAT",
+                AdError::NestedAdCustomizerSyntax => "NESTED_AD_CUSTOMIZER_SYNTAX",
+                AdError::UnsupportedAdCustomizerSyntax => "UNSUPPORTED_AD_CUSTOMIZER_SYNTAX",
+                AdError::UnpairedBraceInAdCustomizerTag => "UNPAIRED_BRACE_IN_AD_CUSTOMIZER_TAG",
+                AdError::MoreThanOneCountdownTagTypeExists => "MORE_THAN_ONE_COUNTDOWN_TAG_TYPE_EXISTS",
+                AdError::DateTimeInCountdownTagIsInvalid => "DATE_TIME_IN_COUNTDOWN_TAG_IS_INVALID",
+                AdError::DateTimeInCountdownTagIsPast => "DATE_TIME_IN_COUNTDOWN_TAG_IS_PAST",
+                AdError::UnrecognizedAdCustomizerTagFound => "UNRECOGNIZED_AD_CUSTOMIZER_TAG_FOUND",
+                AdError::StoreMismatch => "STORE_MISMATCH",
+                AdError::MissingRequiredImageAspectRatio => "MISSING_REQUIRED_IMAGE_ASPECT_RATIO",
+            }
+        }
+    }
 }
 // Proto file describing ad group ad errors.
 
@@ -535,6 +779,29 @@ pub mod ad_group_ad_error_enum {
         /// are permitted.
         CannotUpdateDeprecatedAds = 12,
     }
+    impl AdGroupAdError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AdGroupAdError::Unspecified => "UNSPECIFIED",
+                AdGroupAdError::Unknown => "UNKNOWN",
+                AdGroupAdError::AdGroupAdLabelDoesNotExist => "AD_GROUP_AD_LABEL_DOES_NOT_EXIST",
+                AdGroupAdError::AdGroupAdLabelAlreadyExists => "AD_GROUP_AD_LABEL_ALREADY_EXISTS",
+                AdGroupAdError::AdNotUnderAdgroup => "AD_NOT_UNDER_ADGROUP",
+                AdGroupAdError::CannotOperateOnRemovedAdgroupad => "CANNOT_OPERATE_ON_REMOVED_ADGROUPAD",
+                AdGroupAdError::CannotCreateDeprecatedAds => "CANNOT_CREATE_DEPRECATED_ADS",
+                AdGroupAdError::CannotCreateTextAds => "CANNOT_CREATE_TEXT_ADS",
+                AdGroupAdError::EmptyField => "EMPTY_FIELD",
+                AdGroupAdError::ResourceReferencedInMultipleOps => "RESOURCE_REFERENCED_IN_MULTIPLE_OPS",
+                AdGroupAdError::AdTypeCannotBePaused => "AD_TYPE_CANNOT_BE_PAUSED",
+                AdGroupAdError::AdTypeCannotBeRemoved => "AD_TYPE_CANNOT_BE_REMOVED",
+                AdGroupAdError::CannotUpdateDeprecatedAds => "CANNOT_UPDATE_DEPRECATED_ADS",
+            }
+        }
+    }
 }
 // Proto file describing ad group bid modifier errors.
 
@@ -557,6 +824,20 @@ pub mod ad_group_bid_modifier_error_enum {
         /// Cannot override the bid modifier for the given criterion ID if the parent
         /// campaign is opted out of the same criterion.
         CannotOverrideOptedOutCampaignCriterionBidModifier = 3,
+    }
+    impl AdGroupBidModifierError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AdGroupBidModifierError::Unspecified => "UNSPECIFIED",
+                AdGroupBidModifierError::Unknown => "UNKNOWN",
+                AdGroupBidModifierError::CriterionIdNotSupported => "CRITERION_ID_NOT_SUPPORTED",
+                AdGroupBidModifierError::CannotOverrideOptedOutCampaignCriterionBidModifier => "CANNOT_OVERRIDE_OPTED_OUT_CAMPAIGN_CRITERION_BID_MODIFIER",
+            }
+        }
     }
 }
 // Proto file describing ad group criterion errors.
@@ -641,6 +922,46 @@ pub mod ad_group_criterion_error_enum {
         /// Final mobile urls are not supported for this criterion type.
         FinalMobileUrlsNotSupportedForCriterionType = 38,
     }
+    impl AdGroupCriterionError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AdGroupCriterionError::Unspecified => "UNSPECIFIED",
+                AdGroupCriterionError::Unknown => "UNKNOWN",
+                AdGroupCriterionError::AdGroupCriterionLabelDoesNotExist => "AD_GROUP_CRITERION_LABEL_DOES_NOT_EXIST",
+                AdGroupCriterionError::AdGroupCriterionLabelAlreadyExists => "AD_GROUP_CRITERION_LABEL_ALREADY_EXISTS",
+                AdGroupCriterionError::CannotAddLabelToNegativeCriterion => "CANNOT_ADD_LABEL_TO_NEGATIVE_CRITERION",
+                AdGroupCriterionError::TooManyOperations => "TOO_MANY_OPERATIONS",
+                AdGroupCriterionError::CantUpdateNegative => "CANT_UPDATE_NEGATIVE",
+                AdGroupCriterionError::ConcreteTypeRequired => "CONCRETE_TYPE_REQUIRED",
+                AdGroupCriterionError::BidIncompatibleWithAdgroup => "BID_INCOMPATIBLE_WITH_ADGROUP",
+                AdGroupCriterionError::CannotTargetAndExclude => "CANNOT_TARGET_AND_EXCLUDE",
+                AdGroupCriterionError::IllegalUrl => "ILLEGAL_URL",
+                AdGroupCriterionError::InvalidKeywordText => "INVALID_KEYWORD_TEXT",
+                AdGroupCriterionError::InvalidDestinationUrl => "INVALID_DESTINATION_URL",
+                AdGroupCriterionError::MissingDestinationUrlTag => "MISSING_DESTINATION_URL_TAG",
+                AdGroupCriterionError::KeywordLevelBidNotSupportedForManualcpm => "KEYWORD_LEVEL_BID_NOT_SUPPORTED_FOR_MANUALCPM",
+                AdGroupCriterionError::InvalidUserStatus => "INVALID_USER_STATUS",
+                AdGroupCriterionError::CannotAddCriteriaType => "CANNOT_ADD_CRITERIA_TYPE",
+                AdGroupCriterionError::CannotExcludeCriteriaType => "CANNOT_EXCLUDE_CRITERIA_TYPE",
+                AdGroupCriterionError::CampaignTypeNotCompatibleWithPartialFailure => "CAMPAIGN_TYPE_NOT_COMPATIBLE_WITH_PARTIAL_FAILURE",
+                AdGroupCriterionError::OperationsForTooManyShoppingAdgroups => "OPERATIONS_FOR_TOO_MANY_SHOPPING_ADGROUPS",
+                AdGroupCriterionError::CannotModifyUrlFieldsWithDuplicateElements => "CANNOT_MODIFY_URL_FIELDS_WITH_DUPLICATE_ELEMENTS",
+                AdGroupCriterionError::CannotSetWithoutFinalUrls => "CANNOT_SET_WITHOUT_FINAL_URLS",
+                AdGroupCriterionError::CannotClearFinalUrlsIfFinalMobileUrlsExist => "CANNOT_CLEAR_FINAL_URLS_IF_FINAL_MOBILE_URLS_EXIST",
+                AdGroupCriterionError::CannotClearFinalUrlsIfFinalAppUrlsExist => "CANNOT_CLEAR_FINAL_URLS_IF_FINAL_APP_URLS_EXIST",
+                AdGroupCriterionError::CannotClearFinalUrlsIfTrackingUrlTemplateExists => "CANNOT_CLEAR_FINAL_URLS_IF_TRACKING_URL_TEMPLATE_EXISTS",
+                AdGroupCriterionError::CannotClearFinalUrlsIfUrlCustomParametersExist => "CANNOT_CLEAR_FINAL_URLS_IF_URL_CUSTOM_PARAMETERS_EXIST",
+                AdGroupCriterionError::CannotSetBothDestinationUrlAndFinalUrls => "CANNOT_SET_BOTH_DESTINATION_URL_AND_FINAL_URLS",
+                AdGroupCriterionError::CannotSetBothDestinationUrlAndTrackingUrlTemplate => "CANNOT_SET_BOTH_DESTINATION_URL_AND_TRACKING_URL_TEMPLATE",
+                AdGroupCriterionError::FinalUrlsNotSupportedForCriterionType => "FINAL_URLS_NOT_SUPPORTED_FOR_CRITERION_TYPE",
+                AdGroupCriterionError::FinalMobileUrlsNotSupportedForCriterionType => "FINAL_MOBILE_URLS_NOT_SUPPORTED_FOR_CRITERION_TYPE",
+            }
+        }
+    }
 }
 // Proto file describing ad group errors.
 
@@ -692,6 +1013,32 @@ pub mod ad_group_error_enum {
         /// of this type exists.
         InvalidExcludedParentAssetFieldType = 16,
     }
+    impl AdGroupError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AdGroupError::Unspecified => "UNSPECIFIED",
+                AdGroupError::Unknown => "UNKNOWN",
+                AdGroupError::DuplicateAdgroupName => "DUPLICATE_ADGROUP_NAME",
+                AdGroupError::InvalidAdgroupName => "INVALID_ADGROUP_NAME",
+                AdGroupError::AdvertiserNotOnContentNetwork => "ADVERTISER_NOT_ON_CONTENT_NETWORK",
+                AdGroupError::BidTooBig => "BID_TOO_BIG",
+                AdGroupError::BidTypeAndBiddingStrategyMismatch => "BID_TYPE_AND_BIDDING_STRATEGY_MISMATCH",
+                AdGroupError::MissingAdgroupName => "MISSING_ADGROUP_NAME",
+                AdGroupError::AdgroupLabelDoesNotExist => "ADGROUP_LABEL_DOES_NOT_EXIST",
+                AdGroupError::AdgroupLabelAlreadyExists => "ADGROUP_LABEL_ALREADY_EXISTS",
+                AdGroupError::InvalidContentBidCriterionTypeGroup => "INVALID_CONTENT_BID_CRITERION_TYPE_GROUP",
+                AdGroupError::AdGroupTypeNotValidForAdvertisingChannelType => "AD_GROUP_TYPE_NOT_VALID_FOR_ADVERTISING_CHANNEL_TYPE",
+                AdGroupError::AdgroupTypeNotSupportedForCampaignSalesCountry => "ADGROUP_TYPE_NOT_SUPPORTED_FOR_CAMPAIGN_SALES_COUNTRY",
+                AdGroupError::CannotAddAdgroupOfTypeDsaToCampaignWithoutDsaSetting => "CANNOT_ADD_ADGROUP_OF_TYPE_DSA_TO_CAMPAIGN_WITHOUT_DSA_SETTING",
+                AdGroupError::PromotedHotelAdGroupsNotAvailableForCustomer => "PROMOTED_HOTEL_AD_GROUPS_NOT_AVAILABLE_FOR_CUSTOMER",
+                AdGroupError::InvalidExcludedParentAssetFieldType => "INVALID_EXCLUDED_PARENT_ASSET_FIELD_TYPE",
+            }
+        }
+    }
 }
 // Proto file describing ad group feed errors.
 
@@ -726,6 +1073,25 @@ pub mod ad_group_feed_error_enum {
         /// CustomerFeed for the specified feed.
         NoExistingLocationCustomerFeed = 8,
     }
+    impl AdGroupFeedError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AdGroupFeedError::Unspecified => "UNSPECIFIED",
+                AdGroupFeedError::Unknown => "UNKNOWN",
+                AdGroupFeedError::FeedAlreadyExistsForPlaceholderType => "FEED_ALREADY_EXISTS_FOR_PLACEHOLDER_TYPE",
+                AdGroupFeedError::CannotCreateForRemovedFeed => "CANNOT_CREATE_FOR_REMOVED_FEED",
+                AdGroupFeedError::AdgroupFeedAlreadyExists => "ADGROUP_FEED_ALREADY_EXISTS",
+                AdGroupFeedError::CannotOperateOnRemovedAdgroupFeed => "CANNOT_OPERATE_ON_REMOVED_ADGROUP_FEED",
+                AdGroupFeedError::InvalidPlaceholderType => "INVALID_PLACEHOLDER_TYPE",
+                AdGroupFeedError::MissingFeedmappingForPlaceholderType => "MISSING_FEEDMAPPING_FOR_PLACEHOLDER_TYPE",
+                AdGroupFeedError::NoExistingLocationCustomerFeed => "NO_EXISTING_LOCATION_CUSTOMER_FEED",
+            }
+        }
+    }
 }
 // Proto file describing ad parameter errors.
 
@@ -747,6 +1113,20 @@ pub mod ad_parameter_error_enum {
         AdGroupCriterionMustBeKeyword = 2,
         /// The insertion text is invalid.
         InvalidInsertionTextFormat = 3,
+    }
+    impl AdParameterError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AdParameterError::Unspecified => "UNSPECIFIED",
+                AdParameterError::Unknown => "UNKNOWN",
+                AdParameterError::AdGroupCriterionMustBeKeyword => "AD_GROUP_CRITERION_MUST_BE_KEYWORD",
+                AdParameterError::InvalidInsertionTextFormat => "INVALID_INSERTION_TEXT_FORMAT",
+            }
+        }
     }
 }
 // Proto file describing ad sharing errors.
@@ -773,6 +1153,21 @@ pub mod ad_sharing_error_enum {
         /// Cannot add AdGroupAd on inactive Ad.
         CannotShareInactiveAd = 4,
     }
+    impl AdSharingError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AdSharingError::Unspecified => "UNSPECIFIED",
+                AdSharingError::Unknown => "UNKNOWN",
+                AdSharingError::AdGroupAlreadyContainsAd => "AD_GROUP_ALREADY_CONTAINS_AD",
+                AdSharingError::IncompatibleAdUnderAdGroup => "INCOMPATIBLE_AD_UNDER_AD_GROUP",
+                AdSharingError::CannotShareInactiveAd => "CANNOT_SHARE_INACTIVE_AD",
+            }
+        }
+    }
 }
 // Proto file describing adx errors.
 
@@ -792,6 +1187,19 @@ pub mod adx_error_enum {
         Unknown = 1,
         /// Attempt to use non-AdX feature by AdX customer.
         UnsupportedFeature = 2,
+    }
+    impl AdxError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AdxError::Unspecified => "UNSPECIFIED",
+                AdxError::Unknown => "UNKNOWN",
+                AdxError::UnsupportedFeature => "UNSUPPORTED_FEATURE",
+            }
+        }
     }
 }
 // Proto file describing asset errors.
@@ -849,6 +1257,34 @@ pub mod asset_error_enum {
         /// oneof, cannot have different asset level fields for asset types which are
         /// deduped.
         DuplicateAssetsWithDifferentFieldValue = 18,
+    }
+    impl AssetError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AssetError::Unspecified => "UNSPECIFIED",
+                AssetError::Unknown => "UNKNOWN",
+                AssetError::CustomerNotOnAllowlistForAssetType => "CUSTOMER_NOT_ON_ALLOWLIST_FOR_ASSET_TYPE",
+                AssetError::DuplicateAsset => "DUPLICATE_ASSET",
+                AssetError::DuplicateAssetName => "DUPLICATE_ASSET_NAME",
+                AssetError::AssetDataIsMissing => "ASSET_DATA_IS_MISSING",
+                AssetError::CannotModifyAssetName => "CANNOT_MODIFY_ASSET_NAME",
+                AssetError::FieldIncompatibleWithAssetType => "FIELD_INCOMPATIBLE_WITH_ASSET_TYPE",
+                AssetError::InvalidCallToActionText => "INVALID_CALL_TO_ACTION_TEXT",
+                AssetError::LeadFormInvalidFieldsCombination => "LEAD_FORM_INVALID_FIELDS_COMBINATION",
+                AssetError::LeadFormMissingAgreement => "LEAD_FORM_MISSING_AGREEMENT",
+                AssetError::InvalidAssetStatus => "INVALID_ASSET_STATUS",
+                AssetError::FieldCannotBeModifiedForAssetType => "FIELD_CANNOT_BE_MODIFIED_FOR_ASSET_TYPE",
+                AssetError::SchedulesCannotOverlap => "SCHEDULES_CANNOT_OVERLAP",
+                AssetError::PromotionCannotSetPercentOffAndMoneyAmountOff => "PROMOTION_CANNOT_SET_PERCENT_OFF_AND_MONEY_AMOUNT_OFF",
+                AssetError::PromotionCannotSetPromotionCodeAndOrdersOverAmount => "PROMOTION_CANNOT_SET_PROMOTION_CODE_AND_ORDERS_OVER_AMOUNT",
+                AssetError::TooManyDecimalPlacesSpecified => "TOO_MANY_DECIMAL_PLACES_SPECIFIED",
+                AssetError::DuplicateAssetsWithDifferentFieldValue => "DUPLICATE_ASSETS_WITH_DIFFERENT_FIELD_VALUE",
+            }
+        }
     }
 }
 // Proto file describing asset link errors.
@@ -911,6 +1347,33 @@ pub mod asset_link_error_enum {
         /// The status is invalid for the operation specified.
         InvalidStatus = 17,
     }
+    impl AssetLinkError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AssetLinkError::Unspecified => "UNSPECIFIED",
+                AssetLinkError::Unknown => "UNKNOWN",
+                AssetLinkError::PinningUnsupported => "PINNING_UNSUPPORTED",
+                AssetLinkError::UnsupportedFieldType => "UNSUPPORTED_FIELD_TYPE",
+                AssetLinkError::FieldTypeIncompatibleWithAssetType => "FIELD_TYPE_INCOMPATIBLE_WITH_ASSET_TYPE",
+                AssetLinkError::FieldTypeIncompatibleWithCampaignType => "FIELD_TYPE_INCOMPATIBLE_WITH_CAMPAIGN_TYPE",
+                AssetLinkError::IncompatibleAdvertisingChannelType => "INCOMPATIBLE_ADVERTISING_CHANNEL_TYPE",
+                AssetLinkError::ImageNotWithinSpecifiedDimensionRange => "IMAGE_NOT_WITHIN_SPECIFIED_DIMENSION_RANGE",
+                AssetLinkError::InvalidPinnedField => "INVALID_PINNED_FIELD",
+                AssetLinkError::MediaBundleAssetFileSizeTooLarge => "MEDIA_BUNDLE_ASSET_FILE_SIZE_TOO_LARGE",
+                AssetLinkError::NotEnoughAvailableAssetLinksForValidCombination => "NOT_ENOUGH_AVAILABLE_ASSET_LINKS_FOR_VALID_COMBINATION",
+                AssetLinkError::NotEnoughAvailableAssetLinksWithFallback => "NOT_ENOUGH_AVAILABLE_ASSET_LINKS_WITH_FALLBACK",
+                AssetLinkError::NotEnoughAvailableAssetLinksWithFallbackForValidCombination => "NOT_ENOUGH_AVAILABLE_ASSET_LINKS_WITH_FALLBACK_FOR_VALID_COMBINATION",
+                AssetLinkError::YoutubeVideoRemoved => "YOUTUBE_VIDEO_REMOVED",
+                AssetLinkError::YoutubeVideoTooLong => "YOUTUBE_VIDEO_TOO_LONG",
+                AssetLinkError::YoutubeVideoTooShort => "YOUTUBE_VIDEO_TOO_SHORT",
+                AssetLinkError::InvalidStatus => "INVALID_STATUS",
+            }
+        }
+    }
 }
 // Proto file describing authentication errors.
 
@@ -970,6 +1433,36 @@ pub mod authentication_error_enum {
         /// Google account at <https://landing.google.com/advancedprotection.>
         AdvancedProtectionNotEnrolled = 24,
     }
+    impl AuthenticationError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AuthenticationError::Unspecified => "UNSPECIFIED",
+                AuthenticationError::Unknown => "UNKNOWN",
+                AuthenticationError::AuthenticationError => "AUTHENTICATION_ERROR",
+                AuthenticationError::ClientCustomerIdInvalid => "CLIENT_CUSTOMER_ID_INVALID",
+                AuthenticationError::CustomerNotFound => "CUSTOMER_NOT_FOUND",
+                AuthenticationError::GoogleAccountDeleted => "GOOGLE_ACCOUNT_DELETED",
+                AuthenticationError::GoogleAccountCookieInvalid => "GOOGLE_ACCOUNT_COOKIE_INVALID",
+                AuthenticationError::GoogleAccountAuthenticationFailed => "GOOGLE_ACCOUNT_AUTHENTICATION_FAILED",
+                AuthenticationError::GoogleAccountUserAndAdsUserMismatch => "GOOGLE_ACCOUNT_USER_AND_ADS_USER_MISMATCH",
+                AuthenticationError::LoginCookieRequired => "LOGIN_COOKIE_REQUIRED",
+                AuthenticationError::NotAdsUser => "NOT_ADS_USER",
+                AuthenticationError::OauthTokenInvalid => "OAUTH_TOKEN_INVALID",
+                AuthenticationError::OauthTokenExpired => "OAUTH_TOKEN_EXPIRED",
+                AuthenticationError::OauthTokenDisabled => "OAUTH_TOKEN_DISABLED",
+                AuthenticationError::OauthTokenRevoked => "OAUTH_TOKEN_REVOKED",
+                AuthenticationError::OauthTokenHeaderInvalid => "OAUTH_TOKEN_HEADER_INVALID",
+                AuthenticationError::LoginCookieInvalid => "LOGIN_COOKIE_INVALID",
+                AuthenticationError::UserIdInvalid => "USER_ID_INVALID",
+                AuthenticationError::TwoStepVerificationNotEnrolled => "TWO_STEP_VERIFICATION_NOT_ENROLLED",
+                AuthenticationError::AdvancedProtectionNotEnrolled => "ADVANCED_PROTECTION_NOT_ENROLLED",
+            }
+        }
+    }
 }
 // Proto file describing authorization errors.
 
@@ -1023,6 +1516,31 @@ pub mod authorization_error_enum {
         /// another ads system.
         AccessDeniedForAccountType = 25,
     }
+    impl AuthorizationError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AuthorizationError::Unspecified => "UNSPECIFIED",
+                AuthorizationError::Unknown => "UNKNOWN",
+                AuthorizationError::UserPermissionDenied => "USER_PERMISSION_DENIED",
+                AuthorizationError::DeveloperTokenNotOnAllowlist => "DEVELOPER_TOKEN_NOT_ON_ALLOWLIST",
+                AuthorizationError::DeveloperTokenProhibited => "DEVELOPER_TOKEN_PROHIBITED",
+                AuthorizationError::ProjectDisabled => "PROJECT_DISABLED",
+                AuthorizationError::AuthorizationError => "AUTHORIZATION_ERROR",
+                AuthorizationError::ActionNotPermitted => "ACTION_NOT_PERMITTED",
+                AuthorizationError::IncompleteSignup => "INCOMPLETE_SIGNUP",
+                AuthorizationError::CustomerNotEnabled => "CUSTOMER_NOT_ENABLED",
+                AuthorizationError::MissingTos => "MISSING_TOS",
+                AuthorizationError::DeveloperTokenNotApproved => "DEVELOPER_TOKEN_NOT_APPROVED",
+                AuthorizationError::InvalidLoginCustomerIdServingCustomerIdCombination => "INVALID_LOGIN_CUSTOMER_ID_SERVING_CUSTOMER_ID_COMBINATION",
+                AuthorizationError::ServiceAccessDenied => "SERVICE_ACCESS_DENIED",
+                AuthorizationError::AccessDeniedForAccountType => "ACCESS_DENIED_FOR_ACCOUNT_TYPE",
+            }
+        }
+    }
 }
 // Proto file describing batch job errors.
 
@@ -1053,6 +1571,24 @@ pub mod batch_job_error_enum {
         InvalidPageSize = 6,
         /// The batch job cannot be removed because it has started running.
         CanOnlyRemovePendingJob = 7,
+    }
+    impl BatchJobError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                BatchJobError::Unspecified => "UNSPECIFIED",
+                BatchJobError::Unknown => "UNKNOWN",
+                BatchJobError::CannotModifyJobAfterJobStartsRunning => "CANNOT_MODIFY_JOB_AFTER_JOB_STARTS_RUNNING",
+                BatchJobError::EmptyOperations => "EMPTY_OPERATIONS",
+                BatchJobError::InvalidSequenceToken => "INVALID_SEQUENCE_TOKEN",
+                BatchJobError::ResultsNotReady => "RESULTS_NOT_READY",
+                BatchJobError::InvalidPageSize => "INVALID_PAGE_SIZE",
+                BatchJobError::CanOnlyRemovePendingJob => "CAN_ONLY_REMOVE_PENDING_JOB",
+            }
+        }
     }
 }
 // Proto file describing bidding errors.
@@ -1126,6 +1662,42 @@ pub mod bidding_error_enum {
         /// Bidding strategy type is incompatible with shared budget.
         BiddingStrategyTypeIncompatibleWithSharedBudget = 37,
     }
+    impl BiddingError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                BiddingError::Unspecified => "UNSPECIFIED",
+                BiddingError::Unknown => "UNKNOWN",
+                BiddingError::BiddingStrategyTransitionNotAllowed => "BIDDING_STRATEGY_TRANSITION_NOT_ALLOWED",
+                BiddingError::CannotAttachBiddingStrategyToCampaign => "CANNOT_ATTACH_BIDDING_STRATEGY_TO_CAMPAIGN",
+                BiddingError::InvalidAnonymousBiddingStrategyType => "INVALID_ANONYMOUS_BIDDING_STRATEGY_TYPE",
+                BiddingError::InvalidBiddingStrategyType => "INVALID_BIDDING_STRATEGY_TYPE",
+                BiddingError::InvalidBid => "INVALID_BID",
+                BiddingError::BiddingStrategyNotAvailableForAccountType => "BIDDING_STRATEGY_NOT_AVAILABLE_FOR_ACCOUNT_TYPE",
+                BiddingError::ConversionTrackingNotEnabled => "CONVERSION_TRACKING_NOT_ENABLED",
+                BiddingError::NotEnoughConversions => "NOT_ENOUGH_CONVERSIONS",
+                BiddingError::CannotCreateCampaignWithBiddingStrategy => "CANNOT_CREATE_CAMPAIGN_WITH_BIDDING_STRATEGY",
+                BiddingError::CannotTargetContentNetworkOnlyWithCampaignLevelPopBiddingStrategy => "CANNOT_TARGET_CONTENT_NETWORK_ONLY_WITH_CAMPAIGN_LEVEL_POP_BIDDING_STRATEGY",
+                BiddingError::BiddingStrategyNotSupportedWithAdSchedule => "BIDDING_STRATEGY_NOT_SUPPORTED_WITH_AD_SCHEDULE",
+                BiddingError::PayPerConversionNotAvailableForCustomer => "PAY_PER_CONVERSION_NOT_AVAILABLE_FOR_CUSTOMER",
+                BiddingError::PayPerConversionNotAllowedWithTargetCpa => "PAY_PER_CONVERSION_NOT_ALLOWED_WITH_TARGET_CPA",
+                BiddingError::BiddingStrategyNotAllowedForSearchOnlyCampaigns => "BIDDING_STRATEGY_NOT_ALLOWED_FOR_SEARCH_ONLY_CAMPAIGNS",
+                BiddingError::BiddingStrategyNotSupportedInDraftsOrExperiments => "BIDDING_STRATEGY_NOT_SUPPORTED_IN_DRAFTS_OR_EXPERIMENTS",
+                BiddingError::BiddingStrategyTypeDoesNotSupportProductTypeAdgroupCriterion => "BIDDING_STRATEGY_TYPE_DOES_NOT_SUPPORT_PRODUCT_TYPE_ADGROUP_CRITERION",
+                BiddingError::BidTooSmall => "BID_TOO_SMALL",
+                BiddingError::BidTooBig => "BID_TOO_BIG",
+                BiddingError::BidTooManyFractionalDigits => "BID_TOO_MANY_FRACTIONAL_DIGITS",
+                BiddingError::InvalidDomainName => "INVALID_DOMAIN_NAME",
+                BiddingError::NotCompatibleWithPaymentMode => "NOT_COMPATIBLE_WITH_PAYMENT_MODE",
+                BiddingError::NotCompatibleWithBudgetType => "NOT_COMPATIBLE_WITH_BUDGET_TYPE",
+                BiddingError::NotCompatibleWithBiddingStrategyType => "NOT_COMPATIBLE_WITH_BIDDING_STRATEGY_TYPE",
+                BiddingError::BiddingStrategyTypeIncompatibleWithSharedBudget => "BIDDING_STRATEGY_TYPE_INCOMPATIBLE_WITH_SHARED_BUDGET",
+            }
+        }
+    }
 }
 // Proto file describing bidding strategy errors.
 
@@ -1155,6 +1727,23 @@ pub mod bidding_strategy_error_enum {
         /// The bidding strategy is incompatible with the campaign's bidding
         /// strategy goal type.
         IncompatibleBiddingStrategyAndBiddingStrategyGoalType = 6,
+    }
+    impl BiddingStrategyError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                BiddingStrategyError::Unspecified => "UNSPECIFIED",
+                BiddingStrategyError::Unknown => "UNKNOWN",
+                BiddingStrategyError::DuplicateName => "DUPLICATE_NAME",
+                BiddingStrategyError::CannotChangeBiddingStrategyType => "CANNOT_CHANGE_BIDDING_STRATEGY_TYPE",
+                BiddingStrategyError::CannotRemoveAssociatedStrategy => "CANNOT_REMOVE_ASSOCIATED_STRATEGY",
+                BiddingStrategyError::BiddingStrategyNotSupported => "BIDDING_STRATEGY_NOT_SUPPORTED",
+                BiddingStrategyError::IncompatibleBiddingStrategyAndBiddingStrategyGoalType => "INCOMPATIBLE_BIDDING_STRATEGY_AND_BIDDING_STRATEGY_GOAL_TYPE",
+            }
+        }
     }
 }
 // Proto file describing billing setup errors.
@@ -1218,6 +1807,35 @@ pub mod billing_setup_error_enum {
         /// and hence cannot be used to setup billing.
         PaymentsAccountIneligibleCurrencyCodeMismatch = 19,
     }
+    impl BillingSetupError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                BillingSetupError::Unspecified => "UNSPECIFIED",
+                BillingSetupError::Unknown => "UNKNOWN",
+                BillingSetupError::CannotUseExistingAndNewAccount => "CANNOT_USE_EXISTING_AND_NEW_ACCOUNT",
+                BillingSetupError::CannotRemoveStartedBillingSetup => "CANNOT_REMOVE_STARTED_BILLING_SETUP",
+                BillingSetupError::CannotChangeBillingToSamePaymentsAccount => "CANNOT_CHANGE_BILLING_TO_SAME_PAYMENTS_ACCOUNT",
+                BillingSetupError::BillingSetupNotPermittedForCustomerStatus => "BILLING_SETUP_NOT_PERMITTED_FOR_CUSTOMER_STATUS",
+                BillingSetupError::InvalidPaymentsAccount => "INVALID_PAYMENTS_ACCOUNT",
+                BillingSetupError::BillingSetupNotPermittedForCustomerCategory => "BILLING_SETUP_NOT_PERMITTED_FOR_CUSTOMER_CATEGORY",
+                BillingSetupError::InvalidStartTimeType => "INVALID_START_TIME_TYPE",
+                BillingSetupError::ThirdPartyAlreadyHasBilling => "THIRD_PARTY_ALREADY_HAS_BILLING",
+                BillingSetupError::BillingSetupInProgress => "BILLING_SETUP_IN_PROGRESS",
+                BillingSetupError::NoSignupPermission => "NO_SIGNUP_PERMISSION",
+                BillingSetupError::ChangeOfBillToInProgress => "CHANGE_OF_BILL_TO_IN_PROGRESS",
+                BillingSetupError::PaymentsProfileNotFound => "PAYMENTS_PROFILE_NOT_FOUND",
+                BillingSetupError::PaymentsAccountNotFound => "PAYMENTS_ACCOUNT_NOT_FOUND",
+                BillingSetupError::PaymentsProfileIneligible => "PAYMENTS_PROFILE_INELIGIBLE",
+                BillingSetupError::PaymentsAccountIneligible => "PAYMENTS_ACCOUNT_INELIGIBLE",
+                BillingSetupError::CustomerNeedsInternalApproval => "CUSTOMER_NEEDS_INTERNAL_APPROVAL",
+                BillingSetupError::PaymentsAccountIneligibleCurrencyCodeMismatch => "PAYMENTS_ACCOUNT_INELIGIBLE_CURRENCY_CODE_MISMATCH",
+            }
+        }
+    }
 }
 // Proto file describing campaign budget errors.
 
@@ -1272,6 +1890,34 @@ pub mod campaign_budget_error_enum {
         NonMultipleOfMinimumCurrencyUnit = 16,
         /// Total budget amount must be unset when BudgetPeriod is DAILY.
         TotalBudgetAmountMustBeUnsetForBudgetPeriodDaily = 18,
+    }
+    impl CampaignBudgetError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                CampaignBudgetError::Unspecified => "UNSPECIFIED",
+                CampaignBudgetError::Unknown => "UNKNOWN",
+                CampaignBudgetError::CampaignBudgetCannotBeShared => "CAMPAIGN_BUDGET_CANNOT_BE_SHARED",
+                CampaignBudgetError::CampaignBudgetRemoved => "CAMPAIGN_BUDGET_REMOVED",
+                CampaignBudgetError::CampaignBudgetInUse => "CAMPAIGN_BUDGET_IN_USE",
+                CampaignBudgetError::CampaignBudgetPeriodNotAvailable => "CAMPAIGN_BUDGET_PERIOD_NOT_AVAILABLE",
+                CampaignBudgetError::CannotModifyFieldOfImplicitlySharedCampaignBudget => "CANNOT_MODIFY_FIELD_OF_IMPLICITLY_SHARED_CAMPAIGN_BUDGET",
+                CampaignBudgetError::CannotUpdateCampaignBudgetToImplicitlyShared => "CANNOT_UPDATE_CAMPAIGN_BUDGET_TO_IMPLICITLY_SHARED",
+                CampaignBudgetError::CannotUpdateCampaignBudgetToExplicitlySharedWithoutName => "CANNOT_UPDATE_CAMPAIGN_BUDGET_TO_EXPLICITLY_SHARED_WITHOUT_NAME",
+                CampaignBudgetError::CannotUpdateCampaignBudgetToExplicitlyShared => "CANNOT_UPDATE_CAMPAIGN_BUDGET_TO_EXPLICITLY_SHARED",
+                CampaignBudgetError::CannotUseImplicitlySharedCampaignBudgetWithMultipleCampaigns => "CANNOT_USE_IMPLICITLY_SHARED_CAMPAIGN_BUDGET_WITH_MULTIPLE_CAMPAIGNS",
+                CampaignBudgetError::DuplicateName => "DUPLICATE_NAME",
+                CampaignBudgetError::MoneyAmountInWrongCurrency => "MONEY_AMOUNT_IN_WRONG_CURRENCY",
+                CampaignBudgetError::MoneyAmountLessThanCurrencyMinimumCpc => "MONEY_AMOUNT_LESS_THAN_CURRENCY_MINIMUM_CPC",
+                CampaignBudgetError::MoneyAmountTooLarge => "MONEY_AMOUNT_TOO_LARGE",
+                CampaignBudgetError::NegativeMoneyAmount => "NEGATIVE_MONEY_AMOUNT",
+                CampaignBudgetError::NonMultipleOfMinimumCurrencyUnit => "NON_MULTIPLE_OF_MINIMUM_CURRENCY_UNIT",
+                CampaignBudgetError::TotalBudgetAmountMustBeUnsetForBudgetPeriodDaily => "TOTAL_BUDGET_AMOUNT_MUST_BE_UNSET_FOR_BUDGET_PERIOD_DAILY",
+            }
+        }
     }
 }
 // Proto file describing campaign criterion errors.
@@ -1330,6 +1976,34 @@ pub mod campaign_criterion_error_enum {
         /// A Smart campaign may not target multiple proximity criteria.
         CannotTargetMultipleProximityCriteriaForSmartCampaign = 17,
     }
+    impl CampaignCriterionError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                CampaignCriterionError::Unspecified => "UNSPECIFIED",
+                CampaignCriterionError::Unknown => "UNKNOWN",
+                CampaignCriterionError::ConcreteTypeRequired => "CONCRETE_TYPE_REQUIRED",
+                CampaignCriterionError::InvalidPlacementUrl => "INVALID_PLACEMENT_URL",
+                CampaignCriterionError::CannotExcludeCriteriaType => "CANNOT_EXCLUDE_CRITERIA_TYPE",
+                CampaignCriterionError::CannotSetStatusForCriteriaType => "CANNOT_SET_STATUS_FOR_CRITERIA_TYPE",
+                CampaignCriterionError::CannotSetStatusForExcludedCriteria => "CANNOT_SET_STATUS_FOR_EXCLUDED_CRITERIA",
+                CampaignCriterionError::CannotTargetAndExclude => "CANNOT_TARGET_AND_EXCLUDE",
+                CampaignCriterionError::TooManyOperations => "TOO_MANY_OPERATIONS",
+                CampaignCriterionError::OperatorNotSupportedForCriterionType => "OPERATOR_NOT_SUPPORTED_FOR_CRITERION_TYPE",
+                CampaignCriterionError::ShoppingCampaignSalesCountryNotSupportedForSalesChannel => "SHOPPING_CAMPAIGN_SALES_COUNTRY_NOT_SUPPORTED_FOR_SALES_CHANNEL",
+                CampaignCriterionError::CannotAddExistingField => "CANNOT_ADD_EXISTING_FIELD",
+                CampaignCriterionError::CannotUpdateNegativeCriterion => "CANNOT_UPDATE_NEGATIVE_CRITERION",
+                CampaignCriterionError::CannotSetNegativeKeywordThemeConstantCriterion => "CANNOT_SET_NEGATIVE_KEYWORD_THEME_CONSTANT_CRITERION",
+                CampaignCriterionError::InvalidKeywordThemeConstant => "INVALID_KEYWORD_THEME_CONSTANT",
+                CampaignCriterionError::MissingKeywordThemeConstantOrFreeFormKeywordTheme => "MISSING_KEYWORD_THEME_CONSTANT_OR_FREE_FORM_KEYWORD_THEME",
+                CampaignCriterionError::CannotTargetBothProximityAndLocationCriteriaForSmartCampaign => "CANNOT_TARGET_BOTH_PROXIMITY_AND_LOCATION_CRITERIA_FOR_SMART_CAMPAIGN",
+                CampaignCriterionError::CannotTargetMultipleProximityCriteriaForSmartCampaign => "CANNOT_TARGET_MULTIPLE_PROXIMITY_CRITERIA_FOR_SMART_CAMPAIGN",
+            }
+        }
+    }
 }
 // Proto file describing campaign draft errors.
 
@@ -1372,6 +2046,28 @@ pub mod campaign_draft_error_enum {
         MaxNumberOfDraftsPerCampaignReached = 10,
         /// ListAsyncErrors was called without first promoting the draft.
         ListErrorsForPromotedDraftOnly = 11,
+    }
+    impl CampaignDraftError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                CampaignDraftError::Unspecified => "UNSPECIFIED",
+                CampaignDraftError::Unknown => "UNKNOWN",
+                CampaignDraftError::DuplicateDraftName => "DUPLICATE_DRAFT_NAME",
+                CampaignDraftError::InvalidStatusTransitionFromRemoved => "INVALID_STATUS_TRANSITION_FROM_REMOVED",
+                CampaignDraftError::InvalidStatusTransitionFromPromoted => "INVALID_STATUS_TRANSITION_FROM_PROMOTED",
+                CampaignDraftError::InvalidStatusTransitionFromPromoteFailed => "INVALID_STATUS_TRANSITION_FROM_PROMOTE_FAILED",
+                CampaignDraftError::CustomerCannotCreateDraft => "CUSTOMER_CANNOT_CREATE_DRAFT",
+                CampaignDraftError::CampaignCannotCreateDraft => "CAMPAIGN_CANNOT_CREATE_DRAFT",
+                CampaignDraftError::InvalidDraftChange => "INVALID_DRAFT_CHANGE",
+                CampaignDraftError::InvalidStatusTransition => "INVALID_STATUS_TRANSITION",
+                CampaignDraftError::MaxNumberOfDraftsPerCampaignReached => "MAX_NUMBER_OF_DRAFTS_PER_CAMPAIGN_REACHED",
+                CampaignDraftError::ListErrorsForPromotedDraftOnly => "LIST_ERRORS_FOR_PROMOTED_DRAFT_ONLY",
+            }
+        }
     }
 }
 // Proto file describing campaign errors.
@@ -1494,6 +2190,61 @@ pub mod campaign_error_enum {
         /// of this type exists.
         InvalidExcludedParentAssetFieldType = 48,
     }
+    impl CampaignError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                CampaignError::Unspecified => "UNSPECIFIED",
+                CampaignError::Unknown => "UNKNOWN",
+                CampaignError::CannotTargetContentNetwork => "CANNOT_TARGET_CONTENT_NETWORK",
+                CampaignError::CannotTargetSearchNetwork => "CANNOT_TARGET_SEARCH_NETWORK",
+                CampaignError::CannotTargetSearchNetworkWithoutGoogleSearch => "CANNOT_TARGET_SEARCH_NETWORK_WITHOUT_GOOGLE_SEARCH",
+                CampaignError::CannotTargetGoogleSearchForCpmCampaign => "CANNOT_TARGET_GOOGLE_SEARCH_FOR_CPM_CAMPAIGN",
+                CampaignError::CampaignMustTargetAtLeastOneNetwork => "CAMPAIGN_MUST_TARGET_AT_LEAST_ONE_NETWORK",
+                CampaignError::CannotTargetPartnerSearchNetwork => "CANNOT_TARGET_PARTNER_SEARCH_NETWORK",
+                CampaignError::CannotTargetContentNetworkOnlyWithCriteriaLevelBiddingStrategy => "CANNOT_TARGET_CONTENT_NETWORK_ONLY_WITH_CRITERIA_LEVEL_BIDDING_STRATEGY",
+                CampaignError::CampaignDurationMustContainAllRunnableTrials => "CAMPAIGN_DURATION_MUST_CONTAIN_ALL_RUNNABLE_TRIALS",
+                CampaignError::CannotModifyForTrialCampaign => "CANNOT_MODIFY_FOR_TRIAL_CAMPAIGN",
+                CampaignError::DuplicateCampaignName => "DUPLICATE_CAMPAIGN_NAME",
+                CampaignError::IncompatibleCampaignField => "INCOMPATIBLE_CAMPAIGN_FIELD",
+                CampaignError::InvalidCampaignName => "INVALID_CAMPAIGN_NAME",
+                CampaignError::InvalidAdServingOptimizationStatus => "INVALID_AD_SERVING_OPTIMIZATION_STATUS",
+                CampaignError::InvalidTrackingUrl => "INVALID_TRACKING_URL",
+                CampaignError::CannotSetBothTrackingUrlTemplateAndTrackingSetting => "CANNOT_SET_BOTH_TRACKING_URL_TEMPLATE_AND_TRACKING_SETTING",
+                CampaignError::MaxImpressionsNotInRange => "MAX_IMPRESSIONS_NOT_IN_RANGE",
+                CampaignError::TimeUnitNotSupported => "TIME_UNIT_NOT_SUPPORTED",
+                CampaignError::InvalidOperationIfServingStatusHasEnded => "INVALID_OPERATION_IF_SERVING_STATUS_HAS_ENDED",
+                CampaignError::BudgetCannotBeShared => "BUDGET_CANNOT_BE_SHARED",
+                CampaignError::CampaignCannotUseSharedBudget => "CAMPAIGN_CANNOT_USE_SHARED_BUDGET",
+                CampaignError::CannotChangeBudgetOnCampaignWithTrials => "CANNOT_CHANGE_BUDGET_ON_CAMPAIGN_WITH_TRIALS",
+                CampaignError::CampaignLabelDoesNotExist => "CAMPAIGN_LABEL_DOES_NOT_EXIST",
+                CampaignError::CampaignLabelAlreadyExists => "CAMPAIGN_LABEL_ALREADY_EXISTS",
+                CampaignError::MissingShoppingSetting => "MISSING_SHOPPING_SETTING",
+                CampaignError::InvalidShoppingSalesCountry => "INVALID_SHOPPING_SALES_COUNTRY",
+                CampaignError::AdvertisingChannelTypeNotAvailableForAccountType => "ADVERTISING_CHANNEL_TYPE_NOT_AVAILABLE_FOR_ACCOUNT_TYPE",
+                CampaignError::InvalidAdvertisingChannelSubType => "INVALID_ADVERTISING_CHANNEL_SUB_TYPE",
+                CampaignError::AtLeastOneConversionMustBeSelected => "AT_LEAST_ONE_CONVERSION_MUST_BE_SELECTED",
+                CampaignError::CannotSetAdRotationMode => "CANNOT_SET_AD_ROTATION_MODE",
+                CampaignError::CannotModifyStartDateIfAlreadyStarted => "CANNOT_MODIFY_START_DATE_IF_ALREADY_STARTED",
+                CampaignError::CannotSetDateToPast => "CANNOT_SET_DATE_TO_PAST",
+                CampaignError::MissingHotelCustomerLink => "MISSING_HOTEL_CUSTOMER_LINK",
+                CampaignError::InvalidHotelCustomerLink => "INVALID_HOTEL_CUSTOMER_LINK",
+                CampaignError::MissingHotelSetting => "MISSING_HOTEL_SETTING",
+                CampaignError::CannotUseSharedCampaignBudgetWhilePartOfCampaignGroup => "CANNOT_USE_SHARED_CAMPAIGN_BUDGET_WHILE_PART_OF_CAMPAIGN_GROUP",
+                CampaignError::AppNotFound => "APP_NOT_FOUND",
+                CampaignError::ShoppingEnableLocalNotSupportedForCampaignType => "SHOPPING_ENABLE_LOCAL_NOT_SUPPORTED_FOR_CAMPAIGN_TYPE",
+                CampaignError::MerchantNotAllowedForComparisonListingAds => "MERCHANT_NOT_ALLOWED_FOR_COMPARISON_LISTING_ADS",
+                CampaignError::InsufficientAppInstallsCount => "INSUFFICIENT_APP_INSTALLS_COUNT",
+                CampaignError::SensitiveCategoryApp => "SENSITIVE_CATEGORY_APP",
+                CampaignError::HecAgreementRequired => "HEC_AGREEMENT_REQUIRED",
+                CampaignError::NotCompatibleWithViewThroughConversionOptimization => "NOT_COMPATIBLE_WITH_VIEW_THROUGH_CONVERSION_OPTIMIZATION",
+                CampaignError::InvalidExcludedParentAssetFieldType => "INVALID_EXCLUDED_PARENT_ASSET_FIELD_TYPE",
+            }
+        }
+    }
 }
 // Proto file describing campaign experiment errors.
 
@@ -1539,6 +2290,28 @@ pub mod campaign_experiment_error_enum {
         /// state, such as REMOVED.
         CannotMutateExperimentDueToStatus = 11,
     }
+    impl CampaignExperimentError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                CampaignExperimentError::Unspecified => "UNSPECIFIED",
+                CampaignExperimentError::Unknown => "UNKNOWN",
+                CampaignExperimentError::DuplicateName => "DUPLICATE_NAME",
+                CampaignExperimentError::InvalidTransition => "INVALID_TRANSITION",
+                CampaignExperimentError::CannotCreateExperimentWithSharedBudget => "CANNOT_CREATE_EXPERIMENT_WITH_SHARED_BUDGET",
+                CampaignExperimentError::CannotCreateExperimentForRemovedBaseCampaign => "CANNOT_CREATE_EXPERIMENT_FOR_REMOVED_BASE_CAMPAIGN",
+                CampaignExperimentError::CannotCreateExperimentForNonProposedDraft => "CANNOT_CREATE_EXPERIMENT_FOR_NON_PROPOSED_DRAFT",
+                CampaignExperimentError::CustomerCannotCreateExperiment => "CUSTOMER_CANNOT_CREATE_EXPERIMENT",
+                CampaignExperimentError::CampaignCannotCreateExperiment => "CAMPAIGN_CANNOT_CREATE_EXPERIMENT",
+                CampaignExperimentError::ExperimentDurationsMustNotOverlap => "EXPERIMENT_DURATIONS_MUST_NOT_OVERLAP",
+                CampaignExperimentError::ExperimentDurationMustBeWithinCampaignDuration => "EXPERIMENT_DURATION_MUST_BE_WITHIN_CAMPAIGN_DURATION",
+                CampaignExperimentError::CannotMutateExperimentDueToStatus => "CANNOT_MUTATE_EXPERIMENT_DUE_TO_STATUS",
+            }
+        }
+    }
 }
 // Proto file describing campaign feed errors.
 
@@ -1573,6 +2346,25 @@ pub mod campaign_feed_error_enum {
         /// CustomerFeed for the specified feed.
         NoExistingLocationCustomerFeed = 9,
     }
+    impl CampaignFeedError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                CampaignFeedError::Unspecified => "UNSPECIFIED",
+                CampaignFeedError::Unknown => "UNKNOWN",
+                CampaignFeedError::FeedAlreadyExistsForPlaceholderType => "FEED_ALREADY_EXISTS_FOR_PLACEHOLDER_TYPE",
+                CampaignFeedError::CannotCreateForRemovedFeed => "CANNOT_CREATE_FOR_REMOVED_FEED",
+                CampaignFeedError::CannotCreateAlreadyExistingCampaignFeed => "CANNOT_CREATE_ALREADY_EXISTING_CAMPAIGN_FEED",
+                CampaignFeedError::CannotModifyRemovedCampaignFeed => "CANNOT_MODIFY_REMOVED_CAMPAIGN_FEED",
+                CampaignFeedError::InvalidPlaceholderType => "INVALID_PLACEHOLDER_TYPE",
+                CampaignFeedError::MissingFeedmappingForPlaceholderType => "MISSING_FEEDMAPPING_FOR_PLACEHOLDER_TYPE",
+                CampaignFeedError::NoExistingLocationCustomerFeed => "NO_EXISTING_LOCATION_CUSTOMER_FEED",
+            }
+        }
+    }
 }
 // Proto file describing campaign shared set errors.
 
@@ -1592,6 +2384,19 @@ pub mod campaign_shared_set_error_enum {
         Unknown = 1,
         /// The shared set belongs to another customer and permission isn't granted.
         SharedSetAccessDenied = 2,
+    }
+    impl CampaignSharedSetError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                CampaignSharedSetError::Unspecified => "UNSPECIFIED",
+                CampaignSharedSetError::Unknown => "UNKNOWN",
+                CampaignSharedSetError::SharedSetAccessDenied => "SHARED_SET_ACCESS_DENIED",
+            }
+        }
     }
 }
 // Proto file describing change event errors.
@@ -1625,6 +2430,23 @@ pub mod change_event_error_enum {
         /// to 10K.
         InvalidLimitClause = 6,
     }
+    impl ChangeEventError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ChangeEventError::Unspecified => "UNSPECIFIED",
+                ChangeEventError::Unknown => "UNKNOWN",
+                ChangeEventError::StartDateTooOld => "START_DATE_TOO_OLD",
+                ChangeEventError::ChangeDateRangeInfinite => "CHANGE_DATE_RANGE_INFINITE",
+                ChangeEventError::ChangeDateRangeNegative => "CHANGE_DATE_RANGE_NEGATIVE",
+                ChangeEventError::LimitNotSpecified => "LIMIT_NOT_SPECIFIED",
+                ChangeEventError::InvalidLimitClause => "INVALID_LIMIT_CLAUSE",
+            }
+        }
+    }
 }
 // Proto file describing change status errors.
 
@@ -1657,6 +2479,23 @@ pub mod change_status_error_enum {
         /// to 10K.
         InvalidLimitClause = 7,
     }
+    impl ChangeStatusError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ChangeStatusError::Unspecified => "UNSPECIFIED",
+                ChangeStatusError::Unknown => "UNKNOWN",
+                ChangeStatusError::StartDateTooOld => "START_DATE_TOO_OLD",
+                ChangeStatusError::ChangeDateRangeInfinite => "CHANGE_DATE_RANGE_INFINITE",
+                ChangeStatusError::ChangeDateRangeNegative => "CHANGE_DATE_RANGE_NEGATIVE",
+                ChangeStatusError::LimitNotSpecified => "LIMIT_NOT_SPECIFIED",
+                ChangeStatusError::InvalidLimitClause => "INVALID_LIMIT_CLAUSE",
+            }
+        }
+    }
 }
 // Proto file describing collection size errors.
 
@@ -1679,6 +2518,20 @@ pub mod collection_size_error_enum {
         /// Too many.
         TooMany = 3,
     }
+    impl CollectionSizeError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                CollectionSizeError::Unspecified => "UNSPECIFIED",
+                CollectionSizeError::Unknown => "UNKNOWN",
+                CollectionSizeError::TooFew => "TOO_FEW",
+                CollectionSizeError::TooMany => "TOO_MANY",
+            }
+        }
+    }
 }
 // Proto file describing context errors.
 
@@ -1700,6 +2553,20 @@ pub mod context_error_enum {
         OperationNotPermittedForContext = 2,
         /// The operation is not allowed for removed resources.
         OperationNotPermittedForRemovedResource = 3,
+    }
+    impl ContextError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ContextError::Unspecified => "UNSPECIFIED",
+                ContextError::Unknown => "UNKNOWN",
+                ContextError::OperationNotPermittedForContext => "OPERATION_NOT_PERMITTED_FOR_CONTEXT",
+                ContextError::OperationNotPermittedForRemovedResource => "OPERATION_NOT_PERMITTED_FOR_REMOVED_RESOURCE",
+            }
+        }
     }
 }
 // Proto file describing conversion action errors.
@@ -1746,6 +2613,28 @@ pub mod conversion_action_error_enum {
         CreationNotSupported = 10,
         /// Update of this conversion action isn't supported by Google Ads API.
         UpdateNotSupported = 11,
+    }
+    impl ConversionActionError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ConversionActionError::Unspecified => "UNSPECIFIED",
+                ConversionActionError::Unknown => "UNKNOWN",
+                ConversionActionError::DuplicateName => "DUPLICATE_NAME",
+                ConversionActionError::DuplicateAppId => "DUPLICATE_APP_ID",
+                ConversionActionError::TwoConversionActionsBiddingOnSameAppDownload => "TWO_CONVERSION_ACTIONS_BIDDING_ON_SAME_APP_DOWNLOAD",
+                ConversionActionError::BiddingOnSameAppDownloadAsGlobalAction => "BIDDING_ON_SAME_APP_DOWNLOAD_AS_GLOBAL_ACTION",
+                ConversionActionError::DataDrivenModelWasNeverGenerated => "DATA_DRIVEN_MODEL_WAS_NEVER_GENERATED",
+                ConversionActionError::DataDrivenModelExpired => "DATA_DRIVEN_MODEL_EXPIRED",
+                ConversionActionError::DataDrivenModelStale => "DATA_DRIVEN_MODEL_STALE",
+                ConversionActionError::DataDrivenModelUnknown => "DATA_DRIVEN_MODEL_UNKNOWN",
+                ConversionActionError::CreationNotSupported => "CREATION_NOT_SUPPORTED",
+                ConversionActionError::UpdateNotSupported => "UPDATE_NOT_SUPPORTED",
+            }
+        }
     }
 }
 // Proto file describing conversion adjustment upload errors.
@@ -1810,6 +2699,34 @@ pub mod conversion_adjustment_upload_error_enum {
         /// The user_identifier_source must be FIRST_PARTY for enhancements.
         InvalidUserIdentifierSource = 19,
     }
+    impl ConversionAdjustmentUploadError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ConversionAdjustmentUploadError::Unspecified => "UNSPECIFIED",
+                ConversionAdjustmentUploadError::Unknown => "UNKNOWN",
+                ConversionAdjustmentUploadError::TooRecentConversionAction => "TOO_RECENT_CONVERSION_ACTION",
+                ConversionAdjustmentUploadError::InvalidConversionAction => "INVALID_CONVERSION_ACTION",
+                ConversionAdjustmentUploadError::ConversionAlreadyRetracted => "CONVERSION_ALREADY_RETRACTED",
+                ConversionAdjustmentUploadError::ConversionNotFound => "CONVERSION_NOT_FOUND",
+                ConversionAdjustmentUploadError::ConversionExpired => "CONVERSION_EXPIRED",
+                ConversionAdjustmentUploadError::AdjustmentPrecedesConversion => "ADJUSTMENT_PRECEDES_CONVERSION",
+                ConversionAdjustmentUploadError::MoreRecentRestatementFound => "MORE_RECENT_RESTATEMENT_FOUND",
+                ConversionAdjustmentUploadError::TooRecentConversion => "TOO_RECENT_CONVERSION",
+                ConversionAdjustmentUploadError::CannotRestateConversionActionThatAlwaysUsesDefaultConversionValue => "CANNOT_RESTATE_CONVERSION_ACTION_THAT_ALWAYS_USES_DEFAULT_CONVERSION_VALUE",
+                ConversionAdjustmentUploadError::TooManyAdjustmentsInRequest => "TOO_MANY_ADJUSTMENTS_IN_REQUEST",
+                ConversionAdjustmentUploadError::TooManyAdjustments => "TOO_MANY_ADJUSTMENTS",
+                ConversionAdjustmentUploadError::CustomerNotAcceptedCustomerDataTerms => "CUSTOMER_NOT_ACCEPTED_CUSTOMER_DATA_TERMS",
+                ConversionAdjustmentUploadError::ConversionActionNotEligibleForEnhancement => "CONVERSION_ACTION_NOT_ELIGIBLE_FOR_ENHANCEMENT",
+                ConversionAdjustmentUploadError::InvalidUserIdentifier => "INVALID_USER_IDENTIFIER",
+                ConversionAdjustmentUploadError::UnsupportedUserIdentifier => "UNSUPPORTED_USER_IDENTIFIER",
+                ConversionAdjustmentUploadError::InvalidUserIdentifierSource => "INVALID_USER_IDENTIFIER_SOURCE",
+            }
+        }
+    }
 }
 // Proto file describing conversion custom variable errors.
 
@@ -1831,6 +2748,20 @@ pub mod conversion_custom_variable_error_enum {
         DuplicateName = 2,
         /// A conversion custom variable with the specified tag already exists.
         DuplicateTag = 3,
+    }
+    impl ConversionCustomVariableError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ConversionCustomVariableError::Unspecified => "UNSPECIFIED",
+                ConversionCustomVariableError::Unknown => "UNKNOWN",
+                ConversionCustomVariableError::DuplicateName => "DUPLICATE_NAME",
+                ConversionCustomVariableError::DuplicateTag => "DUPLICATE_TAG",
+            }
+        }
     }
 }
 // Proto file describing conversion upload errors.
@@ -1944,6 +2875,49 @@ pub mod conversion_upload_error_enum {
         /// The user_identifier_source must be FIRST_PARTY for conversion uploads.
         InvalidUserIdentifierSource = 37,
     }
+    impl ConversionUploadError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ConversionUploadError::Unspecified => "UNSPECIFIED",
+                ConversionUploadError::Unknown => "UNKNOWN",
+                ConversionUploadError::TooManyConversionsInRequest => "TOO_MANY_CONVERSIONS_IN_REQUEST",
+                ConversionUploadError::UnparseableGclid => "UNPARSEABLE_GCLID",
+                ConversionUploadError::ConversionPrecedesGclid => "CONVERSION_PRECEDES_GCLID",
+                ConversionUploadError::ExpiredGclid => "EXPIRED_GCLID",
+                ConversionUploadError::TooRecentGclid => "TOO_RECENT_GCLID",
+                ConversionUploadError::GclidNotFound => "GCLID_NOT_FOUND",
+                ConversionUploadError::UnauthorizedCustomer => "UNAUTHORIZED_CUSTOMER",
+                ConversionUploadError::InvalidConversionAction => "INVALID_CONVERSION_ACTION",
+                ConversionUploadError::TooRecentConversionAction => "TOO_RECENT_CONVERSION_ACTION",
+                ConversionUploadError::ConversionTrackingNotEnabledAtImpressionTime => "CONVERSION_TRACKING_NOT_ENABLED_AT_IMPRESSION_TIME",
+                ConversionUploadError::ExternalAttributionDataSetForNonExternallyAttributedConversionAction => "EXTERNAL_ATTRIBUTION_DATA_SET_FOR_NON_EXTERNALLY_ATTRIBUTED_CONVERSION_ACTION",
+                ConversionUploadError::ExternalAttributionDataNotSetForExternallyAttributedConversionAction => "EXTERNAL_ATTRIBUTION_DATA_NOT_SET_FOR_EXTERNALLY_ATTRIBUTED_CONVERSION_ACTION",
+                ConversionUploadError::OrderIdNotPermittedForExternallyAttributedConversionAction => "ORDER_ID_NOT_PERMITTED_FOR_EXTERNALLY_ATTRIBUTED_CONVERSION_ACTION",
+                ConversionUploadError::OrderIdAlreadyInUse => "ORDER_ID_ALREADY_IN_USE",
+                ConversionUploadError::DuplicateOrderId => "DUPLICATE_ORDER_ID",
+                ConversionUploadError::TooRecentCall => "TOO_RECENT_CALL",
+                ConversionUploadError::ExpiredCall => "EXPIRED_CALL",
+                ConversionUploadError::CallNotFound => "CALL_NOT_FOUND",
+                ConversionUploadError::ConversionPrecedesCall => "CONVERSION_PRECEDES_CALL",
+                ConversionUploadError::ConversionTrackingNotEnabledAtCallTime => "CONVERSION_TRACKING_NOT_ENABLED_AT_CALL_TIME",
+                ConversionUploadError::UnparseableCallersPhoneNumber => "UNPARSEABLE_CALLERS_PHONE_NUMBER",
+                ConversionUploadError::CustomVariableNotEnabled => "CUSTOM_VARIABLE_NOT_ENABLED",
+                ConversionUploadError::CustomVariableValueContainsPii => "CUSTOM_VARIABLE_VALUE_CONTAINS_PII",
+                ConversionUploadError::InvalidCustomerForClick => "INVALID_CUSTOMER_FOR_CLICK",
+                ConversionUploadError::InvalidCustomerForCall => "INVALID_CUSTOMER_FOR_CALL",
+                ConversionUploadError::ConversionNotCompliantWithAttPolicy => "CONVERSION_NOT_COMPLIANT_WITH_ATT_POLICY",
+                ConversionUploadError::ClickNotFound => "CLICK_NOT_FOUND",
+                ConversionUploadError::InvalidUserIdentifier => "INVALID_USER_IDENTIFIER",
+                ConversionUploadError::ExternallyAttributedConversionActionNotPermittedWithUserIdentifier => "EXTERNALLY_ATTRIBUTED_CONVERSION_ACTION_NOT_PERMITTED_WITH_USER_IDENTIFIER",
+                ConversionUploadError::UnsupportedUserIdentifier => "UNSUPPORTED_USER_IDENTIFIER",
+                ConversionUploadError::InvalidUserIdentifierSource => "INVALID_USER_IDENTIFIER_SOURCE",
+            }
+        }
+    }
 }
 // Proto file describing conversion value rule errors.
 
@@ -1998,6 +2972,30 @@ pub mod conversion_value_rule_error_enum {
         /// When a value rule is created, it shouldn't have REMOVED status.
         CannotAddRuleWithStatusRemoved = 13,
     }
+    impl ConversionValueRuleError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ConversionValueRuleError::Unspecified => "UNSPECIFIED",
+                ConversionValueRuleError::Unknown => "UNKNOWN",
+                ConversionValueRuleError::InvalidGeoTargetConstant => "INVALID_GEO_TARGET_CONSTANT",
+                ConversionValueRuleError::ConflictingIncludedAndExcludedGeoTarget => "CONFLICTING_INCLUDED_AND_EXCLUDED_GEO_TARGET",
+                ConversionValueRuleError::ConflictingConditions => "CONFLICTING_CONDITIONS",
+                ConversionValueRuleError::CannotRemoveIfIncludedInValueRuleSet => "CANNOT_REMOVE_IF_INCLUDED_IN_VALUE_RULE_SET",
+                ConversionValueRuleError::ConditionNotAllowed => "CONDITION_NOT_ALLOWED",
+                ConversionValueRuleError::FieldMustBeUnset => "FIELD_MUST_BE_UNSET",
+                ConversionValueRuleError::CannotPauseUnlessValueRuleSetIsPaused => "CANNOT_PAUSE_UNLESS_VALUE_RULE_SET_IS_PAUSED",
+                ConversionValueRuleError::UntargetableGeoTarget => "UNTARGETABLE_GEO_TARGET",
+                ConversionValueRuleError::InvalidAudienceUserList => "INVALID_AUDIENCE_USER_LIST",
+                ConversionValueRuleError::InaccessibleUserList => "INACCESSIBLE_USER_LIST",
+                ConversionValueRuleError::InvalidAudienceUserInterest => "INVALID_AUDIENCE_USER_INTEREST",
+                ConversionValueRuleError::CannotAddRuleWithStatusRemoved => "CANNOT_ADD_RULE_WITH_STATUS_REMOVED",
+            }
+        }
+    }
 }
 // Proto file describing conversion value rule set errors.
 
@@ -2047,6 +3045,27 @@ pub mod conversion_value_rule_set_error_enum {
         /// Search, or Display campaigns.
         ValueRulesNotSupportedForCampaignType = 10,
     }
+    impl ConversionValueRuleSetError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ConversionValueRuleSetError::Unspecified => "UNSPECIFIED",
+                ConversionValueRuleSetError::Unknown => "UNKNOWN",
+                ConversionValueRuleSetError::ConflictingValueRuleConditions => "CONFLICTING_VALUE_RULE_CONDITIONS",
+                ConversionValueRuleSetError::InvalidValueRule => "INVALID_VALUE_RULE",
+                ConversionValueRuleSetError::DimensionsUpdateOnlyAllowAppend => "DIMENSIONS_UPDATE_ONLY_ALLOW_APPEND",
+                ConversionValueRuleSetError::ConditionTypeNotAllowed => "CONDITION_TYPE_NOT_ALLOWED",
+                ConversionValueRuleSetError::DuplicateDimensions => "DUPLICATE_DIMENSIONS",
+                ConversionValueRuleSetError::InvalidCampaignId => "INVALID_CAMPAIGN_ID",
+                ConversionValueRuleSetError::CannotPauseUnlessAllValueRulesArePaused => "CANNOT_PAUSE_UNLESS_ALL_VALUE_RULES_ARE_PAUSED",
+                ConversionValueRuleSetError::ShouldPauseWhenAllValueRulesArePaused => "SHOULD_PAUSE_WHEN_ALL_VALUE_RULES_ARE_PAUSED",
+                ConversionValueRuleSetError::ValueRulesNotSupportedForCampaignType => "VALUE_RULES_NOT_SUPPORTED_FOR_CAMPAIGN_TYPE",
+            }
+        }
+    }
 }
 // Proto file describing country code errors.
 
@@ -2066,6 +3085,19 @@ pub mod country_code_error_enum {
         Unknown = 1,
         /// The country code is invalid.
         InvalidCountryCode = 2,
+    }
+    impl CountryCodeError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                CountryCodeError::Unspecified => "UNSPECIFIED",
+                CountryCodeError::Unknown => "UNKNOWN",
+                CountryCodeError::InvalidCountryCode => "INVALID_COUNTRY_CODE",
+            }
+        }
     }
 }
 // Proto file describing criterion errors.
@@ -2371,6 +3403,144 @@ pub mod criterion_error_enum {
         /// <https://ads-developers.googleblog.com/2021/06/broad-match-modifier-upcoming-changes.html.>
         BroadMatchModifierKeywordNotAllowed = 135,
     }
+    impl CriterionError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                CriterionError::Unspecified => "UNSPECIFIED",
+                CriterionError::Unknown => "UNKNOWN",
+                CriterionError::ConcreteTypeRequired => "CONCRETE_TYPE_REQUIRED",
+                CriterionError::InvalidExcludedCategory => "INVALID_EXCLUDED_CATEGORY",
+                CriterionError::InvalidKeywordText => "INVALID_KEYWORD_TEXT",
+                CriterionError::KeywordTextTooLong => "KEYWORD_TEXT_TOO_LONG",
+                CriterionError::KeywordHasTooManyWords => "KEYWORD_HAS_TOO_MANY_WORDS",
+                CriterionError::KeywordHasInvalidChars => "KEYWORD_HAS_INVALID_CHARS",
+                CriterionError::InvalidPlacementUrl => "INVALID_PLACEMENT_URL",
+                CriterionError::InvalidUserList => "INVALID_USER_LIST",
+                CriterionError::InvalidUserInterest => "INVALID_USER_INTEREST",
+                CriterionError::InvalidFormatForPlacementUrl => "INVALID_FORMAT_FOR_PLACEMENT_URL",
+                CriterionError::PlacementUrlIsTooLong => "PLACEMENT_URL_IS_TOO_LONG",
+                CriterionError::PlacementUrlHasIllegalChar => "PLACEMENT_URL_HAS_ILLEGAL_CHAR",
+                CriterionError::PlacementUrlHasMultipleSitesInLine => "PLACEMENT_URL_HAS_MULTIPLE_SITES_IN_LINE",
+                CriterionError::PlacementIsNotAvailableForTargetingOrExclusion => "PLACEMENT_IS_NOT_AVAILABLE_FOR_TARGETING_OR_EXCLUSION",
+                CriterionError::InvalidTopicPath => "INVALID_TOPIC_PATH",
+                CriterionError::InvalidYoutubeChannelId => "INVALID_YOUTUBE_CHANNEL_ID",
+                CriterionError::InvalidYoutubeVideoId => "INVALID_YOUTUBE_VIDEO_ID",
+                CriterionError::YoutubeVerticalChannelDeprecated => "YOUTUBE_VERTICAL_CHANNEL_DEPRECATED",
+                CriterionError::YoutubeDemographicChannelDeprecated => "YOUTUBE_DEMOGRAPHIC_CHANNEL_DEPRECATED",
+                CriterionError::YoutubeUrlUnsupported => "YOUTUBE_URL_UNSUPPORTED",
+                CriterionError::CannotExcludeCriteriaType => "CANNOT_EXCLUDE_CRITERIA_TYPE",
+                CriterionError::CannotAddCriteriaType => "CANNOT_ADD_CRITERIA_TYPE",
+                CriterionError::CannotExcludeSimilarUserList => "CANNOT_EXCLUDE_SIMILAR_USER_LIST",
+                CriterionError::CannotAddClosedUserList => "CANNOT_ADD_CLOSED_USER_LIST",
+                CriterionError::CannotAddDisplayOnlyListsToSearchOnlyCampaigns => "CANNOT_ADD_DISPLAY_ONLY_LISTS_TO_SEARCH_ONLY_CAMPAIGNS",
+                CriterionError::CannotAddDisplayOnlyListsToSearchCampaigns => "CANNOT_ADD_DISPLAY_ONLY_LISTS_TO_SEARCH_CAMPAIGNS",
+                CriterionError::CannotAddDisplayOnlyListsToShoppingCampaigns => "CANNOT_ADD_DISPLAY_ONLY_LISTS_TO_SHOPPING_CAMPAIGNS",
+                CriterionError::CannotAddUserInterestsToSearchCampaigns => "CANNOT_ADD_USER_INTERESTS_TO_SEARCH_CAMPAIGNS",
+                CriterionError::CannotSetBidsOnCriterionTypeInSearchCampaigns => "CANNOT_SET_BIDS_ON_CRITERION_TYPE_IN_SEARCH_CAMPAIGNS",
+                CriterionError::CannotAddUrlsToCriterionTypeForCampaignType => "CANNOT_ADD_URLS_TO_CRITERION_TYPE_FOR_CAMPAIGN_TYPE",
+                CriterionError::InvalidCombinedAudience => "INVALID_COMBINED_AUDIENCE",
+                CriterionError::InvalidCustomAffinity => "INVALID_CUSTOM_AFFINITY",
+                CriterionError::InvalidCustomIntent => "INVALID_CUSTOM_INTENT",
+                CriterionError::InvalidCustomAudience => "INVALID_CUSTOM_AUDIENCE",
+                CriterionError::InvalidIpAddress => "INVALID_IP_ADDRESS",
+                CriterionError::InvalidIpFormat => "INVALID_IP_FORMAT",
+                CriterionError::InvalidMobileApp => "INVALID_MOBILE_APP",
+                CriterionError::InvalidMobileAppCategory => "INVALID_MOBILE_APP_CATEGORY",
+                CriterionError::InvalidCriterionId => "INVALID_CRITERION_ID",
+                CriterionError::CannotTargetCriterion => "CANNOT_TARGET_CRITERION",
+                CriterionError::CannotTargetObsoleteCriterion => "CANNOT_TARGET_OBSOLETE_CRITERION",
+                CriterionError::CriterionIdAndTypeMismatch => "CRITERION_ID_AND_TYPE_MISMATCH",
+                CriterionError::InvalidProximityRadius => "INVALID_PROXIMITY_RADIUS",
+                CriterionError::InvalidProximityRadiusUnits => "INVALID_PROXIMITY_RADIUS_UNITS",
+                CriterionError::InvalidStreetaddressLength => "INVALID_STREETADDRESS_LENGTH",
+                CriterionError::InvalidCitynameLength => "INVALID_CITYNAME_LENGTH",
+                CriterionError::InvalidRegioncodeLength => "INVALID_REGIONCODE_LENGTH",
+                CriterionError::InvalidRegionnameLength => "INVALID_REGIONNAME_LENGTH",
+                CriterionError::InvalidPostalcodeLength => "INVALID_POSTALCODE_LENGTH",
+                CriterionError::InvalidCountryCode => "INVALID_COUNTRY_CODE",
+                CriterionError::InvalidLatitude => "INVALID_LATITUDE",
+                CriterionError::InvalidLongitude => "INVALID_LONGITUDE",
+                CriterionError::ProximityGeopointAndAddressBothCannotBeNull => "PROXIMITY_GEOPOINT_AND_ADDRESS_BOTH_CANNOT_BE_NULL",
+                CriterionError::InvalidProximityAddress => "INVALID_PROXIMITY_ADDRESS",
+                CriterionError::InvalidUserDomainName => "INVALID_USER_DOMAIN_NAME",
+                CriterionError::CriterionParameterTooLong => "CRITERION_PARAMETER_TOO_LONG",
+                CriterionError::AdScheduleTimeIntervalsOverlap => "AD_SCHEDULE_TIME_INTERVALS_OVERLAP",
+                CriterionError::AdScheduleIntervalCannotSpanMultipleDays => "AD_SCHEDULE_INTERVAL_CANNOT_SPAN_MULTIPLE_DAYS",
+                CriterionError::AdScheduleInvalidTimeInterval => "AD_SCHEDULE_INVALID_TIME_INTERVAL",
+                CriterionError::AdScheduleExceededIntervalsPerDayLimit => "AD_SCHEDULE_EXCEEDED_INTERVALS_PER_DAY_LIMIT",
+                CriterionError::AdScheduleCriterionIdMismatchingFields => "AD_SCHEDULE_CRITERION_ID_MISMATCHING_FIELDS",
+                CriterionError::CannotBidModifyCriterionType => "CANNOT_BID_MODIFY_CRITERION_TYPE",
+                CriterionError::CannotBidModifyCriterionCampaignOptedOut => "CANNOT_BID_MODIFY_CRITERION_CAMPAIGN_OPTED_OUT",
+                CriterionError::CannotBidModifyNegativeCriterion => "CANNOT_BID_MODIFY_NEGATIVE_CRITERION",
+                CriterionError::BidModifierAlreadyExists => "BID_MODIFIER_ALREADY_EXISTS",
+                CriterionError::FeedIdNotAllowed => "FEED_ID_NOT_ALLOWED",
+                CriterionError::AccountIneligibleForCriteriaType => "ACCOUNT_INELIGIBLE_FOR_CRITERIA_TYPE",
+                CriterionError::CriteriaTypeInvalidForBiddingStrategy => "CRITERIA_TYPE_INVALID_FOR_BIDDING_STRATEGY",
+                CriterionError::CannotExcludeCriterion => "CANNOT_EXCLUDE_CRITERION",
+                CriterionError::CannotRemoveCriterion => "CANNOT_REMOVE_CRITERION",
+                CriterionError::InvalidProductBiddingCategory => "INVALID_PRODUCT_BIDDING_CATEGORY",
+                CriterionError::MissingShoppingSetting => "MISSING_SHOPPING_SETTING",
+                CriterionError::InvalidMatchingFunction => "INVALID_MATCHING_FUNCTION",
+                CriterionError::LocationFilterNotAllowed => "LOCATION_FILTER_NOT_ALLOWED",
+                CriterionError::InvalidFeedForLocationFilter => "INVALID_FEED_FOR_LOCATION_FILTER",
+                CriterionError::LocationFilterInvalid => "LOCATION_FILTER_INVALID",
+                CriterionError::CannotSetGeoTargetConstantsWithFeedItemSets => "CANNOT_SET_GEO_TARGET_CONSTANTS_WITH_FEED_ITEM_SETS",
+                CriterionError::InvalidLocationGroupRadius => "INVALID_LOCATION_GROUP_RADIUS",
+                CriterionError::InvalidLocationGroupRadiusUnit => "INVALID_LOCATION_GROUP_RADIUS_UNIT",
+                CriterionError::CannotAttachCriteriaAtCampaignAndAdgroup => "CANNOT_ATTACH_CRITERIA_AT_CAMPAIGN_AND_ADGROUP",
+                CriterionError::HotelLengthOfStayOverlapsWithExistingCriterion => "HOTEL_LENGTH_OF_STAY_OVERLAPS_WITH_EXISTING_CRITERION",
+                CriterionError::HotelAdvanceBookingWindowOverlapsWithExistingCriterion => "HOTEL_ADVANCE_BOOKING_WINDOW_OVERLAPS_WITH_EXISTING_CRITERION",
+                CriterionError::FieldIncompatibleWithNegativeTargeting => "FIELD_INCOMPATIBLE_WITH_NEGATIVE_TARGETING",
+                CriterionError::InvalidWebpageCondition => "INVALID_WEBPAGE_CONDITION",
+                CriterionError::InvalidWebpageConditionUrl => "INVALID_WEBPAGE_CONDITION_URL",
+                CriterionError::WebpageConditionUrlCannotBeEmpty => "WEBPAGE_CONDITION_URL_CANNOT_BE_EMPTY",
+                CriterionError::WebpageConditionUrlUnsupportedProtocol => "WEBPAGE_CONDITION_URL_UNSUPPORTED_PROTOCOL",
+                CriterionError::WebpageConditionUrlCannotBeIpAddress => "WEBPAGE_CONDITION_URL_CANNOT_BE_IP_ADDRESS",
+                CriterionError::WebpageConditionUrlDomainNotConsistentWithCampaignSetting => "WEBPAGE_CONDITION_URL_DOMAIN_NOT_CONSISTENT_WITH_CAMPAIGN_SETTING",
+                CriterionError::WebpageConditionUrlCannotBePublicSuffix => "WEBPAGE_CONDITION_URL_CANNOT_BE_PUBLIC_SUFFIX",
+                CriterionError::WebpageConditionUrlInvalidPublicSuffix => "WEBPAGE_CONDITION_URL_INVALID_PUBLIC_SUFFIX",
+                CriterionError::WebpageConditionUrlValueTrackValueNotSupported => "WEBPAGE_CONDITION_URL_VALUE_TRACK_VALUE_NOT_SUPPORTED",
+                CriterionError::WebpageCriterionUrlEqualsCanHaveOnlyOneCondition => "WEBPAGE_CRITERION_URL_EQUALS_CAN_HAVE_ONLY_ONE_CONDITION",
+                CriterionError::WebpageCriterionNotSupportedOnNonDsaAdGroup => "WEBPAGE_CRITERION_NOT_SUPPORTED_ON_NON_DSA_AD_GROUP",
+                CriterionError::CannotTargetUserListForSmartDisplayCampaigns => "CANNOT_TARGET_USER_LIST_FOR_SMART_DISPLAY_CAMPAIGNS",
+                CriterionError::CannotTargetPlacementsForSearchCampaigns => "CANNOT_TARGET_PLACEMENTS_FOR_SEARCH_CAMPAIGNS",
+                CriterionError::ListingScopeTooManyDimensionTypes => "LISTING_SCOPE_TOO_MANY_DIMENSION_TYPES",
+                CriterionError::ListingScopeTooManyInOperators => "LISTING_SCOPE_TOO_MANY_IN_OPERATORS",
+                CriterionError::ListingScopeInOperatorNotSupported => "LISTING_SCOPE_IN_OPERATOR_NOT_SUPPORTED",
+                CriterionError::DuplicateListingDimensionType => "DUPLICATE_LISTING_DIMENSION_TYPE",
+                CriterionError::DuplicateListingDimensionValue => "DUPLICATE_LISTING_DIMENSION_VALUE",
+                CriterionError::CannotSetBidsOnListingGroupSubdivision => "CANNOT_SET_BIDS_ON_LISTING_GROUP_SUBDIVISION",
+                CriterionError::InvalidListingGroupHierarchy => "INVALID_LISTING_GROUP_HIERARCHY",
+                CriterionError::ListingGroupUnitCannotHaveChildren => "LISTING_GROUP_UNIT_CANNOT_HAVE_CHILDREN",
+                CriterionError::ListingGroupSubdivisionRequiresOthersCase => "LISTING_GROUP_SUBDIVISION_REQUIRES_OTHERS_CASE",
+                CriterionError::ListingGroupRequiresSameDimensionTypeAsSiblings => "LISTING_GROUP_REQUIRES_SAME_DIMENSION_TYPE_AS_SIBLINGS",
+                CriterionError::ListingGroupAlreadyExists => "LISTING_GROUP_ALREADY_EXISTS",
+                CriterionError::ListingGroupDoesNotExist => "LISTING_GROUP_DOES_NOT_EXIST",
+                CriterionError::ListingGroupCannotBeRemoved => "LISTING_GROUP_CANNOT_BE_REMOVED",
+                CriterionError::InvalidListingGroupType => "INVALID_LISTING_GROUP_TYPE",
+                CriterionError::ListingGroupAddMayOnlyUseTempId => "LISTING_GROUP_ADD_MAY_ONLY_USE_TEMP_ID",
+                CriterionError::ListingScopeTooLong => "LISTING_SCOPE_TOO_LONG",
+                CriterionError::ListingScopeTooManyDimensions => "LISTING_SCOPE_TOO_MANY_DIMENSIONS",
+                CriterionError::ListingGroupTooLong => "LISTING_GROUP_TOO_LONG",
+                CriterionError::ListingGroupTreeTooDeep => "LISTING_GROUP_TREE_TOO_DEEP",
+                CriterionError::InvalidListingDimension => "INVALID_LISTING_DIMENSION",
+                CriterionError::InvalidListingDimensionType => "INVALID_LISTING_DIMENSION_TYPE",
+                CriterionError::AdvertiserNotOnAllowlistForCombinedAudienceOnDisplay => "ADVERTISER_NOT_ON_ALLOWLIST_FOR_COMBINED_AUDIENCE_ON_DISPLAY",
+                CriterionError::CannotTargetRemovedCombinedAudience => "CANNOT_TARGET_REMOVED_COMBINED_AUDIENCE",
+                CriterionError::InvalidCombinedAudienceId => "INVALID_COMBINED_AUDIENCE_ID",
+                CriterionError::CannotTargetRemovedCustomAudience => "CANNOT_TARGET_REMOVED_CUSTOM_AUDIENCE",
+                CriterionError::HotelCheckInDateRangeOverlapsWithExistingCriterion => "HOTEL_CHECK_IN_DATE_RANGE_OVERLAPS_WITH_EXISTING_CRITERION",
+                CriterionError::HotelCheckInDateRangeStartDateTooEarly => "HOTEL_CHECK_IN_DATE_RANGE_START_DATE_TOO_EARLY",
+                CriterionError::HotelCheckInDateRangeEndDateTooLate => "HOTEL_CHECK_IN_DATE_RANGE_END_DATE_TOO_LATE",
+                CriterionError::HotelCheckInDateRangeReversed => "HOTEL_CHECK_IN_DATE_RANGE_REVERSED",
+                CriterionError::BroadMatchModifierKeywordNotAllowed => "BROAD_MATCH_MODIFIER_KEYWORD_NOT_ALLOWED",
+            }
+        }
+    }
 }
 // Proto file describing currency code errors.
 
@@ -2390,6 +3560,19 @@ pub mod currency_code_error_enum {
         Unknown = 1,
         /// The currency code is not supported.
         Unsupported = 2,
+    }
+    impl CurrencyCodeError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                CurrencyCodeError::Unspecified => "UNSPECIFIED",
+                CurrencyCodeError::Unknown => "UNKNOWN",
+                CurrencyCodeError::Unsupported => "UNSUPPORTED",
+            }
+        }
     }
 }
 // Proto file describing custom audience errors.
@@ -2425,6 +3608,26 @@ pub mod custom_audience_error_enum {
         /// Change in custom audience type is not allowed.
         InvalidTypeChange = 9,
     }
+    impl CustomAudienceError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                CustomAudienceError::Unspecified => "UNSPECIFIED",
+                CustomAudienceError::Unknown => "UNKNOWN",
+                CustomAudienceError::NameAlreadyUsed => "NAME_ALREADY_USED",
+                CustomAudienceError::CannotRemoveWhileInUse => "CANNOT_REMOVE_WHILE_IN_USE",
+                CustomAudienceError::ResourceAlreadyRemoved => "RESOURCE_ALREADY_REMOVED",
+                CustomAudienceError::MemberTypeAndParameterAlreadyExisted => "MEMBER_TYPE_AND_PARAMETER_ALREADY_EXISTED",
+                CustomAudienceError::InvalidMemberType => "INVALID_MEMBER_TYPE",
+                CustomAudienceError::MemberTypeAndValueDoesNotMatch => "MEMBER_TYPE_AND_VALUE_DOES_NOT_MATCH",
+                CustomAudienceError::PolicyViolation => "POLICY_VIOLATION",
+                CustomAudienceError::InvalidTypeChange => "INVALID_TYPE_CHANGE",
+            }
+        }
+    }
 }
 // Proto file describing custom interest errors.
 
@@ -2457,6 +3660,25 @@ pub mod custom_interest_error_enum {
         CannotRemoveWhileInUse = 7,
         /// Cannot mutate custom interest type.
         CannotChangeType = 8,
+    }
+    impl CustomInterestError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                CustomInterestError::Unspecified => "UNSPECIFIED",
+                CustomInterestError::Unknown => "UNKNOWN",
+                CustomInterestError::NameAlreadyUsed => "NAME_ALREADY_USED",
+                CustomInterestError::CustomInterestMemberIdAndTypeParameterNotPresentInRemove => "CUSTOM_INTEREST_MEMBER_ID_AND_TYPE_PARAMETER_NOT_PRESENT_IN_REMOVE",
+                CustomInterestError::TypeAndParameterNotFound => "TYPE_AND_PARAMETER_NOT_FOUND",
+                CustomInterestError::TypeAndParameterAlreadyExisted => "TYPE_AND_PARAMETER_ALREADY_EXISTED",
+                CustomInterestError::InvalidCustomInterestMemberType => "INVALID_CUSTOM_INTEREST_MEMBER_TYPE",
+                CustomInterestError::CannotRemoveWhileInUse => "CANNOT_REMOVE_WHILE_IN_USE",
+                CustomInterestError::CannotChangeType => "CANNOT_CHANGE_TYPE",
+            }
+        }
     }
 }
 // Proto file describing CustomerClientLink errors.
@@ -2492,6 +3714,26 @@ pub mod customer_client_link_error_enum {
         /// Client has too many managers.
         ClientHasTooManyManagers = 9,
     }
+    impl CustomerClientLinkError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                CustomerClientLinkError::Unspecified => "UNSPECIFIED",
+                CustomerClientLinkError::Unknown => "UNKNOWN",
+                CustomerClientLinkError::ClientAlreadyInvitedByThisManager => "CLIENT_ALREADY_INVITED_BY_THIS_MANAGER",
+                CustomerClientLinkError::ClientAlreadyManagedInHierarchy => "CLIENT_ALREADY_MANAGED_IN_HIERARCHY",
+                CustomerClientLinkError::CyclicLinkNotAllowed => "CYCLIC_LINK_NOT_ALLOWED",
+                CustomerClientLinkError::CustomerHasTooManyAccounts => "CUSTOMER_HAS_TOO_MANY_ACCOUNTS",
+                CustomerClientLinkError::ClientHasTooManyInvitations => "CLIENT_HAS_TOO_MANY_INVITATIONS",
+                CustomerClientLinkError::CannotHideOrUnhideManagerAccounts => "CANNOT_HIDE_OR_UNHIDE_MANAGER_ACCOUNTS",
+                CustomerClientLinkError::CustomerHasTooManyAccountsAtManager => "CUSTOMER_HAS_TOO_MANY_ACCOUNTS_AT_MANAGER",
+                CustomerClientLinkError::ClientHasTooManyManagers => "CLIENT_HAS_TOO_MANY_MANAGERS",
+            }
+        }
+    }
 }
 /// Container for enum describing possible customer errors.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -2513,6 +3755,20 @@ pub mod customer_error_enum {
         StatusChangeDisallowed = 2,
         /// CustomerService cannot get a customer that has not been fully set up.
         AccountNotSetUp = 3,
+    }
+    impl CustomerError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                CustomerError::Unspecified => "UNSPECIFIED",
+                CustomerError::Unknown => "UNKNOWN",
+                CustomerError::StatusChangeDisallowed => "STATUS_CHANGE_DISALLOWED",
+                CustomerError::AccountNotSetUp => "ACCOUNT_NOT_SET_UP",
+            }
+        }
     }
 }
 // Proto file describing customer feed errors.
@@ -2546,6 +3802,25 @@ pub mod customer_feed_error_enum {
         MissingFeedmappingForPlaceholderType = 7,
         /// Placeholder not allowed at the account level.
         PlaceholderTypeNotAllowedOnCustomerFeed = 8,
+    }
+    impl CustomerFeedError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                CustomerFeedError::Unspecified => "UNSPECIFIED",
+                CustomerFeedError::Unknown => "UNKNOWN",
+                CustomerFeedError::FeedAlreadyExistsForPlaceholderType => "FEED_ALREADY_EXISTS_FOR_PLACEHOLDER_TYPE",
+                CustomerFeedError::CannotCreateForRemovedFeed => "CANNOT_CREATE_FOR_REMOVED_FEED",
+                CustomerFeedError::CannotCreateAlreadyExistingCustomerFeed => "CANNOT_CREATE_ALREADY_EXISTING_CUSTOMER_FEED",
+                CustomerFeedError::CannotModifyRemovedCustomerFeed => "CANNOT_MODIFY_REMOVED_CUSTOMER_FEED",
+                CustomerFeedError::InvalidPlaceholderType => "INVALID_PLACEHOLDER_TYPE",
+                CustomerFeedError::MissingFeedmappingForPlaceholderType => "MISSING_FEEDMAPPING_FOR_PLACEHOLDER_TYPE",
+                CustomerFeedError::PlaceholderTypeNotAllowedOnCustomerFeed => "PLACEHOLDER_TYPE_NOT_ALLOWED_ON_CUSTOMER_FEED",
+            }
+        }
     }
 }
 // Proto file describing CustomerManagerLink errors.
@@ -2587,6 +3862,27 @@ pub mod customer_manager_link_error_enum {
         /// allowed number of accounts
         TestAccountLinksTooManyChildAccounts = 10,
     }
+    impl CustomerManagerLinkError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                CustomerManagerLinkError::Unspecified => "UNSPECIFIED",
+                CustomerManagerLinkError::Unknown => "UNKNOWN",
+                CustomerManagerLinkError::NoPendingInvite => "NO_PENDING_INVITE",
+                CustomerManagerLinkError::SameClientMoreThanOncePerCall => "SAME_CLIENT_MORE_THAN_ONCE_PER_CALL",
+                CustomerManagerLinkError::ManagerHasMaxNumberOfLinkedAccounts => "MANAGER_HAS_MAX_NUMBER_OF_LINKED_ACCOUNTS",
+                CustomerManagerLinkError::CannotUnlinkAccountWithoutActiveUser => "CANNOT_UNLINK_ACCOUNT_WITHOUT_ACTIVE_USER",
+                CustomerManagerLinkError::CannotRemoveLastClientAccountOwner => "CANNOT_REMOVE_LAST_CLIENT_ACCOUNT_OWNER",
+                CustomerManagerLinkError::CannotChangeRoleByNonAccountOwner => "CANNOT_CHANGE_ROLE_BY_NON_ACCOUNT_OWNER",
+                CustomerManagerLinkError::CannotChangeRoleForNonActiveLinkAccount => "CANNOT_CHANGE_ROLE_FOR_NON_ACTIVE_LINK_ACCOUNT",
+                CustomerManagerLinkError::DuplicateChildFound => "DUPLICATE_CHILD_FOUND",
+                CustomerManagerLinkError::TestAccountLinksTooManyChildAccounts => "TEST_ACCOUNT_LINKS_TOO_MANY_CHILD_ACCOUNTS",
+            }
+        }
+    }
 }
 // Proto file describing CustomerUserAccess errors.
 
@@ -2616,6 +3912,23 @@ pub mod customer_user_access_error_enum {
         /// Last admin user cannot be removed from a manager.
         LastAdminUserOfManager = 6,
     }
+    impl CustomerUserAccessError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                CustomerUserAccessError::Unspecified => "UNSPECIFIED",
+                CustomerUserAccessError::Unknown => "UNKNOWN",
+                CustomerUserAccessError::InvalidUserId => "INVALID_USER_ID",
+                CustomerUserAccessError::RemovalDisallowed => "REMOVAL_DISALLOWED",
+                CustomerUserAccessError::DisallowedAccessRole => "DISALLOWED_ACCESS_ROLE",
+                CustomerUserAccessError::LastAdminUserOfServingCustomer => "LAST_ADMIN_USER_OF_SERVING_CUSTOMER",
+                CustomerUserAccessError::LastAdminUserOfManager => "LAST_ADMIN_USER_OF_MANAGER",
+            }
+        }
+    }
 }
 // Proto file describing database errors.
 
@@ -2642,6 +3955,21 @@ pub mod database_error_enum {
         /// The data written is too large. Please split the request into smaller
         /// requests.
         RequestTooLarge = 4,
+    }
+    impl DatabaseError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                DatabaseError::Unspecified => "UNSPECIFIED",
+                DatabaseError::Unknown => "UNKNOWN",
+                DatabaseError::ConcurrentModification => "CONCURRENT_MODIFICATION",
+                DatabaseError::DataConstraintViolation => "DATA_CONSTRAINT_VIOLATION",
+                DatabaseError::RequestTooLarge => "REQUEST_TOO_LARGE",
+            }
+        }
     }
 }
 // Proto file describing date errors.
@@ -2681,6 +4009,28 @@ pub mod date_error_enum {
         /// Both dates in range are null.
         DateRangeMinimumAndMaximumDatesBothNull = 10,
     }
+    impl DateError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                DateError::Unspecified => "UNSPECIFIED",
+                DateError::Unknown => "UNKNOWN",
+                DateError::InvalidFieldValuesInDate => "INVALID_FIELD_VALUES_IN_DATE",
+                DateError::InvalidFieldValuesInDateTime => "INVALID_FIELD_VALUES_IN_DATE_TIME",
+                DateError::InvalidStringDate => "INVALID_STRING_DATE",
+                DateError::InvalidStringDateTimeMicros => "INVALID_STRING_DATE_TIME_MICROS",
+                DateError::InvalidStringDateTimeSeconds => "INVALID_STRING_DATE_TIME_SECONDS",
+                DateError::InvalidStringDateTimeSecondsWithOffset => "INVALID_STRING_DATE_TIME_SECONDS_WITH_OFFSET",
+                DateError::EarlierThanMinimumDate => "EARLIER_THAN_MINIMUM_DATE",
+                DateError::LaterThanMaximumDate => "LATER_THAN_MAXIMUM_DATE",
+                DateError::DateRangeMinimumDateLaterThanMaximumDate => "DATE_RANGE_MINIMUM_DATE_LATER_THAN_MAXIMUM_DATE",
+                DateError::DateRangeMinimumAndMaximumDatesBothNull => "DATE_RANGE_MINIMUM_AND_MAXIMUM_DATES_BOTH_NULL",
+            }
+        }
+    }
 }
 // Proto file describing date range errors.
 
@@ -2709,6 +4059,23 @@ pub mod date_range_error_enum {
         /// Trying to change start date on a resource that has started.
         CannotModifyStartDateIfAlreadyStarted = 6,
     }
+    impl DateRangeError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                DateRangeError::Unspecified => "UNSPECIFIED",
+                DateRangeError::Unknown => "UNKNOWN",
+                DateRangeError::InvalidDate => "INVALID_DATE",
+                DateRangeError::StartDateAfterEndDate => "START_DATE_AFTER_END_DATE",
+                DateRangeError::CannotSetDateToPast => "CANNOT_SET_DATE_TO_PAST",
+                DateRangeError::AfterMaximumAllowableDate => "AFTER_MAXIMUM_ALLOWABLE_DATE",
+                DateRangeError::CannotModifyStartDateIfAlreadyStarted => "CANNOT_MODIFY_START_DATE_IF_ALREADY_STARTED",
+            }
+        }
+    }
 }
 // Proto file describing distinct errors.
 
@@ -2731,6 +4098,20 @@ pub mod distinct_error_enum {
         /// Duplicate type.
         DuplicateType = 3,
     }
+    impl DistinctError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                DistinctError::Unspecified => "UNSPECIFIED",
+                DistinctError::Unknown => "UNKNOWN",
+                DistinctError::DuplicateElement => "DUPLICATE_ELEMENT",
+                DistinctError::DuplicateType => "DUPLICATE_TYPE",
+            }
+        }
+    }
 }
 // Proto file describing enum errors.
 
@@ -2750,6 +4131,19 @@ pub mod enum_error_enum {
         Unknown = 1,
         /// The enum value is not permitted.
         EnumValueNotPermitted = 3,
+    }
+    impl EnumError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                EnumError::Unspecified => "UNSPECIFIED",
+                EnumError::Unknown => "UNKNOWN",
+                EnumError::EnumValueNotPermitted => "ENUM_VALUE_NOT_PERMITTED",
+            }
+        }
     }
 }
 // Proto file describing extension feed item errors.
@@ -2874,6 +4268,63 @@ pub mod extension_feed_item_error_enum {
         ConcreteExtensionTypeRequired = 45,
         /// Feed item schedule end time must be after start time.
         ScheduleEndNotAfterStart = 46,
+    }
+    impl ExtensionFeedItemError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ExtensionFeedItemError::Unspecified => "UNSPECIFIED",
+                ExtensionFeedItemError::Unknown => "UNKNOWN",
+                ExtensionFeedItemError::ValueOutOfRange => "VALUE_OUT_OF_RANGE",
+                ExtensionFeedItemError::UrlListTooLong => "URL_LIST_TOO_LONG",
+                ExtensionFeedItemError::CannotHaveRestrictionOnEmptyGeoTargeting => "CANNOT_HAVE_RESTRICTION_ON_EMPTY_GEO_TARGETING",
+                ExtensionFeedItemError::CannotSetWithFinalUrls => "CANNOT_SET_WITH_FINAL_URLS",
+                ExtensionFeedItemError::CannotSetWithoutFinalUrls => "CANNOT_SET_WITHOUT_FINAL_URLS",
+                ExtensionFeedItemError::InvalidPhoneNumber => "INVALID_PHONE_NUMBER",
+                ExtensionFeedItemError::PhoneNumberNotSupportedForCountry => "PHONE_NUMBER_NOT_SUPPORTED_FOR_COUNTRY",
+                ExtensionFeedItemError::CarrierSpecificShortNumberNotAllowed => "CARRIER_SPECIFIC_SHORT_NUMBER_NOT_ALLOWED",
+                ExtensionFeedItemError::PremiumRateNumberNotAllowed => "PREMIUM_RATE_NUMBER_NOT_ALLOWED",
+                ExtensionFeedItemError::DisallowedNumberType => "DISALLOWED_NUMBER_TYPE",
+                ExtensionFeedItemError::InvalidDomesticPhoneNumberFormat => "INVALID_DOMESTIC_PHONE_NUMBER_FORMAT",
+                ExtensionFeedItemError::VanityPhoneNumberNotAllowed => "VANITY_PHONE_NUMBER_NOT_ALLOWED",
+                ExtensionFeedItemError::InvalidCallConversionAction => "INVALID_CALL_CONVERSION_ACTION",
+                ExtensionFeedItemError::CustomerNotOnAllowlistForCalltracking => "CUSTOMER_NOT_ON_ALLOWLIST_FOR_CALLTRACKING",
+                ExtensionFeedItemError::CalltrackingNotSupportedForCountry => "CALLTRACKING_NOT_SUPPORTED_FOR_COUNTRY",
+                ExtensionFeedItemError::CustomerConsentForCallRecordingRequired => "CUSTOMER_CONSENT_FOR_CALL_RECORDING_REQUIRED",
+                ExtensionFeedItemError::InvalidAppId => "INVALID_APP_ID",
+                ExtensionFeedItemError::QuotesInReviewExtensionSnippet => "QUOTES_IN_REVIEW_EXTENSION_SNIPPET",
+                ExtensionFeedItemError::HyphensInReviewExtensionSnippet => "HYPHENS_IN_REVIEW_EXTENSION_SNIPPET",
+                ExtensionFeedItemError::ReviewExtensionSourceIneligible => "REVIEW_EXTENSION_SOURCE_INELIGIBLE",
+                ExtensionFeedItemError::SourceNameInReviewExtensionText => "SOURCE_NAME_IN_REVIEW_EXTENSION_TEXT",
+                ExtensionFeedItemError::InconsistentCurrencyCodes => "INCONSISTENT_CURRENCY_CODES",
+                ExtensionFeedItemError::PriceExtensionHasDuplicatedHeaders => "PRICE_EXTENSION_HAS_DUPLICATED_HEADERS",
+                ExtensionFeedItemError::PriceItemHasDuplicatedHeaderAndDescription => "PRICE_ITEM_HAS_DUPLICATED_HEADER_AND_DESCRIPTION",
+                ExtensionFeedItemError::PriceExtensionHasTooFewItems => "PRICE_EXTENSION_HAS_TOO_FEW_ITEMS",
+                ExtensionFeedItemError::PriceExtensionHasTooManyItems => "PRICE_EXTENSION_HAS_TOO_MANY_ITEMS",
+                ExtensionFeedItemError::UnsupportedValue => "UNSUPPORTED_VALUE",
+                ExtensionFeedItemError::UnsupportedValueInSelectedLanguage => "UNSUPPORTED_VALUE_IN_SELECTED_LANGUAGE",
+                ExtensionFeedItemError::InvalidDevicePreference => "INVALID_DEVICE_PREFERENCE",
+                ExtensionFeedItemError::InvalidScheduleEnd => "INVALID_SCHEDULE_END",
+                ExtensionFeedItemError::DateTimeMustBeInAccountTimeZone => "DATE_TIME_MUST_BE_IN_ACCOUNT_TIME_ZONE",
+                ExtensionFeedItemError::InvalidSnippetsHeader => "INVALID_SNIPPETS_HEADER",
+                ExtensionFeedItemError::CannotOperateOnRemovedFeedItem => "CANNOT_OPERATE_ON_REMOVED_FEED_ITEM",
+                ExtensionFeedItemError::PhoneNumberNotSupportedWithCalltrackingForCountry => "PHONE_NUMBER_NOT_SUPPORTED_WITH_CALLTRACKING_FOR_COUNTRY",
+                ExtensionFeedItemError::ConflictingCallConversionSettings => "CONFLICTING_CALL_CONVERSION_SETTINGS",
+                ExtensionFeedItemError::ExtensionTypeMismatch => "EXTENSION_TYPE_MISMATCH",
+                ExtensionFeedItemError::ExtensionSubtypeRequired => "EXTENSION_SUBTYPE_REQUIRED",
+                ExtensionFeedItemError::ExtensionTypeUnsupported => "EXTENSION_TYPE_UNSUPPORTED",
+                ExtensionFeedItemError::CannotOperateOnFeedWithMultipleMappings => "CANNOT_OPERATE_ON_FEED_WITH_MULTIPLE_MAPPINGS",
+                ExtensionFeedItemError::CannotOperateOnFeedWithKeyAttributes => "CANNOT_OPERATE_ON_FEED_WITH_KEY_ATTRIBUTES",
+                ExtensionFeedItemError::InvalidPriceFormat => "INVALID_PRICE_FORMAT",
+                ExtensionFeedItemError::PromotionInvalidTime => "PROMOTION_INVALID_TIME",
+                ExtensionFeedItemError::TooManyDecimalPlacesSpecified => "TOO_MANY_DECIMAL_PLACES_SPECIFIED",
+                ExtensionFeedItemError::ConcreteExtensionTypeRequired => "CONCRETE_EXTENSION_TYPE_REQUIRED",
+                ExtensionFeedItemError::ScheduleEndNotAfterStart => "SCHEDULE_END_NOT_AFTER_START",
+            }
+        }
     }
 }
 // Proto file describing extension setting validation errors.
@@ -3045,6 +4496,83 @@ pub mod extension_setting_error_enum {
         /// The extension contains text which has been prohibited on policy grounds.
         DisallowedText = 68,
     }
+    impl ExtensionSettingError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ExtensionSettingError::Unspecified => "UNSPECIFIED",
+                ExtensionSettingError::Unknown => "UNKNOWN",
+                ExtensionSettingError::ExtensionsRequired => "EXTENSIONS_REQUIRED",
+                ExtensionSettingError::FeedTypeExtensionTypeMismatch => "FEED_TYPE_EXTENSION_TYPE_MISMATCH",
+                ExtensionSettingError::InvalidFeedType => "INVALID_FEED_TYPE",
+                ExtensionSettingError::InvalidFeedTypeForCustomerExtensionSetting => "INVALID_FEED_TYPE_FOR_CUSTOMER_EXTENSION_SETTING",
+                ExtensionSettingError::CannotChangeFeedItemOnCreate => "CANNOT_CHANGE_FEED_ITEM_ON_CREATE",
+                ExtensionSettingError::CannotUpdateNewlyCreatedExtension => "CANNOT_UPDATE_NEWLY_CREATED_EXTENSION",
+                ExtensionSettingError::NoExistingAdGroupExtensionSettingForType => "NO_EXISTING_AD_GROUP_EXTENSION_SETTING_FOR_TYPE",
+                ExtensionSettingError::NoExistingCampaignExtensionSettingForType => "NO_EXISTING_CAMPAIGN_EXTENSION_SETTING_FOR_TYPE",
+                ExtensionSettingError::NoExistingCustomerExtensionSettingForType => "NO_EXISTING_CUSTOMER_EXTENSION_SETTING_FOR_TYPE",
+                ExtensionSettingError::AdGroupExtensionSettingAlreadyExists => "AD_GROUP_EXTENSION_SETTING_ALREADY_EXISTS",
+                ExtensionSettingError::CampaignExtensionSettingAlreadyExists => "CAMPAIGN_EXTENSION_SETTING_ALREADY_EXISTS",
+                ExtensionSettingError::CustomerExtensionSettingAlreadyExists => "CUSTOMER_EXTENSION_SETTING_ALREADY_EXISTS",
+                ExtensionSettingError::AdGroupFeedAlreadyExistsForPlaceholderType => "AD_GROUP_FEED_ALREADY_EXISTS_FOR_PLACEHOLDER_TYPE",
+                ExtensionSettingError::CampaignFeedAlreadyExistsForPlaceholderType => "CAMPAIGN_FEED_ALREADY_EXISTS_FOR_PLACEHOLDER_TYPE",
+                ExtensionSettingError::CustomerFeedAlreadyExistsForPlaceholderType => "CUSTOMER_FEED_ALREADY_EXISTS_FOR_PLACEHOLDER_TYPE",
+                ExtensionSettingError::ValueOutOfRange => "VALUE_OUT_OF_RANGE",
+                ExtensionSettingError::CannotSetFieldWithFinalUrls => "CANNOT_SET_FIELD_WITH_FINAL_URLS",
+                ExtensionSettingError::FinalUrlsNotSet => "FINAL_URLS_NOT_SET",
+                ExtensionSettingError::InvalidPhoneNumber => "INVALID_PHONE_NUMBER",
+                ExtensionSettingError::PhoneNumberNotSupportedForCountry => "PHONE_NUMBER_NOT_SUPPORTED_FOR_COUNTRY",
+                ExtensionSettingError::CarrierSpecificShortNumberNotAllowed => "CARRIER_SPECIFIC_SHORT_NUMBER_NOT_ALLOWED",
+                ExtensionSettingError::PremiumRateNumberNotAllowed => "PREMIUM_RATE_NUMBER_NOT_ALLOWED",
+                ExtensionSettingError::DisallowedNumberType => "DISALLOWED_NUMBER_TYPE",
+                ExtensionSettingError::InvalidDomesticPhoneNumberFormat => "INVALID_DOMESTIC_PHONE_NUMBER_FORMAT",
+                ExtensionSettingError::VanityPhoneNumberNotAllowed => "VANITY_PHONE_NUMBER_NOT_ALLOWED",
+                ExtensionSettingError::InvalidCountryCode => "INVALID_COUNTRY_CODE",
+                ExtensionSettingError::InvalidCallConversionTypeId => "INVALID_CALL_CONVERSION_TYPE_ID",
+                ExtensionSettingError::CustomerNotInAllowlistForCalltracking => "CUSTOMER_NOT_IN_ALLOWLIST_FOR_CALLTRACKING",
+                ExtensionSettingError::CalltrackingNotSupportedForCountry => "CALLTRACKING_NOT_SUPPORTED_FOR_COUNTRY",
+                ExtensionSettingError::InvalidAppId => "INVALID_APP_ID",
+                ExtensionSettingError::QuotesInReviewExtensionSnippet => "QUOTES_IN_REVIEW_EXTENSION_SNIPPET",
+                ExtensionSettingError::HyphensInReviewExtensionSnippet => "HYPHENS_IN_REVIEW_EXTENSION_SNIPPET",
+                ExtensionSettingError::ReviewExtensionSourceNotEligible => "REVIEW_EXTENSION_SOURCE_NOT_ELIGIBLE",
+                ExtensionSettingError::SourceNameInReviewExtensionText => "SOURCE_NAME_IN_REVIEW_EXTENSION_TEXT",
+                ExtensionSettingError::MissingField => "MISSING_FIELD",
+                ExtensionSettingError::InconsistentCurrencyCodes => "INCONSISTENT_CURRENCY_CODES",
+                ExtensionSettingError::PriceExtensionHasDuplicatedHeaders => "PRICE_EXTENSION_HAS_DUPLICATED_HEADERS",
+                ExtensionSettingError::PriceItemHasDuplicatedHeaderAndDescription => "PRICE_ITEM_HAS_DUPLICATED_HEADER_AND_DESCRIPTION",
+                ExtensionSettingError::PriceExtensionHasTooFewItems => "PRICE_EXTENSION_HAS_TOO_FEW_ITEMS",
+                ExtensionSettingError::PriceExtensionHasTooManyItems => "PRICE_EXTENSION_HAS_TOO_MANY_ITEMS",
+                ExtensionSettingError::UnsupportedValue => "UNSUPPORTED_VALUE",
+                ExtensionSettingError::InvalidDevicePreference => "INVALID_DEVICE_PREFERENCE",
+                ExtensionSettingError::InvalidScheduleEnd => "INVALID_SCHEDULE_END",
+                ExtensionSettingError::DateTimeMustBeInAccountTimeZone => "DATE_TIME_MUST_BE_IN_ACCOUNT_TIME_ZONE",
+                ExtensionSettingError::OverlappingSchedulesNotAllowed => "OVERLAPPING_SCHEDULES_NOT_ALLOWED",
+                ExtensionSettingError::ScheduleEndNotAfterStart => "SCHEDULE_END_NOT_AFTER_START",
+                ExtensionSettingError::TooManySchedulesPerDay => "TOO_MANY_SCHEDULES_PER_DAY",
+                ExtensionSettingError::DuplicateExtensionFeedItemEdit => "DUPLICATE_EXTENSION_FEED_ITEM_EDIT",
+                ExtensionSettingError::InvalidSnippetsHeader => "INVALID_SNIPPETS_HEADER",
+                ExtensionSettingError::PhoneNumberNotSupportedWithCalltrackingForCountry => "PHONE_NUMBER_NOT_SUPPORTED_WITH_CALLTRACKING_FOR_COUNTRY",
+                ExtensionSettingError::CampaignTargetingMismatch => "CAMPAIGN_TARGETING_MISMATCH",
+                ExtensionSettingError::CannotOperateOnRemovedFeed => "CANNOT_OPERATE_ON_REMOVED_FEED",
+                ExtensionSettingError::ExtensionTypeRequired => "EXTENSION_TYPE_REQUIRED",
+                ExtensionSettingError::IncompatibleUnderlyingMatchingFunction => "INCOMPATIBLE_UNDERLYING_MATCHING_FUNCTION",
+                ExtensionSettingError::StartDateAfterEndDate => "START_DATE_AFTER_END_DATE",
+                ExtensionSettingError::InvalidPriceFormat => "INVALID_PRICE_FORMAT",
+                ExtensionSettingError::PromotionInvalidTime => "PROMOTION_INVALID_TIME",
+                ExtensionSettingError::PromotionCannotSetPercentDiscountAndMoneyDiscount => "PROMOTION_CANNOT_SET_PERCENT_DISCOUNT_AND_MONEY_DISCOUNT",
+                ExtensionSettingError::PromotionCannotSetPromotionCodeAndOrdersOverAmount => "PROMOTION_CANNOT_SET_PROMOTION_CODE_AND_ORDERS_OVER_AMOUNT",
+                ExtensionSettingError::TooManyDecimalPlacesSpecified => "TOO_MANY_DECIMAL_PLACES_SPECIFIED",
+                ExtensionSettingError::InvalidLanguageCode => "INVALID_LANGUAGE_CODE",
+                ExtensionSettingError::UnsupportedLanguage => "UNSUPPORTED_LANGUAGE",
+                ExtensionSettingError::CustomerConsentForCallRecordingRequired => "CUSTOMER_CONSENT_FOR_CALL_RECORDING_REQUIRED",
+                ExtensionSettingError::ExtensionSettingUpdateIsANoop => "EXTENSION_SETTING_UPDATE_IS_A_NOOP",
+                ExtensionSettingError::DisallowedText => "DISALLOWED_TEXT",
+            }
+        }
+    }
 }
 // Proto file describing feed attribute reference errors.
 
@@ -3068,6 +4596,21 @@ pub mod feed_attribute_reference_error_enum {
         InvalidFeedName = 3,
         /// There is no feed attribute in an enabled feed with the given name.
         InvalidFeedAttributeName = 4,
+    }
+    impl FeedAttributeReferenceError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                FeedAttributeReferenceError::Unspecified => "UNSPECIFIED",
+                FeedAttributeReferenceError::Unknown => "UNKNOWN",
+                FeedAttributeReferenceError::CannotReferenceRemovedFeed => "CANNOT_REFERENCE_REMOVED_FEED",
+                FeedAttributeReferenceError::InvalidFeedName => "INVALID_FEED_NAME",
+                FeedAttributeReferenceError::InvalidFeedAttributeName => "INVALID_FEED_ATTRIBUTE_NAME",
+            }
+        }
     }
 }
 // Proto file describing feed errors.
@@ -3132,6 +4675,40 @@ pub mod feed_error_enum {
         /// A customer cannot have both LOCATION and AFFILIATE_LOCATION feeds.
         CannotHaveLocationAndAffiliateLocationFeeds = 23,
     }
+    impl FeedError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                FeedError::Unspecified => "UNSPECIFIED",
+                FeedError::Unknown => "UNKNOWN",
+                FeedError::AttributeNamesNotUnique => "ATTRIBUTE_NAMES_NOT_UNIQUE",
+                FeedError::AttributesDoNotMatchExistingAttributes => "ATTRIBUTES_DO_NOT_MATCH_EXISTING_ATTRIBUTES",
+                FeedError::CannotSpecifyUserOriginForSystemFeed => "CANNOT_SPECIFY_USER_ORIGIN_FOR_SYSTEM_FEED",
+                FeedError::CannotSpecifyGoogleOriginForNonSystemFeed => "CANNOT_SPECIFY_GOOGLE_ORIGIN_FOR_NON_SYSTEM_FEED",
+                FeedError::CannotSpecifyFeedAttributesForSystemFeed => "CANNOT_SPECIFY_FEED_ATTRIBUTES_FOR_SYSTEM_FEED",
+                FeedError::CannotUpdateFeedAttributesWithOriginGoogle => "CANNOT_UPDATE_FEED_ATTRIBUTES_WITH_ORIGIN_GOOGLE",
+                FeedError::FeedRemoved => "FEED_REMOVED",
+                FeedError::InvalidOriginValue => "INVALID_ORIGIN_VALUE",
+                FeedError::FeedOriginIsNotUser => "FEED_ORIGIN_IS_NOT_USER",
+                FeedError::InvalidAuthTokenForEmail => "INVALID_AUTH_TOKEN_FOR_EMAIL",
+                FeedError::InvalidEmail => "INVALID_EMAIL",
+                FeedError::DuplicateFeedName => "DUPLICATE_FEED_NAME",
+                FeedError::InvalidFeedName => "INVALID_FEED_NAME",
+                FeedError::MissingOauthInfo => "MISSING_OAUTH_INFO",
+                FeedError::NewAttributeCannotBePartOfUniqueKey => "NEW_ATTRIBUTE_CANNOT_BE_PART_OF_UNIQUE_KEY",
+                FeedError::TooManyAttributes => "TOO_MANY_ATTRIBUTES",
+                FeedError::InvalidBusinessAccount => "INVALID_BUSINESS_ACCOUNT",
+                FeedError::BusinessAccountCannotAccessLocationAccount => "BUSINESS_ACCOUNT_CANNOT_ACCESS_LOCATION_ACCOUNT",
+                FeedError::InvalidAffiliateChainId => "INVALID_AFFILIATE_CHAIN_ID",
+                FeedError::DuplicateSystemFeed => "DUPLICATE_SYSTEM_FEED",
+                FeedError::GmbAccessError => "GMB_ACCESS_ERROR",
+                FeedError::CannotHaveLocationAndAffiliateLocationFeeds => "CANNOT_HAVE_LOCATION_AND_AFFILIATE_LOCATION_FEEDS",
+            }
+        }
+    }
 }
 // Proto file describing feed item errors.
 
@@ -3167,6 +4744,27 @@ pub mod feed_item_error_enum {
         CannotModifyKeyAttributeValue = 9,
         /// The feed attribute value is too large.
         SizeTooLargeForMultiValueAttribute = 10,
+    }
+    impl FeedItemError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                FeedItemError::Unspecified => "UNSPECIFIED",
+                FeedItemError::Unknown => "UNKNOWN",
+                FeedItemError::CannotConvertAttributeValueFromString => "CANNOT_CONVERT_ATTRIBUTE_VALUE_FROM_STRING",
+                FeedItemError::CannotOperateOnRemovedFeedItem => "CANNOT_OPERATE_ON_REMOVED_FEED_ITEM",
+                FeedItemError::DateTimeMustBeInAccountTimeZone => "DATE_TIME_MUST_BE_IN_ACCOUNT_TIME_ZONE",
+                FeedItemError::KeyAttributesNotFound => "KEY_ATTRIBUTES_NOT_FOUND",
+                FeedItemError::InvalidUrl => "INVALID_URL",
+                FeedItemError::MissingKeyAttributes => "MISSING_KEY_ATTRIBUTES",
+                FeedItemError::KeyAttributesNotUnique => "KEY_ATTRIBUTES_NOT_UNIQUE",
+                FeedItemError::CannotModifyKeyAttributeValue => "CANNOT_MODIFY_KEY_ATTRIBUTE_VALUE",
+                FeedItemError::SizeTooLargeForMultiValueAttribute => "SIZE_TOO_LARGE_FOR_MULTI_VALUE_ATTRIBUTE",
+            }
+        }
     }
 }
 // Proto file describing feed item set errors.
@@ -3206,6 +4804,25 @@ pub mod feed_item_set_error_enum {
         /// Chain ID specified for AffiliateLocationFeedData is invalid.
         DynamicFilterInvalidChainIds = 8,
     }
+    impl FeedItemSetError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                FeedItemSetError::Unspecified => "UNSPECIFIED",
+                FeedItemSetError::Unknown => "UNKNOWN",
+                FeedItemSetError::FeedItemSetRemoved => "FEED_ITEM_SET_REMOVED",
+                FeedItemSetError::CannotClearDynamicFilter => "CANNOT_CLEAR_DYNAMIC_FILTER",
+                FeedItemSetError::CannotCreateDynamicFilter => "CANNOT_CREATE_DYNAMIC_FILTER",
+                FeedItemSetError::InvalidFeedType => "INVALID_FEED_TYPE",
+                FeedItemSetError::DuplicateName => "DUPLICATE_NAME",
+                FeedItemSetError::WrongDynamicFilterForFeedType => "WRONG_DYNAMIC_FILTER_FOR_FEED_TYPE",
+                FeedItemSetError::DynamicFilterInvalidChainIds => "DYNAMIC_FILTER_INVALID_CHAIN_IDS",
+            }
+        }
+    }
 }
 // Proto file describing feed item set link errors.
 
@@ -3228,6 +4845,20 @@ pub mod feed_item_set_link_error_enum {
         FeedIdMismatch = 2,
         /// Cannot add or remove links to a dynamic set.
         NoMutateAllowedForDynamicSet = 3,
+    }
+    impl FeedItemSetLinkError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                FeedItemSetLinkError::Unspecified => "UNSPECIFIED",
+                FeedItemSetLinkError::Unknown => "UNKNOWN",
+                FeedItemSetLinkError::FeedIdMismatch => "FEED_ID_MISMATCH",
+                FeedItemSetLinkError::NoMutateAllowedForDynamicSet => "NO_MUTATE_ALLOWED_FOR_DYNAMIC_SET",
+            }
+        }
     }
 }
 // Proto file describing feed item target errors.
@@ -3264,6 +4895,26 @@ pub mod feed_item_target_error_enum {
         DuplicateAdSchedule = 8,
         /// Duplicate keywords aren't allowed.
         DuplicateKeyword = 9,
+    }
+    impl FeedItemTargetError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                FeedItemTargetError::Unspecified => "UNSPECIFIED",
+                FeedItemTargetError::Unknown => "UNKNOWN",
+                FeedItemTargetError::MustSetTargetOneofOnCreate => "MUST_SET_TARGET_ONEOF_ON_CREATE",
+                FeedItemTargetError::FeedItemTargetAlreadyExists => "FEED_ITEM_TARGET_ALREADY_EXISTS",
+                FeedItemTargetError::FeedItemSchedulesCannotOverlap => "FEED_ITEM_SCHEDULES_CANNOT_OVERLAP",
+                FeedItemTargetError::TargetLimitExceededForGivenType => "TARGET_LIMIT_EXCEEDED_FOR_GIVEN_TYPE",
+                FeedItemTargetError::TooManySchedulesPerDay => "TOO_MANY_SCHEDULES_PER_DAY",
+                FeedItemTargetError::CannotHaveEnabledCampaignAndEnabledAdGroupTargets => "CANNOT_HAVE_ENABLED_CAMPAIGN_AND_ENABLED_AD_GROUP_TARGETS",
+                FeedItemTargetError::DuplicateAdSchedule => "DUPLICATE_AD_SCHEDULE",
+                FeedItemTargetError::DuplicateKeyword => "DUPLICATE_KEYWORD",
+            }
+        }
     }
 }
 // Proto file describing feed item validation errors.
@@ -3511,6 +5162,123 @@ pub mod feed_item_validation_error_enum {
         /// An error occurred when validating image.
         ImageErrorServerError = 107,
     }
+    impl FeedItemValidationError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                FeedItemValidationError::Unspecified => "UNSPECIFIED",
+                FeedItemValidationError::Unknown => "UNKNOWN",
+                FeedItemValidationError::StringTooShort => "STRING_TOO_SHORT",
+                FeedItemValidationError::StringTooLong => "STRING_TOO_LONG",
+                FeedItemValidationError::ValueNotSpecified => "VALUE_NOT_SPECIFIED",
+                FeedItemValidationError::InvalidDomesticPhoneNumberFormat => "INVALID_DOMESTIC_PHONE_NUMBER_FORMAT",
+                FeedItemValidationError::InvalidPhoneNumber => "INVALID_PHONE_NUMBER",
+                FeedItemValidationError::PhoneNumberNotSupportedForCountry => "PHONE_NUMBER_NOT_SUPPORTED_FOR_COUNTRY",
+                FeedItemValidationError::PremiumRateNumberNotAllowed => "PREMIUM_RATE_NUMBER_NOT_ALLOWED",
+                FeedItemValidationError::DisallowedNumberType => "DISALLOWED_NUMBER_TYPE",
+                FeedItemValidationError::ValueOutOfRange => "VALUE_OUT_OF_RANGE",
+                FeedItemValidationError::CalltrackingNotSupportedForCountry => "CALLTRACKING_NOT_SUPPORTED_FOR_COUNTRY",
+                FeedItemValidationError::CustomerNotInAllowlistForCalltracking => "CUSTOMER_NOT_IN_ALLOWLIST_FOR_CALLTRACKING",
+                FeedItemValidationError::InvalidCountryCode => "INVALID_COUNTRY_CODE",
+                FeedItemValidationError::InvalidAppId => "INVALID_APP_ID",
+                FeedItemValidationError::MissingAttributesForFields => "MISSING_ATTRIBUTES_FOR_FIELDS",
+                FeedItemValidationError::InvalidTypeId => "INVALID_TYPE_ID",
+                FeedItemValidationError::InvalidEmailAddress => "INVALID_EMAIL_ADDRESS",
+                FeedItemValidationError::InvalidHttpsUrl => "INVALID_HTTPS_URL",
+                FeedItemValidationError::MissingDeliveryAddress => "MISSING_DELIVERY_ADDRESS",
+                FeedItemValidationError::StartDateAfterEndDate => "START_DATE_AFTER_END_DATE",
+                FeedItemValidationError::MissingFeedItemStartTime => "MISSING_FEED_ITEM_START_TIME",
+                FeedItemValidationError::MissingFeedItemEndTime => "MISSING_FEED_ITEM_END_TIME",
+                FeedItemValidationError::MissingFeedItemId => "MISSING_FEED_ITEM_ID",
+                FeedItemValidationError::VanityPhoneNumberNotAllowed => "VANITY_PHONE_NUMBER_NOT_ALLOWED",
+                FeedItemValidationError::InvalidReviewExtensionSnippet => "INVALID_REVIEW_EXTENSION_SNIPPET",
+                FeedItemValidationError::InvalidNumberFormat => "INVALID_NUMBER_FORMAT",
+                FeedItemValidationError::InvalidDateFormat => "INVALID_DATE_FORMAT",
+                FeedItemValidationError::InvalidPriceFormat => "INVALID_PRICE_FORMAT",
+                FeedItemValidationError::UnknownPlaceholderField => "UNKNOWN_PLACEHOLDER_FIELD",
+                FeedItemValidationError::MissingEnhancedSitelinkDescriptionLine => "MISSING_ENHANCED_SITELINK_DESCRIPTION_LINE",
+                FeedItemValidationError::ReviewExtensionSourceIneligible => "REVIEW_EXTENSION_SOURCE_INELIGIBLE",
+                FeedItemValidationError::HyphensInReviewExtensionSnippet => "HYPHENS_IN_REVIEW_EXTENSION_SNIPPET",
+                FeedItemValidationError::DoubleQuotesInReviewExtensionSnippet => "DOUBLE_QUOTES_IN_REVIEW_EXTENSION_SNIPPET",
+                FeedItemValidationError::QuotesInReviewExtensionSnippet => "QUOTES_IN_REVIEW_EXTENSION_SNIPPET",
+                FeedItemValidationError::InvalidFormEncodedParams => "INVALID_FORM_ENCODED_PARAMS",
+                FeedItemValidationError::InvalidUrlParameterName => "INVALID_URL_PARAMETER_NAME",
+                FeedItemValidationError::NoGeocodingResult => "NO_GEOCODING_RESULT",
+                FeedItemValidationError::SourceNameInReviewExtensionText => "SOURCE_NAME_IN_REVIEW_EXTENSION_TEXT",
+                FeedItemValidationError::CarrierSpecificShortNumberNotAllowed => "CARRIER_SPECIFIC_SHORT_NUMBER_NOT_ALLOWED",
+                FeedItemValidationError::InvalidPlaceholderFieldId => "INVALID_PLACEHOLDER_FIELD_ID",
+                FeedItemValidationError::InvalidUrlTag => "INVALID_URL_TAG",
+                FeedItemValidationError::ListTooLong => "LIST_TOO_LONG",
+                FeedItemValidationError::InvalidAttributesCombination => "INVALID_ATTRIBUTES_COMBINATION",
+                FeedItemValidationError::DuplicateValues => "DUPLICATE_VALUES",
+                FeedItemValidationError::InvalidCallConversionActionId => "INVALID_CALL_CONVERSION_ACTION_ID",
+                FeedItemValidationError::CannotSetWithoutFinalUrls => "CANNOT_SET_WITHOUT_FINAL_URLS",
+                FeedItemValidationError::AppIdDoesntExistInAppStore => "APP_ID_DOESNT_EXIST_IN_APP_STORE",
+                FeedItemValidationError::InvalidFinalUrl => "INVALID_FINAL_URL",
+                FeedItemValidationError::InvalidTrackingUrl => "INVALID_TRACKING_URL",
+                FeedItemValidationError::InvalidFinalUrlForAppDownloadUrl => "INVALID_FINAL_URL_FOR_APP_DOWNLOAD_URL",
+                FeedItemValidationError::ListTooShort => "LIST_TOO_SHORT",
+                FeedItemValidationError::InvalidUserAction => "INVALID_USER_ACTION",
+                FeedItemValidationError::InvalidTypeName => "INVALID_TYPE_NAME",
+                FeedItemValidationError::InvalidEventChangeStatus => "INVALID_EVENT_CHANGE_STATUS",
+                FeedItemValidationError::InvalidSnippetsHeader => "INVALID_SNIPPETS_HEADER",
+                FeedItemValidationError::InvalidAndroidAppLink => "INVALID_ANDROID_APP_LINK",
+                FeedItemValidationError::NumberTypeWithCalltrackingNotSupportedForCountry => "NUMBER_TYPE_WITH_CALLTRACKING_NOT_SUPPORTED_FOR_COUNTRY",
+                FeedItemValidationError::ReservedKeywordOther => "RESERVED_KEYWORD_OTHER",
+                FeedItemValidationError::DuplicateOptionLabels => "DUPLICATE_OPTION_LABELS",
+                FeedItemValidationError::DuplicateOptionPrefills => "DUPLICATE_OPTION_PREFILLS",
+                FeedItemValidationError::UnequalListLengths => "UNEQUAL_LIST_LENGTHS",
+                FeedItemValidationError::InconsistentCurrencyCodes => "INCONSISTENT_CURRENCY_CODES",
+                FeedItemValidationError::PriceExtensionHasDuplicatedHeaders => "PRICE_EXTENSION_HAS_DUPLICATED_HEADERS",
+                FeedItemValidationError::ItemHasDuplicatedHeaderAndDescription => "ITEM_HAS_DUPLICATED_HEADER_AND_DESCRIPTION",
+                FeedItemValidationError::PriceExtensionHasTooFewItems => "PRICE_EXTENSION_HAS_TOO_FEW_ITEMS",
+                FeedItemValidationError::UnsupportedValue => "UNSUPPORTED_VALUE",
+                FeedItemValidationError::InvalidFinalMobileUrl => "INVALID_FINAL_MOBILE_URL",
+                FeedItemValidationError::InvalidKeywordlessAdRuleLabel => "INVALID_KEYWORDLESS_AD_RULE_LABEL",
+                FeedItemValidationError::ValueTrackParameterNotSupported => "VALUE_TRACK_PARAMETER_NOT_SUPPORTED",
+                FeedItemValidationError::UnsupportedValueInSelectedLanguage => "UNSUPPORTED_VALUE_IN_SELECTED_LANGUAGE",
+                FeedItemValidationError::InvalidIosAppLink => "INVALID_IOS_APP_LINK",
+                FeedItemValidationError::MissingIosAppLinkOrIosAppStoreId => "MISSING_IOS_APP_LINK_OR_IOS_APP_STORE_ID",
+                FeedItemValidationError::PromotionInvalidTime => "PROMOTION_INVALID_TIME",
+                FeedItemValidationError::PromotionCannotSetPercentOffAndMoneyAmountOff => "PROMOTION_CANNOT_SET_PERCENT_OFF_AND_MONEY_AMOUNT_OFF",
+                FeedItemValidationError::PromotionCannotSetPromotionCodeAndOrdersOverAmount => "PROMOTION_CANNOT_SET_PROMOTION_CODE_AND_ORDERS_OVER_AMOUNT",
+                FeedItemValidationError::TooManyDecimalPlacesSpecified => "TOO_MANY_DECIMAL_PLACES_SPECIFIED",
+                FeedItemValidationError::AdCustomizersNotAllowed => "AD_CUSTOMIZERS_NOT_ALLOWED",
+                FeedItemValidationError::InvalidLanguageCode => "INVALID_LANGUAGE_CODE",
+                FeedItemValidationError::UnsupportedLanguage => "UNSUPPORTED_LANGUAGE",
+                FeedItemValidationError::IfFunctionNotAllowed => "IF_FUNCTION_NOT_ALLOWED",
+                FeedItemValidationError::InvalidFinalUrlSuffix => "INVALID_FINAL_URL_SUFFIX",
+                FeedItemValidationError::InvalidTagInFinalUrlSuffix => "INVALID_TAG_IN_FINAL_URL_SUFFIX",
+                FeedItemValidationError::InvalidFinalUrlSuffixFormat => "INVALID_FINAL_URL_SUFFIX_FORMAT",
+                FeedItemValidationError::CustomerConsentForCallRecordingRequired => "CUSTOMER_CONSENT_FOR_CALL_RECORDING_REQUIRED",
+                FeedItemValidationError::OnlyOneDeliveryOptionIsAllowed => "ONLY_ONE_DELIVERY_OPTION_IS_ALLOWED",
+                FeedItemValidationError::NoDeliveryOptionIsSet => "NO_DELIVERY_OPTION_IS_SET",
+                FeedItemValidationError::InvalidConversionReportingState => "INVALID_CONVERSION_REPORTING_STATE",
+                FeedItemValidationError::ImageSizeWrong => "IMAGE_SIZE_WRONG",
+                FeedItemValidationError::EmailDeliveryNotAvailableInCountry => "EMAIL_DELIVERY_NOT_AVAILABLE_IN_COUNTRY",
+                FeedItemValidationError::AutoReplyNotAvailableInCountry => "AUTO_REPLY_NOT_AVAILABLE_IN_COUNTRY",
+                FeedItemValidationError::InvalidLatitudeValue => "INVALID_LATITUDE_VALUE",
+                FeedItemValidationError::InvalidLongitudeValue => "INVALID_LONGITUDE_VALUE",
+                FeedItemValidationError::TooManyLabels => "TOO_MANY_LABELS",
+                FeedItemValidationError::InvalidImageUrl => "INVALID_IMAGE_URL",
+                FeedItemValidationError::MissingLatitudeValue => "MISSING_LATITUDE_VALUE",
+                FeedItemValidationError::MissingLongitudeValue => "MISSING_LONGITUDE_VALUE",
+                FeedItemValidationError::AddressNotFound => "ADDRESS_NOT_FOUND",
+                FeedItemValidationError::AddressNotTargetable => "ADDRESS_NOT_TARGETABLE",
+                FeedItemValidationError::InvalidAssetId => "INVALID_ASSET_ID",
+                FeedItemValidationError::IncompatibleAssetType => "INCOMPATIBLE_ASSET_TYPE",
+                FeedItemValidationError::ImageErrorUnexpectedSize => "IMAGE_ERROR_UNEXPECTED_SIZE",
+                FeedItemValidationError::ImageErrorAspectRatioNotAllowed => "IMAGE_ERROR_ASPECT_RATIO_NOT_ALLOWED",
+                FeedItemValidationError::ImageErrorFileTooLarge => "IMAGE_ERROR_FILE_TOO_LARGE",
+                FeedItemValidationError::ImageErrorFormatNotAllowed => "IMAGE_ERROR_FORMAT_NOT_ALLOWED",
+                FeedItemValidationError::ImageErrorConstraintsViolated => "IMAGE_ERROR_CONSTRAINTS_VIOLATED",
+                FeedItemValidationError::ImageErrorServerError => "IMAGE_ERROR_SERVER_ERROR",
+            }
+        }
+    }
 }
 // Proto file describing feed item errors.
 
@@ -3568,6 +5336,35 @@ pub mod feed_mapping_error_enum {
         /// The "field" oneof was not set in an AttributeFieldMapping.
         AttributeFieldMappingMissingField = 19,
     }
+    impl FeedMappingError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                FeedMappingError::Unspecified => "UNSPECIFIED",
+                FeedMappingError::Unknown => "UNKNOWN",
+                FeedMappingError::InvalidPlaceholderField => "INVALID_PLACEHOLDER_FIELD",
+                FeedMappingError::InvalidCriterionField => "INVALID_CRITERION_FIELD",
+                FeedMappingError::InvalidPlaceholderType => "INVALID_PLACEHOLDER_TYPE",
+                FeedMappingError::InvalidCriterionType => "INVALID_CRITERION_TYPE",
+                FeedMappingError::NoAttributeFieldMappings => "NO_ATTRIBUTE_FIELD_MAPPINGS",
+                FeedMappingError::FeedAttributeTypeMismatch => "FEED_ATTRIBUTE_TYPE_MISMATCH",
+                FeedMappingError::CannotOperateOnMappingsForSystemGeneratedFeed => "CANNOT_OPERATE_ON_MAPPINGS_FOR_SYSTEM_GENERATED_FEED",
+                FeedMappingError::MultipleMappingsForPlaceholderType => "MULTIPLE_MAPPINGS_FOR_PLACEHOLDER_TYPE",
+                FeedMappingError::MultipleMappingsForCriterionType => "MULTIPLE_MAPPINGS_FOR_CRITERION_TYPE",
+                FeedMappingError::MultipleMappingsForPlaceholderField => "MULTIPLE_MAPPINGS_FOR_PLACEHOLDER_FIELD",
+                FeedMappingError::MultipleMappingsForCriterionField => "MULTIPLE_MAPPINGS_FOR_CRITERION_FIELD",
+                FeedMappingError::UnexpectedAttributeFieldMappings => "UNEXPECTED_ATTRIBUTE_FIELD_MAPPINGS",
+                FeedMappingError::LocationPlaceholderOnlyForPlacesFeeds => "LOCATION_PLACEHOLDER_ONLY_FOR_PLACES_FEEDS",
+                FeedMappingError::CannotModifyMappingsForTypedFeed => "CANNOT_MODIFY_MAPPINGS_FOR_TYPED_FEED",
+                FeedMappingError::InvalidPlaceholderTypeForNonSystemGeneratedFeed => "INVALID_PLACEHOLDER_TYPE_FOR_NON_SYSTEM_GENERATED_FEED",
+                FeedMappingError::InvalidPlaceholderTypeForSystemGeneratedFeedType => "INVALID_PLACEHOLDER_TYPE_FOR_SYSTEM_GENERATED_FEED_TYPE",
+                FeedMappingError::AttributeFieldMappingMissingField => "ATTRIBUTE_FIELD_MAPPING_MISSING_FIELD",
+            }
+        }
+    }
 }
 // Proto file describing field errors.
 
@@ -3600,6 +5397,25 @@ pub mod field_error_enum {
         /// The field's value is on a deny-list for this field.
         BlockedValue = 9,
     }
+    impl FieldError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                FieldError::Unspecified => "UNSPECIFIED",
+                FieldError::Unknown => "UNKNOWN",
+                FieldError::Required => "REQUIRED",
+                FieldError::ImmutableField => "IMMUTABLE_FIELD",
+                FieldError::InvalidValue => "INVALID_VALUE",
+                FieldError::ValueMustBeUnset => "VALUE_MUST_BE_UNSET",
+                FieldError::RequiredNonemptyList => "REQUIRED_NONEMPTY_LIST",
+                FieldError::FieldCannotBeCleared => "FIELD_CANNOT_BE_CLEARED",
+                FieldError::BlockedValue => "BLOCKED_VALUE",
+            }
+        }
+    }
 }
 // Proto file describing field mask errors.
 
@@ -3627,6 +5443,22 @@ pub mod field_mask_error_enum {
         /// be cleared, but not updated. To fix this, the field mask should select
         /// all the subfields of the invalid field.
         FieldHasSubfields = 3,
+    }
+    impl FieldMaskError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                FieldMaskError::Unspecified => "UNSPECIFIED",
+                FieldMaskError::Unknown => "UNKNOWN",
+                FieldMaskError::FieldMaskMissing => "FIELD_MASK_MISSING",
+                FieldMaskError::FieldMaskNotAllowed => "FIELD_MASK_NOT_ALLOWED",
+                FieldMaskError::FieldNotFound => "FIELD_NOT_FOUND",
+                FieldMaskError::FieldHasSubfields => "FIELD_HAS_SUBFIELDS",
+            }
+        }
     }
 }
 // Proto file describing function errors.
@@ -3679,6 +5511,34 @@ pub mod function_error_enum {
         /// Invalid attribute name.
         InvalidAttributeName = 17,
     }
+    impl FunctionError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                FunctionError::Unspecified => "UNSPECIFIED",
+                FunctionError::Unknown => "UNKNOWN",
+                FunctionError::InvalidFunctionFormat => "INVALID_FUNCTION_FORMAT",
+                FunctionError::DataTypeMismatch => "DATA_TYPE_MISMATCH",
+                FunctionError::InvalidConjunctionOperands => "INVALID_CONJUNCTION_OPERANDS",
+                FunctionError::InvalidNumberOfOperands => "INVALID_NUMBER_OF_OPERANDS",
+                FunctionError::InvalidOperandType => "INVALID_OPERAND_TYPE",
+                FunctionError::InvalidOperator => "INVALID_OPERATOR",
+                FunctionError::InvalidRequestContextType => "INVALID_REQUEST_CONTEXT_TYPE",
+                FunctionError::InvalidFunctionForCallPlaceholder => "INVALID_FUNCTION_FOR_CALL_PLACEHOLDER",
+                FunctionError::InvalidFunctionForPlaceholder => "INVALID_FUNCTION_FOR_PLACEHOLDER",
+                FunctionError::InvalidOperand => "INVALID_OPERAND",
+                FunctionError::MissingConstantOperandValue => "MISSING_CONSTANT_OPERAND_VALUE",
+                FunctionError::InvalidConstantOperandValue => "INVALID_CONSTANT_OPERAND_VALUE",
+                FunctionError::InvalidNesting => "INVALID_NESTING",
+                FunctionError::MultipleFeedIdsNotSupported => "MULTIPLE_FEED_IDS_NOT_SUPPORTED",
+                FunctionError::InvalidFunctionForFeedWithFixedSchema => "INVALID_FUNCTION_FOR_FEED_WITH_FIXED_SCHEMA",
+                FunctionError::InvalidAttributeName => "INVALID_ATTRIBUTE_NAME",
+            }
+        }
+    }
 }
 // Proto file describing function parsing errors.
 
@@ -3719,6 +5579,29 @@ pub mod function_parsing_error_enum {
         /// Function had too many operands.
         TooManyOperands = 12,
     }
+    impl FunctionParsingError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                FunctionParsingError::Unspecified => "UNSPECIFIED",
+                FunctionParsingError::Unknown => "UNKNOWN",
+                FunctionParsingError::NoMoreInput => "NO_MORE_INPUT",
+                FunctionParsingError::ExpectedCharacter => "EXPECTED_CHARACTER",
+                FunctionParsingError::UnexpectedSeparator => "UNEXPECTED_SEPARATOR",
+                FunctionParsingError::UnmatchedLeftBracket => "UNMATCHED_LEFT_BRACKET",
+                FunctionParsingError::UnmatchedRightBracket => "UNMATCHED_RIGHT_BRACKET",
+                FunctionParsingError::TooManyNestedFunctions => "TOO_MANY_NESTED_FUNCTIONS",
+                FunctionParsingError::MissingRightHandOperand => "MISSING_RIGHT_HAND_OPERAND",
+                FunctionParsingError::InvalidOperatorName => "INVALID_OPERATOR_NAME",
+                FunctionParsingError::FeedAttributeOperandArgumentNotInteger => "FEED_ATTRIBUTE_OPERAND_ARGUMENT_NOT_INTEGER",
+                FunctionParsingError::NoOperands => "NO_OPERANDS",
+                FunctionParsingError::TooManyOperands => "TOO_MANY_OPERANDS",
+            }
+        }
+    }
 }
 /// Container for enum describing possible geo target constant suggestion errors.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -3745,6 +5628,22 @@ pub mod geo_target_constant_suggestion_error_enum {
         /// the request.
         RequestParametersUnset = 5,
     }
+    impl GeoTargetConstantSuggestionError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                GeoTargetConstantSuggestionError::Unspecified => "UNSPECIFIED",
+                GeoTargetConstantSuggestionError::Unknown => "UNKNOWN",
+                GeoTargetConstantSuggestionError::LocationNameSizeLimit => "LOCATION_NAME_SIZE_LIMIT",
+                GeoTargetConstantSuggestionError::LocationNameLimit => "LOCATION_NAME_LIMIT",
+                GeoTargetConstantSuggestionError::InvalidCountryCode => "INVALID_COUNTRY_CODE",
+                GeoTargetConstantSuggestionError::RequestParametersUnset => "REQUEST_PARAMETERS_UNSET",
+            }
+        }
+    }
 }
 // Proto file describing header errors.
 
@@ -3767,6 +5666,20 @@ pub mod header_error_enum {
         /// The linked customer id could not be validated.
         InvalidLinkedCustomerId = 7,
     }
+    impl HeaderError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                HeaderError::Unspecified => "UNSPECIFIED",
+                HeaderError::Unknown => "UNKNOWN",
+                HeaderError::InvalidLoginCustomerId => "INVALID_LOGIN_CUSTOMER_ID",
+                HeaderError::InvalidLinkedCustomerId => "INVALID_LINKED_CUSTOMER_ID",
+            }
+        }
+    }
 }
 // Proto file describing id errors.
 
@@ -3786,6 +5699,19 @@ pub mod id_error_enum {
         Unknown = 1,
         /// Id not found
         NotFound = 2,
+    }
+    impl IdError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                IdError::Unspecified => "UNSPECIFIED",
+                IdError::Unknown => "UNKNOWN",
+                IdError::NotFound => "NOT_FOUND",
+            }
+        }
     }
 }
 // Proto file describing image errors.
@@ -3886,6 +5812,57 @@ pub mod image_error_enum {
         /// Image format is not allowed.
         FormatNotAllowed = 40,
     }
+    impl ImageError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ImageError::Unspecified => "UNSPECIFIED",
+                ImageError::Unknown => "UNKNOWN",
+                ImageError::InvalidImage => "INVALID_IMAGE",
+                ImageError::StorageError => "STORAGE_ERROR",
+                ImageError::BadRequest => "BAD_REQUEST",
+                ImageError::UnexpectedSize => "UNEXPECTED_SIZE",
+                ImageError::AnimatedNotAllowed => "ANIMATED_NOT_ALLOWED",
+                ImageError::AnimationTooLong => "ANIMATION_TOO_LONG",
+                ImageError::ServerError => "SERVER_ERROR",
+                ImageError::CmykJpegNotAllowed => "CMYK_JPEG_NOT_ALLOWED",
+                ImageError::FlashNotAllowed => "FLASH_NOT_ALLOWED",
+                ImageError::FlashWithoutClicktag => "FLASH_WITHOUT_CLICKTAG",
+                ImageError::FlashErrorAfterFixingClickTag => "FLASH_ERROR_AFTER_FIXING_CLICK_TAG",
+                ImageError::AnimatedVisualEffect => "ANIMATED_VISUAL_EFFECT",
+                ImageError::FlashError => "FLASH_ERROR",
+                ImageError::LayoutProblem => "LAYOUT_PROBLEM",
+                ImageError::ProblemReadingImageFile => "PROBLEM_READING_IMAGE_FILE",
+                ImageError::ErrorStoringImage => "ERROR_STORING_IMAGE",
+                ImageError::AspectRatioNotAllowed => "ASPECT_RATIO_NOT_ALLOWED",
+                ImageError::FlashHasNetworkObjects => "FLASH_HAS_NETWORK_OBJECTS",
+                ImageError::FlashHasNetworkMethods => "FLASH_HAS_NETWORK_METHODS",
+                ImageError::FlashHasUrl => "FLASH_HAS_URL",
+                ImageError::FlashHasMouseTracking => "FLASH_HAS_MOUSE_TRACKING",
+                ImageError::FlashHasRandomNum => "FLASH_HAS_RANDOM_NUM",
+                ImageError::FlashSelfTargets => "FLASH_SELF_TARGETS",
+                ImageError::FlashBadGeturlTarget => "FLASH_BAD_GETURL_TARGET",
+                ImageError::FlashVersionNotSupported => "FLASH_VERSION_NOT_SUPPORTED",
+                ImageError::FlashWithoutHardCodedClickUrl => "FLASH_WITHOUT_HARD_CODED_CLICK_URL",
+                ImageError::InvalidFlashFile => "INVALID_FLASH_FILE",
+                ImageError::FailedToFixClickTagInFlash => "FAILED_TO_FIX_CLICK_TAG_IN_FLASH",
+                ImageError::FlashAccessesNetworkResources => "FLASH_ACCESSES_NETWORK_RESOURCES",
+                ImageError::FlashExternalJsCall => "FLASH_EXTERNAL_JS_CALL",
+                ImageError::FlashExternalFsCall => "FLASH_EXTERNAL_FS_CALL",
+                ImageError::FileTooLarge => "FILE_TOO_LARGE",
+                ImageError::ImageDataTooLarge => "IMAGE_DATA_TOO_LARGE",
+                ImageError::ImageProcessingError => "IMAGE_PROCESSING_ERROR",
+                ImageError::ImageTooSmall => "IMAGE_TOO_SMALL",
+                ImageError::InvalidInput => "INVALID_INPUT",
+                ImageError::ProblemReadingFile => "PROBLEM_READING_FILE",
+                ImageError::ImageConstraintsViolated => "IMAGE_CONSTRAINTS_VIOLATED",
+                ImageError::FormatNotAllowed => "FORMAT_NOT_ALLOWED",
+            }
+        }
+    }
 }
 // Proto file describing internal errors.
 
@@ -3914,6 +5891,22 @@ pub mod internal_error_enum {
         /// The request took longer than a deadline.
         DeadlineExceeded = 5,
     }
+    impl InternalError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                InternalError::Unspecified => "UNSPECIFIED",
+                InternalError::Unknown => "UNKNOWN",
+                InternalError::InternalError => "INTERNAL_ERROR",
+                InternalError::ErrorCodeNotPublished => "ERROR_CODE_NOT_PUBLISHED",
+                InternalError::TransientError => "TRANSIENT_ERROR",
+                InternalError::DeadlineExceeded => "DEADLINE_EXCEEDED",
+            }
+        }
+    }
 }
 // Proto file describing invoice errors.
 
@@ -3937,6 +5930,21 @@ pub mod invoice_error_enum {
         NotInvoicedCustomer = 3,
         /// Cannot request invoices for a non approved billing setup.
         BillingSetupNotApproved = 4,
+    }
+    impl InvoiceError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                InvoiceError::Unspecified => "UNSPECIFIED",
+                InvoiceError::Unknown => "UNKNOWN",
+                InvoiceError::YearMonthTooOld => "YEAR_MONTH_TOO_OLD",
+                InvoiceError::NotInvoicedCustomer => "NOT_INVOICED_CUSTOMER",
+                InvoiceError::BillingSetupNotApproved => "BILLING_SETUP_NOT_APPROVED",
+            }
+        }
     }
 }
 // Proto file describing errors from applying a keyword plan ad group.
@@ -3962,6 +5970,20 @@ pub mod keyword_plan_ad_group_error_enum {
         /// The keyword plan ad group name is duplicate to an existing keyword plan
         /// AdGroup name or other keyword plan AdGroup name in the request.
         DuplicateName = 3,
+    }
+    impl KeywordPlanAdGroupError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                KeywordPlanAdGroupError::Unspecified => "UNSPECIFIED",
+                KeywordPlanAdGroupError::Unknown => "UNKNOWN",
+                KeywordPlanAdGroupError::InvalidName => "INVALID_NAME",
+                KeywordPlanAdGroupError::DuplicateName => "DUPLICATE_NAME",
+            }
+        }
     }
 }
 // Proto file describing errors from applying a keyword plan ad group keyword or
@@ -3999,6 +6021,25 @@ pub mod keyword_plan_ad_group_keyword_error_enum {
         /// Cpc Bid set for negative keyword.
         NegativeKeywordHasCpcBid = 8,
     }
+    impl KeywordPlanAdGroupKeywordError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                KeywordPlanAdGroupKeywordError::Unspecified => "UNSPECIFIED",
+                KeywordPlanAdGroupKeywordError::Unknown => "UNKNOWN",
+                KeywordPlanAdGroupKeywordError::InvalidKeywordMatchType => "INVALID_KEYWORD_MATCH_TYPE",
+                KeywordPlanAdGroupKeywordError::DuplicateKeyword => "DUPLICATE_KEYWORD",
+                KeywordPlanAdGroupKeywordError::KeywordTextTooLong => "KEYWORD_TEXT_TOO_LONG",
+                KeywordPlanAdGroupKeywordError::KeywordHasInvalidChars => "KEYWORD_HAS_INVALID_CHARS",
+                KeywordPlanAdGroupKeywordError::KeywordHasTooManyWords => "KEYWORD_HAS_TOO_MANY_WORDS",
+                KeywordPlanAdGroupKeywordError::InvalidKeywordText => "INVALID_KEYWORD_TEXT",
+                KeywordPlanAdGroupKeywordError::NegativeKeywordHasCpcBid => "NEGATIVE_KEYWORD_HAS_CPC_BID",
+            }
+        }
+    }
 }
 // Proto file describing errors from applying a keyword plan campaign.
 
@@ -4032,6 +6073,24 @@ pub mod keyword_plan_campaign_error_enum {
         /// The number of languages in the keyword plan campaign exceeds limits.
         MaxLanguagesExceeded = 7,
     }
+    impl KeywordPlanCampaignError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                KeywordPlanCampaignError::Unspecified => "UNSPECIFIED",
+                KeywordPlanCampaignError::Unknown => "UNKNOWN",
+                KeywordPlanCampaignError::InvalidName => "INVALID_NAME",
+                KeywordPlanCampaignError::InvalidLanguages => "INVALID_LANGUAGES",
+                KeywordPlanCampaignError::InvalidGeos => "INVALID_GEOS",
+                KeywordPlanCampaignError::DuplicateName => "DUPLICATE_NAME",
+                KeywordPlanCampaignError::MaxGeosExceeded => "MAX_GEOS_EXCEEDED",
+                KeywordPlanCampaignError::MaxLanguagesExceeded => "MAX_LANGUAGES_EXCEEDED",
+            }
+        }
+    }
 }
 // Proto file describing errors from applying a keyword plan campaign keyword.
 
@@ -4053,6 +6112,19 @@ pub mod keyword_plan_campaign_keyword_error_enum {
         Unknown = 1,
         /// Keyword plan campaign keyword is positive.
         CampaignKeywordIsPositive = 8,
+    }
+    impl KeywordPlanCampaignKeywordError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                KeywordPlanCampaignKeywordError::Unspecified => "UNSPECIFIED",
+                KeywordPlanCampaignKeywordError::Unknown => "UNKNOWN",
+                KeywordPlanCampaignKeywordError::CampaignKeywordIsPositive => "CAMPAIGN_KEYWORD_IS_POSITIVE",
+            }
+        }
     }
 }
 // Proto file describing errors from applying keyword plan resources (keyword
@@ -4105,6 +6177,32 @@ pub mod keyword_plan_error_enum {
         /// The plan's name is invalid.
         InvalidName = 16,
     }
+    impl KeywordPlanError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                KeywordPlanError::Unspecified => "UNSPECIFIED",
+                KeywordPlanError::Unknown => "UNKNOWN",
+                KeywordPlanError::BidMultiplierOutOfRange => "BID_MULTIPLIER_OUT_OF_RANGE",
+                KeywordPlanError::BidTooHigh => "BID_TOO_HIGH",
+                KeywordPlanError::BidTooLow => "BID_TOO_LOW",
+                KeywordPlanError::BidTooManyFractionalDigits => "BID_TOO_MANY_FRACTIONAL_DIGITS",
+                KeywordPlanError::DailyBudgetTooLow => "DAILY_BUDGET_TOO_LOW",
+                KeywordPlanError::DailyBudgetTooManyFractionalDigits => "DAILY_BUDGET_TOO_MANY_FRACTIONAL_DIGITS",
+                KeywordPlanError::InvalidValue => "INVALID_VALUE",
+                KeywordPlanError::KeywordPlanHasNoKeywords => "KEYWORD_PLAN_HAS_NO_KEYWORDS",
+                KeywordPlanError::KeywordPlanNotEnabled => "KEYWORD_PLAN_NOT_ENABLED",
+                KeywordPlanError::KeywordPlanNotFound => "KEYWORD_PLAN_NOT_FOUND",
+                KeywordPlanError::MissingBid => "MISSING_BID",
+                KeywordPlanError::MissingForecastPeriod => "MISSING_FORECAST_PERIOD",
+                KeywordPlanError::InvalidForecastDateRange => "INVALID_FORECAST_DATE_RANGE",
+                KeywordPlanError::InvalidName => "INVALID_NAME",
+            }
+        }
+    }
 }
 // Proto file describing errors from KeywordPlanIdeaService.
 
@@ -4126,6 +6224,20 @@ pub mod keyword_plan_idea_error_enum {
         UrlCrawlError = 2,
         /// The input has an invalid value.
         InvalidValue = 3,
+    }
+    impl KeywordPlanIdeaError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                KeywordPlanIdeaError::Unspecified => "UNSPECIFIED",
+                KeywordPlanIdeaError::Unknown => "UNKNOWN",
+                KeywordPlanIdeaError::UrlCrawlError => "URL_CRAWL_ERROR",
+                KeywordPlanIdeaError::InvalidValue => "INVALID_VALUE",
+            }
+        }
     }
 }
 // Proto file describing label errors.
@@ -4165,6 +6277,27 @@ pub mod label_error_enum {
         /// resource.
         CannotAttachNonManagerLabelToCustomer = 10,
     }
+    impl LabelError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                LabelError::Unspecified => "UNSPECIFIED",
+                LabelError::Unknown => "UNKNOWN",
+                LabelError::CannotApplyInactiveLabel => "CANNOT_APPLY_INACTIVE_LABEL",
+                LabelError::CannotApplyLabelToDisabledAdGroupCriterion => "CANNOT_APPLY_LABEL_TO_DISABLED_AD_GROUP_CRITERION",
+                LabelError::CannotApplyLabelToNegativeAdGroupCriterion => "CANNOT_APPLY_LABEL_TO_NEGATIVE_AD_GROUP_CRITERION",
+                LabelError::ExceededLabelLimitPerType => "EXCEEDED_LABEL_LIMIT_PER_TYPE",
+                LabelError::InvalidResourceForManagerLabel => "INVALID_RESOURCE_FOR_MANAGER_LABEL",
+                LabelError::DuplicateName => "DUPLICATE_NAME",
+                LabelError::InvalidLabelName => "INVALID_LABEL_NAME",
+                LabelError::CannotAttachLabelToDraft => "CANNOT_ATTACH_LABEL_TO_DRAFT",
+                LabelError::CannotAttachNonManagerLabelToCustomer => "CANNOT_ATTACH_NON_MANAGER_LABEL_TO_CUSTOMER",
+            }
+        }
+    }
 }
 // Proto file describing language code errors.
 
@@ -4187,6 +6320,20 @@ pub mod language_code_error_enum {
         /// The language code is not supported.
         InvalidLanguageCode = 3,
     }
+    impl LanguageCodeError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                LanguageCodeError::Unspecified => "UNSPECIFIED",
+                LanguageCodeError::Unknown => "UNKNOWN",
+                LanguageCodeError::LanguageCodeNotFound => "LANGUAGE_CODE_NOT_FOUND",
+                LanguageCodeError::InvalidLanguageCode => "INVALID_LANGUAGE_CODE",
+            }
+        }
+    }
 }
 // Proto file describing list operation errors.
 
@@ -4208,6 +6355,20 @@ pub mod list_operation_error_enum {
         RequiredFieldMissing = 7,
         /// Duplicate or identical value is sent in multiple list operations.
         DuplicateValues = 8,
+    }
+    impl ListOperationError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ListOperationError::Unspecified => "UNSPECIFIED",
+                ListOperationError::Unknown => "UNKNOWN",
+                ListOperationError::RequiredFieldMissing => "REQUIRED_FIELD_MISSING",
+                ListOperationError::DuplicateValues => "DUPLICATE_VALUES",
+            }
+        }
     }
 }
 // Proto file describing ManagerLink errors.
@@ -4262,6 +6423,35 @@ pub mod manager_link_error_enum {
         InvalidStatusChange = 17,
         /// The change for mutate link is invalid.
         InvalidChange = 18,
+    }
+    impl ManagerLinkError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ManagerLinkError::Unspecified => "UNSPECIFIED",
+                ManagerLinkError::Unknown => "UNKNOWN",
+                ManagerLinkError::AccountsNotCompatibleForLinking => "ACCOUNTS_NOT_COMPATIBLE_FOR_LINKING",
+                ManagerLinkError::TooManyManagers => "TOO_MANY_MANAGERS",
+                ManagerLinkError::TooManyInvites => "TOO_MANY_INVITES",
+                ManagerLinkError::AlreadyInvitedByThisManager => "ALREADY_INVITED_BY_THIS_MANAGER",
+                ManagerLinkError::AlreadyManagedByThisManager => "ALREADY_MANAGED_BY_THIS_MANAGER",
+                ManagerLinkError::AlreadyManagedInHierarchy => "ALREADY_MANAGED_IN_HIERARCHY",
+                ManagerLinkError::DuplicateChildFound => "DUPLICATE_CHILD_FOUND",
+                ManagerLinkError::ClientHasNoAdminUser => "CLIENT_HAS_NO_ADMIN_USER",
+                ManagerLinkError::MaxDepthExceeded => "MAX_DEPTH_EXCEEDED",
+                ManagerLinkError::CycleNotAllowed => "CYCLE_NOT_ALLOWED",
+                ManagerLinkError::TooManyAccounts => "TOO_MANY_ACCOUNTS",
+                ManagerLinkError::TooManyAccountsAtManager => "TOO_MANY_ACCOUNTS_AT_MANAGER",
+                ManagerLinkError::NonOwnerUserCannotModifyLink => "NON_OWNER_USER_CANNOT_MODIFY_LINK",
+                ManagerLinkError::SuspendedAccountCannotAddClients => "SUSPENDED_ACCOUNT_CANNOT_ADD_CLIENTS",
+                ManagerLinkError::ClientOutsideTree => "CLIENT_OUTSIDE_TREE",
+                ManagerLinkError::InvalidStatusChange => "INVALID_STATUS_CHANGE",
+                ManagerLinkError::InvalidChange => "INVALID_CHANGE",
+            }
+        }
     }
 }
 // Proto file describing media bundle errors.
@@ -4324,6 +6514,40 @@ pub mod media_bundle_error_enum {
         UrlInMediaBundleNotSslCompliant = 23,
         /// Custom exits not allowed in HTML5 entry.
         CustomExitNotAllowed = 24,
+    }
+    impl MediaBundleError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                MediaBundleError::Unspecified => "UNSPECIFIED",
+                MediaBundleError::Unknown => "UNKNOWN",
+                MediaBundleError::BadRequest => "BAD_REQUEST",
+                MediaBundleError::DoubleclickBundleNotAllowed => "DOUBLECLICK_BUNDLE_NOT_ALLOWED",
+                MediaBundleError::ExternalUrlNotAllowed => "EXTERNAL_URL_NOT_ALLOWED",
+                MediaBundleError::FileTooLarge => "FILE_TOO_LARGE",
+                MediaBundleError::GoogleWebDesignerZipFileNotPublished => "GOOGLE_WEB_DESIGNER_ZIP_FILE_NOT_PUBLISHED",
+                MediaBundleError::InvalidInput => "INVALID_INPUT",
+                MediaBundleError::InvalidMediaBundle => "INVALID_MEDIA_BUNDLE",
+                MediaBundleError::InvalidMediaBundleEntry => "INVALID_MEDIA_BUNDLE_ENTRY",
+                MediaBundleError::InvalidMimeType => "INVALID_MIME_TYPE",
+                MediaBundleError::InvalidPath => "INVALID_PATH",
+                MediaBundleError::InvalidUrlReference => "INVALID_URL_REFERENCE",
+                MediaBundleError::MediaDataTooLarge => "MEDIA_DATA_TOO_LARGE",
+                MediaBundleError::MissingPrimaryMediaBundleEntry => "MISSING_PRIMARY_MEDIA_BUNDLE_ENTRY",
+                MediaBundleError::ServerError => "SERVER_ERROR",
+                MediaBundleError::StorageError => "STORAGE_ERROR",
+                MediaBundleError::SwiffyBundleNotAllowed => "SWIFFY_BUNDLE_NOT_ALLOWED",
+                MediaBundleError::TooManyFiles => "TOO_MANY_FILES",
+                MediaBundleError::UnexpectedSize => "UNEXPECTED_SIZE",
+                MediaBundleError::UnsupportedGoogleWebDesignerEnvironment => "UNSUPPORTED_GOOGLE_WEB_DESIGNER_ENVIRONMENT",
+                MediaBundleError::UnsupportedHtml5Feature => "UNSUPPORTED_HTML5_FEATURE",
+                MediaBundleError::UrlInMediaBundleNotSslCompliant => "URL_IN_MEDIA_BUNDLE_NOT_SSL_COMPLIANT",
+                MediaBundleError::CustomExitNotAllowed => "CUSTOM_EXIT_NOT_ALLOWED",
+            }
+        }
     }
 }
 // Proto file describing media file errors.
@@ -4388,6 +6612,41 @@ pub mod media_file_error_enum {
         YouTubeVideoHasNonPositiveDuration = 23,
         /// The YouTube video ID is syntactically valid but the video was not found.
         YouTubeVideoNotFound = 24,
+    }
+    impl MediaFileError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                MediaFileError::Unspecified => "UNSPECIFIED",
+                MediaFileError::Unknown => "UNKNOWN",
+                MediaFileError::CannotCreateStandardIcon => "CANNOT_CREATE_STANDARD_ICON",
+                MediaFileError::CannotSelectStandardIconWithOtherTypes => "CANNOT_SELECT_STANDARD_ICON_WITH_OTHER_TYPES",
+                MediaFileError::CannotSpecifyMediaFileIdAndData => "CANNOT_SPECIFY_MEDIA_FILE_ID_AND_DATA",
+                MediaFileError::DuplicateMedia => "DUPLICATE_MEDIA",
+                MediaFileError::EmptyField => "EMPTY_FIELD",
+                MediaFileError::ResourceReferencedInMultipleOps => "RESOURCE_REFERENCED_IN_MULTIPLE_OPS",
+                MediaFileError::FieldNotSupportedForMediaSubType => "FIELD_NOT_SUPPORTED_FOR_MEDIA_SUB_TYPE",
+                MediaFileError::InvalidMediaFileId => "INVALID_MEDIA_FILE_ID",
+                MediaFileError::InvalidMediaSubType => "INVALID_MEDIA_SUB_TYPE",
+                MediaFileError::InvalidMediaFileType => "INVALID_MEDIA_FILE_TYPE",
+                MediaFileError::InvalidMimeType => "INVALID_MIME_TYPE",
+                MediaFileError::InvalidReferenceId => "INVALID_REFERENCE_ID",
+                MediaFileError::InvalidYouTubeId => "INVALID_YOU_TUBE_ID",
+                MediaFileError::MediaFileFailedTranscoding => "MEDIA_FILE_FAILED_TRANSCODING",
+                MediaFileError::MediaNotTranscoded => "MEDIA_NOT_TRANSCODED",
+                MediaFileError::MediaTypeDoesNotMatchMediaFileType => "MEDIA_TYPE_DOES_NOT_MATCH_MEDIA_FILE_TYPE",
+                MediaFileError::NoFieldsSpecified => "NO_FIELDS_SPECIFIED",
+                MediaFileError::NullReferenceIdAndMediaId => "NULL_REFERENCE_ID_AND_MEDIA_ID",
+                MediaFileError::TooLong => "TOO_LONG",
+                MediaFileError::UnsupportedType => "UNSUPPORTED_TYPE",
+                MediaFileError::YouTubeServiceUnavailable => "YOU_TUBE_SERVICE_UNAVAILABLE",
+                MediaFileError::YouTubeVideoHasNonPositiveDuration => "YOU_TUBE_VIDEO_HAS_NON_POSITIVE_DURATION",
+                MediaFileError::YouTubeVideoNotFound => "YOU_TUBE_VIDEO_NOT_FOUND",
+            }
+        }
     }
 }
 // Proto file describing media uploading errors.
@@ -4481,6 +6740,52 @@ pub mod media_upload_error_enum {
         /// The dimensions of the image are not allowed.
         DimensionsNotAllowed = 35,
     }
+    impl MediaUploadError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                MediaUploadError::Unspecified => "UNSPECIFIED",
+                MediaUploadError::Unknown => "UNKNOWN",
+                MediaUploadError::FileTooBig => "FILE_TOO_BIG",
+                MediaUploadError::UnparseableImage => "UNPARSEABLE_IMAGE",
+                MediaUploadError::AnimatedImageNotAllowed => "ANIMATED_IMAGE_NOT_ALLOWED",
+                MediaUploadError::FormatNotAllowed => "FORMAT_NOT_ALLOWED",
+                MediaUploadError::ExternalUrlNotAllowed => "EXTERNAL_URL_NOT_ALLOWED",
+                MediaUploadError::InvalidUrlReference => "INVALID_URL_REFERENCE",
+                MediaUploadError::MissingPrimaryMediaBundleEntry => "MISSING_PRIMARY_MEDIA_BUNDLE_ENTRY",
+                MediaUploadError::AnimatedVisualEffect => "ANIMATED_VISUAL_EFFECT",
+                MediaUploadError::AnimationTooLong => "ANIMATION_TOO_LONG",
+                MediaUploadError::AspectRatioNotAllowed => "ASPECT_RATIO_NOT_ALLOWED",
+                MediaUploadError::AudioNotAllowedInMediaBundle => "AUDIO_NOT_ALLOWED_IN_MEDIA_BUNDLE",
+                MediaUploadError::CmykJpegNotAllowed => "CMYK_JPEG_NOT_ALLOWED",
+                MediaUploadError::FlashNotAllowed => "FLASH_NOT_ALLOWED",
+                MediaUploadError::FrameRateTooHigh => "FRAME_RATE_TOO_HIGH",
+                MediaUploadError::GoogleWebDesignerZipFileNotPublished => "GOOGLE_WEB_DESIGNER_ZIP_FILE_NOT_PUBLISHED",
+                MediaUploadError::ImageConstraintsViolated => "IMAGE_CONSTRAINTS_VIOLATED",
+                MediaUploadError::InvalidMediaBundle => "INVALID_MEDIA_BUNDLE",
+                MediaUploadError::InvalidMediaBundleEntry => "INVALID_MEDIA_BUNDLE_ENTRY",
+                MediaUploadError::InvalidMimeType => "INVALID_MIME_TYPE",
+                MediaUploadError::InvalidPath => "INVALID_PATH",
+                MediaUploadError::LayoutProblem => "LAYOUT_PROBLEM",
+                MediaUploadError::MalformedUrl => "MALFORMED_URL",
+                MediaUploadError::MediaBundleNotAllowed => "MEDIA_BUNDLE_NOT_ALLOWED",
+                MediaUploadError::MediaBundleNotCompatibleToProductType => "MEDIA_BUNDLE_NOT_COMPATIBLE_TO_PRODUCT_TYPE",
+                MediaUploadError::MediaBundleRejectedByMultipleAssetSpecs => "MEDIA_BUNDLE_REJECTED_BY_MULTIPLE_ASSET_SPECS",
+                MediaUploadError::TooManyFilesInMediaBundle => "TOO_MANY_FILES_IN_MEDIA_BUNDLE",
+                MediaUploadError::UnsupportedGoogleWebDesignerEnvironment => "UNSUPPORTED_GOOGLE_WEB_DESIGNER_ENVIRONMENT",
+                MediaUploadError::UnsupportedHtml5Feature => "UNSUPPORTED_HTML5_FEATURE",
+                MediaUploadError::UrlInMediaBundleNotSslCompliant => "URL_IN_MEDIA_BUNDLE_NOT_SSL_COMPLIANT",
+                MediaUploadError::VideoFileNameTooLong => "VIDEO_FILE_NAME_TOO_LONG",
+                MediaUploadError::VideoMultipleFilesWithSameName => "VIDEO_MULTIPLE_FILES_WITH_SAME_NAME",
+                MediaUploadError::VideoNotAllowedInMediaBundle => "VIDEO_NOT_ALLOWED_IN_MEDIA_BUNDLE",
+                MediaUploadError::CannotUploadMediaTypeThroughApi => "CANNOT_UPLOAD_MEDIA_TYPE_THROUGH_API",
+                MediaUploadError::DimensionsNotAllowed => "DIMENSIONS_NOT_ALLOWED",
+            }
+        }
+    }
 }
 // Proto file describing multiplier errors.
 
@@ -4524,6 +6829,30 @@ pub mod multiplier_error_enum {
         /// Multiplier type (cpc vs. cpm) needs to match campaign's bidding strategy
         MultiplierAndBiddingStrategyTypeMismatch = 13,
     }
+    impl MultiplierError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                MultiplierError::Unspecified => "UNSPECIFIED",
+                MultiplierError::Unknown => "UNKNOWN",
+                MultiplierError::MultiplierTooHigh => "MULTIPLIER_TOO_HIGH",
+                MultiplierError::MultiplierTooLow => "MULTIPLIER_TOO_LOW",
+                MultiplierError::TooManyFractionalDigits => "TOO_MANY_FRACTIONAL_DIGITS",
+                MultiplierError::MultiplierNotAllowedForBiddingStrategy => "MULTIPLIER_NOT_ALLOWED_FOR_BIDDING_STRATEGY",
+                MultiplierError::MultiplierNotAllowedWhenBaseBidIsMissing => "MULTIPLIER_NOT_ALLOWED_WHEN_BASE_BID_IS_MISSING",
+                MultiplierError::NoMultiplierSpecified => "NO_MULTIPLIER_SPECIFIED",
+                MultiplierError::MultiplierCausesBidToExceedDailyBudget => "MULTIPLIER_CAUSES_BID_TO_EXCEED_DAILY_BUDGET",
+                MultiplierError::MultiplierCausesBidToExceedMonthlyBudget => "MULTIPLIER_CAUSES_BID_TO_EXCEED_MONTHLY_BUDGET",
+                MultiplierError::MultiplierCausesBidToExceedCustomBudget => "MULTIPLIER_CAUSES_BID_TO_EXCEED_CUSTOM_BUDGET",
+                MultiplierError::MultiplierCausesBidToExceedMaxAllowedBid => "MULTIPLIER_CAUSES_BID_TO_EXCEED_MAX_ALLOWED_BID",
+                MultiplierError::BidLessThanMinAllowedBidWithMultiplier => "BID_LESS_THAN_MIN_ALLOWED_BID_WITH_MULTIPLIER",
+                MultiplierError::MultiplierAndBiddingStrategyTypeMismatch => "MULTIPLIER_AND_BIDDING_STRATEGY_TYPE_MISMATCH",
+            }
+        }
+    }
 }
 // Proto file describing mutate errors.
 
@@ -4559,6 +6888,26 @@ pub mod mutate_error_enum {
         /// Attempt to write to read-only fields.
         ResourceReadOnly = 13,
     }
+    impl MutateError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                MutateError::Unspecified => "UNSPECIFIED",
+                MutateError::Unknown => "UNKNOWN",
+                MutateError::ResourceNotFound => "RESOURCE_NOT_FOUND",
+                MutateError::IdExistsInMultipleMutates => "ID_EXISTS_IN_MULTIPLE_MUTATES",
+                MutateError::InconsistentFieldValues => "INCONSISTENT_FIELD_VALUES",
+                MutateError::MutateNotAllowed => "MUTATE_NOT_ALLOWED",
+                MutateError::ResourceNotInGoogleAds => "RESOURCE_NOT_IN_GOOGLE_ADS",
+                MutateError::ResourceAlreadyExists => "RESOURCE_ALREADY_EXISTS",
+                MutateError::ResourceDoesNotSupportValidateOnly => "RESOURCE_DOES_NOT_SUPPORT_VALIDATE_ONLY",
+                MutateError::ResourceReadOnly => "RESOURCE_READ_ONLY",
+            }
+        }
+    }
 }
 // Proto file describing new resource creation errors.
 
@@ -4584,6 +6933,21 @@ pub mod new_resource_creation_error_enum {
         /// validation will be done for this child resource.
         TempIdResourceHadErrors = 4,
     }
+    impl NewResourceCreationError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                NewResourceCreationError::Unspecified => "UNSPECIFIED",
+                NewResourceCreationError::Unknown => "UNKNOWN",
+                NewResourceCreationError::CannotSetIdForCreate => "CANNOT_SET_ID_FOR_CREATE",
+                NewResourceCreationError::DuplicateTempIds => "DUPLICATE_TEMP_IDS",
+                NewResourceCreationError::TempIdResourceHadErrors => "TEMP_ID_RESOURCE_HAD_ERRORS",
+            }
+        }
+    }
 }
 // Proto file describing not allowlisted errors.
 
@@ -4603,6 +6967,19 @@ pub mod not_allowlisted_error_enum {
         Unknown = 1,
         /// Customer is not allowlisted for accessing this feature.
         CustomerNotAllowlistedForThisFeature = 2,
+    }
+    impl NotAllowlistedError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                NotAllowlistedError::Unspecified => "UNSPECIFIED",
+                NotAllowlistedError::Unknown => "UNKNOWN",
+                NotAllowlistedError::CustomerNotAllowlistedForThisFeature => "CUSTOMER_NOT_ALLOWLISTED_FOR_THIS_FEATURE",
+            }
+        }
     }
 }
 // Proto file describing not empty errors.
@@ -4624,6 +7001,19 @@ pub mod not_empty_error_enum {
         /// Empty list.
         EmptyList = 2,
     }
+    impl NotEmptyError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                NotEmptyError::Unspecified => "UNSPECIFIED",
+                NotEmptyError::Unknown => "UNKNOWN",
+                NotEmptyError::EmptyList => "EMPTY_LIST",
+            }
+        }
+    }
 }
 // Proto file describing null errors.
 
@@ -4643,6 +7033,19 @@ pub mod null_error_enum {
         Unknown = 1,
         /// Specified list/container must not contain any null elements
         NullContent = 2,
+    }
+    impl NullError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                NullError::Unspecified => "UNSPECIFIED",
+                NullError::Unknown => "UNKNOWN",
+                NullError::NullContent => "NULL_CONTENT",
+            }
+        }
     }
 }
 // Proto file describing offline user data job errors.
@@ -4738,6 +7141,50 @@ pub mod offline_user_data_job_error_enum {
         /// Last purchase date time cannot be less than acquisition date time.
         LastPurchaseTimeLessThanAcquisitionTime = 38,
     }
+    impl OfflineUserDataJobError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                OfflineUserDataJobError::Unspecified => "UNSPECIFIED",
+                OfflineUserDataJobError::Unknown => "UNKNOWN",
+                OfflineUserDataJobError::InvalidUserListId => "INVALID_USER_LIST_ID",
+                OfflineUserDataJobError::InvalidUserListType => "INVALID_USER_LIST_TYPE",
+                OfflineUserDataJobError::NotOnAllowlistForUserId => "NOT_ON_ALLOWLIST_FOR_USER_ID",
+                OfflineUserDataJobError::IncompatibleUploadKeyType => "INCOMPATIBLE_UPLOAD_KEY_TYPE",
+                OfflineUserDataJobError::MissingUserIdentifier => "MISSING_USER_IDENTIFIER",
+                OfflineUserDataJobError::InvalidMobileIdFormat => "INVALID_MOBILE_ID_FORMAT",
+                OfflineUserDataJobError::TooManyUserIdentifiers => "TOO_MANY_USER_IDENTIFIERS",
+                OfflineUserDataJobError::NotOnAllowlistForStoreSalesDirect => "NOT_ON_ALLOWLIST_FOR_STORE_SALES_DIRECT",
+                OfflineUserDataJobError::NotOnAllowlistForUnifiedStoreSales => "NOT_ON_ALLOWLIST_FOR_UNIFIED_STORE_SALES",
+                OfflineUserDataJobError::InvalidPartnerId => "INVALID_PARTNER_ID",
+                OfflineUserDataJobError::InvalidEncoding => "INVALID_ENCODING",
+                OfflineUserDataJobError::InvalidCountryCode => "INVALID_COUNTRY_CODE",
+                OfflineUserDataJobError::IncompatibleUserIdentifier => "INCOMPATIBLE_USER_IDENTIFIER",
+                OfflineUserDataJobError::FutureTransactionTime => "FUTURE_TRANSACTION_TIME",
+                OfflineUserDataJobError::InvalidConversionAction => "INVALID_CONVERSION_ACTION",
+                OfflineUserDataJobError::MobileIdNotSupported => "MOBILE_ID_NOT_SUPPORTED",
+                OfflineUserDataJobError::InvalidOperationOrder => "INVALID_OPERATION_ORDER",
+                OfflineUserDataJobError::ConflictingOperation => "CONFLICTING_OPERATION",
+                OfflineUserDataJobError::ExternalUpdateIdAlreadyExists => "EXTERNAL_UPDATE_ID_ALREADY_EXISTS",
+                OfflineUserDataJobError::JobAlreadyStarted => "JOB_ALREADY_STARTED",
+                OfflineUserDataJobError::RemoveNotSupported => "REMOVE_NOT_SUPPORTED",
+                OfflineUserDataJobError::RemoveAllNotSupported => "REMOVE_ALL_NOT_SUPPORTED",
+                OfflineUserDataJobError::InvalidSha256Format => "INVALID_SHA256_FORMAT",
+                OfflineUserDataJobError::CustomKeyDisabled => "CUSTOM_KEY_DISABLED",
+                OfflineUserDataJobError::CustomKeyNotPredefined => "CUSTOM_KEY_NOT_PREDEFINED",
+                OfflineUserDataJobError::CustomKeyNotSet => "CUSTOM_KEY_NOT_SET",
+                OfflineUserDataJobError::CustomerNotAcceptedCustomerDataTerms => "CUSTOMER_NOT_ACCEPTED_CUSTOMER_DATA_TERMS",
+                OfflineUserDataJobError::AttributesNotApplicableForCustomerMatchUserList => "ATTRIBUTES_NOT_APPLICABLE_FOR_CUSTOMER_MATCH_USER_LIST",
+                OfflineUserDataJobError::LifetimeValueBucketNotInRange => "LIFETIME_VALUE_BUCKET_NOT_IN_RANGE",
+                OfflineUserDataJobError::IncompatibleUserIdentifierForAttributes => "INCOMPATIBLE_USER_IDENTIFIER_FOR_ATTRIBUTES",
+                OfflineUserDataJobError::FutureTimeNotAllowed => "FUTURE_TIME_NOT_ALLOWED",
+                OfflineUserDataJobError::LastPurchaseTimeLessThanAcquisitionTime => "LAST_PURCHASE_TIME_LESS_THAN_ACQUISITION_TIME",
+            }
+        }
+    }
 }
 // Proto file describing operation access denied errors.
 
@@ -4776,6 +7223,28 @@ pub mod operation_access_denied_error_enum {
         /// The mutate is not allowed for this customer.
         MutateNotPermittedForCustomer = 11,
     }
+    impl OperationAccessDeniedError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                OperationAccessDeniedError::Unspecified => "UNSPECIFIED",
+                OperationAccessDeniedError::Unknown => "UNKNOWN",
+                OperationAccessDeniedError::ActionNotPermitted => "ACTION_NOT_PERMITTED",
+                OperationAccessDeniedError::CreateOperationNotPermitted => "CREATE_OPERATION_NOT_PERMITTED",
+                OperationAccessDeniedError::RemoveOperationNotPermitted => "REMOVE_OPERATION_NOT_PERMITTED",
+                OperationAccessDeniedError::UpdateOperationNotPermitted => "UPDATE_OPERATION_NOT_PERMITTED",
+                OperationAccessDeniedError::MutateActionNotPermittedForClient => "MUTATE_ACTION_NOT_PERMITTED_FOR_CLIENT",
+                OperationAccessDeniedError::OperationNotPermittedForCampaignType => "OPERATION_NOT_PERMITTED_FOR_CAMPAIGN_TYPE",
+                OperationAccessDeniedError::CreateAsRemovedNotPermitted => "CREATE_AS_REMOVED_NOT_PERMITTED",
+                OperationAccessDeniedError::OperationNotPermittedForRemovedResource => "OPERATION_NOT_PERMITTED_FOR_REMOVED_RESOURCE",
+                OperationAccessDeniedError::OperationNotPermittedForAdGroupType => "OPERATION_NOT_PERMITTED_FOR_AD_GROUP_TYPE",
+                OperationAccessDeniedError::MutateNotPermittedForCustomer => "MUTATE_NOT_PERMITTED_FOR_CUSTOMER",
+            }
+        }
+    }
 }
 // Proto file describing operator errors.
 
@@ -4795,6 +7264,19 @@ pub mod operator_error_enum {
         Unknown = 1,
         /// Operator not supported.
         OperatorNotSupported = 2,
+    }
+    impl OperatorError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                OperatorError::Unspecified => "UNSPECIFIED",
+                OperatorError::Unknown => "UNKNOWN",
+                OperatorError::OperatorNotSupported => "OPERATOR_NOT_SUPPORTED",
+            }
+        }
     }
 }
 // Proto file describing partial failure errors.
@@ -4817,6 +7299,19 @@ pub mod partial_failure_error_enum {
         /// This method requires this field be set to true.
         PartialFailureModeRequired = 2,
     }
+    impl PartialFailureError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                PartialFailureError::Unspecified => "UNSPECIFIED",
+                PartialFailureError::Unknown => "UNKNOWN",
+                PartialFailureError::PartialFailureModeRequired => "PARTIAL_FAILURE_MODE_REQUIRED",
+            }
+        }
+    }
 }
 // Proto file describing payments account service errors.
 
@@ -4836,6 +7331,19 @@ pub mod payments_account_error_enum {
         Unknown = 1,
         /// Manager customers are not supported for payments account service.
         NotSupportedForManagerCustomer = 2,
+    }
+    impl PaymentsAccountError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                PaymentsAccountError::Unspecified => "UNSPECIFIED",
+                PaymentsAccountError::Unknown => "UNKNOWN",
+                PaymentsAccountError::NotSupportedForManagerCustomer => "NOT_SUPPORTED_FOR_MANAGER_CUSTOMER",
+            }
+        }
     }
 }
 // Proto file describing policy finding errors.
@@ -4859,6 +7367,20 @@ pub mod policy_finding_error_enum {
         PolicyFinding = 2,
         /// The given policy topic does not exist.
         PolicyTopicNotFound = 3,
+    }
+    impl PolicyFindingError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                PolicyFindingError::Unspecified => "UNSPECIFIED",
+                PolicyFindingError::Unknown => "UNKNOWN",
+                PolicyFindingError::PolicyFinding => "POLICY_FINDING",
+                PolicyFindingError::PolicyTopicNotFound => "POLICY_TOPIC_NOT_FOUND",
+            }
+        }
     }
 }
 // Proto file describing policy validation parameter errors.
@@ -4885,6 +7407,21 @@ pub mod policy_validation_parameter_error_enum {
         /// the same policy violation parameter.
         CannotSetBothIgnorablePolicyTopicsAndExemptPolicyViolationKeys = 4,
     }
+    impl PolicyValidationParameterError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                PolicyValidationParameterError::Unspecified => "UNSPECIFIED",
+                PolicyValidationParameterError::Unknown => "UNKNOWN",
+                PolicyValidationParameterError::UnsupportedAdTypeForIgnorablePolicyTopics => "UNSUPPORTED_AD_TYPE_FOR_IGNORABLE_POLICY_TOPICS",
+                PolicyValidationParameterError::UnsupportedAdTypeForExemptPolicyViolationKeys => "UNSUPPORTED_AD_TYPE_FOR_EXEMPT_POLICY_VIOLATION_KEYS",
+                PolicyValidationParameterError::CannotSetBothIgnorablePolicyTopicsAndExemptPolicyViolationKeys => "CANNOT_SET_BOTH_IGNORABLE_POLICY_TOPICS_AND_EXEMPT_POLICY_VIOLATION_KEYS",
+            }
+        }
+    }
 }
 // Proto file describing policy violation errors.
 
@@ -4904,6 +7441,19 @@ pub mod policy_violation_error_enum {
         Unknown = 1,
         /// A policy was violated. See PolicyViolationDetails for more detail.
         PolicyError = 2,
+    }
+    impl PolicyViolationError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                PolicyViolationError::Unspecified => "UNSPECIFIED",
+                PolicyViolationError::Unknown => "UNKNOWN",
+                PolicyViolationError::PolicyError => "POLICY_ERROR",
+            }
+        }
     }
 }
 // Proto file describing query errors.
@@ -5047,6 +7597,72 @@ pub mod query_error_enum {
         /// limit.
         FilterHasTooManyValues = 63,
     }
+    impl QueryError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                QueryError::Unspecified => "UNSPECIFIED",
+                QueryError::Unknown => "UNKNOWN",
+                QueryError::QueryError => "QUERY_ERROR",
+                QueryError::BadEnumConstant => "BAD_ENUM_CONSTANT",
+                QueryError::BadEscapeSequence => "BAD_ESCAPE_SEQUENCE",
+                QueryError::BadFieldName => "BAD_FIELD_NAME",
+                QueryError::BadLimitValue => "BAD_LIMIT_VALUE",
+                QueryError::BadNumber => "BAD_NUMBER",
+                QueryError::BadOperator => "BAD_OPERATOR",
+                QueryError::BadParameterName => "BAD_PARAMETER_NAME",
+                QueryError::BadParameterValue => "BAD_PARAMETER_VALUE",
+                QueryError::BadResourceTypeInFromClause => "BAD_RESOURCE_TYPE_IN_FROM_CLAUSE",
+                QueryError::BadSymbol => "BAD_SYMBOL",
+                QueryError::BadValue => "BAD_VALUE",
+                QueryError::DateRangeTooWide => "DATE_RANGE_TOO_WIDE",
+                QueryError::DateRangeTooNarrow => "DATE_RANGE_TOO_NARROW",
+                QueryError::ExpectedAnd => "EXPECTED_AND",
+                QueryError::ExpectedBy => "EXPECTED_BY",
+                QueryError::ExpectedDimensionFieldInSelectClause => "EXPECTED_DIMENSION_FIELD_IN_SELECT_CLAUSE",
+                QueryError::ExpectedFiltersOnDateRange => "EXPECTED_FILTERS_ON_DATE_RANGE",
+                QueryError::ExpectedFrom => "EXPECTED_FROM",
+                QueryError::ExpectedList => "EXPECTED_LIST",
+                QueryError::ExpectedReferencedFieldInSelectClause => "EXPECTED_REFERENCED_FIELD_IN_SELECT_CLAUSE",
+                QueryError::ExpectedSelect => "EXPECTED_SELECT",
+                QueryError::ExpectedSingleValue => "EXPECTED_SINGLE_VALUE",
+                QueryError::ExpectedValueWithBetweenOperator => "EXPECTED_VALUE_WITH_BETWEEN_OPERATOR",
+                QueryError::InvalidDateFormat => "INVALID_DATE_FORMAT",
+                QueryError::InvalidStringValue => "INVALID_STRING_VALUE",
+                QueryError::InvalidValueWithBetweenOperator => "INVALID_VALUE_WITH_BETWEEN_OPERATOR",
+                QueryError::InvalidValueWithDuringOperator => "INVALID_VALUE_WITH_DURING_OPERATOR",
+                QueryError::InvalidValueWithLikeOperator => "INVALID_VALUE_WITH_LIKE_OPERATOR",
+                QueryError::OperatorFieldMismatch => "OPERATOR_FIELD_MISMATCH",
+                QueryError::ProhibitedEmptyListInCondition => "PROHIBITED_EMPTY_LIST_IN_CONDITION",
+                QueryError::ProhibitedEnumConstant => "PROHIBITED_ENUM_CONSTANT",
+                QueryError::ProhibitedFieldCombinationInSelectClause => "PROHIBITED_FIELD_COMBINATION_IN_SELECT_CLAUSE",
+                QueryError::ProhibitedFieldInOrderByClause => "PROHIBITED_FIELD_IN_ORDER_BY_CLAUSE",
+                QueryError::ProhibitedFieldInSelectClause => "PROHIBITED_FIELD_IN_SELECT_CLAUSE",
+                QueryError::ProhibitedFieldInWhereClause => "PROHIBITED_FIELD_IN_WHERE_CLAUSE",
+                QueryError::ProhibitedResourceTypeInFromClause => "PROHIBITED_RESOURCE_TYPE_IN_FROM_CLAUSE",
+                QueryError::ProhibitedResourceTypeInSelectClause => "PROHIBITED_RESOURCE_TYPE_IN_SELECT_CLAUSE",
+                QueryError::ProhibitedResourceTypeInWhereClause => "PROHIBITED_RESOURCE_TYPE_IN_WHERE_CLAUSE",
+                QueryError::ProhibitedMetricInSelectOrWhereClause => "PROHIBITED_METRIC_IN_SELECT_OR_WHERE_CLAUSE",
+                QueryError::ProhibitedSegmentInSelectOrWhereClause => "PROHIBITED_SEGMENT_IN_SELECT_OR_WHERE_CLAUSE",
+                QueryError::ProhibitedSegmentWithMetricInSelectOrWhereClause => "PROHIBITED_SEGMENT_WITH_METRIC_IN_SELECT_OR_WHERE_CLAUSE",
+                QueryError::LimitValueTooLow => "LIMIT_VALUE_TOO_LOW",
+                QueryError::ProhibitedNewlineInString => "PROHIBITED_NEWLINE_IN_STRING",
+                QueryError::ProhibitedValueCombinationInList => "PROHIBITED_VALUE_COMBINATION_IN_LIST",
+                QueryError::ProhibitedValueCombinationWithBetweenOperator => "PROHIBITED_VALUE_COMBINATION_WITH_BETWEEN_OPERATOR",
+                QueryError::StringNotTerminated => "STRING_NOT_TERMINATED",
+                QueryError::TooManySegments => "TOO_MANY_SEGMENTS",
+                QueryError::UnexpectedEndOfQuery => "UNEXPECTED_END_OF_QUERY",
+                QueryError::UnexpectedFromClause => "UNEXPECTED_FROM_CLAUSE",
+                QueryError::UnrecognizedField => "UNRECOGNIZED_FIELD",
+                QueryError::UnexpectedInput => "UNEXPECTED_INPUT",
+                QueryError::RequestedMetricsForManager => "REQUESTED_METRICS_FOR_MANAGER",
+                QueryError::FilterHasTooManyValues => "FILTER_HAS_TOO_MANY_VALUES",
+            }
+        }
+    }
 }
 // Proto file describing quota errors.
 
@@ -5071,6 +7687,21 @@ pub mod quota_error_enum {
         /// Too many requests in a short amount of time.
         ResourceTemporarilyExhausted = 4,
     }
+    impl QuotaError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                QuotaError::Unspecified => "UNSPECIFIED",
+                QuotaError::Unknown => "UNKNOWN",
+                QuotaError::ResourceExhausted => "RESOURCE_EXHAUSTED",
+                QuotaError::AccessProhibited => "ACCESS_PROHIBITED",
+                QuotaError::ResourceTemporarilyExhausted => "RESOURCE_TEMPORARILY_EXHAUSTED",
+            }
+        }
+    }
 }
 // Proto file describing range errors.
 
@@ -5093,6 +7724,20 @@ pub mod range_error_enum {
         /// Too high.
         TooHigh = 3,
     }
+    impl RangeError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                RangeError::Unspecified => "UNSPECIFIED",
+                RangeError::Unknown => "UNKNOWN",
+                RangeError::TooLow => "TOO_LOW",
+                RangeError::TooHigh => "TOO_HIGH",
+            }
+        }
+    }
 }
 // Proto file describing errors generated from ReachPlanService.
 
@@ -5113,6 +7758,19 @@ pub mod reach_plan_error_enum {
         Unknown = 1,
         /// Not forecastable due to missing rate card data.
         NotForecastableMissingRate = 2,
+    }
+    impl ReachPlanError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ReachPlanError::Unspecified => "UNSPECIFIED",
+                ReachPlanError::Unknown => "UNKNOWN",
+                ReachPlanError::NotForecastableMissingRate => "NOT_FORECASTABLE_MISSING_RATE",
+            }
+        }
     }
 }
 // Proto file describing errors from applying a recommendation.
@@ -5164,6 +7822,32 @@ pub mod recommendation_error_enum {
         /// The recommendation apply request was malformed and invalid.
         InvalidApplyRequest = 15,
     }
+    impl RecommendationError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                RecommendationError::Unspecified => "UNSPECIFIED",
+                RecommendationError::Unknown => "UNKNOWN",
+                RecommendationError::BudgetAmountTooSmall => "BUDGET_AMOUNT_TOO_SMALL",
+                RecommendationError::BudgetAmountTooLarge => "BUDGET_AMOUNT_TOO_LARGE",
+                RecommendationError::InvalidBudgetAmount => "INVALID_BUDGET_AMOUNT",
+                RecommendationError::PolicyError => "POLICY_ERROR",
+                RecommendationError::InvalidBidAmount => "INVALID_BID_AMOUNT",
+                RecommendationError::AdgroupKeywordLimit => "ADGROUP_KEYWORD_LIMIT",
+                RecommendationError::RecommendationAlreadyApplied => "RECOMMENDATION_ALREADY_APPLIED",
+                RecommendationError::RecommendationInvalidated => "RECOMMENDATION_INVALIDATED",
+                RecommendationError::TooManyOperations => "TOO_MANY_OPERATIONS",
+                RecommendationError::NoOperations => "NO_OPERATIONS",
+                RecommendationError::DifferentTypesNotSupported => "DIFFERENT_TYPES_NOT_SUPPORTED",
+                RecommendationError::DuplicateResourceName => "DUPLICATE_RESOURCE_NAME",
+                RecommendationError::RecommendationAlreadyDismissed => "RECOMMENDATION_ALREADY_DISMISSED",
+                RecommendationError::InvalidApplyRequest => "INVALID_APPLY_REQUEST",
+            }
+        }
+    }
 }
 // Proto file describing region code errors.
 
@@ -5183,6 +7867,19 @@ pub mod region_code_error_enum {
         Unknown = 1,
         /// Invalid region code.
         InvalidRegionCode = 2,
+    }
+    impl RegionCodeError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                RegionCodeError::Unspecified => "UNSPECIFIED",
+                RegionCodeError::Unknown => "UNKNOWN",
+                RegionCodeError::InvalidRegionCode => "INVALID_REGION_CODE",
+            }
+        }
     }
 }
 // Proto file describing request errors.
@@ -5254,6 +7951,41 @@ pub mod request_error_enum {
         /// Deadline specified by the client was too short.
         RpcDeadlineTooShort = 33,
     }
+    impl RequestError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                RequestError::Unspecified => "UNSPECIFIED",
+                RequestError::Unknown => "UNKNOWN",
+                RequestError::ResourceNameMissing => "RESOURCE_NAME_MISSING",
+                RequestError::ResourceNameMalformed => "RESOURCE_NAME_MALFORMED",
+                RequestError::BadResourceId => "BAD_RESOURCE_ID",
+                RequestError::InvalidCustomerId => "INVALID_CUSTOMER_ID",
+                RequestError::OperationRequired => "OPERATION_REQUIRED",
+                RequestError::ResourceNotFound => "RESOURCE_NOT_FOUND",
+                RequestError::InvalidPageToken => "INVALID_PAGE_TOKEN",
+                RequestError::ExpiredPageToken => "EXPIRED_PAGE_TOKEN",
+                RequestError::InvalidPageSize => "INVALID_PAGE_SIZE",
+                RequestError::RequiredFieldMissing => "REQUIRED_FIELD_MISSING",
+                RequestError::ImmutableField => "IMMUTABLE_FIELD",
+                RequestError::TooManyMutateOperations => "TOO_MANY_MUTATE_OPERATIONS",
+                RequestError::CannotBeExecutedByManagerAccount => "CANNOT_BE_EXECUTED_BY_MANAGER_ACCOUNT",
+                RequestError::CannotModifyForeignField => "CANNOT_MODIFY_FOREIGN_FIELD",
+                RequestError::InvalidEnumValue => "INVALID_ENUM_VALUE",
+                RequestError::DeveloperTokenParameterMissing => "DEVELOPER_TOKEN_PARAMETER_MISSING",
+                RequestError::LoginCustomerIdParameterMissing => "LOGIN_CUSTOMER_ID_PARAMETER_MISSING",
+                RequestError::ValidateOnlyRequestHasPageToken => "VALIDATE_ONLY_REQUEST_HAS_PAGE_TOKEN",
+                RequestError::CannotReturnSummaryRowForRequestWithoutMetrics => "CANNOT_RETURN_SUMMARY_ROW_FOR_REQUEST_WITHOUT_METRICS",
+                RequestError::CannotReturnSummaryRowForValidateOnlyRequests => "CANNOT_RETURN_SUMMARY_ROW_FOR_VALIDATE_ONLY_REQUESTS",
+                RequestError::InconsistentReturnSummaryRowValue => "INCONSISTENT_RETURN_SUMMARY_ROW_VALUE",
+                RequestError::TotalResultsCountNotOriginallyRequested => "TOTAL_RESULTS_COUNT_NOT_ORIGINALLY_REQUESTED",
+                RequestError::RpcDeadlineTooShort => "RPC_DEADLINE_TOO_SHORT",
+            }
+        }
+    }
 }
 // Proto file describing resource access denied errors.
 
@@ -5273,6 +8005,19 @@ pub mod resource_access_denied_error_enum {
         Unknown = 1,
         /// User did not have write access.
         WriteAccessDenied = 3,
+    }
+    impl ResourceAccessDeniedError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ResourceAccessDeniedError::Unspecified => "UNSPECIFIED",
+                ResourceAccessDeniedError::Unknown => "UNKNOWN",
+                ResourceAccessDeniedError::WriteAccessDenied => "WRITE_ACCESS_DENIED",
+            }
+        }
     }
 }
 // Proto file describing resource count limit exceeded errors.
@@ -5332,6 +8077,27 @@ pub mod resource_count_limit_exceeded_error_enum {
         /// returned in ErrorDetails.
         ResourceLimit = 10,
     }
+    impl ResourceCountLimitExceededError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ResourceCountLimitExceededError::Unspecified => "UNSPECIFIED",
+                ResourceCountLimitExceededError::Unknown => "UNKNOWN",
+                ResourceCountLimitExceededError::AccountLimit => "ACCOUNT_LIMIT",
+                ResourceCountLimitExceededError::CampaignLimit => "CAMPAIGN_LIMIT",
+                ResourceCountLimitExceededError::AdgroupLimit => "ADGROUP_LIMIT",
+                ResourceCountLimitExceededError::AdGroupAdLimit => "AD_GROUP_AD_LIMIT",
+                ResourceCountLimitExceededError::AdGroupCriterionLimit => "AD_GROUP_CRITERION_LIMIT",
+                ResourceCountLimitExceededError::SharedSetLimit => "SHARED_SET_LIMIT",
+                ResourceCountLimitExceededError::MatchingFunctionLimit => "MATCHING_FUNCTION_LIMIT",
+                ResourceCountLimitExceededError::ResponseRowLimitExceeded => "RESPONSE_ROW_LIMIT_EXCEEDED",
+                ResourceCountLimitExceededError::ResourceLimit => "RESOURCE_LIMIT",
+            }
+        }
+    }
 }
 // Proto file describing setting errors.
 
@@ -5380,6 +8146,29 @@ pub mod setting_error_enum {
         /// The setting value is not compatible with the campaign type.
         SettingValueNotCompatibleWithCampaign = 20,
     }
+    impl SettingError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                SettingError::Unspecified => "UNSPECIFIED",
+                SettingError::Unknown => "UNKNOWN",
+                SettingError::SettingTypeIsNotAvailable => "SETTING_TYPE_IS_NOT_AVAILABLE",
+                SettingError::SettingTypeIsNotCompatibleWithCampaign => "SETTING_TYPE_IS_NOT_COMPATIBLE_WITH_CAMPAIGN",
+                SettingError::TargetingSettingContainsInvalidCriterionTypeGroup => "TARGETING_SETTING_CONTAINS_INVALID_CRITERION_TYPE_GROUP",
+                SettingError::TargetingSettingDemographicCriterionTypeGroupsMustBeSetToTargetAll => "TARGETING_SETTING_DEMOGRAPHIC_CRITERION_TYPE_GROUPS_MUST_BE_SET_TO_TARGET_ALL",
+                SettingError::TargetingSettingCannotChangeTargetAllToFalseForDemographicCriterionTypeGroup => "TARGETING_SETTING_CANNOT_CHANGE_TARGET_ALL_TO_FALSE_FOR_DEMOGRAPHIC_CRITERION_TYPE_GROUP",
+                SettingError::DynamicSearchAdsSettingAtLeastOneFeedIdMustBePresent => "DYNAMIC_SEARCH_ADS_SETTING_AT_LEAST_ONE_FEED_ID_MUST_BE_PRESENT",
+                SettingError::DynamicSearchAdsSettingContainsInvalidDomainName => "DYNAMIC_SEARCH_ADS_SETTING_CONTAINS_INVALID_DOMAIN_NAME",
+                SettingError::DynamicSearchAdsSettingContainsSubdomainName => "DYNAMIC_SEARCH_ADS_SETTING_CONTAINS_SUBDOMAIN_NAME",
+                SettingError::DynamicSearchAdsSettingContainsInvalidLanguageCode => "DYNAMIC_SEARCH_ADS_SETTING_CONTAINS_INVALID_LANGUAGE_CODE",
+                SettingError::TargetAllIsNotAllowedForPlacementInSearchCampaign => "TARGET_ALL_IS_NOT_ALLOWED_FOR_PLACEMENT_IN_SEARCH_CAMPAIGN",
+                SettingError::SettingValueNotCompatibleWithCampaign => "SETTING_VALUE_NOT_COMPATIBLE_WITH_CAMPAIGN",
+            }
+        }
+    }
 }
 // Proto file describing shared criterion errors.
 
@@ -5399,6 +8188,19 @@ pub mod shared_criterion_error_enum {
         Unknown = 1,
         /// The criterion is not appropriate for the shared set type.
         CriterionTypeNotAllowedForSharedSetType = 2,
+    }
+    impl SharedCriterionError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                SharedCriterionError::Unspecified => "UNSPECIFIED",
+                SharedCriterionError::Unknown => "UNKNOWN",
+                SharedCriterionError::CriterionTypeNotAllowedForSharedSetType => "CRITERION_TYPE_NOT_ALLOWED_FOR_SHARED_SET_TYPE",
+            }
+        }
     }
 }
 // Proto file describing shared set errors.
@@ -5426,6 +8228,22 @@ pub mod shared_set_error_enum {
         /// The shared set cannot be removed because it is in use.
         SharedSetInUse = 5,
     }
+    impl SharedSetError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                SharedSetError::Unspecified => "UNSPECIFIED",
+                SharedSetError::Unknown => "UNKNOWN",
+                SharedSetError::CustomerCannotCreateSharedSetOfThisType => "CUSTOMER_CANNOT_CREATE_SHARED_SET_OF_THIS_TYPE",
+                SharedSetError::DuplicateName => "DUPLICATE_NAME",
+                SharedSetError::SharedSetRemoved => "SHARED_SET_REMOVED",
+                SharedSetError::SharedSetInUse => "SHARED_SET_IN_USE",
+            }
+        }
+    }
 }
 // Proto file describing size limit errors.
 
@@ -5448,6 +8266,20 @@ pub mod size_limit_error_enum {
         /// The number of entries in the response exceeds the system limit.
         ResponseSizeLimitExceeded = 3,
     }
+    impl SizeLimitError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                SizeLimitError::Unspecified => "UNSPECIFIED",
+                SizeLimitError::Unknown => "UNKNOWN",
+                SizeLimitError::RequestSizeLimitExceeded => "REQUEST_SIZE_LIMIT_EXCEEDED",
+                SizeLimitError::ResponseSizeLimitExceeded => "RESPONSE_SIZE_LIMIT_EXCEEDED",
+            }
+        }
+    }
 }
 // Proto file describing string format errors.
 
@@ -5469,6 +8301,20 @@ pub mod string_format_error_enum {
         IllegalChars = 2,
         /// The input string value is invalid for the associated field.
         InvalidFormat = 3,
+    }
+    impl StringFormatError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                StringFormatError::Unspecified => "UNSPECIFIED",
+                StringFormatError::Unknown => "UNKNOWN",
+                StringFormatError::IllegalChars => "ILLEGAL_CHARS",
+                StringFormatError::InvalidFormat => "INVALID_FORMAT",
+            }
+        }
     }
 }
 // Proto file describing string length errors.
@@ -5494,6 +8340,21 @@ pub mod string_length_error_enum {
         TooShort = 2,
         /// Too long.
         TooLong = 3,
+    }
+    impl StringLengthError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                StringLengthError::Unspecified => "UNSPECIFIED",
+                StringLengthError::Unknown => "UNKNOWN",
+                StringLengthError::Empty => "EMPTY",
+                StringLengthError::TooShort => "TOO_SHORT",
+                StringLengthError::TooLong => "TOO_LONG",
+            }
+        }
     }
 }
 // Proto file describing ThirdPartyAppAnalyticsLink errors.
@@ -5522,6 +8383,22 @@ pub mod third_party_app_analytics_link_error_enum {
         /// Regenerating shareable link ID is only allowed on active links
         CannotRegenerateShareableLinkIdForRemovedLink = 5,
     }
+    impl ThirdPartyAppAnalyticsLinkError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ThirdPartyAppAnalyticsLinkError::Unspecified => "UNSPECIFIED",
+                ThirdPartyAppAnalyticsLinkError::Unknown => "UNKNOWN",
+                ThirdPartyAppAnalyticsLinkError::InvalidAnalyticsProviderId => "INVALID_ANALYTICS_PROVIDER_ID",
+                ThirdPartyAppAnalyticsLinkError::InvalidMobileAppId => "INVALID_MOBILE_APP_ID",
+                ThirdPartyAppAnalyticsLinkError::MobileAppIsNotEnabled => "MOBILE_APP_IS_NOT_ENABLED",
+                ThirdPartyAppAnalyticsLinkError::CannotRegenerateShareableLinkIdForRemovedLink => "CANNOT_REGENERATE_SHAREABLE_LINK_ID_FOR_REMOVED_LINK",
+            }
+        }
+    }
 }
 // Proto file describing time zone errors.
 
@@ -5541,6 +8418,19 @@ pub mod time_zone_error_enum {
         Unknown = 1,
         /// Time zone is not valid.
         InvalidTimeZone = 5,
+    }
+    impl TimeZoneError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                TimeZoneError::Unspecified => "UNSPECIFIED",
+                TimeZoneError::Unknown => "UNKNOWN",
+                TimeZoneError::InvalidTimeZone => "INVALID_TIME_ZONE",
+            }
+        }
     }
 }
 // Proto file describing url field errors.
@@ -5678,6 +8568,70 @@ pub mod url_field_error_enum {
         /// Custom parameter value cannot be null.
         NullCustomParameterValue = 57,
     }
+    impl UrlFieldError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                UrlFieldError::Unspecified => "UNSPECIFIED",
+                UrlFieldError::Unknown => "UNKNOWN",
+                UrlFieldError::InvalidTrackingUrlTemplate => "INVALID_TRACKING_URL_TEMPLATE",
+                UrlFieldError::InvalidTagInTrackingUrlTemplate => "INVALID_TAG_IN_TRACKING_URL_TEMPLATE",
+                UrlFieldError::MissingTrackingUrlTemplateTag => "MISSING_TRACKING_URL_TEMPLATE_TAG",
+                UrlFieldError::MissingProtocolInTrackingUrlTemplate => "MISSING_PROTOCOL_IN_TRACKING_URL_TEMPLATE",
+                UrlFieldError::InvalidProtocolInTrackingUrlTemplate => "INVALID_PROTOCOL_IN_TRACKING_URL_TEMPLATE",
+                UrlFieldError::MalformedTrackingUrlTemplate => "MALFORMED_TRACKING_URL_TEMPLATE",
+                UrlFieldError::MissingHostInTrackingUrlTemplate => "MISSING_HOST_IN_TRACKING_URL_TEMPLATE",
+                UrlFieldError::InvalidTldInTrackingUrlTemplate => "INVALID_TLD_IN_TRACKING_URL_TEMPLATE",
+                UrlFieldError::RedundantNestedTrackingUrlTemplateTag => "REDUNDANT_NESTED_TRACKING_URL_TEMPLATE_TAG",
+                UrlFieldError::InvalidFinalUrl => "INVALID_FINAL_URL",
+                UrlFieldError::InvalidTagInFinalUrl => "INVALID_TAG_IN_FINAL_URL",
+                UrlFieldError::RedundantNestedFinalUrlTag => "REDUNDANT_NESTED_FINAL_URL_TAG",
+                UrlFieldError::MissingProtocolInFinalUrl => "MISSING_PROTOCOL_IN_FINAL_URL",
+                UrlFieldError::InvalidProtocolInFinalUrl => "INVALID_PROTOCOL_IN_FINAL_URL",
+                UrlFieldError::MalformedFinalUrl => "MALFORMED_FINAL_URL",
+                UrlFieldError::MissingHostInFinalUrl => "MISSING_HOST_IN_FINAL_URL",
+                UrlFieldError::InvalidTldInFinalUrl => "INVALID_TLD_IN_FINAL_URL",
+                UrlFieldError::InvalidFinalMobileUrl => "INVALID_FINAL_MOBILE_URL",
+                UrlFieldError::InvalidTagInFinalMobileUrl => "INVALID_TAG_IN_FINAL_MOBILE_URL",
+                UrlFieldError::RedundantNestedFinalMobileUrlTag => "REDUNDANT_NESTED_FINAL_MOBILE_URL_TAG",
+                UrlFieldError::MissingProtocolInFinalMobileUrl => "MISSING_PROTOCOL_IN_FINAL_MOBILE_URL",
+                UrlFieldError::InvalidProtocolInFinalMobileUrl => "INVALID_PROTOCOL_IN_FINAL_MOBILE_URL",
+                UrlFieldError::MalformedFinalMobileUrl => "MALFORMED_FINAL_MOBILE_URL",
+                UrlFieldError::MissingHostInFinalMobileUrl => "MISSING_HOST_IN_FINAL_MOBILE_URL",
+                UrlFieldError::InvalidTldInFinalMobileUrl => "INVALID_TLD_IN_FINAL_MOBILE_URL",
+                UrlFieldError::InvalidFinalAppUrl => "INVALID_FINAL_APP_URL",
+                UrlFieldError::InvalidTagInFinalAppUrl => "INVALID_TAG_IN_FINAL_APP_URL",
+                UrlFieldError::RedundantNestedFinalAppUrlTag => "REDUNDANT_NESTED_FINAL_APP_URL_TAG",
+                UrlFieldError::MultipleAppUrlsForOstype => "MULTIPLE_APP_URLS_FOR_OSTYPE",
+                UrlFieldError::InvalidOstype => "INVALID_OSTYPE",
+                UrlFieldError::InvalidProtocolForAppUrl => "INVALID_PROTOCOL_FOR_APP_URL",
+                UrlFieldError::InvalidPackageIdForAppUrl => "INVALID_PACKAGE_ID_FOR_APP_URL",
+                UrlFieldError::UrlCustomParametersCountExceedsLimit => "URL_CUSTOM_PARAMETERS_COUNT_EXCEEDS_LIMIT",
+                UrlFieldError::InvalidCharactersInUrlCustomParameterKey => "INVALID_CHARACTERS_IN_URL_CUSTOM_PARAMETER_KEY",
+                UrlFieldError::InvalidCharactersInUrlCustomParameterValue => "INVALID_CHARACTERS_IN_URL_CUSTOM_PARAMETER_VALUE",
+                UrlFieldError::InvalidTagInUrlCustomParameterValue => "INVALID_TAG_IN_URL_CUSTOM_PARAMETER_VALUE",
+                UrlFieldError::RedundantNestedUrlCustomParameterTag => "REDUNDANT_NESTED_URL_CUSTOM_PARAMETER_TAG",
+                UrlFieldError::MissingProtocol => "MISSING_PROTOCOL",
+                UrlFieldError::InvalidProtocol => "INVALID_PROTOCOL",
+                UrlFieldError::InvalidUrl => "INVALID_URL",
+                UrlFieldError::DestinationUrlDeprecated => "DESTINATION_URL_DEPRECATED",
+                UrlFieldError::InvalidTagInUrl => "INVALID_TAG_IN_URL",
+                UrlFieldError::MissingUrlTag => "MISSING_URL_TAG",
+                UrlFieldError::DuplicateUrlId => "DUPLICATE_URL_ID",
+                UrlFieldError::InvalidUrlId => "INVALID_URL_ID",
+                UrlFieldError::FinalUrlSuffixMalformed => "FINAL_URL_SUFFIX_MALFORMED",
+                UrlFieldError::InvalidTagInFinalUrlSuffix => "INVALID_TAG_IN_FINAL_URL_SUFFIX",
+                UrlFieldError::InvalidTopLevelDomain => "INVALID_TOP_LEVEL_DOMAIN",
+                UrlFieldError::MalformedTopLevelDomain => "MALFORMED_TOP_LEVEL_DOMAIN",
+                UrlFieldError::MalformedUrl => "MALFORMED_URL",
+                UrlFieldError::MissingHost => "MISSING_HOST",
+                UrlFieldError::NullCustomParameterValue => "NULL_CUSTOM_PARAMETER_VALUE",
+            }
+        }
+    }
 }
 // Proto file describing user data errors.
 
@@ -5701,6 +8655,21 @@ pub mod user_data_error_enum {
         TooManyUserIdentifiers = 3,
         /// Current user list is not applicable for the given customer.
         UserListNotApplicable = 4,
+    }
+    impl UserDataError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                UserDataError::Unspecified => "UNSPECIFIED",
+                UserDataError::Unknown => "UNKNOWN",
+                UserDataError::OperationsForCustomerMatchNotAllowed => "OPERATIONS_FOR_CUSTOMER_MATCH_NOT_ALLOWED",
+                UserDataError::TooManyUserIdentifiers => "TOO_MANY_USER_IDENTIFIERS",
+                UserDataError::UserListNotApplicable => "USER_LIST_NOT_APPLICABLE",
+            }
+        }
     }
 }
 // Proto file describing user list errors.
@@ -5779,6 +8748,44 @@ pub mod user_list_error_enum {
         /// types of lists in its rules.
         CanNotMixCrmBasedInLogicalListWithOtherLists = 36,
     }
+    impl UserListError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                UserListError::Unspecified => "UNSPECIFIED",
+                UserListError::Unknown => "UNKNOWN",
+                UserListError::ExternalRemarketingUserListMutateNotSupported => "EXTERNAL_REMARKETING_USER_LIST_MUTATE_NOT_SUPPORTED",
+                UserListError::ConcreteTypeRequired => "CONCRETE_TYPE_REQUIRED",
+                UserListError::ConversionTypeIdRequired => "CONVERSION_TYPE_ID_REQUIRED",
+                UserListError::DuplicateConversionTypes => "DUPLICATE_CONVERSION_TYPES",
+                UserListError::InvalidConversionType => "INVALID_CONVERSION_TYPE",
+                UserListError::InvalidDescription => "INVALID_DESCRIPTION",
+                UserListError::InvalidName => "INVALID_NAME",
+                UserListError::InvalidType => "INVALID_TYPE",
+                UserListError::CanNotAddLogicalListAsLogicalListOperand => "CAN_NOT_ADD_LOGICAL_LIST_AS_LOGICAL_LIST_OPERAND",
+                UserListError::InvalidUserListLogicalRuleOperand => "INVALID_USER_LIST_LOGICAL_RULE_OPERAND",
+                UserListError::NameAlreadyUsed => "NAME_ALREADY_USED",
+                UserListError::NewConversionTypeNameRequired => "NEW_CONVERSION_TYPE_NAME_REQUIRED",
+                UserListError::ConversionTypeNameAlreadyUsed => "CONVERSION_TYPE_NAME_ALREADY_USED",
+                UserListError::OwnershipRequiredForSet => "OWNERSHIP_REQUIRED_FOR_SET",
+                UserListError::UserListMutateNotSupported => "USER_LIST_MUTATE_NOT_SUPPORTED",
+                UserListError::InvalidRule => "INVALID_RULE",
+                UserListError::InvalidDateRange => "INVALID_DATE_RANGE",
+                UserListError::CanNotMutateSensitiveUserlist => "CAN_NOT_MUTATE_SENSITIVE_USERLIST",
+                UserListError::MaxNumRulebasedUserlists => "MAX_NUM_RULEBASED_USERLISTS",
+                UserListError::CannotModifyBillableRecordCount => "CANNOT_MODIFY_BILLABLE_RECORD_COUNT",
+                UserListError::AppIdNotSet => "APP_ID_NOT_SET",
+                UserListError::UserlistNameIsReservedForSystemList => "USERLIST_NAME_IS_RESERVED_FOR_SYSTEM_LIST",
+                UserListError::AdvertiserNotOnAllowlistForUsingUploadedData => "ADVERTISER_NOT_ON_ALLOWLIST_FOR_USING_UPLOADED_DATA",
+                UserListError::RuleTypeIsNotSupported => "RULE_TYPE_IS_NOT_SUPPORTED",
+                UserListError::CanNotAddASimilarUserlistAsLogicalListOperand => "CAN_NOT_ADD_A_SIMILAR_USERLIST_AS_LOGICAL_LIST_OPERAND",
+                UserListError::CanNotMixCrmBasedInLogicalListWithOtherLists => "CAN_NOT_MIX_CRM_BASED_IN_LOGICAL_LIST_WITH_OTHER_LISTS",
+            }
+        }
+    }
 }
 // Proto file describing YouTube video registration errors.
 
@@ -5802,6 +8809,21 @@ pub mod youtube_video_registration_error_enum {
         VideoNotAccessible = 3,
         /// Video to be registered is not eligible (e.g. mature content).
         VideoNotEligible = 4,
+    }
+    impl YoutubeVideoRegistrationError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                YoutubeVideoRegistrationError::Unspecified => "UNSPECIFIED",
+                YoutubeVideoRegistrationError::Unknown => "UNKNOWN",
+                YoutubeVideoRegistrationError::VideoNotFound => "VIDEO_NOT_FOUND",
+                YoutubeVideoRegistrationError::VideoNotAccessible => "VIDEO_NOT_ACCESSIBLE",
+                YoutubeVideoRegistrationError::VideoNotEligible => "VIDEO_NOT_ELIGIBLE",
+            }
+        }
     }
 }
 // Proto file describing the common error protos
@@ -6313,6 +9335,20 @@ pub mod quota_error_details {
         Account = 2,
         /// Per project or DevToken quota
         Developer = 3,
+    }
+    impl QuotaRateScope {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                QuotaRateScope::Unspecified => "UNSPECIFIED",
+                QuotaRateScope::Unknown => "UNKNOWN",
+                QuotaRateScope::Account => "ACCOUNT",
+                QuotaRateScope::Developer => "DEVELOPER",
+            }
+        }
     }
 }
 /// Error details returned when an resource count limit was exceeded.

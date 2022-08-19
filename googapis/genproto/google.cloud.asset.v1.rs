@@ -36,6 +36,21 @@ pub mod temporal_asset {
         /// prior_asset is a deletion.
         Deleted = 4,
     }
+    impl PriorAssetState {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                PriorAssetState::Unspecified => "PRIOR_ASSET_STATE_UNSPECIFIED",
+                PriorAssetState::Present => "PRESENT",
+                PriorAssetState::Invalid => "INVALID",
+                PriorAssetState::DoesNotExist => "DOES_NOT_EXIST",
+                PriorAssetState::Deleted => "DELETED",
+            }
+        }
+    }
 }
 /// A time window specified by its `start_time` and `end_time`.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -347,9 +362,9 @@ pub struct ResourceSearchResult {
     /// To search against the `labels`:
     ///
     /// * use a field query:
-    ///     - query on any label's key or value. Example: `labels:prod`
-    ///     - query by a given label. Example: `labels.env:prod`
-    ///     - query by a given label's existence. Example: `labels.env:*`
+    ///      - query on any label's key or value. Example: `labels:prod`
+    ///      - query by a given label. Example: `labels.env:prod`
+    ///      - query by a given label's existence. Example: `labels.env:*`
     /// * use a free text query. Example: `prod`
     #[prost(map="string, string", tag="7")]
     pub labels: ::std::collections::HashMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
@@ -384,10 +399,10 @@ pub struct ResourceSearchResult {
     /// To search against `create_time`:
     ///
     /// * use a field query.
-    ///     - value in seconds since unix epoch. Example: `createTime > 1609459200`
-    ///     - value in date string. Example: `createTime > 2021-01-01`
-    ///     - value in date-time string (must be quoted). Example: `createTime >
-    ///     "2021-01-01T00:00:00"`
+    ///      - value in seconds since unix epoch. Example: `createTime > 1609459200`
+    ///      - value in date string. Example: `createTime > 2021-01-01`
+    ///      - value in date-time string (must be quoted). Example: `createTime >
+    ///      "2021-01-01T00:00:00"`
     #[prost(message, optional, tag="11")]
     pub create_time: ::core::option::Option<::prost_types::Timestamp>,
     /// The last update timestamp of this resource, at which the resource was last
@@ -398,10 +413,10 @@ pub struct ResourceSearchResult {
     /// To search against `update_time`:
     ///
     /// * use a field query.
-    ///     - value in seconds since unix epoch. Example: `updateTime < 1609459200`
-    ///     - value in date string. Example: `updateTime < 2021-01-01`
-    ///     - value in date-time string (must be quoted). Example: `updateTime <
-    ///     "2021-01-01T00:00:00"`
+    ///      - value in seconds since unix epoch. Example: `updateTime < 1609459200`
+    ///      - value in date string. Example: `updateTime < 2021-01-01`
+    ///      - value in date-time string (must be quoted). Example: `updateTime <
+    ///      "2021-01-01T00:00:00"`
     #[prost(message, optional, tag="12")]
     pub update_time: ::core::option::Option<::prost_types::Timestamp>,
     /// The state of this resource. Different resources types have different state
@@ -442,8 +457,8 @@ pub struct ResourceSearchResult {
     /// To search against the `additional_attributes`:
     ///
     /// * use a free text query to match the attributes values. Example: to search
-    ///   `additional_attributes = { dnsName: "foobar" }`, you can issue a query
-    ///   `foobar`.
+    ///    `additional_attributes = { dnsName: "foobar" }`, you can issue a query
+    ///    `foobar`.
     #[prost(message, optional, tag="9")]
     pub additional_attributes: ::core::option::Option<::prost_types::Struct>,
     /// The full resource name of this resource's parent, if it has one.
@@ -620,12 +635,12 @@ pub struct IamPolicySearchResult {
     /// To search against the `policy` bindings:
     ///
     /// * use a field query:
-    ///     - query by the policy contained members. Example:
-    ///       `policy:amy@gmail.com`
-    ///     - query by the policy contained roles. Example:
-    ///       `policy:roles/compute.admin`
-    ///     - query by the policy contained roles' included permissions. Example:
-    ///       `policy.role.permissions:compute.instances.create`
+    ///      - query by the policy contained members. Example:
+    ///        `policy:amy@gmail.com`
+    ///      - query by the policy contained roles. Example:
+    ///        `policy:roles/compute.admin`
+    ///      - query by the policy contained roles' included permissions. Example:
+    ///        `policy.role.permissions:compute.instances.create`
     #[prost(message, optional, tag="3")]
     pub policy: ::core::option::Option<super::super::super::iam::v1::Policy>,
     /// Explanation about the IAM policy search result. It contains additional
@@ -698,6 +713,20 @@ pub mod condition_evaluation {
         /// contains variables that are either missing input values or have not been
         /// supported by Analyzer yet.
         Conditional = 3,
+    }
+    impl EvaluationValue {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                EvaluationValue::Unspecified => "EVALUATION_VALUE_UNSPECIFIED",
+                EvaluationValue::True => "TRUE",
+                EvaluationValue::False => "FALSE",
+                EvaluationValue::Conditional => "CONDITIONAL",
+            }
+        }
     }
 }
 /// IAM Policy analysis result, consisting of one IAM policy binding and derived
@@ -1329,6 +1358,19 @@ pub mod partition_spec {
         /// request was received.
         RequestTime = 2,
     }
+    impl PartitionKey {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                PartitionKey::Unspecified => "PARTITION_KEY_UNSPECIFIED",
+                PartitionKey::ReadTime => "READ_TIME",
+                PartitionKey::RequestTime => "REQUEST_TIME",
+            }
+        }
+    }
 }
 /// A Pub/Sub destination.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -1456,38 +1498,38 @@ pub struct SearchAllResourcesRequest {
     /// Examples:
     ///
     /// * `name:Important` to find Cloud resources whose name contains
-    ///   "Important" as a word.
+    ///    "Important" as a word.
     /// * `name=Important` to find the Cloud resource whose name is exactly
-    ///   "Important".
+    ///    "Important".
     /// * `displayName:Impor*` to find Cloud resources whose display name
-    ///   contains "Impor" as a prefix of any word in the field.
+    ///    contains "Impor" as a prefix of any word in the field.
     /// * `location:us-west*` to find Cloud resources whose location contains both
-    ///   "us" and "west" as prefixes.
+    ///    "us" and "west" as prefixes.
     /// * `labels:prod` to find Cloud resources whose labels contain "prod" as
-    ///   a key or value.
+    ///    a key or value.
     /// * `labels.env:prod` to find Cloud resources that have a label "env"
-    ///   and its value is "prod".
+    ///    and its value is "prod".
     /// * `labels.env:*` to find Cloud resources that have a label "env".
     /// * `kmsKey:key` to find Cloud resources encrypted with a customer-managed
-    ///   encryption key whose name contains the word "key".
+    ///    encryption key whose name contains the word "key".
     /// * `state:ACTIVE` to find Cloud resources whose state contains "ACTIVE" as a
-    ///   word.
+    ///    word.
     /// * `NOT state:ACTIVE` to find Cloud resources whose state doesn't contain
-    ///   "ACTIVE" as a word.
+    ///    "ACTIVE" as a word.
     /// * `createTime<1609459200` to find Cloud resources that were created before
-    ///   "2021-01-01 00:00:00 UTC". 1609459200 is the epoch timestamp of
-    ///   "2021-01-01 00:00:00 UTC" in seconds.
+    ///    "2021-01-01 00:00:00 UTC". 1609459200 is the epoch timestamp of
+    ///    "2021-01-01 00:00:00 UTC" in seconds.
     /// * `updateTime>1609459200` to find Cloud resources that were updated after
-    ///   "2021-01-01 00:00:00 UTC". 1609459200 is the epoch timestamp of
-    ///   "2021-01-01 00:00:00 UTC" in seconds.
+    ///    "2021-01-01 00:00:00 UTC". 1609459200 is the epoch timestamp of
+    ///    "2021-01-01 00:00:00 UTC" in seconds.
     /// * `Important` to find Cloud resources that contain "Important" as a word
-    ///   in any of the searchable fields.
+    ///    in any of the searchable fields.
     /// * `Impor*` to find Cloud resources that contain "Impor" as a prefix of any
-    ///   word in any of the searchable fields.
+    ///    word in any of the searchable fields.
     /// * `Important location:(us-west1 OR global)` to find Cloud
-    ///   resources that contain "Important" as a word in any of the searchable
-    ///   fields and are also located in the "us-west1" region or the "global"
-    ///   location.
+    ///    resources that contain "Important" as a word in any of the searchable
+    ///    fields and are also located in the "us-west1" region or the "global"
+    ///    location.
     #[prost(string, tag="2")]
     pub query: ::prost::alloc::string::String,
     /// Optional. A list of asset types that this request searches for. If empty, it will
@@ -1524,18 +1566,18 @@ pub struct SearchAllResourcesRequest {
     /// Example: "location DESC, name".
     /// Only singular primitive fields in the response are sortable:
     ///
-    ///   * name
-    ///   * assetType
-    ///   * project
-    ///   * displayName
-    ///   * description
-    ///   * location
-    ///   * kmsKey
-    ///   * createTime
-    ///   * updateTime
-    ///   * state
-    ///   * parentFullResourceName
-    ///   * parentAssetType
+    ///    * name
+    ///    * assetType
+    ///    * project
+    ///    * displayName
+    ///    * description
+    ///    * location
+    ///    * kmsKey
+    ///    * createTime
+    ///    * updateTime
+    ///    * state
+    ///    * parentFullResourceName
+    ///    * parentAssetType
     ///
     /// All the other fields such as repeated fields (e.g., `networkTags`), map
     /// fields (e.g., `labels`) and struct fields (e.g., `additionalAttributes`)
@@ -1550,20 +1592,20 @@ pub struct SearchAllResourcesRequest {
     /// The read_mask paths must be valid field paths listed but not limited to
     /// (both snake_case and camelCase are supported):
     ///
-    ///   * name
-    ///   * assetType
-    ///   * project
-    ///   * displayName
-    ///   * description
-    ///   * location
-    ///   * labels
-    ///   * networkTags
-    ///   * kmsKey
-    ///   * createTime
-    ///   * updateTime
-    ///   * state
-    ///   * additionalAttributes
-    ///   * versionedResources
+    ///    * name
+    ///    * assetType
+    ///    * project
+    ///    * displayName
+    ///    * description
+    ///    * location
+    ///    * labels
+    ///    * networkTags
+    ///    * kmsKey
+    ///    * createTime
+    ///    * updateTime
+    ///    * state
+    ///    * additionalAttributes
+    ///    * versionedResources
     ///
     /// If read_mask is not specified, all fields except versionedResources will
     /// be returned.
@@ -1616,35 +1658,35 @@ pub struct SearchAllIamPoliciesRequest {
     /// Examples:
     ///
     /// * `policy:amy@gmail.com` to find IAM policy bindings that specify user
-    ///   "amy@gmail.com".
+    ///    "amy@gmail.com".
     /// * `policy:roles/compute.admin` to find IAM policy bindings that specify
-    ///   the Compute Admin role.
+    ///    the Compute Admin role.
     /// * `policy:comp*` to find IAM policy bindings that contain "comp" as a
-    ///   prefix of any word in the binding.
+    ///    prefix of any word in the binding.
     /// * `policy.role.permissions:storage.buckets.update` to find IAM policy
-    ///   bindings that specify a role containing "storage.buckets.update"
-    ///   permission. Note that if callers don't have `iam.roles.get` access to a
-    ///   role's included permissions, policy bindings that specify this role will
-    ///   be dropped from the search results.
+    ///    bindings that specify a role containing "storage.buckets.update"
+    ///    permission. Note that if callers don't have `iam.roles.get` access to a
+    ///    role's included permissions, policy bindings that specify this role will
+    ///    be dropped from the search results.
     /// * `policy.role.permissions:upd*` to find IAM policy bindings that specify a
-    ///   role containing "upd" as a prefix of any word in the role permission.
-    ///   Note that if callers don't have `iam.roles.get` access to a role's
-    ///   included permissions, policy bindings that specify this role will be
-    ///   dropped from the search results.
+    ///    role containing "upd" as a prefix of any word in the role permission.
+    ///    Note that if callers don't have `iam.roles.get` access to a role's
+    ///    included permissions, policy bindings that specify this role will be
+    ///    dropped from the search results.
     /// * `resource:organizations/123456` to find IAM policy bindings
-    ///   that are set on "organizations/123456".
+    ///    that are set on "organizations/123456".
     /// * `resource=//cloudresourcemanager.googleapis.com/projects/myproject` to
-    ///   find IAM policy bindings that are set on the project named "myproject".
+    ///    find IAM policy bindings that are set on the project named "myproject".
     /// * `Important` to find IAM policy bindings that contain "Important" as a
-    ///   word in any of the searchable fields (except for the included
-    ///   permissions).
+    ///    word in any of the searchable fields (except for the included
+    ///    permissions).
     /// * `resource:(instance1 OR instance2) policy:amy` to find
-    ///   IAM policy bindings that are set on resources "instance1" or
-    ///   "instance2" and also specify user "amy".
+    ///    IAM policy bindings that are set on resources "instance1" or
+    ///    "instance2" and also specify user "amy".
     /// * `roles:roles/compute.admin` to find IAM policy bindings that specify the
-    ///   Compute Admin role.
+    ///    Compute Admin role.
     /// * `memberTypes:user` to find IAM policy bindings that contain the "user"
-    ///   member type.
+    ///    member type.
     #[prost(string, tag="2")]
     pub query: ::prost::alloc::string::String,
     /// Optional. The page size for search result pagination. Page size is capped at 500 even
@@ -1682,9 +1724,9 @@ pub struct SearchAllIamPoliciesRequest {
     /// to indicate descending order. Redundant space characters are ignored.
     /// Example: "assetType DESC, resource".
     /// Only singular primitive fields in the response are sortable:
-    ///   * resource
-    ///   * assetType
-    ///   * project
+    ///    * resource
+    ///    * assetType
+    ///    * project
     /// All the other fields such as repeated fields (e.g., `folders`) and
     /// non-primitive fields (e.g., `policy`) are not supported.
     #[prost(string, tag="7")]
@@ -1979,7 +2021,7 @@ pub mod iam_policy_analysis_output_config {
         /// written. Tables will be created based on this table_prefix if not exist:
         /// * <table_prefix>_analysis table will contain export operation's metadata.
         /// * <table_prefix>_analysis_result will contain all the
-        ///   \[IamPolicyAnalysisResult][google.cloud.asset.v1.IamPolicyAnalysisResult\].
+        ///    \[IamPolicyAnalysisResult][google.cloud.asset.v1.IamPolicyAnalysisResult\].
         /// When \[partition_key\] is specified, both tables will be partitioned based
         /// on the \[partition_key\].
         #[prost(string, tag="2")]
@@ -2019,6 +2061,18 @@ pub mod iam_policy_analysis_output_config {
             /// the result table(s) is partitoned by the RequestTime column, an
             /// additional timestamp column representing when the request was received.
             RequestTime = 1,
+        }
+        impl PartitionKey {
+            /// String value of the enum field names used in the ProtoBuf definition.
+            ///
+            /// The values are not transformed in any way and thus are considered stable
+            /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+            pub fn as_str_name(&self) -> &'static str {
+                match self {
+                    PartitionKey::Unspecified => "PARTITION_KEY_UNSPECIFIED",
+                    PartitionKey::RequestTime => "REQUEST_TIME",
+                }
+            }
         }
     }
     /// IAM policy analysis export destination.
@@ -2082,6 +2136,19 @@ pub mod analyze_move_request {
         /// Basic analysis only including blockers which will prevent the specified
         /// resource move at runtime.
         Basic = 2,
+    }
+    impl AnalysisView {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AnalysisView::Unspecified => "ANALYSIS_VIEW_UNSPECIFIED",
+                AnalysisView::Full => "FULL",
+                AnalysisView::Basic => "BASIC",
+            }
+        }
     }
 }
 /// The response message for resource move analysis.
@@ -2153,10 +2220,28 @@ pub enum ContentType {
     /// The related resources.
     Relationship = 7,
 }
+impl ContentType {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            ContentType::Unspecified => "CONTENT_TYPE_UNSPECIFIED",
+            ContentType::Resource => "RESOURCE",
+            ContentType::IamPolicy => "IAM_POLICY",
+            ContentType::OrgPolicy => "ORG_POLICY",
+            ContentType::AccessPolicy => "ACCESS_POLICY",
+            ContentType::OsInventory => "OS_INVENTORY",
+            ContentType::Relationship => "RELATIONSHIP",
+        }
+    }
+}
 /// Generated client implementations.
 pub mod asset_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Asset service definition.
     #[derive(Debug, Clone)]
     pub struct AssetServiceClient<T> {
@@ -2171,6 +2256,10 @@ pub mod asset_service_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -2192,19 +2281,19 @@ pub mod asset_service_client {
         {
             AssetServiceClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Exports assets with time and resource types to a given Cloud Storage

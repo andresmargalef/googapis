@@ -284,6 +284,21 @@ pub mod document {
                 /// Turn the head 90 degrees counterclockwise from upright to read.
                 PageLeft = 4,
             }
+            impl Orientation {
+                /// String value of the enum field names used in the ProtoBuf definition.
+                ///
+                /// The values are not transformed in any way and thus are considered stable
+                /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+                pub fn as_str_name(&self) -> &'static str {
+                    match self {
+                        Orientation::Unspecified => "ORIENTATION_UNSPECIFIED",
+                        Orientation::PageUp => "PAGE_UP",
+                        Orientation::PageRight => "PAGE_RIGHT",
+                        Orientation::PageDown => "PAGE_DOWN",
+                        Orientation::PageLeft => "PAGE_LEFT",
+                    }
+                }
+            }
         }
         /// A block has a set of lines (collected into paragraphs) that have a
         /// common line-spacing and orientation.
@@ -365,6 +380,20 @@ pub mod document {
                     WideSpace = 2,
                     /// A hyphen that indicates that a token has been split across lines.
                     Hyphen = 3,
+                }
+                impl Type {
+                    /// String value of the enum field names used in the ProtoBuf definition.
+                    ///
+                    /// The values are not transformed in any way and thus are considered stable
+                    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+                    pub fn as_str_name(&self) -> &'static str {
+                        match self {
+                            Type::Unspecified => "TYPE_UNSPECIFIED",
+                            Type::Space => "SPACE",
+                            Type::WideSpace => "WIDE_SPACE",
+                            Type::Hyphen => "HYPHEN",
+                        }
+                    }
                 }
             }
         }
@@ -654,6 +683,24 @@ pub mod document {
                 /// References a \[Page.form_fields][google.cloud.documentai.v1.Document.Page.form_fields\] element.
                 FormField = 7,
             }
+            impl LayoutType {
+                /// String value of the enum field names used in the ProtoBuf definition.
+                ///
+                /// The values are not transformed in any way and thus are considered stable
+                /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+                pub fn as_str_name(&self) -> &'static str {
+                    match self {
+                        LayoutType::Unspecified => "LAYOUT_TYPE_UNSPECIFIED",
+                        LayoutType::Block => "BLOCK",
+                        LayoutType::Paragraph => "PARAGRAPH",
+                        LayoutType::Line => "LINE",
+                        LayoutType::Token => "TOKEN",
+                        LayoutType::VisualElement => "VISUAL_ELEMENT",
+                        LayoutType::Table => "TABLE",
+                        LayoutType::FormField => "FORM_FIELD",
+                    }
+                }
+            }
         }
     }
     /// Structure to identify provenance relationships between annotations in
@@ -713,6 +760,23 @@ pub mod document {
             EvalApproved = 5,
             /// Element is skipped in the validation process.
             EvalSkipped = 6,
+        }
+        impl OperationType {
+            /// String value of the enum field names used in the ProtoBuf definition.
+            ///
+            /// The values are not transformed in any way and thus are considered stable
+            /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+            pub fn as_str_name(&self) -> &'static str {
+                match self {
+                    OperationType::Unspecified => "OPERATION_TYPE_UNSPECIFIED",
+                    OperationType::Add => "ADD",
+                    OperationType::Remove => "REMOVE",
+                    OperationType::Replace => "REPLACE",
+                    OperationType::EvalRequested => "EVAL_REQUESTED",
+                    OperationType::EvalApproved => "EVAL_APPROVED",
+                    OperationType::EvalSkipped => "EVAL_SKIPPED",
+                }
+            }
         }
     }
     /// Contains past or forward revisions of this document.
@@ -783,10 +847,10 @@ pub mod document {
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Source {
         /// Optional. Currently supports Google Cloud Storage URI of the form
-        ///    `gs://bucket_name/object_name`. Object versioning is not supported.
-        ///    See [Google Cloud Storage Request
-        ///    URIs](<https://cloud.google.com/storage/docs/reference-uris>) for more
-        ///    info.
+        ///     `gs://bucket_name/object_name`. Object versioning is not supported.
+        ///     See [Google Cloud Storage Request
+        ///     URIs](<https://cloud.google.com/storage/docs/reference-uris>) for more
+        ///     info.
         #[prost(string, tag="1")]
         Uri(::prost::alloc::string::String),
         /// Optional. Inline document content, represented as a stream of bytes.
@@ -911,6 +975,22 @@ pub mod common_operation_metadata {
         /// Operation is cancelled.
         Cancelled = 5,
     }
+    impl State {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                State::Unspecified => "STATE_UNSPECIFIED",
+                State::Running => "RUNNING",
+                State::Cancelling => "CANCELLING",
+                State::Succeeded => "SUCCEEDED",
+                State::Failed => "FAILED",
+                State::Cancelled => "CANCELLED",
+            }
+        }
+    }
 }
 /// Request message for the process document method.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -974,6 +1054,21 @@ pub mod human_review_status {
         /// Some error happened during triggering human review, see the
         /// \[state_message\] for details.
         Error = 4,
+    }
+    impl State {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                State::Unspecified => "STATE_UNSPECIFIED",
+                State::Skipped => "SKIPPED",
+                State::ValidationPassed => "VALIDATION_PASSED",
+                State::InProgress => "IN_PROGRESS",
+                State::Error => "ERROR",
+            }
+        }
     }
 }
 /// Response message for the process document method.
@@ -1069,6 +1164,23 @@ pub mod batch_process_metadata {
         /// The batch processing has failed.
         Failed = 6,
     }
+    impl State {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                State::Unspecified => "STATE_UNSPECIFIED",
+                State::Waiting => "WAITING",
+                State::Running => "RUNNING",
+                State::Succeeded => "SUCCEEDED",
+                State::Cancelling => "CANCELLING",
+                State::Cancelled => "CANCELLED",
+                State::Failed => "FAILED",
+            }
+        }
+    }
 }
 /// Request message for review document method.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -1099,6 +1211,18 @@ pub mod review_document_request {
         /// resource to the urgent task queue to respect this priority level.
         Urgent = 1,
     }
+    impl Priority {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Priority::Default => "DEFAULT",
+                Priority::Urgent => "URGENT",
+            }
+        }
+    }
     /// The document payload.
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Source {
@@ -1125,6 +1249,7 @@ pub struct ReviewDocumentOperationMetadata {
 pub mod document_processor_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Service to call Cloud DocumentAI to process documents according to the
     /// processor's definition. Processors are built using state-of-the-art Google
     /// AI such as natural language, computer vision, and translation to extract
@@ -1142,6 +1267,10 @@ pub mod document_processor_service_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -1165,19 +1294,19 @@ pub mod document_processor_service_client {
                 InterceptedService::new(inner, interceptor),
             )
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Processes a single document.

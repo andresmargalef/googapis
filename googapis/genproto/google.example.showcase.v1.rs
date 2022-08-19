@@ -93,6 +93,7 @@ pub struct ComplianceDataGrandchild {
 pub mod compliance_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// This service is used to test that GAPICs can transcode proto3 requests to
     /// REST format correctly for various types of HTTP annotations......
     #[derive(Debug, Clone)]
@@ -108,6 +109,10 @@ pub mod compliance_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -129,19 +134,19 @@ pub mod compliance_client {
         {
             ComplianceClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// This method echoes the ComplianceData request. This method exercises
@@ -427,10 +432,25 @@ pub enum Severity {
     /// Critical.
     Critical = 3,
 }
+impl Severity {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            Severity::Unnecessary => "UNNECESSARY",
+            Severity::Necessary => "NECESSARY",
+            Severity::Urgent => "URGENT",
+            Severity::Critical => "CRITICAL",
+        }
+    }
+}
 /// Generated client implementations.
 pub mod echo_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// This service is used showcase the four main types of rpcs - unary, server
     /// side streaming, client side streaming, and bidirectional streaming. This
     /// service also exposes methods that explicitly implement server delay, and
@@ -449,6 +469,10 @@ pub mod echo_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -470,19 +494,19 @@ pub mod echo_client {
         {
             EchoClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// This method simply echoes the request. This method showcases unary RPCs.
@@ -720,6 +744,7 @@ pub struct GetSequenceReportRequest {
 pub mod sequence_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     #[derive(Debug, Clone)]
     pub struct SequenceServiceClient<T> {
         inner: tonic::client::Grpc<T>,
@@ -733,6 +758,10 @@ pub mod sequence_service_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -754,19 +783,19 @@ pub mod sequence_service_client {
         {
             SequenceServiceClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Creates a sequence.
@@ -860,6 +889,19 @@ pub mod session {
         /// v1.0. (Until the spec is "GA", this will be a moving target.)
         V10 = 2,
     }
+    impl Version {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Version::Unspecified => "VERSION_UNSPECIFIED",
+                Version::V1Latest => "V1_LATEST",
+                Version::V10 => "V1_0",
+            }
+        }
+    }
 }
 /// The request for the CreateSession method.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -935,6 +977,20 @@ pub mod report_session_response {
         Failed = 2,
         /// The session is incomplete. This is a failure response.
         Incomplete = 3,
+    }
+    impl Result {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Result::Unspecified => "RESULT_UNSPECIFIED",
+                Result::Passed => "PASSED",
+                Result::Failed => "FAILED",
+                Result::Incomplete => "INCOMPLETE",
+            }
+        }
     }
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -1016,6 +1072,20 @@ pub mod test {
         /// warning.
         Optional = 3,
     }
+    impl ExpectationLevel {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ExpectationLevel::Unspecified => "EXPECTATION_LEVEL_UNSPECIFIED",
+                ExpectationLevel::Required => "REQUIRED",
+                ExpectationLevel::Recommended => "RECOMMENDED",
+                ExpectationLevel::Optional => "OPTIONAL",
+            }
+        }
+    }
 }
 /// An issue found in the test.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -1045,6 +1115,20 @@ pub mod issue {
         /// value when the generator tried to confirm success.
         IncorrectConfirmation = 3,
     }
+    impl Type {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Type::Unspecified => "TYPE_UNSPECIFIED",
+                Type::Skipped => "SKIPPED",
+                Type::Pending => "PENDING",
+                Type::IncorrectConfirmation => "INCORRECT_CONFIRMATION",
+            }
+        }
+    }
     /// Severity levels.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -1054,6 +1138,19 @@ pub mod issue {
         Error = 1,
         /// Warnings.
         Warning = 2,
+    }
+    impl Severity {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Severity::Unspecified => "SEVERITY_UNSPECIFIED",
+                Severity::Error => "ERROR",
+                Severity::Warning => "WARNING",
+            }
+        }
     }
 }
 /// The request for the ListTests method.
@@ -1122,6 +1219,7 @@ pub struct VerifyTestResponse {
 pub mod testing_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// A service to facilitate running discrete sets of tests
     /// against Showcase.
     #[derive(Debug, Clone)]
@@ -1137,6 +1235,10 @@ pub mod testing_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -1158,19 +1260,19 @@ pub mod testing_client {
         {
             TestingClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Creates a new testing session.

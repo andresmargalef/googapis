@@ -42,6 +42,18 @@ pub mod api_warning {
         /// set may be incomplete.
         RegionUnreachable = 1,
     }
+    impl SqlApiWarningCode {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                SqlApiWarningCode::Unspecified => "SQL_API_WARNING_CODE_UNSPECIFIED",
+                SqlApiWarningCode::RegionUnreachable => "REGION_UNREACHABLE",
+            }
+        }
+    }
 }
 /// We currently only support backup retention by specifying the number
 /// of backups we will retain.
@@ -66,6 +78,18 @@ pub mod backup_retention_settings {
         Unspecified = 0,
         /// Retention will be by count, eg. "retain the most recent 7 backups".
         Count = 1,
+    }
+    impl RetentionUnit {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                RetentionUnit::Unspecified => "RETENTION_UNIT_UNSPECIFIED",
+                RetentionUnit::Count => "COUNT",
+            }
+        }
     }
 }
 /// Database instance backup configuration.
@@ -340,10 +364,10 @@ pub mod export_context {
         pub struct MysqlExportOptions {
             /// Option to include SQL statement required to set up replication.
             /// *  If set to **1**, the dump file includes
-            ///  a CHANGE MASTER TO statement with the binary log coordinates,
-            ///  and --set-gtid-purged is set to ON.
+            ///   a CHANGE MASTER TO statement with the binary log coordinates,
+            ///   and --set-gtid-purged is set to ON.
             /// *  If set to **2**, the CHANGE MASTER TO statement is written as
-            ///  a SQL comment and has no effect.
+            ///   a SQL comment and has no effect.
             /// *  If set to any value other than **1**, --set-gtid-purged is set
             /// to OFF.
             #[prost(message, optional, tag="1")]
@@ -793,6 +817,51 @@ pub mod operation {
         /// instance.
         StartExternalSync = 35,
     }
+    impl SqlOperationType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                SqlOperationType::Unspecified => "SQL_OPERATION_TYPE_UNSPECIFIED",
+                SqlOperationType::Import => "IMPORT",
+                SqlOperationType::Export => "EXPORT",
+                SqlOperationType::Create => "CREATE",
+                SqlOperationType::Update => "UPDATE",
+                SqlOperationType::Delete => "DELETE",
+                SqlOperationType::Restart => "RESTART",
+                SqlOperationType::Backup => "BACKUP",
+                SqlOperationType::Snapshot => "SNAPSHOT",
+                SqlOperationType::BackupVolume => "BACKUP_VOLUME",
+                SqlOperationType::DeleteVolume => "DELETE_VOLUME",
+                SqlOperationType::RestoreVolume => "RESTORE_VOLUME",
+                SqlOperationType::InjectUser => "INJECT_USER",
+                SqlOperationType::Clone => "CLONE",
+                SqlOperationType::StopReplica => "STOP_REPLICA",
+                SqlOperationType::StartReplica => "START_REPLICA",
+                SqlOperationType::PromoteReplica => "PROMOTE_REPLICA",
+                SqlOperationType::CreateReplica => "CREATE_REPLICA",
+                SqlOperationType::CreateUser => "CREATE_USER",
+                SqlOperationType::DeleteUser => "DELETE_USER",
+                SqlOperationType::UpdateUser => "UPDATE_USER",
+                SqlOperationType::CreateDatabase => "CREATE_DATABASE",
+                SqlOperationType::DeleteDatabase => "DELETE_DATABASE",
+                SqlOperationType::UpdateDatabase => "UPDATE_DATABASE",
+                SqlOperationType::Failover => "FAILOVER",
+                SqlOperationType::DeleteBackup => "DELETE_BACKUP",
+                SqlOperationType::RecreateReplica => "RECREATE_REPLICA",
+                SqlOperationType::TruncateLog => "TRUNCATE_LOG",
+                SqlOperationType::DemoteMaster => "DEMOTE_MASTER",
+                SqlOperationType::Maintenance => "MAINTENANCE",
+                SqlOperationType::EnablePrivateIp => "ENABLE_PRIVATE_IP",
+                SqlOperationType::DeferMaintenance => "DEFER_MAINTENANCE",
+                SqlOperationType::CreateClone => "CREATE_CLONE",
+                SqlOperationType::RescheduleMaintenance => "RESCHEDULE_MAINTENANCE",
+                SqlOperationType::StartExternalSync => "START_EXTERNAL_SYNC",
+            }
+        }
+    }
     /// The status of an operation.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -805,6 +874,20 @@ pub mod operation {
         Running = 2,
         /// The operation completed.
         Done = 3,
+    }
+    impl SqlOperationStatus {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                SqlOperationStatus::Unspecified => "SQL_OPERATION_STATUS_UNSPECIFIED",
+                SqlOperationStatus::Pending => "PENDING",
+                SqlOperationStatus::Running => "RUNNING",
+                SqlOperationStatus::Done => "DONE",
+            }
+        }
     }
 }
 /// Database instance operation error.
@@ -960,6 +1043,20 @@ pub mod settings {
         /// The instance starts upon receiving requests.
         OnDemand = 3,
     }
+    impl SqlActivationPolicy {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                SqlActivationPolicy::Unspecified => "SQL_ACTIVATION_POLICY_UNSPECIFIED",
+                SqlActivationPolicy::Always => "ALWAYS",
+                SqlActivationPolicy::Never => "NEVER",
+                SqlActivationPolicy::OnDemand => "ON_DEMAND",
+            }
+        }
+    }
 }
 /// SslCerts Resource
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -1038,6 +1135,20 @@ pub enum SqlFileType {
     Csv = 2,
     Bak = 4,
 }
+impl SqlFileType {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            SqlFileType::Unspecified => "SQL_FILE_TYPE_UNSPECIFIED",
+            SqlFileType::Sql => "SQL",
+            SqlFileType::Csv => "CSV",
+            SqlFileType::Bak => "BAK",
+        }
+    }
+}
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum SqlBackendType {
@@ -1049,6 +1160,20 @@ pub enum SqlBackendType {
     SecondGen = 2,
     /// On premises instance.
     External = 3,
+}
+impl SqlBackendType {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            SqlBackendType::Unspecified => "SQL_BACKEND_TYPE_UNSPECIFIED",
+            SqlBackendType::FirstGen => "FIRST_GEN",
+            SqlBackendType::SecondGen => "SECOND_GEN",
+            SqlBackendType::External => "EXTERNAL",
+        }
+    }
 }
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
@@ -1069,6 +1194,21 @@ pub enum SqlIpAddressType {
     /// decommission this IP as soon as the migration is complete.
     /// Note: V1 instances with V1 ip addresses will be counted as PRIMARY.
     Migrated1stGen = 4,
+}
+impl SqlIpAddressType {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            SqlIpAddressType::Unspecified => "SQL_IP_ADDRESS_TYPE_UNSPECIFIED",
+            SqlIpAddressType::Primary => "PRIMARY",
+            SqlIpAddressType::Outgoing => "OUTGOING",
+            SqlIpAddressType::Private => "PRIVATE",
+            SqlIpAddressType::Migrated1stGen => "MIGRATED_1ST_GEN",
+        }
+    }
 }
 /// The database engine type and version.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -1111,6 +1251,34 @@ pub enum SqlDatabaseVersion {
     /// The database version is SQL Server 2019 Web.
     Sqlserver2019Web = 29,
 }
+impl SqlDatabaseVersion {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            SqlDatabaseVersion::Unspecified => "SQL_DATABASE_VERSION_UNSPECIFIED",
+            SqlDatabaseVersion::Mysql51 => "MYSQL_5_1",
+            SqlDatabaseVersion::Mysql55 => "MYSQL_5_5",
+            SqlDatabaseVersion::Mysql56 => "MYSQL_5_6",
+            SqlDatabaseVersion::Mysql57 => "MYSQL_5_7",
+            SqlDatabaseVersion::Postgres96 => "POSTGRES_9_6",
+            SqlDatabaseVersion::Postgres11 => "POSTGRES_11",
+            SqlDatabaseVersion::Sqlserver2017Standard => "SQLSERVER_2017_STANDARD",
+            SqlDatabaseVersion::Sqlserver2017Enterprise => "SQLSERVER_2017_ENTERPRISE",
+            SqlDatabaseVersion::Sqlserver2017Express => "SQLSERVER_2017_EXPRESS",
+            SqlDatabaseVersion::Sqlserver2017Web => "SQLSERVER_2017_WEB",
+            SqlDatabaseVersion::Postgres10 => "POSTGRES_10",
+            SqlDatabaseVersion::Postgres12 => "POSTGRES_12",
+            SqlDatabaseVersion::Postgres13 => "POSTGRES_13",
+            SqlDatabaseVersion::Sqlserver2019Standard => "SQLSERVER_2019_STANDARD",
+            SqlDatabaseVersion::Sqlserver2019Enterprise => "SQLSERVER_2019_ENTERPRISE",
+            SqlDatabaseVersion::Sqlserver2019Express => "SQLSERVER_2019_EXPRESS",
+            SqlDatabaseVersion::Sqlserver2019Web => "SQLSERVER_2019_WEB",
+        }
+    }
+}
 /// The pricing plan for this instance.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
@@ -1121,6 +1289,19 @@ pub enum SqlPricingPlan {
     Package = 1,
     /// The instance is billed per usage.
     PerUse = 2,
+}
+impl SqlPricingPlan {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            SqlPricingPlan::Unspecified => "SQL_PRICING_PLAN_UNSPECIFIED",
+            SqlPricingPlan::Package => "PACKAGE",
+            SqlPricingPlan::PerUse => "PER_USE",
+        }
+    }
 }
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
@@ -1136,6 +1317,19 @@ pub enum SqlReplicationType {
     /// to your data.
     Asynchronous = 2,
 }
+impl SqlReplicationType {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            SqlReplicationType::Unspecified => "SQL_REPLICATION_TYPE_UNSPECIFIED",
+            SqlReplicationType::Synchronous => "SYNCHRONOUS",
+            SqlReplicationType::Asynchronous => "ASYNCHRONOUS",
+        }
+    }
+}
 /// The type of disk that is used for a v2 instance to use.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
@@ -1150,6 +1344,20 @@ pub enum SqlDataDiskType {
     /// API.
     ObsoleteLocalSsd = 3,
 }
+impl SqlDataDiskType {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            SqlDataDiskType::Unspecified => "SQL_DATA_DISK_TYPE_UNSPECIFIED",
+            SqlDataDiskType::PdSsd => "PD_SSD",
+            SqlDataDiskType::PdHdd => "PD_HDD",
+            SqlDataDiskType::ObsoleteLocalSsd => "OBSOLETE_LOCAL_SSD",
+        }
+    }
+}
 /// The availability type of the given Cloud SQL instance.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
@@ -1160,6 +1368,19 @@ pub enum SqlAvailabilityType {
     Zonal = 1,
     /// Regional available instance.
     Regional = 2,
+}
+impl SqlAvailabilityType {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            SqlAvailabilityType::Unspecified => "SQL_AVAILABILITY_TYPE_UNSPECIFIED",
+            SqlAvailabilityType::Zonal => "ZONAL",
+            SqlAvailabilityType::Regional => "REGIONAL",
+        }
+    }
 }
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
@@ -1174,6 +1395,19 @@ pub enum SqlUpdateTrack {
     /// your instance prefer to let Cloud SQL choose the timing of restart (within
     /// its Maintenance window, if applicable).
     Stable = 2,
+}
+impl SqlUpdateTrack {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            SqlUpdateTrack::Unspecified => "SQL_UPDATE_TRACK_UNSPECIFIED",
+            SqlUpdateTrack::Canary => "canary",
+            SqlUpdateTrack::Stable => "stable",
+        }
+    }
 }
 /// Backup runs delete request.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -1338,6 +1572,26 @@ pub enum SqlBackupRunStatus {
     /// The backup has been deleted.
     Deleted = 9,
 }
+impl SqlBackupRunStatus {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            SqlBackupRunStatus::Unspecified => "SQL_BACKUP_RUN_STATUS_UNSPECIFIED",
+            SqlBackupRunStatus::Enqueued => "ENQUEUED",
+            SqlBackupRunStatus::Overdue => "OVERDUE",
+            SqlBackupRunStatus::Running => "RUNNING",
+            SqlBackupRunStatus::Failed => "FAILED",
+            SqlBackupRunStatus::Successful => "SUCCESSFUL",
+            SqlBackupRunStatus::Skipped => "SKIPPED",
+            SqlBackupRunStatus::DeletionPending => "DELETION_PENDING",
+            SqlBackupRunStatus::DeletionFailed => "DELETION_FAILED",
+            SqlBackupRunStatus::Deleted => "DELETED",
+        }
+    }
+}
 /// Defines the supported backup kinds.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
@@ -1348,6 +1602,19 @@ pub enum SqlBackupKind {
     Snapshot = 1,
     /// Physical backups
     Physical = 2,
+}
+impl SqlBackupKind {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            SqlBackupKind::Unspecified => "SQL_BACKUP_KIND_UNSPECIFIED",
+            SqlBackupKind::Snapshot => "SNAPSHOT",
+            SqlBackupKind::Physical => "PHYSICAL",
+        }
+    }
 }
 /// Type of backup (i.e. automated, on demand, etc).
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -1360,10 +1627,24 @@ pub enum SqlBackupRunType {
     /// The user manually triggers a backup.
     OnDemand = 2,
 }
+impl SqlBackupRunType {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            SqlBackupRunType::Unspecified => "SQL_BACKUP_RUN_TYPE_UNSPECIFIED",
+            SqlBackupRunType::Automated => "AUTOMATED",
+            SqlBackupRunType::OnDemand => "ON_DEMAND",
+        }
+    }
+}
 /// Generated client implementations.
 pub mod sql_backup_runs_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Service for managing database backups.
     #[derive(Debug, Clone)]
     pub struct SqlBackupRunsServiceClient<T> {
@@ -1378,6 +1659,10 @@ pub mod sql_backup_runs_service_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -1399,19 +1684,19 @@ pub mod sql_backup_runs_service_client {
         {
             SqlBackupRunsServiceClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Deletes the backup taken by a backup run.
@@ -1529,11 +1814,11 @@ pub struct ConnectSettings {
     pub region: ::prost::alloc::string::String,
     /// The database engine type and version. The **databaseVersion**
     /// field cannot be changed after instance creation.
-    ///   MySQL instances: **MYSQL_8_0**, **MYSQL_5_7** (default),
+    ///    MySQL instances: **MYSQL_8_0**, **MYSQL_5_7** (default),
     /// or **MYSQL_5_6**.
-    ///   PostgreSQL instances: **POSTGRES_9_6**, **POSTGRES_10**,
+    ///    PostgreSQL instances: **POSTGRES_9_6**, **POSTGRES_10**,
     /// **POSTGRES_11** or **POSTGRES_12** (default).
-    ///   SQL Server instances: **SQLSERVER_2017_STANDARD** (default),
+    ///    SQL Server instances: **SQLSERVER_2017_STANDARD** (default),
     /// **SQLSERVER_2017_ENTERPRISE**, **SQLSERVER_2017_EXPRESS**, or
     /// **SQLSERVER_2017_WEB**.
     #[prost(enumeration="SqlDatabaseVersion", tag="31")]
@@ -1575,6 +1860,7 @@ pub struct GenerateEphemeralCertResponse {
 pub mod sql_connect_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Cloud SQL connect service.
     #[derive(Debug, Clone)]
     pub struct SqlConnectServiceClient<T> {
@@ -1589,6 +1875,10 @@ pub mod sql_connect_service_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -1610,19 +1900,19 @@ pub mod sql_connect_service_client {
         {
             SqlConnectServiceClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Retrieves connect settings about a Cloud SQL instance.
@@ -1750,6 +2040,7 @@ pub struct DatabasesListResponse {
 pub mod sql_databases_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Service to manage databases.
     #[derive(Debug, Clone)]
     pub struct SqlDatabasesServiceClient<T> {
@@ -1764,6 +2055,10 @@ pub mod sql_databases_service_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -1785,19 +2080,19 @@ pub mod sql_databases_service_client {
         {
             SqlDatabasesServiceClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Deletes a database from a Cloud SQL instance.
@@ -2005,10 +2300,29 @@ pub enum SqlFlagType {
     /// Comma-separated list of the strings in a SqlFlagType enum.
     RepeatedString = 7,
 }
+impl SqlFlagType {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            SqlFlagType::Unspecified => "SQL_FLAG_TYPE_UNSPECIFIED",
+            SqlFlagType::Boolean => "BOOLEAN",
+            SqlFlagType::String => "STRING",
+            SqlFlagType::Integer => "INTEGER",
+            SqlFlagType::None => "NONE",
+            SqlFlagType::MysqlTimezoneOffset => "MYSQL_TIMEZONE_OFFSET",
+            SqlFlagType::Float => "FLOAT",
+            SqlFlagType::RepeatedString => "REPEATED_STRING",
+        }
+    }
+}
 /// Generated client implementations.
 pub mod sql_flags_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Service to manage database flags for Cloud SQL instances.
     #[derive(Debug, Clone)]
     pub struct SqlFlagsServiceClient<T> {
@@ -2023,6 +2337,10 @@ pub mod sql_flags_service_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -2044,19 +2362,19 @@ pub mod sql_flags_service_client {
         {
             SqlFlagsServiceClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Lists all available database flags for Cloud SQL instances.
@@ -2085,6 +2403,7 @@ pub mod sql_flags_service_client {
 pub mod sql_instance_names_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Cloud SQL instance names service.
     #[derive(Debug, Clone)]
     pub struct SqlInstanceNamesServiceClient<T> {
@@ -2099,6 +2418,10 @@ pub mod sql_instance_names_service_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -2122,19 +2445,19 @@ pub mod sql_instance_names_service_client {
                 InterceptedService::new(inner, interceptor),
             )
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
     }
@@ -2431,6 +2754,19 @@ pub mod sql_instances_verify_external_sync_settings_request {
         /// Offline external sync only dumps and loads a one-time snapshot of
         /// the primary instance's data
         Offline = 2,
+    }
+    impl ExternalSyncMode {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ExternalSyncMode::Unspecified => "EXTERNAL_SYNC_MODE_UNSPECIFIED",
+                ExternalSyncMode::Online => "ONLINE",
+                ExternalSyncMode::Offline => "OFFLINE",
+            }
+        }
     }
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum SyncConfig {
@@ -2776,9 +3112,9 @@ pub struct DatabaseInstance {
     /// This field represents the report generated by the proactive database
     /// wellness job for OutOfDisk issues.
     /// *  Writers:
-    ///   *  the proactive database wellness job for OOD.
+    ///    *  the proactive database wellness job for OOD.
     /// *  Readers:
-    ///   *  the proactive database wellness job
+    ///    *  the proactive database wellness job
     #[prost(message, optional, tag="38")]
     pub out_of_disk_report: ::core::option::Option<database_instance::SqlOutOfDiskReport>,
     /// Output only. The time when the instance was created in
@@ -2824,15 +3160,15 @@ pub mod database_instance {
         /// This field represents the state generated by the proactive database
         /// wellness job for OutOfDisk issues.
         /// *  Writers:
-        ///   *  the proactive database wellness job for OOD.
+        ///    *  the proactive database wellness job for OOD.
         /// *  Readers:
-        ///   *  the proactive database wellness job
+        ///    *  the proactive database wellness job
         #[prost(enumeration="sql_out_of_disk_report::SqlOutOfDiskState", optional, tag="1")]
         pub sql_out_of_disk_state: ::core::option::Option<i32>,
         /// The minimum recommended increase size in GigaBytes
         /// This field is consumed by the frontend
         /// *  Writers:
-        ///   *  the proactive database wellness job for OOD.
+        ///    *  the proactive database wellness job for OOD.
         /// *  Readers:
         #[prost(int32, optional, tag="2")]
         pub sql_min_recommended_increase_size_gb: ::core::option::Option<i32>,
@@ -2850,6 +3186,19 @@ pub mod database_instance {
             /// Data disk is almost used up. It is shutdown to prevent data
             /// corruption.
             SoftShutdown = 2,
+        }
+        impl SqlOutOfDiskState {
+            /// String value of the enum field names used in the ProtoBuf definition.
+            ///
+            /// The values are not transformed in any way and thus are considered stable
+            /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+            pub fn as_str_name(&self) -> &'static str {
+                match self {
+                    SqlOutOfDiskState::Unspecified => "SQL_OUT_OF_DISK_STATE_UNSPECIFIED",
+                    SqlOutOfDiskState::Normal => "NORMAL",
+                    SqlOutOfDiskState::SoftShutdown => "SOFT_SHUTDOWN",
+                }
+            }
         }
     }
     /// The current serving state of the database instance.
@@ -2874,6 +3223,24 @@ pub mod database_instance {
         /// The instance is under maintenance operations and the database is
         /// available.
         OnlineMaintenance = 7,
+    }
+    impl SqlInstanceState {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                SqlInstanceState::Unspecified => "SQL_INSTANCE_STATE_UNSPECIFIED",
+                SqlInstanceState::Runnable => "RUNNABLE",
+                SqlInstanceState::Suspended => "SUSPENDED",
+                SqlInstanceState::PendingDelete => "PENDING_DELETE",
+                SqlInstanceState::PendingCreate => "PENDING_CREATE",
+                SqlInstanceState::Maintenance => "MAINTENANCE",
+                SqlInstanceState::Failed => "FAILED",
+                SqlInstanceState::OnlineMaintenance => "ONLINE_MAINTENANCE",
+            }
+        }
     }
 }
 /// Reschedule options for maintenance windows.
@@ -2908,6 +3275,20 @@ pub mod sql_instances_reschedule_maintenance_request_body {
         NextAvailableWindow = 2,
         /// Reschedules maintenance to a specific time and day.
         SpecificTime = 3,
+    }
+    impl RescheduleType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                RescheduleType::Unspecified => "RESCHEDULE_TYPE_UNSPECIFIED",
+                RescheduleType::Immediate => "IMMEDIATE",
+                RescheduleType::NextAvailableWindow => "NEXT_AVAILABLE_WINDOW",
+                RescheduleType::SpecificTime => "SPECIFIC_TIME",
+            }
+        }
     }
 }
 /// Database instance demote primary instance context.
@@ -3056,6 +3437,42 @@ pub mod sql_external_sync_setting_error {
         /// The primary instance's binary log retention setting.
         BinlogRetentionSetting = 25,
     }
+    impl SqlExternalSyncSettingErrorType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                SqlExternalSyncSettingErrorType::Unspecified => "SQL_EXTERNAL_SYNC_SETTING_ERROR_TYPE_UNSPECIFIED",
+                SqlExternalSyncSettingErrorType::ConnectionFailure => "CONNECTION_FAILURE",
+                SqlExternalSyncSettingErrorType::BinlogNotEnabled => "BINLOG_NOT_ENABLED",
+                SqlExternalSyncSettingErrorType::IncompatibleDatabaseVersion => "INCOMPATIBLE_DATABASE_VERSION",
+                SqlExternalSyncSettingErrorType::ReplicaAlreadySetup => "REPLICA_ALREADY_SETUP",
+                SqlExternalSyncSettingErrorType::InsufficientPrivilege => "INSUFFICIENT_PRIVILEGE",
+                SqlExternalSyncSettingErrorType::UnsupportedMigrationType => "UNSUPPORTED_MIGRATION_TYPE",
+                SqlExternalSyncSettingErrorType::NoPglogicalInstalled => "NO_PGLOGICAL_INSTALLED",
+                SqlExternalSyncSettingErrorType::PglogicalNodeAlreadyExists => "PGLOGICAL_NODE_ALREADY_EXISTS",
+                SqlExternalSyncSettingErrorType::InvalidWalLevel => "INVALID_WAL_LEVEL",
+                SqlExternalSyncSettingErrorType::InvalidSharedPreloadLibrary => "INVALID_SHARED_PRELOAD_LIBRARY",
+                SqlExternalSyncSettingErrorType::InsufficientMaxReplicationSlots => "INSUFFICIENT_MAX_REPLICATION_SLOTS",
+                SqlExternalSyncSettingErrorType::InsufficientMaxWalSenders => "INSUFFICIENT_MAX_WAL_SENDERS",
+                SqlExternalSyncSettingErrorType::InsufficientMaxWorkerProcesses => "INSUFFICIENT_MAX_WORKER_PROCESSES",
+                SqlExternalSyncSettingErrorType::UnsupportedExtensions => "UNSUPPORTED_EXTENSIONS",
+                SqlExternalSyncSettingErrorType::InvalidRdsLogicalReplication => "INVALID_RDS_LOGICAL_REPLICATION",
+                SqlExternalSyncSettingErrorType::InvalidLoggingSetup => "INVALID_LOGGING_SETUP",
+                SqlExternalSyncSettingErrorType::InvalidDbParam => "INVALID_DB_PARAM",
+                SqlExternalSyncSettingErrorType::UnsupportedGtidMode => "UNSUPPORTED_GTID_MODE",
+                SqlExternalSyncSettingErrorType::SqlserverAgentNotRunning => "SQLSERVER_AGENT_NOT_RUNNING",
+                SqlExternalSyncSettingErrorType::UnsupportedTableDefinition => "UNSUPPORTED_TABLE_DEFINITION",
+                SqlExternalSyncSettingErrorType::UnsupportedDefiner => "UNSUPPORTED_DEFINER",
+                SqlExternalSyncSettingErrorType::SqlserverServernameMismatch => "SQLSERVER_SERVERNAME_MISMATCH",
+                SqlExternalSyncSettingErrorType::PrimaryAlreadySetup => "PRIMARY_ALREADY_SETUP",
+                SqlExternalSyncSettingErrorType::UnsupportedBinlogFormat => "UNSUPPORTED_BINLOG_FORMAT",
+                SqlExternalSyncSettingErrorType::BinlogRetentionSetting => "BINLOG_RETENTION_SETTING",
+            }
+        }
+    }
 }
 /// On-premises instance configuration.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -3124,6 +3541,20 @@ pub enum SqlInstanceType {
     /// A Cloud SQL instance acting as a read-replica.
     ReadReplicaInstance = 3,
 }
+impl SqlInstanceType {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            SqlInstanceType::Unspecified => "SQL_INSTANCE_TYPE_UNSPECIFIED",
+            SqlInstanceType::CloudSqlInstance => "CLOUD_SQL_INSTANCE",
+            SqlInstanceType::OnPremisesInstance => "ON_PREMISES_INSTANCE",
+            SqlInstanceType::ReadReplicaInstance => "READ_REPLICA_INSTANCE",
+        }
+    }
+}
 /// The suspension reason of the database instance if the state is SUSPENDED.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
@@ -3142,10 +3573,26 @@ pub enum SqlSuspensionReason {
     /// The KMS key used by the instance is either revoked or denied access to
     KmsKeyIssue = 5,
 }
+impl SqlSuspensionReason {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            SqlSuspensionReason::Unspecified => "SQL_SUSPENSION_REASON_UNSPECIFIED",
+            SqlSuspensionReason::BillingIssue => "BILLING_ISSUE",
+            SqlSuspensionReason::LegalIssue => "LEGAL_ISSUE",
+            SqlSuspensionReason::OperationalIssue => "OPERATIONAL_ISSUE",
+            SqlSuspensionReason::KmsKeyIssue => "KMS_KEY_ISSUE",
+        }
+    }
+}
 /// Generated client implementations.
 pub mod sql_instances_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Service to manage Cloud SQL instances.
     #[derive(Debug, Clone)]
     pub struct SqlInstancesServiceClient<T> {
@@ -3160,6 +3607,10 @@ pub mod sql_instances_service_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -3181,19 +3632,19 @@ pub mod sql_instances_service_client {
         {
             SqlInstancesServiceClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Adds a new trusted Certificate Authority (CA) version for the specified
@@ -3784,6 +4235,7 @@ pub struct OperationsListResponse {
 pub mod sql_operations_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Service to fetch operations for database instances.
     #[derive(Debug, Clone)]
     pub struct SqlOperationsServiceClient<T> {
@@ -3798,6 +4250,10 @@ pub mod sql_operations_service_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -3819,19 +4275,19 @@ pub mod sql_operations_service_client {
         {
             SqlOperationsServiceClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Retrieves an instance operation that has been performed on an instance.
@@ -3961,6 +4417,7 @@ pub struct SslCertsListResponse {
 pub mod sql_ssl_certs_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Service to manage SSL certs for Cloud SQL instances.
     #[derive(Debug, Clone)]
     pub struct SqlSslCertsServiceClient<T> {
@@ -3975,6 +4432,10 @@ pub mod sql_ssl_certs_service_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -3996,19 +4457,19 @@ pub mod sql_ssl_certs_service_client {
         {
             SqlSslCertsServiceClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Deletes the SSL certificate. For First Generation instances, the
@@ -4139,6 +4600,7 @@ pub struct Tier {
 pub mod sql_tiers_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Service for providing machine types (tiers) for Cloud SQL instances.
     #[derive(Debug, Clone)]
     pub struct SqlTiersServiceClient<T> {
@@ -4153,6 +4615,10 @@ pub mod sql_tiers_service_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -4174,19 +4640,19 @@ pub mod sql_tiers_service_client {
         {
             SqlTiersServiceClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Lists all available machine types (tiers) for Cloud SQL, for example,
@@ -4319,6 +4785,19 @@ pub mod user {
         /// Cloud IAM service account.
         CloudIamServiceAccount = 2,
     }
+    impl SqlUserType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                SqlUserType::BuiltIn => "BUILT_IN",
+                SqlUserType::CloudIamUser => "CLOUD_IAM_USER",
+                SqlUserType::CloudIamServiceAccount => "CLOUD_IAM_SERVICE_ACCOUNT",
+            }
+        }
+    }
     /// User details for specific database type
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum UserDetails {
@@ -4355,6 +4834,7 @@ pub struct UsersListResponse {
 pub mod sql_users_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Cloud SQL users service.
     #[derive(Debug, Clone)]
     pub struct SqlUsersServiceClient<T> {
@@ -4369,6 +4849,10 @@ pub mod sql_users_service_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -4390,19 +4874,19 @@ pub mod sql_users_service_client {
         {
             SqlUsersServiceClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Deletes a user from a Cloud SQL instance.

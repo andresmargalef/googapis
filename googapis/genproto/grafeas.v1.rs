@@ -20,9 +20,9 @@ pub struct RelatedUrl {
 /// for quickly selecting a public key ALREADY CONFIGURED on the verifier through
 /// a trusted channel. Verification implementations MUST reject signatures in any
 /// of the following circumstances:
-///   * The `public_key_id` is not recognized by the verifier.
-///   * The public key that `public_key_id` refers to does not verify the
-///     signature with respect to the payload.
+///    * The `public_key_id` is not recognized by the verifier.
+///    * The public key that `public_key_id` refers to does not verify the
+///      signature with respect to the payload.
 ///
 /// The `signature` contents SHOULD NOT be "attached" (where the payload is
 /// included with the serialized `signature` bytes). Verifiers MUST ignore any
@@ -41,22 +41,22 @@ pub struct Signature {
     #[prost(bytes="vec", tag="1")]
     pub signature: ::prost::alloc::vec::Vec<u8>,
     /// The identifier for the public key that verifies this signature.
-    ///   * The `public_key_id` is required.
-    ///   * The `public_key_id` SHOULD be an RFC3986 conformant URI.
-    ///   * When possible, the `public_key_id` SHOULD be an immutable reference,
-    ///     such as a cryptographic digest.
+    ///    * The `public_key_id` is required.
+    ///    * The `public_key_id` SHOULD be an RFC3986 conformant URI.
+    ///    * When possible, the `public_key_id` SHOULD be an immutable reference,
+    ///      such as a cryptographic digest.
     ///
     /// Examples of valid `public_key_id`s:
     ///
     /// OpenPGP V4 public key fingerprint:
-    ///   * "openpgp4fpr:74FAF3B861BDA0870C7B6DEF607E48D2A663AEEA"
+    ///    * "openpgp4fpr:74FAF3B861BDA0870C7B6DEF607E48D2A663AEEA"
     /// See <https://www.iana.org/assignments/uri-schemes/prov/openpgp4fpr> for more
     /// details on this scheme.
     ///
     /// RFC6920 digest-named SubjectPublicKeyInfo (digest of the DER
     /// serialization):
-    ///   * "ni:///sha-256;cD9o9Cq6LG3jD0iKXqEi_vdjJGecm_iXkbqVoScViaU"
-    ///   * "nih:///sha-256;703f68f42aba2c6de30f488a5ea122fef76324679c9bf89791ba95a1271589a5"
+    ///    * "ni:///sha-256;cD9o9Cq6LG3jD0iKXqEi_vdjJGecm_iXkbqVoScViaU"
+    ///    * "nih:///sha-256;703f68f42aba2c6de30f488a5ea122fef76324679c9bf89791ba95a1271589a5"
     #[prost(string, tag="2")]
     pub public_key_id: ::prost::alloc::string::String,
 }
@@ -105,6 +105,27 @@ pub enum NoteKind {
     Compliance = 9,
     /// This represents a DSSE attestation Note
     DsseAttestation = 10,
+}
+impl NoteKind {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            NoteKind::Unspecified => "NOTE_KIND_UNSPECIFIED",
+            NoteKind::Vulnerability => "VULNERABILITY",
+            NoteKind::Build => "BUILD",
+            NoteKind::Image => "IMAGE",
+            NoteKind::Package => "PACKAGE",
+            NoteKind::Deployment => "DEPLOYMENT",
+            NoteKind::Discovery => "DISCOVERY",
+            NoteKind::Attestation => "ATTESTATION",
+            NoteKind::Upgrade => "UPGRADE",
+            NoteKind::Compliance => "COMPLIANCE",
+            NoteKind::DsseAttestation => "DSSE_ATTESTATION",
+        }
+    }
 }
 // An attestation wrapper with a PGP-compatible signature. This message only
 // supports `ATTACHED` signatures, where the payload that is signed is included
@@ -223,12 +244,40 @@ pub mod cvs_sv3 {
         Local = 3,
         Physical = 4,
     }
+    impl AttackVector {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AttackVector::Unspecified => "ATTACK_VECTOR_UNSPECIFIED",
+                AttackVector::Network => "ATTACK_VECTOR_NETWORK",
+                AttackVector::Adjacent => "ATTACK_VECTOR_ADJACENT",
+                AttackVector::Local => "ATTACK_VECTOR_LOCAL",
+                AttackVector::Physical => "ATTACK_VECTOR_PHYSICAL",
+            }
+        }
+    }
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
     pub enum AttackComplexity {
         Unspecified = 0,
         Low = 1,
         High = 2,
+    }
+    impl AttackComplexity {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AttackComplexity::Unspecified => "ATTACK_COMPLEXITY_UNSPECIFIED",
+                AttackComplexity::Low => "ATTACK_COMPLEXITY_LOW",
+                AttackComplexity::High => "ATTACK_COMPLEXITY_HIGH",
+            }
+        }
     }
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -238,12 +287,39 @@ pub mod cvs_sv3 {
         Low = 2,
         High = 3,
     }
+    impl PrivilegesRequired {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                PrivilegesRequired::Unspecified => "PRIVILEGES_REQUIRED_UNSPECIFIED",
+                PrivilegesRequired::None => "PRIVILEGES_REQUIRED_NONE",
+                PrivilegesRequired::Low => "PRIVILEGES_REQUIRED_LOW",
+                PrivilegesRequired::High => "PRIVILEGES_REQUIRED_HIGH",
+            }
+        }
+    }
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
     pub enum UserInteraction {
         Unspecified = 0,
         None = 1,
         Required = 2,
+    }
+    impl UserInteraction {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                UserInteraction::Unspecified => "USER_INTERACTION_UNSPECIFIED",
+                UserInteraction::None => "USER_INTERACTION_NONE",
+                UserInteraction::Required => "USER_INTERACTION_REQUIRED",
+            }
+        }
     }
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -252,6 +328,19 @@ pub mod cvs_sv3 {
         Unchanged = 1,
         Changed = 2,
     }
+    impl Scope {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Scope::Unspecified => "SCOPE_UNSPECIFIED",
+                Scope::Unchanged => "SCOPE_UNCHANGED",
+                Scope::Changed => "SCOPE_CHANGED",
+            }
+        }
+    }
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
     pub enum Impact {
@@ -259,6 +348,20 @@ pub mod cvs_sv3 {
         High = 1,
         Low = 2,
         None = 3,
+    }
+    impl Impact {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Impact::Unspecified => "IMPACT_UNSPECIFIED",
+                Impact::High => "IMPACT_HIGH",
+                Impact::Low => "IMPACT_LOW",
+                Impact::None => "IMPACT_NONE",
+            }
+        }
     }
 }
 /// This represents a particular channel of distribution for a given package.
@@ -369,6 +472,20 @@ pub mod version {
         /// A special version representing positive infinity.
         Maximum = 3,
     }
+    impl VersionKind {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                VersionKind::Unspecified => "VERSION_KIND_UNSPECIFIED",
+                VersionKind::Normal => "NORMAL",
+                VersionKind::Minimum => "MINIMUM",
+                VersionKind::Maximum => "MAXIMUM",
+            }
+        }
+    }
 }
 /// Instruction set architectures supported by various package managers.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -380,6 +497,19 @@ pub enum Architecture {
     X86 = 1,
     /// X64 architecture.
     X64 = 2,
+}
+impl Architecture {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            Architecture::Unspecified => "ARCHITECTURE_UNSPECIFIED",
+            Architecture::X86 => "X86",
+            Architecture::X64 => "X64",
+        }
+    }
 }
 /// A security vulnerability that can be found in resources.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -632,6 +762,22 @@ pub enum Severity {
     High = 4,
     /// Critical severity.
     Critical = 5,
+}
+impl Severity {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            Severity::Unspecified => "SEVERITY_UNSPECIFIED",
+            Severity::Minimal => "MINIMAL",
+            Severity::Low => "LOW",
+            Severity::Medium => "MEDIUM",
+            Severity::High => "HIGH",
+            Severity::Critical => "CRITICAL",
+        }
+    }
 }
 // Spec defined at
 // <https://github.com/in-toto/attestation/blob/main/spec/predicates/provenance.md>
@@ -1083,6 +1229,20 @@ pub mod alias_context {
         /// ref named "refs/foo/bar".
         Other = 4,
     }
+    impl Kind {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Kind::Unspecified => "KIND_UNSPECIFIED",
+                Kind::Fixed => "FIXED",
+                Kind::Movable => "MOVABLE",
+                Kind::Other => "OTHER",
+            }
+        }
+    }
 }
 /// A CloudRepoSourceContext denotes a particular revision in a Google Cloud
 /// Source Repo.
@@ -1348,6 +1508,20 @@ pub mod deployment_occurrence {
         /// Custom user-defined platform.
         Custom = 3,
     }
+    impl Platform {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Platform::Unspecified => "PLATFORM_UNSPECIFIED",
+                Platform::Gke => "GKE",
+                Platform::Flex => "FLEX",
+                Platform::Custom => "CUSTOM",
+            }
+        }
+    }
 }
 /// A note that indicates a type of analysis a provider would perform. This note
 /// exists in a provider's project. A `Discovery` occurrence is created in a
@@ -1393,6 +1567,19 @@ pub mod discovery_occurrence {
         /// The resource is ignored for continuous analysis.
         Inactive = 2,
     }
+    impl ContinuousAnalysis {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ContinuousAnalysis::Unspecified => "CONTINUOUS_ANALYSIS_UNSPECIFIED",
+                ContinuousAnalysis::Active => "ACTIVE",
+                ContinuousAnalysis::Inactive => "INACTIVE",
+            }
+        }
+    }
     /// Analysis status for a resource. Currently for initial analysis only (not
     /// updated in continuous analysis).
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -1411,6 +1598,22 @@ pub mod discovery_occurrence {
         FinishedFailed = 4,
         /// The resource is known not to be supported
         FinishedUnsupported = 5,
+    }
+    impl AnalysisStatus {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AnalysisStatus::Unspecified => "ANALYSIS_STATUS_UNSPECIFIED",
+                AnalysisStatus::Pending => "PENDING",
+                AnalysisStatus::Scanning => "SCANNING",
+                AnalysisStatus::FinishedSuccess => "FINISHED_SUCCESS",
+                AnalysisStatus::FinishedFailed => "FINISHED_FAILED",
+                AnalysisStatus::FinishedUnsupported => "FINISHED_UNSUPPORTED",
+            }
+        }
     }
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -1477,8 +1680,8 @@ pub struct Fingerprint {
     #[prost(string, repeated, tag="2")]
     pub v2_blob: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// Output only. The name of the image's v2 blobs computed via:
-    ///   \[bottom\] := v2_blob\[bottom\]
-    ///   \[N\] := sha256(v2_blob\[N\] + " " + v2_name\[N+1\])
+    ///    \[bottom\] := v2_blob\[bottom\]
+    ///    \[N\] := sha256(v2_blob\[N\] + " " + v2_name\[N+1\])
     /// Only the name of the final blob is kept.
     #[prost(string, tag="3")]
     pub v2_name: ::prost::alloc::string::String,
@@ -1486,7 +1689,7 @@ pub struct Fingerprint {
 /// Basis describes the base image portion (Note) of the DockerImage
 /// relationship. Linked occurrences are derived from this or an equivalent image
 /// via:
-///   FROM <Basis.resource_url>
+///    FROM <Basis.resource_url>
 /// Or an equivalent reference, e.g., a tag of the resource_url.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ImageNote {
@@ -2009,6 +2212,7 @@ pub struct BatchCreateOccurrencesResponse {
 pub mod grafeas_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// [Grafeas](https://grafeas.io) API.
     ///
     /// Retrieves analysis results of Cloud components such as Docker container
@@ -2038,6 +2242,10 @@ pub mod grafeas_client {
             let inner = tonic::client::Grpc::new(inner);
             Self { inner }
         }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
+            Self { inner }
+        }
         pub fn with_interceptor<F>(
             inner: T,
             interceptor: F,
@@ -2057,19 +2265,19 @@ pub mod grafeas_client {
         {
             GrafeasClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Gets the specified occurrence.

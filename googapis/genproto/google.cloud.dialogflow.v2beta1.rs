@@ -8,7 +8,7 @@ pub struct SpeechContext {
     /// This list can be used to:
     ///
     /// * improve accuracy for words and phrases you expect the user to say,
-    ///   e.g. typical commands for your Dialogflow agent
+    ///    e.g. typical commands for your Dialogflow agent
     /// * add additional words to the speech recognizer vocabulary
     /// * ...
     ///
@@ -20,9 +20,9 @@ pub struct SpeechContext {
     /// Optional. Boost for this context compared to other contexts:
     ///
     /// * If the boost is positive, Dialogflow will increase the probability that
-    ///   the phrases in this context are recognized over similar sounding phrases.
+    ///    the phrases in this context are recognized over similar sounding phrases.
     /// * If the boost is unspecified or non-positive, Dialogflow will not apply
-    ///   any boost.
+    ///    any boost.
     ///
     /// Dialogflow recommends that you use boosts in the range (0, 20] and that you
     /// find a value that fits your use case with binary search.
@@ -267,6 +267,24 @@ pub enum AudioEncoding {
     /// wideband is supported. `sample_rate_hertz` must be 16000.
     SpeexWithHeaderByte = 7,
 }
+impl AudioEncoding {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            AudioEncoding::Unspecified => "AUDIO_ENCODING_UNSPECIFIED",
+            AudioEncoding::Linear16 => "AUDIO_ENCODING_LINEAR_16",
+            AudioEncoding::Flac => "AUDIO_ENCODING_FLAC",
+            AudioEncoding::Mulaw => "AUDIO_ENCODING_MULAW",
+            AudioEncoding::Amr => "AUDIO_ENCODING_AMR",
+            AudioEncoding::AmrWb => "AUDIO_ENCODING_AMR_WB",
+            AudioEncoding::OggOpus => "AUDIO_ENCODING_OGG_OPUS",
+            AudioEncoding::SpeexWithHeaderByte => "AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE",
+        }
+    }
+}
 /// Variant of the specified [Speech model]\[google.cloud.dialogflow.v2beta1.InputAudioConfig.model\] to use.
 ///
 /// See the [Cloud Speech
@@ -295,18 +313,32 @@ pub enum SpeechModelVariant {
     /// Use an enhanced model variant:
     ///
     /// * If an enhanced variant does not exist for the given
-    ///   \[model][google.cloud.dialogflow.v2beta1.InputAudioConfig.model\] and request language, Dialogflow falls
-    ///   back to the standard variant.
+    ///    \[model][google.cloud.dialogflow.v2beta1.InputAudioConfig.model\] and request language, Dialogflow falls
+    ///    back to the standard variant.
     ///
-    ///   The [Cloud Speech
-    ///   documentation](<https://cloud.google.com/speech-to-text/docs/enhanced-models>)
-    ///   describes which models have enhanced variants.
+    ///    The [Cloud Speech
+    ///    documentation](<https://cloud.google.com/speech-to-text/docs/enhanced-models>)
+    ///    describes which models have enhanced variants.
     ///
     /// * If the API caller isn't eligible for enhanced models, Dialogflow returns
-    ///   an error.  Please see the [Dialogflow
-    ///   docs](<https://cloud.google.com/dialogflow/docs/data-logging>)
-    ///   for how to make your project eligible.
+    ///    an error.  Please see the [Dialogflow
+    ///    docs](<https://cloud.google.com/dialogflow/docs/data-logging>)
+    ///    for how to make your project eligible.
     UseEnhanced = 3,
+}
+impl SpeechModelVariant {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            SpeechModelVariant::Unspecified => "SPEECH_MODEL_VARIANT_UNSPECIFIED",
+            SpeechModelVariant::UseBestAvailable => "USE_BEST_AVAILABLE",
+            SpeechModelVariant::UseStandard => "USE_STANDARD",
+            SpeechModelVariant::UseEnhanced => "USE_ENHANCED",
+        }
+    }
 }
 /// Gender of the voice as described in
 /// [SSML voice element](<https://www.w3.org/TR/speech-synthesis11/#edef_voice>).
@@ -322,6 +354,20 @@ pub enum SsmlVoiceGender {
     Female = 2,
     /// A gender-neutral voice.
     Neutral = 3,
+}
+impl SsmlVoiceGender {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            SsmlVoiceGender::Unspecified => "SSML_VOICE_GENDER_UNSPECIFIED",
+            SsmlVoiceGender::Male => "SSML_VOICE_GENDER_MALE",
+            SsmlVoiceGender::Female => "SSML_VOICE_GENDER_FEMALE",
+            SsmlVoiceGender::Neutral => "SSML_VOICE_GENDER_NEUTRAL",
+        }
+    }
 }
 /// Audio encoding of the output audio format in Text-To-Speech.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -343,6 +389,22 @@ pub enum OutputAudioEncoding {
     OggOpus = 3,
     /// 8-bit samples that compand 14-bit audio samples using G.711 PCMU/mu-law.
     Mulaw = 5,
+}
+impl OutputAudioEncoding {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            OutputAudioEncoding::Unspecified => "OUTPUT_AUDIO_ENCODING_UNSPECIFIED",
+            OutputAudioEncoding::Linear16 => "OUTPUT_AUDIO_ENCODING_LINEAR_16",
+            OutputAudioEncoding::Mp3 => "OUTPUT_AUDIO_ENCODING_MP3",
+            OutputAudioEncoding::Mp364Kbps => "OUTPUT_AUDIO_ENCODING_MP3_64_KBPS",
+            OutputAudioEncoding::OggOpus => "OUTPUT_AUDIO_ENCODING_OGG_OPUS",
+            OutputAudioEncoding::Mulaw => "OUTPUT_AUDIO_ENCODING_MULAW",
+        }
+    }
 }
 /// \[DTMF\](<https://en.wikipedia.org/wiki/Dual-tone_multi-frequency_signaling>)
 /// digit in Telephony Gateway.
@@ -383,6 +445,33 @@ pub enum TelephonyDtmf {
     DtmfStar = 15,
     /// Pound/diamond/hash/square/gate/octothorpe: '#'.
     DtmfPound = 16,
+}
+impl TelephonyDtmf {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            TelephonyDtmf::Unspecified => "TELEPHONY_DTMF_UNSPECIFIED",
+            TelephonyDtmf::DtmfOne => "DTMF_ONE",
+            TelephonyDtmf::DtmfTwo => "DTMF_TWO",
+            TelephonyDtmf::DtmfThree => "DTMF_THREE",
+            TelephonyDtmf::DtmfFour => "DTMF_FOUR",
+            TelephonyDtmf::DtmfFive => "DTMF_FIVE",
+            TelephonyDtmf::DtmfSix => "DTMF_SIX",
+            TelephonyDtmf::DtmfSeven => "DTMF_SEVEN",
+            TelephonyDtmf::DtmfEight => "DTMF_EIGHT",
+            TelephonyDtmf::DtmfNine => "DTMF_NINE",
+            TelephonyDtmf::DtmfZero => "DTMF_ZERO",
+            TelephonyDtmf::DtmfA => "DTMF_A",
+            TelephonyDtmf::DtmfB => "DTMF_B",
+            TelephonyDtmf::DtmfC => "DTMF_C",
+            TelephonyDtmf::DtmfD => "DTMF_D",
+            TelephonyDtmf::DtmfStar => "DTMF_STAR",
+            TelephonyDtmf::DtmfPound => "DTMF_POUND",
+        }
+    }
 }
 /// By default, your agent responds to a matched intent with a static response.
 /// As an alternative, you can provide a more dynamic response by using
@@ -469,6 +558,18 @@ pub mod fulfillment {
             /// Fulfillment is enabled for SmallTalk.
             Smalltalk = 1,
         }
+        impl Type {
+            /// String value of the enum field names used in the ProtoBuf definition.
+            ///
+            /// The values are not transformed in any way and thus are considered stable
+            /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+            pub fn as_str_name(&self) -> &'static str {
+                match self {
+                    Type::Unspecified => "TYPE_UNSPECIFIED",
+                    Type::Smalltalk => "SMALLTALK",
+                }
+            }
+        }
     }
     /// Required. The fulfillment configuration.
     #[derive(Clone, PartialEq, ::prost::Oneof)]
@@ -503,6 +604,7 @@ pub struct UpdateFulfillmentRequest {
 pub mod fulfillments_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Service for managing [Fulfillments][google.cloud.dialogflow.v2beta1.Fulfillment].
     #[derive(Debug, Clone)]
     pub struct FulfillmentsClient<T> {
@@ -517,6 +619,10 @@ pub mod fulfillments_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -538,19 +644,19 @@ pub mod fulfillments_client {
         {
             FulfillmentsClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Retrieves the fulfillment.
@@ -619,7 +725,7 @@ pub struct Environment {
     /// Supported formats:
     /// - `projects/<Project Number / ID>/agent/environments/<Environment ID>`
     /// - `projects/<Project Number / ID>/locations/<Location
-    ///   ID>/agent/environments/<Environment ID>`
+    ///    ID>/agent/environments/<Environment ID>`
     #[prost(string, tag="1")]
     pub name: ::prost::alloc::string::String,
     /// Optional. The developer-provided description for this environment.
@@ -630,7 +736,7 @@ pub struct Environment {
     /// Supported formats:
     /// - `projects/<Project ID>/agent/versions/<Version ID>`
     /// - `projects/<Project ID>/locations/<Location ID>/agent/versions/<Version
-    ///   ID>`
+    ///    ID>`
     #[prost(string, tag="3")]
     pub agent_version: ::prost::alloc::string::String,
     /// Output only. The state of this environment. This field is read-only, i.e., it cannot be
@@ -666,6 +772,20 @@ pub mod environment {
         Loading = 2,
         /// Running.
         Running = 3,
+    }
+    impl State {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                State::Unspecified => "STATE_UNSPECIFIED",
+                State::Stopped => "STOPPED",
+                State::Loading => "LOADING",
+                State::Running => "RUNNING",
+            }
+        }
     }
 }
 /// Instructs the speech synthesizer on how to generate the output audio content.
@@ -727,7 +847,7 @@ pub struct GetEnvironmentRequest {
     /// Supported formats:
     /// - `projects/<Project Number / ID>/agent/environments/<Environment ID>`
     /// - `projects/<Project Number / ID>/locations/<Location
-    ///   ID>/agent/environments/<Environment ID>`
+    ///    ID>/agent/environments/<Environment ID>`
     #[prost(string, tag="1")]
     pub name: ::prost::alloc::string::String,
 }
@@ -781,7 +901,7 @@ pub struct GetEnvironmentHistoryRequest {
     /// Supported formats:
     /// - `projects/<Project Number / ID>/agent/environments/<Environment ID>`
     /// - `projects/<Project Number / ID>/locations/<Location
-    ///   ID>/agent/environments/<Environment ID>`
+    ///    ID>/agent/environments/<Environment ID>`
     #[prost(string, tag="1")]
     pub parent: ::prost::alloc::string::String,
     /// Optional. The maximum number of items to return in a single page. By default 100 and
@@ -799,7 +919,7 @@ pub struct EnvironmentHistory {
     /// Supported formats:
     /// - `projects/<Project Number / ID>/agent/environments/<Environment ID>`
     /// - `projects/<Project Number / ID>/locations/<Location
-    ///    ID>/agent/environments/<Environment ID>`
+    ///     ID>/agent/environments/<Environment ID>`
     #[prost(string, tag="1")]
     pub parent: ::prost::alloc::string::String,
     /// Output only. The list of agent environments. There will be a maximum number of items
@@ -831,6 +951,7 @@ pub mod environment_history {
 pub mod environments_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Service for managing [Environments][google.cloud.dialogflow.v2beta1.Environment].
     #[derive(Debug, Clone)]
     pub struct EnvironmentsClient<T> {
@@ -845,6 +966,10 @@ pub mod environments_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -866,19 +991,19 @@ pub mod environments_client {
         {
             EnvironmentsClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Returns the list of all non-draft environments of the specified agent.
@@ -1057,6 +1182,21 @@ pub mod validation_error {
         /// The agent may completely fail.
         Critical = 4,
     }
+    impl Severity {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Severity::Unspecified => "SEVERITY_UNSPECIFIED",
+                Severity::Info => "INFO",
+                Severity::Warning => "WARNING",
+                Severity::Error => "ERROR",
+                Severity::Critical => "CRITICAL",
+            }
+        }
+    }
 }
 /// Represents the output of agent validation.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -1079,7 +1219,7 @@ pub struct ValidationResult {
 pub struct Agent {
     /// Required. The project of this agent.
     /// Format: `projects/<Project ID>` or
-    ///         `projects/<Project ID>/locations/<Location ID>`
+    ///          `projects/<Project ID>/locations/<Location ID>`
     #[prost(string, tag="1")]
     pub parent: ::prost::alloc::string::String,
     /// Required. The name of this agent.
@@ -1153,6 +1293,19 @@ pub mod agent {
         /// especially the ones using @sys.any or very large custom entities.
         MlOnly = 2,
     }
+    impl MatchMode {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                MatchMode::Unspecified => "MATCH_MODE_UNSPECIFIED",
+                MatchMode::Hybrid => "MATCH_MODE_HYBRID",
+                MatchMode::MlOnly => "MATCH_MODE_ML_ONLY",
+            }
+        }
+    }
     /// API version for the agent.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -1165,6 +1318,20 @@ pub mod agent {
         V2 = 2,
         /// V2beta1 API.
         V2Beta1 = 3,
+    }
+    impl ApiVersion {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ApiVersion::Unspecified => "API_VERSION_UNSPECIFIED",
+                ApiVersion::V1 => "API_VERSION_V1",
+                ApiVersion::V2 => "API_VERSION_V2",
+                ApiVersion::V2Beta1 => "API_VERSION_V2_BETA_1",
+            }
+        }
     }
     /// Represents the agent tier.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -1180,13 +1347,27 @@ pub mod agent {
         /// Enterprise Plus Edition.
         EnterprisePlus = 3,
     }
+    impl Tier {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Tier::Unspecified => "TIER_UNSPECIFIED",
+                Tier::Standard => "TIER_STANDARD",
+                Tier::Enterprise => "TIER_ENTERPRISE",
+                Tier::EnterprisePlus => "TIER_ENTERPRISE_PLUS",
+            }
+        }
+    }
 }
 /// The request message for \[Agents.GetAgent][google.cloud.dialogflow.v2beta1.Agents.GetAgent\].
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetAgentRequest {
     /// Required. The project that the agent to fetch is associated with.
     /// Format: `projects/<Project ID>` or
-    ///         `projects/<Project ID>/locations/<Location ID>`.
+    ///          `projects/<Project ID>/locations/<Location ID>`.
     #[prost(string, tag="1")]
     pub parent: ::prost::alloc::string::String,
 }
@@ -1205,7 +1386,7 @@ pub struct SetAgentRequest {
 pub struct DeleteAgentRequest {
     /// Required. The project that the agent to delete is associated with.
     /// Format: `projects/<Project ID>` or
-    ///         `projects/<Project ID>/locations/<Location ID>`.
+    ///          `projects/<Project ID>/locations/<Location ID>`.
     #[prost(string, tag="1")]
     pub parent: ::prost::alloc::string::String,
 }
@@ -1214,7 +1395,7 @@ pub struct DeleteAgentRequest {
 pub struct SubAgent {
     /// Required. The project of this agent.
     /// Format: `projects/<Project ID>` or
-    ///         `projects/<Project ID>/locations/<Location ID>`.
+    ///          `projects/<Project ID>/locations/<Location ID>`.
     #[prost(string, tag="1")]
     pub project: ::prost::alloc::string::String,
     /// Optional. The unique identifier (`environment name` in dialogflow console)
@@ -1228,7 +1409,7 @@ pub struct SubAgent {
 pub struct SearchAgentsRequest {
     /// Required. The project to list agents from.
     /// Format: `projects/<Project ID or '-'>` or
-    ///         `projects/<Project ID or '-'>/locations/<Location ID>`.
+    ///          `projects/<Project ID or '-'>/locations/<Location ID>`.
     #[prost(string, tag="1")]
     pub parent: ::prost::alloc::string::String,
     /// Optional. The maximum number of items to return in a single page. By
@@ -1256,7 +1437,7 @@ pub struct SearchAgentsResponse {
 pub struct TrainAgentRequest {
     /// Required. The project that the agent to train is associated with.
     /// Format: `projects/<Project ID>` or
-    ///         `projects/<Project ID>/locations/<Location ID>`.
+    ///          `projects/<Project ID>/locations/<Location ID>`.
     #[prost(string, tag="1")]
     pub parent: ::prost::alloc::string::String,
 }
@@ -1265,7 +1446,7 @@ pub struct TrainAgentRequest {
 pub struct ExportAgentRequest {
     /// Required. The project that the agent to export is associated with.
     /// Format: `projects/<Project ID>` or
-    ///         `projects/<Project ID>/locations/<Location ID>`.
+    ///          `projects/<Project ID>/locations/<Location ID>`.
     #[prost(string, tag="1")]
     pub parent: ::prost::alloc::string::String,
     /// Optional. The
@@ -1302,7 +1483,7 @@ pub mod export_agent_response {
 pub struct ImportAgentRequest {
     /// Required. The project that the agent to import is associated with.
     /// Format: `projects/<Project ID>` or
-    ///         `projects/<Project ID>/locations/<Location ID>`.
+    ///          `projects/<Project ID>/locations/<Location ID>`.
     #[prost(string, tag="1")]
     pub parent: ::prost::alloc::string::String,
     /// Required. The agent to import.
@@ -1328,7 +1509,7 @@ pub mod import_agent_request {
 pub struct RestoreAgentRequest {
     /// Required. The project that the agent to restore is associated with.
     /// Format: `projects/<Project ID>` or
-    ///         `projects/<Project ID>/locations/<Location ID>`.
+    ///          `projects/<Project ID>/locations/<Location ID>`.
     #[prost(string, tag="1")]
     pub parent: ::prost::alloc::string::String,
     /// Required. The agent to restore.
@@ -1354,7 +1535,7 @@ pub mod restore_agent_request {
 pub struct GetValidationResultRequest {
     /// Required. The project that the agent is associated with.
     /// Format: `projects/<Project ID>` or
-    ///         `projects/<Project ID>/locations/<Location ID>`.
+    ///          `projects/<Project ID>/locations/<Location ID>`.
     #[prost(string, tag="1")]
     pub parent: ::prost::alloc::string::String,
     /// Optional. The language for which you want a validation result. If not
@@ -1369,6 +1550,7 @@ pub struct GetValidationResultRequest {
 pub mod agents_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Service for managing [Agents][google.cloud.dialogflow.v2beta1.Agent].
     #[derive(Debug, Clone)]
     pub struct AgentsClient<T> {
@@ -1383,6 +1565,10 @@ pub mod agents_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -1404,19 +1590,19 @@ pub mod agents_client {
         {
             AgentsClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Retrieves the specified agent.
@@ -1696,7 +1882,7 @@ pub mod agents_client {
 pub struct GcsSources {
     /// Required. Google Cloud Storage URIs for the inputs. A URI is of the
     /// form:
-    ///   gs://bucket/object-prefix-or-name
+    ///    gs://bucket/object-prefix-or-name
     /// Whether a prefix or name is used depends on the use case.
     #[prost(string, repeated, tag="2")]
     pub uris: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
@@ -1706,7 +1892,7 @@ pub struct GcsSources {
 pub struct GcsSource {
     /// Required. The Google Cloud Storage URIs for the inputs. A URI is of the
     /// form:
-    ///   gs://bucket/object-prefix-or-name
+    ///    gs://bucket/object-prefix-or-name
     /// Whether a prefix or name is used depends on the use case.
     #[prost(string, tag="1")]
     pub uri: ::prost::alloc::string::String,
@@ -1730,14 +1916,14 @@ pub struct GcsSource {
 pub struct Context {
     /// Required. The unique identifier of the context. Supported formats:
     /// - `projects/<Project ID>/agent/sessions/<Session ID>/contexts/<Context
-    ///   ID>`,
+    ///    ID>`,
     /// - `projects/<Project ID>/locations/<Location ID>/agent/sessions/<Session
-    ///   ID>/contexts/<Context ID>`,
+    ///    ID>/contexts/<Context ID>`,
     /// - `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
-    ///   ID>/sessions/<Session ID>/contexts/<Context ID>`,
+    ///    ID>/sessions/<Session ID>/contexts/<Context ID>`,
     /// - `projects/<Project ID>/locations/<Location
-    ///   ID>/agent/environments/<Environment ID>/users/<User ID>/sessions/<Session
-    ///   ID>/contexts/<Context ID>`,
+    ///    ID>/agent/environments/<Environment ID>/users/<User ID>/sessions/<Session
+    ///    ID>/contexts/<Context ID>`,
     ///
     /// The `Context ID` is always converted to lowercase, may only contain
     /// characters in a-zA-Z0-9_-% and may be at most 250 bytes long.
@@ -1768,13 +1954,13 @@ pub struct Context {
     /// -   MapKey type: string
     /// -   MapKey value: parameter name
     /// -   MapValue type:
-    ///     -   If parameter's entity type is a composite entity: map
-    ///     -   Else: depending on parameter value type, could be one of string,
-    ///         number, boolean, null, list or map
+    ///      -   If parameter's entity type is a composite entity: map
+    ///      -   Else: depending on parameter value type, could be one of string,
+    ///          number, boolean, null, list or map
     /// -   MapValue value:
-    ///     -   If parameter's entity type is a composite entity:
-    ///         map from composite entity property names to property values
-    ///     -   Else: parameter value
+    ///      -   If parameter's entity type is a composite entity:
+    ///          map from composite entity property names to property values
+    ///      -   Else: parameter value
     #[prost(message, optional, tag="3")]
     pub parameters: ::core::option::Option<::prost_types::Struct>,
 }
@@ -1784,12 +1970,12 @@ pub struct ListContextsRequest {
     /// Required. The session to list all contexts from. Supported formats:
     /// - `projects/<Project ID>/agent/sessions/<Session ID>,
     /// - `projects/<Project ID>/locations/<Location ID>/agent/sessions/<Session
-    ///   ID>`,
+    ///    ID>`,
     /// - `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
-    ///   ID>/sessions/<Session ID>`,
+    ///    ID>/sessions/<Session ID>`,
     /// - `projects/<Project ID>/locations/<Location
-    ///   ID>/agent/environments/<Environment ID>/users/<User ID>/sessions/<Session
-    ///   ID>`,
+    ///    ID>/agent/environments/<Environment ID>/users/<User ID>/sessions/<Session
+    ///    ID>`,
     ///
     /// If `Location ID` is not specified we assume default 'us' location. If
     /// `Environment ID` is not specified, we assume default 'draft' environment.
@@ -1821,14 +2007,14 @@ pub struct ListContextsResponse {
 pub struct GetContextRequest {
     /// Required. The name of the context. Supported formats:
     /// - `projects/<Project ID>/agent/sessions/<Session ID>/contexts/<Context
-    ///   ID>`,
+    ///    ID>`,
     /// - `projects/<Project ID>/locations/<Location ID>/agent/sessions/<Session
-    ///   ID>/contexts/<Context ID>`,
+    ///    ID>/contexts/<Context ID>`,
     /// - `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
-    ///   ID>/sessions/<Session ID>/contexts/<Context ID>`,
+    ///    ID>/sessions/<Session ID>/contexts/<Context ID>`,
     /// - `projects/<Project ID>/locations/<Location
-    ///   ID>/agent/environments/<Environment ID>/users/<User ID>/sessions/<Session
-    ///   ID>/contexts/<Context ID>`,
+    ///    ID>/agent/environments/<Environment ID>/users/<User ID>/sessions/<Session
+    ///    ID>/contexts/<Context ID>`,
     ///
     /// If `Location ID` is not specified we assume default 'us' location. If
     /// `Environment ID` is not specified, we assume default 'draft' environment.
@@ -1842,12 +2028,12 @@ pub struct CreateContextRequest {
     /// Required. The session to create a context for. Supported formats:
     /// - `projects/<Project ID>/agent/sessions/<Session ID>,
     /// - `projects/<Project ID>/locations/<Location ID>/agent/sessions/<Session
-    ///   ID>`,
+    ///    ID>`,
     /// - `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
-    ///   ID>/sessions/<Session ID>`,
+    ///    ID>/sessions/<Session ID>`,
     /// - `projects/<Project ID>/locations/<Location
-    ///   ID>/agent/environments/<Environment ID>/users/<User ID>/sessions/<Session
-    ///   ID>`,
+    ///    ID>/agent/environments/<Environment ID>/users/<User ID>/sessions/<Session
+    ///    ID>`,
     ///
     /// If `Location ID` is not specified we assume default 'us' location. If
     /// `Environment ID` is not specified, we assume default 'draft' environment.
@@ -1873,14 +2059,14 @@ pub struct UpdateContextRequest {
 pub struct DeleteContextRequest {
     /// Required. The name of the context to delete. Supported formats:
     /// - `projects/<Project ID>/agent/sessions/<Session ID>/contexts/<Context
-    ///   ID>`,
+    ///    ID>`,
     /// - `projects/<Project ID>/locations/<Location ID>/agent/sessions/<Session
-    ///   ID>/contexts/<Context ID>`,
+    ///    ID>/contexts/<Context ID>`,
     /// - `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
-    ///   ID>/sessions/<Session ID>/contexts/<Context ID>`,
+    ///    ID>/sessions/<Session ID>/contexts/<Context ID>`,
     /// - `projects/<Project ID>/locations/<Location
-    ///   ID>/agent/environments/<Environment ID>/users/<User ID>/sessions/<Session
-    ///   ID>/contexts/<Context ID>`,
+    ///    ID>/agent/environments/<Environment ID>/users/<User ID>/sessions/<Session
+    ///    ID>/contexts/<Context ID>`,
     ///
     /// If `Location ID` is not specified we assume default 'us' location. If
     /// `Environment ID` is not specified, we assume default 'draft' environment.
@@ -1894,12 +2080,12 @@ pub struct DeleteAllContextsRequest {
     /// Required. The name of the session to delete all contexts from. Supported formats:
     /// - `projects/<Project ID>/agent/sessions/<Session ID>,
     /// - `projects/<Project ID>/locations/<Location ID>/agent/sessions/<Session
-    ///   ID>`,
+    ///    ID>`,
     /// - `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
-    ///   ID>/sessions/<Session ID>`,
+    ///    ID>/sessions/<Session ID>`,
     /// - `projects/<Project ID>/locations/<Location
-    ///   ID>/agent/environments/<Environment ID>/users/<User ID>/sessions/<Session
-    ///   ID>`,
+    ///    ID>/agent/environments/<Environment ID>/users/<User ID>/sessions/<Session
+    ///    ID>`,
     ///
     /// If `Location ID` is not specified we assume default 'us' location. If
     /// `Environment ID` is not specified we assume default 'draft' environment. If
@@ -1911,6 +2097,7 @@ pub struct DeleteAllContextsRequest {
 pub mod contexts_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Service for managing [Contexts][google.cloud.dialogflow.v2beta1.Context].
     #[derive(Debug, Clone)]
     pub struct ContextsClient<T> {
@@ -1925,6 +2112,10 @@ pub mod contexts_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -1946,19 +2137,19 @@ pub mod contexts_client {
         {
             ContextsClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Returns the list of all contexts in the specified session.
@@ -2115,10 +2306,10 @@ pub struct Intent {
     /// priorities.
     ///
     /// - If the supplied value is unspecified or 0, the service
-    ///   translates the value to 500,000, which corresponds to the
-    ///   `Normal` priority in the console.
+    ///    translates the value to 500,000, which corresponds to the
+    ///    `Normal` priority in the console.
     /// - If the supplied value is negative, the intent is ignored
-    ///   in runtime detect intent requests.
+    ///    in runtime detect intent requests.
     #[prost(int32, tag="3")]
     pub priority: i32,
     /// Optional. Indicates whether this is a fallback intent.
@@ -2133,9 +2324,9 @@ pub struct Intent {
     /// then the default value is determined as follows:
     ///
     /// - Before April 15th, 2018 the default is:
-    ///   ml_enabled = false / ml_disabled = true.
+    ///    ml_enabled = false / ml_disabled = true.
     /// - After April 15th, 2018 the default is:
-    ///   ml_enabled = true / ml_disabled = false.
+    ///    ml_enabled = true / ml_disabled = false.
     #[deprecated]
     #[prost(bool, tag="5")]
     pub ml_enabled: bool,
@@ -2162,7 +2353,7 @@ pub struct Intent {
     ///
     /// - `projects/<Project ID>/agent/sessions/-/contexts/<Context ID>`
     /// - `projects/<Project ID>/locations/<Location
-    ///   ID>/agent/sessions/-/contexts/<Context ID>`
+    ///    ID>/agent/sessions/-/contexts/<Context ID>`
     #[prost(string, repeated, tag="7")]
     pub input_context_names: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// Optional. The collection of event names that trigger the intent.
@@ -2251,8 +2442,8 @@ pub mod intent {
         ///
         /// -   `Part.text` is set to a part of the phrase that has no parameters.
         /// -   `Part.text` is set to a part of the phrase that you want to annotate,
-        ///     and the `entity_type`, `alias`, and `user_defined` fields are all
-        ///     set.
+        ///      and the `entity_type`, `alias`, and `user_defined` fields are all
+        ///      set.
         #[prost(message, repeated, tag="3")]
         pub parts: ::prost::alloc::vec::Vec<training_phrase::Part>,
         /// Optional. Indicates how many times this example was added to
@@ -2302,6 +2493,19 @@ pub mod intent {
             /// work.
             Template = 2,
         }
+        impl Type {
+            /// String value of the enum field names used in the ProtoBuf definition.
+            ///
+            /// The values are not transformed in any way and thus are considered stable
+            /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+            pub fn as_str_name(&self) -> &'static str {
+                match self {
+                    Type::Unspecified => "TYPE_UNSPECIFIED",
+                    Type::Example => "EXAMPLE",
+                    Type::Template => "TEMPLATE",
+                }
+            }
+        }
     }
     /// Represents intent parameters.
     #[derive(Clone, PartialEq, ::prost::Message)]
@@ -2318,7 +2522,7 @@ pub mod intent {
         /// - a parameter value defined as `$parameter_name`,
         /// - an original parameter value defined as `$parameter_name.original`,
         /// - a parameter value from some context defined as
-        ///   `#context_name.parameter_name`.
+        ///    `#context_name.parameter_name`.
         #[prost(string, tag="3")]
         pub value: ::prost::alloc::string::String,
         /// Optional. The default value to use when the `value` yields an empty
@@ -2676,6 +2880,19 @@ pub mod intent {
                 /// 232 DP.
                 Medium = 2,
             }
+            impl CardWidth {
+                /// String value of the enum field names used in the ProtoBuf definition.
+                ///
+                /// The values are not transformed in any way and thus are considered stable
+                /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+                pub fn as_str_name(&self) -> &'static str {
+                    match self {
+                        CardWidth::Unspecified => "CARD_WIDTH_UNSPECIFIED",
+                        CardWidth::Small => "SMALL",
+                        CardWidth::Medium => "MEDIUM",
+                    }
+                }
+            }
         }
         /// Standalone Rich Business Messaging (RBM) rich card.
         ///
@@ -2710,6 +2927,19 @@ pub mod intent {
                 /// Vertical layout.
                 Vertical = 2,
             }
+            impl CardOrientation {
+                /// String value of the enum field names used in the ProtoBuf definition.
+                ///
+                /// The values are not transformed in any way and thus are considered stable
+                /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+                pub fn as_str_name(&self) -> &'static str {
+                    match self {
+                        CardOrientation::Unspecified => "CARD_ORIENTATION_UNSPECIFIED",
+                        CardOrientation::Horizontal => "HORIZONTAL",
+                        CardOrientation::Vertical => "VERTICAL",
+                    }
+                }
+            }
             /// Thumbnail preview alignment for standalone cards with horizontal
             /// layout.
             #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -2721,6 +2951,19 @@ pub mod intent {
                 Left = 1,
                 /// Thumbnail preview is right-aligned.
                 Right = 2,
+            }
+            impl ThumbnailImageAlignment {
+                /// String value of the enum field names used in the ProtoBuf definition.
+                ///
+                /// The values are not transformed in any way and thus are considered stable
+                /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+                pub fn as_str_name(&self) -> &'static str {
+                    match self {
+                        ThumbnailImageAlignment::Unspecified => "THUMBNAIL_IMAGE_ALIGNMENT_UNSPECIFIED",
+                        ThumbnailImageAlignment::Left => "LEFT",
+                        ThumbnailImageAlignment::Right => "RIGHT",
+                    }
+                }
             }
         }
         /// Rich Business Messaging (RBM) Card content
@@ -2801,6 +3044,20 @@ pub mod intent {
                     /// 264 DP. Not available for rich card carousels when the card width
                     /// is set to small.
                     Tall = 3,
+                }
+                impl Height {
+                    /// String value of the enum field names used in the ProtoBuf definition.
+                    ///
+                    /// The values are not transformed in any way and thus are considered stable
+                    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+                    pub fn as_str_name(&self) -> &'static str {
+                        match self {
+                            Height::Unspecified => "HEIGHT_UNSPECIFIED",
+                            Height::Short => "SHORT",
+                            Height::Medium => "MEDIUM",
+                            Height::Tall => "TALL",
+                        }
+                    }
                 }
             }
         }
@@ -2947,6 +3204,18 @@ pub mod intent {
                 /// Response media type is audio.
                 Audio = 1,
             }
+            impl ResponseMediaType {
+                /// String value of the enum field names used in the ProtoBuf definition.
+                ///
+                /// The values are not transformed in any way and thus are considered stable
+                /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+                pub fn as_str_name(&self) -> &'static str {
+                    match self {
+                        ResponseMediaType::Unspecified => "RESPONSE_MEDIA_TYPE_UNSPECIFIED",
+                        ResponseMediaType::Audio => "AUDIO",
+                    }
+                }
+            }
         }
         /// Browse Carousel Card for Actions on Google.
         /// <https://developers.google.com/actions/assistant/responses#browsing_carousel>
@@ -3011,6 +3280,19 @@ pub mod intent {
                         /// which refers to AMP content via <link rel="amphtml">.
                         AmpContent = 2,
                     }
+                    impl UrlTypeHint {
+                        /// String value of the enum field names used in the ProtoBuf definition.
+                        ///
+                        /// The values are not transformed in any way and thus are considered stable
+                        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+                        pub fn as_str_name(&self) -> &'static str {
+                            match self {
+                                UrlTypeHint::Unspecified => "URL_TYPE_HINT_UNSPECIFIED",
+                                UrlTypeHint::AmpAction => "AMP_ACTION",
+                                UrlTypeHint::AmpContent => "AMP_CONTENT",
+                            }
+                        }
+                    }
                 }
             }
             /// Image display options for Actions on Google. This should be used for
@@ -3038,6 +3320,21 @@ pub mod intent {
                 /// Pad the gaps between image and image frame with a blurred copy of the
                 /// same image.
                 BlurredBackground = 4,
+            }
+            impl ImageDisplayOptions {
+                /// String value of the enum field names used in the ProtoBuf definition.
+                ///
+                /// The values are not transformed in any way and thus are considered stable
+                /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+                pub fn as_str_name(&self) -> &'static str {
+                    match self {
+                        ImageDisplayOptions::Unspecified => "IMAGE_DISPLAY_OPTIONS_UNSPECIFIED",
+                        ImageDisplayOptions::Gray => "GRAY",
+                        ImageDisplayOptions::White => "WHITE",
+                        ImageDisplayOptions::Cropped => "CROPPED",
+                        ImageDisplayOptions::BlurredBackground => "BLURRED_BACKGROUND",
+                    }
+                }
             }
         }
         /// Table card for Actions on Google.
@@ -3087,6 +3384,20 @@ pub mod intent {
                 /// Text is aligned to the trailing edge of the column.
                 Trailing = 3,
             }
+            impl HorizontalAlignment {
+                /// String value of the enum field names used in the ProtoBuf definition.
+                ///
+                /// The values are not transformed in any way and thus are considered stable
+                /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+                pub fn as_str_name(&self) -> &'static str {
+                    match self {
+                        HorizontalAlignment::Unspecified => "HORIZONTAL_ALIGNMENT_UNSPECIFIED",
+                        HorizontalAlignment::Leading => "LEADING",
+                        HorizontalAlignment::Center => "CENTER",
+                        HorizontalAlignment::Trailing => "TRAILING",
+                    }
+                }
+            }
         }
         /// Row of \[TableCard][google.cloud.dialogflow.v2beta1.Intent.Message.TableCard\].
         #[derive(Clone, PartialEq, ::prost::Message)]
@@ -3133,6 +3444,27 @@ pub mod intent {
             Telephony = 10,
             /// Google Hangouts.
             GoogleHangouts = 11,
+        }
+        impl Platform {
+            /// String value of the enum field names used in the ProtoBuf definition.
+            ///
+            /// The values are not transformed in any way and thus are considered stable
+            /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+            pub fn as_str_name(&self) -> &'static str {
+                match self {
+                    Platform::Unspecified => "PLATFORM_UNSPECIFIED",
+                    Platform::Facebook => "FACEBOOK",
+                    Platform::Slack => "SLACK",
+                    Platform::Telegram => "TELEGRAM",
+                    Platform::Kik => "KIK",
+                    Platform::Skype => "SKYPE",
+                    Platform::Line => "LINE",
+                    Platform::Viber => "VIBER",
+                    Platform::ActionsOnGoogle => "ACTIONS_ON_GOOGLE",
+                    Platform::Telephony => "TELEPHONY",
+                    Platform::GoogleHangouts => "GOOGLE_HANGOUTS",
+                }
+            }
         }
         /// Required. The rich response message.
         #[derive(Clone, PartialEq, ::prost::Oneof)]
@@ -3225,6 +3557,19 @@ pub mod intent {
         /// Webhook is enabled in the agent and in the intent. Also, each slot
         /// filling prompt is forwarded to the webhook.
         EnabledForSlotFilling = 2,
+    }
+    impl WebhookState {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                WebhookState::Unspecified => "WEBHOOK_STATE_UNSPECIFIED",
+                WebhookState::Enabled => "WEBHOOK_STATE_ENABLED",
+                WebhookState::EnabledForSlotFilling => "WEBHOOK_STATE_ENABLED_FOR_SLOT_FILLING",
+            }
+        }
     }
 }
 /// The request message for \[Intents.ListIntents][google.cloud.dialogflow.v2beta1.Intents.ListIntents\].
@@ -3442,10 +3787,23 @@ pub enum IntentView {
     /// All fields are populated.
     Full = 1,
 }
+impl IntentView {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            IntentView::Unspecified => "INTENT_VIEW_UNSPECIFIED",
+            IntentView::Full => "INTENT_VIEW_FULL",
+        }
+    }
+}
 /// Generated client implementations.
 pub mod intents_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Service for managing [Intents][google.cloud.dialogflow.v2beta1.Intent].
     #[derive(Debug, Clone)]
     pub struct IntentsClient<T> {
@@ -3460,6 +3818,10 @@ pub mod intents_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -3481,19 +3843,19 @@ pub mod intents_client {
         {
             IntentsClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Returns the list of all intents in the specified agent.
@@ -3701,7 +4063,7 @@ pub struct EntityType {
     /// Supported formats:
     /// - `projects/<Project ID>/agent/entityTypes/<Entity Type ID>`
     /// - `projects/<Project ID>/locations/<Location ID>/agent/entityTypes/<Entity
-    ///   Type ID>`
+    ///    Type ID>`
     #[prost(string, tag="1")]
     pub name: ::prost::alloc::string::String,
     /// Required. The name of the entity type.
@@ -3737,7 +4099,7 @@ pub mod entity_type {
         /// For `KIND_LIST` entity types:
         ///
         /// *   A string that can contain references to other entity types (with or
-        ///     without aliases).
+        ///      without aliases).
         #[prost(string, tag="1")]
         pub value: ::prost::alloc::string::String,
         /// Required. A collection of value synonyms. For example, if the entity type
@@ -3767,6 +4129,20 @@ pub mod entity_type {
         /// values.
         Regexp = 3,
     }
+    impl Kind {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Kind::Unspecified => "KIND_UNSPECIFIED",
+                Kind::Map => "KIND_MAP",
+                Kind::List => "KIND_LIST",
+                Kind::Regexp => "KIND_REGEXP",
+            }
+        }
+    }
     /// Represents different entity type expansion modes. Automated expansion
     /// allows an agent to recognize values that have not been explicitly listed in
     /// the entity (for example, new kinds of shopping list items).
@@ -3778,6 +4154,18 @@ pub mod entity_type {
         /// Allows an agent to recognize values that have not been explicitly
         /// listed in the entity.
         Default = 1,
+    }
+    impl AutoExpansionMode {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AutoExpansionMode::Unspecified => "AUTO_EXPANSION_MODE_UNSPECIFIED",
+                AutoExpansionMode::Default => "AUTO_EXPANSION_MODE_DEFAULT",
+            }
+        }
     }
 }
 /// The request message for \[EntityTypes.ListEntityTypes][google.cloud.dialogflow.v2beta1.EntityTypes.ListEntityTypes\].
@@ -3823,7 +4211,7 @@ pub struct GetEntityTypeRequest {
     /// Supported formats:
     /// - `projects/<Project ID>/agent/entityTypes/<Entity Type ID>`
     /// - `projects/<Project ID>/locations/<Location ID>/agent/entityTypes/<Entity
-    ///   Type ID>`
+    ///    Type ID>`
     #[prost(string, tag="1")]
     pub name: ::prost::alloc::string::String,
     /// Optional. The language used to access language-specific data.
@@ -3878,7 +4266,7 @@ pub struct DeleteEntityTypeRequest {
     /// Supported formats:
     /// - `projects/<Project ID>/agent/entityTypes/<Entity Type ID>`
     /// - `projects/<Project ID>/locations/<Location ID>/agent/entityTypes/<Entity
-    ///   Type ID>`
+    ///    Type ID>`
     #[prost(string, tag="1")]
     pub name: ::prost::alloc::string::String,
 }
@@ -3959,7 +4347,7 @@ pub struct BatchCreateEntitiesRequest {
     /// Supported formats:
     /// - `projects/<Project ID>/agent/entityTypes/<Entity Type ID>`
     /// - `projects/<Project ID>/locations/<Location ID>/agent/entityTypes/<Entity
-    ///   Type ID>`
+    ///    Type ID>`
     #[prost(string, tag="1")]
     pub parent: ::prost::alloc::string::String,
     /// Required. The entities to create.
@@ -3980,7 +4368,7 @@ pub struct BatchUpdateEntitiesRequest {
     /// Supported formats:
     /// - `projects/<Project ID>/agent/entityTypes/<Entity Type ID>`
     /// - `projects/<Project ID>/locations/<Location ID>/agent/entityTypes/<Entity
-    ///   Type ID>`
+    ///    Type ID>`
     #[prost(string, tag="1")]
     pub parent: ::prost::alloc::string::String,
     /// Required. The entities to update or create.
@@ -4004,7 +4392,7 @@ pub struct BatchDeleteEntitiesRequest {
     /// Supported formats:
     /// - `projects/<Project ID>/agent/entityTypes/<Entity Type ID>`
     /// - `projects/<Project ID>/locations/<Location ID>/agent/entityTypes/<Entity
-    ///   Type ID>`
+    ///    Type ID>`
     #[prost(string, tag="1")]
     pub parent: ::prost::alloc::string::String,
     /// Required. The reference `values` of the entities to delete. Note that
@@ -4031,6 +4419,7 @@ pub struct EntityTypeBatch {
 pub mod entity_types_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Service for managing [EntityTypes][google.cloud.dialogflow.v2beta1.EntityType].
     #[derive(Debug, Clone)]
     pub struct EntityTypesClient<T> {
@@ -4045,6 +4434,10 @@ pub mod entity_types_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -4066,19 +4459,19 @@ pub mod entity_types_client {
         {
             EntityTypesClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Returns the list of all entity types in the specified agent.
@@ -4389,14 +4782,14 @@ pub struct SessionEntityType {
     /// Required. The unique identifier of this session entity type. Supported
     /// formats:
     /// - `projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Entity
-    ///   Type Display Name>`
+    ///    Type Display Name>`
     /// - `projects/<Project ID>/locations/<Location ID>/agent/sessions/<Session
-    ///   ID>/entityTypes/<Entity Type Display Name>`
+    ///    ID>/entityTypes/<Entity Type Display Name>`
     /// - `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
-    ///   ID>/sessions/<Session ID>/entityTypes/<Entity Type Display Name>`
+    ///    ID>/sessions/<Session ID>/entityTypes/<Entity Type Display Name>`
     /// - `projects/<Project ID>/locations/<Location ID>/agent/environments/
-    ///   <Environment ID>/users/<User ID>/sessions/<Session
-    ///   ID>/entityTypes/<Entity Type Display Name>`
+    ///    <Environment ID>/users/<User ID>/sessions/<Session
+    ///    ID>/entityTypes/<Entity Type Display Name>`
     ///
     /// If `Location ID` is not specified we assume default 'us' location. If
     /// `Environment ID` is not specified, we assume default 'draft' environment.
@@ -4436,6 +4829,19 @@ pub mod session_entity_type {
         /// and merge.
         Supplement = 2,
     }
+    impl EntityOverrideMode {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                EntityOverrideMode::Unspecified => "ENTITY_OVERRIDE_MODE_UNSPECIFIED",
+                EntityOverrideMode::Override => "ENTITY_OVERRIDE_MODE_OVERRIDE",
+                EntityOverrideMode::Supplement => "ENTITY_OVERRIDE_MODE_SUPPLEMENT",
+            }
+        }
+    }
 }
 /// The request message for \[SessionEntityTypes.ListSessionEntityTypes][google.cloud.dialogflow.v2beta1.SessionEntityTypes.ListSessionEntityTypes\].
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -4444,12 +4850,12 @@ pub struct ListSessionEntityTypesRequest {
     /// Supported formats:
     /// - `projects/<Project ID>/agent/sessions/<Session ID>,
     /// - `projects/<Project ID>/locations/<Location ID>/agent/sessions/<Session
-    ///   ID>`,
+    ///    ID>`,
     /// - `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
-    ///   ID>/sessions/<Session ID>`,
+    ///    ID>/sessions/<Session ID>`,
     /// - `projects/<Project ID>/locations/<Location
-    ///   ID>/agent/environments/<Environment ID>/users/<User ID>/sessions/<Session
-    ///   ID>`,
+    ///    ID>/agent/environments/<Environment ID>/users/<User ID>/sessions/<Session
+    ///    ID>`,
     ///
     /// If `Location ID` is not specified we assume default 'us' location. If
     /// `Environment ID` is not specified, we assume default 'draft' environment.
@@ -4481,14 +4887,14 @@ pub struct ListSessionEntityTypesResponse {
 pub struct GetSessionEntityTypeRequest {
     /// Required. The name of the session entity type. Supported formats:
     /// - `projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Entity
-    ///   Type Display Name>`
+    ///    Type Display Name>`
     /// - `projects/<Project ID>/locations/<Location ID>/agent/sessions/<Session
-    ///   ID>/entityTypes/<Entity Type Display Name>`
+    ///    ID>/entityTypes/<Entity Type Display Name>`
     /// - `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
-    ///   ID>/sessions/<Session ID>/entityTypes/<Entity Type Display Name>`
+    ///    ID>/sessions/<Session ID>/entityTypes/<Entity Type Display Name>`
     /// - `projects/<Project ID>/locations/<Location ID>/agent/environments/
-    ///   <Environment ID>/users/<User ID>/sessions/<Session
-    ///   ID>/entityTypes/<Entity Type Display Name>`
+    ///    <Environment ID>/users/<User ID>/sessions/<Session
+    ///    ID>/entityTypes/<Entity Type Display Name>`
     ///
     /// If `Location ID` is not specified we assume default 'us' location. If
     /// `Environment ID` is not specified, we assume default 'draft' environment.
@@ -4503,12 +4909,12 @@ pub struct CreateSessionEntityTypeRequest {
     /// Supported formats:
     /// - `projects/<Project ID>/agent/sessions/<Session ID>,
     /// - `projects/<Project ID>/locations/<Location ID>/agent/sessions/<Session
-    ///   ID>`,
+    ///    ID>`,
     /// - `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
-    ///   ID>/sessions/<Session ID>`,
+    ///    ID>/sessions/<Session ID>`,
     /// - `projects/<Project ID>/locations/<Location
-    ///   ID>/agent/environments/<Environment ID>/users/<User ID>/sessions/<Session
-    ///   ID>`,
+    ///    ID>/agent/environments/<Environment ID>/users/<User ID>/sessions/<Session
+    ///    ID>`,
     ///
     /// If `Location ID` is not specified we assume default 'us' location. If
     /// `Environment ID` is not specified, we assume default 'draft' environment.
@@ -4535,14 +4941,14 @@ pub struct DeleteSessionEntityTypeRequest {
     /// Required. The name of the entity type to delete.
     /// Supported formats:
     /// - `projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Entity
-    ///   Type Display Name>`
+    ///    Type Display Name>`
     /// - `projects/<Project ID>/locations/<Location ID>/agent/sessions/<Session
-    ///   ID>/entityTypes/<Entity Type Display Name>`
+    ///    ID>/entityTypes/<Entity Type Display Name>`
     /// - `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
-    ///   ID>/sessions/<Session ID>/entityTypes/<Entity Type Display Name>`
+    ///    ID>/sessions/<Session ID>/entityTypes/<Entity Type Display Name>`
     /// - `projects/<Project ID>/locations/<Location ID>/agent/environments/
-    ///   <Environment ID>/users/<User ID>/sessions/<Session
-    ///   ID>/entityTypes/<Entity Type Display Name>`
+    ///    <Environment ID>/users/<User ID>/sessions/<Session
+    ///    ID>/entityTypes/<Entity Type Display Name>`
     ///
     /// If `Location ID` is not specified we assume default 'us' location. If
     /// `Environment ID` is not specified, we assume default 'draft' environment.
@@ -4554,6 +4960,7 @@ pub struct DeleteSessionEntityTypeRequest {
 pub mod session_entity_types_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Service for managing [SessionEntityTypes][google.cloud.dialogflow.v2beta1.SessionEntityType].
     #[derive(Debug, Clone)]
     pub struct SessionEntityTypesClient<T> {
@@ -4568,6 +4975,10 @@ pub mod session_entity_types_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -4589,19 +5000,19 @@ pub mod session_entity_types_client {
         {
             SessionEntityTypesClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Returns the list of all session entity types in the specified session.
@@ -4738,12 +5149,12 @@ pub struct DetectIntentRequest {
     /// Required. The name of the session this query is sent to. Supported formats:
     /// - `projects/<Project ID>/agent/sessions/<Session ID>,
     /// - `projects/<Project ID>/locations/<Location ID>/agent/sessions/<Session
-    ///   ID>`,
+    ///    ID>`,
     /// - `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
-    ///   ID>/sessions/<Session ID>`,
+    ///    ID>/sessions/<Session ID>`,
     /// - `projects/<Project ID>/locations/<Location
-    ///   ID>/agent/environments/<Environment ID>/users/<User ID>/sessions/<Session
-    ///   ID>`,
+    ///    ID>/agent/environments/<Environment ID>/users/<User ID>/sessions/<Session
+    ///    ID>`,
     ///
     /// If `Location ID` is not specified we assume default 'us' location. If
     /// `Environment ID` is not specified, we assume default 'draft' environment
@@ -4766,7 +5177,7 @@ pub struct DetectIntentRequest {
     /// Required. The input specification. It can be set to:
     ///
     /// 1.  an audio config
-    ///     which instructs the speech recognizer how to process the speech audio,
+    ///      which instructs the speech recognizer how to process the speech audio,
     ///
     /// 2.  a conversational query in the form of text, or
     ///
@@ -4895,7 +5306,7 @@ pub struct QueryParameters {
 /// Represents the query input. It can contain either:
 ///
 /// 1.  An audio config which
-///     instructs the speech recognizer how to process the speech audio.
+///      instructs the speech recognizer how to process the speech audio.
 ///
 /// 2.  A conversational query in the form of text.
 ///
@@ -4931,12 +5342,12 @@ pub struct QueryResult {
     /// The original conversational query text:
     ///
     /// - If natural language text was provided as input, `query_text` contains
-    ///   a copy of the input.
+    ///    a copy of the input.
     /// - If natural language speech audio was provided as input, `query_text`
-    ///   contains the speech recognition result. If speech recognizer produced
-    ///   multiple alternatives, a particular one is picked.
+    ///    contains the speech recognition result. If speech recognizer produced
+    ///    multiple alternatives, a particular one is picked.
     /// - If automatic spell correction is enabled, `query_text` will contain the
-    ///   corrected user input.
+    ///    corrected user input.
     #[prost(string, tag="1")]
     pub query_text: ::prost::alloc::string::String,
     /// The language that was triggered during intent detection.
@@ -4968,21 +5379,21 @@ pub struct QueryResult {
     /// -   MapKey type: string
     /// -   MapKey value: parameter name
     /// -   MapValue type:
-    ///     -   If parameter's entity type is a composite entity: map
-    ///     -   Else: depending on parameter value type, could be one of string,
-    ///         number, boolean, null, list or map
+    ///      -   If parameter's entity type is a composite entity: map
+    ///      -   Else: depending on parameter value type, could be one of string,
+    ///          number, boolean, null, list or map
     /// -   MapValue value:
-    ///     -   If parameter's entity type is a composite entity:
-    ///         map from composite entity property names to property values
-    ///     -   Else: parameter value
+    ///      -   If parameter's entity type is a composite entity:
+    ///          map from composite entity property names to property values
+    ///      -   Else: parameter value
     #[prost(message, optional, tag="4")]
     pub parameters: ::core::option::Option<::prost_types::Struct>,
     /// This field is set to:
     ///
     /// - `false` if the matched intent has required parameters and not all of
-    ///    the required parameter values have been collected.
+    ///     the required parameter values have been collected.
     /// - `true` if all required parameter values have been collected, or if the
-    ///    matched intent doesn't contain any required parameters.
+    ///     matched intent doesn't contain any required parameters.
     #[prost(bool, tag="5")]
     pub all_required_params_present: bool,
     /// Indicates whether the conversational query triggers a cancellation for slot
@@ -5103,6 +5514,20 @@ pub mod knowledge_answers {
             /// Indicates our confidence is high.
             High = 3,
         }
+        impl MatchConfidenceLevel {
+            /// String value of the enum field names used in the ProtoBuf definition.
+            ///
+            /// The values are not transformed in any way and thus are considered stable
+            /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+            pub fn as_str_name(&self) -> &'static str {
+                match self {
+                    MatchConfidenceLevel::Unspecified => "MATCH_CONFIDENCE_LEVEL_UNSPECIFIED",
+                    MatchConfidenceLevel::Low => "LOW",
+                    MatchConfidenceLevel::Medium => "MEDIUM",
+                    MatchConfidenceLevel::High => "HIGH",
+                }
+            }
+        }
     }
 }
 /// The top-level message sent by the client to the
@@ -5112,27 +5537,27 @@ pub mod knowledge_answers {
 ///
 /// 1.  The first message must contain
 /// \[session][google.cloud.dialogflow.v2beta1.StreamingDetectIntentRequest.session\],
-///     \[query_input][google.cloud.dialogflow.v2beta1.StreamingDetectIntentRequest.query_input\] plus optionally
-///     \[query_params][google.cloud.dialogflow.v2beta1.StreamingDetectIntentRequest.query_params\]. If the client
-///     wants to receive an audio response, it should also contain
-///     \[output_audio_config][google.cloud.dialogflow.v2beta1.StreamingDetectIntentRequest.output_audio_config\].
-///     The message must not contain
-///     \[input_audio][google.cloud.dialogflow.v2beta1.StreamingDetectIntentRequest.input_audio\].
+///      \[query_input][google.cloud.dialogflow.v2beta1.StreamingDetectIntentRequest.query_input\] plus optionally
+///      \[query_params][google.cloud.dialogflow.v2beta1.StreamingDetectIntentRequest.query_params\]. If the client
+///      wants to receive an audio response, it should also contain
+///      \[output_audio_config][google.cloud.dialogflow.v2beta1.StreamingDetectIntentRequest.output_audio_config\].
+///      The message must not contain
+///      \[input_audio][google.cloud.dialogflow.v2beta1.StreamingDetectIntentRequest.input_audio\].
 /// 2.  If \[query_input][google.cloud.dialogflow.v2beta1.StreamingDetectIntentRequest.query_input\] was set to
-///     \[query_input.audio_config][google.cloud.dialogflow.v2beta1.InputAudioConfig\], all subsequent
-///     messages must contain
-///     \[input_audio][google.cloud.dialogflow.v2beta1.StreamingDetectIntentRequest.input_audio\] to continue with
-///     Speech recognition.
-///     If you decide to rather detect an intent from text input after you
-///     already started Speech recognition, please send a message with
-///     \[query_input.text][google.cloud.dialogflow.v2beta1.QueryInput.text\].
+///      \[query_input.audio_config][google.cloud.dialogflow.v2beta1.InputAudioConfig\], all subsequent
+///      messages must contain
+///      \[input_audio][google.cloud.dialogflow.v2beta1.StreamingDetectIntentRequest.input_audio\] to continue with
+///      Speech recognition.
+///      If you decide to rather detect an intent from text input after you
+///      already started Speech recognition, please send a message with
+///      \[query_input.text][google.cloud.dialogflow.v2beta1.QueryInput.text\].
 ///
-///     However, note that:
+///      However, note that:
 ///
-///     * Dialogflow will bill you for the audio duration so far.
-///     * Dialogflow discards all Speech recognition results in favor of the
-///       input text.
-///     * Dialogflow will use the language code from the first message.
+///      * Dialogflow will bill you for the audio duration so far.
+///      * Dialogflow discards all Speech recognition results in favor of the
+///        input text.
+///      * Dialogflow will use the language code from the first message.
 ///
 /// After you sent all input, you must half-close or abort the request stream.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -5141,12 +5566,12 @@ pub struct StreamingDetectIntentRequest {
     /// Supported formats:
     /// - `projects/<Project ID>/agent/sessions/<Session ID>,
     /// - `projects/<Project ID>/locations/<Location ID>/agent/sessions/<Session
-    ///   ID>`,
+    ///    ID>`,
     /// - `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
-    ///   ID>/sessions/<Session ID>`,
+    ///    ID>/sessions/<Session ID>`,
     /// - `projects/<Project ID>/locations/<Location
-    ///   ID>/agent/environments/<Environment ID>/users/<User ID>/sessions/<Session
-    ///   ID>`,
+    ///    ID>/agent/environments/<Environment ID>/users/<User ID>/sessions/<Session
+    ///    ID>`,
     ///
     /// If `Location ID` is not specified we assume default 'us' location. If
     /// `Environment ID` is not specified, we assume default 'draft' environment.
@@ -5169,7 +5594,7 @@ pub struct StreamingDetectIntentRequest {
     /// Required. The input specification. It can be set to:
     ///
     /// 1.  an audio config which instructs the speech recognizer how to process
-    ///     the speech audio,
+    ///      the speech audio,
     ///
     /// 2.  a conversational query in the form of text, or
     ///
@@ -5213,18 +5638,18 @@ pub struct StreamingDetectIntentRequest {
 /// Multiple response messages can be returned in order:
 ///
 /// 1.  If the `StreamingDetectIntentRequest.input_audio` field was
-///     set, the `recognition_result` field is populated for one
-///     or more messages.
-///     See the \[StreamingRecognitionResult][google.cloud.dialogflow.v2beta1.StreamingRecognitionResult\] message for details
-///     about the result message sequence.
+///      set, the `recognition_result` field is populated for one
+///      or more messages.
+///      See the \[StreamingRecognitionResult][google.cloud.dialogflow.v2beta1.StreamingRecognitionResult\] message for details
+///      about the result message sequence.
 ///
 /// 2.  The next message contains `response_id`, `query_result`,
-///     `alternative_query_results` and optionally `webhook_status` if a WebHook
-///     was called.
+///      `alternative_query_results` and optionally `webhook_status` if a WebHook
+///      was called.
 ///
 /// 3.  If `output_audio_config` was specified in the request or agent-level
-///     speech synthesizer is configured, all subsequent messages contain
-///     `output_audio` and `output_audio_config`.
+///      speech synthesizer is configured, all subsequent messages contain
+///      `output_audio` and `output_audio_config`.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StreamingDetectIntentResponse {
     /// The unique identifier of the response. It can be used to
@@ -5332,10 +5757,10 @@ pub struct StreamingRecognitionResult {
     /// not change its guess about this interim recognition result:
     ///
     /// * If the value is unspecified or 0.0, Dialogflow didn't compute the
-    ///   stability. In particular, Dialogflow will only provide stability for
-    ///   `TRANSCRIPT` results with `is_final = false`.
+    ///    stability. In particular, Dialogflow will only provide stability for
+    ///    `TRANSCRIPT` results with `is_final = false`.
     /// * Otherwise, the value is in (0.0, 1.0] where 0.0 means completely
-    ///   unstable and 1.0 means completely stable.
+    ///    unstable and 1.0 means completely stable.
     #[prost(float, tag="6")]
     pub stability: f32,
     /// Word-specific information for the words recognized by Speech in
@@ -5382,6 +5807,21 @@ pub mod streaming_recognition_result {
         /// up to the time of sending, which represents an intermediate result.
         PartialDtmfDigits = 4,
     }
+    impl MessageType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                MessageType::Unspecified => "MESSAGE_TYPE_UNSPECIFIED",
+                MessageType::Transcript => "TRANSCRIPT",
+                MessageType::DtmfDigits => "DTMF_DIGITS",
+                MessageType::EndOfSingleUtterance => "END_OF_SINGLE_UTTERANCE",
+                MessageType::PartialDtmfDigits => "PARTIAL_DTMF_DIGITS",
+            }
+        }
+    }
 }
 /// Represents the natural language text to be processed.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -5416,13 +5856,13 @@ pub struct EventInput {
     /// -   MapKey type: string
     /// -   MapKey value: parameter name
     /// -   MapValue type:
-    ///     -   If parameter's entity type is a composite entity: map
-    ///     -   Else: depending on parameter value type, could be one of string,
-    ///         number, boolean, null, list or map
+    ///      -   If parameter's entity type is a composite entity: map
+    ///      -   Else: depending on parameter value type, could be one of string,
+    ///          number, boolean, null, list or map
     /// -   MapValue value:
-    ///     -   If parameter's entity type is a composite entity:
-    ///         map from composite entity property names to property values
-    ///     -   Else: parameter value
+    ///      -   If parameter's entity type is a composite entity:
+    ///          map from composite entity property names to property values
+    ///      -   Else: parameter value
     #[prost(message, optional, tag="2")]
     pub parameters: ::core::option::Option<::prost_types::Struct>,
     /// Required. The language of this query. See [Language
@@ -5474,6 +5914,7 @@ pub struct Sentiment {
 pub mod sessions_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// A service used for session interactions.
     ///
     /// For more information, see the [API interactions
@@ -5491,6 +5932,10 @@ pub mod sessions_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -5512,19 +5957,19 @@ pub mod sessions_client {
         {
             SessionsClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Processes a natural language query and returns structured, actionable data
@@ -5621,17 +6066,17 @@ pub struct Participant {
     /// You can specify a user id as follows:
     ///
     /// 1. If you set this field in
-    ///    \[CreateParticipantRequest][google.cloud.dialogflow.v2beta1.CreateParticipantRequest.participant\]
-    ///    or
-    ///    \[UpdateParticipantRequest][google.cloud.dialogflow.v2beta1.UpdateParticipantRequest.participant\],
-    ///    Dialogflow adds the obfuscated user id with the participant.
+    ///     \[CreateParticipantRequest][google.cloud.dialogflow.v2beta1.CreateParticipantRequest.participant\]
+    ///     or
+    ///     \[UpdateParticipantRequest][google.cloud.dialogflow.v2beta1.UpdateParticipantRequest.participant\],
+    ///     Dialogflow adds the obfuscated user id with the participant.
     ///
     /// 2. If you set this field in
-    ///    \[AnalyzeContent][google.cloud.dialogflow.v2beta1.AnalyzeContentRequest.obfuscated_external_user_id\]
-    ///    or
-    ///    \[StreamingAnalyzeContent][google.cloud.dialogflow.v2beta1.StreamingAnalyzeContentRequest.obfuscated_external_user_id\],
-    ///    Dialogflow will update
-    ///    \[Participant.obfuscated_external_user_id][google.cloud.dialogflow.v2beta1.Participant.obfuscated_external_user_id\].
+    ///     \[AnalyzeContent][google.cloud.dialogflow.v2beta1.AnalyzeContentRequest.obfuscated_external_user_id\]
+    ///     or
+    ///     \[StreamingAnalyzeContent][google.cloud.dialogflow.v2beta1.StreamingAnalyzeContentRequest.obfuscated_external_user_id\],
+    ///     Dialogflow will update
+    ///     \[Participant.obfuscated_external_user_id][google.cloud.dialogflow.v2beta1.Participant.obfuscated_external_user_id\].
     ///
     /// Dialogflow uses this user id for following purposes:
     /// 1) Billing and measurement. If user with the same
@@ -5643,9 +6088,9 @@ pub struct Participant {
     /// Note:
     ///
     /// * Please never pass raw user ids to Dialogflow. Always obfuscate your user
-    ///   id first.
+    ///    id first.
     /// * Dialogflow only accepts a UTF-8 encoded string, e.g., a hex digest of a
-    ///   hash function like SHA-512.
+    ///    hash function like SHA-512.
     /// * The length of the user id must be <= 256 characters.
     #[prost(string, tag="7")]
     pub obfuscated_external_user_id: ::prost::alloc::string::String,
@@ -5657,14 +6102,14 @@ pub struct Participant {
     /// example, filters to match all documents that have 'US' or 'CA' in their
     /// market metadata values and 'agent' in their user metadata values will be
     ///
-    ///     documents_metadata_filters {
-    ///       key: "market"
-    ///       value: "US,CA"
-    ///     }
-    ///     documents_metadata_filters {
-    ///       key: "user"
-    ///       value: "agent"
-    ///     }
+    ///      documents_metadata_filters {
+    ///        key: "market"
+    ///        value: "US,CA"
+    ///      }
+    ///      documents_metadata_filters {
+    ///        key: "user"
+    ///        value: "agent"
+    ///      }
     #[prost(map="string, string", tag="8")]
     pub documents_metadata_filters: ::std::collections::HashMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
 }
@@ -5683,6 +6128,20 @@ pub mod participant {
         /// Participant is an end user that has called or chatted with
         /// Dialogflow services.
         EndUser = 3,
+    }
+    impl Role {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Role::Unspecified => "ROLE_UNSPECIFIED",
+                Role::HumanAgent => "HUMAN_AGENT",
+                Role::AutomatedAgent => "AUTOMATED_AGENT",
+                Role::EndUser => "END_USER",
+            }
+        }
     }
 }
 /// Represents a message posted into a conversation.
@@ -5848,6 +6307,19 @@ pub mod automated_agent_reply {
         /// Final reply.
         Final = 2,
     }
+    impl AutomatedAgentReplyType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AutomatedAgentReplyType::Unspecified => "AUTOMATED_AGENT_REPLY_TYPE_UNSPECIFIED",
+                AutomatedAgentReplyType::Partial => "PARTIAL",
+                AutomatedAgentReplyType::Final => "FINAL",
+            }
+        }
+    }
     /// Required.
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Response {
@@ -5896,6 +6368,20 @@ pub mod suggestion_feature {
         /// Run smart reply model.
         SmartReply = 3,
     }
+    impl Type {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Type::Unspecified => "TYPE_UNSPECIFIED",
+                Type::ArticleSuggestion => "ARTICLE_SUGGESTION",
+                Type::Faq => "FAQ",
+                Type::SmartReply => "SMART_REPLY",
+            }
+        }
+    }
 }
 /// Represents the parameters of human assist query.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -5908,14 +6394,14 @@ pub struct AssistQueryParameters {
     /// example, filters to match all documents that have 'US' or 'CA' in their
     /// market metadata values and 'agent' in their user metadata values will be
     ///
-    ///     documents_metadata_filters {
-    ///       key: "market"
-    ///       value: "US,CA"
-    ///     }
-    ///     documents_metadata_filters {
-    ///       key: "user"
-    ///       value: "agent"
-    ///     }
+    ///      documents_metadata_filters {
+    ///        key: "market"
+    ///        value: "US,CA"
+    ///      }
+    ///      documents_metadata_filters {
+    ///        key: "user"
+    ///        value: "agent"
+    ///      }
     #[prost(map="string, string", tag="1")]
     pub documents_metadata_filters: ::std::collections::HashMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
 }
@@ -5946,12 +6432,12 @@ pub struct AnalyzeContentRequest {
     /// participant.
     ///
     /// Given two messages under the same participant:
-    ///  - If send time are different regardless of whether the content of the
-    ///  messages are exactly the same, the conversation will regard them as
-    ///  two distinct messages sent by the participant.
-    ///  - If send time is the same regardless of whether the content of the
-    ///  messages are exactly the same, the conversation will regard them as
-    ///  same message, and ignore the message received later.
+    ///   - If send time are different regardless of whether the content of the
+    ///   messages are exactly the same, the conversation will regard them as
+    ///   two distinct messages sent by the participant.
+    ///   - If send time is the same regardless of whether the content of the
+    ///   messages are exactly the same, the conversation will regard them as
+    ///   same message, and ignore the message received later.
     ///
     /// If the value is not provided, a new request will always be regarded as a
     /// new message without any de-duplication.
@@ -5998,10 +6484,10 @@ pub struct AnalyzeContentResponse {
     /// Optional. The audio data bytes encoded as specified in the request.
     /// This field is set if:
     ///
-    ///  - `reply_audio_config` was specified in the request, or
-    ///  - The automated agent responded with audio to play to the user. In such
-    ///    case, `reply_audio.config` contains settings used to synthesize the
-    ///    speech.
+    ///   - `reply_audio_config` was specified in the request, or
+    ///   - The automated agent responded with audio to play to the user. In such
+    ///     case, `reply_audio.config` contains settings used to synthesize the
+    ///     speech.
     ///
     /// In some scenarios, multiple output audio fields may be present in the
     /// response structure. In these cases, only the top-most-level audio output
@@ -6055,8 +6541,8 @@ pub struct AnnotatedMessagePart {
     /// `@sys.unit-currency`, this may contain:
     /// <pre>
     /// {
-    ///   "amount": 5,
-    ///   "currency": "USD"
+    ///    "amount": 5,
+    ///    "currency": "USD"
     /// }
     /// </pre>
     #[prost(message, optional, tag="3")]
@@ -6515,9 +7001,9 @@ pub mod response_message {
     ///
     /// You may set this, for example:
     /// * In the entry fulfillment of a CX Page if entering the page indicates
-    ///   something went extremely wrong in the conversation.
+    ///    something went extremely wrong in the conversation.
     /// * In a webhook response when you determine that the customer issue can only
-    ///   be handled by a human.
+    ///    be handled by a human.
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct LiveAgentHandoff {
         /// Custom metadata for your handoff procedure. Dialogflow doesn't impose
@@ -6577,6 +7063,7 @@ pub mod response_message {
 pub mod participants_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Service for managing
     /// [Participants][google.cloud.dialogflow.v2beta1.Participant].
     #[derive(Debug, Clone)]
@@ -6592,6 +7079,10 @@ pub mod participants_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -6613,19 +7104,19 @@ pub mod participants_client {
         {
             ParticipantsClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Creates a new participant in a conversation.
@@ -6899,11 +7390,11 @@ pub mod participants_client {
 /// A typical workflow for customers provide feedback to an answer is:
 ///
 /// 1. For human agent assistant, customers get suggestion via ListSuggestions
-///    API. Together with the answers, \[AnswerRecord.name][google.cloud.dialogflow.v2beta1.AnswerRecord.name\] are returned to the
-///    customers.
+///     API. Together with the answers, \[AnswerRecord.name][google.cloud.dialogflow.v2beta1.AnswerRecord.name\] are returned to the
+///     customers.
 /// 2. The customer uses the \[AnswerRecord.name][google.cloud.dialogflow.v2beta1.AnswerRecord.name\] to call the
-///    \[UpdateAnswerRecord][\] method to send feedback about a specific answer
-///    that they believe is wrong.
+///     \[UpdateAnswerRecord][\] method to send feedback about a specific answer
+///     that they believe is wrong.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AnswerRecord {
     /// The unique identifier of this answer record.
@@ -6991,6 +7482,20 @@ pub mod answer_feedback {
         /// Answer is fully correct.
         FullyCorrect = 3,
     }
+    impl CorrectnessLevel {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                CorrectnessLevel::Unspecified => "CORRECTNESS_LEVEL_UNSPECIFIED",
+                CorrectnessLevel::NotCorrect => "NOT_CORRECT",
+                CorrectnessLevel::PartiallyCorrect => "PARTIALLY_CORRECT",
+                CorrectnessLevel::FullyCorrect => "FULLY_CORRECT",
+            }
+        }
+    }
     /// Normally, detail feedback is provided when answer is not fully correct.
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum DetailFeedback {
@@ -7008,7 +7513,7 @@ pub struct AgentAssistantFeedback {
     ///
     /// * Query: "Can I change my mailing address?"
     /// * Suggested document says: "Items must be returned/exchanged within 60
-    ///   days of the purchase date."
+    ///    days of the purchase date."
     /// * \[answer_relevance][google.cloud.dialogflow.v2beta1.AgentAssistantFeedback.answer_relevance\]: \[AnswerRelevance.IRRELEVANT][google.cloud.dialogflow.v2beta1.AgentAssistantFeedback.AnswerRelevance.IRRELEVANT\]
     #[prost(enumeration="agent_assistant_feedback::AnswerRelevance", tag="1")]
     pub answer_relevance: i32,
@@ -7018,7 +7523,7 @@ pub struct AgentAssistantFeedback {
     ///
     /// * Query: "Can I return the package in 2 days once received?"
     /// * Suggested document says: "Items must be returned/exchanged within 60
-    ///   days of the purchase date."
+    ///    days of the purchase date."
     /// * Ground truth: "No return or exchange is allowed."
     /// * \[document_correctness\]: INCORRECT
     #[prost(enumeration="agent_assistant_feedback::DocumentCorrectness", tag="2")]
@@ -7059,6 +7564,19 @@ pub mod agent_assistant_feedback {
         /// Answer is relevant to query.
         Relevant = 2,
     }
+    impl AnswerRelevance {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AnswerRelevance::Unspecified => "ANSWER_RELEVANCE_UNSPECIFIED",
+                AnswerRelevance::Irrelevant => "IRRELEVANT",
+                AnswerRelevance::Relevant => "RELEVANT",
+            }
+        }
+    }
     /// Correctness of document.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -7070,6 +7588,19 @@ pub mod agent_assistant_feedback {
         /// Information in document is correct.
         Correct = 2,
     }
+    impl DocumentCorrectness {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                DocumentCorrectness::Unspecified => "DOCUMENT_CORRECTNESS_UNSPECIFIED",
+                DocumentCorrectness::Incorrect => "INCORRECT",
+                DocumentCorrectness::Correct => "CORRECT",
+            }
+        }
+    }
     /// Efficiency of document.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -7080,6 +7611,19 @@ pub mod agent_assistant_feedback {
         Inefficient = 1,
         /// Document is efficient.
         Efficient = 2,
+    }
+    impl DocumentEfficiency {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                DocumentEfficiency::Unspecified => "DOCUMENT_EFFICIENCY_UNSPECIFIED",
+                DocumentEfficiency::Inefficient => "INEFFICIENT",
+                DocumentEfficiency::Efficient => "EFFICIENT",
+            }
+        }
     }
 }
 /// Request message for \[AnswerRecords.GetAnswerRecord][google.cloud.dialogflow.v2beta1.AnswerRecords.GetAnswerRecord\].
@@ -7140,6 +7684,7 @@ pub struct UpdateAnswerRecordRequest {
 pub mod answer_records_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Service for managing [AnswerRecords][google.cloud.dialogflow.v2beta1.AnswerRecord].
     #[derive(Debug, Clone)]
     pub struct AnswerRecordsClient<T> {
@@ -7154,6 +7699,10 @@ pub mod answer_records_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -7175,19 +7724,19 @@ pub mod answer_records_client {
         {
             AnswerRecordsClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Deprecated.
@@ -7313,6 +7862,19 @@ pub mod conversation {
         /// Conversation has been completed.
         Completed = 2,
     }
+    impl LifecycleState {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                LifecycleState::Unspecified => "LIFECYCLE_STATE_UNSPECIFIED",
+                LifecycleState::InProgress => "IN_PROGRESS",
+                LifecycleState::Completed => "COMPLETED",
+            }
+        }
+    }
     /// Enumeration of the different conversation stages a conversation can be in.
     /// Reference:
     /// <https://cloud.google.com/dialogflow/priv/docs/contact-center/basics#stages>
@@ -7328,6 +7890,19 @@ pub mod conversation {
         /// The conversation should not provide responses, just listen and provide
         /// suggestions.
         HumanAssistStage = 2,
+    }
+    impl ConversationStage {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ConversationStage::Unspecified => "CONVERSATION_STAGE_UNSPECIFIED",
+                ConversationStage::VirtualAgentStage => "VIRTUAL_AGENT_STAGE",
+                ConversationStage::HumanAssistStage => "HUMAN_ASSIST_STAGE",
+            }
+        }
     }
 }
 /// Represents a phone number for telephony integration. It allows for connecting
@@ -7379,11 +7954,11 @@ pub struct ListConversationsRequest {
     /// general, the expression must specify the field name, a comparison operator,
     /// and the value to use for filtering:
     /// <ul>
-    ///   <li>The value must be a string, a number, or a boolean.</li>
-    ///   <li>The comparison operator must be either `=`,`!=`, `>`, or `<`.</li>
-    ///   <li>To filter on multiple expressions, separate the
-    ///       expressions with `AND` or `OR` (omitting both implies `AND`).</li>
-    ///   <li>For clarity, expressions can be enclosed in parentheses.</li>
+    ///    <li>The value must be a string, a number, or a boolean.</li>
+    ///    <li>The comparison operator must be either `=`,`!=`, `>`, or `<`.</li>
+    ///    <li>To filter on multiple expressions, separate the
+    ///        expressions with `AND` or `OR` (omitting both implies `AND`).</li>
+    ///    <li>For clarity, expressions can be enclosed in parentheses.</li>
     /// </ul>
     /// Only `lifecycle_state` can be filtered on in this way. For example,
     /// the following expression only returns `COMPLETED` conversations:
@@ -7503,6 +8078,7 @@ pub struct ListMessagesResponse {
 pub mod conversations_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Service for managing [Conversations][google.cloud.dialogflow.v2beta1.Conversation].
     #[derive(Debug, Clone)]
     pub struct ConversationsClient<T> {
@@ -7517,6 +8093,10 @@ pub mod conversations_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -7538,19 +8118,19 @@ pub mod conversations_client {
         {
             ConversationsClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Creates a new conversation. Conversations are auto-completed after 24
@@ -7748,6 +8328,21 @@ pub mod conversation_event {
         /// * when we can recover from an error.
         UnrecoverableError = 4,
     }
+    impl Type {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Type::Unspecified => "TYPE_UNSPECIFIED",
+                Type::ConversationStarted => "CONVERSATION_STARTED",
+                Type::ConversationFinished => "CONVERSATION_FINISHED",
+                Type::NewMessage => "NEW_MESSAGE",
+                Type::UnrecoverableError => "UNRECOVERABLE_ERROR",
+            }
+        }
+    }
     /// Payload of conversation event.
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Payload {
@@ -7851,6 +8446,21 @@ pub mod document {
         /// The legacy enum for agent-facing smart reply feature.
         SmartReply = 4,
     }
+    impl KnowledgeType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                KnowledgeType::Unspecified => "KNOWLEDGE_TYPE_UNSPECIFIED",
+                KnowledgeType::Faq => "FAQ",
+                KnowledgeType::ExtractiveQa => "EXTRACTIVE_QA",
+                KnowledgeType::ArticleSuggestion => "ARTICLE_SUGGESTION",
+                KnowledgeType::SmartReply => "SMART_REPLY",
+            }
+        }
+    }
     /// The source of this document.
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Source {
@@ -7904,7 +8514,7 @@ pub struct ListDocumentsRequest {
     /// The filter expression used to filter documents returned by the list method.
     /// The expression has the following syntax:
     ///
-    ///   <field> <operator> <value> [AND <field> <operator> <value>] ...
+    ///    <field> <operator> <value> [AND <field> <operator> <value>] ...
     ///
     /// The following fields and operators are supported:
     ///
@@ -7916,7 +8526,7 @@ pub struct ListDocumentsRequest {
     ///
     /// * "knowledge_types:FAQ" matches documents with FAQ knowledge type.
     /// * "display_name:customer" matches documents whose display name contains
-    ///   "customer".
+    ///    "customer".
     /// * "state=ACTIVE" matches documents with ACTIVE state.
     /// * "knowledge_types:FAQ AND state=ACTIVE" matches all active FAQ documents.
     ///
@@ -8066,6 +8676,20 @@ pub mod knowledge_operation_metadata {
         /// The operation is done, either cancelled or completed.
         Done = 3,
     }
+    impl State {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                State::Unspecified => "STATE_UNSPECIFIED",
+                State::Pending => "PENDING",
+                State::Running => "RUNNING",
+                State::Done => "DONE",
+            }
+        }
+    }
 }
 /// Request message for \[Documents.ReloadDocument][google.cloud.dialogflow.v2beta1.Documents.ReloadDocument\].
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -8102,6 +8726,7 @@ pub mod reload_document_request {
 pub mod documents_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Service for managing knowledge [Documents][google.cloud.dialogflow.v2beta1.Document].
     #[derive(Debug, Clone)]
     pub struct DocumentsClient<T> {
@@ -8116,6 +8741,10 @@ pub mod documents_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -8137,19 +8766,19 @@ pub mod documents_client {
         {
             DocumentsClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Returns the list of all documents of the knowledge base.
@@ -8759,6 +9388,19 @@ pub mod notification_config {
         /// Pubsub message will be json.
         Json = 2,
     }
+    impl MessageFormat {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                MessageFormat::Unspecified => "MESSAGE_FORMAT_UNSPECIFIED",
+                MessageFormat::Proto => "PROTO",
+                MessageFormat::Json => "JSON",
+            }
+        }
+    }
 }
 /// Defines logging behavior for conversation lifecycle events.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -8843,6 +9485,7 @@ pub struct DeleteConversationProfileRequest {
 pub mod conversation_profiles_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Service for managing [ConversationProfiles][google.cloud.dialogflow.v2beta1.ConversationProfile].
     #[derive(Debug, Clone)]
     pub struct ConversationProfilesClient<T> {
@@ -8857,6 +9500,10 @@ pub mod conversation_profiles_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -8878,19 +9525,19 @@ pub mod conversation_profiles_client {
         {
             ConversationProfilesClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Returns the list of all conversation profiles in the specified project.
@@ -9075,7 +9722,7 @@ pub struct ListKnowledgeBasesRequest {
     /// The filter expression used to filter knowledge bases returned by the list
     /// method. The expression has the following syntax:
     ///
-    ///   <field> <operator> <value> [AND <field> <operator> <value>] ...
+    ///    <field> <operator> <value> [AND <field> <operator> <value>] ...
     ///
     /// The following fields and operators are supported:
     ///
@@ -9086,12 +9733,12 @@ pub struct ListKnowledgeBasesRequest {
     ///
     /// * 'language_code=en-us' matches knowledge bases with en-us language code.
     /// * 'display_name:articles' matches knowledge bases whose display name
-    ///   contains "articles".
+    ///    contains "articles".
     /// * 'display_name:"Best Articles"' matches knowledge bases whose display
-    ///   name contains "Best Articles".
+    ///    name contains "Best Articles".
     /// * 'language_code=en-gb AND display_name=articles' matches all knowledge
-    ///   bases whose display name contains "articles" and whose language code is
-    ///   "en-gb".
+    ///    bases whose display name contains "articles" and whose language code is
+    ///    "en-gb".
     ///
     /// Note: An empty filter string (i.e. "") is a no-op and will result in no
     /// filtering.
@@ -9161,6 +9808,7 @@ pub struct UpdateKnowledgeBaseRequest {
 pub mod knowledge_bases_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Service for managing [KnowledgeBases][google.cloud.dialogflow.v2beta1.KnowledgeBase].
     #[derive(Debug, Clone)]
     pub struct KnowledgeBasesClient<T> {
@@ -9175,6 +9823,10 @@ pub mod knowledge_bases_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -9196,19 +9848,19 @@ pub mod knowledge_bases_client {
         {
             KnowledgeBasesClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Returns the list of all knowledge bases of the specified agent.
@@ -9352,7 +10004,7 @@ pub struct Version {
     /// Supported formats:
     /// - `projects/<Project ID>/agent/versions/<Version ID>`
     /// - `projects/<Project ID>/locations/<Location ID>/agent/versions/<Version
-    ///   ID>`
+    ///    ID>`
     #[prost(string, tag="1")]
     pub name: ::prost::alloc::string::String,
     /// Optional. The developer-provided description of this version.
@@ -9385,6 +10037,20 @@ pub mod version {
         Ready = 2,
         /// Version training failed.
         Failed = 3,
+    }
+    impl VersionStatus {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                VersionStatus::Unspecified => "VERSION_STATUS_UNSPECIFIED",
+                VersionStatus::InProgress => "IN_PROGRESS",
+                VersionStatus::Ready => "READY",
+                VersionStatus::Failed => "FAILED",
+            }
+        }
     }
 }
 /// The request message for \[Versions.ListVersions][google.cloud.dialogflow.v2beta1.Versions.ListVersions\].
@@ -9423,7 +10089,7 @@ pub struct GetVersionRequest {
     /// Supported formats:
     /// - `projects/<Project ID>/agent/versions/<Version ID>`
     /// - `projects/<Project ID>/locations/<Location ID>/agent/versions/<Version
-    ///   ID>`
+    ///    ID>`
     #[prost(string, tag="1")]
     pub name: ::prost::alloc::string::String,
 }
@@ -9447,7 +10113,7 @@ pub struct UpdateVersionRequest {
     /// Supported formats:
     /// - `projects/<Project ID>/agent/versions/<Version ID>`
     /// - `projects/<Project ID>/locations/<Location ID>/agent/versions/<Version
-    ///   ID>`
+    ///    ID>`
     #[prost(message, optional, tag="1")]
     pub version: ::core::option::Option<Version>,
     /// Required. The mask to control which fields get updated.
@@ -9461,7 +10127,7 @@ pub struct DeleteVersionRequest {
     /// Supported formats:
     /// - `projects/<Project ID>/agent/versions/<Version ID>`
     /// - `projects/<Project ID>/locations/<Location ID>/agent/versions/<Version
-    ///   ID>`
+    ///    ID>`
     #[prost(string, tag="1")]
     pub name: ::prost::alloc::string::String,
 }
@@ -9469,6 +10135,7 @@ pub struct DeleteVersionRequest {
 pub mod versions_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Service for managing [Versions][google.cloud.dialogflow.v2beta1.Version].
     #[derive(Debug, Clone)]
     pub struct VersionsClient<T> {
@@ -9483,6 +10150,10 @@ pub mod versions_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -9504,19 +10175,19 @@ pub mod versions_client {
         {
             VersionsClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Returns the list of all versions of the specified agent.
@@ -9635,12 +10306,12 @@ pub struct WebhookRequest {
     /// Supported formats:
     /// - `projects/<Project ID>/agent/sessions/<Session ID>,
     /// - `projects/<Project ID>/locations/<Location ID>/agent/sessions/<Session
-    ///   ID>`,
+    ///    ID>`,
     /// - `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
-    ///   ID>/sessions/<Session ID>`,
+    ///    ID>/sessions/<Session ID>`,
     /// - `projects/<Project ID>/locations/<Location
-    ///   ID>/agent/environments/<Environment ID>/users/<User ID>/sessions/<Session
-    ///   ID>`,
+    ///    ID>/agent/environments/<Environment ID>/users/<User ID>/sessions/<Session
+    ///    ID>`,
     #[prost(string, tag="4")]
     pub session: ::prost::alloc::string::String,
     /// The unique identifier of the response. Contains the same value as
@@ -9753,9 +10424,9 @@ pub struct OriginalDetectIntentRequest {
     /// In particular, for the Dialogflow Phone Gateway integration, this field has
     /// the form:
     /// <pre>{
-    ///  "telephony": {
-    ///    "caller_id": "+18558363987"
-    ///  }
+    ///   "telephony": {
+    ///     "caller_id": "+18558363987"
+    ///   }
     /// }</pre>
     /// Note: The caller ID field (`caller_id`) will be redacted for Trial
     /// Edition agents and populated with the caller ID in [E.164

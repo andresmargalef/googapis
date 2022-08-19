@@ -232,6 +232,20 @@ pub mod transfer_message {
         /// Error message.
         Error = 3,
     }
+    impl MessageSeverity {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                MessageSeverity::Unspecified => "MESSAGE_SEVERITY_UNSPECIFIED",
+                MessageSeverity::Info => "INFO",
+                MessageSeverity::Warning => "WARNING",
+                MessageSeverity::Error => "ERROR",
+            }
+        }
+    }
 }
 /// DEPRECATED. Represents data transfer type.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -244,6 +258,19 @@ pub enum TransferType {
     /// Streaming data transfer. Streaming data source currently doesn't
     /// support multiple transfer configs per project.
     Streaming = 2,
+}
+impl TransferType {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            TransferType::Unspecified => "TRANSFER_TYPE_UNSPECIFIED",
+            TransferType::Batch => "BATCH",
+            TransferType::Streaming => "STREAMING",
+        }
+    }
 }
 /// Represents data transfer run state.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -262,6 +289,22 @@ pub enum TransferState {
     Failed = 5,
     /// Data transfer is cancelled (6).
     Cancelled = 6,
+}
+impl TransferState {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            TransferState::Unspecified => "TRANSFER_STATE_UNSPECIFIED",
+            TransferState::Pending => "PENDING",
+            TransferState::Running => "RUNNING",
+            TransferState::Succeeded => "SUCCEEDED",
+            TransferState::Failed => "FAILED",
+            TransferState::Cancelled => "CANCELLED",
+        }
+    }
 }
 /// Represents a data source parameter with validation rules, so that
 /// parameters can be rendered in the UI. These parameters are given to us by
@@ -343,6 +386,23 @@ pub mod data_source_parameter {
         Record = 5,
         /// Page ID for a Google+ Page.
         PlusPage = 6,
+    }
+    impl Type {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Type::Unspecified => "TYPE_UNSPECIFIED",
+                Type::String => "STRING",
+                Type::Integer => "INTEGER",
+                Type::Double => "DOUBLE",
+                Type::Boolean => "BOOLEAN",
+                Type::Record => "RECORD",
+                Type::PlusPage => "PLUS_PAGE",
+            }
+        }
     }
 }
 /// Represents data source metadata. Metadata is sufficient to
@@ -437,6 +497,20 @@ pub mod data_source {
         /// Use First Party OAuth.
         FirstPartyOauth = 3,
     }
+    impl AuthorizationType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AuthorizationType::Unspecified => "AUTHORIZATION_TYPE_UNSPECIFIED",
+                AuthorizationType::AuthorizationCode => "AUTHORIZATION_CODE",
+                AuthorizationType::GooglePlusAuthorizationCode => "GOOGLE_PLUS_AUTHORIZATION_CODE",
+                AuthorizationType::FirstPartyOauth => "FIRST_PARTY_OAUTH",
+            }
+        }
+    }
     /// Represents how the data source supports data auto refresh.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -451,6 +525,19 @@ pub mod data_source {
         /// for the past few days. Allows custom values to be set for each transfer
         /// config.
         CustomSlidingWindow = 2,
+    }
+    impl DataRefreshType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                DataRefreshType::Unspecified => "DATA_REFRESH_TYPE_UNSPECIFIED",
+                DataRefreshType::SlidingWindow => "SLIDING_WINDOW",
+                DataRefreshType::CustomSlidingWindow => "CUSTOM_SLIDING_WINDOW",
+            }
+        }
     }
 }
 /// A request to get data source info.
@@ -519,14 +606,14 @@ pub struct CreateTransferConfigRequest {
     /// <https://www.gstatic.com/bigquerydatatransfer/oauthz/auth?client_id=<datatransferapiclientid>&scope=<data_source_scopes>&redirect_uri=<redirect_uri>>
     ///
     /// * client_id should be OAuth client_id of BigQuery DTS API for the given
-    ///   data source returned by ListDataSources method.
+    ///    data source returned by ListDataSources method.
     /// * data_source_scopes are the scopes returned by ListDataSources method.
     /// * redirect_uri is an optional parameter. If not specified, then
-    ///   authorization code is posted to the opener of authorization flow window.
-    ///   Otherwise it will be sent to the redirect uri. A special value of
-    ///   urn:ietf:wg:oauth:2.0:oob means that authorization code should be
-    ///   returned in the title bar of the browser, with the page text prompting
-    ///   the user to copy the code and paste it in the application.
+    ///    authorization code is posted to the opener of authorization flow window.
+    ///    Otherwise it will be sent to the redirect uri. A special value of
+    ///    urn:ietf:wg:oauth:2.0:oob means that authorization code should be
+    ///    returned in the title bar of the browser, with the page text prompting
+    ///    the user to copy the code and paste it in the application.
     #[prost(string, tag="3")]
     pub authorization_code: ::prost::alloc::string::String,
     /// Optional version info. If users want to find a very recent access token,
@@ -559,14 +646,14 @@ pub struct UpdateTransferConfigRequest {
     /// <https://www.gstatic.com/bigquerydatatransfer/oauthz/auth?client_id=<datatransferapiclientid>&scope=<data_source_scopes>&redirect_uri=<redirect_uri>>
     ///
     /// * client_id should be OAuth client_id of BigQuery DTS API for the given
-    ///   data source returned by ListDataSources method.
+    ///    data source returned by ListDataSources method.
     /// * data_source_scopes are the scopes returned by ListDataSources method.
     /// * redirect_uri is an optional parameter. If not specified, then
-    ///   authorization code is posted to the opener of authorization flow window.
-    ///   Otherwise it will be sent to the redirect uri. A special value of
-    ///   urn:ietf:wg:oauth:2.0:oob means that authorization code should be
-    ///   returned in the title bar of the browser, with the page text prompting
-    ///   the user to copy the code and paste it in the application.
+    ///    authorization code is posted to the opener of authorization flow window.
+    ///    Otherwise it will be sent to the redirect uri. A special value of
+    ///    urn:ietf:wg:oauth:2.0:oob means that authorization code should be
+    ///    returned in the title bar of the browser, with the page text prompting
+    ///    the user to copy the code and paste it in the application.
     #[prost(string, tag="3")]
     pub authorization_code: ::prost::alloc::string::String,
     /// Required. Required list of fields to be updated in this request.
@@ -698,6 +785,18 @@ pub mod list_transfer_runs_request {
         Unspecified = 0,
         /// Only latest run per day should be returned.
         Latest = 1,
+    }
+    impl RunAttempt {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                RunAttempt::Unspecified => "RUN_ATTEMPT_UNSPECIFIED",
+                RunAttempt::Latest => "LATEST",
+            }
+        }
     }
 }
 /// The returned list of pipelines in the project.
@@ -850,6 +949,7 @@ pub struct StartManualTransferRunsResponse {
 pub mod data_transfer_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The Google BigQuery Data Transfer Service API enables BigQuery users to
     /// configure the transfer of their data from other Google Products into
     /// BigQuery. This service contains methods that are end user exposed. It backs
@@ -867,6 +967,10 @@ pub mod data_transfer_service_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -888,19 +992,19 @@ pub mod data_transfer_service_client {
         {
             DataTransferServiceClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Retrieves a supported data source and returns its settings,

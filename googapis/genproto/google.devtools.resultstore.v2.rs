@@ -117,6 +117,38 @@ pub enum Language {
     /// Extensible Markup Language
     Xml = 22,
 }
+impl Language {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            Language::Unspecified => "LANGUAGE_UNSPECIFIED",
+            Language::None => "NONE",
+            Language::Android => "ANDROID",
+            Language::As => "AS",
+            Language::Cc => "CC",
+            Language::Css => "CSS",
+            Language::Dart => "DART",
+            Language::Go => "GO",
+            Language::Gwt => "GWT",
+            Language::Haskell => "HASKELL",
+            Language::Java => "JAVA",
+            Language::Js => "JS",
+            Language::Lisp => "LISP",
+            Language::Objc => "OBJC",
+            Language::Py => "PY",
+            Language::Sh => "SH",
+            Language::Swift => "SWIFT",
+            Language::Ts => "TS",
+            Language::Web => "WEB",
+            Language::Scala => "SCALA",
+            Language::Proto => "PROTO",
+            Language::Xml => "XML",
+        }
+    }
+}
 /// Status of a resource.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
@@ -160,6 +192,30 @@ pub enum Status {
     /// (E.g. Restricted to a different configuration.)
     Skipped = 13,
 }
+impl Status {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            Status::Unspecified => "STATUS_UNSPECIFIED",
+            Status::Building => "BUILDING",
+            Status::Built => "BUILT",
+            Status::FailedToBuild => "FAILED_TO_BUILD",
+            Status::Testing => "TESTING",
+            Status::Passed => "PASSED",
+            Status::Failed => "FAILED",
+            Status::TimedOut => "TIMED_OUT",
+            Status::Cancelled => "CANCELLED",
+            Status::ToolFailed => "TOOL_FAILED",
+            Status::Incomplete => "INCOMPLETE",
+            Status::Flaky => "FLAKY",
+            Status::Unknown => "UNKNOWN",
+            Status::Skipped => "SKIPPED",
+        }
+    }
+}
 /// Indicates the upload status of the invocation, whether it is
 /// post-processing, or immutable, etc.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -174,6 +230,20 @@ pub enum UploadStatus {
     PostProcessing = 2,
     /// All post-processing is complete, and the invocation is now immutable.
     Immutable = 3,
+}
+impl UploadStatus {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            UploadStatus::Unspecified => "UPLOAD_STATUS_UNSPECIFIED",
+            UploadStatus::Uploading => "UPLOADING",
+            UploadStatus::PostProcessing => "POST_PROCESSING",
+            UploadStatus::Immutable => "IMMUTABLE",
+        }
+    }
 }
 /// Describes line coverage for a file
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -334,6 +404,20 @@ pub mod file {
         /// SHA-256
         Sha256 = 3,
     }
+    impl HashType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                HashType::Unspecified => "HASH_TYPE_UNSPECIFIED",
+                HashType::Md5 => "MD5",
+                HashType::Sha1 => "SHA1",
+                HashType::Sha256 => "SHA256",
+            }
+        }
+    }
 }
 /// Information specific to an entry in an archive.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -393,6 +477,25 @@ pub enum FileProcessingErrorType {
     NotFound = 7,
     /// File is empty but was expected to have content.
     FileEmpty = 8,
+}
+impl FileProcessingErrorType {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            FileProcessingErrorType::Unspecified => "FILE_PROCESSING_ERROR_TYPE_UNSPECIFIED",
+            FileProcessingErrorType::GenericReadError => "GENERIC_READ_ERROR",
+            FileProcessingErrorType::GenericParseError => "GENERIC_PARSE_ERROR",
+            FileProcessingErrorType::FileTooLarge => "FILE_TOO_LARGE",
+            FileProcessingErrorType::OutputTooLarge => "OUTPUT_TOO_LARGE",
+            FileProcessingErrorType::AccessDenied => "ACCESS_DENIED",
+            FileProcessingErrorType::DeadlineExceeded => "DEADLINE_EXCEEDED",
+            FileProcessingErrorType::NotFound => "NOT_FOUND",
+            FileProcessingErrorType::FileEmpty => "FILE_EMPTY",
+        }
+    }
 }
 /// The result of running a test suite, as reported in a <testsuite> element of
 /// an XML log.
@@ -518,6 +621,23 @@ pub mod test_case {
         /// suppressed.  Eg. if someone temporarily disables a failing test.
         Suppressed = 6,
     }
+    impl Result {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Result::Unspecified => "RESULT_UNSPECIFIED",
+                Result::Completed => "COMPLETED",
+                Result::Interrupted => "INTERRUPTED",
+                Result::Cancelled => "CANCELLED",
+                Result::Filtered => "FILTERED",
+                Result::Skipped => "SKIPPED",
+                Result::Suppressed => "SUPPRESSED",
+            }
+        }
+    }
 }
 /// Represents a violated assertion, as reported in a <failure> element within a
 /// <testcase>. Some languages allow assertions to be made without stopping the
@@ -630,15 +750,15 @@ pub struct Action {
     /// stdout: The stdout of the action
     /// stderr: The stderr of the action
     /// baseline.lcov: Baseline coverage file to be parsed by the server. This
-    ///     uses a stripped down implementation of the LCOV standard.
-    ///     <http://ltp.sourceforge.net/coverage/lcov/geninfo.1.php>
+    ///      uses a stripped down implementation of the LCOV standard.
+    ///      <http://ltp.sourceforge.net/coverage/lcov/geninfo.1.php>
     ///
     /// For test actions:
     /// test.xml: The test suite / test case data in XML format.
     /// test.log: The combined stdout and stderr of the test process.
     /// test.lcov: Coverage file to be parsed by the server. This uses a stripped
-    ///     down implementation of the LCOV standard.
-    ///     <http://ltp.sourceforge.net/coverage/lcov/geninfo.1.php>
+    ///      down implementation of the LCOV standard.
+    ///      <http://ltp.sourceforge.net/coverage/lcov/geninfo.1.php>
     #[prost(message, repeated, tag="8")]
     pub files: ::prost::alloc::vec::Vec<File>,
     /// List of names of file sets that are referenced from this Action.
@@ -906,6 +1026,21 @@ pub enum ExecutionStrategy {
     /// The action was executed locally, without parallelism.
     LocalSequential = 4,
 }
+impl ExecutionStrategy {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            ExecutionStrategy::Unspecified => "EXECUTION_STRATEGY_UNSPECIFIED",
+            ExecutionStrategy::OtherEnvironment => "OTHER_ENVIRONMENT",
+            ExecutionStrategy::RemoteService => "REMOTE_SERVICE",
+            ExecutionStrategy::LocalParallel => "LOCAL_PARALLEL",
+            ExecutionStrategy::LocalSequential => "LOCAL_SEQUENTIAL",
+        }
+    }
+}
 /// Most build systems cache build results to speed up incremental builds.
 /// Some also cache test results too. This indicates whether the test results
 /// were found in a cache, and where that cache was located.
@@ -920,6 +1055,20 @@ pub enum TestCaching {
     RemoteCacheHit = 2,
     /// The test result was not found in any cache, so it had to be run again.
     CacheMiss = 3,
+}
+impl TestCaching {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            TestCaching::Unspecified => "TEST_CACHING_UNSPECIFIED",
+            TestCaching::LocalCacheHit => "LOCAL_CACHE_HIT",
+            TestCaching::RemoteCacheHit => "REMOTE_CACHE_HIT",
+            TestCaching::CacheMiss => "CACHE_MISS",
+        }
+    }
 }
 /// Represents a configuration within an Invocation associated with one or more
 /// ConfiguredTargets. It captures the environment and other settings that
@@ -1054,9 +1203,9 @@ pub struct LineCoverageSummary {
 }
 /// Summary of branch coverage
 /// A branch may be:
-///  * not executed.  Counted only in total.
-///  * executed but not taken.  Appears in total and executed.
-///  * executed and taken.  Appears in all three fields.
+///   * not executed.  Counted only in total.
+///   * executed but not taken.  Appears in total and executed.
+///   * executed and taken.  Appears in all three fields.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BranchCoverageSummary {
     /// The number of branches present in the file.
@@ -1413,6 +1562,22 @@ pub enum TargetType {
     /// Any test target, in bazel that means a rule with a '_test' suffix.
     Test = 5,
 }
+impl TargetType {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            TargetType::Unspecified => "TARGET_TYPE_UNSPECIFIED",
+            TargetType::Application => "APPLICATION",
+            TargetType::Binary => "BINARY",
+            TargetType::Library => "LIBRARY",
+            TargetType::Package => "PACKAGE",
+            TargetType::Test => "TEST",
+        }
+    }
+}
 /// Indicates how big the user indicated the test action was.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
@@ -1429,6 +1594,22 @@ pub enum TestSize {
     Enormous = 4,
     /// Something that doesn't fit into the above categories.
     OtherSize = 5,
+}
+impl TestSize {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            TestSize::Unspecified => "TEST_SIZE_UNSPECIFIED",
+            TestSize::Small => "SMALL",
+            TestSize::Medium => "MEDIUM",
+            TestSize::Large => "LARGE",
+            TestSize::Enormous => "ENORMOUS",
+            TestSize::OtherSize => "OTHER_SIZE",
+        }
+    }
 }
 /// Request passed into GetInvocation
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -2054,6 +2235,7 @@ pub struct TraverseFileSetsResponse {
 pub mod result_store_download_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// This is the interface used to download information from the ResultStore
     /// database.
     ///
@@ -2072,6 +2254,10 @@ pub mod result_store_download_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -2093,19 +2279,19 @@ pub mod result_store_download_client {
         {
             ResultStoreDownloadClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Retrieves the invocation with the given name.
@@ -2650,6 +2836,7 @@ pub struct GetFileTailResponse {
 pub mod result_store_file_download_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// This API allows download of File messages referenced in
     /// ResultStore resources.
     #[derive(Debug, Clone)]
@@ -2665,6 +2852,10 @@ pub mod result_store_file_download_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -2688,19 +2879,19 @@ pub mod result_store_file_download_client {
                 InterceptedService::new(inner, interceptor),
             )
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Retrieves the File with the given uri.
@@ -2840,10 +3031,10 @@ pub struct CreateInvocationRequest {
     /// retry is needed. This serves a role closely related to resume_token, as
     /// both fields may be used to provide state required to restore a Batch
     /// Upload, but they differ in two important aspects:
-    ///  - it is not compared to previous values, and as such does not provide
-    ///    concurrency control;
-    ///  - it allows for a larger payload, since the contents are never
-    ///    inspected/compared;
+    ///   - it is not compared to previous values, and as such does not provide
+    ///     concurrency control;
+    ///   - it allows for a larger payload, since the contents are never
+    ///     inspected/compared;
     /// The size of the message must be within 1 MiB. Too large requests will be
     /// rejected.
     #[prost(bytes="vec", tag="8")]
@@ -3156,7 +3347,7 @@ pub struct CreateActionRequest {
     /// Recommended IDs for Test Actions:
     /// "test": For a single test action.
     /// "test_shard0_run0_attempt0" ... "test_shard9_run9_attempt9": For tests with
-    ///  shard/run/attempts.
+    ///   shard/run/attempts.
     ///
     /// Recommended IDs for Build Actions:
     /// "build": If you only have a single build action.
@@ -3372,10 +3563,10 @@ pub struct UploadBatchRequest {
     /// retry is needed. This serves a role closely related to resume_token, as
     /// both fields may be used to provide state required to restore a Batch
     /// Upload, but they differ in two important aspects:
-    ///  - it is not compared to previous values, and as such does not provide
-    ///    concurrency control;
-    ///  - it allows for a larger payload, since the contents are never
-    ///    inspected/compared;
+    ///   - it is not compared to previous values, and as such does not provide
+    ///     concurrency control;
+    ///   - it allows for a larger payload, since the contents are never
+    ///     inspected/compared;
     /// The size of the message must be within 1 MiB. Too large requests will be
     /// rejected.
     #[prost(bytes="vec", tag="6")]
@@ -3481,6 +3672,21 @@ pub mod upload_request {
         /// An empty resource should be provided below.
         Finalize = 4,
     }
+    impl UploadOperation {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                UploadOperation::Unspecified => "UPLOAD_OPERATION_UNSPECIFIED",
+                UploadOperation::Create => "CREATE",
+                UploadOperation::Update => "UPDATE",
+                UploadOperation::Merge => "MERGE",
+                UploadOperation::Finalize => "FINALIZE",
+            }
+        }
+    }
     /// The proto of the resource being uploaded.
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Resource {
@@ -3519,6 +3725,7 @@ pub struct GetInvocationUploadMetadataRequest {
 pub mod result_store_upload_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// This is the interface used to upload information to the ResultStore database,
     /// to update that information as necessary, and to make it immutable at the end.
     ///
@@ -3542,6 +3749,10 @@ pub mod result_store_upload_client {
             let inner = tonic::client::Grpc::new(inner);
             Self { inner }
         }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
+            Self { inner }
+        }
         pub fn with_interceptor<F>(
             inner: T,
             interceptor: F,
@@ -3561,19 +3772,19 @@ pub mod result_store_upload_client {
         {
             ResultStoreUploadClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Creates the given invocation.

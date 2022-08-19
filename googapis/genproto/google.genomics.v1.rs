@@ -166,6 +166,24 @@ pub mod variant_annotation {
         /// `CNV` indicates a variation in copy number.
         Cnv = 7,
     }
+    impl Type {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Type::Unspecified => "TYPE_UNSPECIFIED",
+                Type::Other => "TYPE_OTHER",
+                Type::Insertion => "INSERTION",
+                Type::Deletion => "DELETION",
+                Type::Substitution => "SUBSTITUTION",
+                Type::Snp => "SNP",
+                Type::Structural => "STRUCTURAL",
+                Type::Cnv => "CNV",
+            }
+        }
+    }
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
     pub enum Effect {
@@ -198,6 +216,25 @@ pub mod variant_annotation {
         /// normal splicing pattern.
         SpliceSiteDisruption = 8,
     }
+    impl Effect {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Effect::Unspecified => "EFFECT_UNSPECIFIED",
+                Effect::Other => "EFFECT_OTHER",
+                Effect::Frameshift => "FRAMESHIFT",
+                Effect::FramePreservingIndel => "FRAME_PRESERVING_INDEL",
+                Effect::SynonymousSnp => "SYNONYMOUS_SNP",
+                Effect::NonsynonymousSnp => "NONSYNONYMOUS_SNP",
+                Effect::StopGain => "STOP_GAIN",
+                Effect::StopLoss => "STOP_LOSS",
+                Effect::SpliceSiteDisruption => "SPLICE_SITE_DISRUPTION",
+            }
+        }
+    }
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
     pub enum ClinicalSignificance {
@@ -220,6 +257,30 @@ pub mod variant_annotation {
         /// signficances are reported for a variant. The original clinical
         /// significance values may be provided in the `info` field.
         MultipleReported = 13,
+    }
+    impl ClinicalSignificance {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ClinicalSignificance::Unspecified => "CLINICAL_SIGNIFICANCE_UNSPECIFIED",
+                ClinicalSignificance::Other => "CLINICAL_SIGNIFICANCE_OTHER",
+                ClinicalSignificance::Uncertain => "UNCERTAIN",
+                ClinicalSignificance::Benign => "BENIGN",
+                ClinicalSignificance::LikelyBenign => "LIKELY_BENIGN",
+                ClinicalSignificance::LikelyPathogenic => "LIKELY_PATHOGENIC",
+                ClinicalSignificance::Pathogenic => "PATHOGENIC",
+                ClinicalSignificance::DrugResponse => "DRUG_RESPONSE",
+                ClinicalSignificance::Histocompatibility => "HISTOCOMPATIBILITY",
+                ClinicalSignificance::ConfersSensitivity => "CONFERS_SENSITIVITY",
+                ClinicalSignificance::RiskFactor => "RISK_FACTOR",
+                ClinicalSignificance::Association => "ASSOCIATION",
+                ClinicalSignificance::Protective => "PROTECTIVE",
+                ClinicalSignificance::MultipleReported => "MULTIPLE_REPORTED",
+            }
+        }
     }
 }
 /// A transcript represents the assertion that a particular region of the
@@ -537,10 +598,26 @@ pub enum AnnotationType {
     /// particular region of the reference genome may be transcribed as RNA.
     Transcript = 4,
 }
+impl AnnotationType {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            AnnotationType::Unspecified => "ANNOTATION_TYPE_UNSPECIFIED",
+            AnnotationType::Generic => "GENERIC",
+            AnnotationType::Variant => "VARIANT",
+            AnnotationType::Gene => "GENE",
+            AnnotationType::Transcript => "TRANSCRIPT",
+        }
+    }
+}
 /// Generated client implementations.
 pub mod annotation_service_v1_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// This service provides storage and positional retrieval of genomic
     /// reference annotations, including variant annotations.
     #[derive(Debug, Clone)]
@@ -556,6 +633,10 @@ pub mod annotation_service_v1_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -577,19 +658,19 @@ pub mod annotation_service_v1_client {
         {
             AnnotationServiceV1Client::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Creates a new annotation set. Caller must have WRITE permission for the
@@ -948,6 +1029,26 @@ pub mod cigar_unit {
         /// `X`.
         SequenceMismatch = 9,
     }
+    impl Operation {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Operation::Unspecified => "OPERATION_UNSPECIFIED",
+                Operation::AlignmentMatch => "ALIGNMENT_MATCH",
+                Operation::Insert => "INSERT",
+                Operation::Delete => "DELETE",
+                Operation::Skip => "SKIP",
+                Operation::ClipSoft => "CLIP_SOFT",
+                Operation::ClipHard => "CLIP_HARD",
+                Operation::Pad => "PAD",
+                Operation::SequenceMatch => "SEQUENCE_MATCH",
+                Operation::SequenceMismatch => "SEQUENCE_MISMATCH",
+            }
+        }
+    }
 }
 /// A Dataset is a collection of genomic data.
 ///
@@ -1039,6 +1140,7 @@ pub struct GetDatasetRequest {
 pub mod dataset_service_v1_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// This service manages datasets, which are collections of genomic data.
     #[derive(Debug, Clone)]
     pub struct DatasetServiceV1Client<T> {
@@ -1053,6 +1155,10 @@ pub mod dataset_service_v1_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -1074,19 +1180,19 @@ pub mod dataset_service_v1_client {
         {
             DatasetServiceV1Client::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Lists datasets within a project.
@@ -1476,31 +1582,31 @@ pub struct LinearAlignment {
 /// representing the local alignment of the read to reference. The following
 /// pseudocode demonstrates one way of doing this:
 ///
-///     out = ""
-///     offset = 0
-///     for c in read.alignment.cigar {
-///       switch c.operation {
-///       case "ALIGNMENT_MATCH", "SEQUENCE_MATCH", "SEQUENCE_MISMATCH":
-///         out += read.alignedSequence\[offset:offset+c.operationLength\]
-///         offset += c.operationLength
-///         break
-///       case "CLIP_SOFT", "INSERT":
-///         offset += c.operationLength
-///         break
-///       case "PAD":
-///         out += repeat("*", c.operationLength)
-///         break
-///       case "DELETE":
-///         out += repeat("-", c.operationLength)
-///         break
-///       case "SKIP":
-///         out += repeat(" ", c.operationLength)
-///         break
-///       case "CLIP_HARD":
-///         break
-///       }
-///     }
-///     return out
+///      out = ""
+///      offset = 0
+///      for c in read.alignment.cigar {
+///        switch c.operation {
+///        case "ALIGNMENT_MATCH", "SEQUENCE_MATCH", "SEQUENCE_MISMATCH":
+///          out += read.alignedSequence\[offset:offset+c.operationLength\]
+///          offset += c.operationLength
+///          break
+///        case "CLIP_SOFT", "INSERT":
+///          offset += c.operationLength
+///          break
+///        case "PAD":
+///          out += repeat("*", c.operationLength)
+///          break
+///        case "DELETE":
+///          out += repeat("-", c.operationLength)
+///          break
+///        case "SKIP":
+///          out += repeat(" ", c.operationLength)
+///          break
+///        case "CLIP_HARD":
+///          break
+///        }
+///      }
+///      return out
 ///
 /// ### Converting to SAM's CIGAR string
 ///
@@ -1508,22 +1614,22 @@ pub struct LinearAlignment {
 /// `cigar` field. Note that this is a lossy conversion
 /// (`cigar.referenceSequence` is lost).
 ///
-///     cigarMap = {
-///       "ALIGNMENT_MATCH": "M",
-///       "INSERT": "I",
-///       "DELETE": "D",
-///       "SKIP": "N",
-///       "CLIP_SOFT": "S",
-///       "CLIP_HARD": "H",
-///       "PAD": "P",
-///       "SEQUENCE_MATCH": "=",
-///       "SEQUENCE_MISMATCH": "X",
-///     }
-///     cigarStr = ""
-///     for c in read.alignment.cigar {
-///       cigarStr += c.operationLength + cigarMap\[c.operation\]
-///     }
-///     return cigarStr
+///      cigarMap = {
+///        "ALIGNMENT_MATCH": "M",
+///        "INSERT": "I",
+///        "DELETE": "D",
+///        "SKIP": "N",
+///        "CLIP_SOFT": "S",
+///        "CLIP_HARD": "H",
+///        "PAD": "P",
+///        "SEQUENCE_MATCH": "=",
+///        "SEQUENCE_MISMATCH": "X",
+///      }
+///      cigarStr = ""
+///      for c in read.alignment.cigar {
+///        cigarStr += c.operationLength + cigarMap\[c.operation\]
+///      }
+///      return cigarStr
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Read {
     /// The server-generated read ID, unique across all reads. This is different
@@ -1822,6 +1928,19 @@ pub mod import_read_group_sets_request {
         /// separate read group set.
         MergeAll = 2,
     }
+    impl PartitionStrategy {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                PartitionStrategy::Unspecified => "PARTITION_STRATEGY_UNSPECIFIED",
+                PartitionStrategy::PerFilePerSample => "PER_FILE_PER_SAMPLE",
+                PartitionStrategy::MergeAll => "MERGE_ALL",
+            }
+        }
+    }
 }
 /// The read group set import response.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -2063,6 +2182,7 @@ pub struct StreamReadsResponse {
 pub mod streaming_read_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     #[derive(Debug, Clone)]
     pub struct StreamingReadServiceClient<T> {
         inner: tonic::client::Grpc<T>,
@@ -2076,6 +2196,10 @@ pub mod streaming_read_service_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -2097,19 +2221,19 @@ pub mod streaming_read_service_client {
         {
             StreamingReadServiceClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Returns a stream of all the reads matching the search request, ordered
@@ -2142,6 +2266,7 @@ pub mod streaming_read_service_client {
 pub mod read_service_v1_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The Readstore. A data store for DNA sequencing Reads.
     #[derive(Debug, Clone)]
     pub struct ReadServiceV1Client<T> {
@@ -2156,6 +2281,10 @@ pub mod read_service_v1_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -2177,19 +2306,19 @@ pub mod read_service_v1_client {
         {
             ReadServiceV1Client::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Creates read group sets by asynchronously importing the provided
@@ -2650,6 +2779,7 @@ pub struct ListBasesResponse {
 pub mod reference_service_v1_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     #[derive(Debug, Clone)]
     pub struct ReferenceServiceV1Client<T> {
         inner: tonic::client::Grpc<T>,
@@ -2663,6 +2793,10 @@ pub mod reference_service_v1_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -2684,19 +2818,19 @@ pub mod reference_service_v1_client {
         {
             ReferenceServiceV1Client::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Searches for reference sets which match the given criteria.
@@ -2880,6 +3014,22 @@ pub mod variant_set_metadata {
         Flag = 3,
         Character = 4,
         String = 5,
+    }
+    impl Type {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Type::Unspecified => "TYPE_UNSPECIFIED",
+                Type::Integer => "INTEGER",
+                Type::Float => "FLOAT",
+                Type::Flag => "FLAG",
+                Type::Character => "CHARACTER",
+                Type::String => "STRING",
+            }
+        }
     }
 }
 /// A variant set is a collection of call sets and variants. It contains summary
@@ -3119,6 +3269,19 @@ pub mod import_variants_request {
         /// be bzip2 compressed.
         CompleteGenomics = 2,
     }
+    impl Format {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Format::Unspecified => "FORMAT_UNSPECIFIED",
+                Format::Vcf => "FORMAT_VCF",
+                Format::CompleteGenomics => "FORMAT_COMPLETE_GENOMICS",
+            }
+        }
+    }
 }
 /// The variant data import response.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -3171,6 +3334,18 @@ pub mod export_variant_set_request {
         Unspecified = 0,
         /// Export the data to Google BigQuery.
         Bigquery = 1,
+    }
+    impl Format {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Format::Unspecified => "FORMAT_UNSPECIFIED",
+                Format::Bigquery => "FORMAT_BIGQUERY",
+            }
+        }
     }
 }
 /// The variant set request.
@@ -3452,10 +3627,24 @@ pub enum InfoMergeOperation {
     /// and persists this info field in each of the incoming Variant's Calls.
     MoveToCalls = 2,
 }
+impl InfoMergeOperation {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            InfoMergeOperation::Unspecified => "INFO_MERGE_OPERATION_UNSPECIFIED",
+            InfoMergeOperation::IgnoreNew => "IGNORE_NEW",
+            InfoMergeOperation::MoveToCalls => "MOVE_TO_CALLS",
+        }
+    }
+}
 /// Generated client implementations.
 pub mod streaming_variant_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     #[derive(Debug, Clone)]
     pub struct StreamingVariantServiceClient<T> {
         inner: tonic::client::Grpc<T>,
@@ -3469,6 +3658,10 @@ pub mod streaming_variant_service_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -3492,19 +3685,19 @@ pub mod streaming_variant_service_client {
                 InterceptedService::new(inner, interceptor),
             )
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Returns a stream of all the variants matching the search request, ordered
@@ -3537,6 +3730,7 @@ pub mod streaming_variant_service_client {
 pub mod variant_service_v1_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     #[derive(Debug, Clone)]
     pub struct VariantServiceV1Client<T> {
         inner: tonic::client::Grpc<T>,
@@ -3550,6 +3744,10 @@ pub mod variant_service_v1_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -3571,19 +3769,19 @@ pub mod variant_service_v1_client {
         {
             VariantServiceV1Client::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Creates variant data by asynchronously importing the provided information.

@@ -32,14 +32,14 @@ pub mod advanced_settings {
 /// as follows:
 ///
 /// * If at least one OutputAudioText response is present, then all
-///   OutputAudioText responses are linearly concatenated, and the result is used
-///   for output audio synthesis.
+///    OutputAudioText responses are linearly concatenated, and the result is used
+///    for output audio synthesis.
 /// * If the OutputAudioText responses are a mixture of text and SSML, then the
-///   concatenated result is treated as SSML; otherwise, the result is treated as
-///   either text or SSML as appropriate. The agent designer should ideally use
-///   either text or SSML consistently throughout the bot design.
+///    concatenated result is treated as SSML; otherwise, the result is treated as
+///    either text or SSML as appropriate. The agent designer should ideally use
+///    either text or SSML consistently throughout the bot design.
 /// * Otherwise, all Text responses are linearly concatenated, and the result is
-///   used for output audio synthesis.
+///    used for output audio synthesis.
 ///
 /// This approach allows for more sophisticated user experience scenarios, where
 /// the text displayed to the user may differ from what is heard.
@@ -71,10 +71,10 @@ pub mod response_message {
     ///
     /// You may set this, for example:
     /// * In the \[entry_fulfillment][google.cloud.dialogflow.cx.v3.Page.entry_fulfillment\] of a \[Page][google.cloud.dialogflow.cx.v3.Page\] if
-    ///   entering the page indicates something went extremely wrong in the
-    ///   conversation.
+    ///    entering the page indicates something went extremely wrong in the
+    ///    conversation.
     /// * In a webhook response when you determine that the customer issue can only
-    ///   be handled by a human.
+    ///    be handled by a human.
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct LiveAgentHandoff {
         /// Custom metadata for your handoff procedure. Dialogflow doesn't impose
@@ -93,9 +93,9 @@ pub mod response_message {
     ///
     /// You may set this, for example:
     /// * In the \[entry_fulfillment][google.cloud.dialogflow.cx.v3.Page.entry_fulfillment\] of a \[Page][google.cloud.dialogflow.cx.v3.Page\] if
-    ///   entering the page indicates that the conversation succeeded.
+    ///    entering the page indicates that the conversation succeeded.
     /// * In a webhook response when you determine that you handled the customer
-    ///   issue.
+    ///    issue.
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ConversationSuccess {
         /// Custom metadata. Dialogflow doesn't impose any structure on this.
@@ -235,9 +235,9 @@ pub mod response_message {
 }
 /// A fulfillment can do one or more of the following actions at the same time:
 ///
-///   * Generate rich message responses.
-///   * Set parameter values.
-///   * Call the webhook.
+///    * Generate rich message responses.
+///    * Set parameter values.
+///    * Call the webhook.
 ///
 /// Fulfillments can be called at various stages in the \[Page][google.cloud.dialogflow.cx.v3.Page\] or
 /// \[Form][google.cloud.dialogflow.cx.v3.Form\] lifecycle. For example, when a \[DetectIntentRequest][google.cloud.dialogflow.cx.v3.DetectIntentRequest\] drives a
@@ -379,11 +379,11 @@ pub struct Page {
     /// with the page. Transition route groups must be unique within a page.
     ///
     /// *   If multiple transition routes within a page scope refer to the same
-    ///     intent, then the precedence order is: page's transition route -> page's
-    ///     transition route group -> flow's transition routes.
+    ///      intent, then the precedence order is: page's transition route -> page's
+    ///      transition route group -> flow's transition routes.
     ///
     /// *   If multiple transition route groups within a page contain the same
-    ///     intent, then the first group in the ordered list takes precedence.
+    ///      intent, then the first group in the ordered list takes precedence.
     ///
     /// Format:`projects/<Project ID>/locations/<Location ID>/agents/<Agent
     /// ID>/flows/<Flow ID>/transitionRouteGroups/<TransitionRouteGroup ID>`.
@@ -398,16 +398,16 @@ pub struct Page {
     ///
     /// *   TransitionRoutes defined in the page with intent specified.
     /// *   TransitionRoutes defined in the
-    ///     [transition route groups]\[google.cloud.dialogflow.cx.v3.Page.transition_route_groups\] with intent
-    ///     specified.
+    ///      [transition route groups]\[google.cloud.dialogflow.cx.v3.Page.transition_route_groups\] with intent
+    ///      specified.
     /// *   TransitionRoutes defined in flow with intent specified.
     /// *   TransitionRoutes defined in the
-    ///     [transition route groups]\[google.cloud.dialogflow.cx.v3.Flow.transition_route_groups\] with intent
-    ///     specified.
+    ///      [transition route groups]\[google.cloud.dialogflow.cx.v3.Flow.transition_route_groups\] with intent
+    ///      specified.
     /// *   TransitionRoutes defined in the page with only condition specified.
     /// *   TransitionRoutes defined in the
-    ///     [transition route groups]\[google.cloud.dialogflow.cx.v3.Page.transition_route_groups\] with only
-    ///     condition specified.
+    ///      [transition route groups]\[google.cloud.dialogflow.cx.v3.Page.transition_route_groups\] with only
+    ///      condition specified.
     #[prost(message, repeated, tag="9")]
     pub transition_routes: ::prost::alloc::vec::Vec<TransitionRoute>,
     /// Handlers associated with the page to handle events such as webhook errors,
@@ -787,12 +787,12 @@ pub struct DeletePageRequest {
     /// For pages with incoming transitions:
     ///
     /// *  If `force` is set to false, an error will be returned with message
-    ///    indicating the incoming transitions.
+    ///     indicating the incoming transitions.
     /// *  If `force` is set to true, Dialogflow will remove the page, as well as
-    ///    any transitions to the page (i.e. [Target
-    ///    page]\[EventHandler.target_page\] in event handlers or [Target
-    ///    page]\[TransitionRoute.target_page\] in transition routes that point to
-    ///    this page will be cleared).
+    ///     any transitions to the page (i.e. [Target
+    ///     page]\[EventHandler.target_page\] in event handlers or [Target
+    ///     page]\[TransitionRoute.target_page\] in transition routes that point to
+    ///     this page will be cleared).
     #[prost(bool, tag="2")]
     pub force: bool,
 }
@@ -800,6 +800,7 @@ pub struct DeletePageRequest {
 pub mod pages_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Service for managing [Pages][google.cloud.dialogflow.cx.v3.Page].
     #[derive(Debug, Clone)]
     pub struct PagesClient<T> {
@@ -814,6 +815,10 @@ pub mod pages_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -835,19 +840,19 @@ pub mod pages_client {
         {
             PagesClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Returns the list of all pages in the specified flow.
@@ -1019,6 +1024,30 @@ pub mod validation_message {
         /// Transition route group.
         TransitionRouteGroup = 7,
     }
+    impl ResourceType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ResourceType::Unspecified => "RESOURCE_TYPE_UNSPECIFIED",
+                ResourceType::Agent => "AGENT",
+                ResourceType::Intent => "INTENT",
+                ResourceType::IntentTrainingPhrase => "INTENT_TRAINING_PHRASE",
+                ResourceType::IntentParameter => "INTENT_PARAMETER",
+                ResourceType::Intents => "INTENTS",
+                ResourceType::IntentTrainingPhrases => "INTENT_TRAINING_PHRASES",
+                ResourceType::EntityType => "ENTITY_TYPE",
+                ResourceType::EntityTypes => "ENTITY_TYPES",
+                ResourceType::Webhook => "WEBHOOK",
+                ResourceType::Flow => "FLOW",
+                ResourceType::Page => "PAGE",
+                ResourceType::Pages => "PAGES",
+                ResourceType::TransitionRouteGroup => "TRANSITION_ROUTE_GROUP",
+            }
+        }
+    }
     /// Severity level.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -1031,6 +1060,20 @@ pub mod validation_message {
         Warning = 2,
         /// The agent may experience failures.
         Error = 3,
+    }
+    impl Severity {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Severity::Unspecified => "SEVERITY_UNSPECIFIED",
+                Severity::Info => "INFO",
+                Severity::Warning => "WARNING",
+                Severity::Error => "ERROR",
+            }
+        }
     }
 }
 /// Resource name and display name.
@@ -1074,6 +1117,19 @@ pub mod nlu_settings {
         /// Use advanced NLU model.
         Advanced = 3,
     }
+    impl ModelType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ModelType::Unspecified => "MODEL_TYPE_UNSPECIFIED",
+                ModelType::Standard => "MODEL_TYPE_STANDARD",
+                ModelType::Advanced => "MODEL_TYPE_ADVANCED",
+            }
+        }
+    }
     /// NLU model training mode.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -1086,6 +1142,19 @@ pub mod nlu_settings {
         /// User needs to manually trigger NLU model training. Best for large flows
         /// whose models take long time to train.
         Manual = 2,
+    }
+    impl ModelTrainingMode {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ModelTrainingMode::Unspecified => "MODEL_TRAINING_MODE_UNSPECIFIED",
+                ModelTrainingMode::Automatic => "MODEL_TRAINING_MODE_AUTOMATIC",
+                ModelTrainingMode::Manual => "MODEL_TRAINING_MODE_MANUAL",
+            }
+        }
     }
 }
 /// Flows represents the conversation flows when you build your chatbot agent.
@@ -1201,12 +1270,12 @@ pub struct DeleteFlowRequest {
     /// For flows with incoming transitions:
     ///
     /// *  If `force` is set to false, an error will be returned with message
-    ///    indicating the incoming transitions.
+    ///     indicating the incoming transitions.
     /// *  If `force` is set to true, Dialogflow will remove the flow, as well as
-    ///    any transitions to the flow (i.e. [Target
-    ///    flow]\[EventHandler.target_flow\] in event handlers or [Target
-    ///    flow]\[TransitionRoute.target_flow\] in transition routes that point to
-    ///    this flow will be cleared).
+    ///     any transitions to the flow (i.e. [Target
+    ///     flow]\[EventHandler.target_flow\] in event handlers or [Target
+    ///     flow]\[TransitionRoute.target_flow\] in transition routes that point to
+    ///     this flow will be cleared).
     #[prost(bool, tag="2")]
     pub force: bool,
 }
@@ -1380,6 +1449,19 @@ pub mod import_flow_request {
         /// not available.
         Fallback = 2,
     }
+    impl ImportOption {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ImportOption::Unspecified => "IMPORT_OPTION_UNSPECIFIED",
+                ImportOption::Keep => "KEEP",
+                ImportOption::Fallback => "FALLBACK",
+            }
+        }
+    }
     /// Required. The flow to import.
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Flow {
@@ -1445,6 +1527,7 @@ pub mod export_flow_response {
 pub mod flows_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Service for managing [Flows][google.cloud.dialogflow.cx.v3.Flow].
     #[derive(Debug, Clone)]
     pub struct FlowsClient<T> {
@@ -1459,6 +1542,10 @@ pub mod flows_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -1480,19 +1567,19 @@ pub mod flows_client {
         {
             FlowsClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Creates a flow in the specified agent.
@@ -1920,6 +2007,18 @@ pub mod security_settings {
         /// Call redaction service to clean up the data to be persisted.
         RedactWithService = 1,
     }
+    impl RedactionStrategy {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                RedactionStrategy::Unspecified => "REDACTION_STRATEGY_UNSPECIFIED",
+                RedactionStrategy::RedactWithService => "REDACT_WITH_SERVICE",
+            }
+        }
+    }
     /// Defines what types of data to redact.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -1931,6 +2030,18 @@ pub mod security_settings {
         /// temporarily saved on disk.
         RedactDiskStorage = 2,
     }
+    impl RedactionScope {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                RedactionScope::Unspecified => "REDACTION_SCOPE_UNSPECIFIED",
+                RedactionScope::RedactDiskStorage => "REDACT_DISK_STORAGE",
+            }
+        }
+    }
     /// Type of data we purge after retention settings triggers purge.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -1940,6 +2051,18 @@ pub mod security_settings {
         /// Dialogflow history. This does not include Cloud logging, which is
         /// owned by the user - not Dialogflow.
         DialogflowHistory = 1,
+    }
+    impl PurgeDataType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                PurgeDataType::Unspecified => "PURGE_DATA_TYPE_UNSPECIFIED",
+                PurgeDataType::DialogflowHistory => "DIALOGFLOW_HISTORY",
+            }
+        }
     }
     /// Specifies how data is retained. Note that even if the data is
     /// purged due to retention policy, we may still hold it in backup storage for
@@ -1963,6 +2086,7 @@ pub mod security_settings {
 pub mod security_settings_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Service for managing security settings for Dialogflow.
     #[derive(Debug, Clone)]
     pub struct SecuritySettingsServiceClient<T> {
@@ -1977,6 +2101,10 @@ pub mod security_settings_service_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -2000,19 +2128,19 @@ pub mod security_settings_service_client {
                 InterceptedService::new(inner, interceptor),
             )
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Create security settings in the specified location.
@@ -2338,6 +2466,19 @@ pub mod restore_agent_request {
         /// target agent.
         Fallback = 2,
     }
+    impl RestoreOption {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                RestoreOption::Unspecified => "RESTORE_OPTION_UNSPECIFIED",
+                RestoreOption::Keep => "KEEP",
+                RestoreOption::Fallback => "FALLBACK",
+            }
+        }
+    }
     /// Required. The agent to restore.
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Agent {
@@ -2390,6 +2531,7 @@ pub struct AgentValidationResult {
 pub mod agents_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Service for managing [Agents][google.cloud.dialogflow.cx.v3.Agent].
     #[derive(Debug, Clone)]
     pub struct AgentsClient<T> {
@@ -2404,6 +2546,10 @@ pub mod agents_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -2425,19 +2571,19 @@ pub mod agents_client {
         {
             AgentsClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Returns the list of all agents in the specified location.
@@ -2856,6 +3002,24 @@ pub enum AudioEncoding {
     /// wideband is supported. `sample_rate_hertz` must be 16000.
     SpeexWithHeaderByte = 7,
 }
+impl AudioEncoding {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            AudioEncoding::Unspecified => "AUDIO_ENCODING_UNSPECIFIED",
+            AudioEncoding::Linear16 => "AUDIO_ENCODING_LINEAR_16",
+            AudioEncoding::Flac => "AUDIO_ENCODING_FLAC",
+            AudioEncoding::Mulaw => "AUDIO_ENCODING_MULAW",
+            AudioEncoding::Amr => "AUDIO_ENCODING_AMR",
+            AudioEncoding::AmrWb => "AUDIO_ENCODING_AMR_WB",
+            AudioEncoding::OggOpus => "AUDIO_ENCODING_OGG_OPUS",
+            AudioEncoding::SpeexWithHeaderByte => "AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE",
+        }
+    }
+}
 /// Variant of the specified [Speech model]\[google.cloud.dialogflow.cx.v3.InputAudioConfig.model\] to use.
 ///
 /// See the [Cloud Speech
@@ -2884,18 +3048,32 @@ pub enum SpeechModelVariant {
     /// Use an enhanced model variant:
     ///
     /// * If an enhanced variant does not exist for the given
-    ///   \[model][google.cloud.dialogflow.cx.v3.InputAudioConfig.model\] and request language, Dialogflow falls
-    ///   back to the standard variant.
+    ///    \[model][google.cloud.dialogflow.cx.v3.InputAudioConfig.model\] and request language, Dialogflow falls
+    ///    back to the standard variant.
     ///
-    ///   The [Cloud Speech
-    ///   documentation](<https://cloud.google.com/speech-to-text/docs/enhanced-models>)
-    ///   describes which models have enhanced variants.
+    ///    The [Cloud Speech
+    ///    documentation](<https://cloud.google.com/speech-to-text/docs/enhanced-models>)
+    ///    describes which models have enhanced variants.
     ///
     /// * If the API caller isn't eligible for enhanced models, Dialogflow returns
-    ///   an error.  Please see the [Dialogflow
-    ///   docs](<https://cloud.google.com/dialogflow/docs/data-logging>)
-    ///   for how to make your project eligible.
+    ///    an error.  Please see the [Dialogflow
+    ///    docs](<https://cloud.google.com/dialogflow/docs/data-logging>)
+    ///    for how to make your project eligible.
     UseEnhanced = 3,
+}
+impl SpeechModelVariant {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            SpeechModelVariant::Unspecified => "SPEECH_MODEL_VARIANT_UNSPECIFIED",
+            SpeechModelVariant::UseBestAvailable => "USE_BEST_AVAILABLE",
+            SpeechModelVariant::UseStandard => "USE_STANDARD",
+            SpeechModelVariant::UseEnhanced => "USE_ENHANCED",
+        }
+    }
 }
 /// Gender of the voice as described in
 /// [SSML voice element](<https://www.w3.org/TR/speech-synthesis11/#edef_voice>).
@@ -2911,6 +3089,20 @@ pub enum SsmlVoiceGender {
     Female = 2,
     /// A gender-neutral voice.
     Neutral = 3,
+}
+impl SsmlVoiceGender {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            SsmlVoiceGender::Unspecified => "SSML_VOICE_GENDER_UNSPECIFIED",
+            SsmlVoiceGender::Male => "SSML_VOICE_GENDER_MALE",
+            SsmlVoiceGender::Female => "SSML_VOICE_GENDER_FEMALE",
+            SsmlVoiceGender::Neutral => "SSML_VOICE_GENDER_NEUTRAL",
+        }
+    }
 }
 /// Audio encoding of the output audio format in Text-To-Speech.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -2933,6 +3125,22 @@ pub enum OutputAudioEncoding {
     /// 8-bit samples that compand 14-bit audio samples using G.711 PCMU/mu-law.
     Mulaw = 5,
 }
+impl OutputAudioEncoding {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            OutputAudioEncoding::Unspecified => "OUTPUT_AUDIO_ENCODING_UNSPECIFIED",
+            OutputAudioEncoding::Linear16 => "OUTPUT_AUDIO_ENCODING_LINEAR_16",
+            OutputAudioEncoding::Mp3 => "OUTPUT_AUDIO_ENCODING_MP3",
+            OutputAudioEncoding::Mp364Kbps => "OUTPUT_AUDIO_ENCODING_MP3_64_KBPS",
+            OutputAudioEncoding::OggOpus => "OUTPUT_AUDIO_ENCODING_OGG_OPUS",
+            OutputAudioEncoding::Mulaw => "OUTPUT_AUDIO_ENCODING_MULAW",
+        }
+    }
+}
 /// The request message for \[Changelogs.ListChangelogs][google.cloud.dialogflow.cx.v3.Changelogs.ListChangelogs\].
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListChangelogsRequest {
@@ -2942,24 +3150,24 @@ pub struct ListChangelogsRequest {
     pub parent: ::prost::alloc::string::String,
     /// The filter string. Supports filter by user_email, resource, type and
     /// create_time. Some examples:
-    ///   1. By user email:
-    ///        user_email = "someone@google.com"
-    ///   2. By resource name:
-    ///        resource = "projects/123/locations/global/agents/456/flows/789"
-    ///   3. By resource display name:
-    ///        display_name = "my agent"
-    ///   4. By action:
-    ///        action = "Create"
-    ///   5. By type:
-    ///        type = "flows"
-    ///   6. By create time. Currently predicates on `create_time` and
-    ///      `create_time_epoch_seconds` are supported:
-    ///        create_time_epoch_seconds > 1551790877 AND create_time <=
-    ///        2017-01-15T01:30:15.01Z
-    ///   7. Combination of above filters:
-    ///        resource = "projects/123/locations/global/agents/456/flows/789"
-    ///          AND user_email = "someone@google.com"
-    ///          AND create_time <= 2017-01-15T01:30:15.01Z
+    ///    1. By user email:
+    ///         user_email = "someone@google.com"
+    ///    2. By resource name:
+    ///         resource = "projects/123/locations/global/agents/456/flows/789"
+    ///    3. By resource display name:
+    ///         display_name = "my agent"
+    ///    4. By action:
+    ///         action = "Create"
+    ///    5. By type:
+    ///         type = "flows"
+    ///    6. By create time. Currently predicates on `create_time` and
+    ///       `create_time_epoch_seconds` are supported:
+    ///         create_time_epoch_seconds > 1551790877 AND create_time <=
+    ///         2017-01-15T01:30:15.01Z
+    ///    7. Combination of above filters:
+    ///         resource = "projects/123/locations/global/agents/456/flows/789"
+    ///           AND user_email = "someone@google.com"
+    ///           AND create_time <= 2017-01-15T01:30:15.01Z
     #[prost(string, tag="2")]
     pub filter: ::prost::alloc::string::String,
     /// The maximum number of items to return in a single page. By default 100 and
@@ -3023,6 +3231,7 @@ pub struct Changelog {
 pub mod changelogs_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Service for managing [Changelogs][google.cloud.dialogflow.cx.v3.Changelog].
     #[derive(Debug, Clone)]
     pub struct ChangelogsClient<T> {
@@ -3037,6 +3246,10 @@ pub mod changelogs_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -3058,19 +3271,19 @@ pub mod changelogs_client {
         {
             ChangelogsClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Returns the list of Changelogs.
@@ -3173,6 +3386,20 @@ pub mod deployment {
         /// The deployment failed.
         Failed = 3,
     }
+    impl State {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                State::Unspecified => "STATE_UNSPECIFIED",
+                State::Running => "RUNNING",
+                State::Succeeded => "SUCCEEDED",
+                State::Failed => "FAILED",
+            }
+        }
+    }
 }
 /// The request message for \[Deployments.ListDeployments][google.cloud.dialogflow.cx.v3.Deployments.ListDeployments\].
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -3217,6 +3444,7 @@ pub struct GetDeploymentRequest {
 pub mod deployments_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Service for managing [Deployments][google.cloud.dialogflow.cx.v3.Deployment].
     #[derive(Debug, Clone)]
     pub struct DeploymentsClient<T> {
@@ -3231,6 +3459,10 @@ pub mod deployments_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -3252,19 +3484,19 @@ pub mod deployments_client {
         {
             DeploymentsClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Returns the list of all deployments in the specified [Environment][google.cloud.dialogflow.cx.v3.Environment].
@@ -3320,19 +3552,19 @@ pub mod deployments_client {
 /// There are three types of entities:
 ///
 /// *   **System** - entities that are defined by the Dialogflow API for common
-///     data types such as date, time, currency, and so on. A system entity is
-///     represented by the `EntityType` type.
+///      data types such as date, time, currency, and so on. A system entity is
+///      represented by the `EntityType` type.
 ///
 /// *   **Custom** - entities that are defined by you that represent
-///     actionable data that is meaningful to your application. For example,
-///     you could define a `pizza.sauce` entity for red or white pizza sauce,
-///     a `pizza.cheese` entity for the different types of cheese on a pizza,
-///     a `pizza.topping` entity for different toppings, and so on. A custom
-///     entity is represented by the `EntityType` type.
+///      actionable data that is meaningful to your application. For example,
+///      you could define a `pizza.sauce` entity for red or white pizza sauce,
+///      a `pizza.cheese` entity for the different types of cheese on a pizza,
+///      a `pizza.topping` entity for different toppings, and so on. A custom
+///      entity is represented by the `EntityType` type.
 ///
 /// *   **User** - entities that are built for an individual user such as
-///     favorites, preferences, playlists, and so on. A user entity is
-///     represented by the \[SessionEntityType][google.cloud.dialogflow.cx.v3.SessionEntityType\] type.
+///      favorites, preferences, playlists, and so on. A user entity is
+///      represented by the \[SessionEntityType][google.cloud.dialogflow.cx.v3.SessionEntityType\] type.
 ///
 /// For more information about entity types, see the [Dialogflow
 /// documentation](<https://cloud.google.com/dialogflow/docs/entities-overview>).
@@ -3388,7 +3620,7 @@ pub mod entity_type {
         /// For `KIND_LIST` entity types:
         ///
         /// *   A string that can contain references to other entity types (with or
-        ///     without aliases).
+        ///      without aliases).
         #[prost(string, tag="1")]
         pub value: ::prost::alloc::string::String,
         /// Required. A collection of value synonyms. For example, if the entity type
@@ -3425,6 +3657,20 @@ pub mod entity_type {
         /// values.
         Regexp = 3,
     }
+    impl Kind {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Kind::Unspecified => "KIND_UNSPECIFIED",
+                Kind::Map => "KIND_MAP",
+                Kind::List => "KIND_LIST",
+                Kind::Regexp => "KIND_REGEXP",
+            }
+        }
+    }
     /// Represents different entity type expansion modes. Automated expansion
     /// allows an agent to recognize values that have not been explicitly listed in
     /// the entity (for example, new kinds of shopping list items).
@@ -3436,6 +3682,18 @@ pub mod entity_type {
         /// Allows an agent to recognize values that have not been explicitly
         /// listed in the entity.
         Default = 1,
+    }
+    impl AutoExpansionMode {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AutoExpansionMode::Unspecified => "AUTO_EXPANSION_MODE_UNSPECIFIED",
+                AutoExpansionMode::Default => "AUTO_EXPANSION_MODE_DEFAULT",
+            }
+        }
     }
 }
 /// The request message for \[EntityTypes.ListEntityTypes][google.cloud.dialogflow.cx.v3.EntityTypes.ListEntityTypes\].
@@ -3561,12 +3819,12 @@ pub struct DeleteEntityTypeRequest {
     /// For entity types that are used by intents or pages:
     ///
     /// *  If `force` is set to false, an error will be returned with message
-    ///    indicating the referencing resources.
+    ///     indicating the referencing resources.
     /// *  If `force` is set to true, Dialogflow will remove the entity type, as
-    ///    well as any references to the entity type (i.e. Page
-    ///    \[parameter][google.cloud.dialogflow.cx.v3.Form.Parameter\] of the entity type will be changed to
-    ///    '@sys.any' and intent \[parameter][google.cloud.dialogflow.cx.v3.Intent.Parameter\] of the entity type
-    ///    will be removed).
+    ///     well as any references to the entity type (i.e. Page
+    ///     \[parameter][google.cloud.dialogflow.cx.v3.Form.Parameter\] of the entity type will be changed to
+    ///     '@sys.any' and intent \[parameter][google.cloud.dialogflow.cx.v3.Intent.Parameter\] of the entity type
+    ///     will be removed).
     #[prost(bool, tag="2")]
     pub force: bool,
 }
@@ -3574,6 +3832,7 @@ pub struct DeleteEntityTypeRequest {
 pub mod entity_types_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Service for managing [EntityTypes][google.cloud.dialogflow.cx.v3.EntityType].
     #[derive(Debug, Clone)]
     pub struct EntityTypesClient<T> {
@@ -3588,6 +3847,10 @@ pub mod entity_types_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -3609,19 +3872,19 @@ pub mod entity_types_client {
         {
             EntityTypesClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Returns the list of all entity types in the specified agent.
@@ -3766,10 +4029,10 @@ pub struct Intent {
     /// priorities.
     ///
     /// - If the supplied value is unspecified or 0, the service
-    ///   translates the value to 500,000, which corresponds to the
-    ///   `Normal` priority in the console.
+    ///    translates the value to 500,000, which corresponds to the
+    ///    `Normal` priority in the console.
     /// - If the supplied value is negative, the intent is ignored
-    ///   in runtime detect intent requests.
+    ///    in runtime detect intent requests.
     #[prost(int32, tag="5")]
     pub priority: i32,
     /// Indicates whether this is a fallback intent. Currently only default
@@ -3824,7 +4087,7 @@ pub mod intent {
         ///
         /// -   `Part.text` is set to a part of the phrase that has no parameters.
         /// -   `Part.text` is set to a part of the phrase that you want to annotate,
-        ///     and the `parameter_id` field is set.
+        ///      and the `parameter_id` field is set.
         #[prost(message, repeated, tag="2")]
         pub parts: ::prost::alloc::vec::Vec<training_phrase::Part>,
         /// Indicates how many times this example was added to the intent.
@@ -4004,10 +4267,24 @@ pub enum IntentView {
     /// All fields are populated.
     Full = 2,
 }
+impl IntentView {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            IntentView::Unspecified => "INTENT_VIEW_UNSPECIFIED",
+            IntentView::Partial => "INTENT_VIEW_PARTIAL",
+            IntentView::Full => "INTENT_VIEW_FULL",
+        }
+    }
+}
 /// Generated client implementations.
 pub mod intents_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Service for managing [Intents][google.cloud.dialogflow.cx.v3.Intent].
     #[derive(Debug, Clone)]
     pub struct IntentsClient<T> {
@@ -4022,6 +4299,10 @@ pub mod intents_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -4043,19 +4324,19 @@ pub mod intents_client {
         {
             IntentsClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Returns the list of all intents in the specified agent.
@@ -4227,6 +4508,19 @@ pub mod session_entity_type {
         /// and merge.
         Supplement = 2,
     }
+    impl EntityOverrideMode {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                EntityOverrideMode::Unspecified => "ENTITY_OVERRIDE_MODE_UNSPECIFIED",
+                EntityOverrideMode::Override => "ENTITY_OVERRIDE_MODE_OVERRIDE",
+                EntityOverrideMode::Supplement => "ENTITY_OVERRIDE_MODE_SUPPLEMENT",
+            }
+        }
+    }
 }
 /// The request message for \[SessionEntityTypes.ListSessionEntityTypes][google.cloud.dialogflow.cx.v3.SessionEntityTypes.ListSessionEntityTypes\].
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -4320,6 +4614,7 @@ pub struct DeleteSessionEntityTypeRequest {
 pub mod session_entity_types_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Service for managing [SessionEntityTypes][google.cloud.dialogflow.cx.v3.SessionEntityType].
     #[derive(Debug, Clone)]
     pub struct SessionEntityTypesClient<T> {
@@ -4334,6 +4629,10 @@ pub mod session_entity_types_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -4355,19 +4654,19 @@ pub mod session_entity_types_client {
         {
             SessionEntityTypesClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Returns the list of all session entity types in the specified session.
@@ -4556,6 +4855,19 @@ pub mod detect_intent_response {
         /// Final response.
         Final = 2,
     }
+    impl ResponseType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ResponseType::Unspecified => "RESPONSE_TYPE_UNSPECIFIED",
+                ResponseType::Partial => "PARTIAL",
+                ResponseType::Final => "FINAL",
+            }
+        }
+    }
 }
 /// The top-level message sent by the client to the
 /// \[Sessions.StreamingDetectIntent][google.cloud.dialogflow.cx.v3.Sessions.StreamingDetectIntent\] method.
@@ -4563,26 +4875,26 @@ pub mod detect_intent_response {
 /// Multiple request messages should be sent in order:
 ///
 /// 1.  The first message must contain
-///     \[session][google.cloud.dialogflow.cx.v3.StreamingDetectIntentRequest.session\],
-///     \[query_input][google.cloud.dialogflow.cx.v3.StreamingDetectIntentRequest.query_input\] plus optionally
-///     \[query_params][google.cloud.dialogflow.cx.v3.StreamingDetectIntentRequest.query_params\]. If the client
-///     wants to receive an audio response, it should also contain
-///     \[output_audio_config][google.cloud.dialogflow.cx.v3.StreamingDetectIntentRequest.output_audio_config\].
+///      \[session][google.cloud.dialogflow.cx.v3.StreamingDetectIntentRequest.session\],
+///      \[query_input][google.cloud.dialogflow.cx.v3.StreamingDetectIntentRequest.query_input\] plus optionally
+///      \[query_params][google.cloud.dialogflow.cx.v3.StreamingDetectIntentRequest.query_params\]. If the client
+///      wants to receive an audio response, it should also contain
+///      \[output_audio_config][google.cloud.dialogflow.cx.v3.StreamingDetectIntentRequest.output_audio_config\].
 ///
 /// 2.  If \[query_input][google.cloud.dialogflow.cx.v3.StreamingDetectIntentRequest.query_input\] was set to
-///     \[query_input.audio.config][google.cloud.dialogflow.cx.v3.AudioInput.config\], all subsequent messages
-///     must contain \[query_input.audio.audio][google.cloud.dialogflow.cx.v3.AudioInput.audio\] to continue with
-///     Speech recognition.
-///     If you decide to rather detect an intent from text
-///     input after you already started Speech recognition, please send a message
-///     with \[query_input.text][google.cloud.dialogflow.cx.v3.QueryInput.text\].
+///      \[query_input.audio.config][google.cloud.dialogflow.cx.v3.AudioInput.config\], all subsequent messages
+///      must contain \[query_input.audio.audio][google.cloud.dialogflow.cx.v3.AudioInput.audio\] to continue with
+///      Speech recognition.
+///      If you decide to rather detect an intent from text
+///      input after you already started Speech recognition, please send a message
+///      with \[query_input.text][google.cloud.dialogflow.cx.v3.QueryInput.text\].
 ///
-///     However, note that:
+///      However, note that:
 ///
-///     * Dialogflow will bill you for the audio duration so far.
-///     * Dialogflow discards all Speech recognition results in favor of the
-///       input text.
-///     * Dialogflow will use the language code from the first message.
+///      * Dialogflow will bill you for the audio duration so far.
+///      * Dialogflow discards all Speech recognition results in favor of the
+///        input text.
+///      * Dialogflow will use the language code from the first message.
 ///
 /// After you sent all input, you must half-close or abort the request stream.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -4631,17 +4943,17 @@ pub struct StreamingDetectIntentRequest {
 /// `detect_intent_response` field, depending on the request:
 ///
 /// *   If the `StreamingDetectIntentRequest.query_input.audio` field was
-///     set, and the `StreamingDetectIntentRequest.enable_partial_response`
-///     field was false, the `recognition_result` field is populated for each
-///     of the (N-1) responses.
-///     See the \[StreamingRecognitionResult][google.cloud.dialogflow.cx.v3.StreamingRecognitionResult\] message for details
-///     about the result message sequence.
+///      set, and the `StreamingDetectIntentRequest.enable_partial_response`
+///      field was false, the `recognition_result` field is populated for each
+///      of the (N-1) responses.
+///      See the \[StreamingRecognitionResult][google.cloud.dialogflow.cx.v3.StreamingRecognitionResult\] message for details
+///      about the result message sequence.
 ///
 /// *   If the `StreamingDetectIntentRequest.enable_partial_response` field was
-///     true, the `detect_intent_response` field is populated for each
-///     of the (N-1) responses, where 1 <= N <= 4.
-///     These responses set the \[DetectIntentResponse.response_type][google.cloud.dialogflow.cx.v3.DetectIntentResponse.response_type\] field
-///     to `PARTIAL`.
+///      true, the `detect_intent_response` field is populated for each
+///      of the (N-1) responses, where 1 <= N <= 4.
+///      These responses set the \[DetectIntentResponse.response_type][google.cloud.dialogflow.cx.v3.DetectIntentResponse.response_type\] field
+///      to `PARTIAL`.
 ///
 /// For the final Nth response message, the `detect_intent_response` is fully
 /// populated, and \[DetectIntentResponse.response_type][google.cloud.dialogflow.cx.v3.DetectIntentResponse.response_type\] is set to `FINAL`.
@@ -4728,10 +5040,10 @@ pub struct StreamingRecognitionResult {
     /// An estimate of the likelihood that the speech recognizer will
     /// not change its guess about this interim recognition result:
     /// * If the value is unspecified or 0.0, Dialogflow didn't compute the
-    ///   stability. In particular, Dialogflow will only provide stability for
-    ///   `TRANSCRIPT` results with `is_final = false`.
+    ///    stability. In particular, Dialogflow will only provide stability for
+    ///    `TRANSCRIPT` results with `is_final = false`.
     /// * Otherwise, the value is in (0.0, 1.0] where 0.0 means completely
-    ///   unstable and 1.0 means completely stable.
+    ///    unstable and 1.0 means completely stable.
     #[prost(float, tag="6")]
     pub stability: f32,
     /// Word-specific information for the words recognized by Speech in
@@ -4768,6 +5080,19 @@ pub mod streaming_recognition_result {
         /// `true`, and is not used otherwise.
         EndOfSingleUtterance = 2,
     }
+    impl MessageType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                MessageType::Unspecified => "MESSAGE_TYPE_UNSPECIFIED",
+                MessageType::Transcript => "TRANSCRIPT",
+                MessageType::EndOfSingleUtterance => "END_OF_SINGLE_UTTERANCE",
+            }
+        }
+    }
 }
 /// Represents the parameters of a conversational query.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -4794,9 +5119,9 @@ pub struct QueryParameters {
     /// the form:
     /// ```
     /// {
-    ///  "telephony": {
-    ///    "caller_id": "+18558363987"
-    ///  }
+    ///   "telephony": {
+    ///     "caller_id": "+18558363987"
+    ///   }
     /// }
     /// ```
     #[prost(message, optional, tag="4")]
@@ -4816,13 +5141,13 @@ pub struct QueryParameters {
     /// -   MapKey type: string
     /// -   MapKey value: parameter name
     /// -   MapValue type:
-    ///     -   If parameter's entity type is a composite entity: map
-    ///     -   Else: depending on parameter value type, could be one of string,
-    ///         number, boolean, null, list or map
+    ///      -   If parameter's entity type is a composite entity: map
+    ///      -   Else: depending on parameter value type, could be one of string,
+    ///          number, boolean, null, list or map
     /// -   MapValue value:
-    ///     -   If parameter's entity type is a composite entity:
-    ///         map from composite entity property names to property values
-    ///     -   Else: parameter value
+    ///      -   If parameter's entity type is a composite entity:
+    ///          map from composite entity property names to property values
+    ///      -   Else: parameter value
     #[prost(message, optional, tag="5")]
     pub parameters: ::core::option::Option<::prost_types::Struct>,
     /// The unique identifier of the \[page][google.cloud.dialogflow.cx.v3.Page\] to override the [current
@@ -4929,13 +5254,13 @@ pub struct QueryResult {
     /// -   MapKey type: string
     /// -   MapKey value: parameter name
     /// -   MapValue type:
-    ///     -   If parameter's entity type is a composite entity: map
-    ///     -   Else: depending on parameter value type, could be one of string,
-    ///         number, boolean, null, list or map
+    ///      -   If parameter's entity type is a composite entity: map
+    ///      -   Else: depending on parameter value type, could be one of string,
+    ///          number, boolean, null, list or map
     /// -   MapValue value:
-    ///     -   If parameter's entity type is a composite entity:
-    ///         map from composite entity property names to property values
-    ///     -   Else: parameter value
+    ///      -   If parameter's entity type is a composite entity:
+    ///          map from composite entity property names to property values
+    ///      -   Else: parameter value
     #[prost(message, optional, tag="3")]
     pub parameters: ::core::option::Option<::prost_types::Struct>,
     /// The list of rich messages returned to the client. Responses vary from
@@ -5092,13 +5417,13 @@ pub struct Match {
     /// -   MapKey type: string
     /// -   MapKey value: parameter name
     /// -   MapValue type:
-    ///     -   If parameter's entity type is a composite entity: map
-    ///     -   Else: depending on parameter value type, could be one of string,
-    ///         number, boolean, null, list or map
+    ///      -   If parameter's entity type is a composite entity: map
+    ///      -   Else: depending on parameter value type, could be one of string,
+    ///          number, boolean, null, list or map
     /// -   MapValue value:
-    ///     -   If parameter's entity type is a composite entity:
-    ///         map from composite entity property names to property values
-    ///     -   Else: parameter value
+    ///      -   If parameter's entity type is a composite entity:
+    ///          map from composite entity property names to property values
+    ///      -   Else: parameter value
     #[prost(message, optional, tag="2")]
     pub parameters: ::core::option::Option<::prost_types::Struct>,
     /// Final text input which was matched during MatchIntent. This value can be
@@ -5138,6 +5463,23 @@ pub mod r#match {
         NoInput = 5,
         /// The query directly triggered an event.
         Event = 6,
+    }
+    impl MatchType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                MatchType::Unspecified => "MATCH_TYPE_UNSPECIFIED",
+                MatchType::Intent => "INTENT",
+                MatchType::DirectIntent => "DIRECT_INTENT",
+                MatchType::ParameterFilling => "PARAMETER_FILLING",
+                MatchType::NoMatch => "NO_MATCH",
+                MatchType::NoInput => "NO_INPUT",
+                MatchType::Event => "EVENT",
+            }
+        }
     }
 }
 /// Request of \[MatchIntent][\].
@@ -5263,6 +5605,7 @@ pub struct SentimentAnalysisResult {
 pub mod sessions_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// A session represents an interaction with a user. You retrieve user input
     /// and pass it to the [DetectIntent][google.cloud.dialogflow.cx.v3.Sessions.DetectIntent] method to determine
     /// user intent and respond.
@@ -5279,6 +5622,10 @@ pub mod sessions_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -5300,19 +5647,19 @@ pub mod sessions_client {
         {
             SessionsClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Processes a natural language query and returns structured, actionable data
@@ -5567,9 +5914,9 @@ pub struct DeleteTransitionRouteGroupRequest {
     /// If the transition route group is referenced by any page:
     ///
     /// *  If `force` is set to false, an error will be returned with message
-    ///    indicating pages that reference the transition route group.
+    ///     indicating pages that reference the transition route group.
     /// *  If `force` is set to true, Dialogflow will remove the transition route
-    ///    group, as well as any reference to it.
+    ///     group, as well as any reference to it.
     #[prost(bool, tag="2")]
     pub force: bool,
 }
@@ -5577,6 +5924,7 @@ pub struct DeleteTransitionRouteGroupRequest {
 pub mod transition_route_groups_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Service for managing [TransitionRouteGroups][google.cloud.dialogflow.cx.v3.TransitionRouteGroup].
     #[derive(Debug, Clone)]
     pub struct TransitionRouteGroupsClient<T> {
@@ -5591,6 +5939,10 @@ pub mod transition_route_groups_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -5612,19 +5964,19 @@ pub mod transition_route_groups_client {
         {
             TransitionRouteGroupsClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Returns the list of all transition route groups in the specified flow.
@@ -5908,6 +6260,21 @@ pub mod test_run_difference {
         /// The message utterance.
         Utterance = 4,
     }
+    impl DiffType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                DiffType::Unspecified => "DIFF_TYPE_UNSPECIFIED",
+                DiffType::Intent => "INTENT",
+                DiffType::Page => "PAGE",
+                DiffType::Parameters => "PARAMETERS",
+                DiffType::Utterance => "UTTERANCE",
+            }
+        }
+    }
 }
 /// Transition coverage represents the percentage of all possible page
 /// transitions (page-level transition routes and event handlers, excluding
@@ -6074,6 +6441,20 @@ pub mod calculate_coverage_request {
         /// Transition route group coverage.
         TransitionRouteGroup = 3,
     }
+    impl CoverageType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                CoverageType::Unspecified => "COVERAGE_TYPE_UNSPECIFIED",
+                CoverageType::Intent => "INTENT",
+                CoverageType::PageTransition => "PAGE_TRANSITION",
+                CoverageType::TransitionRouteGroup => "TRANSITION_ROUTE_GROUP",
+            }
+        }
+    }
 }
 /// The response message for \[TestCases.CalculateCoverage][google.cloud.dialogflow.cx.v3.TestCases.CalculateCoverage\].
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -6135,6 +6516,19 @@ pub mod list_test_cases_request {
         Basic = 1,
         /// Include everything.
         Full = 2,
+    }
+    impl TestCaseView {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                TestCaseView::Unspecified => "TEST_CASE_VIEW_UNSPECIFIED",
+                TestCaseView::Basic => "BASIC",
+                TestCaseView::Full => "FULL",
+            }
+        }
     }
 }
 /// The response message for \[TestCases.ListTestCases][google.cloud.dialogflow.cx.v3.TestCases.ListTestCases\].
@@ -6333,12 +6727,12 @@ pub struct ExportTestCasesRequest {
     /// [API Filtering](<https://aip.dev/160>). The expression is case insensitive
     /// and supports the following syntax:
     ///
-    ///   name = <value> [OR name = <value>] ...
+    ///    name = <value> [OR name = <value>] ...
     ///
     /// For example:
     ///
     /// *   "name = t1 OR name = t2" matches the test case with the exact resource
-    ///     name "t1" or "t2".
+    ///      name "t1" or "t2".
     #[prost(string, tag="4")]
     pub filter: ::prost::alloc::string::String,
     /// The destination to export.
@@ -6357,6 +6751,19 @@ pub mod export_test_cases_request {
         Blob = 1,
         /// JSON format.
         Json = 2,
+    }
+    impl DataFormat {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                DataFormat::Unspecified => "DATA_FORMAT_UNSPECIFIED",
+                DataFormat::Blob => "BLOB",
+                DataFormat::Json => "JSON",
+            }
+        }
     }
     /// The destination to export.
     #[derive(Clone, PartialEq, ::prost::Oneof)]
@@ -6419,8 +6826,8 @@ pub struct ListTestCaseResultsRequest {
     /// The expression is case insensitive. Only 'AND' is supported for logical
     /// operators. The supported syntax is listed below in detail:
     ///
-    ///   <field> <operator> <value> [AND <field> <operator> <value>] ...
-    ///   [AND latest]
+    ///    <field> <operator> <value> [AND <field> <operator> <value>] ...
+    ///    [AND latest]
     ///
     /// The supported fields and operators are:
     /// field                 operator
@@ -6432,11 +6839,11 @@ pub struct ListTestCaseResultsRequest {
     ///
     /// Examples:
     /// *   "environment=draft AND latest" matches the latest test result for each
-    ///     test case in the draft environment.
+    ///      test case in the draft environment.
     /// *   "environment IN (e1,e2)" matches any test case results with an
-    ///     environment resource name of either "e1" or "e2".
+    ///      environment resource name of either "e1" or "e2".
     /// *   "test_time > 1602540713" matches any test case results with test time
-    ///     later than a unix timestamp in seconds 1602540713.
+    ///      later than a unix timestamp in seconds 1602540713.
     #[prost(string, tag="4")]
     pub filter: ::prost::alloc::string::String,
 }
@@ -6471,10 +6878,24 @@ pub enum TestResult {
     /// The test did not pass.
     Failed = 2,
 }
+impl TestResult {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            TestResult::Unspecified => "TEST_RESULT_UNSPECIFIED",
+            TestResult::Passed => "PASSED",
+            TestResult::Failed => "FAILED",
+        }
+    }
+}
 /// Generated client implementations.
 pub mod test_cases_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Service for managing [Test Cases][google.cloud.dialogflow.cx.v3.TestCase] and
     /// [Test Case Results][google.cloud.dialogflow.cx.v3.TestCaseResult].
     #[derive(Debug, Clone)]
@@ -6490,6 +6911,10 @@ pub mod test_cases_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -6511,19 +6936,19 @@ pub mod test_cases_client {
         {
             TestCasesClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Fetches a list of test cases for a given agent.
@@ -7004,6 +7429,19 @@ pub mod continuous_test_result {
         /// At least one test did not pass.
         Failed = 2,
     }
+    impl AggregatedTestResult {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AggregatedTestResult::Unspecified => "AGGREGATED_TEST_RESULT_UNSPECIFIED",
+                AggregatedTestResult::Passed => "PASSED",
+                AggregatedTestResult::Failed => "FAILED",
+            }
+        }
+    }
 }
 /// The request message for \[Environments.RunContinuousTest][google.cloud.dialogflow.cx.v3.Environments.RunContinuousTest\].
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -7093,6 +7531,7 @@ pub struct DeployFlowMetadata {
 pub mod environments_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Service for managing [Environments][google.cloud.dialogflow.cx.v3.Environment].
     #[derive(Debug, Clone)]
     pub struct EnvironmentsClient<T> {
@@ -7107,6 +7546,10 @@ pub mod environments_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -7128,19 +7571,19 @@ pub mod environments_client {
         {
             EnvironmentsClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Returns the list of all environments in the specified [Agent][google.cloud.dialogflow.cx.v3.Agent].
@@ -7561,6 +8004,22 @@ pub mod experiment {
             /// 'END_SESSION'.
             SessionEndRate = 5,
         }
+        impl MetricType {
+            /// String value of the enum field names used in the ProtoBuf definition.
+            ///
+            /// The values are not transformed in any way and thus are considered stable
+            /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+            pub fn as_str_name(&self) -> &'static str {
+                match self {
+                    MetricType::MetricUnspecified => "METRIC_UNSPECIFIED",
+                    MetricType::ContainedSessionNoCallbackRate => "CONTAINED_SESSION_NO_CALLBACK_RATE",
+                    MetricType::LiveAgentHandoffRate => "LIVE_AGENT_HANDOFF_RATE",
+                    MetricType::CallbackSessionRate => "CALLBACK_SESSION_RATE",
+                    MetricType::AbandonedSessionRate => "ABANDONED_SESSION_RATE",
+                    MetricType::SessionEndRate => "SESSION_END_RATE",
+                }
+            }
+        }
         /// Types of count-based metric for Dialogflow experiment.
         #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
         #[repr(i32)]
@@ -7573,6 +8032,20 @@ pub mod experiment {
             TotalTurnCount = 2,
             /// Average turn count in a session.
             AverageTurnCount = 3,
+        }
+        impl CountType {
+            /// String value of the enum field names used in the ProtoBuf definition.
+            ///
+            /// The values are not transformed in any way and thus are considered stable
+            /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+            pub fn as_str_name(&self) -> &'static str {
+                match self {
+                    CountType::Unspecified => "COUNT_TYPE_UNSPECIFIED",
+                    CountType::TotalNoMatchCount => "TOTAL_NO_MATCH_COUNT",
+                    CountType::TotalTurnCount => "TOTAL_TURN_COUNT",
+                    CountType::AverageTurnCount => "AVERAGE_TURN_COUNT",
+                }
+            }
         }
     }
     /// The state of the experiment.
@@ -7589,6 +8062,21 @@ pub mod experiment {
         Done = 3,
         /// The experiment with auto-rollout enabled has failed.
         RolloutFailed = 4,
+    }
+    impl State {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                State::Unspecified => "STATE_UNSPECIFIED",
+                State::Draft => "DRAFT",
+                State::Running => "RUNNING",
+                State::Done => "DONE",
+                State::RolloutFailed => "ROLLOUT_FAILED",
+            }
+        }
     }
 }
 /// A list of flow version variants.
@@ -7784,6 +8272,7 @@ pub struct StopExperimentRequest {
 pub mod experiments_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Service for managing [Experiments][google.cloud.dialogflow.cx.v3.Experiment].
     #[derive(Debug, Clone)]
     pub struct ExperimentsClient<T> {
@@ -7798,6 +8287,10 @@ pub mod experiments_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -7819,19 +8312,19 @@ pub mod experiments_client {
         {
             ExperimentsClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Returns the list of all experiments in the specified [Environment][google.cloud.dialogflow.cx.v3.Environment].
@@ -8036,10 +8529,10 @@ pub mod webhook {
         /// server certificates are signed with "subject alt name". For instance a
         /// certificate can be self-signed using the following command,
         ///
-        ///     openssl x509 -req -days 200 -in example.com.csr \
-        ///       -signkey example.com.key \
-        ///       -out example.com.crt \
-        ///       -extfile <(printf "\nsubjectAltName='DNS:www.example.com'")
+        ///      openssl x509 -req -days 200 -in example.com.csr \
+        ///        -signkey example.com.key \
+        ///        -out example.com.crt \
+        ///        -extfile <(printf "\nsubjectAltName='DNS:www.example.com'")
         #[prost(bytes="vec", repeated, tag="5")]
         pub allowed_ca_certs: ::prost::alloc::vec::Vec<::prost::alloc::vec::Vec<u8>>,
     }
@@ -8147,12 +8640,12 @@ pub struct DeleteWebhookRequest {
     /// For webhooks that are used by pages/flows/transition route groups:
     ///
     /// *  If `force` is set to false, an error will be returned with message
-    ///    indicating the referenced resources.
+    ///     indicating the referenced resources.
     /// *  If `force` is set to true, Dialogflow will remove the webhook, as well
-    ///    as any references to the webhook (i.e.
-    ///    \[Webhook][google.cloud.dialogflow.cx.v3.Fulfillment.webhook\] and
-    ///    \[tag][google.cloud.dialogflow.cx.v3.Fulfillment.tag\]in fulfillments that
-    ///    point to this webhook will be removed).
+    ///     as any references to the webhook (i.e.
+    ///     \[Webhook][google.cloud.dialogflow.cx.v3.Fulfillment.webhook\] and
+    ///     \[tag][google.cloud.dialogflow.cx.v3.Fulfillment.tag\]in fulfillments that
+    ///     point to this webhook will be removed).
     #[prost(bool, tag="2")]
     pub force: bool,
 }
@@ -8336,6 +8829,19 @@ pub mod webhook_response {
             /// user.
             Replace = 2,
         }
+        impl MergeBehavior {
+            /// String value of the enum field names used in the ProtoBuf definition.
+            ///
+            /// The values are not transformed in any way and thus are considered stable
+            /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+            pub fn as_str_name(&self) -> &'static str {
+                match self {
+                    MergeBehavior::Unspecified => "MERGE_BEHAVIOR_UNSPECIFIED",
+                    MergeBehavior::Append => "APPEND",
+                    MergeBehavior::Replace => "REPLACE",
+                }
+            }
+        }
     }
     /// The target to transition to. This can be set optionally to indicate an
     /// immediate transition to a different page in the same host flow, or a
@@ -8448,6 +8954,20 @@ pub mod page_info {
                 /// Indicates that the parameter has a value.
                 Filled = 3,
             }
+            impl ParameterState {
+                /// String value of the enum field names used in the ProtoBuf definition.
+                ///
+                /// The values are not transformed in any way and thus are considered stable
+                /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+                pub fn as_str_name(&self) -> &'static str {
+                    match self {
+                        ParameterState::Unspecified => "PARAMETER_STATE_UNSPECIFIED",
+                        ParameterState::Empty => "EMPTY",
+                        ParameterState::Invalid => "INVALID",
+                        ParameterState::Filled => "FILLED",
+                    }
+                }
+            }
         }
     }
 }
@@ -8481,6 +9001,7 @@ pub struct SessionInfo {
 pub mod webhooks_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Service for managing [Webhooks][google.cloud.dialogflow.cx.v3.Webhook].
     #[derive(Debug, Clone)]
     pub struct WebhooksClient<T> {
@@ -8495,6 +9016,10 @@ pub mod webhooks_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -8516,19 +9041,19 @@ pub mod webhooks_client {
         {
             WebhooksClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Returns the list of all webhooks in the specified agent.
@@ -8685,6 +9210,20 @@ pub mod version {
         /// Version training failed.
         Failed = 3,
     }
+    impl State {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                State::Unspecified => "STATE_UNSPECIFIED",
+                State::Running => "RUNNING",
+                State::Succeeded => "SUCCEEDED",
+                State::Failed => "FAILED",
+            }
+        }
+    }
 }
 /// The request message for
 /// \[Versions.ListVersions][google.cloud.dialogflow.cx.v3.Versions.ListVersions\].
@@ -8823,6 +9362,7 @@ pub struct CompareVersionsResponse {
 pub mod versions_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Service for managing [Versions][google.cloud.dialogflow.cx.v3.Version].
     #[derive(Debug, Clone)]
     pub struct VersionsClient<T> {
@@ -8837,6 +9377,10 @@ pub mod versions_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -8858,19 +9402,19 @@ pub mod versions_client {
         {
             VersionsClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Returns the list of all versions in the specified

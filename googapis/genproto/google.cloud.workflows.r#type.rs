@@ -75,6 +75,20 @@ pub mod engine_call_log {
         /// Function call did not succeed because an exception was raised.
         ExceptionRaised = 3,
     }
+    impl State {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                State::Unspecified => "STATE_UNSPECIFIED",
+                State::Begun => "BEGUN",
+                State::Succeeded => "SUCCEEDED",
+                State::ExceptionRaised => "EXCEPTION_RAISED",
+            }
+        }
+    }
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Details {
         /// Appears at the start of a call.
@@ -146,6 +160,21 @@ pub mod executions_system_log {
         Failed = 3,
         /// The Workflow Execution has been stopped intentionally.
         Cancelled = 4,
+    }
+    impl State {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                State::Unspecified => "STATE_UNSPECIFIED",
+                State::Active => "ACTIVE",
+                State::Succeeded => "SUCCEEDED",
+                State::Failed => "FAILED",
+                State::Cancelled => "CANCELLED",
+            }
+        }
     }
     /// Detailed log information.
     #[derive(Clone, PartialEq, ::prost::Oneof)]

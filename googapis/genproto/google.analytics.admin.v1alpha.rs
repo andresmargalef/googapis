@@ -717,6 +717,19 @@ pub mod custom_dimension {
         /// Dimension scoped to a user.
         User = 2,
     }
+    impl DimensionScope {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                DimensionScope::Unspecified => "DIMENSION_SCOPE_UNSPECIFIED",
+                DimensionScope::Event => "EVENT",
+                DimensionScope::User => "USER",
+            }
+        }
+    }
 }
 /// A definition for a custom metric.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -784,6 +797,27 @@ pub mod custom_metric {
         /// This metric measures hours.
         Hours = 10,
     }
+    impl MeasurementUnit {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                MeasurementUnit::Unspecified => "MEASUREMENT_UNIT_UNSPECIFIED",
+                MeasurementUnit::Standard => "STANDARD",
+                MeasurementUnit::Currency => "CURRENCY",
+                MeasurementUnit::Feet => "FEET",
+                MeasurementUnit::Meters => "METERS",
+                MeasurementUnit::Kilometers => "KILOMETERS",
+                MeasurementUnit::Miles => "MILES",
+                MeasurementUnit::Milliseconds => "MILLISECONDS",
+                MeasurementUnit::Seconds => "SECONDS",
+                MeasurementUnit::Minutes => "MINUTES",
+                MeasurementUnit::Hours => "HOURS",
+            }
+        }
+    }
     /// The scope of this metric.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -792,6 +826,18 @@ pub mod custom_metric {
         Unspecified = 0,
         /// Metric scoped to an event.
         Event = 1,
+    }
+    impl MetricScope {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                MetricScope::Unspecified => "METRIC_SCOPE_UNSPECIFIED",
+                MetricScope::Event => "EVENT",
+            }
+        }
     }
 }
 /// Settings values for data retention. This is a singleton resource.
@@ -830,6 +876,22 @@ pub mod data_retention_settings {
         /// The data retention time duration is 50 months.
         /// Available to 360 properties only.
         FiftyMonths = 6,
+    }
+    impl RetentionDuration {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                RetentionDuration::Unspecified => "RETENTION_DURATION_UNSPECIFIED",
+                RetentionDuration::TwoMonths => "TWO_MONTHS",
+                RetentionDuration::FourteenMonths => "FOURTEEN_MONTHS",
+                RetentionDuration::TwentySixMonths => "TWENTY_SIX_MONTHS",
+                RetentionDuration::ThirtyEightMonths => "THIRTY_EIGHT_MONTHS",
+                RetentionDuration::FiftyMonths => "FIFTY_MONTHS",
+            }
+        }
     }
 }
 /// The category selected for this property, used for industry benchmarking.
@@ -891,6 +953,43 @@ pub enum IndustryCategory {
     /// Shopping
     Shopping = 26,
 }
+impl IndustryCategory {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            IndustryCategory::Unspecified => "INDUSTRY_CATEGORY_UNSPECIFIED",
+            IndustryCategory::Automotive => "AUTOMOTIVE",
+            IndustryCategory::BusinessAndIndustrialMarkets => "BUSINESS_AND_INDUSTRIAL_MARKETS",
+            IndustryCategory::Finance => "FINANCE",
+            IndustryCategory::Healthcare => "HEALTHCARE",
+            IndustryCategory::Technology => "TECHNOLOGY",
+            IndustryCategory::Travel => "TRAVEL",
+            IndustryCategory::Other => "OTHER",
+            IndustryCategory::ArtsAndEntertainment => "ARTS_AND_ENTERTAINMENT",
+            IndustryCategory::BeautyAndFitness => "BEAUTY_AND_FITNESS",
+            IndustryCategory::BooksAndLiterature => "BOOKS_AND_LITERATURE",
+            IndustryCategory::FoodAndDrink => "FOOD_AND_DRINK",
+            IndustryCategory::Games => "GAMES",
+            IndustryCategory::HobbiesAndLeisure => "HOBBIES_AND_LEISURE",
+            IndustryCategory::HomeAndGarden => "HOME_AND_GARDEN",
+            IndustryCategory::InternetAndTelecom => "INTERNET_AND_TELECOM",
+            IndustryCategory::LawAndGovernment => "LAW_AND_GOVERNMENT",
+            IndustryCategory::News => "NEWS",
+            IndustryCategory::OnlineCommunities => "ONLINE_COMMUNITIES",
+            IndustryCategory::PeopleAndSociety => "PEOPLE_AND_SOCIETY",
+            IndustryCategory::PetsAndAnimals => "PETS_AND_ANIMALS",
+            IndustryCategory::RealEstate => "REAL_ESTATE",
+            IndustryCategory::Reference => "REFERENCE",
+            IndustryCategory::Science => "SCIENCE",
+            IndustryCategory::Sports => "SPORTS",
+            IndustryCategory::JobsAndEducation => "JOBS_AND_EDUCATION",
+            IndustryCategory::Shopping => "SHOPPING",
+        }
+    }
+}
 /// Various levels of service for Google Analytics.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
@@ -901,6 +1000,19 @@ pub enum ServiceLevel {
     GoogleAnalyticsStandard = 1,
     /// The paid, premium version of Google Analytics.
     GoogleAnalytics360 = 2,
+}
+impl ServiceLevel {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            ServiceLevel::Unspecified => "SERVICE_LEVEL_UNSPECIFIED",
+            ServiceLevel::GoogleAnalyticsStandard => "GOOGLE_ANALYTICS_STANDARD",
+            ServiceLevel::GoogleAnalytics360 => "GOOGLE_ANALYTICS_360",
+        }
+    }
 }
 /// Different kinds of actors that can make changes to Google Analytics
 /// resources.
@@ -916,6 +1028,20 @@ pub enum ActorType {
     /// Changes made by Google Analytics support team staff.
     Support = 3,
 }
+impl ActorType {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            ActorType::Unspecified => "ACTOR_TYPE_UNSPECIFIED",
+            ActorType::User => "USER",
+            ActorType::System => "SYSTEM",
+            ActorType::Support => "SUPPORT",
+        }
+    }
+}
 /// Types of actions that may change a resource.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
@@ -928,6 +1054,20 @@ pub enum ActionType {
     Updated = 2,
     /// Resource was deleted in this change.
     Deleted = 3,
+}
+impl ActionType {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            ActionType::Unspecified => "ACTION_TYPE_UNSPECIFIED",
+            ActionType::Created => "CREATED",
+            ActionType::Updated => "UPDATED",
+            ActionType::Deleted => "DELETED",
+        }
+    }
 }
 /// Types of resources whose changes may be returned from change history.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -962,6 +1102,30 @@ pub enum ChangeHistoryResourceType {
     /// DataRetentionSettings resource
     DataRetentionSettings = 13,
 }
+impl ChangeHistoryResourceType {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            ChangeHistoryResourceType::Unspecified => "CHANGE_HISTORY_RESOURCE_TYPE_UNSPECIFIED",
+            ChangeHistoryResourceType::Account => "ACCOUNT",
+            ChangeHistoryResourceType::Property => "PROPERTY",
+            ChangeHistoryResourceType::WebDataStream => "WEB_DATA_STREAM",
+            ChangeHistoryResourceType::AndroidAppDataStream => "ANDROID_APP_DATA_STREAM",
+            ChangeHistoryResourceType::IosAppDataStream => "IOS_APP_DATA_STREAM",
+            ChangeHistoryResourceType::FirebaseLink => "FIREBASE_LINK",
+            ChangeHistoryResourceType::GoogleAdsLink => "GOOGLE_ADS_LINK",
+            ChangeHistoryResourceType::GoogleSignalsSettings => "GOOGLE_SIGNALS_SETTINGS",
+            ChangeHistoryResourceType::ConversionEvent => "CONVERSION_EVENT",
+            ChangeHistoryResourceType::MeasurementProtocolSecret => "MEASUREMENT_PROTOCOL_SECRET",
+            ChangeHistoryResourceType::CustomDimension => "CUSTOM_DIMENSION",
+            ChangeHistoryResourceType::CustomMetric => "CUSTOM_METRIC",
+            ChangeHistoryResourceType::DataRetentionSettings => "DATA_RETENTION_SETTINGS",
+        }
+    }
+}
 /// Status of the Google Signals settings (i.e., whether this feature has been
 /// enabled for the property).
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -974,6 +1138,19 @@ pub enum GoogleSignalsState {
     GoogleSignalsEnabled = 1,
     /// Google Signals is disabled.
     GoogleSignalsDisabled = 2,
+}
+impl GoogleSignalsState {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            GoogleSignalsState::Unspecified => "GOOGLE_SIGNALS_STATE_UNSPECIFIED",
+            GoogleSignalsState::GoogleSignalsEnabled => "GOOGLE_SIGNALS_ENABLED",
+            GoogleSignalsState::GoogleSignalsDisabled => "GOOGLE_SIGNALS_DISABLED",
+        }
+    }
 }
 /// Consent field of the Google Signals settings (i.e., whether the user has
 /// consented to the Google Signals terms of service.)
@@ -989,6 +1166,19 @@ pub enum GoogleSignalsConsent {
     /// Terms of service have not been accepted
     NotConsented = 1,
 }
+impl GoogleSignalsConsent {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            GoogleSignalsConsent::Unspecified => "GOOGLE_SIGNALS_CONSENT_UNSPECIFIED",
+            GoogleSignalsConsent::Consented => "GOOGLE_SIGNALS_CONSENT_CONSENTED",
+            GoogleSignalsConsent::NotConsented => "GOOGLE_SIGNALS_CONSENT_NOT_CONSENTED",
+        }
+    }
+}
 /// An indication of which product the user initiated a link proposal from.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
@@ -1000,6 +1190,19 @@ pub enum LinkProposalInitiatingProduct {
     /// This proposal was created by a user from a linked product (not Google
     /// Analytics).
     LinkedProduct = 2,
+}
+impl LinkProposalInitiatingProduct {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            LinkProposalInitiatingProduct::Unspecified => "LINK_PROPOSAL_INITIATING_PRODUCT_UNSPECIFIED",
+            LinkProposalInitiatingProduct::GoogleAnalytics => "GOOGLE_ANALYTICS",
+            LinkProposalInitiatingProduct::LinkedProduct => "LINKED_PRODUCT",
+        }
+    }
 }
 /// The state of a link proposal resource.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -1027,6 +1230,23 @@ pub enum LinkProposalState {
     /// the same external product resource that this proposal specifies. This
     /// proposal will be automatically deleted after some time.
     Obsolete = 6,
+}
+impl LinkProposalState {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            LinkProposalState::Unspecified => "LINK_PROPOSAL_STATE_UNSPECIFIED",
+            LinkProposalState::AwaitingReviewFromGoogleAnalytics => "AWAITING_REVIEW_FROM_GOOGLE_ANALYTICS",
+            LinkProposalState::AwaitingReviewFromLinkedProduct => "AWAITING_REVIEW_FROM_LINKED_PRODUCT",
+            LinkProposalState::Withdrawn => "WITHDRAWN",
+            LinkProposalState::Declined => "DECLINED",
+            LinkProposalState::Expired => "EXPIRED",
+            LinkProposalState::Obsolete => "OBSOLETE",
+        }
+    }
 }
 /// Request message for GetAccount RPC.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -2284,6 +2504,7 @@ pub struct UpdateDataRetentionSettingsRequest {
 pub mod analytics_admin_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Service Interface for the Analytics Admin API (GA4).
     #[derive(Debug, Clone)]
     pub struct AnalyticsAdminServiceClient<T> {
@@ -2298,6 +2519,10 @@ pub mod analytics_admin_service_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -2319,19 +2544,19 @@ pub mod analytics_admin_service_client {
         {
             AnalyticsAdminServiceClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Lookup for a single Account.

@@ -41,6 +41,19 @@ pub mod arrow_serialization_options {
         /// Zstandard compression.
         Zstd = 2,
     }
+    impl CompressionCodec {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                CompressionCodec::CompressionUnspecified => "COMPRESSION_UNSPECIFIED",
+                CompressionCodec::Lz4Frame => "LZ4_FRAME",
+                CompressionCodec::Zstd => "ZSTD",
+            }
+        }
+    }
 }
 /// Avro schema.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -138,17 +151,17 @@ pub struct TableFieldSchema {
     /// Values of this NUMERIC or BIGNUMERIC field must be in this range when:
     ///
     /// * Precision (P) and scale (S) are specified:
-    ///   [-10^(P-S) + 10^(-S), 10^(P-S) - 10^(-S)]
+    ///    [-10^(P-S) + 10^(-S), 10^(P-S) - 10^(-S)]
     /// * Precision (P) is specified but not scale (and thus scale is
-    ///   interpreted to be equal to zero):
-    ///   [-10^P + 1, 10^P - 1].
+    ///    interpreted to be equal to zero):
+    ///    [-10^P + 1, 10^P - 1].
     ///
     /// Acceptable values for precision and scale if both are specified:
     ///
     /// * If type = "NUMERIC":
-    ///   1 <= precision - scale <= 29 and 0 <= scale <= 9.
+    ///    1 <= precision - scale <= 29 and 0 <= scale <= 9.
     /// * If type = "BIGNUMERIC":
-    ///   1 <= precision - scale <= 38 and 0 <= scale <= 38.
+    ///    1 <= precision - scale <= 38 and 0 <= scale <= 38.
     ///
     /// Acceptable values for precision if only precision is specified but not
     /// scale (and thus scale is interpreted to be equal to zero):
@@ -201,6 +214,32 @@ pub mod table_field_schema {
         /// JSON, String
         Json = 15,
     }
+    impl Type {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Type::Unspecified => "TYPE_UNSPECIFIED",
+                Type::String => "STRING",
+                Type::Int64 => "INT64",
+                Type::Double => "DOUBLE",
+                Type::Struct => "STRUCT",
+                Type::Bytes => "BYTES",
+                Type::Bool => "BOOL",
+                Type::Timestamp => "TIMESTAMP",
+                Type::Date => "DATE",
+                Type::Time => "TIME",
+                Type::Datetime => "DATETIME",
+                Type::Geography => "GEOGRAPHY",
+                Type::Numeric => "NUMERIC",
+                Type::Bignumeric => "BIGNUMERIC",
+                Type::Interval => "INTERVAL",
+                Type::Json => "JSON",
+            }
+        }
+    }
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
     pub enum Mode {
@@ -209,6 +248,20 @@ pub mod table_field_schema {
         Nullable = 1,
         Required = 2,
         Repeated = 3,
+    }
+    impl Mode {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Mode::Unspecified => "MODE_UNSPECIFIED",
+                Mode::Nullable => "NULLABLE",
+                Mode::Required => "REQUIRED",
+                Mode::Repeated => "REPEATED",
+            }
+        }
     }
 }
 /// Information about the ReadSession.
@@ -277,10 +330,10 @@ pub mod read_session {
         /// Aggregates are not supported.
         ///
         /// Examples: "int_field > 5"
-        ///           "date_field = CAST('2014-9-27' as DATE)"
-        ///           "nullable_field is not NULL"
-        ///           "st_equals(geo_field, st_geofromtext("POINT(2, 2)"))"
-        ///           "numeric_field BETWEEN 1.0 AND 5.0"
+        ///            "date_field = CAST('2014-9-27' as DATE)"
+        ///            "nullable_field is not NULL"
+        ///            "st_equals(geo_field, st_geofromtext("POINT(2, 2)"))"
+        ///            "numeric_field BETWEEN 1.0 AND 5.0"
         ///
         /// Restricted to a maximum length for 1 MB.
         #[prost(string, tag="2")]
@@ -363,6 +416,20 @@ pub mod write_stream {
         /// Data is only visible up to the offset to which it was flushed.
         Buffered = 3,
     }
+    impl Type {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Type::Unspecified => "TYPE_UNSPECIFIED",
+                Type::Committed => "COMMITTED",
+                Type::Pending => "PENDING",
+                Type::Buffered => "BUFFERED",
+            }
+        }
+    }
 }
 /// Data format for input or output data.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -375,6 +442,19 @@ pub enum DataFormat {
     /// Arrow is a standard open source column-based message format.
     /// See <https://arrow.apache.org/> for more details.
     Arrow = 2,
+}
+impl DataFormat {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            DataFormat::Unspecified => "DATA_FORMAT_UNSPECIFIED",
+            DataFormat::Avro => "AVRO",
+            DataFormat::Arrow => "ARROW",
+        }
+    }
 }
 /// Request message for `CreateReadSession`.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -766,11 +846,30 @@ pub mod storage_error {
         /// field than bigquery schema.
         SchemaMismatchExtraFields = 7,
     }
+    impl StorageErrorCode {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                StorageErrorCode::Unspecified => "STORAGE_ERROR_CODE_UNSPECIFIED",
+                StorageErrorCode::TableNotFound => "TABLE_NOT_FOUND",
+                StorageErrorCode::StreamAlreadyCommitted => "STREAM_ALREADY_COMMITTED",
+                StorageErrorCode::StreamNotFound => "STREAM_NOT_FOUND",
+                StorageErrorCode::InvalidStreamType => "INVALID_STREAM_TYPE",
+                StorageErrorCode::InvalidStreamState => "INVALID_STREAM_STATE",
+                StorageErrorCode::StreamFinalized => "STREAM_FINALIZED",
+                StorageErrorCode::SchemaMismatchExtraFields => "SCHEMA_MISMATCH_EXTRA_FIELDS",
+            }
+        }
+    }
 }
 /// Generated client implementations.
 pub mod big_query_read_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// BigQuery Read API.
     ///
     /// The Read API can be used to read data from BigQuery.
@@ -787,6 +886,10 @@ pub mod big_query_read_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -808,19 +911,19 @@ pub mod big_query_read_client {
         {
             BigQueryReadClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Creates a new read session. A read session divides the contents of a
@@ -927,6 +1030,7 @@ pub mod big_query_read_client {
 pub mod big_query_write_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// BigQuery Write API.
     ///
     /// The Write API can be used to write data to BigQuery.
@@ -948,6 +1052,10 @@ pub mod big_query_write_client {
             let inner = tonic::client::Grpc::new(inner);
             Self { inner }
         }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
+            Self { inner }
+        }
         pub fn with_interceptor<F>(
             inner: T,
             interceptor: F,
@@ -967,19 +1075,19 @@ pub mod big_query_write_client {
         {
             BigQueryWriteClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Creates a write stream to the given table.

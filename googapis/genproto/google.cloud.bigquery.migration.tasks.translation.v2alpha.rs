@@ -84,6 +84,23 @@ pub mod translation_task_details {
         /// File encoding is UTF_16BE.
         Utf16be = 6,
     }
+    impl FileEncoding {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                FileEncoding::Unspecified => "FILE_ENCODING_UNSPECIFIED",
+                FileEncoding::Utf8 => "UTF_8",
+                FileEncoding::Iso88591 => "ISO_8859_1",
+                FileEncoding::UsAscii => "US_ASCII",
+                FileEncoding::Utf16 => "UTF_16",
+                FileEncoding::Utf16le => "UTF_16LE",
+                FileEncoding::Utf16be => "UTF_16BE",
+            }
+        }
+    }
     /// The special token data type.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -104,6 +121,24 @@ pub mod translation_task_details {
         Date = 6,
         /// Token type as timestamp.
         Timestamp = 7,
+    }
+    impl TokenType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                TokenType::Unspecified => "TOKEN_TYPE_UNSPECIFIED",
+                TokenType::String => "STRING",
+                TokenType::Int64 => "INT64",
+                TokenType::Numeric => "NUMERIC",
+                TokenType::Bool => "BOOL",
+                TokenType::Float64 => "FLOAT64",
+                TokenType::Date => "DATE",
+                TokenType::Timestamp => "TIMESTAMP",
+            }
+        }
     }
     /// The language specific settings for the translation task.
     #[derive(Clone, PartialEq, ::prost::Oneof)]
@@ -148,6 +183,20 @@ pub mod identifier_settings {
         /// Identifiers will be in lower cases.
         Lower = 3,
     }
+    impl IdentifierCase {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                IdentifierCase::Unspecified => "IDENTIFIER_CASE_UNSPECIFIED",
+                IdentifierCase::Original => "ORIGINAL",
+                IdentifierCase::Upper => "UPPER",
+                IdentifierCase::Lower => "LOWER",
+            }
+        }
+    }
     /// The SQL identifier rewrite mode.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -158,6 +207,19 @@ pub mod identifier_settings {
         None = 1,
         /// All SQL identifiers will be rewrite.
         RewriteAll = 2,
+    }
+    impl IdentifierRewriteMode {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                IdentifierRewriteMode::Unspecified => "IDENTIFIER_REWRITE_MODE_UNSPECIFIED",
+                IdentifierRewriteMode::None => "NONE",
+                IdentifierRewriteMode::RewriteAll => "REWRITE_ALL",
+            }
+        }
     }
 }
 /// Teradata SQL specific translation task related settings.

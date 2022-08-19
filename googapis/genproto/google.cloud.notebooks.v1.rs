@@ -98,6 +98,18 @@ pub mod event {
         /// The instance / runtime is idle
         Idle = 1,
     }
+    impl EventType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                EventType::Unspecified => "EVENT_TYPE_UNSPECIFIED",
+                EventType::Idle => "IDLE",
+            }
+        }
+    }
 }
 /// The description a notebook execution workload.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -254,25 +266,42 @@ pub mod execution_template {
         /// configure your processing cluster according to these guidelines:
         ///
         /// *   You _must_ set `TrainingInput.masterType` to specify the type
-        ///     of machine to use for your master node. This is the only required
-        ///     setting.
+        ///      of machine to use for your master node. This is the only required
+        ///      setting.
         ///
         /// *   You _may_ set `TrainingInput.workerCount` to specify the number of
-        ///     workers to use. If you specify one or more workers, you _must_ also
-        ///     set `TrainingInput.workerType` to specify the type of machine to use
-        ///     for your worker nodes.
+        ///      workers to use. If you specify one or more workers, you _must_ also
+        ///      set `TrainingInput.workerType` to specify the type of machine to use
+        ///      for your worker nodes.
         ///
         /// *   You _may_ set `TrainingInput.parameterServerCount` to specify the
-        ///     number of parameter servers to use. If you specify one or more
-        ///     parameter servers, you _must_ also set
-        ///     `TrainingInput.parameterServerType` to specify the type of machine to
-        ///     use for your parameter servers.
+        ///      number of parameter servers to use. If you specify one or more
+        ///      parameter servers, you _must_ also set
+        ///      `TrainingInput.parameterServerType` to specify the type of machine to
+        ///      use for your parameter servers.
         ///
         /// Note that all of your workers must use the same machine type, which can
         /// be different from your parameter server type and master type. Your
         /// parameter servers must likewise use the same machine type, which can be
         /// different from your worker type and master type.
         Custom = 6,
+    }
+    impl ScaleTier {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ScaleTier::Unspecified => "SCALE_TIER_UNSPECIFIED",
+                ScaleTier::Basic => "BASIC",
+                ScaleTier::Standard1 => "STANDARD_1",
+                ScaleTier::Premium1 => "PREMIUM_1",
+                ScaleTier::BasicGpu => "BASIC_GPU",
+                ScaleTier::BasicTpu => "BASIC_TPU",
+                ScaleTier::Custom => "CUSTOM",
+            }
+        }
     }
     /// Hardware accelerator types for AI Platform Training jobs.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -295,6 +324,24 @@ pub mod execution_template {
         /// TPU v3.
         TpuV3 = 7,
     }
+    impl SchedulerAcceleratorType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                SchedulerAcceleratorType::Unspecified => "SCHEDULER_ACCELERATOR_TYPE_UNSPECIFIED",
+                SchedulerAcceleratorType::NvidiaTeslaK80 => "NVIDIA_TESLA_K80",
+                SchedulerAcceleratorType::NvidiaTeslaP100 => "NVIDIA_TESLA_P100",
+                SchedulerAcceleratorType::NvidiaTeslaV100 => "NVIDIA_TESLA_V100",
+                SchedulerAcceleratorType::NvidiaTeslaP4 => "NVIDIA_TESLA_P4",
+                SchedulerAcceleratorType::NvidiaTeslaT4 => "NVIDIA_TESLA_T4",
+                SchedulerAcceleratorType::TpuV2 => "TPU_V2",
+                SchedulerAcceleratorType::TpuV3 => "TPU_V3",
+            }
+        }
+    }
     /// The backend used for this execution.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -307,6 +354,19 @@ pub mod execution_template {
         /// Run execution on a cluster with Dataproc as a job.
         /// <https://cloud.google.com/dataproc/docs/reference/rest/v1/projects.regions.jobs>
         Dataproc = 2,
+    }
+    impl JobType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                JobType::Unspecified => "JOB_TYPE_UNSPECIFIED",
+                JobType::VertexAi => "VERTEX_AI",
+                JobType::Dataproc => "DATAPROC",
+            }
+        }
     }
     /// Parameters for an execution type.
     /// NOTE: There are currently no extra parameters for VertexAI jobs.
@@ -381,6 +441,26 @@ pub mod execution {
         /// The Execution is being created.
         Initializing = 10,
     }
+    impl State {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                State::Unspecified => "STATE_UNSPECIFIED",
+                State::Queued => "QUEUED",
+                State::Preparing => "PREPARING",
+                State::Running => "RUNNING",
+                State::Succeeded => "SUCCEEDED",
+                State::Failed => "FAILED",
+                State::Cancelling => "CANCELLING",
+                State::Cancelled => "CANCELLED",
+                State::Expired => "EXPIRED",
+                State::Initializing => "INITIALIZING",
+            }
+        }
+    }
 }
 /// Reservation Affinity for consuming Zonal reservation.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -410,6 +490,20 @@ pub mod reservation_affinity {
         /// Must consume from a specific reservation. Must specify key value fields
         /// for specifying the reservations.
         SpecificReservation = 3,
+    }
+    impl Type {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Type::Unspecified => "TYPE_UNSPECIFIED",
+                Type::NoReservation => "NO_RESERVATION",
+                Type::AnyReservation => "ANY_RESERVATION",
+                Type::SpecificReservation => "SPECIFIC_RESERVATION",
+            }
+        }
     }
 }
 /// The definition of a notebook instance.
@@ -450,10 +544,10 @@ pub struct Instance {
     /// If not specified, the following
     /// \[scopes\](<https://cloud.google.com/compute/docs/access/service-accounts#accesscopesiam>)
     /// are defined:
-    ///  - <https://www.googleapis.com/auth/cloud-platform>
-    ///  - <https://www.googleapis.com/auth/userinfo.email>
+    ///   - <https://www.googleapis.com/auth/cloud-platform>
+    ///   - <https://www.googleapis.com/auth/userinfo.email>
     /// If not using default scopes, you need at least:
-    ///    <https://www.googleapis.com/auth/compute>
+    ///     <https://www.googleapis.com/auth/compute>
     #[prost(string, repeated, tag="31")]
     pub service_account_scopes: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// Required. The [Compute Engine machine type](/compute/docs/machine-types) of this
@@ -753,6 +847,20 @@ pub mod instance {
             /// The instance upgrade is failed.
             Failed = 3,
         }
+        impl State {
+            /// String value of the enum field names used in the ProtoBuf definition.
+            ///
+            /// The values are not transformed in any way and thus are considered stable
+            /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+            pub fn as_str_name(&self) -> &'static str {
+                match self {
+                    State::Unspecified => "STATE_UNSPECIFIED",
+                    State::Started => "STARTED",
+                    State::Succeeded => "SUCCEEDED",
+                    State::Failed => "FAILED",
+                }
+            }
+        }
         /// The definition of operations of this upgrade history entry.
         #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
         #[repr(i32)]
@@ -763,6 +871,19 @@ pub mod instance {
             Upgrade = 1,
             /// Rollback.
             Rollback = 2,
+        }
+        impl Action {
+            /// String value of the enum field names used in the ProtoBuf definition.
+            ///
+            /// The values are not transformed in any way and thus are considered stable
+            /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+            pub fn as_str_name(&self) -> &'static str {
+                match self {
+                    Action::Unspecified => "ACTION_UNSPECIFIED",
+                    Action::Upgrade => "UPGRADE",
+                    Action::Rollback => "ROLLBACK",
+                }
+            }
         }
     }
     /// Definition of the types of hardware accelerators that can be used on this
@@ -795,6 +916,28 @@ pub mod instance {
         /// (Coming soon) Accelerator type is TPU V3.
         TpuV3 = 7,
     }
+    impl AcceleratorType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AcceleratorType::Unspecified => "ACCELERATOR_TYPE_UNSPECIFIED",
+                AcceleratorType::NvidiaTeslaK80 => "NVIDIA_TESLA_K80",
+                AcceleratorType::NvidiaTeslaP100 => "NVIDIA_TESLA_P100",
+                AcceleratorType::NvidiaTeslaV100 => "NVIDIA_TESLA_V100",
+                AcceleratorType::NvidiaTeslaP4 => "NVIDIA_TESLA_P4",
+                AcceleratorType::NvidiaTeslaT4 => "NVIDIA_TESLA_T4",
+                AcceleratorType::NvidiaTeslaA100 => "NVIDIA_TESLA_A100",
+                AcceleratorType::NvidiaTeslaT4Vws => "NVIDIA_TESLA_T4_VWS",
+                AcceleratorType::NvidiaTeslaP100Vws => "NVIDIA_TESLA_P100_VWS",
+                AcceleratorType::NvidiaTeslaP4Vws => "NVIDIA_TESLA_P4_VWS",
+                AcceleratorType::TpuV2 => "TPU_V2",
+                AcceleratorType::TpuV3 => "TPU_V3",
+            }
+        }
+    }
     /// The definition of the states of this instance.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -821,6 +964,26 @@ pub mod instance {
         /// The instance is getting registered.
         Registering = 9,
     }
+    impl State {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                State::Unspecified => "STATE_UNSPECIFIED",
+                State::Starting => "STARTING",
+                State::Provisioning => "PROVISIONING",
+                State::Active => "ACTIVE",
+                State::Stopping => "STOPPING",
+                State::Stopped => "STOPPED",
+                State::Deleted => "DELETED",
+                State::Upgrading => "UPGRADING",
+                State::Initializing => "INITIALIZING",
+                State::Registering => "REGISTERING",
+            }
+        }
+    }
     /// Possible disk types for notebook instances.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -834,6 +997,20 @@ pub mod instance {
         /// Balanced persistent disk type.
         PdBalanced = 3,
     }
+    impl DiskType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                DiskType::Unspecified => "DISK_TYPE_UNSPECIFIED",
+                DiskType::PdStandard => "PD_STANDARD",
+                DiskType::PdSsd => "PD_SSD",
+                DiskType::PdBalanced => "PD_BALANCED",
+            }
+        }
+    }
     /// Definition of the disk encryption options.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -844,6 +1021,19 @@ pub mod instance {
         Gmek = 1,
         /// Use customer managed encryption keys to encrypt the boot disk.
         Cmek = 2,
+    }
+    impl DiskEncryption {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                DiskEncryption::Unspecified => "DISK_ENCRYPTION_UNSPECIFIED",
+                DiskEncryption::Gmek => "GMEK",
+                DiskEncryption::Cmek => "CMEK",
+            }
+        }
     }
     /// The type of vNIC driver.
     /// Default should be UNSPECIFIED_NIC_TYPE.
@@ -856,6 +1046,19 @@ pub mod instance {
         VirtioNet = 1,
         /// GVNIC
         Gvnic = 2,
+    }
+    impl NicType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                NicType::UnspecifiedNicType => "UNSPECIFIED_NIC_TYPE",
+                NicType::VirtioNet => "VIRTIO_NET",
+                NicType::Gvnic => "GVNIC",
+            }
+        }
     }
     /// Type of the environment; can be one of VM image, or container image.
     #[derive(Clone, PartialEq, ::prost::Oneof)]
@@ -939,6 +1142,25 @@ pub mod runtime {
         /// The runtime is being created and set up. It is not ready for use.
         Initializing = 8,
     }
+    impl State {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                State::Unspecified => "STATE_UNSPECIFIED",
+                State::Starting => "STARTING",
+                State::Provisioning => "PROVISIONING",
+                State::Active => "ACTIVE",
+                State::Stopping => "STOPPING",
+                State::Stopped => "STOPPED",
+                State::Deleting => "DELETING",
+                State::Upgrading => "UPGRADING",
+                State::Initializing => "INITIALIZING",
+            }
+        }
+    }
     /// The runtime substate.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -953,6 +1175,19 @@ pub mod runtime {
         /// (for example, critical daemons are not running)
         /// Applies to ACTIVE state.
         Unhealthy = 2,
+    }
+    impl HealthState {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                HealthState::Unspecified => "HEALTH_STATE_UNSPECIFIED",
+                HealthState::Healthy => "HEALTHY",
+                HealthState::Unhealthy => "UNHEALTHY",
+            }
+        }
     }
     /// Type of the runtime; currently only supports Compute Engine VM.
     #[derive(Clone, PartialEq, ::prost::Oneof)]
@@ -1012,6 +1247,28 @@ pub mod runtime_accelerator_config {
         NvidiaTeslaP100Vws = 10,
         /// Accelerator type is Nvidia Tesla P.4 GPU Virtual Workstations.
         NvidiaTeslaP4Vws = 11,
+    }
+    impl AcceleratorType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AcceleratorType::Unspecified => "ACCELERATOR_TYPE_UNSPECIFIED",
+                AcceleratorType::NvidiaTeslaK80 => "NVIDIA_TESLA_K80",
+                AcceleratorType::NvidiaTeslaP100 => "NVIDIA_TESLA_P100",
+                AcceleratorType::NvidiaTeslaV100 => "NVIDIA_TESLA_V100",
+                AcceleratorType::NvidiaTeslaP4 => "NVIDIA_TESLA_P4",
+                AcceleratorType::NvidiaTeslaT4 => "NVIDIA_TESLA_T4",
+                AcceleratorType::NvidiaTeslaA100 => "NVIDIA_TESLA_A100",
+                AcceleratorType::TpuV2 => "TPU_V2",
+                AcceleratorType::TpuV3 => "TPU_V3",
+                AcceleratorType::NvidiaTeslaT4Vws => "NVIDIA_TESLA_T4_VWS",
+                AcceleratorType::NvidiaTeslaP100Vws => "NVIDIA_TESLA_P100_VWS",
+                AcceleratorType::NvidiaTeslaP4Vws => "NVIDIA_TESLA_P4_VWS",
+            }
+        }
     }
 }
 /// Represents a custom encryption key configuration that can be applied to
@@ -1173,6 +1430,20 @@ pub mod local_disk_initialize_params {
         /// Balanced persistent disk type.
         PdBalanced = 3,
     }
+    impl DiskType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                DiskType::Unspecified => "DISK_TYPE_UNSPECIFIED",
+                DiskType::PdStandard => "PD_STANDARD",
+                DiskType::PdSsd => "PD_SSD",
+                DiskType::PdBalanced => "PD_BALANCED",
+            }
+        }
+    }
 }
 /// Specifies the login configuration for Runtime
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -1199,6 +1470,18 @@ pub mod runtime_access_config {
         Unspecified = 0,
         /// Single user login.
         SingleUser = 1,
+    }
+    impl RuntimeAccessType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                RuntimeAccessType::Unspecified => "RUNTIME_ACCESS_TYPE_UNSPECIFIED",
+                RuntimeAccessType::SingleUser => "SINGLE_USER",
+            }
+        }
     }
 }
 /// Specifies the selection and configuration of software inside the runtime.
@@ -1394,6 +1677,19 @@ pub mod virtual_machine_config {
         /// GVNIC
         Gvnic = 2,
     }
+    impl NicType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                NicType::UnspecifiedNicType => "UNSPECIFIED_NIC_TYPE",
+                NicType::VirtioNet => "VIRTIO_NET",
+                NicType::Gvnic => "GVNIC",
+            }
+        }
+    }
 }
 /// Request for listing Managed Notebook Runtimes.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -1513,6 +1809,7 @@ pub struct ReportRuntimeEventRequest {
 pub mod managed_notebook_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// API v1 service for Managed Notebooks.
     #[derive(Debug, Clone)]
     pub struct ManagedNotebookServiceClient<T> {
@@ -1527,6 +1824,10 @@ pub mod managed_notebook_service_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -1550,19 +1851,19 @@ pub mod managed_notebook_service_client {
                 InterceptedService::new(inner, interceptor),
             )
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Lists Runtimes in a given project and location.
@@ -1850,6 +2151,23 @@ pub mod schedule {
         /// The schedule resource is being deleted.
         Deleting = 6,
     }
+    impl State {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                State::Unspecified => "STATE_UNSPECIFIED",
+                State::Enabled => "ENABLED",
+                State::Paused => "PAUSED",
+                State::Disabled => "DISABLED",
+                State::UpdateFailed => "UPDATE_FAILED",
+                State::Initializing => "INITIALIZING",
+                State::Deleting => "DELETING",
+            }
+        }
+    }
 }
 /// Represents the metadata of the long-running operation.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -2104,13 +2422,13 @@ pub struct GetInstanceHealthResponse {
     pub health_state: i32,
     /// Output only. Additional information about instance health.
     /// Example:
-    ///  healthInfo": {
-    ///   "docker_proxy_agent_status": "1",
-    ///   "docker_status": "1",
-    ///   "jupyterlab_api_status": "-1",
-    ///   "jupyterlab_status": "-1",
-    ///   "updated": "2020-10-18 09:40:03.573409"
-    ///  }
+    ///   healthInfo": {
+    ///    "docker_proxy_agent_status": "1",
+    ///    "docker_status": "1",
+    ///    "jupyterlab_api_status": "-1",
+    ///    "jupyterlab_status": "-1",
+    ///    "updated": "2020-10-18 09:40:03.573409"
+    ///   }
     #[prost(map="string, string", tag="2")]
     pub health_info: ::std::collections::HashMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
 }
@@ -2136,6 +2454,21 @@ pub mod get_instance_health_response {
         /// The instance health monitoring agent is not running.
         /// Applies to ACTIVE state.
         AgentNotRunning = 4,
+    }
+    impl HealthState {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                HealthState::Unspecified => "HEALTH_STATE_UNSPECIFIED",
+                HealthState::Healthy => "HEALTHY",
+                HealthState::Unhealthy => "UNHEALTHY",
+                HealthState::AgentNotInstalled => "AGENT_NOT_INSTALLED",
+                HealthState::AgentNotRunning => "AGENT_NOT_RUNNING",
+            }
+        }
     }
 }
 /// Request for upgrading a notebook instance
@@ -2263,8 +2596,8 @@ pub struct ListSchedulesResponse {
     pub next_page_token: ::prost::alloc::string::String,
     /// Schedules that could not be reached. For example:
     ///
-    ///     ['projects/{project_id}/location/{location}/schedules/monthly_digest',
-    ///      'projects/{project_id}/location/{location}/schedules/weekly_sentiment']
+    ///      ['projects/{project_id}/location/{location}/schedules/monthly_digest',
+    ///       'projects/{project_id}/location/{location}/schedules/weekly_sentiment']
     #[prost(string, repeated, tag="3")]
     pub unreachable: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
@@ -2341,8 +2674,8 @@ pub struct ListExecutionsResponse {
     pub next_page_token: ::prost::alloc::string::String,
     /// Executions IDs that could not be reached. For example:
     ///
-    ///     ['projects/{project_id}/location/{location}/executions/imagenet_test1',
-    ///      'projects/{project_id}/location/{location}/executions/classifier_train1']
+    ///      ['projects/{project_id}/location/{location}/executions/imagenet_test1',
+    ///       'projects/{project_id}/location/{location}/executions/classifier_train1']
     #[prost(string, repeated, tag="3")]
     pub unreachable: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
@@ -2380,6 +2713,7 @@ pub struct CreateExecutionRequest {
 pub mod notebook_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// API v1 service for Cloud AI Platform Notebooks.
     #[derive(Debug, Clone)]
     pub struct NotebookServiceClient<T> {
@@ -2394,6 +2728,10 @@ pub mod notebook_service_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -2415,19 +2753,19 @@ pub mod notebook_service_client {
         {
             NotebookServiceClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Lists instances in a given project and location.

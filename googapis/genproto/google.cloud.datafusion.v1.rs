@@ -61,6 +61,20 @@ pub mod accelerator {
         /// custom built to streamline CCAI Insights processing.
         CcaiInsights = 3,
     }
+    impl AcceleratorType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AcceleratorType::Unspecified => "ACCELERATOR_TYPE_UNSPECIFIED",
+                AcceleratorType::Cdc => "CDC",
+                AcceleratorType::Healthcare => "HEALTHCARE",
+                AcceleratorType::CcaiInsights => "CCAI_INSIGHTS",
+            }
+        }
+    }
     /// Different values possible for the state of an accelerator
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -74,6 +88,20 @@ pub mod accelerator {
         /// Indicates that accelerator state is currently unknown.
         /// Requests for enable, disable could be retried while in this state
         Unknown = 3,
+    }
+    impl State {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                State::Unspecified => "STATE_UNSPECIFIED",
+                State::Enabled => "ENABLED",
+                State::Disabled => "DISABLED",
+                State::Unknown => "UNKNOWN",
+            }
+        }
     }
 }
 /// The crypto key configuration. This field is used by the Customer-managed
@@ -213,6 +241,20 @@ pub mod instance {
         /// pipelines at low cost.
         Developer = 3,
     }
+    impl Type {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Type::Unspecified => "TYPE_UNSPECIFIED",
+                Type::Basic => "BASIC",
+                Type::Enterprise => "ENTERPRISE",
+                Type::Developer => "DEVELOPER",
+            }
+        }
+    }
     /// Represents the state of a Data Fusion instance
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -238,6 +280,26 @@ pub mod instance {
         AutoUpdating = 8,
         /// Instance is being auto-upgraded
         AutoUpgrading = 9,
+    }
+    impl State {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                State::Unspecified => "STATE_UNSPECIFIED",
+                State::Creating => "CREATING",
+                State::Active => "ACTIVE",
+                State::Failed => "FAILED",
+                State::Deleting => "DELETING",
+                State::Upgrading => "UPGRADING",
+                State::Restarting => "RESTARTING",
+                State::Updating => "UPDATING",
+                State::AutoUpdating => "AUTO_UPDATING",
+                State::AutoUpgrading => "AUTO_UPGRADING",
+            }
+        }
     }
 }
 /// Request message for listing Data Fusion instances.
@@ -401,6 +463,7 @@ pub struct OperationMetadata {
 pub mod data_fusion_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Service for creating and managing Data Fusion instances.
     /// Data Fusion enables ETL developers to build code-free, data integration
     /// pipelines via a point-and-click UI.
@@ -417,6 +480,10 @@ pub mod data_fusion_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -438,19 +505,19 @@ pub mod data_fusion_client {
         {
             DataFusionClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Lists possible versions for Data Fusion instances in the specified project

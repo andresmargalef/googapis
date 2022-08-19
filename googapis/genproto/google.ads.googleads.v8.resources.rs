@@ -1586,18 +1586,18 @@ pub struct AdParameter {
     #[prost(int64, optional, tag="6")]
     pub parameter_index: ::core::option::Option<i64>,
     /// Numeric value to insert into the ad text. The following restrictions
-    ///  apply:
-    ///  - Can use comma or period as a separator, with an optional period or
-    ///    comma (respectively) for fractional values. For example, 1,000,000.00
-    ///    and 2.000.000,10 are valid.
-    ///  - Can be prepended or appended with a currency symbol. For example,
-    ///    $99.99 is valid.
-    ///  - Can be prepended or appended with a currency code. For example, 99.99USD
-    ///    and EUR200 are valid.
-    ///  - Can use '%'. For example, 1.0% and 1,0% are valid.
-    ///  - Can use plus or minus. For example, -10.99 and 25+ are valid.
-    ///  - Can use '/' between two numbers. For example 4/1 and 0.95/0.45 are
-    ///    valid.
+    ///   apply:
+    ///   - Can use comma or period as a separator, with an optional period or
+    ///     comma (respectively) for fractional values. For example, 1,000,000.00
+    ///     and 2.000.000,10 are valid.
+    ///   - Can be prepended or appended with a currency symbol. For example,
+    ///     $99.99 is valid.
+    ///   - Can be prepended or appended with a currency code. For example, 99.99USD
+    ///     and EUR200 are valid.
+    ///   - Can use '%'. For example, 1.0% and 1,0% are valid.
+    ///   - Can use plus or minus. For example, -10.99 and 25+ are valid.
+    ///   - Can use '/' between two numbers. For example 4/1 and 0.95/0.45 are
+    ///     valid.
     #[prost(string, optional, tag="7")]
     pub insertion_text: ::core::option::Option<::prost::alloc::string::String>,
 }
@@ -3499,6 +3499,19 @@ pub mod feed_attribute_operation {
         Unknown = 1,
         /// Add the attribute to the existing attributes.
         Add = 2,
+    }
+    impl Operator {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Operator::Unspecified => "UNSPECIFIED",
+                Operator::Unknown => "UNKNOWN",
+                Operator::Add => "ADD",
+            }
+        }
     }
 }
 // Proto file describing the FeedItem resource.

@@ -46,6 +46,22 @@ pub mod logged_backup {
         /// of being deleted.
         Deleting = 5,
     }
+    impl State {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                State::Unspecified => "STATE_UNSPECIFIED",
+                State::Creating => "CREATING",
+                State::InProgress => "IN_PROGRESS",
+                State::Succeeded => "SUCCEEDED",
+                State::Failed => "FAILED",
+                State::Deleting => "DELETING",
+            }
+        }
+    }
 }
 /// Namespaces, list of namespaces
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -219,6 +235,22 @@ pub mod logged_restore {
         /// This Restore resource is in the process of being deleted.
         Deleting = 5,
     }
+    impl State {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                State::Unspecified => "STATE_UNSPECIFIED",
+                State::Creating => "CREATING",
+                State::InProgress => "IN_PROGRESS",
+                State::Succeeded => "SUCCEEDED",
+                State::Failed => "FAILED",
+                State::Deleting => "DELETING",
+            }
+        }
+    }
 }
 /// RestorePlan as stored in Platform log. It's used to log the details of
 /// a createRestorePlan/updateRestorePlan request, so only fields that can be
@@ -237,8 +269,8 @@ pub struct LoggedRestorePlan {
     /// will restore data. NOTE: the cluster's region must be the same as the
     /// RestorePlan.
     /// Possible formats:
-    ///   1. projects/*/locations/*/clusters/*
-    ///   2. projects/*/zones/*/clusters/*
+    ///    1. projects/*/locations/*/clusters/*
+    ///    2. projects/*/zones/*/clusters/*
     #[prost(string, tag="3")]
     pub cluster: ::prost::alloc::string::String,
     /// Configuration of Restores created via this RestorePlan.
@@ -379,6 +411,20 @@ pub mod restore_config {
         /// provisioning blank PVs or binding to statically provisioned PVs.
         NoVolumeDataRestoration = 3,
     }
+    impl VolumeDataRestorePolicy {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                VolumeDataRestorePolicy::Unspecified => "VOLUME_DATA_RESTORE_POLICY_UNSPECIFIED",
+                VolumeDataRestorePolicy::RestoreVolumeDataFromBackup => "RESTORE_VOLUME_DATA_FROM_BACKUP",
+                VolumeDataRestorePolicy::ReuseVolumeHandleFromBackup => "REUSE_VOLUME_HANDLE_FROM_BACKUP",
+                VolumeDataRestorePolicy::NoVolumeDataRestoration => "NO_VOLUME_DATA_RESTORATION",
+            }
+        }
+    }
     /// Defines the behavior for handling the situation where cluster-scoped
     /// resources being restored already exist in the target cluster.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -394,6 +440,19 @@ pub mod restore_config {
         /// data loss if used inappropriately - for example, deleting a CRD will
         /// cause Kubernetes to delete all CRs of that type.
         UseBackupVersion = 2,
+    }
+    impl ClusterResourceConflictPolicy {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ClusterResourceConflictPolicy::Unspecified => "CLUSTER_RESOURCE_CONFLICT_POLICY_UNSPECIFIED",
+                ClusterResourceConflictPolicy::UseExistingVersion => "USE_EXISTING_VERSION",
+                ClusterResourceConflictPolicy::UseBackupVersion => "USE_BACKUP_VERSION",
+            }
+        }
     }
     /// Defines the behavior for handling the situation where sets of namespaced
     /// resources being restored already exist in the target cluster.
@@ -416,6 +475,19 @@ pub mod restore_config {
         /// occurs during the restore process itself (e.g., because an out of band
         /// process creates conflicting resources), a conflict will be reported.
         FailOnConflict = 2,
+    }
+    impl NamespacedResourceRestoreMode {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                NamespacedResourceRestoreMode::Unspecified => "NAMESPACED_RESOURCE_RESTORE_MODE_UNSPECIFIED",
+                NamespacedResourceRestoreMode::DeleteAndRestore => "DELETE_AND_RESTORE",
+                NamespacedResourceRestoreMode::FailOnConflict => "FAIL_ON_CONFLICT",
+            }
+        }
     }
     /// Specifies the namespaced resources to restore from the Backup.
     /// Only one of the entries may be specified. If not specified, NO namespaced
@@ -549,4 +621,18 @@ pub enum ChangeType {
     Update = 2,
     /// The resource is deleted.
     Deletion = 3,
+}
+impl ChangeType {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            ChangeType::Unspecified => "CHANGE_TYPE_UNSPECIFIED",
+            ChangeType::Creation => "CREATION",
+            ChangeType::Update => "UPDATE",
+            ChangeType::Deletion => "DELETION",
+        }
+    }
 }

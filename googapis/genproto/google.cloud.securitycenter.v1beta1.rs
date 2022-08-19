@@ -14,11 +14,11 @@ pub struct SecurityMarks {
     /// Mutable user specified security marks belonging to the parent resource.
     /// Constraints are as follows:
     ///
-    ///   * Keys and values are treated as case insensitive
-    ///   * Keys must be between 1 - 256 characters (inclusive)
-    ///   * Keys must be letters, numbers, underscores, or dashes
-    ///   * Values have leading and trailing whitespace trimmed, remaining
-    ///     characters must be between 1 - 4096 characters (inclusive)
+    ///    * Keys and values are treated as case insensitive
+    ///    * Keys must be between 1 - 256 characters (inclusive)
+    ///    * Keys must be letters, numbers, underscores, or dashes
+    ///    * Values have leading and trailing whitespace trimmed, remaining
+    ///      characters must be between 1 - 4096 characters (inclusive)
     #[prost(map="string, string", tag="2")]
     pub marks: ::std::collections::HashMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
 }
@@ -166,6 +166,19 @@ pub mod finding {
         /// and is no longer active.
         Inactive = 2,
     }
+    impl State {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                State::Unspecified => "STATE_UNSPECIFIED",
+                State::Active => "ACTIVE",
+                State::Inactive => "INACTIVE",
+            }
+        }
+    }
 }
 /// User specified settings that are attached to the Security Command
 /// Center organization.
@@ -222,6 +235,19 @@ pub mod organization_settings {
             /// All other resources will be retrieved.
             Exclude = 2,
         }
+        impl InclusionMode {
+            /// String value of the enum field names used in the ProtoBuf definition.
+            ///
+            /// The values are not transformed in any way and thus are considered stable
+            /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+            pub fn as_str_name(&self) -> &'static str {
+                match self {
+                    InclusionMode::Unspecified => "INCLUSION_MODE_UNSPECIFIED",
+                    InclusionMode::IncludeOnly => "INCLUDE_ONLY",
+                    InclusionMode::Exclude => "EXCLUDE",
+                }
+            }
+        }
     }
 }
 /// Response of asset discovery run
@@ -249,6 +275,20 @@ pub mod run_asset_discovery_response {
         Superseded = 2,
         /// Asset discovery run was killed and terminated.
         Terminated = 3,
+    }
+    impl State {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                State::Unspecified => "STATE_UNSPECIFIED",
+                State::Completed => "COMPLETED",
+                State::Superseded => "SUPERSEDED",
+                State::Terminated => "TERMINATED",
+            }
+        }
     }
 }
 /// Security Command Center finding source. A finding source
@@ -389,12 +429,12 @@ pub struct GroupAssetsRequest {
     /// Possible "state" values when compare_duration is specified:
     ///
     /// * "ADDED": indicates that the asset was not present before
-    ///              compare_duration, but present at reference_time.
+    ///               compare_duration, but present at reference_time.
     /// * "REMOVED": indicates that the asset was present at the start of
-    ///              compare_duration, but not present at reference_time.
+    ///               compare_duration, but not present at reference_time.
     /// * "ACTIVE": indicates that the asset was present at both the
-    ///              start and the end of the time period defined by
-    ///              compare_duration and reference_time.
+    ///               start and the end of the time period defined by
+    ///               compare_duration and reference_time.
     ///
     /// This field is ignored if `state` is not a field in `group_by`.
     #[prost(message, optional, tag="4")]
@@ -448,9 +488,9 @@ pub struct GroupFindingsRequest {
     /// Restrictions have the form `<field> <operator> <value>` and may have a `-`
     /// character in front of them to indicate negation. Examples include:
     ///
-    ///  * name
-    ///  * source_properties.a_property
-    ///  * security_marks.marks.marka
+    ///   * name
+    ///   * source_properties.a_property
+    ///   * security_marks.marks.marka
     ///
     /// The supported operators are:
     ///
@@ -616,12 +656,12 @@ pub struct ListAssetsRequest {
     /// Possible "state" values when compare_duration is specified:
     ///
     /// * "ADDED": indicates that the asset was not present before
-    ///              compare_duration, but present at read_time.
+    ///               compare_duration, but present at read_time.
     /// * "REMOVED": indicates that the asset was present at the start of
-    ///              compare_duration, but not present at read_time.
+    ///               compare_duration, but not present at read_time.
     /// * "ACTIVE": indicates that the asset was present at both the
-    ///              start and the end of the time period defined by
-    ///              compare_duration and read_time.
+    ///               start and the end of the time period defined by
+    ///               compare_duration and read_time.
     ///
     /// If compare_duration is not specified, then the only possible state is
     /// "UNUSED", which indicates that the asset is present at read_time.
@@ -693,6 +733,21 @@ pub mod list_assets_response {
             /// Asset was active at both point(s) in time.
             Active = 4,
         }
+        impl State {
+            /// String value of the enum field names used in the ProtoBuf definition.
+            ///
+            /// The values are not transformed in any way and thus are considered stable
+            /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+            pub fn as_str_name(&self) -> &'static str {
+                match self {
+                    State::Unspecified => "STATE_UNSPECIFIED",
+                    State::Unused => "UNUSED",
+                    State::Added => "ADDED",
+                    State::Removed => "REMOVED",
+                    State::Active => "ACTIVE",
+                }
+            }
+        }
     }
 }
 /// Request message for listing findings.
@@ -712,9 +767,9 @@ pub struct ListFindingsRequest {
     /// Restrictions have the form `<field> <operator> <value>` and may have a `-`
     /// character in front of them to indicate negation. Examples include:
     ///
-    ///  * name
-    ///  * source_properties.a_property
-    ///  * security_marks.marks.marka
+    ///   * name
+    ///   * source_properties.a_property
+    ///   * security_marks.marks.marka
     ///
     /// The supported operators are:
     ///
@@ -855,6 +910,7 @@ pub struct UpdateSecurityMarksRequest {
 pub mod security_center_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// V1 Beta APIs for Security Center service.
     #[derive(Debug, Clone)]
     pub struct SecurityCenterClient<T> {
@@ -869,6 +925,10 @@ pub mod security_center_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -890,19 +950,19 @@ pub mod security_center_client {
         {
             SecurityCenterClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Creates a source.

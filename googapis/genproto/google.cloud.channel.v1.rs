@@ -24,6 +24,19 @@ pub mod edu_data {
         /// Higher Education Universities & Colleges
         University = 2,
     }
+    impl InstituteType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                InstituteType::Unspecified => "INSTITUTE_TYPE_UNSPECIFIED",
+                InstituteType::K12 => "K12",
+                InstituteType::University => "UNIVERSITY",
+            }
+        }
+    }
     /// Number of students and staff the institute has.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -44,6 +57,24 @@ pub mod edu_data {
         Size500110000 = 6,
         /// 10,001 +
         Size10001OrMore = 7,
+    }
+    impl InstituteSize {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                InstituteSize::Unspecified => "INSTITUTE_SIZE_UNSPECIFIED",
+                InstituteSize::Size1100 => "SIZE_1_100",
+                InstituteSize::Size101500 => "SIZE_101_500",
+                InstituteSize::Size5011000 => "SIZE_501_1000",
+                InstituteSize::Size10012000 => "SIZE_1001_2000",
+                InstituteSize::Size20015000 => "SIZE_2001_5000",
+                InstituteSize::Size500110000 => "SIZE_5001_10000",
+                InstituteSize::Size10001OrMore => "SIZE_10001_OR_MORE",
+            }
+        }
     }
 }
 /// Cloud Identity information for the Cloud Channel Customer.
@@ -90,6 +121,19 @@ pub mod cloud_identity_info {
         Domain = 1,
         /// Team customer which needs email verification to use services.
         Team = 2,
+    }
+    impl CustomerType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                CustomerType::Unspecified => "CUSTOMER_TYPE_UNSPECIFIED",
+                CustomerType::Domain => "DOMAIN",
+                CustomerType::Team => "TEAM",
+            }
+        }
     }
 }
 /// Data type and value of a parameter.
@@ -178,6 +222,19 @@ pub enum ChannelPartnerLinkView {
     /// Includes all fields.
     Full = 2,
 }
+impl ChannelPartnerLinkView {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            ChannelPartnerLinkView::Unspecified => "UNSPECIFIED",
+            ChannelPartnerLinkView::Basic => "BASIC",
+            ChannelPartnerLinkView::Full => "FULL",
+        }
+    }
+}
 /// ChannelPartnerLinkState represents state of a channel partner link.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
@@ -193,6 +250,21 @@ pub enum ChannelPartnerLinkState {
     Revoked = 3,
     /// Status when the reseller is suspended by Google or distributor.
     Suspended = 4,
+}
+impl ChannelPartnerLinkState {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            ChannelPartnerLinkState::Unspecified => "CHANNEL_PARTNER_LINK_STATE_UNSPECIFIED",
+            ChannelPartnerLinkState::Invited => "INVITED",
+            ChannelPartnerLinkState::Active => "ACTIVE",
+            ChannelPartnerLinkState::Revoked => "REVOKED",
+            ChannelPartnerLinkState::Suspended => "SUSPENDED",
+        }
+    }
 }
 /// Entity representing a customer of a reseller or distributor.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -337,6 +409,18 @@ pub enum MediaType {
     /// Type of image.
     Image = 1,
 }
+impl MediaType {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            MediaType::Unspecified => "MEDIA_TYPE_UNSPECIFIED",
+            MediaType::Image => "MEDIA_TYPE_IMAGE",
+        }
+    }
+}
 /// Represents an offer made to resellers for purchase.
 /// An offer is associated with a \[Sku][google.cloud.channel.v1.Sku\], has a plan for payment, a price, and
 /// defines the constraints for buying.
@@ -415,6 +499,20 @@ pub mod parameter_definition {
         String = 2,
         /// Double type.
         Double = 3,
+    }
+    impl ParameterType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ParameterType::Unspecified => "PARAMETER_TYPE_UNSPECIFIED",
+                ParameterType::Int64 => "INT64",
+                ParameterType::String => "STRING",
+                ParameterType::Double => "DOUBLE",
+            }
+        }
     }
 }
 /// Represents the constraints for buying the Offer.
@@ -557,6 +655,20 @@ pub enum PromotionalOrderType {
     /// Orders for modifying an existing customer's promotion on the same SKU.
     PromotionSwitch = 3,
 }
+impl PromotionalOrderType {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            PromotionalOrderType::PromotionalTypeUnspecified => "PROMOTIONAL_TYPE_UNSPECIFIED",
+            PromotionalOrderType::NewUpgrade => "NEW_UPGRADE",
+            PromotionalOrderType::Transfer => "TRANSFER",
+            PromotionalOrderType::PromotionSwitch => "PROMOTION_SWITCH",
+        }
+    }
+}
 /// Describes how the reseller will be billed.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
@@ -574,6 +686,22 @@ pub enum PaymentPlan {
     /// Price and ordering not available through API.
     Offline = 5,
 }
+impl PaymentPlan {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            PaymentPlan::Unspecified => "PAYMENT_PLAN_UNSPECIFIED",
+            PaymentPlan::Commitment => "COMMITMENT",
+            PaymentPlan::Flexible => "FLEXIBLE",
+            PaymentPlan::Free => "FREE",
+            PaymentPlan::Trial => "TRIAL",
+            PaymentPlan::Offline => "OFFLINE",
+        }
+    }
+}
 /// Specifies when the payment needs to happen.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
@@ -584,6 +712,19 @@ pub enum PaymentType {
     Prepay = 1,
     /// Postpay. Reseller is charged at the end of the Payment cycle.
     Postpay = 2,
+}
+impl PaymentType {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            PaymentType::Unspecified => "PAYMENT_TYPE_UNSPECIFIED",
+            PaymentType::Prepay => "PREPAY",
+            PaymentType::Postpay => "POSTPAY",
+        }
+    }
 }
 /// Represents the type for a monetizable resource(any entity on which billing
 /// happens). For example, this could be MINUTES for Google Voice and GB for
@@ -612,6 +753,24 @@ pub enum ResourceType {
     /// For Google Cloud Platform subscriptions like Anthos or SAP.
     Subscription = 7,
 }
+impl ResourceType {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            ResourceType::Unspecified => "RESOURCE_TYPE_UNSPECIFIED",
+            ResourceType::Seat => "SEAT",
+            ResourceType::Mau => "MAU",
+            ResourceType::Gb => "GB",
+            ResourceType::LicensedUser => "LICENSED_USER",
+            ResourceType::Minutes => "MINUTES",
+            ResourceType::IaasUsage => "IAAS_USAGE",
+            ResourceType::Subscription => "SUBSCRIPTION",
+        }
+    }
+}
 /// Period Type.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
@@ -624,6 +783,20 @@ pub enum PeriodType {
     Month = 2,
     /// Year.
     Year = 3,
+}
+impl PeriodType {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            PeriodType::Unspecified => "PERIOD_TYPE_UNSPECIFIED",
+            PeriodType::Day => "DAY",
+            PeriodType::Month => "MONTH",
+            PeriodType::Year => "YEAR",
+        }
+    }
 }
 /// An entitlement is a representation of a customer's ability to use a service.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -694,6 +867,19 @@ pub mod entitlement {
         /// The entitlement is currently suspended.
         Suspended = 5,
     }
+    impl ProvisioningState {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ProvisioningState::Unspecified => "PROVISIONING_STATE_UNSPECIFIED",
+                ProvisioningState::Active => "ACTIVE",
+                ProvisioningState::Suspended => "SUSPENDED",
+            }
+        }
+    }
     /// Suspension reason for an entitlement if \[provisioning_state][google.cloud.channel.v1.Entitlement.provisioning_state\] = SUSPENDED.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -711,6 +897,22 @@ pub mod entitlement {
         PendingTosAcceptance = 4,
         /// Other reasons (internal reasons, abuse, etc.).
         Other = 100,
+    }
+    impl SuspensionReason {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                SuspensionReason::Unspecified => "SUSPENSION_REASON_UNSPECIFIED",
+                SuspensionReason::ResellerInitiated => "RESELLER_INITIATED",
+                SuspensionReason::TrialEnded => "TRIAL_ENDED",
+                SuspensionReason::RenewalWithTypeCancel => "RENEWAL_WITH_TYPE_CANCEL",
+                SuspensionReason::PendingTosAcceptance => "PENDING_TOS_ACCEPTANCE",
+                SuspensionReason::Other => "OTHER",
+            }
+        }
     }
 }
 /// Definition for extended entitlement parameters.
@@ -839,6 +1041,20 @@ pub mod transfer_eligibility {
         /// SKU subscription is suspended
         SkuSuspended = 3,
     }
+    impl Reason {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Reason::Unspecified => "REASON_UNSPECIFIED",
+                Reason::PendingTosAcceptance => "PENDING_TOS_ACCEPTANCE",
+                Reason::SkuNotEligible => "SKU_NOT_ELIGIBLE",
+                Reason::SkuSuspended => "SKU_SUSPENDED",
+            }
+        }
+    }
 }
 /// Provides contextual information about a \[google.longrunning.Operation][google.longrunning.Operation\].
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -877,6 +1093,28 @@ pub mod operation_metadata {
         ChangeParameters = 15,
         /// Long Running Operation was triggered by ProvisionCloudIdentity.
         ProvisionCloudIdentity = 16,
+    }
+    impl OperationType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                OperationType::Unspecified => "OPERATION_TYPE_UNSPECIFIED",
+                OperationType::CreateEntitlement => "CREATE_ENTITLEMENT",
+                OperationType::ChangeRenewalSettings => "CHANGE_RENEWAL_SETTINGS",
+                OperationType::StartPaidService => "START_PAID_SERVICE",
+                OperationType::ActivateEntitlement => "ACTIVATE_ENTITLEMENT",
+                OperationType::SuspendEntitlement => "SUSPEND_ENTITLEMENT",
+                OperationType::CancelEntitlement => "CANCEL_ENTITLEMENT",
+                OperationType::TransferEntitlements => "TRANSFER_ENTITLEMENTS",
+                OperationType::TransferEntitlementsToGoogle => "TRANSFER_ENTITLEMENTS_TO_GOOGLE",
+                OperationType::ChangeOffer => "CHANGE_OFFER",
+                OperationType::ChangeParameters => "CHANGE_PARAMETERS",
+                OperationType::ProvisionCloudIdentity => "PROVISION_CLOUD_IDENTITY",
+            }
+        }
     }
 }
 /// Request message for \[CloudChannelService.CheckCloudIdentityAccountsExist][google.cloud.channel.v1.CloudChannelService.CheckCloudIdentityAccountsExist\].
@@ -1752,6 +1990,19 @@ pub mod list_purchasable_skus_request {
             /// SKU is a downgrade on the current entitlement.
             Downgrade = 2,
         }
+        impl ChangeType {
+            /// String value of the enum field names used in the ProtoBuf definition.
+            ///
+            /// The values are not transformed in any way and thus are considered stable
+            /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+            pub fn as_str_name(&self) -> &'static str {
+                match self {
+                    ChangeType::Unspecified => "CHANGE_TYPE_UNSPECIFIED",
+                    ChangeType::Upgrade => "UPGRADE",
+                    ChangeType::Downgrade => "DOWNGRADE",
+                }
+            }
+        }
     }
     /// Defines the intended purchase.
     #[derive(Clone, PartialEq, ::prost::Oneof)]
@@ -1931,6 +2182,7 @@ pub struct ListSubscribersResponse {
 pub mod cloud_channel_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// CloudChannelService lets Google cloud resellers and distributors manage
     /// their customers, channel partners, entitlements, and reports.
     ///
@@ -1965,6 +2217,10 @@ pub mod cloud_channel_service_client {
             let inner = tonic::client::Grpc::new(inner);
             Self { inner }
         }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
+            Self { inner }
+        }
         pub fn with_interceptor<F>(
             inner: T,
             interceptor: F,
@@ -1984,19 +2240,19 @@ pub mod cloud_channel_service_client {
         {
             CloudChannelServiceClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// List [Customer][google.cloud.channel.v1.Customer]s.
@@ -3332,6 +3588,19 @@ pub mod customer_event {
         /// Primary domain of the customer has been verified.
         PrimaryDomainVerified = 2,
     }
+    impl Type {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Type::Unspecified => "TYPE_UNSPECIFIED",
+                Type::PrimaryDomainChanged => "PRIMARY_DOMAIN_CHANGED",
+                Type::PrimaryDomainVerified => "PRIMARY_DOMAIN_VERIFIED",
+            }
+        }
+    }
 }
 /// Represents Pub/Sub message content describing entitlement update.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -3379,6 +3648,29 @@ pub mod entitlement_event {
         LicenseAssignmentChanged = 12,
         /// License cap was changed for the entitlement.
         LicenseCapChanged = 13,
+    }
+    impl Type {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Type::Unspecified => "TYPE_UNSPECIFIED",
+                Type::Created => "CREATED",
+                Type::PricePlanSwitched => "PRICE_PLAN_SWITCHED",
+                Type::CommitmentChanged => "COMMITMENT_CHANGED",
+                Type::Renewed => "RENEWED",
+                Type::Suspended => "SUSPENDED",
+                Type::Activated => "ACTIVATED",
+                Type::Cancelled => "CANCELLED",
+                Type::SkuChanged => "SKU_CHANGED",
+                Type::RenewalSettingChanged => "RENEWAL_SETTING_CHANGED",
+                Type::PaidServiceStarted => "PAID_SERVICE_STARTED",
+                Type::LicenseAssignmentChanged => "LICENSE_ASSIGNMENT_CHANGED",
+                Type::LicenseCapChanged => "LICENSE_CAP_CHANGED",
+            }
+        }
     }
 }
 /// Represents information which resellers will get as part of notification from

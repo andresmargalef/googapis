@@ -57,7 +57,7 @@ pub struct AzureCredentials {
 pub struct ObjectConditions {
     /// If specified, only objects with a "last modification time" before
     /// `NOW` - `min_time_elapsed_since_last_modification` and objects that don't
-    ///  have a "last modification time" are transferred.
+    ///   have a "last modification time" are transferred.
     ///
     /// For each \[TransferOperation][google.storagetransfer.v1.TransferOperation\]
     /// started by this \[TransferJob][google.storagetransfer.v1.TransferJob\], `NOW`
@@ -87,20 +87,20 @@ pub struct ObjectConditions {
     ///
     /// The following are requirements of `include_prefixes`:
     ///
-    ///   * Each include-prefix can contain any sequence of Unicode characters, to
-    ///     a max length of 1024 bytes when UTF8-encoded, and must not contain
-    ///     Carriage Return or Line Feed characters.  Wildcard matching and regular
-    ///     expression matching are not supported.
+    ///    * Each include-prefix can contain any sequence of Unicode characters, to
+    ///      a max length of 1024 bytes when UTF8-encoded, and must not contain
+    ///      Carriage Return or Line Feed characters.  Wildcard matching and regular
+    ///      expression matching are not supported.
     ///
-    ///   * Each include-prefix must omit the leading slash. For example, to
-    ///     include the object `s3://my-aws-bucket/logs/y=2015/requests.gz`,
-    ///     specify the include-prefix as `logs/y=2015/requests.gz`.
+    ///    * Each include-prefix must omit the leading slash. For example, to
+    ///      include the object `s3://my-aws-bucket/logs/y=2015/requests.gz`,
+    ///      specify the include-prefix as `logs/y=2015/requests.gz`.
     ///
-    ///   * None of the include-prefix values can be empty, if specified.
+    ///    * None of the include-prefix values can be empty, if specified.
     ///
-    ///   * Each include-prefix must include a distinct portion of the object
-    ///     namespace. No include-prefix may be a prefix of another
-    ///     include-prefix.
+    ///    * Each include-prefix must include a distinct portion of the object
+    ///      namespace. No include-prefix may be a prefix of another
+    ///      include-prefix.
     ///
     /// The max size of `include_prefixes` is 1000.
     ///
@@ -115,25 +115,25 @@ pub struct ObjectConditions {
     ///
     /// The following are requirements of `exclude_prefixes`:
     ///
-    ///   * Each exclude-prefix can contain any sequence of Unicode characters, to
-    ///     a max length of 1024 bytes when UTF8-encoded, and must not contain
-    ///     Carriage Return or Line Feed characters.  Wildcard matching and regular
-    ///     expression matching are not supported.
+    ///    * Each exclude-prefix can contain any sequence of Unicode characters, to
+    ///      a max length of 1024 bytes when UTF8-encoded, and must not contain
+    ///      Carriage Return or Line Feed characters.  Wildcard matching and regular
+    ///      expression matching are not supported.
     ///
-    ///   * Each exclude-prefix must omit the leading slash. For example, to
-    ///     exclude the object `s3://my-aws-bucket/logs/y=2015/requests.gz`,
-    ///     specify the exclude-prefix as `logs/y=2015/requests.gz`.
+    ///    * Each exclude-prefix must omit the leading slash. For example, to
+    ///      exclude the object `s3://my-aws-bucket/logs/y=2015/requests.gz`,
+    ///      specify the exclude-prefix as `logs/y=2015/requests.gz`.
     ///
-    ///   * None of the exclude-prefix values can be empty, if specified.
+    ///    * None of the exclude-prefix values can be empty, if specified.
     ///
-    ///   * Each exclude-prefix must exclude a distinct portion of the object
-    ///     namespace. No exclude-prefix may be a prefix of another
-    ///     exclude-prefix.
+    ///    * Each exclude-prefix must exclude a distinct portion of the object
+    ///      namespace. No exclude-prefix may be a prefix of another
+    ///      exclude-prefix.
     ///
-    ///   * If \[include_prefixes\]
-    ///     \[google.storagetransfer.v1.ObjectConditions.include_prefixes\] is
-    ///     specified, then each exclude-prefix must start with the value of a path
-    ///     explicitly included by `include_prefixes`.
+    ///    * If \[include_prefixes\]
+    ///      \[google.storagetransfer.v1.ObjectConditions.include_prefixes\] is
+    ///      specified, then each exclude-prefix must start with the value of a path
+    ///      explicitly included by `include_prefixes`.
     ///
     /// The max size of `exclude_prefixes` is 1000.
     ///
@@ -391,12 +391,12 @@ pub struct Schedule {
     /// *   If `schedule_end_date` and
     /// \[schedule_start_date][google.storagetransfer.v1.Schedule.schedule_start_date\]
     /// are the same and in
-    ///     the future relative to UTC, the transfer is executed only one time.
+    ///      the future relative to UTC, the transfer is executed only one time.
     /// *   If `schedule_end_date` is later than `schedule_start_date`  and
-    ///     `schedule_end_date` is in the future relative to UTC, the job will
-    ///     run each day at
-    ///     \[start_time_of_day][google.storagetransfer.v1.Schedule.start_time_of_day\]
-    ///     through `schedule_end_date`.
+    ///      `schedule_end_date` is in the future relative to UTC, the job will
+    ///      run each day at
+    ///      \[start_time_of_day][google.storagetransfer.v1.Schedule.start_time_of_day\]
+    ///      through `schedule_end_date`.
     #[prost(message, optional, tag="2")]
     pub schedule_end_date: ::core::option::Option<super::super::r#type::Date>,
     /// The time in UTC that a transfer job is scheduled to run. Transfers may
@@ -406,14 +406,14 @@ pub struct Schedule {
     ///
     /// *   One-time transfers run immediately.
     /// *   Recurring transfers run immediately, and each day at midnight UTC,
-    ///     through
-    ///     \[schedule_end_date][google.storagetransfer.v1.Schedule.schedule_end_date\].
+    ///      through
+    ///      \[schedule_end_date][google.storagetransfer.v1.Schedule.schedule_end_date\].
     ///
     /// If `start_time_of_day` is specified:
     ///
     /// *   One-time transfers run at the specified time.
     /// *   Recurring transfers run at the specified time each day, through
-    ///     `schedule_end_date`.
+    ///      `schedule_end_date`.
     #[prost(message, optional, tag="3")]
     pub start_time_of_day: ::core::option::Option<super::super::r#type::TimeOfDay>,
     /// The time in UTC that no further transfer operations are scheduled. Combined
@@ -428,10 +428,10 @@ pub struct Schedule {
     /// and is subject to the following:
     ///
     /// *   If `end_time_of_day` is not set and `schedule_end_date` is set, then
-    ///     a default value of `23:59:59` is used for `end_time_of_day`.
+    ///      a default value of `23:59:59` is used for `end_time_of_day`.
     ///
     /// *   If `end_time_of_day` is set and `schedule_end_date` is not set, then
-    ///     \[INVALID_ARGUMENT][google.rpc.Code.INVALID_ARGUMENT\] is returned.
+    ///      \[INVALID_ARGUMENT][google.rpc.Code.INVALID_ARGUMENT\] is returned.
     #[prost(message, optional, tag="4")]
     pub end_time_of_day: ::core::option::Option<super::super::r#type::TimeOfDay>,
     /// Interval between the start of each scheduled TransferOperation. If
@@ -523,6 +523,20 @@ pub mod transfer_job {
         /// garbage collection. Transfer jobs become eligible for garbage collection
         /// 30 days after their status is set to `DELETED`.
         Deleted = 3,
+    }
+    impl Status {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Status::Unspecified => "STATUS_UNSPECIFIED",
+                Status::Enabled => "ENABLED",
+                Status::Disabled => "DISABLED",
+                Status::Deleted => "DELETED",
+            }
+        }
     }
 }
 /// An entry describing an error that has occurred.
@@ -674,6 +688,20 @@ pub mod notification_config {
         /// \[ABORTED][google.storagetransfer.v1.TransferOperation.Status.ABORTED\].
         TransferOperationAborted = 3,
     }
+    impl EventType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                EventType::Unspecified => "EVENT_TYPE_UNSPECIFIED",
+                EventType::TransferOperationSuccess => "TRANSFER_OPERATION_SUCCESS",
+                EventType::TransferOperationFailed => "TRANSFER_OPERATION_FAILED",
+                EventType::TransferOperationAborted => "TRANSFER_OPERATION_ABORTED",
+            }
+        }
+    }
     /// Enum for specifying the format of a notification message's payload.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -686,6 +714,19 @@ pub mod notification_config {
         /// response](<https://developers.google.com/protocol-buffers/docs/proto3#json>),
         /// in application/json.
         Json = 2,
+    }
+    impl PayloadFormat {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                PayloadFormat::Unspecified => "PAYLOAD_FORMAT_UNSPECIFIED",
+                PayloadFormat::None => "NONE",
+                PayloadFormat::Json => "JSON",
+            }
+        }
     }
 }
 /// A description of the execution of a transfer.
@@ -742,6 +783,23 @@ pub mod transfer_operation {
         Aborted = 5,
         /// Temporarily delayed by the system. No user action is required.
         Queued = 6,
+    }
+    impl Status {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Status::Unspecified => "STATUS_UNSPECIFIED",
+                Status::InProgress => "IN_PROGRESS",
+                Status::Paused => "PAUSED",
+                Status::Success => "SUCCESS",
+                Status::Failed => "FAILED",
+                Status::Aborted => "ABORTED",
+                Status::Queued => "QUEUED",
+            }
+        }
     }
 }
 /// Request passed to GetGoogleServiceAccount.
@@ -813,8 +871,8 @@ pub struct GetTransferJobRequest {
 pub struct ListTransferJobsRequest {
     /// Required. A list of query parameters specified as JSON text in the form of:
     /// `{"projectId":"my_project_id",
-    ///  "jobNames":\["jobid1","jobid2",...\],
-    ///  "jobStatuses":\["status1","status2",...\]}`
+    ///   "jobNames":\["jobid1","jobid2",...\],
+    ///   "jobStatuses":\["status1","status2",...\]}`
     ///
     /// Since `jobNames` and `jobStatuses` support multiple values, their values
     /// must be specified with array notation. `projectId` is required.
@@ -871,6 +929,7 @@ pub struct RunTransferJobRequest {
 pub mod storage_transfer_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Storage Transfer Service and its protos.
     /// Transfers data between between Google Cloud Storage buckets or from a data
     /// source external to Google to a Cloud Storage bucket.
@@ -887,6 +946,10 @@ pub mod storage_transfer_service_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -910,19 +973,19 @@ pub mod storage_transfer_service_client {
                 InterceptedService::new(inner, interceptor),
             )
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Returns the Google service account that is used by Storage Transfer

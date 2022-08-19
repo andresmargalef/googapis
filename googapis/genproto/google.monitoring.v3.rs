@@ -32,31 +32,31 @@ pub mod typed_value {
 /// A closed time interval. It extends from the start time to the end time, and includes both: `[startTime, endTime]`. Valid time intervals depend on the \[`MetricKind`\](<https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.metricDescriptors#MetricKind>) of the metric value. The end time must not be earlier than the start time. When writing data points, the start time must not be more than 25 hours in the past and the end time must not be more than five minutes in the future.
 ///
 /// * For `GAUGE` metrics, the `startTime` value is technically optional; if
-///   no value is specified, the start time defaults to the value of the
-///   end time, and the interval represents a single point in time. If both
-///   start and end times are specified, they must be identical. Such an
-///   interval is valid only for `GAUGE` metrics, which are point-in-time
-///   measurements. The end time of a new interval must be at least a
-///   millisecond after the end time of the previous interval.
+///    no value is specified, the start time defaults to the value of the
+///    end time, and the interval represents a single point in time. If both
+///    start and end times are specified, they must be identical. Such an
+///    interval is valid only for `GAUGE` metrics, which are point-in-time
+///    measurements. The end time of a new interval must be at least a
+///    millisecond after the end time of the previous interval.
 ///
 /// * For `DELTA` metrics, the start time and end time must specify a
-///   non-zero interval, with subsequent points specifying contiguous and
-///   non-overlapping intervals. For `DELTA` metrics, the start time of
-///   the next interval must be at least a millisecond after the end time
-///   of the previous interval.
+///    non-zero interval, with subsequent points specifying contiguous and
+///    non-overlapping intervals. For `DELTA` metrics, the start time of
+///    the next interval must be at least a millisecond after the end time
+///    of the previous interval.
 ///
 /// * For `CUMULATIVE` metrics, the start time and end time must specify a
-///   non-zero interval, with subsequent points specifying the same
-///   start time and increasing end times, until an event resets the
-///   cumulative value to zero and sets a new start time for the following
-///   points. The new start time must be at least a millisecond after the
-///   end time of the previous interval.
+///    non-zero interval, with subsequent points specifying the same
+///    start time and increasing end times, until an event resets the
+///    cumulative value to zero and sets a new start time for the following
+///    points. The new start time must be at least a millisecond after the
+///    end time of the previous interval.
 ///
 /// * The start time of a new interval must be at least a millisecond after the
-///   end time of the previous interval because intervals are closed. If the
-///   start time of a new interval is the same as the end time of the previous
-///   interval, then data written at the new start time could overwrite data
-///   written at the previous end time.
+///    end time of the previous interval because intervals are closed. If the
+///    start time of a new interval is the same as the end time of the previous
+///    interval, then data written at the new start time could overwrite data
+///    written at the previous end time.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TimeInterval {
     /// Required. The end of the time interval.
@@ -306,6 +306,35 @@ pub mod aggregation {
         /// `GAUGE` metric with `value_type` `DOUBLE`.
         AlignPercentChange = 23,
     }
+    impl Aligner {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Aligner::AlignNone => "ALIGN_NONE",
+                Aligner::AlignDelta => "ALIGN_DELTA",
+                Aligner::AlignRate => "ALIGN_RATE",
+                Aligner::AlignInterpolate => "ALIGN_INTERPOLATE",
+                Aligner::AlignNextOlder => "ALIGN_NEXT_OLDER",
+                Aligner::AlignMin => "ALIGN_MIN",
+                Aligner::AlignMax => "ALIGN_MAX",
+                Aligner::AlignMean => "ALIGN_MEAN",
+                Aligner::AlignCount => "ALIGN_COUNT",
+                Aligner::AlignSum => "ALIGN_SUM",
+                Aligner::AlignStddev => "ALIGN_STDDEV",
+                Aligner::AlignCountTrue => "ALIGN_COUNT_TRUE",
+                Aligner::AlignCountFalse => "ALIGN_COUNT_FALSE",
+                Aligner::AlignFractionTrue => "ALIGN_FRACTION_TRUE",
+                Aligner::AlignPercentile99 => "ALIGN_PERCENTILE_99",
+                Aligner::AlignPercentile95 => "ALIGN_PERCENTILE_95",
+                Aligner::AlignPercentile50 => "ALIGN_PERCENTILE_50",
+                Aligner::AlignPercentile05 => "ALIGN_PERCENTILE_05",
+                Aligner::AlignPercentChange => "ALIGN_PERCENT_CHANGE",
+            }
+        }
+    }
     /// A Reducer operation describes how to aggregate data points from multiple
     /// time series into a single time series, where the value of each data point
     /// in the resulting series is a function of all the already aligned values in
@@ -389,6 +418,30 @@ pub mod aggregation {
         /// of the output is `DOUBLE`.
         ReducePercentile05 = 12,
     }
+    impl Reducer {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Reducer::ReduceNone => "REDUCE_NONE",
+                Reducer::ReduceMean => "REDUCE_MEAN",
+                Reducer::ReduceMin => "REDUCE_MIN",
+                Reducer::ReduceMax => "REDUCE_MAX",
+                Reducer::ReduceSum => "REDUCE_SUM",
+                Reducer::ReduceStddev => "REDUCE_STDDEV",
+                Reducer::ReduceCount => "REDUCE_COUNT",
+                Reducer::ReduceCountTrue => "REDUCE_COUNT_TRUE",
+                Reducer::ReduceCountFalse => "REDUCE_COUNT_FALSE",
+                Reducer::ReduceFractionTrue => "REDUCE_FRACTION_TRUE",
+                Reducer::ReducePercentile99 => "REDUCE_PERCENTILE_99",
+                Reducer::ReducePercentile95 => "REDUCE_PERCENTILE_95",
+                Reducer::ReducePercentile50 => "REDUCE_PERCENTILE_50",
+                Reducer::ReducePercentile05 => "REDUCE_PERCENTILE_05",
+            }
+        }
+    }
 }
 /// Specifies an ordering relationship on two arguments, called `left` and
 /// `right`.
@@ -409,6 +462,23 @@ pub enum ComparisonType {
     ComparisonEq = 5,
     /// True if the left argument is not equal to the right argument.
     ComparisonNe = 6,
+}
+impl ComparisonType {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            ComparisonType::ComparisonUnspecified => "COMPARISON_UNSPECIFIED",
+            ComparisonType::ComparisonGt => "COMPARISON_GT",
+            ComparisonType::ComparisonGe => "COMPARISON_GE",
+            ComparisonType::ComparisonLt => "COMPARISON_LT",
+            ComparisonType::ComparisonLe => "COMPARISON_LE",
+            ComparisonType::ComparisonEq => "COMPARISON_EQ",
+            ComparisonType::ComparisonNe => "COMPARISON_NE",
+        }
+    }
 }
 /// The tier of service for a Workspace. Please see the
 /// [service tiers
@@ -433,6 +503,19 @@ pub enum ServiceTier {
     /// documentation](<https://cloud.google.com/monitoring/workspaces/tiers>).
     Premium = 2,
 }
+impl ServiceTier {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            ServiceTier::Unspecified => "SERVICE_TIER_UNSPECIFIED",
+            ServiceTier::Basic => "SERVICE_TIER_BASIC",
+            ServiceTier::Premium => "SERVICE_TIER_PREMIUM",
+        }
+    }
+}
 /// Describes a change made to a configuration.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MutationRecord {
@@ -452,7 +535,7 @@ pub struct AlertPolicy {
     /// Required if the policy exists. The resource name for this policy. The
     /// format is:
     ///
-    ///     projects/\[PROJECT_ID_OR_NUMBER]/alertPolicies/[ALERT_POLICY_ID\]
+    ///      projects/\[PROJECT_ID_OR_NUMBER]/alertPolicies/[ALERT_POLICY_ID\]
     ///
     /// `\[ALERT_POLICY_ID\]` is assigned by Stackdriver Monitoring when the policy
     /// is created. When calling the
@@ -517,7 +600,7 @@ pub struct AlertPolicy {
     /// \[google.monitoring.v3.NotificationChannelService.ListNotificationChannels\]
     /// method. The format of the entries in this field is:
     ///
-    ///     projects/\[PROJECT_ID_OR_NUMBER]/notificationChannels/[CHANNEL_ID\]
+    ///      projects/\[PROJECT_ID_OR_NUMBER]/notificationChannels/[CHANNEL_ID\]
     #[prost(string, repeated, tag="14")]
     pub notification_channels: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// A read-only record of the creation of the alerting policy. If provided
@@ -558,7 +641,7 @@ pub mod alert_policy {
         /// Required if the condition exists. The unique resource name for this
         /// condition. Its format is:
         ///
-        ///     projects/\[PROJECT_ID_OR_NUMBER]/alertPolicies/[POLICY_ID]/conditions/[CONDITION_ID\]
+        ///      projects/\[PROJECT_ID_OR_NUMBER]/alertPolicies/[POLICY_ID]/conditions/[CONDITION_ID\]
         ///
         /// `\[CONDITION_ID\]` is assigned by Stackdriver Monitoring when the
         /// condition is created as part of a new or updated alerting policy.
@@ -866,6 +949,20 @@ pub mod alert_policy {
         /// simultaneously on at least one resource.
         AndWithMatchingResource = 3,
     }
+    impl ConditionCombinerType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ConditionCombinerType::CombineUnspecified => "COMBINE_UNSPECIFIED",
+                ConditionCombinerType::And => "AND",
+                ConditionCombinerType::Or => "OR",
+                ConditionCombinerType::AndWithMatchingResource => "AND_WITH_MATCHING_RESOURCE",
+            }
+        }
+    }
 }
 /// The protocol for the `CreateAlertPolicy` request.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -873,7 +970,7 @@ pub struct CreateAlertPolicyRequest {
     /// Required. The \[project\](<https://cloud.google.com/monitoring/api/v3#project_name>) in
     /// which to create the alerting policy. The format is:
     ///
-    ///     projects/\[PROJECT_ID_OR_NUMBER\]
+    ///      projects/\[PROJECT_ID_OR_NUMBER\]
     ///
     /// Note that this field names the parent container in which the alerting
     /// policy will be written, not the name of the created policy. |name| must be
@@ -895,7 +992,7 @@ pub struct CreateAlertPolicyRequest {
 pub struct GetAlertPolicyRequest {
     /// Required. The alerting policy to retrieve. The format is:
     ///
-    ///     projects/\[PROJECT_ID_OR_NUMBER]/alertPolicies/[ALERT_POLICY_ID\]
+    ///      projects/\[PROJECT_ID_OR_NUMBER]/alertPolicies/[ALERT_POLICY_ID\]
     #[prost(string, tag="3")]
     pub name: ::prost::alloc::string::String,
 }
@@ -905,7 +1002,7 @@ pub struct ListAlertPoliciesRequest {
     /// Required. The \[project\](<https://cloud.google.com/monitoring/api/v3#project_name>)
     /// whose alert policies are to be listed. The format is:
     ///
-    ///     projects/\[PROJECT_ID_OR_NUMBER\]
+    ///      projects/\[PROJECT_ID_OR_NUMBER\]
     ///
     /// Note that this field names the parent container in which the alerting
     /// policies to be listed are stored. To retrieve a single alerting policy
@@ -972,12 +1069,12 @@ pub struct UpdateAlertPolicyRequest {
     /// adding the supplied policy, except for the following:
     ///
     /// +   The new policy will have the same `\[ALERT_POLICY_ID\]` as the former
-    ///     policy. This gives you continuity with the former policy in your
-    ///     notifications and incidents.
+    ///      policy. This gives you continuity with the former policy in your
+    ///      notifications and incidents.
     /// +   Conditions in the new policy will keep their former `\[CONDITION_ID\]` if
-    ///     the supplied condition includes the `name` field with that
-    ///     `\[CONDITION_ID\]`. If the supplied condition omits the `name` field,
-    ///     then a new `\[CONDITION_ID\]` is created.
+    ///      the supplied condition includes the `name` field with that
+    ///      `\[CONDITION_ID\]`. If the supplied condition omits the `name` field,
+    ///      then a new `\[CONDITION_ID\]` is created.
     #[prost(message, optional, tag="2")]
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
     /// Required. The updated alerting policy or the updated values for the
@@ -992,7 +1089,7 @@ pub struct UpdateAlertPolicyRequest {
 pub struct DeleteAlertPolicyRequest {
     /// Required. The alerting policy to delete. The format is:
     ///
-    ///     projects/\[PROJECT_ID_OR_NUMBER]/alertPolicies/[ALERT_POLICY_ID\]
+    ///      projects/\[PROJECT_ID_OR_NUMBER]/alertPolicies/[ALERT_POLICY_ID\]
     ///
     /// For more information, see \[AlertPolicy][google.monitoring.v3.AlertPolicy\].
     #[prost(string, tag="3")]
@@ -1002,6 +1099,7 @@ pub struct DeleteAlertPolicyRequest {
 pub mod alert_policy_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The AlertPolicyService API is used to manage (list, create, delete,
     /// edit) alert policies in Stackdriver Monitoring. An alerting policy is
     /// a description of the conditions under which some aspect of your
@@ -1026,6 +1124,10 @@ pub mod alert_policy_service_client {
             let inner = tonic::client::Grpc::new(inner);
             Self { inner }
         }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
+            Self { inner }
+        }
         pub fn with_interceptor<F>(
             inner: T,
             interceptor: F,
@@ -1045,19 +1147,19 @@ pub mod alert_policy_service_client {
         {
             AlertPolicyServiceClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Lists the existing alerting policies for the workspace.
@@ -1217,7 +1319,7 @@ pub struct DroppedLabels {
 pub struct Group {
     /// Output only. The name of this group. The format is:
     ///
-    ///     projects/\[PROJECT_ID_OR_NUMBER]/groups/[GROUP_ID\]
+    ///      projects/\[PROJECT_ID_OR_NUMBER]/groups/[GROUP_ID\]
     ///
     /// When creating a group, this field is ignored and a new name is created
     /// consisting of the project specified in the call to `CreateGroup`
@@ -1229,7 +1331,7 @@ pub struct Group {
     pub display_name: ::prost::alloc::string::String,
     /// The name of the group's parent, if it has one. The format is:
     ///
-    ///     projects/\[PROJECT_ID_OR_NUMBER]/groups/[GROUP_ID\]
+    ///      projects/\[PROJECT_ID_OR_NUMBER]/groups/[GROUP_ID\]
     ///
     /// For groups with no parent, `parent_name` is the empty string, `""`.
     #[prost(string, tag="3")]
@@ -1249,7 +1351,7 @@ pub struct ListGroupsRequest {
     /// Required. The \[project\](<https://cloud.google.com/monitoring/api/v3#project_name>)
     /// whose groups are to be listed. The format is:
     ///
-    ///     projects/\[PROJECT_ID_OR_NUMBER\]
+    ///      projects/\[PROJECT_ID_OR_NUMBER\]
     #[prost(string, tag="7")]
     pub name: ::prost::alloc::string::String,
     /// A positive number that is the maximum number of results to return.
@@ -1275,7 +1377,7 @@ pub mod list_groups_request {
     pub enum Filter {
         /// A group name. The format is:
         ///
-        ///     projects/\[PROJECT_ID_OR_NUMBER]/groups/[GROUP_ID\]
+        ///      projects/\[PROJECT_ID_OR_NUMBER]/groups/[GROUP_ID\]
         ///
         /// Returns groups whose `parent_name` field contains the group
         /// name.  If no groups have this parent, the results are empty.
@@ -1283,7 +1385,7 @@ pub mod list_groups_request {
         ChildrenOfGroup(::prost::alloc::string::String),
         /// A group name. The format is:
         ///
-        ///     projects/\[PROJECT_ID_OR_NUMBER]/groups/[GROUP_ID\]
+        ///      projects/\[PROJECT_ID_OR_NUMBER]/groups/[GROUP_ID\]
         ///
         /// Returns groups that are ancestors of the specified group.
         /// The groups are returned in order, starting with the immediate parent and
@@ -1293,7 +1395,7 @@ pub mod list_groups_request {
         AncestorsOfGroup(::prost::alloc::string::String),
         /// A group name. The format is:
         ///
-        ///     projects/\[PROJECT_ID_OR_NUMBER]/groups/[GROUP_ID\]
+        ///      projects/\[PROJECT_ID_OR_NUMBER]/groups/[GROUP_ID\]
         ///
         /// Returns the descendants of the specified group.  This is a superset of
         /// the results returned by the `children_of_group` filter, and includes
@@ -1319,7 +1421,7 @@ pub struct ListGroupsResponse {
 pub struct GetGroupRequest {
     /// Required. The group to retrieve. The format is:
     ///
-    ///     projects/\[PROJECT_ID_OR_NUMBER]/groups/[GROUP_ID\]
+    ///      projects/\[PROJECT_ID_OR_NUMBER]/groups/[GROUP_ID\]
     #[prost(string, tag="3")]
     pub name: ::prost::alloc::string::String,
 }
@@ -1329,7 +1431,7 @@ pub struct CreateGroupRequest {
     /// Required. The \[project\](<https://cloud.google.com/monitoring/api/v3#project_name>) in
     /// which to create the group. The format is:
     ///
-    ///     projects/\[PROJECT_ID_OR_NUMBER\]
+    ///      projects/\[PROJECT_ID_OR_NUMBER\]
     #[prost(string, tag="4")]
     pub name: ::prost::alloc::string::String,
     /// Required. A group definition. It is an error to define the `name` field because
@@ -1357,7 +1459,7 @@ pub struct UpdateGroupRequest {
 pub struct DeleteGroupRequest {
     /// Required. The group to delete. The format is:
     ///
-    ///     projects/\[PROJECT_ID_OR_NUMBER]/groups/[GROUP_ID\]
+    ///      projects/\[PROJECT_ID_OR_NUMBER]/groups/[GROUP_ID\]
     #[prost(string, tag="3")]
     pub name: ::prost::alloc::string::String,
     /// If this field is true, then the request means to delete a group with all
@@ -1371,7 +1473,7 @@ pub struct DeleteGroupRequest {
 pub struct ListGroupMembersRequest {
     /// Required. The group whose members are listed. The format is:
     ///
-    ///     projects/\[PROJECT_ID_OR_NUMBER]/groups/[GROUP_ID\]
+    ///      projects/\[PROJECT_ID_OR_NUMBER]/groups/[GROUP_ID\]
     #[prost(string, tag="7")]
     pub name: ::prost::alloc::string::String,
     /// A positive number that is the maximum number of results to return.
@@ -1389,7 +1491,7 @@ pub struct ListGroupMembersRequest {
     /// example, to return only resources representing Compute Engine VM instances,
     /// use this filter:
     ///
-    ///     `resource.type = "gce_instance"`
+    ///      `resource.type = "gce_instance"`
     #[prost(string, tag="5")]
     pub filter: ::prost::alloc::string::String,
     /// An optional time interval for which results should be returned. Only
@@ -1418,6 +1520,7 @@ pub struct ListGroupMembersResponse {
 pub mod group_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The Group API lets you inspect and manage your
     /// [groups](#google.monitoring.v3.Group).
     ///
@@ -1445,6 +1548,10 @@ pub mod group_service_client {
             let inner = tonic::client::Grpc::new(inner);
             Self { inner }
         }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
+            Self { inner }
+        }
         pub fn with_interceptor<F>(
             inner: T,
             interceptor: F,
@@ -1464,19 +1571,19 @@ pub mod group_service_client {
         {
             GroupServiceClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Lists the existing groups.
@@ -1776,19 +1883,19 @@ pub struct QueryError {
 ///
 /// For example, suppose the request field `text` contains:
 ///
-///   text: "The quick brown fox jumps over the lazy dog."
+///    text: "The quick brown fox jumps over the lazy dog."
 ///
 /// Then the locator:
 ///
-///   source: "text"
-///   start_position {
-///     line: 1
-///     column: 17
-///   }
-///   end_position {
-///     line: 1
-///     column: 19
-///   }
+///    source: "text"
+///    start_position {
+///      line: 1
+///      column: 17
+///    }
+///    end_position {
+///      line: 1
+///      column: 19
+///    }
 ///
 /// refers to the part of the text: "fox".
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -1843,7 +1950,7 @@ pub struct ListMonitoredResourceDescriptorsRequest {
     /// Required. The \[project\](<https://cloud.google.com/monitoring/api/v3#project_name>) on
     /// which to execute the request. The format is:
     ///
-    ///     projects/\[PROJECT_ID_OR_NUMBER\]
+    ///      projects/\[PROJECT_ID_OR_NUMBER\]
     #[prost(string, tag="5")]
     pub name: ::prost::alloc::string::String,
     /// An optional \[filter\](<https://cloud.google.com/monitoring/api/v3/filters>)
@@ -1851,7 +1958,7 @@ pub struct ListMonitoredResourceDescriptorsRequest {
     /// descriptor's type and labels. For example, the following filter returns
     /// only Google Compute Engine descriptors that have an `id` label:
     ///
-    ///     resource.type = starts_with("gce_") AND resource.label:id
+    ///      resource.type = starts_with("gce_") AND resource.label:id
     #[prost(string, tag="2")]
     pub filter: ::prost::alloc::string::String,
     /// A positive number that is the maximum number of results to return.
@@ -1881,7 +1988,7 @@ pub struct ListMonitoredResourceDescriptorsResponse {
 pub struct GetMonitoredResourceDescriptorRequest {
     /// Required. The monitored resource descriptor to get.  The format is:
     ///
-    ///     projects/\[PROJECT_ID_OR_NUMBER]/monitoredResourceDescriptors/[RESOURCE_TYPE\]
+    ///      projects/\[PROJECT_ID_OR_NUMBER]/monitoredResourceDescriptors/[RESOURCE_TYPE\]
     ///
     /// The `\[RESOURCE_TYPE\]` is a predefined type, such as
     /// `cloudsql_database`.
@@ -1894,7 +2001,7 @@ pub struct ListMetricDescriptorsRequest {
     /// Required. The \[project\](<https://cloud.google.com/monitoring/api/v3#project_name>) on
     /// which to execute the request. The format is:
     ///
-    ///     projects/\[PROJECT_ID_OR_NUMBER\]
+    ///      projects/\[PROJECT_ID_OR_NUMBER\]
     #[prost(string, tag="5")]
     pub name: ::prost::alloc::string::String,
     /// If this field is empty, all custom and
@@ -1904,7 +2011,7 @@ pub struct ListMetricDescriptorsRequest {
     /// returned. For example, the following filter matches all
     /// [custom metrics](<https://cloud.google.com/monitoring/custom-metrics>):
     ///
-    ///     metric.type = starts_with("custom.googleapis.com/")
+    ///      metric.type = starts_with("custom.googleapis.com/")
     #[prost(string, tag="2")]
     pub filter: ::prost::alloc::string::String,
     /// A positive number that is the maximum number of results to return.
@@ -1934,7 +2041,7 @@ pub struct ListMetricDescriptorsResponse {
 pub struct GetMetricDescriptorRequest {
     /// Required. The metric descriptor on which to execute the request. The format is:
     ///
-    ///     projects/\[PROJECT_ID_OR_NUMBER]/metricDescriptors/[METRIC_ID\]
+    ///      projects/\[PROJECT_ID_OR_NUMBER]/metricDescriptors/[METRIC_ID\]
     ///
     /// An example value of `\[METRIC_ID\]` is
     /// `"compute.googleapis.com/instance/disk/read_bytes_count"`.
@@ -1947,7 +2054,7 @@ pub struct CreateMetricDescriptorRequest {
     /// Required. The \[project\](<https://cloud.google.com/monitoring/api/v3#project_name>) on
     /// which to execute the request. The format is:
     /// 4
-    ///     projects/\[PROJECT_ID_OR_NUMBER\]
+    ///      projects/\[PROJECT_ID_OR_NUMBER\]
     #[prost(string, tag="3")]
     pub name: ::prost::alloc::string::String,
     /// Required. The new [custom metric](<https://cloud.google.com/monitoring/custom-metrics>)
@@ -1960,7 +2067,7 @@ pub struct CreateMetricDescriptorRequest {
 pub struct DeleteMetricDescriptorRequest {
     /// Required. The metric descriptor on which to execute the request. The format is:
     ///
-    ///     projects/\[PROJECT_ID_OR_NUMBER]/metricDescriptors/[METRIC_ID\]
+    ///      projects/\[PROJECT_ID_OR_NUMBER]/metricDescriptors/[METRIC_ID\]
     ///
     /// An example of `\[METRIC_ID\]` is:
     /// `"custom.googleapis.com/my_test_metric"`.
@@ -1973,9 +2080,9 @@ pub struct ListTimeSeriesRequest {
     /// Required. The \[project\](<https://cloud.google.com/monitoring/api/v3#project_name>),
     /// organization or folder on which to execute the request. The format is:
     ///
-    ///     projects/\[PROJECT_ID_OR_NUMBER\]
-    ///     organizations/\[ORGANIZATION_ID\]
-    ///     folders/\[FOLDER_ID\]
+    ///      projects/\[PROJECT_ID_OR_NUMBER\]
+    ///      organizations/\[ORGANIZATION_ID\]
+    ///      folders/\[FOLDER_ID\]
     #[prost(string, tag="10")]
     pub name: ::prost::alloc::string::String,
     /// Required. A [monitoring filter](<https://cloud.google.com/monitoring/api/v3/filters>)
@@ -1983,8 +2090,8 @@ pub struct ListTimeSeriesRequest {
     /// specify a single metric type, and can additionally specify metric labels
     /// and other information. For example:
     ///
-    ///     metric.type = "compute.googleapis.com/instance/cpu/usage_time" AND
-    ///         metric.labels.instance_name = "my-instance-name"
+    ///      metric.type = "compute.googleapis.com/instance/cpu/usage_time" AND
+    ///          metric.labels.instance_name = "my-instance-name"
     #[prost(string, tag="2")]
     pub filter: ::prost::alloc::string::String,
     /// Required. The time interval for which results should be returned. Only time series
@@ -2036,6 +2143,18 @@ pub mod list_time_series_request {
         /// but not the time series data.
         Headers = 1,
     }
+    impl TimeSeriesView {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                TimeSeriesView::Full => "FULL",
+                TimeSeriesView::Headers => "HEADERS",
+            }
+        }
+    }
 }
 /// The `ListTimeSeries` response.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -2067,7 +2186,7 @@ pub struct CreateTimeSeriesRequest {
     /// Required. The \[project\](<https://cloud.google.com/monitoring/api/v3#project_name>) on
     /// which to execute the request. The format is:
     ///
-    ///     projects/\[PROJECT_ID_OR_NUMBER\]
+    ///      projects/\[PROJECT_ID_OR_NUMBER\]
     #[prost(string, tag="3")]
     pub name: ::prost::alloc::string::String,
     /// Required. The new data to be added to a list of time series.
@@ -2124,7 +2243,7 @@ pub struct QueryTimeSeriesRequest {
     /// Required. The \[project\](<https://cloud.google.com/monitoring/api/v3#project_name>) on
     /// which to execute the request. The format is:
     ///
-    ///     projects/\[PROJECT_ID_OR_NUMBER\]
+    ///      projects/\[PROJECT_ID_OR_NUMBER\]
     #[prost(string, tag="1")]
     pub name: ::prost::alloc::string::String,
     /// Required. The query in the [Monitoring Query
@@ -2176,6 +2295,7 @@ pub struct QueryErrorList {
 pub mod metric_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Manages metric descriptors, monitored resource descriptors, and
     /// time series data.
     #[derive(Debug, Clone)]
@@ -2191,6 +2311,10 @@ pub mod metric_service_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -2212,19 +2336,19 @@ pub mod metric_service_client {
         {
             MetricServiceClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Lists monitored resource descriptors that match a filter. This method does not require a Workspace.
@@ -2452,7 +2576,7 @@ pub mod metric_service_client {
 pub struct NotificationChannelDescriptor {
     /// The full REST resource name for this descriptor. The format is:
     ///
-    ///     projects/\[PROJECT_ID_OR_NUMBER]/notificationChannelDescriptors/[TYPE\]
+    ///      projects/\[PROJECT_ID_OR_NUMBER]/notificationChannelDescriptors/[TYPE\]
     ///
     /// In the above, `\[TYPE\]` is the value of the `type` field.
     #[prost(string, tag="6")]
@@ -2500,7 +2624,7 @@ pub struct NotificationChannel {
     pub r#type: ::prost::alloc::string::String,
     /// The full REST resource name for this channel. The format is:
     ///
-    ///     projects/\[PROJECT_ID_OR_NUMBER]/notificationChannels/[CHANNEL_ID\]
+    ///      projects/\[PROJECT_ID_OR_NUMBER]/notificationChannels/[CHANNEL_ID\]
     ///
     /// The `\[CHANNEL_ID\]` is automatically assigned by the server on creation.
     #[prost(string, tag="6")]
@@ -2594,6 +2718,19 @@ pub mod notification_channel {
         /// to messages that are delivered to that channel.
         Verified = 2,
     }
+    impl VerificationStatus {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                VerificationStatus::Unspecified => "VERIFICATION_STATUS_UNSPECIFIED",
+                VerificationStatus::Unverified => "UNVERIFIED",
+                VerificationStatus::Verified => "VERIFIED",
+            }
+        }
+    }
 }
 /// The `ListNotificationChannelDescriptors` request.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -2601,7 +2738,7 @@ pub struct ListNotificationChannelDescriptorsRequest {
     /// Required. The REST resource name of the parent from which to retrieve
     /// the notification channel descriptors. The expected syntax is:
     ///
-    ///     projects/\[PROJECT_ID_OR_NUMBER\]
+    ///      projects/\[PROJECT_ID_OR_NUMBER\]
     ///
     /// Note that this
     /// \[names\](<https://cloud.google.com/monitoring/api/v3#project_name>) the parent
@@ -2641,7 +2778,7 @@ pub struct ListNotificationChannelDescriptorsResponse {
 pub struct GetNotificationChannelDescriptorRequest {
     /// Required. The channel type for which to execute the request. The format is:
     ///
-    ///     projects/\[PROJECT_ID_OR_NUMBER]/notificationChannelDescriptors/[CHANNEL_TYPE\]
+    ///      projects/\[PROJECT_ID_OR_NUMBER]/notificationChannelDescriptors/[CHANNEL_TYPE\]
     #[prost(string, tag="3")]
     pub name: ::prost::alloc::string::String,
 }
@@ -2651,7 +2788,7 @@ pub struct CreateNotificationChannelRequest {
     /// Required. The \[project\](<https://cloud.google.com/monitoring/api/v3#project_name>) on
     /// which to execute the request. The format is:
     ///
-    ///     projects/\[PROJECT_ID_OR_NUMBER\]
+    ///      projects/\[PROJECT_ID_OR_NUMBER\]
     ///
     /// This names the container into which the channel will be
     /// written, this does not name the newly created channel. The resulting
@@ -2669,7 +2806,7 @@ pub struct ListNotificationChannelsRequest {
     /// Required. The \[project\](<https://cloud.google.com/monitoring/api/v3#project_name>) on
     /// which to execute the request. The format is:
     ///
-    ///     projects/\[PROJECT_ID_OR_NUMBER\]
+    ///      projects/\[PROJECT_ID_OR_NUMBER\]
     ///
     /// This names the container
     /// in which to look for the notification channels; it does not name a
@@ -2727,7 +2864,7 @@ pub struct ListNotificationChannelsResponse {
 pub struct GetNotificationChannelRequest {
     /// Required. The channel for which to execute the request. The format is:
     ///
-    ///     projects/\[PROJECT_ID_OR_NUMBER]/notificationChannels/[CHANNEL_ID\]
+    ///      projects/\[PROJECT_ID_OR_NUMBER]/notificationChannels/[CHANNEL_ID\]
     #[prost(string, tag="3")]
     pub name: ::prost::alloc::string::String,
 }
@@ -2749,7 +2886,7 @@ pub struct UpdateNotificationChannelRequest {
 pub struct DeleteNotificationChannelRequest {
     /// Required. The channel for which to execute the request. The format is:
     ///
-    ///     projects/\[PROJECT_ID_OR_NUMBER]/notificationChannels/[CHANNEL_ID\]
+    ///      projects/\[PROJECT_ID_OR_NUMBER]/notificationChannels/[CHANNEL_ID\]
     #[prost(string, tag="3")]
     pub name: ::prost::alloc::string::String,
     /// If true, the notification channel will be deleted regardless of its
@@ -2821,6 +2958,7 @@ pub struct VerifyNotificationChannelRequest {
 pub mod notification_channel_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The Notification Channel API provides access to configuration that
     /// controls how messages related to incidents are sent.
     #[derive(Debug, Clone)]
@@ -2836,6 +2974,10 @@ pub mod notification_channel_service_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -2859,19 +3001,19 @@ pub mod notification_channel_service_client {
                 InterceptedService::new(inner, interceptor),
             )
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Lists the descriptors for supported channel types. The use of descriptors
@@ -3131,6 +3273,7 @@ pub mod notification_channel_service_client {
 pub mod query_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The QueryService API is used to manage time series data in Stackdriver
     /// Monitoring. Time series data is a collection of data points that describes
     /// the time-varying values of a metric.
@@ -3147,6 +3290,10 @@ pub mod query_service_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -3168,19 +3315,19 @@ pub mod query_service_client {
         {
             QueryServiceClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Queries time series using Monitoring Query Language. This method does not require a Workspace.
@@ -3214,7 +3361,7 @@ pub mod query_service_client {
 pub struct Service {
     /// Resource name for this Service. The format is:
     ///
-    ///     projects/\[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID\]
+    ///      projects/\[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID\]
     #[prost(string, tag="1")]
     pub name: ::prost::alloc::string::String,
     /// Name used for UI elements listing this Service.
@@ -3366,7 +3513,7 @@ pub mod service {
 pub struct ServiceLevelObjective {
     /// Resource name for this `ServiceLevelObjective`. The format is:
     ///
-    ///     projects/\[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID]/serviceLevelObjectives/[SLO_NAME\]
+    ///      projects/\[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID]/serviceLevelObjectives/[SLO_NAME\]
     #[prost(string, tag="1")]
     pub name: ::prost::alloc::string::String,
     /// Name used for UI elements listing this SLO.
@@ -3412,6 +3559,19 @@ pub mod service_level_objective {
         /// `RequestBasedSli` or `WindowsBasedSli`, return the
         /// `ServiceLevelIndicator` as it was provided.
         Explicit = 1,
+    }
+    impl View {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                View::Unspecified => "VIEW_UNSPECIFIED",
+                View::Full => "FULL",
+                View::Explicit => "EXPLICIT",
+            }
+        }
     }
     /// The time period over which the objective will be evaluated.
     #[derive(Clone, PartialEq, ::prost::Oneof)]
@@ -3689,7 +3849,7 @@ pub struct CreateServiceRequest {
     /// Required. Resource \[name\](<https://cloud.google.com/monitoring/api/v3#project_name>) of
     /// the parent workspace. The format is:
     ///
-    ///     projects/\[PROJECT_ID_OR_NUMBER\]
+    ///      projects/\[PROJECT_ID_OR_NUMBER\]
     #[prost(string, tag="1")]
     pub parent: ::prost::alloc::string::String,
     /// Optional. The Service id to use for this Service. If omitted, an id will be
@@ -3705,7 +3865,7 @@ pub struct CreateServiceRequest {
 pub struct GetServiceRequest {
     /// Required. Resource name of the `Service`. The format is:
     ///
-    ///     projects/\[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID\]
+    ///      projects/\[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID\]
     #[prost(string, tag="1")]
     pub name: ::prost::alloc::string::String,
 }
@@ -3716,23 +3876,23 @@ pub struct ListServicesRequest {
     /// \[project\](<https://cloud.google.com/monitoring/api/v3#project_name>) or a
     /// Monitoring Workspace. The formats are:
     ///
-    ///     projects/\[PROJECT_ID_OR_NUMBER\]
-    ///     workspaces/\[HOST_PROJECT_ID_OR_NUMBER\]
+    ///      projects/\[PROJECT_ID_OR_NUMBER\]
+    ///      workspaces/\[HOST_PROJECT_ID_OR_NUMBER\]
     #[prost(string, tag="1")]
     pub parent: ::prost::alloc::string::String,
     /// A filter specifying what `Service`s to return. The filter currently
     /// supports the following fields:
     ///
-    ///     - `identifier_case`
-    ///     - `app_engine.module_id`
-    ///     - `cloud_endpoints.service` (reserved for future use)
-    ///     - `mesh_istio.mesh_uid`
-    ///     - `mesh_istio.service_namespace`
-    ///     - `mesh_istio.service_name`
-    ///     - `cluster_istio.location` (deprecated)
-    ///     - `cluster_istio.cluster_name` (deprecated)
-    ///     - `cluster_istio.service_namespace` (deprecated)
-    ///     - `cluster_istio.service_name` (deprecated)
+    ///      - `identifier_case`
+    ///      - `app_engine.module_id`
+    ///      - `cloud_endpoints.service` (reserved for future use)
+    ///      - `mesh_istio.mesh_uid`
+    ///      - `mesh_istio.service_namespace`
+    ///      - `mesh_istio.service_name`
+    ///      - `cluster_istio.location` (deprecated)
+    ///      - `cluster_istio.cluster_name` (deprecated)
+    ///      - `cluster_istio.service_namespace` (deprecated)
+    ///      - `cluster_istio.service_name` (deprecated)
     ///
     /// `identifier_case` refers to which option in the identifier oneof is
     /// populated. For example, the filter `identifier_case = "CUSTOM"` would match
@@ -3779,7 +3939,7 @@ pub struct UpdateServiceRequest {
 pub struct DeleteServiceRequest {
     /// Required. Resource name of the `Service` to delete. The format is:
     ///
-    ///     projects/\[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID\]
+    ///      projects/\[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID\]
     #[prost(string, tag="1")]
     pub name: ::prost::alloc::string::String,
 }
@@ -3788,7 +3948,7 @@ pub struct DeleteServiceRequest {
 pub struct CreateServiceLevelObjectiveRequest {
     /// Required. Resource name of the parent `Service`. The format is:
     ///
-    ///     projects/\[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID\]
+    ///      projects/\[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID\]
     #[prost(string, tag="1")]
     pub parent: ::prost::alloc::string::String,
     /// Optional. The ServiceLevelObjective id to use for this
@@ -3807,7 +3967,7 @@ pub struct CreateServiceLevelObjectiveRequest {
 pub struct GetServiceLevelObjectiveRequest {
     /// Required. Resource name of the `ServiceLevelObjective` to get. The format is:
     ///
-    ///     projects/\[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID]/serviceLevelObjectives/[SLO_NAME\]
+    ///      projects/\[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID]/serviceLevelObjectives/[SLO_NAME\]
     #[prost(string, tag="1")]
     pub name: ::prost::alloc::string::String,
     /// View of the `ServiceLevelObjective` to return. If `DEFAULT`, return the
@@ -3823,8 +3983,8 @@ pub struct ListServiceLevelObjectivesRequest {
     /// Required. Resource name of the parent containing the listed SLOs, either a
     /// project or a Monitoring Workspace. The formats are:
     ///
-    ///     projects/\[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID\]
-    ///     workspaces/\[HOST_PROJECT_ID_OR_NUMBER\]/services/-
+    ///      projects/\[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID\]
+    ///      workspaces/\[HOST_PROJECT_ID_OR_NUMBER\]/services/-
     #[prost(string, tag="1")]
     pub parent: ::prost::alloc::string::String,
     /// A filter specifying what `ServiceLevelObjective`s to return.
@@ -3874,7 +4034,7 @@ pub struct UpdateServiceLevelObjectiveRequest {
 pub struct DeleteServiceLevelObjectiveRequest {
     /// Required. Resource name of the `ServiceLevelObjective` to delete. The format is:
     ///
-    ///     projects/\[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID]/serviceLevelObjectives/[SLO_NAME\]
+    ///      projects/\[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID]/serviceLevelObjectives/[SLO_NAME\]
     #[prost(string, tag="1")]
     pub name: ::prost::alloc::string::String,
 }
@@ -3882,6 +4042,7 @@ pub struct DeleteServiceLevelObjectiveRequest {
 pub mod service_monitoring_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The Cloud Monitoring Service-Oriented Monitoring API has endpoints for
     /// managing and querying aspects of a workspace's services. These include the
     /// `Service`'s monitored resources, its Service-Level Objectives, and a taxonomy
@@ -3899,6 +4060,10 @@ pub mod service_monitoring_service_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -3922,19 +4087,19 @@ pub mod service_monitoring_service_client {
                 InterceptedService::new(inner, interceptor),
             )
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Create a `Service`.
@@ -4148,12 +4313,12 @@ pub mod service_monitoring_service_client {
 ///
 /// It contains the name of a span with format:
 ///
-///     projects/\[PROJECT_ID_OR_NUMBER]/traces/[TRACE_ID]/spans/[SPAN_ID\]
+///      projects/\[PROJECT_ID_OR_NUMBER]/traces/[TRACE_ID]/spans/[SPAN_ID\]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SpanContext {
     /// The resource name of the span. The format is:
     ///
-    ///     projects/\[PROJECT_ID_OR_NUMBER]/traces/[TRACE_ID]/spans/[SPAN_ID\]
+    ///      projects/\[PROJECT_ID_OR_NUMBER]/traces/[TRACE_ID]/spans/[SPAN_ID\]
     ///
     /// `\[TRACE_ID\]` is a unique identifier for a trace within a project;
     /// it is a 32-character hexadecimal encoding of a 16-byte array.
@@ -4169,7 +4334,7 @@ pub struct SpanContext {
 pub struct InternalChecker {
     /// A unique resource name for this InternalChecker. The format is:
     ///
-    ///     projects/\[PROJECT_ID_OR_NUMBER]/internalCheckers/[INTERNAL_CHECKER_ID\]
+    ///      projects/\[PROJECT_ID_OR_NUMBER]/internalCheckers/[INTERNAL_CHECKER_ID\]
     ///
     /// `\[PROJECT_ID_OR_NUMBER\]` is the Stackdriver Workspace project for the
     /// Uptime check config associated with the internal checker.
@@ -4219,6 +4384,19 @@ pub mod internal_checker {
         /// there is no "deleting" or "down" state.
         Running = 2,
     }
+    impl State {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                State::Unspecified => "UNSPECIFIED",
+                State::Creating => "CREATING",
+                State::Running => "RUNNING",
+            }
+        }
+    }
 }
 /// This message configures which resources and services to monitor for
 /// availability.
@@ -4226,7 +4404,7 @@ pub mod internal_checker {
 pub struct UptimeCheckConfig {
     /// A unique resource name for this Uptime check configuration. The format is:
     ///
-    ///      projects/\[PROJECT_ID_OR_NUMBER]/uptimeCheckConfigs/[UPTIME_CHECK_ID\]
+    ///       projects/\[PROJECT_ID_OR_NUMBER]/uptimeCheckConfigs/[UPTIME_CHECK_ID\]
     ///
     /// `\[PROJECT_ID_OR_NUMBER\]` is the Workspace host project associated with the
     /// Uptime check.
@@ -4399,6 +4577,19 @@ pub mod uptime_check_config {
             /// POST request.
             Post = 2,
         }
+        impl RequestMethod {
+            /// String value of the enum field names used in the ProtoBuf definition.
+            ///
+            /// The values are not transformed in any way and thus are considered stable
+            /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+            pub fn as_str_name(&self) -> &'static str {
+                match self {
+                    RequestMethod::MethodUnspecified => "METHOD_UNSPECIFIED",
+                    RequestMethod::Get => "GET",
+                    RequestMethod::Post => "POST",
+                }
+            }
+        }
         /// Header options corresponding to the content type of a HTTP request body.
         #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
         #[repr(i32)]
@@ -4408,6 +4599,18 @@ pub mod uptime_check_config {
             /// `body` is in URL-encoded form. Equivalent to setting the `Content-Type`
             /// to `application/x-www-form-urlencoded` in the HTTP request.
             UrlEncoded = 1,
+        }
+        impl ContentType {
+            /// String value of the enum field names used in the ProtoBuf definition.
+            ///
+            /// The values are not transformed in any way and thus are considered stable
+            /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+            pub fn as_str_name(&self) -> &'static str {
+                match self {
+                    ContentType::TypeUnspecified => "TYPE_UNSPECIFIED",
+                    ContentType::UrlEncoded => "URL_ENCODED",
+                }
+            }
         }
     }
     /// Information required for a TCP Uptime check request.
@@ -4463,6 +4666,21 @@ pub mod uptime_check_config {
             /// checks.
             NotMatchesRegex = 4,
         }
+        impl ContentMatcherOption {
+            /// String value of the enum field names used in the ProtoBuf definition.
+            ///
+            /// The values are not transformed in any way and thus are considered stable
+            /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+            pub fn as_str_name(&self) -> &'static str {
+                match self {
+                    ContentMatcherOption::Unspecified => "CONTENT_MATCHER_OPTION_UNSPECIFIED",
+                    ContentMatcherOption::ContainsString => "CONTAINS_STRING",
+                    ContentMatcherOption::NotContainsString => "NOT_CONTAINS_STRING",
+                    ContentMatcherOption::MatchesRegex => "MATCHES_REGEX",
+                    ContentMatcherOption::NotMatchesRegex => "NOT_MATCHES_REGEX",
+                }
+            }
+        }
     }
     /// The resource the check is checking. Required.
     #[derive(Clone, PartialEq, ::prost::Oneof)]
@@ -4471,12 +4689,12 @@ pub mod uptime_check_config {
         /// resource](<https://cloud.google.com/monitoring/api/resources>) associated
         /// with the configuration.
         /// The following monitored resource types are valid for this field:
-        ///   `uptime_url`,
-        ///   `gce_instance`,
-        ///   `gae_app`,
-        ///   `aws_ec2_instance`,
-        ///   `aws_elb_load_balancer`
-        ///   `k8s_service`
+        ///    `uptime_url`,
+        ///    `gce_instance`,
+        ///    `gae_app`,
+        ///    `aws_ec2_instance`,
+        ///    `aws_elb_load_balancer`
+        ///    `k8s_service`
         #[prost(message, tag="3")]
         MonitoredResource(super::super::super::api::MonitoredResource),
         /// The group resource associated with the configuration.
@@ -4532,6 +4750,21 @@ pub enum UptimeCheckRegion {
     /// Singapore).
     AsiaPacific = 4,
 }
+impl UptimeCheckRegion {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            UptimeCheckRegion::RegionUnspecified => "REGION_UNSPECIFIED",
+            UptimeCheckRegion::Usa => "USA",
+            UptimeCheckRegion::Europe => "EUROPE",
+            UptimeCheckRegion::SouthAmerica => "SOUTH_AMERICA",
+            UptimeCheckRegion::AsiaPacific => "ASIA_PACIFIC",
+        }
+    }
+}
 /// The supported resource types that can be used as values of
 /// `group_resource.resource_type`.
 /// `INSTANCE` includes `gce_instance` and `aws_ec2_instance` resource types.
@@ -4548,13 +4781,26 @@ pub enum GroupResourceType {
     /// A group of Amazon ELB load balancers.
     AwsElbLoadBalancer = 2,
 }
+impl GroupResourceType {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            GroupResourceType::ResourceTypeUnspecified => "RESOURCE_TYPE_UNSPECIFIED",
+            GroupResourceType::Instance => "INSTANCE",
+            GroupResourceType::AwsElbLoadBalancer => "AWS_ELB_LOAD_BALANCER",
+        }
+    }
+}
 /// The protocol for the `ListUptimeCheckConfigs` request.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListUptimeCheckConfigsRequest {
     /// Required. The \[project\](<https://cloud.google.com/monitoring/api/v3#project_name>)
     /// whose Uptime check configurations are listed. The format is:
     ///
-    ///     projects/\[PROJECT_ID_OR_NUMBER\]
+    ///      projects/\[PROJECT_ID_OR_NUMBER\]
     #[prost(string, tag="1")]
     pub parent: ::prost::alloc::string::String,
     /// The maximum number of results to return in a single response. The server
@@ -4592,7 +4838,7 @@ pub struct ListUptimeCheckConfigsResponse {
 pub struct GetUptimeCheckConfigRequest {
     /// Required. The Uptime check configuration to retrieve. The format is:
     ///
-    ///     projects/\[PROJECT_ID_OR_NUMBER]/uptimeCheckConfigs/[UPTIME_CHECK_ID\]
+    ///      projects/\[PROJECT_ID_OR_NUMBER]/uptimeCheckConfigs/[UPTIME_CHECK_ID\]
     #[prost(string, tag="1")]
     pub name: ::prost::alloc::string::String,
 }
@@ -4602,7 +4848,7 @@ pub struct CreateUptimeCheckConfigRequest {
     /// Required. The \[project\](<https://cloud.google.com/monitoring/api/v3#project_name>) in
     /// which to create the Uptime check. The format is:
     ///
-    ///     projects/\[PROJECT_ID_OR_NUMBER\]
+    ///      projects/\[PROJECT_ID_OR_NUMBER\]
     #[prost(string, tag="1")]
     pub parent: ::prost::alloc::string::String,
     /// Required. The new Uptime check configuration.
@@ -4637,7 +4883,7 @@ pub struct UpdateUptimeCheckConfigRequest {
 pub struct DeleteUptimeCheckConfigRequest {
     /// Required. The Uptime check configuration to delete. The format is:
     ///
-    ///     projects/\[PROJECT_ID_OR_NUMBER]/uptimeCheckConfigs/[UPTIME_CHECK_ID\]
+    ///      projects/\[PROJECT_ID_OR_NUMBER]/uptimeCheckConfigs/[UPTIME_CHECK_ID\]
     #[prost(string, tag="1")]
     pub name: ::prost::alloc::string::String,
 }
@@ -4678,6 +4924,7 @@ pub struct ListUptimeCheckIpsResponse {
 pub mod uptime_check_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The UptimeCheckService API is used to manage (list, create, delete, edit)
     /// Uptime check configurations in the Stackdriver Monitoring product. An Uptime
     /// check is a piece of configuration that determines which resources and
@@ -4701,6 +4948,10 @@ pub mod uptime_check_service_client {
             let inner = tonic::client::Grpc::new(inner);
             Self { inner }
         }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
+            Self { inner }
+        }
         pub fn with_interceptor<F>(
             inner: T,
             interceptor: F,
@@ -4720,19 +4971,19 @@ pub mod uptime_check_service_client {
         {
             UptimeCheckServiceClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Lists the existing valid Uptime check configurations for the project

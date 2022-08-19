@@ -104,6 +104,21 @@ pub mod crypto_key {
         /// \[MacSign][google.cloud.kms.v1.KeyManagementService.MacSign\].
         Mac = 9,
     }
+    impl CryptoKeyPurpose {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                CryptoKeyPurpose::Unspecified => "CRYPTO_KEY_PURPOSE_UNSPECIFIED",
+                CryptoKeyPurpose::EncryptDecrypt => "ENCRYPT_DECRYPT",
+                CryptoKeyPurpose::AsymmetricSign => "ASYMMETRIC_SIGN",
+                CryptoKeyPurpose::AsymmetricDecrypt => "ASYMMETRIC_DECRYPT",
+                CryptoKeyPurpose::Mac => "MAC",
+            }
+        }
+    }
     /// Controls the rate of automatic rotation.
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum RotationSchedule {
@@ -166,6 +181,19 @@ pub mod key_operation_attestation {
         /// Cavium HSM attestation V2 compressed with gzip. This is a new format
         /// introduced in Cavium's version 3.2-08.
         CaviumV2Compressed = 4,
+    }
+    impl AttestationFormat {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AttestationFormat::Unspecified => "ATTESTATION_FORMAT_UNSPECIFIED",
+                AttestationFormat::CaviumV1Compressed => "CAVIUM_V1_COMPRESSED",
+                AttestationFormat::CaviumV2Compressed => "CAVIUM_V2_COMPRESSED",
+            }
+        }
     }
 }
 /// A \[CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion\] represents an individual cryptographic key, and the
@@ -340,6 +368,41 @@ pub mod crypto_key_version {
         /// Algorithm representing symmetric encryption by an external key manager.
         ExternalSymmetricEncryption = 18,
     }
+    impl CryptoKeyVersionAlgorithm {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                CryptoKeyVersionAlgorithm::Unspecified => "CRYPTO_KEY_VERSION_ALGORITHM_UNSPECIFIED",
+                CryptoKeyVersionAlgorithm::GoogleSymmetricEncryption => "GOOGLE_SYMMETRIC_ENCRYPTION",
+                CryptoKeyVersionAlgorithm::RsaSignPss2048Sha256 => "RSA_SIGN_PSS_2048_SHA256",
+                CryptoKeyVersionAlgorithm::RsaSignPss3072Sha256 => "RSA_SIGN_PSS_3072_SHA256",
+                CryptoKeyVersionAlgorithm::RsaSignPss4096Sha256 => "RSA_SIGN_PSS_4096_SHA256",
+                CryptoKeyVersionAlgorithm::RsaSignPss4096Sha512 => "RSA_SIGN_PSS_4096_SHA512",
+                CryptoKeyVersionAlgorithm::RsaSignPkcs12048Sha256 => "RSA_SIGN_PKCS1_2048_SHA256",
+                CryptoKeyVersionAlgorithm::RsaSignPkcs13072Sha256 => "RSA_SIGN_PKCS1_3072_SHA256",
+                CryptoKeyVersionAlgorithm::RsaSignPkcs14096Sha256 => "RSA_SIGN_PKCS1_4096_SHA256",
+                CryptoKeyVersionAlgorithm::RsaSignPkcs14096Sha512 => "RSA_SIGN_PKCS1_4096_SHA512",
+                CryptoKeyVersionAlgorithm::RsaSignRawPkcs12048 => "RSA_SIGN_RAW_PKCS1_2048",
+                CryptoKeyVersionAlgorithm::RsaSignRawPkcs13072 => "RSA_SIGN_RAW_PKCS1_3072",
+                CryptoKeyVersionAlgorithm::RsaSignRawPkcs14096 => "RSA_SIGN_RAW_PKCS1_4096",
+                CryptoKeyVersionAlgorithm::RsaDecryptOaep2048Sha256 => "RSA_DECRYPT_OAEP_2048_SHA256",
+                CryptoKeyVersionAlgorithm::RsaDecryptOaep3072Sha256 => "RSA_DECRYPT_OAEP_3072_SHA256",
+                CryptoKeyVersionAlgorithm::RsaDecryptOaep4096Sha256 => "RSA_DECRYPT_OAEP_4096_SHA256",
+                CryptoKeyVersionAlgorithm::RsaDecryptOaep4096Sha512 => "RSA_DECRYPT_OAEP_4096_SHA512",
+                CryptoKeyVersionAlgorithm::RsaDecryptOaep2048Sha1 => "RSA_DECRYPT_OAEP_2048_SHA1",
+                CryptoKeyVersionAlgorithm::RsaDecryptOaep3072Sha1 => "RSA_DECRYPT_OAEP_3072_SHA1",
+                CryptoKeyVersionAlgorithm::RsaDecryptOaep4096Sha1 => "RSA_DECRYPT_OAEP_4096_SHA1",
+                CryptoKeyVersionAlgorithm::EcSignP256Sha256 => "EC_SIGN_P256_SHA256",
+                CryptoKeyVersionAlgorithm::EcSignP384Sha384 => "EC_SIGN_P384_SHA384",
+                CryptoKeyVersionAlgorithm::EcSignSecp256k1Sha256 => "EC_SIGN_SECP256K1_SHA256",
+                CryptoKeyVersionAlgorithm::HmacSha256 => "HMAC_SHA256",
+                CryptoKeyVersionAlgorithm::ExternalSymmetricEncryption => "EXTERNAL_SYMMETRIC_ENCRYPTION",
+            }
+        }
+    }
     /// The state of a \[CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion\], indicating if it can be used.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -376,6 +439,24 @@ pub mod crypto_key_version {
         /// \[CryptoKeyVersion.import_failure_reason][google.cloud.kms.v1.CryptoKeyVersion.import_failure_reason\].
         ImportFailed = 7,
     }
+    impl CryptoKeyVersionState {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                CryptoKeyVersionState::Unspecified => "CRYPTO_KEY_VERSION_STATE_UNSPECIFIED",
+                CryptoKeyVersionState::PendingGeneration => "PENDING_GENERATION",
+                CryptoKeyVersionState::Enabled => "ENABLED",
+                CryptoKeyVersionState::Disabled => "DISABLED",
+                CryptoKeyVersionState::Destroyed => "DESTROYED",
+                CryptoKeyVersionState::DestroyScheduled => "DESTROY_SCHEDULED",
+                CryptoKeyVersionState::PendingImport => "PENDING_IMPORT",
+                CryptoKeyVersionState::ImportFailed => "IMPORT_FAILED",
+            }
+        }
+    }
     /// A view for \[CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion\]s. Controls the level of detail returned
     /// for \[CryptoKeyVersions][google.cloud.kms.v1.CryptoKeyVersion\] in
     /// \[KeyManagementService.ListCryptoKeyVersions][google.cloud.kms.v1.KeyManagementService.ListCryptoKeyVersions\] and
@@ -389,6 +470,18 @@ pub mod crypto_key_version {
         /// Provides all fields in each \[CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion\], including the
         /// \[attestation][google.cloud.kms.v1.CryptoKeyVersion.attestation\].
         Full = 1,
+    }
+    impl CryptoKeyVersionView {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                CryptoKeyVersionView::Unspecified => "CRYPTO_KEY_VERSION_VIEW_UNSPECIFIED",
+                CryptoKeyVersionView::Full => "FULL",
+            }
+        }
     }
 }
 /// The public key for a given \[CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion\]. Obtained via
@@ -540,6 +633,19 @@ pub mod import_job {
         /// mechanism](<http://docs.oasis-open.org/pkcs11/pkcs11-curr/v2.40/cos01/pkcs11-curr-v2.40-cos01.html#_Toc408226908>).
         RsaOaep4096Sha1Aes256 = 2,
     }
+    impl ImportMethod {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ImportMethod::Unspecified => "IMPORT_METHOD_UNSPECIFIED",
+                ImportMethod::RsaOaep3072Sha1Aes256 => "RSA_OAEP_3072_SHA1_AES_256",
+                ImportMethod::RsaOaep4096Sha1Aes256 => "RSA_OAEP_4096_SHA1_AES_256",
+            }
+        }
+    }
     /// The state of the \[ImportJob][google.cloud.kms.v1.ImportJob\], indicating if it can be used.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -557,6 +663,20 @@ pub mod import_job {
         Active = 2,
         /// This job can no longer be used and may not leave this state once entered.
         Expired = 3,
+    }
+    impl ImportJobState {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ImportJobState::Unspecified => "IMPORT_JOB_STATE_UNSPECIFIED",
+                ImportJobState::PendingGeneration => "PENDING_GENERATION",
+                ImportJobState::Active => "ACTIVE",
+                ImportJobState::Expired => "EXPIRED",
+            }
+        }
     }
 }
 /// ExternalProtectionLevelOptions stores a group of additional fields for
@@ -582,6 +702,20 @@ pub enum ProtectionLevel {
     Hsm = 2,
     /// Crypto operations are performed by an external key manager.
     External = 3,
+}
+impl ProtectionLevel {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            ProtectionLevel::Unspecified => "PROTECTION_LEVEL_UNSPECIFIED",
+            ProtectionLevel::Software => "SOFTWARE",
+            ProtectionLevel::Hsm => "HSM",
+            ProtectionLevel::External => "EXTERNAL",
+        }
+    }
 }
 /// Request message for \[KeyManagementService.ListKeyRings][google.cloud.kms.v1.KeyManagementService.ListKeyRings\].
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -904,13 +1038,13 @@ pub mod import_crypto_key_version_request {
         ///
         /// This field contains the concatenation of two wrapped keys:
         /// <ol>
-        ///   <li>An ephemeral AES-256 wrapping key wrapped with the
-        ///       \[public_key][google.cloud.kms.v1.ImportJob.public_key\] using RSAES-OAEP with SHA-1,
-        ///       MGF1 with SHA-1, and an empty label.
-        ///   </li>
-        ///   <li>The key to be imported, wrapped with the ephemeral AES-256 key
-        ///       using AES-KWP (RFC 5649).
-        ///   </li>
+        ///    <li>An ephemeral AES-256 wrapping key wrapped with the
+        ///        \[public_key][google.cloud.kms.v1.ImportJob.public_key\] using RSAES-OAEP with SHA-1,
+        ///        MGF1 with SHA-1, and an empty label.
+        ///    </li>
+        ///    <li>The key to be imported, wrapped with the ephemeral AES-256 key
+        ///        using AES-KWP (RFC 5649).
+        ///    </li>
         /// </ol>
         ///
         /// If importing symmetric key material, it is expected that the unwrapped
@@ -1549,6 +1683,7 @@ pub struct LocationMetadata {
 pub mod key_management_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Google Cloud Key Management Service
     ///
     /// Manages cryptographic keys and operations using those keys. Implements a REST
@@ -1576,6 +1711,10 @@ pub mod key_management_service_client {
             let inner = tonic::client::Grpc::new(inner);
             Self { inner }
         }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
+            Self { inner }
+        }
         pub fn with_interceptor<F>(
             inner: T,
             interceptor: F,
@@ -1595,19 +1734,19 @@ pub mod key_management_service_client {
         {
             KeyManagementServiceClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Lists [KeyRings][google.cloud.kms.v1.KeyRing].

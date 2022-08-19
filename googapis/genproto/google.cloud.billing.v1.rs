@@ -171,6 +171,7 @@ pub struct UpdateProjectBillingInfoRequest {
 pub mod cloud_billing_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Retrieves GCP Console billing accounts and associates them with projects.
     #[derive(Debug, Clone)]
     pub struct CloudBillingClient<T> {
@@ -185,6 +186,10 @@ pub mod cloud_billing_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -206,19 +211,19 @@ pub mod cloud_billing_client {
         {
             CloudBillingClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Gets information about a billing account. The current authenticated user
@@ -609,8 +614,8 @@ pub struct PricingInfo {
 ///
 /// `usage_unit: GBy`
 /// `tiered_rates:`
-///    `[start_usage_amount: 20, unit_price: $10]`
-///    `[start_usage_amount: 100, unit_price: $5]`
+///     `[start_usage_amount: 20, unit_price: $10]`
+///     `[start_usage_amount: 100, unit_price: $5]`
 ///
 /// The above expresses a pricing formula where the first 20GB is free, the
 /// next 80GB is priced at $10 per GB followed by $5 per GB for additional
@@ -697,6 +702,19 @@ pub mod aggregation_info {
         Account = 1,
         Project = 2,
     }
+    impl AggregationLevel {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AggregationLevel::Unspecified => "AGGREGATION_LEVEL_UNSPECIFIED",
+                AggregationLevel::Account => "ACCOUNT",
+                AggregationLevel::Project => "PROJECT",
+            }
+        }
+    }
     /// The interval at which usage is aggregated to compute cost.
     /// Example: "MONTHLY" aggregation interval indicates that usage for tiered
     /// pricing is aggregated every month.
@@ -706,6 +724,19 @@ pub mod aggregation_info {
         Unspecified = 0,
         Daily = 1,
         Monthly = 2,
+    }
+    impl AggregationInterval {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AggregationInterval::Unspecified => "AGGREGATION_INTERVAL_UNSPECIFIED",
+                AggregationInterval::Daily => "DAILY",
+                AggregationInterval::Monthly => "MONTHLY",
+            }
+        }
     }
 }
 /// Request message for `ListServices`.
@@ -785,6 +816,7 @@ pub struct ListSkusResponse {
 pub mod cloud_catalog_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// A catalog of Google Cloud Platform services and SKUs.
     /// Provides pricing information and metadata on Google Cloud Platform services
     /// and SKUs.
@@ -801,6 +833,10 @@ pub mod cloud_catalog_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -822,19 +858,19 @@ pub mod cloud_catalog_client {
         {
             CloudCatalogClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Lists all public cloud services.

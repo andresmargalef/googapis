@@ -31,6 +31,24 @@ pub mod policy_topic_entry_type_enum {
         /// through area of interest.
         AreaOfInterestOnly = 7,
     }
+    impl PolicyTopicEntryType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                PolicyTopicEntryType::Unspecified => "UNSPECIFIED",
+                PolicyTopicEntryType::Unknown => "UNKNOWN",
+                PolicyTopicEntryType::Prohibited => "PROHIBITED",
+                PolicyTopicEntryType::Limited => "LIMITED",
+                PolicyTopicEntryType::FullyLimited => "FULLY_LIMITED",
+                PolicyTopicEntryType::Descriptive => "DESCRIPTIVE",
+                PolicyTopicEntryType::Broadening => "BROADENING",
+                PolicyTopicEntryType::AreaOfInterestOnly => "AREA_OF_INTEREST_ONLY",
+            }
+        }
+    }
 }
 // Proto file describing policy topic evidence destination mismatch url types.
 
@@ -62,6 +80,23 @@ pub mod policy_topic_evidence_destination_mismatch_url_type_enum {
         /// The tracking url template, with substituted mobile url.
         MobileTrackingUrl = 6,
     }
+    impl PolicyTopicEvidenceDestinationMismatchUrlType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                PolicyTopicEvidenceDestinationMismatchUrlType::Unspecified => "UNSPECIFIED",
+                PolicyTopicEvidenceDestinationMismatchUrlType::Unknown => "UNKNOWN",
+                PolicyTopicEvidenceDestinationMismatchUrlType::DisplayUrl => "DISPLAY_URL",
+                PolicyTopicEvidenceDestinationMismatchUrlType::FinalUrl => "FINAL_URL",
+                PolicyTopicEvidenceDestinationMismatchUrlType::FinalMobileUrl => "FINAL_MOBILE_URL",
+                PolicyTopicEvidenceDestinationMismatchUrlType::TrackingUrl => "TRACKING_URL",
+                PolicyTopicEvidenceDestinationMismatchUrlType::MobileTrackingUrl => "MOBILE_TRACKING_URL",
+            }
+        }
+    }
 }
 // Proto file describing device of destination not working policy topic
 // evidence.
@@ -90,6 +125,21 @@ pub mod policy_topic_evidence_destination_not_working_device_enum {
         /// Landing page doesn't work on iOS device.
         Ios = 4,
     }
+    impl PolicyTopicEvidenceDestinationNotWorkingDevice {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                PolicyTopicEvidenceDestinationNotWorkingDevice::Unspecified => "UNSPECIFIED",
+                PolicyTopicEvidenceDestinationNotWorkingDevice::Unknown => "UNKNOWN",
+                PolicyTopicEvidenceDestinationNotWorkingDevice::Desktop => "DESKTOP",
+                PolicyTopicEvidenceDestinationNotWorkingDevice::Android => "ANDROID",
+                PolicyTopicEvidenceDestinationNotWorkingDevice::Ios => "IOS",
+            }
+        }
+    }
 }
 // Proto file describing DNS error types of destination not working policy topic
 // evidence.
@@ -117,6 +167,20 @@ pub mod policy_topic_evidence_destination_not_working_dns_error_type_enum {
         /// doesn't mean the landing page doesn't work. Google will recrawl the
         /// landing page.
         GoogleCrawlerDnsIssue = 3,
+    }
+    impl PolicyTopicEvidenceDestinationNotWorkingDnsErrorType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                PolicyTopicEvidenceDestinationNotWorkingDnsErrorType::Unspecified => "UNSPECIFIED",
+                PolicyTopicEvidenceDestinationNotWorkingDnsErrorType::Unknown => "UNKNOWN",
+                PolicyTopicEvidenceDestinationNotWorkingDnsErrorType::HostnameNotFound => "HOSTNAME_NOT_FOUND",
+                PolicyTopicEvidenceDestinationNotWorkingDnsErrorType::GoogleCrawlerDnsIssue => "GOOGLE_CRAWLER_DNS_ISSUE",
+            }
+        }
     }
 }
 // Proto file describing policy approval statuses.
@@ -149,6 +213,22 @@ pub mod policy_approval_status_enum {
         /// searching for information about the targeted countries.
         AreaOfInterestOnly = 5,
     }
+    impl PolicyApprovalStatus {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                PolicyApprovalStatus::Unspecified => "UNSPECIFIED",
+                PolicyApprovalStatus::Unknown => "UNKNOWN",
+                PolicyApprovalStatus::Disapproved => "DISAPPROVED",
+                PolicyApprovalStatus::ApprovedLimited => "APPROVED_LIMITED",
+                PolicyApprovalStatus::Approved => "APPROVED",
+                PolicyApprovalStatus::AreaOfInterestOnly => "AREA_OF_INTEREST_ONLY",
+            }
+        }
+    }
 }
 // Proto file describing policy review statuses.
 
@@ -178,6 +258,22 @@ pub mod policy_review_status_enum {
         /// The resource is eligible and may be serving but could still undergo
         /// further review.
         EligibleMayServe = 5,
+    }
+    impl PolicyReviewStatus {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                PolicyReviewStatus::Unspecified => "UNSPECIFIED",
+                PolicyReviewStatus::Unknown => "UNKNOWN",
+                PolicyReviewStatus::ReviewInProgress => "REVIEW_IN_PROGRESS",
+                PolicyReviewStatus::Reviewed => "REVIEWED",
+                PolicyReviewStatus::UnderAppeal => "UNDER_APPEAL",
+                PolicyReviewStatus::EligibleMayServe => "ELIGIBLE_MAY_SERVE",
+            }
+        }
     }
 }
 // Proto file describing the performance label of an asset.
@@ -210,6 +306,23 @@ pub mod asset_performance_label_enum {
         /// Best performing assets.
         Best = 6,
     }
+    impl AssetPerformanceLabel {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AssetPerformanceLabel::Unspecified => "UNSPECIFIED",
+                AssetPerformanceLabel::Unknown => "UNKNOWN",
+                AssetPerformanceLabel::Pending => "PENDING",
+                AssetPerformanceLabel::Learning => "LEARNING",
+                AssetPerformanceLabel::Low => "LOW",
+                AssetPerformanceLabel::Good => "GOOD",
+                AssetPerformanceLabel::Best => "BEST",
+            }
+        }
+    }
 }
 // Proto file describing policy review statuses.
 
@@ -240,6 +353,23 @@ pub mod served_asset_field_type_enum {
         /// The asset is used in description 2.
         Description2 = 6,
     }
+    impl ServedAssetFieldType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ServedAssetFieldType::Unspecified => "UNSPECIFIED",
+                ServedAssetFieldType::Unknown => "UNKNOWN",
+                ServedAssetFieldType::Headline1 => "HEADLINE_1",
+                ServedAssetFieldType::Headline2 => "HEADLINE_2",
+                ServedAssetFieldType::Headline3 => "HEADLINE_3",
+                ServedAssetFieldType::Description1 => "DESCRIPTION_1",
+                ServedAssetFieldType::Description2 => "DESCRIPTION_2",
+            }
+        }
+    }
 }
 // Proto file describing call conversion reporting state.
 
@@ -267,6 +397,21 @@ pub mod call_conversion_reporting_state_enum {
         /// (call only ads/call extensions) level.
         UseResourceLevelCallConversionAction = 4,
     }
+    impl CallConversionReportingState {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                CallConversionReportingState::Unspecified => "UNSPECIFIED",
+                CallConversionReportingState::Unknown => "UNKNOWN",
+                CallConversionReportingState::Disabled => "DISABLED",
+                CallConversionReportingState::UseAccountLevelCallConversionAction => "USE_ACCOUNT_LEVEL_CALL_CONVERSION_ACTION",
+                CallConversionReportingState::UseResourceLevelCallConversionAction => "USE_RESOURCE_LEVEL_CALL_CONVERSION_ACTION",
+            }
+        }
+    }
 }
 // Proto file describing display ad format settings.
 
@@ -291,6 +436,21 @@ pub mod display_ad_format_setting_enum {
         /// Native format, i.e. the format rendering is controlled by the publisher
         /// and not by Google.
         Native = 4,
+    }
+    impl DisplayAdFormatSetting {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                DisplayAdFormatSetting::Unspecified => "UNSPECIFIED",
+                DisplayAdFormatSetting::Unknown => "UNKNOWN",
+                DisplayAdFormatSetting::AllFormats => "ALL_FORMATS",
+                DisplayAdFormatSetting::NonNative => "NON_NATIVE",
+                DisplayAdFormatSetting::Native => "NATIVE",
+            }
+        }
     }
 }
 // Proto file describing display upload product types.
@@ -353,6 +513,28 @@ pub mod display_upload_product_type_enum {
         /// used in a hotel campaign.
         DynamicHtml5HotelAd = 11,
     }
+    impl DisplayUploadProductType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                DisplayUploadProductType::Unspecified => "UNSPECIFIED",
+                DisplayUploadProductType::Unknown => "UNKNOWN",
+                DisplayUploadProductType::Html5UploadAd => "HTML5_UPLOAD_AD",
+                DisplayUploadProductType::DynamicHtml5EducationAd => "DYNAMIC_HTML5_EDUCATION_AD",
+                DisplayUploadProductType::DynamicHtml5FlightAd => "DYNAMIC_HTML5_FLIGHT_AD",
+                DisplayUploadProductType::DynamicHtml5HotelRentalAd => "DYNAMIC_HTML5_HOTEL_RENTAL_AD",
+                DisplayUploadProductType::DynamicHtml5JobAd => "DYNAMIC_HTML5_JOB_AD",
+                DisplayUploadProductType::DynamicHtml5LocalAd => "DYNAMIC_HTML5_LOCAL_AD",
+                DisplayUploadProductType::DynamicHtml5RealEstateAd => "DYNAMIC_HTML5_REAL_ESTATE_AD",
+                DisplayUploadProductType::DynamicHtml5CustomAd => "DYNAMIC_HTML5_CUSTOM_AD",
+                DisplayUploadProductType::DynamicHtml5TravelAd => "DYNAMIC_HTML5_TRAVEL_AD",
+                DisplayUploadProductType::DynamicHtml5HotelAd => "DYNAMIC_HTML5_HOTEL_AD",
+            }
+        }
+    }
 }
 // Proto file describing app store types for a legacy app install ad.
 
@@ -380,6 +562,23 @@ pub mod legacy_app_install_ad_app_store_enum {
         WindowsPhoneStore = 5,
         /// The app is hosted in a Chinese app store.
         CnAppStore = 6,
+    }
+    impl LegacyAppInstallAdAppStore {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                LegacyAppInstallAdAppStore::Unspecified => "UNSPECIFIED",
+                LegacyAppInstallAdAppStore::Unknown => "UNKNOWN",
+                LegacyAppInstallAdAppStore::AppleAppStore => "APPLE_APP_STORE",
+                LegacyAppInstallAdAppStore::GooglePlay => "GOOGLE_PLAY",
+                LegacyAppInstallAdAppStore::WindowsStore => "WINDOWS_STORE",
+                LegacyAppInstallAdAppStore::WindowsPhoneStore => "WINDOWS_PHONE_STORE",
+                LegacyAppInstallAdAppStore::CnAppStore => "CN_APP_STORE",
+            }
+        }
     }
 }
 // Proto file describing mime types.
@@ -425,6 +624,30 @@ pub mod mime_type_enum {
         /// MIME type of application/x-html5-ad-zip.
         Html5AdZip = 13,
     }
+    impl MimeType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                MimeType::Unspecified => "UNSPECIFIED",
+                MimeType::Unknown => "UNKNOWN",
+                MimeType::ImageJpeg => "IMAGE_JPEG",
+                MimeType::ImageGif => "IMAGE_GIF",
+                MimeType::ImagePng => "IMAGE_PNG",
+                MimeType::Flash => "FLASH",
+                MimeType::TextHtml => "TEXT_HTML",
+                MimeType::Pdf => "PDF",
+                MimeType::Msword => "MSWORD",
+                MimeType::Msexcel => "MSEXCEL",
+                MimeType::Rtf => "RTF",
+                MimeType::AudioWav => "AUDIO_WAV",
+                MimeType::AudioMp3 => "AUDIO_MP3",
+                MimeType::Html5AdZip => "HTML5_AD_ZIP",
+            }
+        }
+    }
 }
 // Proto file describing age range types.
 
@@ -457,6 +680,25 @@ pub mod age_range_type_enum {
         /// Undetermined age range.
         AgeRangeUndetermined = 503999,
     }
+    impl AgeRangeType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AgeRangeType::Unspecified => "UNSPECIFIED",
+                AgeRangeType::Unknown => "UNKNOWN",
+                AgeRangeType::AgeRange1824 => "AGE_RANGE_18_24",
+                AgeRangeType::AgeRange2534 => "AGE_RANGE_25_34",
+                AgeRangeType::AgeRange3544 => "AGE_RANGE_35_44",
+                AgeRangeType::AgeRange4554 => "AGE_RANGE_45_54",
+                AgeRangeType::AgeRange5564 => "AGE_RANGE_55_64",
+                AgeRangeType::AgeRange65Up => "AGE_RANGE_65_UP",
+                AgeRangeType::AgeRangeUndetermined => "AGE_RANGE_UNDETERMINED",
+            }
+        }
+    }
 }
 // Proto file describing criteria types.
 
@@ -476,6 +718,19 @@ pub mod app_payment_model_type_enum {
         Unknown = 1,
         /// Represents paid-for apps.
         Paid = 30,
+    }
+    impl AppPaymentModelType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AppPaymentModelType::Unspecified => "UNSPECIFIED",
+                AppPaymentModelType::Unknown => "UNKNOWN",
+                AppPaymentModelType::Paid => "PAID",
+            }
+        }
     }
 }
 // Proto file describing content label types.
@@ -525,6 +780,33 @@ pub mod content_label_type_enum {
         /// Sensitive social issues.
         SocialIssues = 17,
     }
+    impl ContentLabelType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ContentLabelType::Unspecified => "UNSPECIFIED",
+                ContentLabelType::Unknown => "UNKNOWN",
+                ContentLabelType::SexuallySuggestive => "SEXUALLY_SUGGESTIVE",
+                ContentLabelType::BelowTheFold => "BELOW_THE_FOLD",
+                ContentLabelType::ParkedDomain => "PARKED_DOMAIN",
+                ContentLabelType::Juvenile => "JUVENILE",
+                ContentLabelType::Profanity => "PROFANITY",
+                ContentLabelType::Tragedy => "TRAGEDY",
+                ContentLabelType::Video => "VIDEO",
+                ContentLabelType::VideoRatingDvG => "VIDEO_RATING_DV_G",
+                ContentLabelType::VideoRatingDvPg => "VIDEO_RATING_DV_PG",
+                ContentLabelType::VideoRatingDvT => "VIDEO_RATING_DV_T",
+                ContentLabelType::VideoRatingDvMa => "VIDEO_RATING_DV_MA",
+                ContentLabelType::VideoNotYetRated => "VIDEO_NOT_YET_RATED",
+                ContentLabelType::EmbeddedVideo => "EMBEDDED_VIDEO",
+                ContentLabelType::LiveStreamingVideo => "LIVE_STREAMING_VIDEO",
+                ContentLabelType::SocialIssues => "SOCIAL_ISSUES",
+            }
+        }
+    }
 }
 // Proto file describing days of week.
 
@@ -557,6 +839,25 @@ pub mod day_of_week_enum {
         /// Sunday.
         Sunday = 8,
     }
+    impl DayOfWeek {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                DayOfWeek::Unspecified => "UNSPECIFIED",
+                DayOfWeek::Unknown => "UNKNOWN",
+                DayOfWeek::Monday => "MONDAY",
+                DayOfWeek::Tuesday => "TUESDAY",
+                DayOfWeek::Wednesday => "WEDNESDAY",
+                DayOfWeek::Thursday => "THURSDAY",
+                DayOfWeek::Friday => "FRIDAY",
+                DayOfWeek::Saturday => "SATURDAY",
+                DayOfWeek::Sunday => "SUNDAY",
+            }
+        }
+    }
 }
 // Proto file describing devices.
 
@@ -585,6 +886,23 @@ pub mod device_enum {
         /// Other device types.
         Other = 5,
     }
+    impl Device {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Device::Unspecified => "UNSPECIFIED",
+                Device::Unknown => "UNKNOWN",
+                Device::Mobile => "MOBILE",
+                Device::Tablet => "TABLET",
+                Device::Desktop => "DESKTOP",
+                Device::ConnectedTv => "CONNECTED_TV",
+                Device::Other => "OTHER",
+            }
+        }
+    }
 }
 // Proto file describing gender types.
 
@@ -609,6 +927,21 @@ pub mod gender_type_enum {
         /// Undetermined gender.
         Undetermined = 20,
     }
+    impl GenderType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                GenderType::Unspecified => "UNSPECIFIED",
+                GenderType::Unknown => "UNKNOWN",
+                GenderType::Male => "MALE",
+                GenderType::Female => "FEMALE",
+                GenderType::Undetermined => "UNDETERMINED",
+            }
+        }
+    }
 }
 // Proto file describing hotel date selection types.
 
@@ -630,6 +963,20 @@ pub mod hotel_date_selection_type_enum {
         DefaultSelection = 50,
         /// Dates selected by the user.
         UserSelected = 51,
+    }
+    impl HotelDateSelectionType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                HotelDateSelectionType::Unspecified => "UNSPECIFIED",
+                HotelDateSelectionType::Unknown => "UNKNOWN",
+                HotelDateSelectionType::DefaultSelection => "DEFAULT_SELECTION",
+                HotelDateSelectionType::UserSelected => "USER_SELECTED",
+            }
+        }
     }
 }
 // Proto file describing income range types.
@@ -663,6 +1010,25 @@ pub mod income_range_type_enum {
         /// Undetermined income range.
         IncomeRangeUndetermined = 510000,
     }
+    impl IncomeRangeType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                IncomeRangeType::Unspecified => "UNSPECIFIED",
+                IncomeRangeType::Unknown => "UNKNOWN",
+                IncomeRangeType::IncomeRange050 => "INCOME_RANGE_0_50",
+                IncomeRangeType::IncomeRange5060 => "INCOME_RANGE_50_60",
+                IncomeRangeType::IncomeRange6070 => "INCOME_RANGE_60_70",
+                IncomeRangeType::IncomeRange7080 => "INCOME_RANGE_70_80",
+                IncomeRangeType::IncomeRange8090 => "INCOME_RANGE_80_90",
+                IncomeRangeType::IncomeRange90Up => "INCOME_RANGE_90_UP",
+                IncomeRangeType::IncomeRangeUndetermined => "INCOME_RANGE_UNDETERMINED",
+            }
+        }
+    }
 }
 // Proto file describing interaction types.
 
@@ -682,6 +1048,19 @@ pub mod interaction_type_enum {
         Unknown = 1,
         /// Calls.
         Calls = 8000,
+    }
+    impl InteractionType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                InteractionType::Unspecified => "UNSPECIFIED",
+                InteractionType::Unknown => "UNKNOWN",
+                InteractionType::Calls => "CALLS",
+            }
+        }
     }
 }
 // Proto file describing Keyword match types.
@@ -707,6 +1086,21 @@ pub mod keyword_match_type_enum {
         /// Broad match.
         Broad = 4,
     }
+    impl KeywordMatchType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                KeywordMatchType::Unspecified => "UNSPECIFIED",
+                KeywordMatchType::Unknown => "UNKNOWN",
+                KeywordMatchType::Exact => "EXACT",
+                KeywordMatchType::Phrase => "PHRASE",
+                KeywordMatchType::Broad => "BROAD",
+            }
+        }
+    }
 }
 // Proto file describing listing groups.
 
@@ -731,6 +1125,20 @@ pub mod listing_group_type_enum {
         /// Listing group unit that defines a bid.
         Unit = 3,
     }
+    impl ListingGroupType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ListingGroupType::Unspecified => "UNSPECIFIED",
+                ListingGroupType::Unknown => "UNKNOWN",
+                ListingGroupType::Subdivision => "SUBDIVISION",
+                ListingGroupType::Unit => "UNIT",
+            }
+        }
+    }
 }
 // Proto file describing location group radius units.
 
@@ -754,6 +1162,21 @@ pub mod location_group_radius_units_enum {
         Miles = 3,
         /// Milli Miles
         MilliMiles = 4,
+    }
+    impl LocationGroupRadiusUnits {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                LocationGroupRadiusUnits::Unspecified => "UNSPECIFIED",
+                LocationGroupRadiusUnits::Unknown => "UNKNOWN",
+                LocationGroupRadiusUnits::Meters => "METERS",
+                LocationGroupRadiusUnits::Miles => "MILES",
+                LocationGroupRadiusUnits::MilliMiles => "MILLI_MILES",
+            }
+        }
     }
 }
 // Proto file describing days of week.
@@ -781,6 +1204,22 @@ pub mod minute_of_hour_enum {
         /// Forty-five minutes past the hour.
         FortyFive = 5,
     }
+    impl MinuteOfHour {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                MinuteOfHour::Unspecified => "UNSPECIFIED",
+                MinuteOfHour::Unknown => "UNKNOWN",
+                MinuteOfHour::Zero => "ZERO",
+                MinuteOfHour::Fifteen => "FIFTEEN",
+                MinuteOfHour::Thirty => "THIRTY",
+                MinuteOfHour::FortyFive => "FORTY_FIVE",
+            }
+        }
+    }
 }
 // Proto file describing parenal status types.
 
@@ -805,6 +1244,21 @@ pub mod parental_status_type_enum {
         /// Undetermined parental status.
         Undetermined = 302,
     }
+    impl ParentalStatusType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ParentalStatusType::Unspecified => "UNSPECIFIED",
+                ParentalStatusType::Unknown => "UNKNOWN",
+                ParentalStatusType::Parent => "PARENT",
+                ParentalStatusType::NotAParent => "NOT_A_PARENT",
+                ParentalStatusType::Undetermined => "UNDETERMINED",
+            }
+        }
+    }
 }
 // Proto file describing preferred content criterion type.
 
@@ -824,6 +1278,19 @@ pub mod preferred_content_type_enum {
         Unknown = 1,
         /// Represents top content on YouTube.
         YoutubeTopContent = 400,
+    }
+    impl PreferredContentType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                PreferredContentType::Unspecified => "UNSPECIFIED",
+                PreferredContentType::Unknown => "UNKNOWN",
+                PreferredContentType::YoutubeTopContent => "YOUTUBE_TOP_CONTENT",
+            }
+        }
     }
 }
 /// Level of a product bidding category.
@@ -851,6 +1318,23 @@ pub mod product_bidding_category_level_enum {
         /// Level 5.
         Level5 = 6,
     }
+    impl ProductBiddingCategoryLevel {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ProductBiddingCategoryLevel::Unspecified => "UNSPECIFIED",
+                ProductBiddingCategoryLevel::Unknown => "UNKNOWN",
+                ProductBiddingCategoryLevel::Level1 => "LEVEL1",
+                ProductBiddingCategoryLevel::Level2 => "LEVEL2",
+                ProductBiddingCategoryLevel::Level3 => "LEVEL3",
+                ProductBiddingCategoryLevel::Level4 => "LEVEL4",
+                ProductBiddingCategoryLevel::Level5 => "LEVEL5",
+            }
+        }
+    }
 }
 // Proto file describing bidding schemes.
 
@@ -872,6 +1356,20 @@ pub mod product_channel_enum {
         Online = 2,
         /// The item is sold in local stores.
         Local = 3,
+    }
+    impl ProductChannel {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ProductChannel::Unspecified => "UNSPECIFIED",
+                ProductChannel::Unknown => "UNKNOWN",
+                ProductChannel::Online => "ONLINE",
+                ProductChannel::Local => "LOCAL",
+            }
+        }
     }
 }
 // Proto file describing bidding schemes.
@@ -897,6 +1395,20 @@ pub mod product_channel_exclusivity_enum {
         /// it is available for purchase in both ShoppingProductChannels.
         MultiChannel = 3,
     }
+    impl ProductChannelExclusivity {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ProductChannelExclusivity::Unspecified => "UNSPECIFIED",
+                ProductChannelExclusivity::Unknown => "UNKNOWN",
+                ProductChannelExclusivity::SingleChannel => "SINGLE_CHANNEL",
+                ProductChannelExclusivity::MultiChannel => "MULTI_CHANNEL",
+            }
+        }
+    }
 }
 // Proto file describing bidding schemes.
 
@@ -920,6 +1432,21 @@ pub mod product_condition_enum {
         Refurbished = 4,
         /// The product condition is used.
         Used = 5,
+    }
+    impl ProductCondition {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ProductCondition::Unspecified => "UNSPECIFIED",
+                ProductCondition::Unknown => "UNKNOWN",
+                ProductCondition::New => "NEW",
+                ProductCondition::Refurbished => "REFURBISHED",
+                ProductCondition::Used => "USED",
+            }
+        }
     }
 }
 // Proto file describing product custom attributes.
@@ -949,6 +1476,23 @@ pub mod product_custom_attribute_index_enum {
         /// Fifth product custom attribute.
         Index4 = 11,
     }
+    impl ProductCustomAttributeIndex {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ProductCustomAttributeIndex::Unspecified => "UNSPECIFIED",
+                ProductCustomAttributeIndex::Unknown => "UNKNOWN",
+                ProductCustomAttributeIndex::Index0 => "INDEX0",
+                ProductCustomAttributeIndex::Index1 => "INDEX1",
+                ProductCustomAttributeIndex::Index2 => "INDEX2",
+                ProductCustomAttributeIndex::Index3 => "INDEX3",
+                ProductCustomAttributeIndex::Index4 => "INDEX4",
+            }
+        }
+    }
 }
 // Proto file describing bidding schemes.
 
@@ -977,6 +1521,23 @@ pub mod product_type_level_enum {
         /// Level 5.
         Level5 = 11,
     }
+    impl ProductTypeLevel {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ProductTypeLevel::Unspecified => "UNSPECIFIED",
+                ProductTypeLevel::Unknown => "UNKNOWN",
+                ProductTypeLevel::Level1 => "LEVEL1",
+                ProductTypeLevel::Level2 => "LEVEL2",
+                ProductTypeLevel::Level3 => "LEVEL3",
+                ProductTypeLevel::Level4 => "LEVEL4",
+                ProductTypeLevel::Level5 => "LEVEL5",
+            }
+        }
+    }
 }
 // Proto file describing proximity radius units.
 
@@ -998,6 +1559,20 @@ pub mod proximity_radius_units_enum {
         Miles = 2,
         /// Kilometers
         Kilometers = 3,
+    }
+    impl ProximityRadiusUnits {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ProximityRadiusUnits::Unspecified => "UNSPECIFIED",
+                ProximityRadiusUnits::Unknown => "UNKNOWN",
+                ProximityRadiusUnits::Miles => "MILES",
+                ProximityRadiusUnits::Kilometers => "KILOMETERS",
+            }
+        }
     }
 }
 // Proto file describing webpage condition operand.
@@ -1027,6 +1602,23 @@ pub mod webpage_condition_operand_enum {
         /// Operand denoting a webpage custom label targeting condition.
         CustomLabel = 6,
     }
+    impl WebpageConditionOperand {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                WebpageConditionOperand::Unspecified => "UNSPECIFIED",
+                WebpageConditionOperand::Unknown => "UNKNOWN",
+                WebpageConditionOperand::Url => "URL",
+                WebpageConditionOperand::Category => "CATEGORY",
+                WebpageConditionOperand::PageTitle => "PAGE_TITLE",
+                WebpageConditionOperand::PageContent => "PAGE_CONTENT",
+                WebpageConditionOperand::CustomLabel => "CUSTOM_LABEL",
+            }
+        }
+    }
 }
 // Proto file describing webpage condition operator.
 
@@ -1049,6 +1641,20 @@ pub mod webpage_condition_operator_enum {
         Equals = 2,
         /// The argument web condition is part of the compared web condition.
         Contains = 3,
+    }
+    impl WebpageConditionOperator {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                WebpageConditionOperator::Unspecified => "UNSPECIFIED",
+                WebpageConditionOperator::Unknown => "UNKNOWN",
+                WebpageConditionOperator::Equals => "EQUALS",
+                WebpageConditionOperator::Contains => "CONTAINS",
+            }
+        }
     }
 }
 /// Describes the type of call-to-action phrases in a lead form.
@@ -1094,6 +1700,32 @@ pub mod lead_form_call_to_action_type_enum {
         /// Get started.
         GetStarted = 15,
     }
+    impl LeadFormCallToActionType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                LeadFormCallToActionType::Unspecified => "UNSPECIFIED",
+                LeadFormCallToActionType::Unknown => "UNKNOWN",
+                LeadFormCallToActionType::LearnMore => "LEARN_MORE",
+                LeadFormCallToActionType::GetQuote => "GET_QUOTE",
+                LeadFormCallToActionType::ApplyNow => "APPLY_NOW",
+                LeadFormCallToActionType::SignUp => "SIGN_UP",
+                LeadFormCallToActionType::ContactUs => "CONTACT_US",
+                LeadFormCallToActionType::Subscribe => "SUBSCRIBE",
+                LeadFormCallToActionType::Download => "DOWNLOAD",
+                LeadFormCallToActionType::BookNow => "BOOK_NOW",
+                LeadFormCallToActionType::GetOffer => "GET_OFFER",
+                LeadFormCallToActionType::Register => "REGISTER",
+                LeadFormCallToActionType::GetInfo => "GET_INFO",
+                LeadFormCallToActionType::RequestDemo => "REQUEST_DEMO",
+                LeadFormCallToActionType::JoinNow => "JOIN_NOW",
+                LeadFormCallToActionType::GetStarted => "GET_STARTED",
+            }
+        }
+    }
 }
 /// Describes the desired level of intent of generated leads.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -1113,6 +1745,20 @@ pub mod lead_form_desired_intent_enum {
         LowIntent = 2,
         /// Only leads with a high level of intent are desired.
         HighIntent = 3,
+    }
+    impl LeadFormDesiredIntent {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                LeadFormDesiredIntent::Unspecified => "UNSPECIFIED",
+                LeadFormDesiredIntent::Unknown => "UNKNOWN",
+                LeadFormDesiredIntent::LowIntent => "LOW_INTENT",
+                LeadFormDesiredIntent::HighIntent => "HIGH_INTENT",
+            }
+        }
     }
 }
 /// Describes the input type of a lead form field.
@@ -1301,6 +1947,78 @@ pub mod lead_form_field_user_input_type_enum {
         /// Category: "Travel"
         TravelAccommodation = 1047,
     }
+    impl LeadFormFieldUserInputType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                LeadFormFieldUserInputType::Unspecified => "UNSPECIFIED",
+                LeadFormFieldUserInputType::Unknown => "UNKNOWN",
+                LeadFormFieldUserInputType::FullName => "FULL_NAME",
+                LeadFormFieldUserInputType::GivenName => "GIVEN_NAME",
+                LeadFormFieldUserInputType::FamilyName => "FAMILY_NAME",
+                LeadFormFieldUserInputType::Email => "EMAIL",
+                LeadFormFieldUserInputType::PhoneNumber => "PHONE_NUMBER",
+                LeadFormFieldUserInputType::PostalCode => "POSTAL_CODE",
+                LeadFormFieldUserInputType::City => "CITY",
+                LeadFormFieldUserInputType::Region => "REGION",
+                LeadFormFieldUserInputType::Country => "COUNTRY",
+                LeadFormFieldUserInputType::WorkEmail => "WORK_EMAIL",
+                LeadFormFieldUserInputType::CompanyName => "COMPANY_NAME",
+                LeadFormFieldUserInputType::WorkPhone => "WORK_PHONE",
+                LeadFormFieldUserInputType::JobTitle => "JOB_TITLE",
+                LeadFormFieldUserInputType::VehicleModel => "VEHICLE_MODEL",
+                LeadFormFieldUserInputType::VehicleType => "VEHICLE_TYPE",
+                LeadFormFieldUserInputType::PreferredDealership => "PREFERRED_DEALERSHIP",
+                LeadFormFieldUserInputType::VehiclePurchaseTimeline => "VEHICLE_PURCHASE_TIMELINE",
+                LeadFormFieldUserInputType::VehicleOwnership => "VEHICLE_OWNERSHIP",
+                LeadFormFieldUserInputType::VehiclePaymentType => "VEHICLE_PAYMENT_TYPE",
+                LeadFormFieldUserInputType::VehicleCondition => "VEHICLE_CONDITION",
+                LeadFormFieldUserInputType::CompanySize => "COMPANY_SIZE",
+                LeadFormFieldUserInputType::AnnualSales => "ANNUAL_SALES",
+                LeadFormFieldUserInputType::YearsInBusiness => "YEARS_IN_BUSINESS",
+                LeadFormFieldUserInputType::JobDepartment => "JOB_DEPARTMENT",
+                LeadFormFieldUserInputType::JobRole => "JOB_ROLE",
+                LeadFormFieldUserInputType::EducationProgram => "EDUCATION_PROGRAM",
+                LeadFormFieldUserInputType::EducationCourse => "EDUCATION_COURSE",
+                LeadFormFieldUserInputType::Product => "PRODUCT",
+                LeadFormFieldUserInputType::Service => "SERVICE",
+                LeadFormFieldUserInputType::Offer => "OFFER",
+                LeadFormFieldUserInputType::Category => "CATEGORY",
+                LeadFormFieldUserInputType::PreferredContactMethod => "PREFERRED_CONTACT_METHOD",
+                LeadFormFieldUserInputType::PreferredLocation => "PREFERRED_LOCATION",
+                LeadFormFieldUserInputType::PreferredContactTime => "PREFERRED_CONTACT_TIME",
+                LeadFormFieldUserInputType::PurchaseTimeline => "PURCHASE_TIMELINE",
+                LeadFormFieldUserInputType::YearsOfExperience => "YEARS_OF_EXPERIENCE",
+                LeadFormFieldUserInputType::JobIndustry => "JOB_INDUSTRY",
+                LeadFormFieldUserInputType::LevelOfEducation => "LEVEL_OF_EDUCATION",
+                LeadFormFieldUserInputType::PropertyType => "PROPERTY_TYPE",
+                LeadFormFieldUserInputType::RealtorHelpGoal => "REALTOR_HELP_GOAL",
+                LeadFormFieldUserInputType::PropertyCommunity => "PROPERTY_COMMUNITY",
+                LeadFormFieldUserInputType::PriceRange => "PRICE_RANGE",
+                LeadFormFieldUserInputType::NumberOfBedrooms => "NUMBER_OF_BEDROOMS",
+                LeadFormFieldUserInputType::FurnishedProperty => "FURNISHED_PROPERTY",
+                LeadFormFieldUserInputType::PetsAllowedProperty => "PETS_ALLOWED_PROPERTY",
+                LeadFormFieldUserInputType::NextPlannedPurchase => "NEXT_PLANNED_PURCHASE",
+                LeadFormFieldUserInputType::EventSignupInterest => "EVENT_SIGNUP_INTEREST",
+                LeadFormFieldUserInputType::PreferredShoppingPlaces => "PREFERRED_SHOPPING_PLACES",
+                LeadFormFieldUserInputType::FavoriteBrand => "FAVORITE_BRAND",
+                LeadFormFieldUserInputType::TransportationCommercialLicenseType => "TRANSPORTATION_COMMERCIAL_LICENSE_TYPE",
+                LeadFormFieldUserInputType::EventBookingInterest => "EVENT_BOOKING_INTEREST",
+                LeadFormFieldUserInputType::DestinationCountry => "DESTINATION_COUNTRY",
+                LeadFormFieldUserInputType::DestinationCity => "DESTINATION_CITY",
+                LeadFormFieldUserInputType::DepartureCountry => "DEPARTURE_COUNTRY",
+                LeadFormFieldUserInputType::DepartureCity => "DEPARTURE_CITY",
+                LeadFormFieldUserInputType::DepartureDate => "DEPARTURE_DATE",
+                LeadFormFieldUserInputType::ReturnDate => "RETURN_DATE",
+                LeadFormFieldUserInputType::NumberOfTravelers => "NUMBER_OF_TRAVELERS",
+                LeadFormFieldUserInputType::TravelBudget => "TRAVEL_BUDGET",
+                LeadFormFieldUserInputType::TravelAccommodation => "TRAVEL_ACCOMMODATION",
+            }
+        }
+    }
 }
 /// Describes the type of post-submit call-to-action phrases for a lead form.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -1326,6 +2044,22 @@ pub mod lead_form_post_submit_call_to_action_type_enum {
         /// Shop now.
         ShopNow = 5,
     }
+    impl LeadFormPostSubmitCallToActionType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                LeadFormPostSubmitCallToActionType::Unspecified => "UNSPECIFIED",
+                LeadFormPostSubmitCallToActionType::Unknown => "UNKNOWN",
+                LeadFormPostSubmitCallToActionType::VisitSite => "VISIT_SITE",
+                LeadFormPostSubmitCallToActionType::Download => "DOWNLOAD",
+                LeadFormPostSubmitCallToActionType::LearnMore => "LEARN_MORE",
+                LeadFormPostSubmitCallToActionType::ShopNow => "SHOP_NOW",
+            }
+        }
+    }
 }
 // Proto file describing promotion extension discount modifier.
 
@@ -1346,6 +2080,19 @@ pub mod promotion_extension_discount_modifier_enum {
         Unknown = 1,
         /// 'Up to'.
         UpTo = 2,
+    }
+    impl PromotionExtensionDiscountModifier {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                PromotionExtensionDiscountModifier::Unspecified => "UNSPECIFIED",
+                PromotionExtensionDiscountModifier::Unknown => "UNKNOWN",
+                PromotionExtensionDiscountModifier::UpTo => "UP_TO",
+            }
+        }
     }
 }
 // Proto file describing promotion extension occasion.
@@ -1441,6 +2188,55 @@ pub mod promotion_extension_occasion_enum {
         /// Available in Japanese: Year-end Gift.
         YearEndGift = 38,
     }
+    impl PromotionExtensionOccasion {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                PromotionExtensionOccasion::Unspecified => "UNSPECIFIED",
+                PromotionExtensionOccasion::Unknown => "UNKNOWN",
+                PromotionExtensionOccasion::NewYears => "NEW_YEARS",
+                PromotionExtensionOccasion::ChineseNewYear => "CHINESE_NEW_YEAR",
+                PromotionExtensionOccasion::ValentinesDay => "VALENTINES_DAY",
+                PromotionExtensionOccasion::Easter => "EASTER",
+                PromotionExtensionOccasion::MothersDay => "MOTHERS_DAY",
+                PromotionExtensionOccasion::FathersDay => "FATHERS_DAY",
+                PromotionExtensionOccasion::LaborDay => "LABOR_DAY",
+                PromotionExtensionOccasion::BackToSchool => "BACK_TO_SCHOOL",
+                PromotionExtensionOccasion::Halloween => "HALLOWEEN",
+                PromotionExtensionOccasion::BlackFriday => "BLACK_FRIDAY",
+                PromotionExtensionOccasion::CyberMonday => "CYBER_MONDAY",
+                PromotionExtensionOccasion::Christmas => "CHRISTMAS",
+                PromotionExtensionOccasion::BoxingDay => "BOXING_DAY",
+                PromotionExtensionOccasion::IndependenceDay => "INDEPENDENCE_DAY",
+                PromotionExtensionOccasion::NationalDay => "NATIONAL_DAY",
+                PromotionExtensionOccasion::EndOfSeason => "END_OF_SEASON",
+                PromotionExtensionOccasion::WinterSale => "WINTER_SALE",
+                PromotionExtensionOccasion::SummerSale => "SUMMER_SALE",
+                PromotionExtensionOccasion::FallSale => "FALL_SALE",
+                PromotionExtensionOccasion::SpringSale => "SPRING_SALE",
+                PromotionExtensionOccasion::Ramadan => "RAMADAN",
+                PromotionExtensionOccasion::EidAlFitr => "EID_AL_FITR",
+                PromotionExtensionOccasion::EidAlAdha => "EID_AL_ADHA",
+                PromotionExtensionOccasion::SinglesDay => "SINGLES_DAY",
+                PromotionExtensionOccasion::WomensDay => "WOMENS_DAY",
+                PromotionExtensionOccasion::Holi => "HOLI",
+                PromotionExtensionOccasion::ParentsDay => "PARENTS_DAY",
+                PromotionExtensionOccasion::StNicholasDay => "ST_NICHOLAS_DAY",
+                PromotionExtensionOccasion::Carnival => "CARNIVAL",
+                PromotionExtensionOccasion::Epiphany => "EPIPHANY",
+                PromotionExtensionOccasion::RoshHashanah => "ROSH_HASHANAH",
+                PromotionExtensionOccasion::Passover => "PASSOVER",
+                PromotionExtensionOccasion::Hanukkah => "HANUKKAH",
+                PromotionExtensionOccasion::Diwali => "DIWALI",
+                PromotionExtensionOccasion::Navratri => "NAVRATRI",
+                PromotionExtensionOccasion::Songkran => "SONGKRAN",
+                PromotionExtensionOccasion::YearEndGift => "YEAR_END_GIFT",
+            }
+        }
+    }
 }
 // Proto file describing target impression share goal.
 
@@ -1466,6 +2262,21 @@ pub mod target_impression_share_location_enum {
         TopOfPage = 3,
         /// Top slot in the top box of ads.
         AbsoluteTopOfPage = 4,
+    }
+    impl TargetImpressionShareLocation {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                TargetImpressionShareLocation::Unspecified => "UNSPECIFIED",
+                TargetImpressionShareLocation::Unknown => "UNKNOWN",
+                TargetImpressionShareLocation::AnywhereOnPage => "ANYWHERE_ON_PAGE",
+                TargetImpressionShareLocation::TopOfPage => "TOP_OF_PAGE",
+                TargetImpressionShareLocation::AbsoluteTopOfPage => "ABSOLUTE_TOP_OF_PAGE",
+            }
+        }
     }
 }
 // Proto file describing advertising channel subtypes.
@@ -1521,6 +2332,34 @@ pub mod advertising_channel_sub_type_enum {
         /// Video campaigns with sequence video ads.
         VideoSequence = 17,
     }
+    impl AdvertisingChannelSubType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AdvertisingChannelSubType::Unspecified => "UNSPECIFIED",
+                AdvertisingChannelSubType::Unknown => "UNKNOWN",
+                AdvertisingChannelSubType::SearchMobileApp => "SEARCH_MOBILE_APP",
+                AdvertisingChannelSubType::DisplayMobileApp => "DISPLAY_MOBILE_APP",
+                AdvertisingChannelSubType::SearchExpress => "SEARCH_EXPRESS",
+                AdvertisingChannelSubType::DisplayExpress => "DISPLAY_EXPRESS",
+                AdvertisingChannelSubType::ShoppingSmartAds => "SHOPPING_SMART_ADS",
+                AdvertisingChannelSubType::DisplayGmailAd => "DISPLAY_GMAIL_AD",
+                AdvertisingChannelSubType::DisplaySmartCampaign => "DISPLAY_SMART_CAMPAIGN",
+                AdvertisingChannelSubType::VideoOutstream => "VIDEO_OUTSTREAM",
+                AdvertisingChannelSubType::VideoAction => "VIDEO_ACTION",
+                AdvertisingChannelSubType::VideoNonSkippable => "VIDEO_NON_SKIPPABLE",
+                AdvertisingChannelSubType::AppCampaign => "APP_CAMPAIGN",
+                AdvertisingChannelSubType::AppCampaignForEngagement => "APP_CAMPAIGN_FOR_ENGAGEMENT",
+                AdvertisingChannelSubType::LocalCampaign => "LOCAL_CAMPAIGN",
+                AdvertisingChannelSubType::ShoppingComparisonListingAds => "SHOPPING_COMPARISON_LISTING_ADS",
+                AdvertisingChannelSubType::SmartCampaign => "SMART_CAMPAIGN",
+                AdvertisingChannelSubType::VideoSequence => "VIDEO_SEQUENCE",
+            }
+        }
+    }
 }
 // Proto file describing advertising channel types
 
@@ -1557,6 +2396,26 @@ pub mod advertising_channel_type_enum {
         /// Smart campaigns.
         Smart = 9,
     }
+    impl AdvertisingChannelType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AdvertisingChannelType::Unspecified => "UNSPECIFIED",
+                AdvertisingChannelType::Unknown => "UNKNOWN",
+                AdvertisingChannelType::Search => "SEARCH",
+                AdvertisingChannelType::Display => "DISPLAY",
+                AdvertisingChannelType::Shopping => "SHOPPING",
+                AdvertisingChannelType::Hotel => "HOTEL",
+                AdvertisingChannelType::Video => "VIDEO",
+                AdvertisingChannelType::MultiChannel => "MULTI_CHANNEL",
+                AdvertisingChannelType::Local => "LOCAL",
+                AdvertisingChannelType::Smart => "SMART",
+            }
+        }
+    }
 }
 // Proto file describing the criterion category channel availability mode.
 
@@ -1585,6 +2444,21 @@ pub mod criterion_category_channel_availability_mode_enum {
         /// The category is available to campaigns of a specific channel type and
         /// subtype(s).
         ChannelTypeAndSubsetSubtypes = 4,
+    }
+    impl CriterionCategoryChannelAvailabilityMode {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                CriterionCategoryChannelAvailabilityMode::Unspecified => "UNSPECIFIED",
+                CriterionCategoryChannelAvailabilityMode::Unknown => "UNKNOWN",
+                CriterionCategoryChannelAvailabilityMode::AllChannels => "ALL_CHANNELS",
+                CriterionCategoryChannelAvailabilityMode::ChannelTypeAndAllSubtypes => "CHANNEL_TYPE_AND_ALL_SUBTYPES",
+                CriterionCategoryChannelAvailabilityMode::ChannelTypeAndSubsetSubtypes => "CHANNEL_TYPE_AND_SUBSET_SUBTYPES",
+            }
+        }
     }
 }
 // Proto file describing the criterion category locale availability mode.
@@ -1616,6 +2490,22 @@ pub mod criterion_category_locale_availability_mode_enum {
         /// The category is available to campaigns within a list of country, language
         /// pairs.
         CountryAndLanguage = 5,
+    }
+    impl CriterionCategoryLocaleAvailabilityMode {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                CriterionCategoryLocaleAvailabilityMode::Unspecified => "UNSPECIFIED",
+                CriterionCategoryLocaleAvailabilityMode::Unknown => "UNKNOWN",
+                CriterionCategoryLocaleAvailabilityMode::AllLocales => "ALL_LOCALES",
+                CriterionCategoryLocaleAvailabilityMode::CountryAndAllLanguages => "COUNTRY_AND_ALL_LANGUAGES",
+                CriterionCategoryLocaleAvailabilityMode::LanguageAndAllCountries => "LANGUAGE_AND_ALL_COUNTRIES",
+                CriterionCategoryLocaleAvailabilityMode::CountryAndLanguage => "COUNTRY_AND_LANGUAGE",
+            }
+        }
     }
 }
 // Proto file describing days of week.
@@ -1659,6 +2549,30 @@ pub mod month_of_year_enum {
         /// December.
         December = 13,
     }
+    impl MonthOfYear {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                MonthOfYear::Unspecified => "UNSPECIFIED",
+                MonthOfYear::Unknown => "UNKNOWN",
+                MonthOfYear::January => "JANUARY",
+                MonthOfYear::February => "FEBRUARY",
+                MonthOfYear::March => "MARCH",
+                MonthOfYear::April => "APRIL",
+                MonthOfYear::May => "MAY",
+                MonthOfYear::June => "JUNE",
+                MonthOfYear::July => "JULY",
+                MonthOfYear::August => "AUGUST",
+                MonthOfYear::September => "SEPTEMBER",
+                MonthOfYear::October => "OCTOBER",
+                MonthOfYear::November => "NOVEMBER",
+                MonthOfYear::December => "DECEMBER",
+            }
+        }
+    }
 }
 // Proto file describing app store types for an app extension.
 
@@ -1680,6 +2594,20 @@ pub mod app_store_enum {
         AppleItunes = 2,
         /// Google Play.
         GooglePlay = 3,
+    }
+    impl AppStore {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AppStore::Unspecified => "UNSPECIFIED",
+                AppStore::Unknown => "UNKNOWN",
+                AppStore::AppleItunes => "APPLE_ITUNES",
+                AppStore::GooglePlay => "GOOGLE_PLAY",
+            }
+        }
     }
 }
 // Proto file describing price extension price qualifier type.
@@ -1704,6 +2632,21 @@ pub mod price_extension_price_qualifier_enum {
         UpTo = 3,
         /// 'Average' qualifier for the price.
         Average = 4,
+    }
+    impl PriceExtensionPriceQualifier {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                PriceExtensionPriceQualifier::Unspecified => "UNSPECIFIED",
+                PriceExtensionPriceQualifier::Unknown => "UNKNOWN",
+                PriceExtensionPriceQualifier::From => "FROM",
+                PriceExtensionPriceQualifier::UpTo => "UP_TO",
+                PriceExtensionPriceQualifier::Average => "AVERAGE",
+            }
+        }
     }
 }
 // Proto file describing price extension price unit.
@@ -1734,6 +2677,24 @@ pub mod price_extension_price_unit_enum {
         PerYear = 6,
         /// Per night.
         PerNight = 7,
+    }
+    impl PriceExtensionPriceUnit {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                PriceExtensionPriceUnit::Unspecified => "UNSPECIFIED",
+                PriceExtensionPriceUnit::Unknown => "UNKNOWN",
+                PriceExtensionPriceUnit::PerHour => "PER_HOUR",
+                PriceExtensionPriceUnit::PerDay => "PER_DAY",
+                PriceExtensionPriceUnit::PerWeek => "PER_WEEK",
+                PriceExtensionPriceUnit::PerMonth => "PER_MONTH",
+                PriceExtensionPriceUnit::PerYear => "PER_YEAR",
+                PriceExtensionPriceUnit::PerNight => "PER_NIGHT",
+            }
+        }
     }
 }
 // Proto file describing price extension type.
@@ -1771,6 +2732,27 @@ pub mod price_extension_type_enum {
         /// The type for showing a collection of related service tiers.
         ServiceTiers = 10,
     }
+    impl PriceExtensionType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                PriceExtensionType::Unspecified => "UNSPECIFIED",
+                PriceExtensionType::Unknown => "UNKNOWN",
+                PriceExtensionType::Brands => "BRANDS",
+                PriceExtensionType::Events => "EVENTS",
+                PriceExtensionType::Locations => "LOCATIONS",
+                PriceExtensionType::Neighborhoods => "NEIGHBORHOODS",
+                PriceExtensionType::ProductCategories => "PRODUCT_CATEGORIES",
+                PriceExtensionType::ProductTiers => "PRODUCT_TIERS",
+                PriceExtensionType::Services => "SERVICES",
+                PriceExtensionType::ServiceCategories => "SERVICE_CATEGORIES",
+                PriceExtensionType::ServiceTiers => "SERVICE_TIERS",
+            }
+        }
+    }
 }
 /// The type of string matching to be used for a dynamic FeedItemSet filter.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -1788,6 +2770,19 @@ pub mod feed_item_set_string_filter_type_enum {
         Unknown = 1,
         /// The dynamic set filter will use exact string matching.
         Exact = 2,
+    }
+    impl FeedItemSetStringFilterType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                FeedItemSetStringFilterType::Unspecified => "UNSPECIFIED",
+                FeedItemSetStringFilterType::Unknown => "UNKNOWN",
+                FeedItemSetStringFilterType::Exact => "EXACT",
+            }
+        }
     }
 }
 // Proto file describing operating system for a deeplink app URL.
@@ -1811,6 +2806,20 @@ pub mod app_url_operating_system_type_enum {
         /// The Android operating system.
         Android = 3,
     }
+    impl AppUrlOperatingSystemType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AppUrlOperatingSystemType::Unspecified => "UNSPECIFIED",
+                AppUrlOperatingSystemType::Unknown => "UNKNOWN",
+                AppUrlOperatingSystemType::Ios => "IOS",
+                AppUrlOperatingSystemType::Android => "ANDROID",
+            }
+        }
+    }
 }
 // Proto file describing frequency caps.
 
@@ -1832,6 +2841,20 @@ pub mod frequency_cap_event_type_enum {
         Impression = 2,
         /// The cap applies on video ad views.
         VideoView = 3,
+    }
+    impl FrequencyCapEventType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                FrequencyCapEventType::Unspecified => "UNSPECIFIED",
+                FrequencyCapEventType::Unknown => "UNKNOWN",
+                FrequencyCapEventType::Impression => "IMPRESSION",
+                FrequencyCapEventType::VideoView => "VIDEO_VIEW",
+            }
+        }
     }
 }
 // Proto file describing frequency caps.
@@ -1858,6 +2881,21 @@ pub mod frequency_cap_level_enum {
         /// The cap is applied at the campaign level.
         Campaign = 4,
     }
+    impl FrequencyCapLevel {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                FrequencyCapLevel::Unspecified => "UNSPECIFIED",
+                FrequencyCapLevel::Unknown => "UNKNOWN",
+                FrequencyCapLevel::AdGroupAd => "AD_GROUP_AD",
+                FrequencyCapLevel::AdGroup => "AD_GROUP",
+                FrequencyCapLevel::Campaign => "CAMPAIGN",
+            }
+        }
+    }
 }
 // Proto file describing frequency caps.
 
@@ -1882,6 +2920,21 @@ pub mod frequency_cap_time_unit_enum {
         /// The cap would define limit per one month.
         Month = 4,
     }
+    impl FrequencyCapTimeUnit {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                FrequencyCapTimeUnit::Unspecified => "UNSPECIFIED",
+                FrequencyCapTimeUnit::Unknown => "UNKNOWN",
+                FrequencyCapTimeUnit::Day => "DAY",
+                FrequencyCapTimeUnit::Week => "WEEK",
+                FrequencyCapTimeUnit::Month => "MONTH",
+            }
+        }
+    }
 }
 // Proto file describing keyword plan aggregate metric types.
 
@@ -1901,6 +2954,19 @@ pub mod keyword_plan_aggregate_metric_type_enum {
         Unknown = 1,
         /// The device breakdown of aggregate search volume.
         Device = 2,
+    }
+    impl KeywordPlanAggregateMetricType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                KeywordPlanAggregateMetricType::Unspecified => "UNSPECIFIED",
+                KeywordPlanAggregateMetricType::Unknown => "UNKNOWN",
+                KeywordPlanAggregateMetricType::Device => "DEVICE",
+            }
+        }
     }
 }
 // Proto file describing Keyword Planner competition levels.
@@ -1929,6 +2995,21 @@ pub mod keyword_plan_competition_level_enum {
         Medium = 3,
         /// High competition. The Competition Index range for this is [67, 100].
         High = 4,
+    }
+    impl KeywordPlanCompetitionLevel {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                KeywordPlanCompetitionLevel::Unspecified => "UNSPECIFIED",
+                KeywordPlanCompetitionLevel::Unknown => "UNKNOWN",
+                KeywordPlanCompetitionLevel::Low => "LOW",
+                KeywordPlanCompetitionLevel::Medium => "MEDIUM",
+                KeywordPlanCompetitionLevel::High => "HIGH",
+            }
+        }
     }
 }
 // Proto file describing Keyword Planner Concept Group types.
@@ -1959,6 +3040,21 @@ pub mod keyword_plan_concept_group_type_enum {
         /// returned for generic keywords that don't have a brand association.
         NonBrand = 4,
     }
+    impl KeywordPlanConceptGroupType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                KeywordPlanConceptGroupType::Unspecified => "UNSPECIFIED",
+                KeywordPlanConceptGroupType::Unknown => "UNKNOWN",
+                KeywordPlanConceptGroupType::Brand => "BRAND",
+                KeywordPlanConceptGroupType::OtherBrands => "OTHER_BRANDS",
+                KeywordPlanConceptGroupType::NonBrand => "NON_BRAND",
+            }
+        }
+    }
 }
 // Proto file describing matching function context types.
 
@@ -1982,6 +3078,21 @@ pub mod matching_function_context_type_enum {
         DeviceName = 3,
         /// Feed item set id in the request context.
         FeedItemSetId = 4,
+    }
+    impl MatchingFunctionContextType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                MatchingFunctionContextType::Unspecified => "UNSPECIFIED",
+                MatchingFunctionContextType::Unknown => "UNKNOWN",
+                MatchingFunctionContextType::FeedItemId => "FEED_ITEM_ID",
+                MatchingFunctionContextType::DeviceName => "DEVICE_NAME",
+                MatchingFunctionContextType::FeedItemSetId => "FEED_ITEM_SET_ID",
+            }
+        }
     }
 }
 // Proto file describing matching function operators.
@@ -2017,6 +3128,23 @@ pub mod matching_function_operator_enum {
         /// ConstantOperands.
         ContainsAny = 6,
     }
+    impl MatchingFunctionOperator {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                MatchingFunctionOperator::Unspecified => "UNSPECIFIED",
+                MatchingFunctionOperator::Unknown => "UNKNOWN",
+                MatchingFunctionOperator::In => "IN",
+                MatchingFunctionOperator::Identity => "IDENTITY",
+                MatchingFunctionOperator::Equals => "EQUALS",
+                MatchingFunctionOperator::And => "AND",
+                MatchingFunctionOperator::ContainsAny => "CONTAINS_ANY",
+            }
+        }
+    }
 }
 // Proto file describing types of payable and free interactions.
 
@@ -2049,6 +3177,22 @@ pub mod interaction_event_type_enum {
         /// These are simply other (ad) conversions.
         None = 5,
     }
+    impl InteractionEventType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                InteractionEventType::Unspecified => "UNSPECIFIED",
+                InteractionEventType::Unknown => "UNKNOWN",
+                InteractionEventType::Click => "CLICK",
+                InteractionEventType::Engagement => "ENGAGEMENT",
+                InteractionEventType::VideoView => "VIDEO_VIEW",
+                InteractionEventType::None => "NONE",
+            }
+        }
+    }
 }
 // Proto file describing quality score buckets.
 
@@ -2072,6 +3216,21 @@ pub mod quality_score_bucket_enum {
         Average = 3,
         /// Quality of the creative is above average.
         AboveAverage = 4,
+    }
+    impl QualityScoreBucket {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                QualityScoreBucket::Unspecified => "UNSPECIFIED",
+                QualityScoreBucket::Unknown => "UNKNOWN",
+                QualityScoreBucket::BelowAverage => "BELOW_AVERAGE",
+                QualityScoreBucket::Average => "AVERAGE",
+                QualityScoreBucket::AboveAverage => "ABOVE_AVERAGE",
+            }
+        }
     }
 }
 // Proto file describing user identifier source
@@ -2098,6 +3257,20 @@ pub mod user_identifier_source_enum {
         /// Indicates that the user identifier was provided by the third party
         /// (partner).
         ThirdParty = 3,
+    }
+    impl UserIdentifierSource {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                UserIdentifierSource::Unspecified => "UNSPECIFIED",
+                UserIdentifierSource::Unknown => "UNKNOWN",
+                UserIdentifierSource::FirstParty => "FIRST_PARTY",
+                UserIdentifierSource::ThirdParty => "THIRD_PARTY",
+            }
+        }
     }
 }
 // Proto file describing ad destination types.
@@ -2139,6 +3312,29 @@ pub mod ad_destination_type_enum {
         /// Ad Destination for Conversions with keys unknown
         UnmodeledForConversions = 12,
     }
+    impl AdDestinationType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AdDestinationType::Unspecified => "UNSPECIFIED",
+                AdDestinationType::Unknown => "UNKNOWN",
+                AdDestinationType::NotApplicable => "NOT_APPLICABLE",
+                AdDestinationType::Website => "WEBSITE",
+                AdDestinationType::AppDeepLink => "APP_DEEP_LINK",
+                AdDestinationType::AppStore => "APP_STORE",
+                AdDestinationType::PhoneCall => "PHONE_CALL",
+                AdDestinationType::MapDirections => "MAP_DIRECTIONS",
+                AdDestinationType::LocationListing => "LOCATION_LISTING",
+                AdDestinationType::Message => "MESSAGE",
+                AdDestinationType::LeadForm => "LEAD_FORM",
+                AdDestinationType::Youtube => "YOUTUBE",
+                AdDestinationType::UnmodeledForConversions => "UNMODELED_FOR_CONVERSIONS",
+            }
+        }
+    }
 }
 // Proto file describing ad network types.
 
@@ -2169,6 +3365,24 @@ pub mod ad_network_type_enum {
         /// Cross-network.
         Mixed = 7,
     }
+    impl AdNetworkType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AdNetworkType::Unspecified => "UNSPECIFIED",
+                AdNetworkType::Unknown => "UNKNOWN",
+                AdNetworkType::Search => "SEARCH",
+                AdNetworkType::SearchPartners => "SEARCH_PARTNERS",
+                AdNetworkType::Content => "CONTENT",
+                AdNetworkType::YoutubeSearch => "YOUTUBE_SEARCH",
+                AdNetworkType::YoutubeWatch => "YOUTUBE_WATCH",
+                AdNetworkType::Mixed => "MIXED",
+            }
+        }
+    }
 }
 // Proto file describing Budget and Campaign association status.
 
@@ -2191,6 +3405,20 @@ pub mod budget_campaign_association_status_enum {
         Enabled = 2,
         /// The campaign is no longer using the budget.
         Removed = 3,
+    }
+    impl BudgetCampaignAssociationStatus {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                BudgetCampaignAssociationStatus::Unspecified => "UNSPECIFIED",
+                BudgetCampaignAssociationStatus::Unknown => "UNKNOWN",
+                BudgetCampaignAssociationStatus::Enabled => "ENABLED",
+                BudgetCampaignAssociationStatus::Removed => "REMOVED",
+            }
+        }
     }
 }
 // Proto file describing click types.
@@ -2316,6 +3544,71 @@ pub mod click_type_enum {
         /// Shopping - Comparison Listing.
         ShoppingComparisonListing = 56,
     }
+    impl ClickType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ClickType::Unspecified => "UNSPECIFIED",
+                ClickType::Unknown => "UNKNOWN",
+                ClickType::AppDeeplink => "APP_DEEPLINK",
+                ClickType::Breadcrumbs => "BREADCRUMBS",
+                ClickType::BroadbandPlan => "BROADBAND_PLAN",
+                ClickType::CallTracking => "CALL_TRACKING",
+                ClickType::Calls => "CALLS",
+                ClickType::ClickOnEngagementAd => "CLICK_ON_ENGAGEMENT_AD",
+                ClickType::GetDirections => "GET_DIRECTIONS",
+                ClickType::LocationExpansion => "LOCATION_EXPANSION",
+                ClickType::LocationFormatCall => "LOCATION_FORMAT_CALL",
+                ClickType::LocationFormatDirections => "LOCATION_FORMAT_DIRECTIONS",
+                ClickType::LocationFormatImage => "LOCATION_FORMAT_IMAGE",
+                ClickType::LocationFormatLandingPage => "LOCATION_FORMAT_LANDING_PAGE",
+                ClickType::LocationFormatMap => "LOCATION_FORMAT_MAP",
+                ClickType::LocationFormatStoreInfo => "LOCATION_FORMAT_STORE_INFO",
+                ClickType::LocationFormatText => "LOCATION_FORMAT_TEXT",
+                ClickType::MobileCallTracking => "MOBILE_CALL_TRACKING",
+                ClickType::OfferPrints => "OFFER_PRINTS",
+                ClickType::Other => "OTHER",
+                ClickType::ProductExtensionClicks => "PRODUCT_EXTENSION_CLICKS",
+                ClickType::ProductListingAdClicks => "PRODUCT_LISTING_AD_CLICKS",
+                ClickType::Sitelinks => "SITELINKS",
+                ClickType::StoreLocator => "STORE_LOCATOR",
+                ClickType::UrlClicks => "URL_CLICKS",
+                ClickType::VideoAppStoreClicks => "VIDEO_APP_STORE_CLICKS",
+                ClickType::VideoCallToActionClicks => "VIDEO_CALL_TO_ACTION_CLICKS",
+                ClickType::VideoCardActionHeadlineClicks => "VIDEO_CARD_ACTION_HEADLINE_CLICKS",
+                ClickType::VideoEndCapClicks => "VIDEO_END_CAP_CLICKS",
+                ClickType::VideoWebsiteClicks => "VIDEO_WEBSITE_CLICKS",
+                ClickType::VisualSitelinks => "VISUAL_SITELINKS",
+                ClickType::WirelessPlan => "WIRELESS_PLAN",
+                ClickType::ProductListingAdLocal => "PRODUCT_LISTING_AD_LOCAL",
+                ClickType::ProductListingAdMultichannelLocal => "PRODUCT_LISTING_AD_MULTICHANNEL_LOCAL",
+                ClickType::ProductListingAdMultichannelOnline => "PRODUCT_LISTING_AD_MULTICHANNEL_ONLINE",
+                ClickType::ProductListingAdsCoupon => "PRODUCT_LISTING_ADS_COUPON",
+                ClickType::ProductListingAdTransactable => "PRODUCT_LISTING_AD_TRANSACTABLE",
+                ClickType::ProductAdAppDeeplink => "PRODUCT_AD_APP_DEEPLINK",
+                ClickType::ShowcaseAdCategoryLink => "SHOWCASE_AD_CATEGORY_LINK",
+                ClickType::ShowcaseAdLocalStorefrontLink => "SHOWCASE_AD_LOCAL_STOREFRONT_LINK",
+                ClickType::ShowcaseAdOnlineProductLink => "SHOWCASE_AD_ONLINE_PRODUCT_LINK",
+                ClickType::ShowcaseAdLocalProductLink => "SHOWCASE_AD_LOCAL_PRODUCT_LINK",
+                ClickType::PromotionExtension => "PROMOTION_EXTENSION",
+                ClickType::SwipeableGalleryAdHeadline => "SWIPEABLE_GALLERY_AD_HEADLINE",
+                ClickType::SwipeableGalleryAdSwipes => "SWIPEABLE_GALLERY_AD_SWIPES",
+                ClickType::SwipeableGalleryAdSeeMore => "SWIPEABLE_GALLERY_AD_SEE_MORE",
+                ClickType::SwipeableGalleryAdSitelinkOne => "SWIPEABLE_GALLERY_AD_SITELINK_ONE",
+                ClickType::SwipeableGalleryAdSitelinkTwo => "SWIPEABLE_GALLERY_AD_SITELINK_TWO",
+                ClickType::SwipeableGalleryAdSitelinkThree => "SWIPEABLE_GALLERY_AD_SITELINK_THREE",
+                ClickType::SwipeableGalleryAdSitelinkFour => "SWIPEABLE_GALLERY_AD_SITELINK_FOUR",
+                ClickType::SwipeableGalleryAdSitelinkFive => "SWIPEABLE_GALLERY_AD_SITELINK_FIVE",
+                ClickType::HotelPrice => "HOTEL_PRICE",
+                ClickType::PriceExtension => "PRICE_EXTENSION",
+                ClickType::HotelBookOnGoogleRoomSelection => "HOTEL_BOOK_ON_GOOGLE_ROOM_SELECTION",
+                ClickType::ShoppingComparisonListing => "SHOPPING_COMPARISON_LISTING",
+            }
+        }
+    }
 }
 /// Container for enum describing the category of conversions that are associated
 /// with a ConversionAction.
@@ -2376,6 +3669,38 @@ pub mod conversion_action_category_enum {
         /// A sale occurring in a physical store.
         StoreSale = 21,
     }
+    impl ConversionActionCategory {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ConversionActionCategory::Unspecified => "UNSPECIFIED",
+                ConversionActionCategory::Unknown => "UNKNOWN",
+                ConversionActionCategory::Default => "DEFAULT",
+                ConversionActionCategory::PageView => "PAGE_VIEW",
+                ConversionActionCategory::Purchase => "PURCHASE",
+                ConversionActionCategory::Signup => "SIGNUP",
+                ConversionActionCategory::Lead => "LEAD",
+                ConversionActionCategory::Download => "DOWNLOAD",
+                ConversionActionCategory::AddToCart => "ADD_TO_CART",
+                ConversionActionCategory::BeginCheckout => "BEGIN_CHECKOUT",
+                ConversionActionCategory::SubscribePaid => "SUBSCRIBE_PAID",
+                ConversionActionCategory::PhoneCallLead => "PHONE_CALL_LEAD",
+                ConversionActionCategory::ImportedLead => "IMPORTED_LEAD",
+                ConversionActionCategory::SubmitLeadForm => "SUBMIT_LEAD_FORM",
+                ConversionActionCategory::BookAppointment => "BOOK_APPOINTMENT",
+                ConversionActionCategory::RequestQuote => "REQUEST_QUOTE",
+                ConversionActionCategory::GetDirections => "GET_DIRECTIONS",
+                ConversionActionCategory::OutboundClick => "OUTBOUND_CLICK",
+                ConversionActionCategory::Contact => "CONTACT",
+                ConversionActionCategory::Engagement => "ENGAGEMENT",
+                ConversionActionCategory::StoreVisit => "STORE_VISIT",
+                ConversionActionCategory::StoreSale => "STORE_SALE",
+            }
+        }
+    }
 }
 /// Container for enum indicating the event type the conversion is attributed to.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -2395,6 +3720,20 @@ pub mod conversion_attribution_event_type_enum {
         Impression = 2,
         /// The conversion is attributed to an interaction.
         Interaction = 3,
+    }
+    impl ConversionAttributionEventType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ConversionAttributionEventType::Unspecified => "UNSPECIFIED",
+                ConversionAttributionEventType::Unknown => "UNKNOWN",
+                ConversionAttributionEventType::Impression => "IMPRESSION",
+                ConversionAttributionEventType::Interaction => "INTERACTION",
+            }
+        }
     }
 }
 /// Container for enum representing the number of days between impression and
@@ -2467,6 +3806,37 @@ pub mod conversion_lag_bucket_enum {
         /// Conversion lag bucket from 60 to 90 days. 60 days is included,
         /// 90 days is not.
         SixtyToNinetyDays = 20,
+    }
+    impl ConversionLagBucket {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ConversionLagBucket::Unspecified => "UNSPECIFIED",
+                ConversionLagBucket::Unknown => "UNKNOWN",
+                ConversionLagBucket::LessThanOneDay => "LESS_THAN_ONE_DAY",
+                ConversionLagBucket::OneToTwoDays => "ONE_TO_TWO_DAYS",
+                ConversionLagBucket::TwoToThreeDays => "TWO_TO_THREE_DAYS",
+                ConversionLagBucket::ThreeToFourDays => "THREE_TO_FOUR_DAYS",
+                ConversionLagBucket::FourToFiveDays => "FOUR_TO_FIVE_DAYS",
+                ConversionLagBucket::FiveToSixDays => "FIVE_TO_SIX_DAYS",
+                ConversionLagBucket::SixToSevenDays => "SIX_TO_SEVEN_DAYS",
+                ConversionLagBucket::SevenToEightDays => "SEVEN_TO_EIGHT_DAYS",
+                ConversionLagBucket::EightToNineDays => "EIGHT_TO_NINE_DAYS",
+                ConversionLagBucket::NineToTenDays => "NINE_TO_TEN_DAYS",
+                ConversionLagBucket::TenToElevenDays => "TEN_TO_ELEVEN_DAYS",
+                ConversionLagBucket::ElevenToTwelveDays => "ELEVEN_TO_TWELVE_DAYS",
+                ConversionLagBucket::TwelveToThirteenDays => "TWELVE_TO_THIRTEEN_DAYS",
+                ConversionLagBucket::ThirteenToFourteenDays => "THIRTEEN_TO_FOURTEEN_DAYS",
+                ConversionLagBucket::FourteenToTwentyOneDays => "FOURTEEN_TO_TWENTY_ONE_DAYS",
+                ConversionLagBucket::TwentyOneToThirtyDays => "TWENTY_ONE_TO_THIRTY_DAYS",
+                ConversionLagBucket::ThirtyToFortyFiveDays => "THIRTY_TO_FORTY_FIVE_DAYS",
+                ConversionLagBucket::FortyFiveToSixtyDays => "FORTY_FIVE_TO_SIXTY_DAYS",
+                ConversionLagBucket::SixtyToNinetyDays => "SIXTY_TO_NINETY_DAYS",
+            }
+        }
     }
 }
 /// Container for enum representing the number of days between the impression and
@@ -2607,6 +3977,59 @@ pub mod conversion_or_adjustment_lag_bucket_enum {
         /// conversion adjustment lag bucket was available in Google Ads.
         AdjustmentUnknown = 42,
     }
+    impl ConversionOrAdjustmentLagBucket {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ConversionOrAdjustmentLagBucket::Unspecified => "UNSPECIFIED",
+                ConversionOrAdjustmentLagBucket::Unknown => "UNKNOWN",
+                ConversionOrAdjustmentLagBucket::ConversionLessThanOneDay => "CONVERSION_LESS_THAN_ONE_DAY",
+                ConversionOrAdjustmentLagBucket::ConversionOneToTwoDays => "CONVERSION_ONE_TO_TWO_DAYS",
+                ConversionOrAdjustmentLagBucket::ConversionTwoToThreeDays => "CONVERSION_TWO_TO_THREE_DAYS",
+                ConversionOrAdjustmentLagBucket::ConversionThreeToFourDays => "CONVERSION_THREE_TO_FOUR_DAYS",
+                ConversionOrAdjustmentLagBucket::ConversionFourToFiveDays => "CONVERSION_FOUR_TO_FIVE_DAYS",
+                ConversionOrAdjustmentLagBucket::ConversionFiveToSixDays => "CONVERSION_FIVE_TO_SIX_DAYS",
+                ConversionOrAdjustmentLagBucket::ConversionSixToSevenDays => "CONVERSION_SIX_TO_SEVEN_DAYS",
+                ConversionOrAdjustmentLagBucket::ConversionSevenToEightDays => "CONVERSION_SEVEN_TO_EIGHT_DAYS",
+                ConversionOrAdjustmentLagBucket::ConversionEightToNineDays => "CONVERSION_EIGHT_TO_NINE_DAYS",
+                ConversionOrAdjustmentLagBucket::ConversionNineToTenDays => "CONVERSION_NINE_TO_TEN_DAYS",
+                ConversionOrAdjustmentLagBucket::ConversionTenToElevenDays => "CONVERSION_TEN_TO_ELEVEN_DAYS",
+                ConversionOrAdjustmentLagBucket::ConversionElevenToTwelveDays => "CONVERSION_ELEVEN_TO_TWELVE_DAYS",
+                ConversionOrAdjustmentLagBucket::ConversionTwelveToThirteenDays => "CONVERSION_TWELVE_TO_THIRTEEN_DAYS",
+                ConversionOrAdjustmentLagBucket::ConversionThirteenToFourteenDays => "CONVERSION_THIRTEEN_TO_FOURTEEN_DAYS",
+                ConversionOrAdjustmentLagBucket::ConversionFourteenToTwentyOneDays => "CONVERSION_FOURTEEN_TO_TWENTY_ONE_DAYS",
+                ConversionOrAdjustmentLagBucket::ConversionTwentyOneToThirtyDays => "CONVERSION_TWENTY_ONE_TO_THIRTY_DAYS",
+                ConversionOrAdjustmentLagBucket::ConversionThirtyToFortyFiveDays => "CONVERSION_THIRTY_TO_FORTY_FIVE_DAYS",
+                ConversionOrAdjustmentLagBucket::ConversionFortyFiveToSixtyDays => "CONVERSION_FORTY_FIVE_TO_SIXTY_DAYS",
+                ConversionOrAdjustmentLagBucket::ConversionSixtyToNinetyDays => "CONVERSION_SIXTY_TO_NINETY_DAYS",
+                ConversionOrAdjustmentLagBucket::AdjustmentLessThanOneDay => "ADJUSTMENT_LESS_THAN_ONE_DAY",
+                ConversionOrAdjustmentLagBucket::AdjustmentOneToTwoDays => "ADJUSTMENT_ONE_TO_TWO_DAYS",
+                ConversionOrAdjustmentLagBucket::AdjustmentTwoToThreeDays => "ADJUSTMENT_TWO_TO_THREE_DAYS",
+                ConversionOrAdjustmentLagBucket::AdjustmentThreeToFourDays => "ADJUSTMENT_THREE_TO_FOUR_DAYS",
+                ConversionOrAdjustmentLagBucket::AdjustmentFourToFiveDays => "ADJUSTMENT_FOUR_TO_FIVE_DAYS",
+                ConversionOrAdjustmentLagBucket::AdjustmentFiveToSixDays => "ADJUSTMENT_FIVE_TO_SIX_DAYS",
+                ConversionOrAdjustmentLagBucket::AdjustmentSixToSevenDays => "ADJUSTMENT_SIX_TO_SEVEN_DAYS",
+                ConversionOrAdjustmentLagBucket::AdjustmentSevenToEightDays => "ADJUSTMENT_SEVEN_TO_EIGHT_DAYS",
+                ConversionOrAdjustmentLagBucket::AdjustmentEightToNineDays => "ADJUSTMENT_EIGHT_TO_NINE_DAYS",
+                ConversionOrAdjustmentLagBucket::AdjustmentNineToTenDays => "ADJUSTMENT_NINE_TO_TEN_DAYS",
+                ConversionOrAdjustmentLagBucket::AdjustmentTenToElevenDays => "ADJUSTMENT_TEN_TO_ELEVEN_DAYS",
+                ConversionOrAdjustmentLagBucket::AdjustmentElevenToTwelveDays => "ADJUSTMENT_ELEVEN_TO_TWELVE_DAYS",
+                ConversionOrAdjustmentLagBucket::AdjustmentTwelveToThirteenDays => "ADJUSTMENT_TWELVE_TO_THIRTEEN_DAYS",
+                ConversionOrAdjustmentLagBucket::AdjustmentThirteenToFourteenDays => "ADJUSTMENT_THIRTEEN_TO_FOURTEEN_DAYS",
+                ConversionOrAdjustmentLagBucket::AdjustmentFourteenToTwentyOneDays => "ADJUSTMENT_FOURTEEN_TO_TWENTY_ONE_DAYS",
+                ConversionOrAdjustmentLagBucket::AdjustmentTwentyOneToThirtyDays => "ADJUSTMENT_TWENTY_ONE_TO_THIRTY_DAYS",
+                ConversionOrAdjustmentLagBucket::AdjustmentThirtyToFortyFiveDays => "ADJUSTMENT_THIRTY_TO_FORTY_FIVE_DAYS",
+                ConversionOrAdjustmentLagBucket::AdjustmentFortyFiveToSixtyDays => "ADJUSTMENT_FORTY_FIVE_TO_SIXTY_DAYS",
+                ConversionOrAdjustmentLagBucket::AdjustmentSixtyToNinetyDays => "ADJUSTMENT_SIXTY_TO_NINETY_DAYS",
+                ConversionOrAdjustmentLagBucket::AdjustmentNinetyToOneHundredAndFortyFiveDays => "ADJUSTMENT_NINETY_TO_ONE_HUNDRED_AND_FORTY_FIVE_DAYS",
+                ConversionOrAdjustmentLagBucket::ConversionUnknown => "CONVERSION_UNKNOWN",
+                ConversionOrAdjustmentLagBucket::AdjustmentUnknown => "ADJUSTMENT_UNKNOWN",
+            }
+        }
+    }
 }
 /// Container for enum describing the external conversion source that is
 /// associated with a ConversionAction.
@@ -2706,6 +4129,45 @@ pub mod external_conversion_source_enum {
         /// Conversion that comes from a linked Firebase event for Search Ads 360.
         FirebaseSearchAds360 = 33,
     }
+    impl ExternalConversionSource {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ExternalConversionSource::Unspecified => "UNSPECIFIED",
+                ExternalConversionSource::Unknown => "UNKNOWN",
+                ExternalConversionSource::Webpage => "WEBPAGE",
+                ExternalConversionSource::Analytics => "ANALYTICS",
+                ExternalConversionSource::Upload => "UPLOAD",
+                ExternalConversionSource::AdCallMetrics => "AD_CALL_METRICS",
+                ExternalConversionSource::WebsiteCallMetrics => "WEBSITE_CALL_METRICS",
+                ExternalConversionSource::StoreVisits => "STORE_VISITS",
+                ExternalConversionSource::AndroidInApp => "ANDROID_IN_APP",
+                ExternalConversionSource::IosInApp => "IOS_IN_APP",
+                ExternalConversionSource::IosFirstOpen => "IOS_FIRST_OPEN",
+                ExternalConversionSource::AppUnspecified => "APP_UNSPECIFIED",
+                ExternalConversionSource::AndroidFirstOpen => "ANDROID_FIRST_OPEN",
+                ExternalConversionSource::UploadCalls => "UPLOAD_CALLS",
+                ExternalConversionSource::Firebase => "FIREBASE",
+                ExternalConversionSource::ClickToCall => "CLICK_TO_CALL",
+                ExternalConversionSource::Salesforce => "SALESFORCE",
+                ExternalConversionSource::StoreSalesCrm => "STORE_SALES_CRM",
+                ExternalConversionSource::StoreSalesPaymentNetwork => "STORE_SALES_PAYMENT_NETWORK",
+                ExternalConversionSource::GooglePlay => "GOOGLE_PLAY",
+                ExternalConversionSource::ThirdPartyAppAnalytics => "THIRD_PARTY_APP_ANALYTICS",
+                ExternalConversionSource::GoogleAttribution => "GOOGLE_ATTRIBUTION",
+                ExternalConversionSource::StoreSalesDirectUpload => "STORE_SALES_DIRECT_UPLOAD",
+                ExternalConversionSource::StoreSales => "STORE_SALES",
+                ExternalConversionSource::SearchAds360 => "SEARCH_ADS_360",
+                ExternalConversionSource::GoogleHosted => "GOOGLE_HOSTED",
+                ExternalConversionSource::Floodlight => "FLOODLIGHT",
+                ExternalConversionSource::AnalyticsSearchAds360 => "ANALYTICS_SEARCH_ADS_360",
+                ExternalConversionSource::FirebaseSearchAds360 => "FIREBASE_SEARCH_ADS_360",
+            }
+        }
+    }
 }
 // Proto file describing hotel price buckets.
 
@@ -2734,6 +4196,22 @@ pub mod hotel_price_bucket_enum {
         NotLowest = 4,
         /// Partner was the only one shown.
         OnlyPartnerShown = 5,
+    }
+    impl HotelPriceBucket {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                HotelPriceBucket::Unspecified => "UNSPECIFIED",
+                HotelPriceBucket::Unknown => "UNKNOWN",
+                HotelPriceBucket::LowestUnique => "LOWEST_UNIQUE",
+                HotelPriceBucket::LowestTied => "LOWEST_TIED",
+                HotelPriceBucket::NotLowest => "NOT_LOWEST",
+                HotelPriceBucket::OnlyPartnerShown => "ONLY_PARTNER_SHOWN",
+            }
+        }
     }
 }
 // Proto file describing hotel rate types.
@@ -2766,6 +4244,22 @@ pub mod hotel_rate_type_enum {
         /// all signed-in users, 20% of mobile users, all mobile users in Canada,
         /// etc.
         PrivateRate = 5,
+    }
+    impl HotelRateType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                HotelRateType::Unspecified => "UNSPECIFIED",
+                HotelRateType::Unknown => "UNKNOWN",
+                HotelRateType::Unavailable => "UNAVAILABLE",
+                HotelRateType::PublicRate => "PUBLIC_RATE",
+                HotelRateType::QualifiedRate => "QUALIFIED_RATE",
+                HotelRateType::PrivateRate => "PRIVATE_RATE",
+            }
+        }
     }
 }
 // Proto file describing feed placeholder types.
@@ -2845,6 +4339,38 @@ pub mod placeholder_type_enum {
         /// Lets you attach an image to an ad.
         Image = 21,
     }
+    impl PlaceholderType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                PlaceholderType::Unspecified => "UNSPECIFIED",
+                PlaceholderType::Unknown => "UNKNOWN",
+                PlaceholderType::Sitelink => "SITELINK",
+                PlaceholderType::Call => "CALL",
+                PlaceholderType::App => "APP",
+                PlaceholderType::Location => "LOCATION",
+                PlaceholderType::AffiliateLocation => "AFFILIATE_LOCATION",
+                PlaceholderType::Callout => "CALLOUT",
+                PlaceholderType::StructuredSnippet => "STRUCTURED_SNIPPET",
+                PlaceholderType::Message => "MESSAGE",
+                PlaceholderType::Price => "PRICE",
+                PlaceholderType::Promotion => "PROMOTION",
+                PlaceholderType::AdCustomizer => "AD_CUSTOMIZER",
+                PlaceholderType::DynamicEducation => "DYNAMIC_EDUCATION",
+                PlaceholderType::DynamicFlight => "DYNAMIC_FLIGHT",
+                PlaceholderType::DynamicCustom => "DYNAMIC_CUSTOM",
+                PlaceholderType::DynamicHotel => "DYNAMIC_HOTEL",
+                PlaceholderType::DynamicRealEstate => "DYNAMIC_REAL_ESTATE",
+                PlaceholderType::DynamicTravel => "DYNAMIC_TRAVEL",
+                PlaceholderType::DynamicLocal => "DYNAMIC_LOCAL",
+                PlaceholderType::DynamicJob => "DYNAMIC_JOB",
+                PlaceholderType::Image => "IMAGE",
+            }
+        }
+    }
 }
 // Proto file describing search engine results page types.
 
@@ -2869,6 +4395,21 @@ pub mod search_engine_results_page_type_enum {
         /// Both ads and organic results were contained in the search engine results
         /// page.
         AdsAndOrganic = 4,
+    }
+    impl SearchEngineResultsPageType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                SearchEngineResultsPageType::Unspecified => "UNSPECIFIED",
+                SearchEngineResultsPageType::Unknown => "UNKNOWN",
+                SearchEngineResultsPageType::AdsOnly => "ADS_ONLY",
+                SearchEngineResultsPageType::OrganicOnly => "ORGANIC_ONLY",
+                SearchEngineResultsPageType::AdsAndOrganic => "ADS_AND_ORGANIC",
+            }
+        }
     }
 }
 // Proto file describing search term match types.
@@ -2897,6 +4438,23 @@ pub mod search_term_match_type_enum {
         NearExact = 5,
         /// Phrase match (close variant).
         NearPhrase = 6,
+    }
+    impl SearchTermMatchType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                SearchTermMatchType::Unspecified => "UNSPECIFIED",
+                SearchTermMatchType::Unknown => "UNKNOWN",
+                SearchTermMatchType::Broad => "BROAD",
+                SearchTermMatchType::Exact => "EXACT",
+                SearchTermMatchType::Phrase => "PHRASE",
+                SearchTermMatchType::NearExact => "NEAR_EXACT",
+                SearchTermMatchType::NearPhrase => "NEAR_PHRASE",
+            }
+        }
     }
 }
 // Proto file describing slots.
@@ -2930,6 +4488,25 @@ pub mod slot_enum {
         /// Cross-network.
         Mixed = 8,
     }
+    impl Slot {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Slot::Unspecified => "UNSPECIFIED",
+                Slot::Unknown => "UNKNOWN",
+                Slot::SearchSide => "SEARCH_SIDE",
+                Slot::SearchTop => "SEARCH_TOP",
+                Slot::SearchOther => "SEARCH_OTHER",
+                Slot::Content => "CONTENT",
+                Slot::SearchPartnerTop => "SEARCH_PARTNER_TOP",
+                Slot::SearchPartnerOther => "SEARCH_PARTNER_OTHER",
+                Slot::Mixed => "MIXED",
+            }
+        }
+    }
 }
 /// Container for enum describing the format of the web page where the tracking
 /// tag and snippet will be installed.
@@ -2951,6 +4528,20 @@ pub mod tracking_code_page_format_enum {
         Html = 2,
         /// Google AMP page format.
         Amp = 3,
+    }
+    impl TrackingCodePageFormat {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                TrackingCodePageFormat::Unspecified => "UNSPECIFIED",
+                TrackingCodePageFormat::Unknown => "UNKNOWN",
+                TrackingCodePageFormat::Html => "HTML",
+                TrackingCodePageFormat::Amp => "AMP",
+            }
+        }
     }
 }
 /// Container for enum describing the type of the generated tag snippets for
@@ -2980,6 +4571,22 @@ pub mod tracking_code_type_enum {
         /// The snippet that is used to replace the phone number on your website with
         /// a Google forwarding number for call tracking purposes.
         WebsiteCall = 5,
+    }
+    impl TrackingCodeType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                TrackingCodeType::Unspecified => "UNSPECIFIED",
+                TrackingCodeType::Unknown => "UNKNOWN",
+                TrackingCodeType::Webpage => "WEBPAGE",
+                TrackingCodeType::WebpageOnclick => "WEBPAGE_ONCLICK",
+                TrackingCodeType::ClickToCall => "CLICK_TO_CALL",
+                TrackingCodeType::WebsiteCall => "WEBSITE_CALL",
+            }
+        }
     }
 }
 // Proto file describing criteria types.
@@ -3021,6 +4628,26 @@ pub mod targeting_dimension_enum {
         /// Criteria for income range targeting.
         IncomeRange = 9,
     }
+    impl TargetingDimension {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                TargetingDimension::Unspecified => "UNSPECIFIED",
+                TargetingDimension::Unknown => "UNKNOWN",
+                TargetingDimension::Keyword => "KEYWORD",
+                TargetingDimension::Audience => "AUDIENCE",
+                TargetingDimension::Topic => "TOPIC",
+                TargetingDimension::Gender => "GENDER",
+                TargetingDimension::AgeRange => "AGE_RANGE",
+                TargetingDimension::Placement => "PLACEMENT",
+                TargetingDimension::ParentalStatus => "PARENTAL_STATUS",
+                TargetingDimension::IncomeRange => "INCOME_RANGE",
+            }
+        }
+    }
 }
 /// Indicates what type of data are the user list's members matched from.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -3045,6 +4672,21 @@ pub mod customer_match_upload_key_type_enum {
         /// Members are matched from mobile advertising ids.
         MobileAdvertisingId = 4,
     }
+    impl CustomerMatchUploadKeyType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                CustomerMatchUploadKeyType::Unspecified => "UNSPECIFIED",
+                CustomerMatchUploadKeyType::Unknown => "UNKNOWN",
+                CustomerMatchUploadKeyType::ContactInfo => "CONTACT_INFO",
+                CustomerMatchUploadKeyType::CrmId => "CRM_ID",
+                CustomerMatchUploadKeyType::MobileAdvertisingId => "MOBILE_ADVERTISING_ID",
+            }
+        }
+    }
 }
 /// Logical operator connecting two rules.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -3064,6 +4706,20 @@ pub mod user_list_combined_rule_operator_enum {
         And = 2,
         /// A AND NOT B.
         AndNot = 3,
+    }
+    impl UserListCombinedRuleOperator {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                UserListCombinedRuleOperator::Unspecified => "UNSPECIFIED",
+                UserListCombinedRuleOperator::Unknown => "UNKNOWN",
+                UserListCombinedRuleOperator::And => "AND",
+                UserListCombinedRuleOperator::AndNot => "AND_NOT",
+            }
+        }
     }
 }
 /// Indicates source of Crm upload data.
@@ -3086,6 +4742,21 @@ pub mod user_list_crm_data_source_type_enum {
         ThirdPartyCreditBureau = 3,
         /// The uploaded data is from a third-party voter file.
         ThirdPartyVoterFile = 4,
+    }
+    impl UserListCrmDataSourceType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                UserListCrmDataSourceType::Unspecified => "UNSPECIFIED",
+                UserListCrmDataSourceType::Unknown => "UNKNOWN",
+                UserListCrmDataSourceType::FirstParty => "FIRST_PARTY",
+                UserListCrmDataSourceType::ThirdPartyCreditBureau => "THIRD_PARTY_CREDIT_BUREAU",
+                UserListCrmDataSourceType::ThirdPartyVoterFile => "THIRD_PARTY_VOTER_FILE",
+            }
+        }
     }
 }
 /// Supported rule operator for date type.
@@ -3111,6 +4782,22 @@ pub mod user_list_date_rule_item_operator_enum {
         /// After.
         After = 5,
     }
+    impl UserListDateRuleItemOperator {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                UserListDateRuleItemOperator::Unspecified => "UNSPECIFIED",
+                UserListDateRuleItemOperator::Unknown => "UNKNOWN",
+                UserListDateRuleItemOperator::Equals => "EQUALS",
+                UserListDateRuleItemOperator::NotEquals => "NOT_EQUALS",
+                UserListDateRuleItemOperator::Before => "BEFORE",
+                UserListDateRuleItemOperator::After => "AFTER",
+            }
+        }
+    }
 }
 /// The logical operator of the rule.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -3132,6 +4819,21 @@ pub mod user_list_logical_rule_operator_enum {
         Any = 3,
         /// Not - none of the operands.
         None = 4,
+    }
+    impl UserListLogicalRuleOperator {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                UserListLogicalRuleOperator::Unspecified => "UNSPECIFIED",
+                UserListLogicalRuleOperator::Unknown => "UNKNOWN",
+                UserListLogicalRuleOperator::All => "ALL",
+                UserListLogicalRuleOperator::Any => "ANY",
+                UserListLogicalRuleOperator::None => "NONE",
+            }
+        }
     }
 }
 /// Supported rule operator for number type.
@@ -3161,6 +4863,24 @@ pub mod user_list_number_rule_item_operator_enum {
         /// Less than or equal.
         LessThanOrEqual = 7,
     }
+    impl UserListNumberRuleItemOperator {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                UserListNumberRuleItemOperator::Unspecified => "UNSPECIFIED",
+                UserListNumberRuleItemOperator::Unknown => "UNKNOWN",
+                UserListNumberRuleItemOperator::GreaterThan => "GREATER_THAN",
+                UserListNumberRuleItemOperator::GreaterThanOrEqual => "GREATER_THAN_OR_EQUAL",
+                UserListNumberRuleItemOperator::Equals => "EQUALS",
+                UserListNumberRuleItemOperator::NotEquals => "NOT_EQUALS",
+                UserListNumberRuleItemOperator::LessThan => "LESS_THAN",
+                UserListNumberRuleItemOperator::LessThanOrEqual => "LESS_THAN_OR_EQUAL",
+            }
+        }
+    }
 }
 /// Indicates status of prepopulation based on the rule.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -3183,6 +4903,21 @@ pub mod user_list_prepopulation_status_enum {
         /// Prepopulation failed.
         Failed = 4,
     }
+    impl UserListPrepopulationStatus {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                UserListPrepopulationStatus::Unspecified => "UNSPECIFIED",
+                UserListPrepopulationStatus::Unknown => "UNKNOWN",
+                UserListPrepopulationStatus::Requested => "REQUESTED",
+                UserListPrepopulationStatus::Finished => "FINISHED",
+                UserListPrepopulationStatus::Failed => "FAILED",
+            }
+        }
+    }
 }
 /// Rule based user list rule type.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -3202,6 +4937,20 @@ pub mod user_list_rule_type_enum {
         AndOfOrs = 2,
         /// Disjunctive normal form.
         OrOfAnds = 3,
+    }
+    impl UserListRuleType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                UserListRuleType::Unspecified => "UNSPECIFIED",
+                UserListRuleType::Unknown => "UNKNOWN",
+                UserListRuleType::AndOfOrs => "AND_OF_ORS",
+                UserListRuleType::OrOfAnds => "OR_OF_ANDS",
+            }
+        }
     }
 }
 /// Supported rule operator for string type.
@@ -3235,6 +4984,26 @@ pub mod user_list_string_rule_item_operator_enum {
         /// Not ends with.
         NotEndsWith = 9,
     }
+    impl UserListStringRuleItemOperator {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                UserListStringRuleItemOperator::Unspecified => "UNSPECIFIED",
+                UserListStringRuleItemOperator::Unknown => "UNKNOWN",
+                UserListStringRuleItemOperator::Contains => "CONTAINS",
+                UserListStringRuleItemOperator::Equals => "EQUALS",
+                UserListStringRuleItemOperator::StartsWith => "STARTS_WITH",
+                UserListStringRuleItemOperator::EndsWith => "ENDS_WITH",
+                UserListStringRuleItemOperator::NotEquals => "NOT_EQUALS",
+                UserListStringRuleItemOperator::NotContains => "NOT_CONTAINS",
+                UserListStringRuleItemOperator::NotStartsWith => "NOT_STARTS_WITH",
+                UserListStringRuleItemOperator::NotEndsWith => "NOT_ENDS_WITH",
+            }
+        }
+    }
 }
 // Proto file describing AccessInvitationStatus enum.
 
@@ -3260,6 +5029,21 @@ pub mod access_invitation_status_enum {
         /// Invitation URLs expired without being acted upon. No new user can be
         /// created.  Invitations expire 20 days after creation.
         Expired = 4,
+    }
+    impl AccessInvitationStatus {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AccessInvitationStatus::Unspecified => "UNSPECIFIED",
+                AccessInvitationStatus::Unknown => "UNKNOWN",
+                AccessInvitationStatus::Pending => "PENDING",
+                AccessInvitationStatus::Declined => "DECLINED",
+                AccessInvitationStatus::Expired => "EXPIRED",
+            }
+        }
     }
 }
 /// Indicates the way the resource such as user list is related to a user.
@@ -3287,6 +5071,23 @@ pub mod access_reason_enum {
         /// The resource is accessible to the user.
         Affiliated = 6,
     }
+    impl AccessReason {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AccessReason::Unspecified => "UNSPECIFIED",
+                AccessReason::Unknown => "UNKNOWN",
+                AccessReason::Owned => "OWNED",
+                AccessReason::Shared => "SHARED",
+                AccessReason::Licensed => "LICENSED",
+                AccessReason::Subscribed => "SUBSCRIBED",
+                AccessReason::Affiliated => "AFFILIATED",
+            }
+        }
+    }
 }
 /// Container for enum describing possible access role for user.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -3311,6 +5112,22 @@ pub mod access_role_enum {
         /// Role for \"email only\" access. Represents an email recipient rather than
         /// a true User entity.
         EmailOnly = 5,
+    }
+    impl AccessRole {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AccessRole::Unspecified => "UNSPECIFIED",
+                AccessRole::Unknown => "UNKNOWN",
+                AccessRole::Admin => "ADMIN",
+                AccessRole::Standard => "STANDARD",
+                AccessRole::ReadOnly => "READ_ONLY",
+                AccessRole::EmailOnly => "EMAIL_ONLY",
+            }
+        }
     }
 }
 // Proto file describing AccountBudgetProposal statuses.
@@ -3344,6 +5161,23 @@ pub mod account_budget_proposal_status_enum {
         /// acceptance email.
         Rejected = 6,
     }
+    impl AccountBudgetProposalStatus {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AccountBudgetProposalStatus::Unspecified => "UNSPECIFIED",
+                AccountBudgetProposalStatus::Unknown => "UNKNOWN",
+                AccountBudgetProposalStatus::Pending => "PENDING",
+                AccountBudgetProposalStatus::ApprovedHeld => "APPROVED_HELD",
+                AccountBudgetProposalStatus::Approved => "APPROVED",
+                AccountBudgetProposalStatus::Cancelled => "CANCELLED",
+                AccountBudgetProposalStatus::Rejected => "REJECTED",
+            }
+        }
+    }
 }
 // Proto file describing AccountBudgetProposal types.
 
@@ -3370,6 +5204,22 @@ pub mod account_budget_proposal_type_enum {
         /// Identifies a request to remove a budget that hasn't started yet.
         Remove = 5,
     }
+    impl AccountBudgetProposalType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AccountBudgetProposalType::Unspecified => "UNSPECIFIED",
+                AccountBudgetProposalType::Unknown => "UNKNOWN",
+                AccountBudgetProposalType::Create => "CREATE",
+                AccountBudgetProposalType::Update => "UPDATE",
+                AccountBudgetProposalType::End => "END",
+                AccountBudgetProposalType::Remove => "REMOVE",
+            }
+        }
+    }
 }
 // Proto file describing AccountBudget statuses.
 
@@ -3393,6 +5243,21 @@ pub mod account_budget_status_enum {
         Approved = 3,
         /// The account budget has been cancelled by the user.
         Cancelled = 4,
+    }
+    impl AccountBudgetStatus {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AccountBudgetStatus::Unspecified => "UNSPECIFIED",
+                AccountBudgetStatus::Unknown => "UNKNOWN",
+                AccountBudgetStatus::Pending => "PENDING",
+                AccountBudgetStatus::Approved => "APPROVED",
+                AccountBudgetStatus::Cancelled => "CANCELLED",
+            }
+        }
     }
 }
 /// Container for enum describing possible statuses of an account link.
@@ -3425,6 +5290,24 @@ pub mod account_link_status_enum {
         /// The link is revoked by the user who requested the link.
         Revoked = 7,
     }
+    impl AccountLinkStatus {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AccountLinkStatus::Unspecified => "UNSPECIFIED",
+                AccountLinkStatus::Unknown => "UNKNOWN",
+                AccountLinkStatus::Enabled => "ENABLED",
+                AccountLinkStatus::Removed => "REMOVED",
+                AccountLinkStatus::Requested => "REQUESTED",
+                AccountLinkStatus::PendingApproval => "PENDING_APPROVAL",
+                AccountLinkStatus::Rejected => "REJECTED",
+                AccountLinkStatus::Revoked => "REVOKED",
+            }
+        }
+    }
 }
 // Proto file describing Ad Customizer placeholder fields.
 
@@ -3451,6 +5334,22 @@ pub mod ad_customizer_placeholder_field_enum {
         /// Data Type: STRING. String value to be inserted.
         String = 5,
     }
+    impl AdCustomizerPlaceholderField {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AdCustomizerPlaceholderField::Unspecified => "UNSPECIFIED",
+                AdCustomizerPlaceholderField::Unknown => "UNKNOWN",
+                AdCustomizerPlaceholderField::Integer => "INTEGER",
+                AdCustomizerPlaceholderField::Price => "PRICE",
+                AdCustomizerPlaceholderField::Date => "DATE",
+                AdCustomizerPlaceholderField::String => "STRING",
+            }
+        }
+    }
 }
 // Proto file describing ad group ad rotation mode.
 
@@ -3475,6 +5374,20 @@ pub mod ad_group_ad_rotation_mode_enum {
         Optimize = 2,
         /// Rotate evenly forever.
         RotateForever = 3,
+    }
+    impl AdGroupAdRotationMode {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AdGroupAdRotationMode::Unspecified => "UNSPECIFIED",
+                AdGroupAdRotationMode::Unknown => "UNKNOWN",
+                AdGroupAdRotationMode::Optimize => "OPTIMIZE",
+                AdGroupAdRotationMode::RotateForever => "ROTATE_FOREVER",
+            }
+        }
     }
 }
 // Proto file describing ad group status.
@@ -3502,6 +5415,21 @@ pub mod ad_group_ad_status_enum {
         /// The ad group ad is removed.
         Removed = 4,
     }
+    impl AdGroupAdStatus {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AdGroupAdStatus::Unspecified => "UNSPECIFIED",
+                AdGroupAdStatus::Unknown => "UNKNOWN",
+                AdGroupAdStatus::Enabled => "ENABLED",
+                AdGroupAdStatus::Paused => "PAUSED",
+                AdGroupAdStatus::Removed => "REMOVED",
+            }
+        }
+    }
 }
 // Proto file describing approval status for the criterion.
 
@@ -3527,6 +5455,22 @@ pub mod ad_group_criterion_approval_status_enum {
         PendingReview = 4,
         /// Under review.
         UnderReview = 5,
+    }
+    impl AdGroupCriterionApprovalStatus {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AdGroupCriterionApprovalStatus::Unspecified => "UNSPECIFIED",
+                AdGroupCriterionApprovalStatus::Unknown => "UNKNOWN",
+                AdGroupCriterionApprovalStatus::Approved => "APPROVED",
+                AdGroupCriterionApprovalStatus::Disapproved => "DISAPPROVED",
+                AdGroupCriterionApprovalStatus::PendingReview => "PENDING_REVIEW",
+                AdGroupCriterionApprovalStatus::UnderReview => "UNDER_REVIEW",
+            }
+        }
     }
 }
 // Proto file describing AdGroupCriterion statuses.
@@ -3554,6 +5498,21 @@ pub mod ad_group_criterion_status_enum {
         /// The ad group criterion is removed.
         Removed = 4,
     }
+    impl AdGroupCriterionStatus {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AdGroupCriterionStatus::Unspecified => "UNSPECIFIED",
+                AdGroupCriterionStatus::Unknown => "UNKNOWN",
+                AdGroupCriterionStatus::Enabled => "ENABLED",
+                AdGroupCriterionStatus::Paused => "PAUSED",
+                AdGroupCriterionStatus::Removed => "REMOVED",
+            }
+        }
+    }
 }
 // Proto file describing ad group status.
 
@@ -3579,6 +5538,21 @@ pub mod ad_group_status_enum {
         Paused = 3,
         /// The ad group is removed.
         Removed = 4,
+    }
+    impl AdGroupStatus {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AdGroupStatus::Unspecified => "UNSPECIFIED",
+                AdGroupStatus::Unknown => "UNKNOWN",
+                AdGroupStatus::Enabled => "ENABLED",
+                AdGroupStatus::Paused => "PAUSED",
+                AdGroupStatus::Removed => "REMOVED",
+            }
+        }
     }
 }
 // Proto file describing ad group types.
@@ -3632,6 +5606,33 @@ pub mod ad_group_type_enum {
         /// Video efficient reach ad groups.
         VideoEfficientReach = 17,
     }
+    impl AdGroupType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AdGroupType::Unspecified => "UNSPECIFIED",
+                AdGroupType::Unknown => "UNKNOWN",
+                AdGroupType::SearchStandard => "SEARCH_STANDARD",
+                AdGroupType::DisplayStandard => "DISPLAY_STANDARD",
+                AdGroupType::ShoppingProductAds => "SHOPPING_PRODUCT_ADS",
+                AdGroupType::HotelAds => "HOTEL_ADS",
+                AdGroupType::ShoppingSmartAds => "SHOPPING_SMART_ADS",
+                AdGroupType::VideoBumper => "VIDEO_BUMPER",
+                AdGroupType::VideoTrueViewInStream => "VIDEO_TRUE_VIEW_IN_STREAM",
+                AdGroupType::VideoTrueViewInDisplay => "VIDEO_TRUE_VIEW_IN_DISPLAY",
+                AdGroupType::VideoNonSkippableInStream => "VIDEO_NON_SKIPPABLE_IN_STREAM",
+                AdGroupType::VideoOutstream => "VIDEO_OUTSTREAM",
+                AdGroupType::SearchDynamicAds => "SEARCH_DYNAMIC_ADS",
+                AdGroupType::ShoppingComparisonListingAds => "SHOPPING_COMPARISON_LISTING_ADS",
+                AdGroupType::PromotedHotelAds => "PROMOTED_HOTEL_ADS",
+                AdGroupType::VideoResponsive => "VIDEO_RESPONSIVE",
+                AdGroupType::VideoEfficientReach => "VIDEO_EFFICIENT_REACH",
+            }
+        }
+    }
 }
 // Proto file describing ad serving statuses.
 
@@ -3665,6 +5666,23 @@ pub mod ad_serving_optimization_status_enum {
         /// Ad serving optimization status is not available.
         Unavailable = 6,
     }
+    impl AdServingOptimizationStatus {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AdServingOptimizationStatus::Unspecified => "UNSPECIFIED",
+                AdServingOptimizationStatus::Unknown => "UNKNOWN",
+                AdServingOptimizationStatus::Optimize => "OPTIMIZE",
+                AdServingOptimizationStatus::ConversionOptimize => "CONVERSION_OPTIMIZE",
+                AdServingOptimizationStatus::Rotate => "ROTATE",
+                AdServingOptimizationStatus::RotateIndefinitely => "ROTATE_INDEFINITELY",
+                AdServingOptimizationStatus::Unavailable => "UNAVAILABLE",
+            }
+        }
+    }
 }
 // Proto file describing ad strengths.
 
@@ -3694,6 +5712,24 @@ pub mod ad_strength_enum {
         Good = 6,
         /// Excellent strength.
         Excellent = 7,
+    }
+    impl AdStrength {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AdStrength::Unspecified => "UNSPECIFIED",
+                AdStrength::Unknown => "UNKNOWN",
+                AdStrength::Pending => "PENDING",
+                AdStrength::NoAds => "NO_ADS",
+                AdStrength::Poor => "POOR",
+                AdStrength::Average => "AVERAGE",
+                AdStrength::Good => "GOOD",
+                AdStrength::Excellent => "EXCELLENT",
+            }
+        }
     }
 }
 // Proto file describing the ad type.
@@ -3768,6 +5804,44 @@ pub mod ad_type_enum {
         /// Video responsive ad.
         VideoResponsiveAd = 30,
     }
+    impl AdType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AdType::Unspecified => "UNSPECIFIED",
+                AdType::Unknown => "UNKNOWN",
+                AdType::TextAd => "TEXT_AD",
+                AdType::ExpandedTextAd => "EXPANDED_TEXT_AD",
+                AdType::CallOnlyAd => "CALL_ONLY_AD",
+                AdType::ExpandedDynamicSearchAd => "EXPANDED_DYNAMIC_SEARCH_AD",
+                AdType::HotelAd => "HOTEL_AD",
+                AdType::ShoppingSmartAd => "SHOPPING_SMART_AD",
+                AdType::ShoppingProductAd => "SHOPPING_PRODUCT_AD",
+                AdType::VideoAd => "VIDEO_AD",
+                AdType::GmailAd => "GMAIL_AD",
+                AdType::ImageAd => "IMAGE_AD",
+                AdType::ResponsiveSearchAd => "RESPONSIVE_SEARCH_AD",
+                AdType::LegacyResponsiveDisplayAd => "LEGACY_RESPONSIVE_DISPLAY_AD",
+                AdType::AppAd => "APP_AD",
+                AdType::LegacyAppInstallAd => "LEGACY_APP_INSTALL_AD",
+                AdType::ResponsiveDisplayAd => "RESPONSIVE_DISPLAY_AD",
+                AdType::LocalAd => "LOCAL_AD",
+                AdType::Html5UploadAd => "HTML5_UPLOAD_AD",
+                AdType::DynamicHtml5Ad => "DYNAMIC_HTML5_AD",
+                AdType::AppEngagementAd => "APP_ENGAGEMENT_AD",
+                AdType::ShoppingComparisonListingAd => "SHOPPING_COMPARISON_LISTING_AD",
+                AdType::VideoBumperAd => "VIDEO_BUMPER_AD",
+                AdType::VideoNonSkippableInStreamAd => "VIDEO_NON_SKIPPABLE_IN_STREAM_AD",
+                AdType::VideoOutstreamAd => "VIDEO_OUTSTREAM_AD",
+                AdType::VideoTrueviewDiscoveryAd => "VIDEO_TRUEVIEW_DISCOVERY_AD",
+                AdType::VideoTrueviewInStreamAd => "VIDEO_TRUEVIEW_IN_STREAM_AD",
+                AdType::VideoResponsiveAd => "VIDEO_RESPONSIVE_AD",
+            }
+        }
+    }
 }
 // Proto file describing relation type for affiliate location feeds.
 
@@ -3788,6 +5862,19 @@ pub mod affiliate_location_feed_relationship_type_enum {
         Unknown = 1,
         /// General retailer relationship.
         GeneralRetailer = 2,
+    }
+    impl AffiliateLocationFeedRelationshipType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AffiliateLocationFeedRelationshipType::Unspecified => "UNSPECIFIED",
+                AffiliateLocationFeedRelationshipType::Unknown => "UNKNOWN",
+                AffiliateLocationFeedRelationshipType::GeneralRetailer => "GENERAL_RETAILER",
+            }
+        }
     }
 }
 // Proto file describing Affiliate Location placeholder fields.
@@ -3829,6 +5916,29 @@ pub mod affiliate_location_placeholder_field_enum {
         /// Data Type: STRING. Name of the chain.
         ChainName = 12,
     }
+    impl AffiliateLocationPlaceholderField {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AffiliateLocationPlaceholderField::Unspecified => "UNSPECIFIED",
+                AffiliateLocationPlaceholderField::Unknown => "UNKNOWN",
+                AffiliateLocationPlaceholderField::BusinessName => "BUSINESS_NAME",
+                AffiliateLocationPlaceholderField::AddressLine1 => "ADDRESS_LINE_1",
+                AffiliateLocationPlaceholderField::AddressLine2 => "ADDRESS_LINE_2",
+                AffiliateLocationPlaceholderField::City => "CITY",
+                AffiliateLocationPlaceholderField::Province => "PROVINCE",
+                AffiliateLocationPlaceholderField::PostalCode => "POSTAL_CODE",
+                AffiliateLocationPlaceholderField::CountryCode => "COUNTRY_CODE",
+                AffiliateLocationPlaceholderField::PhoneNumber => "PHONE_NUMBER",
+                AffiliateLocationPlaceholderField::LanguageCode => "LANGUAGE_CODE",
+                AffiliateLocationPlaceholderField::ChainId => "CHAIN_ID",
+                AffiliateLocationPlaceholderField::ChainName => "CHAIN_NAME",
+            }
+        }
+    }
 }
 // Proto file describing App Campaign app store.
 
@@ -3850,6 +5960,20 @@ pub mod app_campaign_app_store_enum {
         AppleAppStore = 2,
         /// Google play.
         GoogleAppStore = 3,
+    }
+    impl AppCampaignAppStore {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AppCampaignAppStore::Unspecified => "UNSPECIFIED",
+                AppCampaignAppStore::Unknown => "UNKNOWN",
+                AppCampaignAppStore::AppleAppStore => "APPLE_APP_STORE",
+                AppCampaignAppStore::GoogleAppStore => "GOOGLE_APP_STORE",
+            }
+        }
     }
 }
 // Proto file describing App Campaign bidding strategy goal types.
@@ -3884,6 +6008,22 @@ pub mod app_campaign_bidding_strategy_goal_type_enum {
         /// conversions while achieving or exceeding target return on advertising
         /// spend.
         OptimizeReturnOnAdvertisingSpend = 5,
+    }
+    impl AppCampaignBiddingStrategyGoalType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AppCampaignBiddingStrategyGoalType::Unspecified => "UNSPECIFIED",
+                AppCampaignBiddingStrategyGoalType::Unknown => "UNKNOWN",
+                AppCampaignBiddingStrategyGoalType::OptimizeInstallsTargetInstallCost => "OPTIMIZE_INSTALLS_TARGET_INSTALL_COST",
+                AppCampaignBiddingStrategyGoalType::OptimizeInAppConversionsTargetInstallCost => "OPTIMIZE_IN_APP_CONVERSIONS_TARGET_INSTALL_COST",
+                AppCampaignBiddingStrategyGoalType::OptimizeInAppConversionsTargetConversionCost => "OPTIMIZE_IN_APP_CONVERSIONS_TARGET_CONVERSION_COST",
+                AppCampaignBiddingStrategyGoalType::OptimizeReturnOnAdvertisingSpend => "OPTIMIZE_RETURN_ON_ADVERTISING_SPEND",
+            }
+        }
     }
 }
 // Proto file describing App placeholder fields.
@@ -3925,6 +6065,26 @@ pub mod app_placeholder_field_enum {
         /// Data Type: STRING. Final URL suffix for the in-app link when using
         /// parallel tracking.
         FinalUrlSuffix = 9,
+    }
+    impl AppPlaceholderField {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AppPlaceholderField::Unspecified => "UNSPECIFIED",
+                AppPlaceholderField::Unknown => "UNKNOWN",
+                AppPlaceholderField::Store => "STORE",
+                AppPlaceholderField::Id => "ID",
+                AppPlaceholderField::LinkText => "LINK_TEXT",
+                AppPlaceholderField::Url => "URL",
+                AppPlaceholderField::FinalUrls => "FINAL_URLS",
+                AppPlaceholderField::FinalMobileUrls => "FINAL_MOBILE_URLS",
+                AppPlaceholderField::TrackingUrl => "TRACKING_URL",
+                AppPlaceholderField::FinalUrlSuffix => "FINAL_URL_SUFFIX",
+            }
+        }
     }
 }
 // Proto file describing asset type.
@@ -3969,6 +6129,30 @@ pub mod asset_field_type_enum {
         /// The asset is linked for use as a Sitelink extension.
         Sitelink = 13,
     }
+    impl AssetFieldType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AssetFieldType::Unspecified => "UNSPECIFIED",
+                AssetFieldType::Unknown => "UNKNOWN",
+                AssetFieldType::Headline => "HEADLINE",
+                AssetFieldType::Description => "DESCRIPTION",
+                AssetFieldType::MandatoryAdText => "MANDATORY_AD_TEXT",
+                AssetFieldType::MarketingImage => "MARKETING_IMAGE",
+                AssetFieldType::MediaBundle => "MEDIA_BUNDLE",
+                AssetFieldType::YoutubeVideo => "YOUTUBE_VIDEO",
+                AssetFieldType::BookOnGoogle => "BOOK_ON_GOOGLE",
+                AssetFieldType::LeadForm => "LEAD_FORM",
+                AssetFieldType::Promotion => "PROMOTION",
+                AssetFieldType::Callout => "CALLOUT",
+                AssetFieldType::StructuredSnippet => "STRUCTURED_SNIPPET",
+                AssetFieldType::Sitelink => "SITELINK",
+            }
+        }
+    }
 }
 // Proto file describing status of an asset link.
 
@@ -3992,6 +6176,21 @@ pub mod asset_link_status_enum {
         Removed = 3,
         /// Asset link is paused.
         Paused = 4,
+    }
+    impl AssetLinkStatus {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AssetLinkStatus::Unspecified => "UNSPECIFIED",
+                AssetLinkStatus::Unknown => "UNKNOWN",
+                AssetLinkStatus::Enabled => "ENABLED",
+                AssetLinkStatus::Removed => "REMOVED",
+                AssetLinkStatus::Paused => "PAUSED",
+            }
+        }
     }
 }
 // Proto file describing asset type.
@@ -4030,6 +6229,28 @@ pub mod asset_type_enum {
         StructuredSnippet = 10,
         /// Sitelink asset.
         Sitelink = 11,
+    }
+    impl AssetType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AssetType::Unspecified => "UNSPECIFIED",
+                AssetType::Unknown => "UNKNOWN",
+                AssetType::YoutubeVideo => "YOUTUBE_VIDEO",
+                AssetType::MediaBundle => "MEDIA_BUNDLE",
+                AssetType::Image => "IMAGE",
+                AssetType::Text => "TEXT",
+                AssetType::LeadForm => "LEAD_FORM",
+                AssetType::BookOnGoogle => "BOOK_ON_GOOGLE",
+                AssetType::Promotion => "PROMOTION",
+                AssetType::Callout => "CALLOUT",
+                AssetType::StructuredSnippet => "STRUCTURED_SNIPPET",
+                AssetType::Sitelink => "SITELINK",
+            }
+        }
     }
 }
 /// Container for enum representing the attribution model that describes how to
@@ -4070,6 +6291,25 @@ pub mod attribution_model_enum {
         /// distribution of credit among clicks using Google Search attribution.
         GoogleSearchAttributionDataDriven = 106,
     }
+    impl AttributionModel {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AttributionModel::Unspecified => "UNSPECIFIED",
+                AttributionModel::Unknown => "UNKNOWN",
+                AttributionModel::External => "EXTERNAL",
+                AttributionModel::GoogleAdsLastClick => "GOOGLE_ADS_LAST_CLICK",
+                AttributionModel::GoogleSearchAttributionFirstClick => "GOOGLE_SEARCH_ATTRIBUTION_FIRST_CLICK",
+                AttributionModel::GoogleSearchAttributionLinear => "GOOGLE_SEARCH_ATTRIBUTION_LINEAR",
+                AttributionModel::GoogleSearchAttributionTimeDecay => "GOOGLE_SEARCH_ATTRIBUTION_TIME_DECAY",
+                AttributionModel::GoogleSearchAttributionPositionBased => "GOOGLE_SEARCH_ATTRIBUTION_POSITION_BASED",
+                AttributionModel::GoogleSearchAttributionDataDriven => "GOOGLE_SEARCH_ATTRIBUTION_DATA_DRIVEN",
+            }
+        }
+    }
 }
 // Proto file describing batch job statuses.
 
@@ -4094,6 +6334,21 @@ pub mod batch_job_status_enum {
         /// The job is done.
         Done = 4,
     }
+    impl BatchJobStatus {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                BatchJobStatus::Unspecified => "UNSPECIFIED",
+                BatchJobStatus::Unknown => "UNKNOWN",
+                BatchJobStatus::Pending => "PENDING",
+                BatchJobStatus::Running => "RUNNING",
+                BatchJobStatus::Done => "DONE",
+            }
+        }
+    }
 }
 // Proto file describing bid modifier source.
 
@@ -4116,6 +6371,20 @@ pub mod bid_modifier_source_enum {
         Campaign = 2,
         /// The bid modifier is specified (overridden) at the ad group level.
         AdGroup = 3,
+    }
+    impl BidModifierSource {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                BidModifierSource::Unspecified => "UNSPECIFIED",
+                BidModifierSource::Unknown => "UNKNOWN",
+                BidModifierSource::Campaign => "CAMPAIGN",
+                BidModifierSource::AdGroup => "AD_GROUP",
+            }
+        }
     }
 }
 // Proto file describing bidding sources.
@@ -4143,6 +6412,21 @@ pub mod bidding_source_enum {
         /// The bid or target is defined on the ad group criterion.
         AdGroupCriterion = 7,
     }
+    impl BiddingSource {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                BiddingSource::Unspecified => "UNSPECIFIED",
+                BiddingSource::Unknown => "UNKNOWN",
+                BiddingSource::CampaignBiddingStrategy => "CAMPAIGN_BIDDING_STRATEGY",
+                BiddingSource::AdGroup => "AD_GROUP",
+                BiddingSource::AdGroupCriterion => "AD_GROUP_CRITERION",
+            }
+        }
+    }
 }
 // Proto file describing BiddingStrategy statuses.
 
@@ -4166,6 +6450,20 @@ pub mod bidding_strategy_status_enum {
         Enabled = 2,
         /// The bidding strategy is removed.
         Removed = 4,
+    }
+    impl BiddingStrategyStatus {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                BiddingStrategyStatus::Unspecified => "UNSPECIFIED",
+                BiddingStrategyStatus::Unknown => "UNKNOWN",
+                BiddingStrategyStatus::Enabled => "ENABLED",
+                BiddingStrategyStatus::Removed => "REMOVED",
+            }
+        }
     }
 }
 // Proto file describing bidding schemes.
@@ -4236,6 +6534,33 @@ pub mod bidding_strategy_type_enum {
         /// to help get as many clicks as possible within your budget.
         TargetSpend = 9,
     }
+    impl BiddingStrategyType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                BiddingStrategyType::Unspecified => "UNSPECIFIED",
+                BiddingStrategyType::Unknown => "UNKNOWN",
+                BiddingStrategyType::Commission => "COMMISSION",
+                BiddingStrategyType::EnhancedCpc => "ENHANCED_CPC",
+                BiddingStrategyType::ManualCpc => "MANUAL_CPC",
+                BiddingStrategyType::ManualCpm => "MANUAL_CPM",
+                BiddingStrategyType::ManualCpv => "MANUAL_CPV",
+                BiddingStrategyType::MaximizeConversions => "MAXIMIZE_CONVERSIONS",
+                BiddingStrategyType::MaximizeConversionValue => "MAXIMIZE_CONVERSION_VALUE",
+                BiddingStrategyType::PageOnePromoted => "PAGE_ONE_PROMOTED",
+                BiddingStrategyType::PercentCpc => "PERCENT_CPC",
+                BiddingStrategyType::TargetCpa => "TARGET_CPA",
+                BiddingStrategyType::TargetCpm => "TARGET_CPM",
+                BiddingStrategyType::TargetImpressionShare => "TARGET_IMPRESSION_SHARE",
+                BiddingStrategyType::TargetOutrankShare => "TARGET_OUTRANK_SHARE",
+                BiddingStrategyType::TargetRoas => "TARGET_ROAS",
+                BiddingStrategyType::TargetSpend => "TARGET_SPEND",
+            }
+        }
+    }
 }
 // Proto file describing BillingSetup statuses.
 
@@ -4263,6 +6588,22 @@ pub mod billing_setup_status_enum {
         Approved = 4,
         /// The billing setup was cancelled by the user prior to approval.
         Cancelled = 5,
+    }
+    impl BillingSetupStatus {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                BillingSetupStatus::Unspecified => "UNSPECIFIED",
+                BillingSetupStatus::Unknown => "UNKNOWN",
+                BillingSetupStatus::Pending => "PENDING",
+                BillingSetupStatus::ApprovedHeld => "APPROVED_HELD",
+                BillingSetupStatus::Approved => "APPROVED",
+                BillingSetupStatus::Cancelled => "CANCELLED",
+            }
+        }
     }
 }
 // Proto file describing brand safety suitability settings.
@@ -4308,6 +6649,21 @@ pub mod brand_safety_suitability_enum {
         /// Google video partners.
         LimitedInventory = 4,
     }
+    impl BrandSafetySuitability {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                BrandSafetySuitability::Unspecified => "UNSPECIFIED",
+                BrandSafetySuitability::Unknown => "UNKNOWN",
+                BrandSafetySuitability::ExpandedInventory => "EXPANDED_INVENTORY",
+                BrandSafetySuitability::StandardInventory => "STANDARD_INVENTORY",
+                BrandSafetySuitability::LimitedInventory => "LIMITED_INVENTORY",
+            }
+        }
+    }
 }
 // Proto file describing Budget delivery methods.
 
@@ -4332,6 +6688,20 @@ pub mod budget_delivery_method_enum {
         /// The budget server will not throttle serving,
         /// and ads will serve as fast as possible.
         Accelerated = 3,
+    }
+    impl BudgetDeliveryMethod {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                BudgetDeliveryMethod::Unspecified => "UNSPECIFIED",
+                BudgetDeliveryMethod::Unknown => "UNKNOWN",
+                BudgetDeliveryMethod::Standard => "STANDARD",
+                BudgetDeliveryMethod::Accelerated => "ACCELERATED",
+            }
+        }
     }
 }
 // Proto file describing Budget delivery methods.
@@ -4358,6 +6728,20 @@ pub mod budget_period_enum {
         /// info.
         CustomPeriod = 5,
     }
+    impl BudgetPeriod {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                BudgetPeriod::Unspecified => "UNSPECIFIED",
+                BudgetPeriod::Unknown => "UNKNOWN",
+                BudgetPeriod::Daily => "DAILY",
+                BudgetPeriod::CustomPeriod => "CUSTOM_PERIOD",
+            }
+        }
+    }
 }
 // Proto file describing Budget statuses
 
@@ -4379,6 +6763,20 @@ pub mod budget_status_enum {
         Enabled = 2,
         /// Budget is removed.
         Removed = 3,
+    }
+    impl BudgetStatus {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                BudgetStatus::Unspecified => "UNSPECIFIED",
+                BudgetStatus::Unknown => "UNKNOWN",
+                BudgetStatus::Enabled => "ENABLED",
+                BudgetStatus::Removed => "REMOVED",
+            }
+        }
     }
 }
 // Proto file describing Budget types.
@@ -4417,6 +6815,21 @@ pub mod budget_type_enum {
         /// BiddingStrategyType.TARGET_CPA and PaymentMode.CONVERSIONS.
         FixedCpa = 4,
     }
+    impl BudgetType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                BudgetType::Unspecified => "UNSPECIFIED",
+                BudgetType::Unknown => "UNKNOWN",
+                BudgetType::Standard => "STANDARD",
+                BudgetType::HotelAdsCommission => "HOTEL_ADS_COMMISSION",
+                BudgetType::FixedCpa => "FIXED_CPA",
+            }
+        }
+    }
 }
 // Proto file describing Call placeholder fields.
 
@@ -4452,6 +6865,23 @@ pub mod call_placeholder_field_enum {
         /// USE_RESOURCE_LEVEL_CALL_CONVERSION_ACTION.
         ConversionReportingState = 6,
     }
+    impl CallPlaceholderField {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                CallPlaceholderField::Unspecified => "UNSPECIFIED",
+                CallPlaceholderField::Unknown => "UNKNOWN",
+                CallPlaceholderField::PhoneNumber => "PHONE_NUMBER",
+                CallPlaceholderField::CountryCode => "COUNTRY_CODE",
+                CallPlaceholderField::Tracked => "TRACKED",
+                CallPlaceholderField::ConversionTypeId => "CONVERSION_TYPE_ID",
+                CallPlaceholderField::ConversionReportingState => "CONVERSION_REPORTING_STATE",
+            }
+        }
+    }
 }
 // Proto file describing call tracking display location.
 
@@ -4473,6 +6903,20 @@ pub mod call_tracking_display_location_enum {
         Ad = 2,
         /// The phone call placed from the landing page ad points to.
         LandingPage = 3,
+    }
+    impl CallTrackingDisplayLocation {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                CallTrackingDisplayLocation::Unspecified => "UNSPECIFIED",
+                CallTrackingDisplayLocation::Unknown => "UNKNOWN",
+                CallTrackingDisplayLocation::Ad => "AD",
+                CallTrackingDisplayLocation::LandingPage => "LANDING_PAGE",
+            }
+        }
     }
 }
 // Proto file describing call types.
@@ -4497,6 +6941,20 @@ pub mod call_type_enum {
         /// The phone call was a mobile click-to-call.
         HighEndMobileSearch = 3,
     }
+    impl CallType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                CallType::Unspecified => "UNSPECIFIED",
+                CallType::Unknown => "UNKNOWN",
+                CallType::ManuallyDialed => "MANUALLY_DIALED",
+                CallType::HighEndMobileSearch => "HIGH_END_MOBILE_SEARCH",
+            }
+        }
+    }
 }
 // Proto file describing Callout placeholder fields.
 
@@ -4516,6 +6974,19 @@ pub mod callout_placeholder_field_enum {
         Unknown = 1,
         /// Data Type: STRING. Callout text.
         CalloutText = 2,
+    }
+    impl CalloutPlaceholderField {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                CalloutPlaceholderField::Unspecified => "UNSPECIFIED",
+                CalloutPlaceholderField::Unknown => "UNKNOWN",
+                CalloutPlaceholderField::CalloutText => "CALLOUT_TEXT",
+            }
+        }
     }
 }
 // Proto file describing CampaignCriterion statuses.
@@ -4542,6 +7013,21 @@ pub mod campaign_criterion_status_enum {
         Paused = 3,
         /// The campaign criterion is removed.
         Removed = 4,
+    }
+    impl CampaignCriterionStatus {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                CampaignCriterionStatus::Unspecified => "UNSPECIFIED",
+                CampaignCriterionStatus::Unknown => "UNKNOWN",
+                CampaignCriterionStatus::Enabled => "ENABLED",
+                CampaignCriterionStatus::Paused => "PAUSED",
+                CampaignCriterionStatus::Removed => "REMOVED",
+            }
+        }
     }
 }
 // Proto file describing campaign draft status.
@@ -4576,6 +7062,23 @@ pub mod campaign_draft_status_enum {
         /// attempted again safely, so the issue must be corrected in the original
         /// campaign.
         PromoteFailed = 6,
+    }
+    impl CampaignDraftStatus {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                CampaignDraftStatus::Unspecified => "UNSPECIFIED",
+                CampaignDraftStatus::Unknown => "UNKNOWN",
+                CampaignDraftStatus::Proposed => "PROPOSED",
+                CampaignDraftStatus::Removed => "REMOVED",
+                CampaignDraftStatus::Promoting => "PROMOTING",
+                CampaignDraftStatus::Promoted => "PROMOTED",
+                CampaignDraftStatus::PromoteFailed => "PROMOTE_FAILED",
+            }
+        }
     }
 }
 // Proto file describing campaign experiment status.
@@ -4619,6 +7122,27 @@ pub mod campaign_experiment_status_enum {
         /// The experiment was ended manually. It did not end based on its end date.
         EndedManually = 10,
     }
+    impl CampaignExperimentStatus {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                CampaignExperimentStatus::Unspecified => "UNSPECIFIED",
+                CampaignExperimentStatus::Unknown => "UNKNOWN",
+                CampaignExperimentStatus::Initializing => "INITIALIZING",
+                CampaignExperimentStatus::InitializationFailed => "INITIALIZATION_FAILED",
+                CampaignExperimentStatus::Enabled => "ENABLED",
+                CampaignExperimentStatus::Graduated => "GRADUATED",
+                CampaignExperimentStatus::Removed => "REMOVED",
+                CampaignExperimentStatus::Promoting => "PROMOTING",
+                CampaignExperimentStatus::PromotionFailed => "PROMOTION_FAILED",
+                CampaignExperimentStatus::Promoted => "PROMOTED",
+                CampaignExperimentStatus::EndedManually => "ENDED_MANUALLY",
+            }
+        }
+    }
 }
 // Proto file describing campaign experiment traffic split type.
 
@@ -4643,6 +7167,20 @@ pub mod campaign_experiment_traffic_split_type_enum {
         /// Traffic is split using cookies to keep users in the same arm (base or
         /// experiment) of the experiment.
         Cookie = 3,
+    }
+    impl CampaignExperimentTrafficSplitType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                CampaignExperimentTrafficSplitType::Unspecified => "UNSPECIFIED",
+                CampaignExperimentTrafficSplitType::Unknown => "UNKNOWN",
+                CampaignExperimentTrafficSplitType::RandomQuery => "RANDOM_QUERY",
+                CampaignExperimentTrafficSplitType::Cookie => "COOKIE",
+            }
+        }
     }
 }
 // Proto file describing campaign experiment type.
@@ -4674,6 +7212,21 @@ pub mod campaign_experiment_type_enum {
         /// from the BASE campaign to this experiment campaign.
         Experiment = 4,
     }
+    impl CampaignExperimentType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                CampaignExperimentType::Unspecified => "UNSPECIFIED",
+                CampaignExperimentType::Unknown => "UNKNOWN",
+                CampaignExperimentType::Base => "BASE",
+                CampaignExperimentType::Draft => "DRAFT",
+                CampaignExperimentType::Experiment => "EXPERIMENT",
+            }
+        }
+    }
 }
 // Proto file describing Campaign serving statuses.
 
@@ -4704,6 +7257,23 @@ pub mod campaign_serving_status_enum {
         /// Suspended.
         Suspended = 6,
     }
+    impl CampaignServingStatus {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                CampaignServingStatus::Unspecified => "UNSPECIFIED",
+                CampaignServingStatus::Unknown => "UNKNOWN",
+                CampaignServingStatus::Serving => "SERVING",
+                CampaignServingStatus::None => "NONE",
+                CampaignServingStatus::Ended => "ENDED",
+                CampaignServingStatus::Pending => "PENDING",
+                CampaignServingStatus::Suspended => "SUSPENDED",
+            }
+        }
+    }
 }
 // Proto file describing campaign shared set statuses.
 
@@ -4725,6 +7295,20 @@ pub mod campaign_shared_set_status_enum {
         Enabled = 2,
         /// The campaign shared set is removed and can no longer be used.
         Removed = 3,
+    }
+    impl CampaignSharedSetStatus {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                CampaignSharedSetStatus::Unspecified => "UNSPECIFIED",
+                CampaignSharedSetStatus::Unknown => "UNKNOWN",
+                CampaignSharedSetStatus::Enabled => "ENABLED",
+                CampaignSharedSetStatus::Removed => "REMOVED",
+            }
+        }
     }
 }
 // Proto file describing campaign status.
@@ -4749,6 +7333,21 @@ pub mod campaign_status_enum {
         Paused = 3,
         /// Campaign has been removed.
         Removed = 4,
+    }
+    impl CampaignStatus {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                CampaignStatus::Unspecified => "UNSPECIFIED",
+                CampaignStatus::Unknown => "UNKNOWN",
+                CampaignStatus::Enabled => "ENABLED",
+                CampaignStatus::Paused => "PAUSED",
+                CampaignStatus::Removed => "REMOVED",
+            }
+        }
     }
 }
 // Proto file describing the sources that the change event resource was
@@ -4799,6 +7398,30 @@ pub mod change_client_type_enum {
         /// changes made by coupon redemption through Google Ads.
         Other = 13,
     }
+    impl ChangeClientType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ChangeClientType::Unspecified => "UNSPECIFIED",
+                ChangeClientType::Unknown => "UNKNOWN",
+                ChangeClientType::GoogleAdsWebClient => "GOOGLE_ADS_WEB_CLIENT",
+                ChangeClientType::GoogleAdsAutomatedRule => "GOOGLE_ADS_AUTOMATED_RULE",
+                ChangeClientType::GoogleAdsScripts => "GOOGLE_ADS_SCRIPTS",
+                ChangeClientType::GoogleAdsBulkUpload => "GOOGLE_ADS_BULK_UPLOAD",
+                ChangeClientType::GoogleAdsApi => "GOOGLE_ADS_API",
+                ChangeClientType::GoogleAdsEditor => "GOOGLE_ADS_EDITOR",
+                ChangeClientType::GoogleAdsMobileApp => "GOOGLE_ADS_MOBILE_APP",
+                ChangeClientType::GoogleAdsRecommendations => "GOOGLE_ADS_RECOMMENDATIONS",
+                ChangeClientType::SearchAds360Sync => "SEARCH_ADS_360_SYNC",
+                ChangeClientType::SearchAds360Post => "SEARCH_ADS_360_POST",
+                ChangeClientType::InternalTool => "INTERNAL_TOOL",
+                ChangeClientType::Other => "OTHER",
+            }
+        }
+    }
 }
 // Proto file describing the resource types the ChangeEvent resource supports.
 
@@ -4843,6 +7466,30 @@ pub mod change_event_resource_type_enum {
         /// An AdGroupAd resource change.
         AdGroupAd = 13,
     }
+    impl ChangeEventResourceType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ChangeEventResourceType::Unspecified => "UNSPECIFIED",
+                ChangeEventResourceType::Unknown => "UNKNOWN",
+                ChangeEventResourceType::Ad => "AD",
+                ChangeEventResourceType::AdGroup => "AD_GROUP",
+                ChangeEventResourceType::AdGroupCriterion => "AD_GROUP_CRITERION",
+                ChangeEventResourceType::Campaign => "CAMPAIGN",
+                ChangeEventResourceType::CampaignBudget => "CAMPAIGN_BUDGET",
+                ChangeEventResourceType::AdGroupBidModifier => "AD_GROUP_BID_MODIFIER",
+                ChangeEventResourceType::CampaignCriterion => "CAMPAIGN_CRITERION",
+                ChangeEventResourceType::Feed => "FEED",
+                ChangeEventResourceType::FeedItem => "FEED_ITEM",
+                ChangeEventResourceType::CampaignFeed => "CAMPAIGN_FEED",
+                ChangeEventResourceType::AdGroupFeed => "AD_GROUP_FEED",
+                ChangeEventResourceType::AdGroupAd => "AD_GROUP_AD",
+            }
+        }
+    }
 }
 // Proto file describing the change status operations.
 
@@ -4867,6 +7514,21 @@ pub mod change_status_operation_enum {
         Changed = 3,
         /// The resource was removed.
         Removed = 4,
+    }
+    impl ChangeStatusOperation {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ChangeStatusOperation::Unspecified => "UNSPECIFIED",
+                ChangeStatusOperation::Unknown => "UNKNOWN",
+                ChangeStatusOperation::Added => "ADDED",
+                ChangeStatusOperation::Changed => "CHANGED",
+                ChangeStatusOperation::Removed => "REMOVED",
+            }
+        }
     }
 }
 // Proto file describing the resource types the ChangeStatus resource supports.
@@ -4908,6 +7570,28 @@ pub mod change_status_resource_type_enum {
         /// An AdGroupBidModifier resource change.
         AdGroupBidModifier = 13,
     }
+    impl ChangeStatusResourceType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ChangeStatusResourceType::Unspecified => "UNSPECIFIED",
+                ChangeStatusResourceType::Unknown => "UNKNOWN",
+                ChangeStatusResourceType::AdGroup => "AD_GROUP",
+                ChangeStatusResourceType::AdGroupAd => "AD_GROUP_AD",
+                ChangeStatusResourceType::AdGroupCriterion => "AD_GROUP_CRITERION",
+                ChangeStatusResourceType::Campaign => "CAMPAIGN",
+                ChangeStatusResourceType::CampaignCriterion => "CAMPAIGN_CRITERION",
+                ChangeStatusResourceType::Feed => "FEED",
+                ChangeStatusResourceType::FeedItem => "FEED_ITEM",
+                ChangeStatusResourceType::AdGroupFeed => "AD_GROUP_FEED",
+                ChangeStatusResourceType::CampaignFeed => "CAMPAIGN_FEED",
+                ChangeStatusResourceType::AdGroupBidModifier => "AD_GROUP_BID_MODIFIER",
+            }
+        }
+    }
 }
 // Proto file describing combined audience status.
 
@@ -4930,6 +7614,20 @@ pub mod combined_audience_status_enum {
         /// Removed status - combined audience is removed and cannot be used for
         /// targeting.
         Removed = 3,
+    }
+    impl CombinedAudienceStatus {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                CombinedAudienceStatus::Unspecified => "UNSPECIFIED",
+                CombinedAudienceStatus::Unknown => "UNKNOWN",
+                CombinedAudienceStatus::Enabled => "ENABLED",
+                CombinedAudienceStatus::Removed => "REMOVED",
+            }
+        }
     }
 }
 // Proto file describing conversion action counting type.
@@ -4955,6 +7653,20 @@ pub mod conversion_action_counting_type_enum {
         /// Count all conversions per click.
         ManyPerClick = 3,
     }
+    impl ConversionActionCountingType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ConversionActionCountingType::Unspecified => "UNSPECIFIED",
+                ConversionActionCountingType::Unknown => "UNKNOWN",
+                ConversionActionCountingType::OnePerClick => "ONE_PER_CLICK",
+                ConversionActionCountingType::ManyPerClick => "MANY_PER_CLICK",
+            }
+        }
+    }
 }
 // Proto file describing conversion action status.
 
@@ -4979,6 +7691,21 @@ pub mod conversion_action_status_enum {
         /// Conversions will not be recorded and the conversion action will not
         /// appear in the UI.
         Hidden = 4,
+    }
+    impl ConversionActionStatus {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ConversionActionStatus::Unspecified => "UNSPECIFIED",
+                ConversionActionStatus::Unknown => "UNKNOWN",
+                ConversionActionStatus::Enabled => "ENABLED",
+                ConversionActionStatus::Removed => "REMOVED",
+                ConversionActionStatus::Hidden => "HIDDEN",
+            }
+        }
     }
 }
 // Proto file describing conversion action type.
@@ -5093,6 +7820,53 @@ pub mod conversion_action_type_enum {
         /// Read only.
         StoreVisits = 36,
     }
+    impl ConversionActionType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ConversionActionType::Unspecified => "UNSPECIFIED",
+                ConversionActionType::Unknown => "UNKNOWN",
+                ConversionActionType::AdCall => "AD_CALL",
+                ConversionActionType::ClickToCall => "CLICK_TO_CALL",
+                ConversionActionType::GooglePlayDownload => "GOOGLE_PLAY_DOWNLOAD",
+                ConversionActionType::GooglePlayInAppPurchase => "GOOGLE_PLAY_IN_APP_PURCHASE",
+                ConversionActionType::UploadCalls => "UPLOAD_CALLS",
+                ConversionActionType::UploadClicks => "UPLOAD_CLICKS",
+                ConversionActionType::Webpage => "WEBPAGE",
+                ConversionActionType::WebsiteCall => "WEBSITE_CALL",
+                ConversionActionType::StoreSalesDirectUpload => "STORE_SALES_DIRECT_UPLOAD",
+                ConversionActionType::StoreSales => "STORE_SALES",
+                ConversionActionType::FirebaseAndroidFirstOpen => "FIREBASE_ANDROID_FIRST_OPEN",
+                ConversionActionType::FirebaseAndroidInAppPurchase => "FIREBASE_ANDROID_IN_APP_PURCHASE",
+                ConversionActionType::FirebaseAndroidCustom => "FIREBASE_ANDROID_CUSTOM",
+                ConversionActionType::FirebaseIosFirstOpen => "FIREBASE_IOS_FIRST_OPEN",
+                ConversionActionType::FirebaseIosInAppPurchase => "FIREBASE_IOS_IN_APP_PURCHASE",
+                ConversionActionType::FirebaseIosCustom => "FIREBASE_IOS_CUSTOM",
+                ConversionActionType::ThirdPartyAppAnalyticsAndroidFirstOpen => "THIRD_PARTY_APP_ANALYTICS_ANDROID_FIRST_OPEN",
+                ConversionActionType::ThirdPartyAppAnalyticsAndroidInAppPurchase => "THIRD_PARTY_APP_ANALYTICS_ANDROID_IN_APP_PURCHASE",
+                ConversionActionType::ThirdPartyAppAnalyticsAndroidCustom => "THIRD_PARTY_APP_ANALYTICS_ANDROID_CUSTOM",
+                ConversionActionType::ThirdPartyAppAnalyticsIosFirstOpen => "THIRD_PARTY_APP_ANALYTICS_IOS_FIRST_OPEN",
+                ConversionActionType::ThirdPartyAppAnalyticsIosInAppPurchase => "THIRD_PARTY_APP_ANALYTICS_IOS_IN_APP_PURCHASE",
+                ConversionActionType::ThirdPartyAppAnalyticsIosCustom => "THIRD_PARTY_APP_ANALYTICS_IOS_CUSTOM",
+                ConversionActionType::AndroidAppPreRegistration => "ANDROID_APP_PRE_REGISTRATION",
+                ConversionActionType::AndroidInstallsAllOtherApps => "ANDROID_INSTALLS_ALL_OTHER_APPS",
+                ConversionActionType::FloodlightAction => "FLOODLIGHT_ACTION",
+                ConversionActionType::FloodlightTransaction => "FLOODLIGHT_TRANSACTION",
+                ConversionActionType::GoogleHosted => "GOOGLE_HOSTED",
+                ConversionActionType::LeadFormSubmit => "LEAD_FORM_SUBMIT",
+                ConversionActionType::Salesforce => "SALESFORCE",
+                ConversionActionType::SearchAds360 => "SEARCH_ADS_360",
+                ConversionActionType::SmartCampaignAdClicksToCall => "SMART_CAMPAIGN_AD_CLICKS_TO_CALL",
+                ConversionActionType::SmartCampaignMapClicksToCall => "SMART_CAMPAIGN_MAP_CLICKS_TO_CALL",
+                ConversionActionType::SmartCampaignMapDirections => "SMART_CAMPAIGN_MAP_DIRECTIONS",
+                ConversionActionType::SmartCampaignTrackedCalls => "SMART_CAMPAIGN_TRACKED_CALLS",
+                ConversionActionType::StoreVisits => "STORE_VISITS",
+            }
+        }
+    }
 }
 // Proto file describing conversion adjustment type.
 
@@ -5116,6 +7890,20 @@ pub mod conversion_adjustment_type_enum {
         Retraction = 2,
         /// Changes the value of a conversion.
         Restatement = 3,
+    }
+    impl ConversionAdjustmentType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ConversionAdjustmentType::Unspecified => "UNSPECIFIED",
+                ConversionAdjustmentType::Unknown => "UNKNOWN",
+                ConversionAdjustmentType::Retraction => "RETRACTION",
+                ConversionAdjustmentType::Restatement => "RESTATEMENT",
+            }
+        }
     }
 }
 // Proto file describing conversion custom variable status.
@@ -5146,6 +7934,21 @@ pub mod conversion_custom_variable_status_enum {
         /// until set to ENABLED again.
         Paused = 4,
     }
+    impl ConversionCustomVariableStatus {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ConversionCustomVariableStatus::Unspecified => "UNSPECIFIED",
+                ConversionCustomVariableStatus::Unknown => "UNKNOWN",
+                ConversionCustomVariableStatus::ActivationNeeded => "ACTIVATION_NEEDED",
+                ConversionCustomVariableStatus::Enabled => "ENABLED",
+                ConversionCustomVariableStatus::Paused => "PAUSED",
+            }
+        }
+    }
 }
 // Proto file describing approval status for the criterion.
 
@@ -5167,6 +7970,20 @@ pub mod criterion_system_serving_status_enum {
         Eligible = 2,
         /// Low search volume.
         RarelyServed = 3,
+    }
+    impl CriterionSystemServingStatus {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                CriterionSystemServingStatus::Unspecified => "UNSPECIFIED",
+                CriterionSystemServingStatus::Unknown => "UNKNOWN",
+                CriterionSystemServingStatus::Eligible => "ELIGIBLE",
+                CriterionSystemServingStatus::RarelyServed => "RARELY_SERVED",
+            }
+        }
     }
 }
 // Proto file describing criteria types.
@@ -5250,6 +8067,50 @@ pub mod criterion_type_enum {
         /// Combined audience
         CombinedAudience = 33,
     }
+    impl CriterionType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                CriterionType::Unspecified => "UNSPECIFIED",
+                CriterionType::Unknown => "UNKNOWN",
+                CriterionType::Keyword => "KEYWORD",
+                CriterionType::Placement => "PLACEMENT",
+                CriterionType::MobileAppCategory => "MOBILE_APP_CATEGORY",
+                CriterionType::MobileApplication => "MOBILE_APPLICATION",
+                CriterionType::Device => "DEVICE",
+                CriterionType::Location => "LOCATION",
+                CriterionType::ListingGroup => "LISTING_GROUP",
+                CriterionType::AdSchedule => "AD_SCHEDULE",
+                CriterionType::AgeRange => "AGE_RANGE",
+                CriterionType::Gender => "GENDER",
+                CriterionType::IncomeRange => "INCOME_RANGE",
+                CriterionType::ParentalStatus => "PARENTAL_STATUS",
+                CriterionType::YoutubeVideo => "YOUTUBE_VIDEO",
+                CriterionType::YoutubeChannel => "YOUTUBE_CHANNEL",
+                CriterionType::UserList => "USER_LIST",
+                CriterionType::Proximity => "PROXIMITY",
+                CriterionType::Topic => "TOPIC",
+                CriterionType::ListingScope => "LISTING_SCOPE",
+                CriterionType::Language => "LANGUAGE",
+                CriterionType::IpBlock => "IP_BLOCK",
+                CriterionType::ContentLabel => "CONTENT_LABEL",
+                CriterionType::Carrier => "CARRIER",
+                CriterionType::UserInterest => "USER_INTEREST",
+                CriterionType::Webpage => "WEBPAGE",
+                CriterionType::OperatingSystemVersion => "OPERATING_SYSTEM_VERSION",
+                CriterionType::AppPaymentModel => "APP_PAYMENT_MODEL",
+                CriterionType::MobileDevice => "MOBILE_DEVICE",
+                CriterionType::CustomAffinity => "CUSTOM_AFFINITY",
+                CriterionType::CustomIntent => "CUSTOM_INTENT",
+                CriterionType::LocationGroup => "LOCATION_GROUP",
+                CriterionType::CustomAudience => "CUSTOM_AUDIENCE",
+                CriterionType::CombinedAudience => "COMBINED_AUDIENCE",
+            }
+        }
+    }
 }
 // Proto file describing custom audience member type.
 
@@ -5276,6 +8137,22 @@ pub mod custom_audience_member_type_enum {
         /// Users who have installed a mobile app.
         App = 5,
     }
+    impl CustomAudienceMemberType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                CustomAudienceMemberType::Unspecified => "UNSPECIFIED",
+                CustomAudienceMemberType::Unknown => "UNKNOWN",
+                CustomAudienceMemberType::Keyword => "KEYWORD",
+                CustomAudienceMemberType::Url => "URL",
+                CustomAudienceMemberType::PlaceCategory => "PLACE_CATEGORY",
+                CustomAudienceMemberType::App => "APP",
+            }
+        }
+    }
 }
 // Proto file describing custom audience status.
 
@@ -5298,6 +8175,20 @@ pub mod custom_audience_status_enum {
         /// Removed status - custom audience is removed and cannot be used for
         /// targeting.
         Removed = 3,
+    }
+    impl CustomAudienceStatus {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                CustomAudienceStatus::Unspecified => "UNSPECIFIED",
+                CustomAudienceStatus::Unknown => "UNKNOWN",
+                CustomAudienceStatus::Enabled => "ENABLED",
+                CustomAudienceStatus::Removed => "REMOVED",
+            }
+        }
     }
 }
 // Proto file describing custom audience type.
@@ -5327,6 +8218,22 @@ pub mod custom_audience_type_enum {
         /// Matches users by what they searched on Google Search.
         Search = 5,
     }
+    impl CustomAudienceType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                CustomAudienceType::Unspecified => "UNSPECIFIED",
+                CustomAudienceType::Unknown => "UNKNOWN",
+                CustomAudienceType::Auto => "AUTO",
+                CustomAudienceType::Interest => "INTEREST",
+                CustomAudienceType::PurchaseIntent => "PURCHASE_INTENT",
+                CustomAudienceType::Search => "SEARCH",
+            }
+        }
+    }
 }
 // Proto file describing custom interest member type.
 
@@ -5348,6 +8255,20 @@ pub mod custom_interest_member_type_enum {
         Keyword = 2,
         /// Custom interest member type URL.
         Url = 3,
+    }
+    impl CustomInterestMemberType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                CustomInterestMemberType::Unspecified => "UNSPECIFIED",
+                CustomInterestMemberType::Unknown => "UNKNOWN",
+                CustomInterestMemberType::Keyword => "KEYWORD",
+                CustomInterestMemberType::Url => "URL",
+            }
+        }
     }
 }
 // Proto file describing custom interest status.
@@ -5372,6 +8293,20 @@ pub mod custom_interest_status_enum {
         /// targeting.
         Removed = 3,
     }
+    impl CustomInterestStatus {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                CustomInterestStatus::Unspecified => "UNSPECIFIED",
+                CustomInterestStatus::Unknown => "UNKNOWN",
+                CustomInterestStatus::Enabled => "ENABLED",
+                CustomInterestStatus::Removed => "REMOVED",
+            }
+        }
+    }
 }
 // Proto file describing custom interest type.
 
@@ -5393,6 +8328,20 @@ pub mod custom_interest_type_enum {
         CustomAffinity = 2,
         /// Allows advertisers to define custom intent audience lists.
         CustomIntent = 3,
+    }
+    impl CustomInterestType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                CustomInterestType::Unspecified => "UNSPECIFIED",
+                CustomInterestType::Unknown => "UNKNOWN",
+                CustomInterestType::CustomAffinity => "CUSTOM_AFFINITY",
+                CustomInterestType::CustomIntent => "CUSTOM_INTENT",
+            }
+        }
     }
 }
 // Proto file describing Custom placeholder fields.
@@ -5466,7 +8415,7 @@ pub mod custom_placeholder_field_enum {
         /// The components are defined as follows:
         /// package_id: app ID as specified in Google Play.
         /// scheme: the scheme to pass to the application. Can be HTTP, or a custom
-        ///   scheme.
+        ///    scheme.
         /// host_path: identifies the specific content within your application.
         AndroidAppLink = 18,
         /// Data Type: STRING_LIST. List of recommended IDs to show together with
@@ -5476,6 +8425,38 @@ pub mod custom_placeholder_field_enum {
         IosAppLink = 20,
         /// Data Type: INT64. iOS app store ID.
         IosAppStoreId = 21,
+    }
+    impl CustomPlaceholderField {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                CustomPlaceholderField::Unspecified => "UNSPECIFIED",
+                CustomPlaceholderField::Unknown => "UNKNOWN",
+                CustomPlaceholderField::Id => "ID",
+                CustomPlaceholderField::Id2 => "ID2",
+                CustomPlaceholderField::ItemTitle => "ITEM_TITLE",
+                CustomPlaceholderField::ItemSubtitle => "ITEM_SUBTITLE",
+                CustomPlaceholderField::ItemDescription => "ITEM_DESCRIPTION",
+                CustomPlaceholderField::ItemAddress => "ITEM_ADDRESS",
+                CustomPlaceholderField::Price => "PRICE",
+                CustomPlaceholderField::FormattedPrice => "FORMATTED_PRICE",
+                CustomPlaceholderField::SalePrice => "SALE_PRICE",
+                CustomPlaceholderField::FormattedSalePrice => "FORMATTED_SALE_PRICE",
+                CustomPlaceholderField::ImageUrl => "IMAGE_URL",
+                CustomPlaceholderField::ItemCategory => "ITEM_CATEGORY",
+                CustomPlaceholderField::FinalUrls => "FINAL_URLS",
+                CustomPlaceholderField::FinalMobileUrls => "FINAL_MOBILE_URLS",
+                CustomPlaceholderField::TrackingUrl => "TRACKING_URL",
+                CustomPlaceholderField::ContextualKeywords => "CONTEXTUAL_KEYWORDS",
+                CustomPlaceholderField::AndroidAppLink => "ANDROID_APP_LINK",
+                CustomPlaceholderField::SimilarIds => "SIMILAR_IDS",
+                CustomPlaceholderField::IosAppLink => "IOS_APP_LINK",
+                CustomPlaceholderField::IosAppStoreId => "IOS_APP_STORE_ID",
+            }
+        }
     }
 }
 // Proto file describing pay per conversion eligibility failure reasons.
@@ -5512,6 +8493,25 @@ pub mod customer_pay_per_conversion_eligibility_failure_reason_enum {
         /// Customer is not eligible due to other reasons.
         Other = 8,
     }
+    impl CustomerPayPerConversionEligibilityFailureReason {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                CustomerPayPerConversionEligibilityFailureReason::Unspecified => "UNSPECIFIED",
+                CustomerPayPerConversionEligibilityFailureReason::Unknown => "UNKNOWN",
+                CustomerPayPerConversionEligibilityFailureReason::NotEnoughConversions => "NOT_ENOUGH_CONVERSIONS",
+                CustomerPayPerConversionEligibilityFailureReason::ConversionLagTooHigh => "CONVERSION_LAG_TOO_HIGH",
+                CustomerPayPerConversionEligibilityFailureReason::HasCampaignWithSharedBudget => "HAS_CAMPAIGN_WITH_SHARED_BUDGET",
+                CustomerPayPerConversionEligibilityFailureReason::HasUploadClicksConversion => "HAS_UPLOAD_CLICKS_CONVERSION",
+                CustomerPayPerConversionEligibilityFailureReason::AverageDailySpendTooHigh => "AVERAGE_DAILY_SPEND_TOO_HIGH",
+                CustomerPayPerConversionEligibilityFailureReason::AnalysisNotComplete => "ANALYSIS_NOT_COMPLETE",
+                CustomerPayPerConversionEligibilityFailureReason::Other => "OTHER",
+            }
+        }
+    }
 }
 // Proto file describing data-driven model status.
 
@@ -5543,6 +8543,22 @@ pub mod data_driven_model_status_enum {
         /// because there has never been the required number of events in any 30-day
         /// period.
         NeverGenerated = 5,
+    }
+    impl DataDrivenModelStatus {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                DataDrivenModelStatus::Unspecified => "UNSPECIFIED",
+                DataDrivenModelStatus::Unknown => "UNKNOWN",
+                DataDrivenModelStatus::Available => "AVAILABLE",
+                DataDrivenModelStatus::Stale => "STALE",
+                DataDrivenModelStatus::Expired => "EXPIRED",
+                DataDrivenModelStatus::NeverGenerated => "NEVER_GENERATED",
+            }
+        }
     }
 }
 // Proto file describing distance buckets.
@@ -5618,6 +8634,45 @@ pub mod distance_bucket_enum {
         /// User was beyond 40 miles of the location.
         Beyond40miles = 28,
     }
+    impl DistanceBucket {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                DistanceBucket::Unspecified => "UNSPECIFIED",
+                DistanceBucket::Unknown => "UNKNOWN",
+                DistanceBucket::Within700m => "WITHIN_700M",
+                DistanceBucket::Within1km => "WITHIN_1KM",
+                DistanceBucket::Within5km => "WITHIN_5KM",
+                DistanceBucket::Within10km => "WITHIN_10KM",
+                DistanceBucket::Within15km => "WITHIN_15KM",
+                DistanceBucket::Within20km => "WITHIN_20KM",
+                DistanceBucket::Within25km => "WITHIN_25KM",
+                DistanceBucket::Within30km => "WITHIN_30KM",
+                DistanceBucket::Within35km => "WITHIN_35KM",
+                DistanceBucket::Within40km => "WITHIN_40KM",
+                DistanceBucket::Within45km => "WITHIN_45KM",
+                DistanceBucket::Within50km => "WITHIN_50KM",
+                DistanceBucket::Within55km => "WITHIN_55KM",
+                DistanceBucket::Within60km => "WITHIN_60KM",
+                DistanceBucket::Within65km => "WITHIN_65KM",
+                DistanceBucket::Beyond65km => "BEYOND_65KM",
+                DistanceBucket::Within07miles => "WITHIN_0_7MILES",
+                DistanceBucket::Within1mile => "WITHIN_1MILE",
+                DistanceBucket::Within5miles => "WITHIN_5MILES",
+                DistanceBucket::Within10miles => "WITHIN_10MILES",
+                DistanceBucket::Within15miles => "WITHIN_15MILES",
+                DistanceBucket::Within20miles => "WITHIN_20MILES",
+                DistanceBucket::Within25miles => "WITHIN_25MILES",
+                DistanceBucket::Within30miles => "WITHIN_30MILES",
+                DistanceBucket::Within35miles => "WITHIN_35MILES",
+                DistanceBucket::Within40miles => "WITHIN_40MILES",
+                DistanceBucket::Beyond40miles => "BEYOND_40MILES",
+            }
+        }
+    }
 }
 // Proto file describing Dynamic Search Ad Page Feed criterion fields.
 
@@ -5640,6 +8695,20 @@ pub mod dsa_page_feed_criterion_field_enum {
         /// Data Type: STRING_LIST. The labels that will help you target ads within
         /// your page feed.
         Label = 3,
+    }
+    impl DsaPageFeedCriterionField {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                DsaPageFeedCriterionField::Unspecified => "UNSPECIFIED",
+                DsaPageFeedCriterionField::Unknown => "UNKNOWN",
+                DsaPageFeedCriterionField::PageUrl => "PAGE_URL",
+                DsaPageFeedCriterionField::Label => "LABEL",
+            }
+        }
     }
 }
 // Proto file describing Education placeholder fields.
@@ -5698,7 +8767,7 @@ pub mod education_placeholder_field_enum {
         /// The components are defined as follows:
         /// package_id: app ID as specified in Google Play.
         /// scheme: the scheme to pass to the application. Can be HTTP, or a custom
-        ///   scheme.
+        ///    scheme.
         /// host_path: identifies the specific content within your application.
         AndroidAppLink = 15,
         /// Data Type: STRING_LIST. List of recommended program IDs to show together
@@ -5708,6 +8777,35 @@ pub mod education_placeholder_field_enum {
         IosAppLink = 17,
         /// Data Type: INT64. iOS app store ID.
         IosAppStoreId = 18,
+    }
+    impl EducationPlaceholderField {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                EducationPlaceholderField::Unspecified => "UNSPECIFIED",
+                EducationPlaceholderField::Unknown => "UNKNOWN",
+                EducationPlaceholderField::ProgramId => "PROGRAM_ID",
+                EducationPlaceholderField::LocationId => "LOCATION_ID",
+                EducationPlaceholderField::ProgramName => "PROGRAM_NAME",
+                EducationPlaceholderField::AreaOfStudy => "AREA_OF_STUDY",
+                EducationPlaceholderField::ProgramDescription => "PROGRAM_DESCRIPTION",
+                EducationPlaceholderField::SchoolName => "SCHOOL_NAME",
+                EducationPlaceholderField::Address => "ADDRESS",
+                EducationPlaceholderField::ThumbnailImageUrl => "THUMBNAIL_IMAGE_URL",
+                EducationPlaceholderField::AlternativeThumbnailImageUrl => "ALTERNATIVE_THUMBNAIL_IMAGE_URL",
+                EducationPlaceholderField::FinalUrls => "FINAL_URLS",
+                EducationPlaceholderField::FinalMobileUrls => "FINAL_MOBILE_URLS",
+                EducationPlaceholderField::TrackingUrl => "TRACKING_URL",
+                EducationPlaceholderField::ContextualKeywords => "CONTEXTUAL_KEYWORDS",
+                EducationPlaceholderField::AndroidAppLink => "ANDROID_APP_LINK",
+                EducationPlaceholderField::SimilarProgramIds => "SIMILAR_PROGRAM_IDS",
+                EducationPlaceholderField::IosAppLink => "IOS_APP_LINK",
+                EducationPlaceholderField::IosAppStoreId => "IOS_APP_STORE_ID",
+            }
+        }
     }
 }
 // Proto file describing extension setting device type.
@@ -5732,6 +8830,20 @@ pub mod extension_setting_device_enum {
         /// Desktop. The extensions in the extension setting will only serve on
         /// desktop devices.
         Desktop = 3,
+    }
+    impl ExtensionSettingDevice {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ExtensionSettingDevice::Unspecified => "UNSPECIFIED",
+                ExtensionSettingDevice::Unknown => "UNKNOWN",
+                ExtensionSettingDevice::Mobile => "MOBILE",
+                ExtensionSettingDevice::Desktop => "DESKTOP",
+            }
+        }
     }
 }
 // Proto file describing extension type.
@@ -5778,6 +8890,31 @@ pub mod extension_type_enum {
         /// Image.
         Image = 16,
     }
+    impl ExtensionType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ExtensionType::Unspecified => "UNSPECIFIED",
+                ExtensionType::Unknown => "UNKNOWN",
+                ExtensionType::None => "NONE",
+                ExtensionType::App => "APP",
+                ExtensionType::Call => "CALL",
+                ExtensionType::Callout => "CALLOUT",
+                ExtensionType::Message => "MESSAGE",
+                ExtensionType::Price => "PRICE",
+                ExtensionType::Promotion => "PROMOTION",
+                ExtensionType::Sitelink => "SITELINK",
+                ExtensionType::StructuredSnippet => "STRUCTURED_SNIPPET",
+                ExtensionType::Location => "LOCATION",
+                ExtensionType::AffiliateLocation => "AFFILIATE_LOCATION",
+                ExtensionType::HotelCallout => "HOTEL_CALLOUT",
+                ExtensionType::Image => "IMAGE",
+            }
+        }
+    }
 }
 // Proto file describing feed attribute type.
 
@@ -5822,6 +8959,31 @@ pub mod feed_attribute_type_enum {
         /// Price.
         Price = 14,
     }
+    impl FeedAttributeType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                FeedAttributeType::Unspecified => "UNSPECIFIED",
+                FeedAttributeType::Unknown => "UNKNOWN",
+                FeedAttributeType::Int64 => "INT64",
+                FeedAttributeType::Double => "DOUBLE",
+                FeedAttributeType::String => "STRING",
+                FeedAttributeType::Boolean => "BOOLEAN",
+                FeedAttributeType::Url => "URL",
+                FeedAttributeType::DateTime => "DATE_TIME",
+                FeedAttributeType::Int64List => "INT64_LIST",
+                FeedAttributeType::DoubleList => "DOUBLE_LIST",
+                FeedAttributeType::StringList => "STRING_LIST",
+                FeedAttributeType::BooleanList => "BOOLEAN_LIST",
+                FeedAttributeType::UrlList => "URL_LIST",
+                FeedAttributeType::DateTimeList => "DATE_TIME_LIST",
+                FeedAttributeType::Price => "PRICE",
+            }
+        }
+    }
 }
 // Proto file describing feed item quality evaluation approval statuses.
 
@@ -5845,6 +9007,20 @@ pub mod feed_item_quality_approval_status_enum {
         /// Does not meet some quality expectations. The specific reason is found in
         /// the quality_disapproval_reasons field.
         Disapproved = 3,
+    }
+    impl FeedItemQualityApprovalStatus {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                FeedItemQualityApprovalStatus::Unspecified => "UNSPECIFIED",
+                FeedItemQualityApprovalStatus::Unknown => "UNKNOWN",
+                FeedItemQualityApprovalStatus::Approved => "APPROVED",
+                FeedItemQualityApprovalStatus::Disapproved => "DISAPPROVED",
+            }
+        }
     }
 }
 // Proto file describing feed item quality disapproval reasons.
@@ -5901,6 +9077,36 @@ pub mod feed_item_quality_disapproval_reason_enum {
         /// Structured snippet contain promotional text.
         StructuredSnippetsHasPromotionalText = 19,
     }
+    impl FeedItemQualityDisapprovalReason {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                FeedItemQualityDisapprovalReason::Unspecified => "UNSPECIFIED",
+                FeedItemQualityDisapprovalReason::Unknown => "UNKNOWN",
+                FeedItemQualityDisapprovalReason::PriceTableRepetitiveHeaders => "PRICE_TABLE_REPETITIVE_HEADERS",
+                FeedItemQualityDisapprovalReason::PriceTableRepetitiveDescription => "PRICE_TABLE_REPETITIVE_DESCRIPTION",
+                FeedItemQualityDisapprovalReason::PriceTableInconsistentRows => "PRICE_TABLE_INCONSISTENT_ROWS",
+                FeedItemQualityDisapprovalReason::PriceDescriptionHasPriceQualifiers => "PRICE_DESCRIPTION_HAS_PRICE_QUALIFIERS",
+                FeedItemQualityDisapprovalReason::PriceUnsupportedLanguage => "PRICE_UNSUPPORTED_LANGUAGE",
+                FeedItemQualityDisapprovalReason::PriceTableRowHeaderTableTypeMismatch => "PRICE_TABLE_ROW_HEADER_TABLE_TYPE_MISMATCH",
+                FeedItemQualityDisapprovalReason::PriceTableRowHeaderHasPromotionalText => "PRICE_TABLE_ROW_HEADER_HAS_PROMOTIONAL_TEXT",
+                FeedItemQualityDisapprovalReason::PriceTableRowDescriptionNotRelevant => "PRICE_TABLE_ROW_DESCRIPTION_NOT_RELEVANT",
+                FeedItemQualityDisapprovalReason::PriceTableRowDescriptionHasPromotionalText => "PRICE_TABLE_ROW_DESCRIPTION_HAS_PROMOTIONAL_TEXT",
+                FeedItemQualityDisapprovalReason::PriceTableRowHeaderDescriptionRepetitive => "PRICE_TABLE_ROW_HEADER_DESCRIPTION_REPETITIVE",
+                FeedItemQualityDisapprovalReason::PriceTableRowUnrateable => "PRICE_TABLE_ROW_UNRATEABLE",
+                FeedItemQualityDisapprovalReason::PriceTableRowPriceInvalid => "PRICE_TABLE_ROW_PRICE_INVALID",
+                FeedItemQualityDisapprovalReason::PriceTableRowUrlInvalid => "PRICE_TABLE_ROW_URL_INVALID",
+                FeedItemQualityDisapprovalReason::PriceHeaderOrDescriptionHasPrice => "PRICE_HEADER_OR_DESCRIPTION_HAS_PRICE",
+                FeedItemQualityDisapprovalReason::StructuredSnippetsHeaderPolicyViolated => "STRUCTURED_SNIPPETS_HEADER_POLICY_VIOLATED",
+                FeedItemQualityDisapprovalReason::StructuredSnippetsRepeatedValues => "STRUCTURED_SNIPPETS_REPEATED_VALUES",
+                FeedItemQualityDisapprovalReason::StructuredSnippetsEditorialGuidelines => "STRUCTURED_SNIPPETS_EDITORIAL_GUIDELINES",
+                FeedItemQualityDisapprovalReason::StructuredSnippetsHasPromotionalText => "STRUCTURED_SNIPPETS_HAS_PROMOTIONAL_TEXT",
+            }
+        }
+    }
 }
 // Proto file describing feed item set status.
 
@@ -5922,6 +9128,20 @@ pub mod feed_item_set_status_enum {
         Enabled = 2,
         /// Feed item set has been removed.
         Removed = 3,
+    }
+    impl FeedItemSetStatus {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                FeedItemSetStatus::Unspecified => "UNSPECIFIED",
+                FeedItemSetStatus::Unknown => "UNKNOWN",
+                FeedItemSetStatus::Enabled => "ENABLED",
+                FeedItemSetStatus::Removed => "REMOVED",
+            }
+        }
     }
 }
 // Proto file describing feed item status.
@@ -5945,6 +9165,20 @@ pub mod feed_item_status_enum {
         /// Feed item has been removed.
         Removed = 3,
     }
+    impl FeedItemStatus {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                FeedItemStatus::Unspecified => "UNSPECIFIED",
+                FeedItemStatus::Unknown => "UNKNOWN",
+                FeedItemStatus::Enabled => "ENABLED",
+                FeedItemStatus::Removed => "REMOVED",
+            }
+        }
+    }
 }
 // Proto file describing feed item target device type.
 
@@ -5965,6 +9199,19 @@ pub mod feed_item_target_device_enum {
         Unknown = 1,
         /// Mobile.
         Mobile = 2,
+    }
+    impl FeedItemTargetDevice {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                FeedItemTargetDevice::Unspecified => "UNSPECIFIED",
+                FeedItemTargetDevice::Unknown => "UNKNOWN",
+                FeedItemTargetDevice::Mobile => "MOBILE",
+            }
+        }
     }
 }
 // Proto file describing feed item target status.
@@ -5987,6 +9234,20 @@ pub mod feed_item_target_status_enum {
         Enabled = 2,
         /// Feed item target has been removed.
         Removed = 3,
+    }
+    impl FeedItemTargetStatus {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                FeedItemTargetStatus::Unspecified => "UNSPECIFIED",
+                FeedItemTargetStatus::Unknown => "UNKNOWN",
+                FeedItemTargetStatus::Enabled => "ENABLED",
+                FeedItemTargetStatus::Removed => "REMOVED",
+            }
+        }
     }
 }
 // Proto file describing feed item target type status.
@@ -6012,6 +9273,21 @@ pub mod feed_item_target_type_enum {
         /// Feed item targets a criterion.
         Criterion = 4,
     }
+    impl FeedItemTargetType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                FeedItemTargetType::Unspecified => "UNSPECIFIED",
+                FeedItemTargetType::Unknown => "UNKNOWN",
+                FeedItemTargetType::Campaign => "CAMPAIGN",
+                FeedItemTargetType::AdGroup => "AD_GROUP",
+                FeedItemTargetType::Criterion => "CRITERION",
+            }
+        }
+    }
 }
 // Proto file describing feed item validation statuses.
 
@@ -6036,6 +9312,21 @@ pub mod feed_item_validation_status_enum {
         /// Feed item is semantically well-formed.
         Valid = 4,
     }
+    impl FeedItemValidationStatus {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                FeedItemValidationStatus::Unspecified => "UNSPECIFIED",
+                FeedItemValidationStatus::Unknown => "UNKNOWN",
+                FeedItemValidationStatus::Pending => "PENDING",
+                FeedItemValidationStatus::Invalid => "INVALID",
+                FeedItemValidationStatus::Valid => "VALID",
+            }
+        }
+    }
 }
 // Proto file describing status of a feed link.
 
@@ -6057,6 +9348,20 @@ pub mod feed_link_status_enum {
         Enabled = 2,
         /// Feed link has been removed.
         Removed = 3,
+    }
+    impl FeedLinkStatus {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                FeedLinkStatus::Unspecified => "UNSPECIFIED",
+                FeedLinkStatus::Unknown => "UNKNOWN",
+                FeedLinkStatus::Enabled => "ENABLED",
+                FeedLinkStatus::Removed => "REMOVED",
+            }
+        }
     }
 }
 // Proto file describing criterion types for feed mappings.
@@ -6080,6 +9385,20 @@ pub mod feed_mapping_criterion_type_enum {
         /// Allows url targeting for your dynamic search ads within a page feed.
         DsaPageFeed = 3,
     }
+    impl FeedMappingCriterionType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                FeedMappingCriterionType::Unspecified => "UNSPECIFIED",
+                FeedMappingCriterionType::Unknown => "UNKNOWN",
+                FeedMappingCriterionType::LocationExtensionTargeting => "LOCATION_EXTENSION_TARGETING",
+                FeedMappingCriterionType::DsaPageFeed => "DSA_PAGE_FEED",
+            }
+        }
+    }
 }
 // Proto file describing feed mapping status.
 
@@ -6101,6 +9420,20 @@ pub mod feed_mapping_status_enum {
         Enabled = 2,
         /// Feed mapping has been removed.
         Removed = 3,
+    }
+    impl FeedMappingStatus {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                FeedMappingStatus::Unspecified => "UNSPECIFIED",
+                FeedMappingStatus::Unknown => "UNKNOWN",
+                FeedMappingStatus::Enabled => "ENABLED",
+                FeedMappingStatus::Removed => "REMOVED",
+            }
+        }
     }
 }
 // Proto file describing feed origin.
@@ -6127,6 +9460,20 @@ pub mod feed_origin_enum {
         /// for the placeholder type of the feed.
         Google = 3,
     }
+    impl FeedOrigin {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                FeedOrigin::Unspecified => "UNSPECIFIED",
+                FeedOrigin::Unknown => "UNKNOWN",
+                FeedOrigin::User => "USER",
+                FeedOrigin::Google => "GOOGLE",
+            }
+        }
+    }
 }
 // Proto file describing feed status.
 
@@ -6148,6 +9495,20 @@ pub mod feed_status_enum {
         Enabled = 2,
         /// Feed has been removed.
         Removed = 3,
+    }
+    impl FeedStatus {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                FeedStatus::Unspecified => "UNSPECIFIED",
+                FeedStatus::Unknown => "UNKNOWN",
+                FeedStatus::Enabled => "ENABLED",
+                FeedStatus::Removed => "REMOVED",
+            }
+        }
     }
 }
 // Proto file describing Flight placeholder fields.
@@ -6213,7 +9574,7 @@ pub mod flight_placeholder_field_enum {
         /// The components are defined as follows:
         /// package_id: app ID as specified in Google Play.
         /// scheme: the scheme to pass to the application. Can be HTTP, or a custom
-        ///   scheme.
+        ///    scheme.
         /// host_path: identifies the specific content within your application.
         AndroidAppLink = 15,
         /// Data Type: STRING_LIST. List of recommended destination IDs to show
@@ -6223,6 +9584,35 @@ pub mod flight_placeholder_field_enum {
         IosAppLink = 17,
         /// Data Type: INT64. iOS app store ID.
         IosAppStoreId = 18,
+    }
+    impl FlightPlaceholderField {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                FlightPlaceholderField::Unspecified => "UNSPECIFIED",
+                FlightPlaceholderField::Unknown => "UNKNOWN",
+                FlightPlaceholderField::DestinationId => "DESTINATION_ID",
+                FlightPlaceholderField::OriginId => "ORIGIN_ID",
+                FlightPlaceholderField::FlightDescription => "FLIGHT_DESCRIPTION",
+                FlightPlaceholderField::OriginName => "ORIGIN_NAME",
+                FlightPlaceholderField::DestinationName => "DESTINATION_NAME",
+                FlightPlaceholderField::FlightPrice => "FLIGHT_PRICE",
+                FlightPlaceholderField::FormattedPrice => "FORMATTED_PRICE",
+                FlightPlaceholderField::FlightSalePrice => "FLIGHT_SALE_PRICE",
+                FlightPlaceholderField::FormattedSalePrice => "FORMATTED_SALE_PRICE",
+                FlightPlaceholderField::ImageUrl => "IMAGE_URL",
+                FlightPlaceholderField::FinalUrls => "FINAL_URLS",
+                FlightPlaceholderField::FinalMobileUrls => "FINAL_MOBILE_URLS",
+                FlightPlaceholderField::TrackingUrl => "TRACKING_URL",
+                FlightPlaceholderField::AndroidAppLink => "ANDROID_APP_LINK",
+                FlightPlaceholderField::SimilarDestinationIds => "SIMILAR_DESTINATION_IDS",
+                FlightPlaceholderField::IosAppLink => "IOS_APP_LINK",
+                FlightPlaceholderField::IosAppStoreId => "IOS_APP_STORE_ID",
+            }
+        }
     }
 }
 // Proto file describing geo target constant statuses.
@@ -6248,6 +9638,20 @@ pub mod geo_target_constant_status_enum {
         /// The geo target constant is obsolete and will be removed.
         RemovalPlanned = 3,
     }
+    impl GeoTargetConstantStatus {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                GeoTargetConstantStatus::Unspecified => "UNSPECIFIED",
+                GeoTargetConstantStatus::Unknown => "UNKNOWN",
+                GeoTargetConstantStatus::Enabled => "ENABLED",
+                GeoTargetConstantStatus::RemovalPlanned => "REMOVAL_PLANNED",
+            }
+        }
+    }
 }
 // Proto file describing GeoTargetingRestriction.
 
@@ -6270,6 +9674,19 @@ pub mod geo_targeting_restriction_enum {
         /// the user.
         LocationOfPresence = 2,
     }
+    impl GeoTargetingRestriction {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                GeoTargetingRestriction::Unspecified => "UNSPECIFIED",
+                GeoTargetingRestriction::Unknown => "UNKNOWN",
+                GeoTargetingRestriction::LocationOfPresence => "LOCATION_OF_PRESENCE",
+            }
+        }
+    }
 }
 // Proto file describing geo targeting types.
 
@@ -6291,6 +9708,20 @@ pub mod geo_targeting_type_enum {
         AreaOfInterest = 2,
         /// Location of the user issuing the query.
         LocationOfPresence = 3,
+    }
+    impl GeoTargetingType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                GeoTargetingType::Unspecified => "UNSPECIFIED",
+                GeoTargetingType::Unknown => "UNKNOWN",
+                GeoTargetingType::AreaOfInterest => "AREA_OF_INTEREST",
+                GeoTargetingType::LocationOfPresence => "LOCATION_OF_PRESENCE",
+            }
+        }
     }
 }
 // Proto file describing GoogleAdsField categories
@@ -6322,6 +9753,22 @@ pub mod google_ads_field_category_enum {
         /// The described artifact is a field and is a metric. It never segments
         /// search queries.
         Metric = 6,
+    }
+    impl GoogleAdsFieldCategory {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                GoogleAdsFieldCategory::Unspecified => "UNSPECIFIED",
+                GoogleAdsFieldCategory::Unknown => "UNKNOWN",
+                GoogleAdsFieldCategory::Resource => "RESOURCE",
+                GoogleAdsFieldCategory::Attribute => "ATTRIBUTE",
+                GoogleAdsFieldCategory::Segment => "SEGMENT",
+                GoogleAdsFieldCategory::Metric => "METRIC",
+            }
+        }
     }
 }
 // Proto file describing GoogleAdsField data types
@@ -6388,6 +9835,29 @@ pub mod google_ads_field_data_type_enum {
         /// Applicable operators:  =, !=, <, >, <=, >=, BETWEEN, IN, NOT IN
         Uint64 = 12,
     }
+    impl GoogleAdsFieldDataType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                GoogleAdsFieldDataType::Unspecified => "UNSPECIFIED",
+                GoogleAdsFieldDataType::Unknown => "UNKNOWN",
+                GoogleAdsFieldDataType::Boolean => "BOOLEAN",
+                GoogleAdsFieldDataType::Date => "DATE",
+                GoogleAdsFieldDataType::Double => "DOUBLE",
+                GoogleAdsFieldDataType::Enum => "ENUM",
+                GoogleAdsFieldDataType::Float => "FLOAT",
+                GoogleAdsFieldDataType::Int32 => "INT32",
+                GoogleAdsFieldDataType::Int64 => "INT64",
+                GoogleAdsFieldDataType::Message => "MESSAGE",
+                GoogleAdsFieldDataType::ResourceName => "RESOURCE_NAME",
+                GoogleAdsFieldDataType::String => "STRING",
+                GoogleAdsFieldDataType::Uint64 => "UINT64",
+            }
+        }
+    }
 }
 // Proto file describing google voice call status.
 
@@ -6409,6 +9879,20 @@ pub mod google_voice_call_status_enum {
         Missed = 2,
         /// The call was received.
         Received = 3,
+    }
+    impl GoogleVoiceCallStatus {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                GoogleVoiceCallStatus::Unspecified => "UNSPECIFIED",
+                GoogleVoiceCallStatus::Unknown => "UNKNOWN",
+                GoogleVoiceCallStatus::Missed => "MISSED",
+                GoogleVoiceCallStatus::Received => "RECEIVED",
+            }
+        }
     }
 }
 // Proto file describing Hotel placeholder fields.
@@ -6477,7 +9961,7 @@ pub mod hotel_placeholder_field_enum {
         /// The components are defined as follows:
         /// package_id: app ID as specified in Google Play.
         /// scheme: the scheme to pass to the application. Can be HTTP, or a custom
-        ///   scheme.
+        ///    scheme.
         /// host_path: identifies the specific content within your application.
         AndroidAppLink = 18,
         /// Data Type: STRING_LIST. List of recommended property IDs to show together
@@ -6487,6 +9971,38 @@ pub mod hotel_placeholder_field_enum {
         IosAppLink = 20,
         /// Data Type: INT64. iOS app store ID.
         IosAppStoreId = 21,
+    }
+    impl HotelPlaceholderField {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                HotelPlaceholderField::Unspecified => "UNSPECIFIED",
+                HotelPlaceholderField::Unknown => "UNKNOWN",
+                HotelPlaceholderField::PropertyId => "PROPERTY_ID",
+                HotelPlaceholderField::PropertyName => "PROPERTY_NAME",
+                HotelPlaceholderField::DestinationName => "DESTINATION_NAME",
+                HotelPlaceholderField::Description => "DESCRIPTION",
+                HotelPlaceholderField::Address => "ADDRESS",
+                HotelPlaceholderField::Price => "PRICE",
+                HotelPlaceholderField::FormattedPrice => "FORMATTED_PRICE",
+                HotelPlaceholderField::SalePrice => "SALE_PRICE",
+                HotelPlaceholderField::FormattedSalePrice => "FORMATTED_SALE_PRICE",
+                HotelPlaceholderField::ImageUrl => "IMAGE_URL",
+                HotelPlaceholderField::Category => "CATEGORY",
+                HotelPlaceholderField::StarRating => "STAR_RATING",
+                HotelPlaceholderField::ContextualKeywords => "CONTEXTUAL_KEYWORDS",
+                HotelPlaceholderField::FinalUrls => "FINAL_URLS",
+                HotelPlaceholderField::FinalMobileUrls => "FINAL_MOBILE_URLS",
+                HotelPlaceholderField::TrackingUrl => "TRACKING_URL",
+                HotelPlaceholderField::AndroidAppLink => "ANDROID_APP_LINK",
+                HotelPlaceholderField::SimilarPropertyIds => "SIMILAR_PROPERTY_IDS",
+                HotelPlaceholderField::IosAppLink => "IOS_APP_LINK",
+                HotelPlaceholderField::IosAppStoreId => "IOS_APP_STORE_ID",
+            }
+        }
     }
 }
 // Proto file describing Advertiser Provided Image placeholder fields.
@@ -6507,6 +10023,19 @@ pub mod image_placeholder_field_enum {
         Unknown = 1,
         /// Data Type: INT64. The asset ID of the image.
         AssetId = 2,
+    }
+    impl ImagePlaceholderField {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ImagePlaceholderField::Unspecified => "UNSPECIFIED",
+                ImagePlaceholderField::Unknown => "UNKNOWN",
+                ImagePlaceholderField::AssetId => "ASSET_ID",
+            }
+        }
     }
 }
 // Proto file describing invoice types.
@@ -6529,6 +10058,20 @@ pub mod invoice_type_enum {
         CreditMemo = 2,
         /// An invoice with a positive amount. The account owes a balance.
         Invoice = 3,
+    }
+    impl InvoiceType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                InvoiceType::Unspecified => "UNSPECIFIED",
+                InvoiceType::Unknown => "UNKNOWN",
+                InvoiceType::CreditMemo => "CREDIT_MEMO",
+                InvoiceType::Invoice => "INVOICE",
+            }
+        }
     }
 }
 // Proto file describing Job placeholder fields.
@@ -6591,7 +10134,7 @@ pub mod job_placeholder_field_enum {
         /// The components are defined as follows:
         /// package_id: app ID as specified in Google Play.
         /// scheme: the scheme to pass to the application. Can be HTTP, or a custom
-        ///   scheme.
+        ///    scheme.
         /// host_path: identifies the specific content within your application.
         AndroidAppLink = 16,
         /// Data Type: STRING_LIST. List of recommended job IDs to show together with
@@ -6601,6 +10144,35 @@ pub mod job_placeholder_field_enum {
         IosAppLink = 18,
         /// Data Type: INT64. iOS app store ID.
         IosAppStoreId = 19,
+    }
+    impl JobPlaceholderField {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                JobPlaceholderField::Unspecified => "UNSPECIFIED",
+                JobPlaceholderField::Unknown => "UNKNOWN",
+                JobPlaceholderField::JobId => "JOB_ID",
+                JobPlaceholderField::LocationId => "LOCATION_ID",
+                JobPlaceholderField::Title => "TITLE",
+                JobPlaceholderField::Subtitle => "SUBTITLE",
+                JobPlaceholderField::Description => "DESCRIPTION",
+                JobPlaceholderField::ImageUrl => "IMAGE_URL",
+                JobPlaceholderField::Category => "CATEGORY",
+                JobPlaceholderField::ContextualKeywords => "CONTEXTUAL_KEYWORDS",
+                JobPlaceholderField::Address => "ADDRESS",
+                JobPlaceholderField::Salary => "SALARY",
+                JobPlaceholderField::FinalUrls => "FINAL_URLS",
+                JobPlaceholderField::FinalMobileUrls => "FINAL_MOBILE_URLS",
+                JobPlaceholderField::TrackingUrl => "TRACKING_URL",
+                JobPlaceholderField::AndroidAppLink => "ANDROID_APP_LINK",
+                JobPlaceholderField::SimilarJobIds => "SIMILAR_JOB_IDS",
+                JobPlaceholderField::IosAppLink => "IOS_APP_LINK",
+                JobPlaceholderField::IosAppStoreId => "IOS_APP_STORE_ID",
+            }
+        }
     }
 }
 // Proto file describing keyword plan forecast intervals.
@@ -6629,6 +10201,21 @@ pub mod keyword_plan_forecast_interval_enum {
         /// The next quarter date range for keyword plan.
         NextQuarter = 5,
     }
+    impl KeywordPlanForecastInterval {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                KeywordPlanForecastInterval::Unspecified => "UNSPECIFIED",
+                KeywordPlanForecastInterval::Unknown => "UNKNOWN",
+                KeywordPlanForecastInterval::NextWeek => "NEXT_WEEK",
+                KeywordPlanForecastInterval::NextMonth => "NEXT_MONTH",
+                KeywordPlanForecastInterval::NextQuarter => "NEXT_QUARTER",
+            }
+        }
+    }
 }
 // Proto file describing Keyword Planner Keyword annotation types.
 
@@ -6648,6 +10235,19 @@ pub mod keyword_plan_keyword_annotation_enum {
         Unknown = 1,
         /// Return the keyword concept and concept group data.
         KeywordConcept = 2,
+    }
+    impl KeywordPlanKeywordAnnotation {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                KeywordPlanKeywordAnnotation::Unspecified => "UNSPECIFIED",
+                KeywordPlanKeywordAnnotation::Unknown => "UNKNOWN",
+                KeywordPlanKeywordAnnotation::KeywordConcept => "KEYWORD_CONCEPT",
+            }
+        }
     }
 }
 // Proto file describing Keyword Planner forecastable network types.
@@ -6671,6 +10271,20 @@ pub mod keyword_plan_network_enum {
         /// Google Search + Search partners.
         GoogleSearchAndPartners = 3,
     }
+    impl KeywordPlanNetwork {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                KeywordPlanNetwork::Unspecified => "UNSPECIFIED",
+                KeywordPlanNetwork::Unknown => "UNKNOWN",
+                KeywordPlanNetwork::GoogleSearch => "GOOGLE_SEARCH",
+                KeywordPlanNetwork::GoogleSearchAndPartners => "GOOGLE_SEARCH_AND_PARTNERS",
+            }
+        }
+    }
 }
 /// Container for enum describing possible status of a label.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -6690,6 +10304,20 @@ pub mod label_status_enum {
         Enabled = 2,
         /// Label is removed.
         Removed = 3,
+    }
+    impl LabelStatus {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                LabelStatus::Unspecified => "UNSPECIFIED",
+                LabelStatus::Unknown => "UNKNOWN",
+                LabelStatus::Enabled => "ENABLED",
+                LabelStatus::Removed => "REMOVED",
+            }
+        }
     }
 }
 /// Container for enum describing different types of Linked accounts.
@@ -6713,6 +10341,21 @@ pub mod linked_account_type_enum {
         DataPartner = 3,
         /// A link to Google Ads.
         GoogleAds = 4,
+    }
+    impl LinkedAccountType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                LinkedAccountType::Unspecified => "UNSPECIFIED",
+                LinkedAccountType::Unknown => "UNKNOWN",
+                LinkedAccountType::ThirdPartyAppAnalytics => "THIRD_PARTY_APP_ANALYTICS",
+                LinkedAccountType::DataPartner => "DATA_PARTNER",
+                LinkedAccountType::GoogleAds => "GOOGLE_ADS",
+            }
+        }
     }
 }
 // Proto file describing Local placeholder fields.
@@ -6777,7 +10420,7 @@ pub mod local_placeholder_field_enum {
         /// The components are defined as follows:
         /// package_id: app ID as specified in Google Play.
         /// scheme: the scheme to pass to the application. Can be HTTP, or a custom
-        ///   scheme.
+        ///    scheme.
         /// host_path: identifies the specific content within your application.
         AndroidAppLink = 17,
         /// Data Type: STRING_LIST. List of recommended local deal IDs to show
@@ -6787,6 +10430,37 @@ pub mod local_placeholder_field_enum {
         IosAppLink = 19,
         /// Data Type: INT64. iOS app store ID.
         IosAppStoreId = 20,
+    }
+    impl LocalPlaceholderField {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                LocalPlaceholderField::Unspecified => "UNSPECIFIED",
+                LocalPlaceholderField::Unknown => "UNKNOWN",
+                LocalPlaceholderField::DealId => "DEAL_ID",
+                LocalPlaceholderField::DealName => "DEAL_NAME",
+                LocalPlaceholderField::Subtitle => "SUBTITLE",
+                LocalPlaceholderField::Description => "DESCRIPTION",
+                LocalPlaceholderField::Price => "PRICE",
+                LocalPlaceholderField::FormattedPrice => "FORMATTED_PRICE",
+                LocalPlaceholderField::SalePrice => "SALE_PRICE",
+                LocalPlaceholderField::FormattedSalePrice => "FORMATTED_SALE_PRICE",
+                LocalPlaceholderField::ImageUrl => "IMAGE_URL",
+                LocalPlaceholderField::Address => "ADDRESS",
+                LocalPlaceholderField::Category => "CATEGORY",
+                LocalPlaceholderField::ContextualKeywords => "CONTEXTUAL_KEYWORDS",
+                LocalPlaceholderField::FinalUrls => "FINAL_URLS",
+                LocalPlaceholderField::FinalMobileUrls => "FINAL_MOBILE_URLS",
+                LocalPlaceholderField::TrackingUrl => "TRACKING_URL",
+                LocalPlaceholderField::AndroidAppLink => "ANDROID_APP_LINK",
+                LocalPlaceholderField::SimilarDealIds => "SIMILAR_DEAL_IDS",
+                LocalPlaceholderField::IosAppLink => "IOS_APP_LINK",
+                LocalPlaceholderField::IosAppStoreId => "IOS_APP_STORE_ID",
+            }
+        }
     }
 }
 // Proto file describing Location Extension Targeting criterion fields.
@@ -6817,6 +10491,24 @@ pub mod location_extension_targeting_criterion_field_enum {
         PostalCode = 6,
         /// Data Type: STRING. Country code of the business address.
         CountryCode = 7,
+    }
+    impl LocationExtensionTargetingCriterionField {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                LocationExtensionTargetingCriterionField::Unspecified => "UNSPECIFIED",
+                LocationExtensionTargetingCriterionField::Unknown => "UNKNOWN",
+                LocationExtensionTargetingCriterionField::AddressLine1 => "ADDRESS_LINE_1",
+                LocationExtensionTargetingCriterionField::AddressLine2 => "ADDRESS_LINE_2",
+                LocationExtensionTargetingCriterionField::City => "CITY",
+                LocationExtensionTargetingCriterionField::Province => "PROVINCE",
+                LocationExtensionTargetingCriterionField::PostalCode => "POSTAL_CODE",
+                LocationExtensionTargetingCriterionField::CountryCode => "COUNTRY_CODE",
+            }
+        }
     }
 }
 // Proto file describing Location placeholder fields.
@@ -6852,6 +10544,26 @@ pub mod location_placeholder_field_enum {
         /// Data Type: STRING. Phone number of the business.
         PhoneNumber = 9,
     }
+    impl LocationPlaceholderField {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                LocationPlaceholderField::Unspecified => "UNSPECIFIED",
+                LocationPlaceholderField::Unknown => "UNKNOWN",
+                LocationPlaceholderField::BusinessName => "BUSINESS_NAME",
+                LocationPlaceholderField::AddressLine1 => "ADDRESS_LINE_1",
+                LocationPlaceholderField::AddressLine2 => "ADDRESS_LINE_2",
+                LocationPlaceholderField::City => "CITY",
+                LocationPlaceholderField::Province => "PROVINCE",
+                LocationPlaceholderField::PostalCode => "POSTAL_CODE",
+                LocationPlaceholderField::CountryCode => "COUNTRY_CODE",
+                LocationPlaceholderField::PhoneNumber => "PHONE_NUMBER",
+            }
+        }
+    }
 }
 // Proto file describing location source types.
 
@@ -6874,6 +10586,20 @@ pub mod location_source_type_enum {
         GoogleMyBusiness = 2,
         /// Affiliate (chain) store locations. For example, Best Buy store locations.
         Affiliate = 3,
+    }
+    impl LocationSourceType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                LocationSourceType::Unspecified => "UNSPECIFIED",
+                LocationSourceType::Unknown => "UNKNOWN",
+                LocationSourceType::GoogleMyBusiness => "GOOGLE_MY_BUSINESS",
+                LocationSourceType::Affiliate => "AFFILIATE",
+            }
+        }
     }
 }
 /// Container for enum describing possible status of a manager and client link.
@@ -6902,6 +10628,23 @@ pub mod manager_link_status_enum {
         /// Indicates relationship has been requested by manager, but manager
         /// canceled it.
         Canceled = 6,
+    }
+    impl ManagerLinkStatus {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ManagerLinkStatus::Unspecified => "UNSPECIFIED",
+                ManagerLinkStatus::Unknown => "UNKNOWN",
+                ManagerLinkStatus::Active => "ACTIVE",
+                ManagerLinkStatus::Inactive => "INACTIVE",
+                ManagerLinkStatus::Pending => "PENDING",
+                ManagerLinkStatus::Refused => "REFUSED",
+                ManagerLinkStatus::Canceled => "CANCELED",
+            }
+        }
     }
 }
 // Proto file describing media types.
@@ -6935,6 +10678,24 @@ pub mod media_type_enum {
         /// Animated image, such as animated GIF.
         DynamicImage = 7,
     }
+    impl MediaType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                MediaType::Unspecified => "UNSPECIFIED",
+                MediaType::Unknown => "UNKNOWN",
+                MediaType::Image => "IMAGE",
+                MediaType::Icon => "ICON",
+                MediaType::MediaBundle => "MEDIA_BUNDLE",
+                MediaType::Audio => "AUDIO",
+                MediaType::Video => "VIDEO",
+                MediaType::DynamicImage => "DYNAMIC_IMAGE",
+            }
+        }
+    }
 }
 // Proto file describing Merchant Center link statuses.
 
@@ -6959,6 +10720,20 @@ pub mod merchant_center_link_status_enum {
         /// The link has no effect. It was proposed by the Merchant Center Account
         /// owner and hasn't been confirmed by the customer.
         Pending = 3,
+    }
+    impl MerchantCenterLinkStatus {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                MerchantCenterLinkStatus::Unspecified => "UNSPECIFIED",
+                MerchantCenterLinkStatus::Unknown => "UNKNOWN",
+                MerchantCenterLinkStatus::Enabled => "ENABLED",
+                MerchantCenterLinkStatus::Pending => "PENDING",
+            }
+        }
     }
 }
 // Proto file describing Message placeholder fields.
@@ -6990,6 +10765,23 @@ pub mod message_placeholder_field_enum {
         /// messaging apps when they tap to send you a message.
         MessageText = 6,
     }
+    impl MessagePlaceholderField {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                MessagePlaceholderField::Unspecified => "UNSPECIFIED",
+                MessagePlaceholderField::Unknown => "UNKNOWN",
+                MessagePlaceholderField::BusinessName => "BUSINESS_NAME",
+                MessagePlaceholderField::CountryCode => "COUNTRY_CODE",
+                MessagePlaceholderField::PhoneNumber => "PHONE_NUMBER",
+                MessagePlaceholderField::MessageExtensionText => "MESSAGE_EXTENSION_TEXT",
+                MessagePlaceholderField::MessageText => "MESSAGE_TEXT",
+            }
+        }
+    }
 }
 /// Container for enum describing different types of mobile app vendors.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -7009,6 +10801,20 @@ pub mod mobile_app_vendor_enum {
         AppleAppStore = 2,
         /// Mobile app vendor for Google app store.
         GoogleAppStore = 3,
+    }
+    impl MobileAppVendor {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                MobileAppVendor::Unspecified => "UNSPECIFIED",
+                MobileAppVendor::Unknown => "UNKNOWN",
+                MobileAppVendor::AppleAppStore => "APPLE_APP_STORE",
+                MobileAppVendor::GoogleAppStore => "GOOGLE_APP_STORE",
+            }
+        }
     }
 }
 // Proto file describing mobile device types.
@@ -7031,6 +10837,20 @@ pub mod mobile_device_type_enum {
         Mobile = 2,
         /// Tablets.
         Tablet = 3,
+    }
+    impl MobileDeviceType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                MobileDeviceType::Unspecified => "UNSPECIFIED",
+                MobileDeviceType::Unknown => "UNKNOWN",
+                MobileDeviceType::Mobile => "MOBILE",
+                MobileDeviceType::Tablet => "TABLET",
+            }
+        }
     }
 }
 // Proto file describing negative geo target types.
@@ -7056,6 +10876,20 @@ pub mod negative_geo_target_type_enum {
         /// are in advertiser's excluded locations.
         Presence = 5,
     }
+    impl NegativeGeoTargetType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                NegativeGeoTargetType::Unspecified => "UNSPECIFIED",
+                NegativeGeoTargetType::Unknown => "UNKNOWN",
+                NegativeGeoTargetType::PresenceOrInterest => "PRESENCE_OR_INTEREST",
+                NegativeGeoTargetType::Presence => "PRESENCE",
+            }
+        }
+    }
 }
 // Proto file describing offline user data job failure reasons.
 
@@ -7078,6 +10912,20 @@ pub mod offline_user_data_job_failure_reason_enum {
         InsufficientMatchedTransactions = 2,
         /// The uploaded transactions are insufficient.
         InsufficientTransactions = 3,
+    }
+    impl OfflineUserDataJobFailureReason {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                OfflineUserDataJobFailureReason::Unspecified => "UNSPECIFIED",
+                OfflineUserDataJobFailureReason::Unknown => "UNKNOWN",
+                OfflineUserDataJobFailureReason::InsufficientMatchedTransactions => "INSUFFICIENT_MATCHED_TRANSACTIONS",
+                OfflineUserDataJobFailureReason::InsufficientTransactions => "INSUFFICIENT_TRANSACTIONS",
+            }
+        }
     }
 }
 // Proto file describing offline user data job status.
@@ -7105,6 +10953,22 @@ pub mod offline_user_data_job_status_enum {
         /// Uploaded data has failed to be processed.
         Failed = 5,
     }
+    impl OfflineUserDataJobStatus {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                OfflineUserDataJobStatus::Unspecified => "UNSPECIFIED",
+                OfflineUserDataJobStatus::Unknown => "UNKNOWN",
+                OfflineUserDataJobStatus::Pending => "PENDING",
+                OfflineUserDataJobStatus::Running => "RUNNING",
+                OfflineUserDataJobStatus::Success => "SUCCESS",
+                OfflineUserDataJobStatus::Failed => "FAILED",
+            }
+        }
+    }
 }
 // Proto file describing offline user data job types.
 
@@ -7131,6 +10995,22 @@ pub mod offline_user_data_job_type_enum {
         /// Customer Match with attribute data.
         CustomerMatchWithAttributes = 5,
     }
+    impl OfflineUserDataJobType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                OfflineUserDataJobType::Unspecified => "UNSPECIFIED",
+                OfflineUserDataJobType::Unknown => "UNKNOWN",
+                OfflineUserDataJobType::StoreSalesUploadFirstParty => "STORE_SALES_UPLOAD_FIRST_PARTY",
+                OfflineUserDataJobType::StoreSalesUploadThirdParty => "STORE_SALES_UPLOAD_THIRD_PARTY",
+                OfflineUserDataJobType::CustomerMatchUserList => "CUSTOMER_MATCH_USER_LIST",
+                OfflineUserDataJobType::CustomerMatchWithAttributes => "CUSTOMER_MATCH_WITH_ATTRIBUTES",
+            }
+        }
+    }
 }
 // Proto file describing operating system version operator types.
 
@@ -7152,6 +11032,20 @@ pub mod operating_system_version_operator_type_enum {
         EqualsTo = 2,
         /// Greater than or equals to the specified version.
         GreaterThanEqualsTo = 4,
+    }
+    impl OperatingSystemVersionOperatorType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                OperatingSystemVersionOperatorType::Unspecified => "UNSPECIFIED",
+                OperatingSystemVersionOperatorType::Unknown => "UNKNOWN",
+                OperatingSystemVersionOperatorType::EqualsTo => "EQUALS_TO",
+                OperatingSystemVersionOperatorType::GreaterThanEqualsTo => "GREATER_THAN_EQUALS_TO",
+            }
+        }
     }
 }
 // Proto file describing optimization goal type.
@@ -7177,6 +11071,20 @@ pub mod optimization_goal_type_enum {
         /// times people selected 'Get directions' to navigate to a store after
         /// viewing an ad.
         DrivingDirections = 3,
+    }
+    impl OptimizationGoalType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                OptimizationGoalType::Unspecified => "UNSPECIFIED",
+                OptimizationGoalType::Unknown => "UNKNOWN",
+                OptimizationGoalType::CallClicks => "CALL_CLICKS",
+                OptimizationGoalType::DrivingDirections => "DRIVING_DIRECTIONS",
+            }
+        }
     }
 }
 // Proto file describing payment modes.
@@ -7212,6 +11120,22 @@ pub mod payment_mode_enum {
         /// BudgetType.STANDARD.
         GuestStay = 7,
     }
+    impl PaymentMode {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                PaymentMode::Unspecified => "UNSPECIFIED",
+                PaymentMode::Unknown => "UNKNOWN",
+                PaymentMode::Clicks => "CLICKS",
+                PaymentMode::ConversionValue => "CONVERSION_VALUE",
+                PaymentMode::Conversions => "CONVERSIONS",
+                PaymentMode::GuestStay => "GUEST_STAY",
+            }
+        }
+    }
 }
 // Proto file describing placement types.
 
@@ -7239,6 +11163,23 @@ pub mod placement_type_enum {
         YoutubeVideo = 5,
         /// YouTube channels(e.g. 'youtube.com::L8ZULXASCc1I_oaOT0NaOQ').
         YoutubeChannel = 6,
+    }
+    impl PlacementType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                PlacementType::Unspecified => "UNSPECIFIED",
+                PlacementType::Unknown => "UNKNOWN",
+                PlacementType::Website => "WEBSITE",
+                PlacementType::MobileAppCategory => "MOBILE_APP_CATEGORY",
+                PlacementType::MobileApplication => "MOBILE_APPLICATION",
+                PlacementType::YoutubeVideo => "YOUTUBE_VIDEO",
+                PlacementType::YoutubeChannel => "YOUTUBE_CHANNEL",
+            }
+        }
     }
 }
 // Proto file describing positive geo target types.
@@ -7268,6 +11209,21 @@ pub mod positive_geo_target_type_enum {
         /// Specifies that an ad is triggered if the user is in
         /// or regularly in advertiser's targeted locations.
         Presence = 7,
+    }
+    impl PositiveGeoTargetType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                PositiveGeoTargetType::Unspecified => "UNSPECIFIED",
+                PositiveGeoTargetType::Unknown => "UNKNOWN",
+                PositiveGeoTargetType::PresenceOrInterest => "PRESENCE_OR_INTEREST",
+                PositiveGeoTargetType::SearchInterest => "SEARCH_INTEREST",
+                PositiveGeoTargetType::Presence => "PRESENCE",
+            }
+        }
     }
 }
 // Proto file describing Price placeholder fields.
@@ -7430,6 +11386,71 @@ pub mod price_placeholder_field_enum {
         /// using Upgraded URLs.
         Item8FinalMobileUrls = 805,
     }
+    impl PricePlaceholderField {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                PricePlaceholderField::Unspecified => "UNSPECIFIED",
+                PricePlaceholderField::Unknown => "UNKNOWN",
+                PricePlaceholderField::Type => "TYPE",
+                PricePlaceholderField::PriceQualifier => "PRICE_QUALIFIER",
+                PricePlaceholderField::TrackingTemplate => "TRACKING_TEMPLATE",
+                PricePlaceholderField::Language => "LANGUAGE",
+                PricePlaceholderField::FinalUrlSuffix => "FINAL_URL_SUFFIX",
+                PricePlaceholderField::Item1Header => "ITEM_1_HEADER",
+                PricePlaceholderField::Item1Description => "ITEM_1_DESCRIPTION",
+                PricePlaceholderField::Item1Price => "ITEM_1_PRICE",
+                PricePlaceholderField::Item1Unit => "ITEM_1_UNIT",
+                PricePlaceholderField::Item1FinalUrls => "ITEM_1_FINAL_URLS",
+                PricePlaceholderField::Item1FinalMobileUrls => "ITEM_1_FINAL_MOBILE_URLS",
+                PricePlaceholderField::Item2Header => "ITEM_2_HEADER",
+                PricePlaceholderField::Item2Description => "ITEM_2_DESCRIPTION",
+                PricePlaceholderField::Item2Price => "ITEM_2_PRICE",
+                PricePlaceholderField::Item2Unit => "ITEM_2_UNIT",
+                PricePlaceholderField::Item2FinalUrls => "ITEM_2_FINAL_URLS",
+                PricePlaceholderField::Item2FinalMobileUrls => "ITEM_2_FINAL_MOBILE_URLS",
+                PricePlaceholderField::Item3Header => "ITEM_3_HEADER",
+                PricePlaceholderField::Item3Description => "ITEM_3_DESCRIPTION",
+                PricePlaceholderField::Item3Price => "ITEM_3_PRICE",
+                PricePlaceholderField::Item3Unit => "ITEM_3_UNIT",
+                PricePlaceholderField::Item3FinalUrls => "ITEM_3_FINAL_URLS",
+                PricePlaceholderField::Item3FinalMobileUrls => "ITEM_3_FINAL_MOBILE_URLS",
+                PricePlaceholderField::Item4Header => "ITEM_4_HEADER",
+                PricePlaceholderField::Item4Description => "ITEM_4_DESCRIPTION",
+                PricePlaceholderField::Item4Price => "ITEM_4_PRICE",
+                PricePlaceholderField::Item4Unit => "ITEM_4_UNIT",
+                PricePlaceholderField::Item4FinalUrls => "ITEM_4_FINAL_URLS",
+                PricePlaceholderField::Item4FinalMobileUrls => "ITEM_4_FINAL_MOBILE_URLS",
+                PricePlaceholderField::Item5Header => "ITEM_5_HEADER",
+                PricePlaceholderField::Item5Description => "ITEM_5_DESCRIPTION",
+                PricePlaceholderField::Item5Price => "ITEM_5_PRICE",
+                PricePlaceholderField::Item5Unit => "ITEM_5_UNIT",
+                PricePlaceholderField::Item5FinalUrls => "ITEM_5_FINAL_URLS",
+                PricePlaceholderField::Item5FinalMobileUrls => "ITEM_5_FINAL_MOBILE_URLS",
+                PricePlaceholderField::Item6Header => "ITEM_6_HEADER",
+                PricePlaceholderField::Item6Description => "ITEM_6_DESCRIPTION",
+                PricePlaceholderField::Item6Price => "ITEM_6_PRICE",
+                PricePlaceholderField::Item6Unit => "ITEM_6_UNIT",
+                PricePlaceholderField::Item6FinalUrls => "ITEM_6_FINAL_URLS",
+                PricePlaceholderField::Item6FinalMobileUrls => "ITEM_6_FINAL_MOBILE_URLS",
+                PricePlaceholderField::Item7Header => "ITEM_7_HEADER",
+                PricePlaceholderField::Item7Description => "ITEM_7_DESCRIPTION",
+                PricePlaceholderField::Item7Price => "ITEM_7_PRICE",
+                PricePlaceholderField::Item7Unit => "ITEM_7_UNIT",
+                PricePlaceholderField::Item7FinalUrls => "ITEM_7_FINAL_URLS",
+                PricePlaceholderField::Item7FinalMobileUrls => "ITEM_7_FINAL_MOBILE_URLS",
+                PricePlaceholderField::Item8Header => "ITEM_8_HEADER",
+                PricePlaceholderField::Item8Description => "ITEM_8_DESCRIPTION",
+                PricePlaceholderField::Item8Price => "ITEM_8_PRICE",
+                PricePlaceholderField::Item8Unit => "ITEM_8_UNIT",
+                PricePlaceholderField::Item8FinalUrls => "ITEM_8_FINAL_URLS",
+                PricePlaceholderField::Item8FinalMobileUrls => "ITEM_8_FINAL_MOBILE_URLS",
+            }
+        }
+    }
 }
 // Proto file describing bidding schemes.
 
@@ -7451,6 +11472,20 @@ pub mod product_bidding_category_status_enum {
         Active = 2,
         /// The category is obsolete. Used only for reporting purposes.
         Obsolete = 3,
+    }
+    impl ProductBiddingCategoryStatus {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ProductBiddingCategoryStatus::Unspecified => "UNSPECIFIED",
+                ProductBiddingCategoryStatus::Unknown => "UNKNOWN",
+                ProductBiddingCategoryStatus::Active => "ACTIVE",
+                ProductBiddingCategoryStatus::Obsolete => "OBSOLETE",
+            }
+        }
     }
 }
 // Proto file describing Promotion placeholder fields.
@@ -7507,6 +11542,32 @@ pub mod promotion_placeholder_field_enum {
         /// tracking.
         FinalUrlSuffix = 15,
     }
+    impl PromotionPlaceholderField {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                PromotionPlaceholderField::Unspecified => "UNSPECIFIED",
+                PromotionPlaceholderField::Unknown => "UNKNOWN",
+                PromotionPlaceholderField::PromotionTarget => "PROMOTION_TARGET",
+                PromotionPlaceholderField::DiscountModifier => "DISCOUNT_MODIFIER",
+                PromotionPlaceholderField::PercentOff => "PERCENT_OFF",
+                PromotionPlaceholderField::MoneyAmountOff => "MONEY_AMOUNT_OFF",
+                PromotionPlaceholderField::PromotionCode => "PROMOTION_CODE",
+                PromotionPlaceholderField::OrdersOverAmount => "ORDERS_OVER_AMOUNT",
+                PromotionPlaceholderField::PromotionStart => "PROMOTION_START",
+                PromotionPlaceholderField::PromotionEnd => "PROMOTION_END",
+                PromotionPlaceholderField::Occasion => "OCCASION",
+                PromotionPlaceholderField::FinalUrls => "FINAL_URLS",
+                PromotionPlaceholderField::FinalMobileUrls => "FINAL_MOBILE_URLS",
+                PromotionPlaceholderField::TrackingUrl => "TRACKING_URL",
+                PromotionPlaceholderField::Language => "LANGUAGE",
+                PromotionPlaceholderField::FinalUrlSuffix => "FINAL_URL_SUFFIX",
+            }
+        }
+    }
 }
 // Proto file describing ad lengths of a plannable video ad.
 
@@ -7530,6 +11591,21 @@ pub mod reach_plan_ad_length_enum {
         FifteenOrTwentySeconds = 3,
         /// More than 20 seconds long ad.
         TwentySecondsOrMore = 4,
+    }
+    impl ReachPlanAdLength {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ReachPlanAdLength::Unspecified => "UNSPECIFIED",
+                ReachPlanAdLength::Unknown => "UNKNOWN",
+                ReachPlanAdLength::SixSeconds => "SIX_SECONDS",
+                ReachPlanAdLength::FifteenOrTwentySeconds => "FIFTEEN_OR_TWENTY_SECONDS",
+                ReachPlanAdLength::TwentySecondsOrMore => "TWENTY_SECONDS_OR_MORE",
+            }
+        }
     }
 }
 // Proto file describing a plannable age range.
@@ -7601,6 +11677,44 @@ pub mod reach_plan_age_range_enum {
         /// 65 years old and beyond.
         AgeRange65Up = 503006,
     }
+    impl ReachPlanAgeRange {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ReachPlanAgeRange::Unspecified => "UNSPECIFIED",
+                ReachPlanAgeRange::Unknown => "UNKNOWN",
+                ReachPlanAgeRange::AgeRange1824 => "AGE_RANGE_18_24",
+                ReachPlanAgeRange::AgeRange1834 => "AGE_RANGE_18_34",
+                ReachPlanAgeRange::AgeRange1844 => "AGE_RANGE_18_44",
+                ReachPlanAgeRange::AgeRange1849 => "AGE_RANGE_18_49",
+                ReachPlanAgeRange::AgeRange1854 => "AGE_RANGE_18_54",
+                ReachPlanAgeRange::AgeRange1864 => "AGE_RANGE_18_64",
+                ReachPlanAgeRange::AgeRange1865Up => "AGE_RANGE_18_65_UP",
+                ReachPlanAgeRange::AgeRange2134 => "AGE_RANGE_21_34",
+                ReachPlanAgeRange::AgeRange2534 => "AGE_RANGE_25_34",
+                ReachPlanAgeRange::AgeRange2544 => "AGE_RANGE_25_44",
+                ReachPlanAgeRange::AgeRange2549 => "AGE_RANGE_25_49",
+                ReachPlanAgeRange::AgeRange2554 => "AGE_RANGE_25_54",
+                ReachPlanAgeRange::AgeRange2564 => "AGE_RANGE_25_64",
+                ReachPlanAgeRange::AgeRange2565Up => "AGE_RANGE_25_65_UP",
+                ReachPlanAgeRange::AgeRange3544 => "AGE_RANGE_35_44",
+                ReachPlanAgeRange::AgeRange3549 => "AGE_RANGE_35_49",
+                ReachPlanAgeRange::AgeRange3554 => "AGE_RANGE_35_54",
+                ReachPlanAgeRange::AgeRange3564 => "AGE_RANGE_35_64",
+                ReachPlanAgeRange::AgeRange3565Up => "AGE_RANGE_35_65_UP",
+                ReachPlanAgeRange::AgeRange4554 => "AGE_RANGE_45_54",
+                ReachPlanAgeRange::AgeRange4564 => "AGE_RANGE_45_64",
+                ReachPlanAgeRange::AgeRange4565Up => "AGE_RANGE_45_65_UP",
+                ReachPlanAgeRange::AgeRange5065Up => "AGE_RANGE_50_65_UP",
+                ReachPlanAgeRange::AgeRange5564 => "AGE_RANGE_55_64",
+                ReachPlanAgeRange::AgeRange5565Up => "AGE_RANGE_55_65_UP",
+                ReachPlanAgeRange::AgeRange65Up => "AGE_RANGE_65_UP",
+            }
+        }
+    }
 }
 // Proto file describing a plannable network.
 
@@ -7625,6 +11739,21 @@ pub mod reach_plan_network_enum {
         /// A combination of the YouTube network and the Google Video Partners
         /// network.
         YoutubeAndGoogleVideoPartners = 4,
+    }
+    impl ReachPlanNetwork {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ReachPlanNetwork::Unspecified => "UNSPECIFIED",
+                ReachPlanNetwork::Unknown => "UNKNOWN",
+                ReachPlanNetwork::Youtube => "YOUTUBE",
+                ReachPlanNetwork::GoogleVideoPartners => "GOOGLE_VIDEO_PARTNERS",
+                ReachPlanNetwork::YoutubeAndGoogleVideoPartners => "YOUTUBE_AND_GOOGLE_VIDEO_PARTNERS",
+            }
+        }
     }
 }
 // Proto file describing Real Estate placeholder fields.
@@ -7686,7 +11815,7 @@ pub mod real_estate_placeholder_field_enum {
         /// The components are defined as follows:
         /// package_id: app ID as specified in Google Play.
         /// scheme: the scheme to pass to the application. Can be HTTP, or a custom
-        ///   scheme.
+        ///    scheme.
         /// host_path: identifies the specific content within your application.
         AndroidAppLink = 16,
         /// Data Type: STRING_LIST. List of recommended listing IDs to show together
@@ -7696,6 +11825,36 @@ pub mod real_estate_placeholder_field_enum {
         IosAppLink = 18,
         /// Data Type: INT64. iOS app store ID.
         IosAppStoreId = 19,
+    }
+    impl RealEstatePlaceholderField {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                RealEstatePlaceholderField::Unspecified => "UNSPECIFIED",
+                RealEstatePlaceholderField::Unknown => "UNKNOWN",
+                RealEstatePlaceholderField::ListingId => "LISTING_ID",
+                RealEstatePlaceholderField::ListingName => "LISTING_NAME",
+                RealEstatePlaceholderField::CityName => "CITY_NAME",
+                RealEstatePlaceholderField::Description => "DESCRIPTION",
+                RealEstatePlaceholderField::Address => "ADDRESS",
+                RealEstatePlaceholderField::Price => "PRICE",
+                RealEstatePlaceholderField::FormattedPrice => "FORMATTED_PRICE",
+                RealEstatePlaceholderField::ImageUrl => "IMAGE_URL",
+                RealEstatePlaceholderField::PropertyType => "PROPERTY_TYPE",
+                RealEstatePlaceholderField::ListingType => "LISTING_TYPE",
+                RealEstatePlaceholderField::ContextualKeywords => "CONTEXTUAL_KEYWORDS",
+                RealEstatePlaceholderField::FinalUrls => "FINAL_URLS",
+                RealEstatePlaceholderField::FinalMobileUrls => "FINAL_MOBILE_URLS",
+                RealEstatePlaceholderField::TrackingUrl => "TRACKING_URL",
+                RealEstatePlaceholderField::AndroidAppLink => "ANDROID_APP_LINK",
+                RealEstatePlaceholderField::SimilarListingIds => "SIMILAR_LISTING_IDS",
+                RealEstatePlaceholderField::IosAppLink => "IOS_APP_LINK",
+                RealEstatePlaceholderField::IosAppStoreId => "IOS_APP_STORE_ID",
+            }
+        }
     }
 }
 // Proto file describing Recommendation types.
@@ -7765,6 +11924,36 @@ pub mod recommendation_type_enum {
         /// with a budget adjustment.
         MarginalRoiCampaignBudget = 19,
     }
+    impl RecommendationType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                RecommendationType::Unspecified => "UNSPECIFIED",
+                RecommendationType::Unknown => "UNKNOWN",
+                RecommendationType::CampaignBudget => "CAMPAIGN_BUDGET",
+                RecommendationType::Keyword => "KEYWORD",
+                RecommendationType::TextAd => "TEXT_AD",
+                RecommendationType::TargetCpaOptIn => "TARGET_CPA_OPT_IN",
+                RecommendationType::MaximizeConversionsOptIn => "MAXIMIZE_CONVERSIONS_OPT_IN",
+                RecommendationType::EnhancedCpcOptIn => "ENHANCED_CPC_OPT_IN",
+                RecommendationType::SearchPartnersOptIn => "SEARCH_PARTNERS_OPT_IN",
+                RecommendationType::MaximizeClicksOptIn => "MAXIMIZE_CLICKS_OPT_IN",
+                RecommendationType::OptimizeAdRotation => "OPTIMIZE_AD_ROTATION",
+                RecommendationType::CalloutExtension => "CALLOUT_EXTENSION",
+                RecommendationType::SitelinkExtension => "SITELINK_EXTENSION",
+                RecommendationType::CallExtension => "CALL_EXTENSION",
+                RecommendationType::KeywordMatchType => "KEYWORD_MATCH_TYPE",
+                RecommendationType::MoveUnusedBudget => "MOVE_UNUSED_BUDGET",
+                RecommendationType::ForecastingCampaignBudget => "FORECASTING_CAMPAIGN_BUDGET",
+                RecommendationType::TargetRoasOptIn => "TARGET_ROAS_OPT_IN",
+                RecommendationType::ResponsiveSearchAd => "RESPONSIVE_SEARCH_AD",
+                RecommendationType::MarginalRoiCampaignBudget => "MARGINAL_ROI_CAMPAIGN_BUDGET",
+            }
+        }
+    }
 }
 // Proto file describing the resource change operations in change event.
 
@@ -7790,6 +11979,21 @@ pub mod resource_change_operation_enum {
         Update = 3,
         /// The resource was removed.
         Remove = 4,
+    }
+    impl ResourceChangeOperation {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ResourceChangeOperation::Unspecified => "UNSPECIFIED",
+                ResourceChangeOperation::Unknown => "UNKNOWN",
+                ResourceChangeOperation::Create => "CREATE",
+                ResourceChangeOperation::Update => "UPDATE",
+                ResourceChangeOperation::Remove => "REMOVE",
+            }
+        }
     }
 }
 /// Container for enum describing possible resource limit types.
@@ -8011,6 +12215,105 @@ pub mod resource_limit_type_enum {
         /// Number of hotel check-in date range bid modifiers per ad agroup.
         HotelCheckInDateRangeBidModifiersPerAdGroup = 132,
     }
+    impl ResourceLimitType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ResourceLimitType::Unspecified => "UNSPECIFIED",
+                ResourceLimitType::Unknown => "UNKNOWN",
+                ResourceLimitType::CampaignsPerCustomer => "CAMPAIGNS_PER_CUSTOMER",
+                ResourceLimitType::BaseCampaignsPerCustomer => "BASE_CAMPAIGNS_PER_CUSTOMER",
+                ResourceLimitType::ExperimentCampaignsPerCustomer => "EXPERIMENT_CAMPAIGNS_PER_CUSTOMER",
+                ResourceLimitType::HotelCampaignsPerCustomer => "HOTEL_CAMPAIGNS_PER_CUSTOMER",
+                ResourceLimitType::SmartShoppingCampaignsPerCustomer => "SMART_SHOPPING_CAMPAIGNS_PER_CUSTOMER",
+                ResourceLimitType::AdGroupsPerCampaign => "AD_GROUPS_PER_CAMPAIGN",
+                ResourceLimitType::AdGroupsPerShoppingCampaign => "AD_GROUPS_PER_SHOPPING_CAMPAIGN",
+                ResourceLimitType::AdGroupsPerHotelCampaign => "AD_GROUPS_PER_HOTEL_CAMPAIGN",
+                ResourceLimitType::ReportingAdGroupsPerLocalCampaign => "REPORTING_AD_GROUPS_PER_LOCAL_CAMPAIGN",
+                ResourceLimitType::ReportingAdGroupsPerAppCampaign => "REPORTING_AD_GROUPS_PER_APP_CAMPAIGN",
+                ResourceLimitType::ManagedAdGroupsPerSmartCampaign => "MANAGED_AD_GROUPS_PER_SMART_CAMPAIGN",
+                ResourceLimitType::AdGroupCriteriaPerCustomer => "AD_GROUP_CRITERIA_PER_CUSTOMER",
+                ResourceLimitType::BaseAdGroupCriteriaPerCustomer => "BASE_AD_GROUP_CRITERIA_PER_CUSTOMER",
+                ResourceLimitType::ExperimentAdGroupCriteriaPerCustomer => "EXPERIMENT_AD_GROUP_CRITERIA_PER_CUSTOMER",
+                ResourceLimitType::AdGroupCriteriaPerCampaign => "AD_GROUP_CRITERIA_PER_CAMPAIGN",
+                ResourceLimitType::CampaignCriteriaPerCustomer => "CAMPAIGN_CRITERIA_PER_CUSTOMER",
+                ResourceLimitType::BaseCampaignCriteriaPerCustomer => "BASE_CAMPAIGN_CRITERIA_PER_CUSTOMER",
+                ResourceLimitType::ExperimentCampaignCriteriaPerCustomer => "EXPERIMENT_CAMPAIGN_CRITERIA_PER_CUSTOMER",
+                ResourceLimitType::WebpageCriteriaPerCustomer => "WEBPAGE_CRITERIA_PER_CUSTOMER",
+                ResourceLimitType::BaseWebpageCriteriaPerCustomer => "BASE_WEBPAGE_CRITERIA_PER_CUSTOMER",
+                ResourceLimitType::ExperimentWebpageCriteriaPerCustomer => "EXPERIMENT_WEBPAGE_CRITERIA_PER_CUSTOMER",
+                ResourceLimitType::CombinedAudienceCriteriaPerAdGroup => "COMBINED_AUDIENCE_CRITERIA_PER_AD_GROUP",
+                ResourceLimitType::CustomerNegativePlacementCriteriaPerCustomer => "CUSTOMER_NEGATIVE_PLACEMENT_CRITERIA_PER_CUSTOMER",
+                ResourceLimitType::CustomerNegativeYoutubeChannelCriteriaPerCustomer => "CUSTOMER_NEGATIVE_YOUTUBE_CHANNEL_CRITERIA_PER_CUSTOMER",
+                ResourceLimitType::CriteriaPerAdGroup => "CRITERIA_PER_AD_GROUP",
+                ResourceLimitType::ListingGroupsPerAdGroup => "LISTING_GROUPS_PER_AD_GROUP",
+                ResourceLimitType::ExplicitlySharedBudgetsPerCustomer => "EXPLICITLY_SHARED_BUDGETS_PER_CUSTOMER",
+                ResourceLimitType::ImplicitlySharedBudgetsPerCustomer => "IMPLICITLY_SHARED_BUDGETS_PER_CUSTOMER",
+                ResourceLimitType::CombinedAudienceCriteriaPerCampaign => "COMBINED_AUDIENCE_CRITERIA_PER_CAMPAIGN",
+                ResourceLimitType::NegativeKeywordsPerCampaign => "NEGATIVE_KEYWORDS_PER_CAMPAIGN",
+                ResourceLimitType::NegativePlacementsPerCampaign => "NEGATIVE_PLACEMENTS_PER_CAMPAIGN",
+                ResourceLimitType::GeoTargetsPerCampaign => "GEO_TARGETS_PER_CAMPAIGN",
+                ResourceLimitType::NegativeIpBlocksPerCampaign => "NEGATIVE_IP_BLOCKS_PER_CAMPAIGN",
+                ResourceLimitType::ProximitiesPerCampaign => "PROXIMITIES_PER_CAMPAIGN",
+                ResourceLimitType::ListingScopesPerShoppingCampaign => "LISTING_SCOPES_PER_SHOPPING_CAMPAIGN",
+                ResourceLimitType::ListingScopesPerNonShoppingCampaign => "LISTING_SCOPES_PER_NON_SHOPPING_CAMPAIGN",
+                ResourceLimitType::NegativeKeywordsPerSharedSet => "NEGATIVE_KEYWORDS_PER_SHARED_SET",
+                ResourceLimitType::NegativePlacementsPerSharedSet => "NEGATIVE_PLACEMENTS_PER_SHARED_SET",
+                ResourceLimitType::SharedSetsPerCustomerForTypeDefault => "SHARED_SETS_PER_CUSTOMER_FOR_TYPE_DEFAULT",
+                ResourceLimitType::SharedSetsPerCustomerForNegativePlacementListLower => "SHARED_SETS_PER_CUSTOMER_FOR_NEGATIVE_PLACEMENT_LIST_LOWER",
+                ResourceLimitType::HotelAdvanceBookingWindowBidModifiersPerAdGroup => "HOTEL_ADVANCE_BOOKING_WINDOW_BID_MODIFIERS_PER_AD_GROUP",
+                ResourceLimitType::BiddingStrategiesPerCustomer => "BIDDING_STRATEGIES_PER_CUSTOMER",
+                ResourceLimitType::BasicUserListsPerCustomer => "BASIC_USER_LISTS_PER_CUSTOMER",
+                ResourceLimitType::LogicalUserListsPerCustomer => "LOGICAL_USER_LISTS_PER_CUSTOMER",
+                ResourceLimitType::BaseAdGroupAdsPerCustomer => "BASE_AD_GROUP_ADS_PER_CUSTOMER",
+                ResourceLimitType::ExperimentAdGroupAdsPerCustomer => "EXPERIMENT_AD_GROUP_ADS_PER_CUSTOMER",
+                ResourceLimitType::AdGroupAdsPerCampaign => "AD_GROUP_ADS_PER_CAMPAIGN",
+                ResourceLimitType::TextAndOtherAdsPerAdGroup => "TEXT_AND_OTHER_ADS_PER_AD_GROUP",
+                ResourceLimitType::ImageAdsPerAdGroup => "IMAGE_ADS_PER_AD_GROUP",
+                ResourceLimitType::ShoppingSmartAdsPerAdGroup => "SHOPPING_SMART_ADS_PER_AD_GROUP",
+                ResourceLimitType::ResponsiveSearchAdsPerAdGroup => "RESPONSIVE_SEARCH_ADS_PER_AD_GROUP",
+                ResourceLimitType::AppAdsPerAdGroup => "APP_ADS_PER_AD_GROUP",
+                ResourceLimitType::AppEngagementAdsPerAdGroup => "APP_ENGAGEMENT_ADS_PER_AD_GROUP",
+                ResourceLimitType::LocalAdsPerAdGroup => "LOCAL_ADS_PER_AD_GROUP",
+                ResourceLimitType::VideoAdsPerAdGroup => "VIDEO_ADS_PER_AD_GROUP",
+                ResourceLimitType::LeadFormAssetLinksPerCampaign => "LEAD_FORM_ASSET_LINKS_PER_CAMPAIGN",
+                ResourceLimitType::VersionsPerAd => "VERSIONS_PER_AD",
+                ResourceLimitType::UserFeedsPerCustomer => "USER_FEEDS_PER_CUSTOMER",
+                ResourceLimitType::SystemFeedsPerCustomer => "SYSTEM_FEEDS_PER_CUSTOMER",
+                ResourceLimitType::FeedAttributesPerFeed => "FEED_ATTRIBUTES_PER_FEED",
+                ResourceLimitType::FeedItemsPerCustomer => "FEED_ITEMS_PER_CUSTOMER",
+                ResourceLimitType::CampaignFeedsPerCustomer => "CAMPAIGN_FEEDS_PER_CUSTOMER",
+                ResourceLimitType::BaseCampaignFeedsPerCustomer => "BASE_CAMPAIGN_FEEDS_PER_CUSTOMER",
+                ResourceLimitType::ExperimentCampaignFeedsPerCustomer => "EXPERIMENT_CAMPAIGN_FEEDS_PER_CUSTOMER",
+                ResourceLimitType::AdGroupFeedsPerCustomer => "AD_GROUP_FEEDS_PER_CUSTOMER",
+                ResourceLimitType::BaseAdGroupFeedsPerCustomer => "BASE_AD_GROUP_FEEDS_PER_CUSTOMER",
+                ResourceLimitType::ExperimentAdGroupFeedsPerCustomer => "EXPERIMENT_AD_GROUP_FEEDS_PER_CUSTOMER",
+                ResourceLimitType::AdGroupFeedsPerCampaign => "AD_GROUP_FEEDS_PER_CAMPAIGN",
+                ResourceLimitType::FeedItemSetsPerCustomer => "FEED_ITEM_SETS_PER_CUSTOMER",
+                ResourceLimitType::FeedItemsPerFeedItemSet => "FEED_ITEMS_PER_FEED_ITEM_SET",
+                ResourceLimitType::CampaignExperimentsPerCustomer => "CAMPAIGN_EXPERIMENTS_PER_CUSTOMER",
+                ResourceLimitType::ExperimentArmsPerVideoExperiment => "EXPERIMENT_ARMS_PER_VIDEO_EXPERIMENT",
+                ResourceLimitType::OwnedLabelsPerCustomer => "OWNED_LABELS_PER_CUSTOMER",
+                ResourceLimitType::LabelsPerCampaign => "LABELS_PER_CAMPAIGN",
+                ResourceLimitType::LabelsPerAdGroup => "LABELS_PER_AD_GROUP",
+                ResourceLimitType::LabelsPerAdGroupAd => "LABELS_PER_AD_GROUP_AD",
+                ResourceLimitType::LabelsPerAdGroupCriterion => "LABELS_PER_AD_GROUP_CRITERION",
+                ResourceLimitType::TargetCustomersPerLabel => "TARGET_CUSTOMERS_PER_LABEL",
+                ResourceLimitType::KeywordPlansPerUserPerCustomer => "KEYWORD_PLANS_PER_USER_PER_CUSTOMER",
+                ResourceLimitType::KeywordPlanAdGroupKeywordsPerKeywordPlan => "KEYWORD_PLAN_AD_GROUP_KEYWORDS_PER_KEYWORD_PLAN",
+                ResourceLimitType::KeywordPlanAdGroupsPerKeywordPlan => "KEYWORD_PLAN_AD_GROUPS_PER_KEYWORD_PLAN",
+                ResourceLimitType::KeywordPlanNegativeKeywordsPerKeywordPlan => "KEYWORD_PLAN_NEGATIVE_KEYWORDS_PER_KEYWORD_PLAN",
+                ResourceLimitType::KeywordPlanCampaignsPerKeywordPlan => "KEYWORD_PLAN_CAMPAIGNS_PER_KEYWORD_PLAN",
+                ResourceLimitType::ConversionActionsPerCustomer => "CONVERSION_ACTIONS_PER_CUSTOMER",
+                ResourceLimitType::BatchJobOperationsPerJob => "BATCH_JOB_OPERATIONS_PER_JOB",
+                ResourceLimitType::BatchJobsPerCustomer => "BATCH_JOBS_PER_CUSTOMER",
+                ResourceLimitType::HotelCheckInDateRangeBidModifiersPerAdGroup => "HOTEL_CHECK_IN_DATE_RANGE_BID_MODIFIERS_PER_AD_GROUP",
+            }
+        }
+    }
 }
 // Proto file describing the response content types used in mutate operations.
 
@@ -8031,6 +12334,19 @@ pub mod response_content_type_enum {
         /// The mutate response will be the resource name and the resource with
         /// all mutable fields.
         MutableResource = 2,
+    }
+    impl ResponseContentType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ResponseContentType::Unspecified => "UNSPECIFIED",
+                ResponseContentType::ResourceNameOnly => "RESOURCE_NAME_ONLY",
+                ResponseContentType::MutableResource => "MUTABLE_RESOURCE",
+            }
+        }
     }
 }
 // Proto file describing search term targeting statuses.
@@ -8060,6 +12376,22 @@ pub mod search_term_targeting_status_enum {
         /// Search term is neither targeted nor excluded.
         None = 5,
     }
+    impl SearchTermTargetingStatus {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                SearchTermTargetingStatus::Unspecified => "UNSPECIFIED",
+                SearchTermTargetingStatus::Unknown => "UNKNOWN",
+                SearchTermTargetingStatus::Added => "ADDED",
+                SearchTermTargetingStatus::Excluded => "EXCLUDED",
+                SearchTermTargetingStatus::AddedExcluded => "ADDED_EXCLUDED",
+                SearchTermTargetingStatus::None => "NONE",
+            }
+        }
+    }
 }
 // Proto file describing shared set statuses.
 
@@ -8082,6 +12414,20 @@ pub mod shared_set_status_enum {
         /// The shared set is removed and can no longer be used.
         Removed = 3,
     }
+    impl SharedSetStatus {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                SharedSetStatus::Unspecified => "UNSPECIFIED",
+                SharedSetStatus::Unknown => "UNKNOWN",
+                SharedSetStatus::Enabled => "ENABLED",
+                SharedSetStatus::Removed => "REMOVED",
+            }
+        }
+    }
 }
 // Proto file describing shared set types.
 
@@ -8103,6 +12449,20 @@ pub mod shared_set_type_enum {
         NegativeKeywords = 2,
         /// A set of placements that can be excluded from targeting.
         NegativePlacements = 3,
+    }
+    impl SharedSetType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                SharedSetType::Unspecified => "UNSPECIFIED",
+                SharedSetType::Unknown => "UNKNOWN",
+                SharedSetType::NegativeKeywords => "NEGATIVE_KEYWORDS",
+                SharedSetType::NegativePlacements => "NEGATIVE_PLACEMENTS",
+            }
+        }
     }
 }
 // Proto file describing simulation modification methods.
@@ -8133,6 +12493,21 @@ pub mod simulation_modification_method_enum {
         /// For example, in a simulated TargetCpa campaign, the campaign target and
         /// all ad group targets were scaled by a factor of X.
         Scaling = 4,
+    }
+    impl SimulationModificationMethod {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                SimulationModificationMethod::Unspecified => "UNSPECIFIED",
+                SimulationModificationMethod::Unknown => "UNKNOWN",
+                SimulationModificationMethod::Uniform => "UNIFORM",
+                SimulationModificationMethod::Default => "DEFAULT",
+                SimulationModificationMethod::Scaling => "SCALING",
+            }
+        }
     }
 }
 // Proto file describing simulation types.
@@ -8167,6 +12542,26 @@ pub mod simulation_type_enum {
         TargetImpressionShare = 8,
         /// The simulation is for a budget.
         Budget = 9,
+    }
+    impl SimulationType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                SimulationType::Unspecified => "UNSPECIFIED",
+                SimulationType::Unknown => "UNKNOWN",
+                SimulationType::CpcBid => "CPC_BID",
+                SimulationType::CpvBid => "CPV_BID",
+                SimulationType::TargetCpa => "TARGET_CPA",
+                SimulationType::BidModifier => "BID_MODIFIER",
+                SimulationType::TargetRoas => "TARGET_ROAS",
+                SimulationType::PercentCpcBid => "PERCENT_CPC_BID",
+                SimulationType::TargetImpressionShare => "TARGET_IMPRESSION_SHARE",
+                SimulationType::Budget => "BUDGET",
+            }
+        }
     }
 }
 // Proto file describing Sitelink placeholder fields.
@@ -8204,6 +12599,25 @@ pub mod sitelink_placeholder_field_enum {
         /// tracking.
         FinalUrlSuffix = 8,
     }
+    impl SitelinkPlaceholderField {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                SitelinkPlaceholderField::Unspecified => "UNSPECIFIED",
+                SitelinkPlaceholderField::Unknown => "UNKNOWN",
+                SitelinkPlaceholderField::Text => "TEXT",
+                SitelinkPlaceholderField::Line1 => "LINE_1",
+                SitelinkPlaceholderField::Line2 => "LINE_2",
+                SitelinkPlaceholderField::FinalUrls => "FINAL_URLS",
+                SitelinkPlaceholderField::FinalMobileUrls => "FINAL_MOBILE_URLS",
+                SitelinkPlaceholderField::TrackingUrl => "TRACKING_URL",
+                SitelinkPlaceholderField::FinalUrlSuffix => "FINAL_URL_SUFFIX",
+            }
+        }
+    }
 }
 // Proto file describing SpendingLimit types.
 
@@ -8224,6 +12638,19 @@ pub mod spending_limit_type_enum {
         Unknown = 1,
         /// Infinite, indicates unlimited spending power.
         Infinite = 2,
+    }
+    impl SpendingLimitType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                SpendingLimitType::Unspecified => "UNSPECIFIED",
+                SpendingLimitType::Unknown => "UNKNOWN",
+                SpendingLimitType::Infinite => "INFINITE",
+            }
+        }
     }
 }
 // Proto file describing Structured Snippet placeholder fields.
@@ -8252,6 +12679,20 @@ pub mod structured_snippet_placeholder_field_enum {
         /// permitted. A snippet can be at most 25 characters.
         Snippets = 3,
     }
+    impl StructuredSnippetPlaceholderField {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                StructuredSnippetPlaceholderField::Unspecified => "UNSPECIFIED",
+                StructuredSnippetPlaceholderField::Unknown => "UNKNOWN",
+                StructuredSnippetPlaceholderField::Header => "HEADER",
+                StructuredSnippetPlaceholderField::Snippets => "SNIPPETS",
+            }
+        }
+    }
 }
 // Proto file describing summary row setting.
 
@@ -8277,6 +12718,21 @@ pub mod summary_row_setting_enum {
         /// Return summary row only and return no results.
         SummaryRowOnly = 4,
     }
+    impl SummaryRowSetting {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                SummaryRowSetting::Unspecified => "UNSPECIFIED",
+                SummaryRowSetting::Unknown => "UNKNOWN",
+                SummaryRowSetting::NoSummaryRow => "NO_SUMMARY_ROW",
+                SummaryRowSetting::SummaryRowWithResults => "SUMMARY_ROW_WITH_RESULTS",
+                SummaryRowSetting::SummaryRowOnly => "SUMMARY_ROW_ONLY",
+            }
+        }
+    }
 }
 // Proto file describing system managed entity sources.
 
@@ -8296,6 +12752,19 @@ pub mod system_managed_resource_source_enum {
         Unknown = 1,
         /// Generated ad variations experiment ad.
         AdVariations = 2,
+    }
+    impl SystemManagedResourceSource {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                SystemManagedResourceSource::Unspecified => "UNSPECIFIED",
+                SystemManagedResourceSource::Unknown => "UNKNOWN",
+                SystemManagedResourceSource::AdVariations => "AD_VARIATIONS",
+            }
+        }
     }
 }
 // Proto file describing TargetCpaOptIn recommendation goals.
@@ -8324,6 +12793,22 @@ pub mod target_cpa_opt_in_recommendation_goal_enum {
         /// to, yet lower than, the actual CPA (computed for past 28 days).
         ClosestCpa = 5,
     }
+    impl TargetCpaOptInRecommendationGoal {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                TargetCpaOptInRecommendationGoal::Unspecified => "UNSPECIFIED",
+                TargetCpaOptInRecommendationGoal::Unknown => "UNKNOWN",
+                TargetCpaOptInRecommendationGoal::SameCost => "SAME_COST",
+                TargetCpaOptInRecommendationGoal::SameConversions => "SAME_CONVERSIONS",
+                TargetCpaOptInRecommendationGoal::SameCpa => "SAME_CPA",
+                TargetCpaOptInRecommendationGoal::ClosestCpa => "CLOSEST_CPA",
+            }
+        }
+    }
 }
 // Proto file describing TimeType types.
 
@@ -8346,6 +12831,20 @@ pub mod time_type_enum {
         Now = 2,
         /// An infinite point in the future.
         Forever = 3,
+    }
+    impl TimeType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                TimeType::Unspecified => "UNSPECIFIED",
+                TimeType::Unknown => "UNKNOWN",
+                TimeType::Now => "NOW",
+                TimeType::Forever => "FOREVER",
+            }
+        }
     }
 }
 // Proto file describing Travel placeholder fields.
@@ -8418,7 +12917,7 @@ pub mod travel_placeholder_field_enum {
         /// The components are defined as follows:
         /// package_id: app ID as specified in Google Play.
         /// scheme: the scheme to pass to the application. Can be HTTP, or a custom
-        ///   scheme.
+        ///    scheme.
         /// host_path: identifies the specific content within your application.
         AndroidAppLink = 18,
         /// Data Type: STRING_LIST. List of recommended destination IDs to show
@@ -8428,6 +12927,38 @@ pub mod travel_placeholder_field_enum {
         IosAppLink = 20,
         /// Data Type: INT64. iOS app store ID.
         IosAppStoreId = 21,
+    }
+    impl TravelPlaceholderField {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                TravelPlaceholderField::Unspecified => "UNSPECIFIED",
+                TravelPlaceholderField::Unknown => "UNKNOWN",
+                TravelPlaceholderField::DestinationId => "DESTINATION_ID",
+                TravelPlaceholderField::OriginId => "ORIGIN_ID",
+                TravelPlaceholderField::Title => "TITLE",
+                TravelPlaceholderField::DestinationName => "DESTINATION_NAME",
+                TravelPlaceholderField::OriginName => "ORIGIN_NAME",
+                TravelPlaceholderField::Price => "PRICE",
+                TravelPlaceholderField::FormattedPrice => "FORMATTED_PRICE",
+                TravelPlaceholderField::SalePrice => "SALE_PRICE",
+                TravelPlaceholderField::FormattedSalePrice => "FORMATTED_SALE_PRICE",
+                TravelPlaceholderField::ImageUrl => "IMAGE_URL",
+                TravelPlaceholderField::Category => "CATEGORY",
+                TravelPlaceholderField::ContextualKeywords => "CONTEXTUAL_KEYWORDS",
+                TravelPlaceholderField::DestinationAddress => "DESTINATION_ADDRESS",
+                TravelPlaceholderField::FinalUrl => "FINAL_URL",
+                TravelPlaceholderField::FinalMobileUrls => "FINAL_MOBILE_URLS",
+                TravelPlaceholderField::TrackingUrl => "TRACKING_URL",
+                TravelPlaceholderField::AndroidAppLink => "ANDROID_APP_LINK",
+                TravelPlaceholderField::SimilarDestinationIds => "SIMILAR_DESTINATION_IDS",
+                TravelPlaceholderField::IosAppLink => "IOS_APP_LINK",
+                TravelPlaceholderField::IosAppStoreId => "IOS_APP_STORE_ID",
+            }
+        }
     }
 }
 // Proto file describing the UserInterest taxonomy type
@@ -8457,6 +12988,23 @@ pub mod user_interest_taxonomy_type_enum {
         /// User interest criteria for new smart phone users.
         NewSmartPhoneUser = 6,
     }
+    impl UserInterestTaxonomyType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                UserInterestTaxonomyType::Unspecified => "UNSPECIFIED",
+                UserInterestTaxonomyType::Unknown => "UNKNOWN",
+                UserInterestTaxonomyType::Affinity => "AFFINITY",
+                UserInterestTaxonomyType::InMarket => "IN_MARKET",
+                UserInterestTaxonomyType::MobileAppInstallUser => "MOBILE_APP_INSTALL_USER",
+                UserInterestTaxonomyType::VerticalGeo => "VERTICAL_GEO",
+                UserInterestTaxonomyType::NewSmartPhoneUser => "NEW_SMART_PHONE_USER",
+            }
+        }
+    }
 }
 // Proto file describing user list access status.
 
@@ -8479,6 +13027,20 @@ pub mod user_list_access_status_enum {
         /// The access is disabled.
         Disabled = 3,
     }
+    impl UserListAccessStatus {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                UserListAccessStatus::Unspecified => "UNSPECIFIED",
+                UserListAccessStatus::Unknown => "UNKNOWN",
+                UserListAccessStatus::Enabled => "ENABLED",
+                UserListAccessStatus::Disabled => "DISABLED",
+            }
+        }
+    }
 }
 // Proto file describing user list closing reason.
 
@@ -8499,6 +13061,19 @@ pub mod user_list_closing_reason_enum {
         Unknown = 1,
         /// The userlist was closed because of not being used for over one year.
         Unused = 2,
+    }
+    impl UserListClosingReason {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                UserListClosingReason::Unspecified => "UNSPECIFIED",
+                UserListClosingReason::Unknown => "UNKNOWN",
+                UserListClosingReason::Unused => "UNUSED",
+            }
+        }
     }
 }
 // Proto file describing user list membership status.
@@ -8523,6 +13098,20 @@ pub mod user_list_membership_status_enum {
         Open = 2,
         /// Closed status - No new members being added. Cannot be used for targeting.
         Closed = 3,
+    }
+    impl UserListMembershipStatus {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                UserListMembershipStatus::Unspecified => "UNSPECIFIED",
+                UserListMembershipStatus::Unknown => "UNKNOWN",
+                UserListMembershipStatus::Open => "OPEN",
+                UserListMembershipStatus::Closed => "CLOSED",
+            }
+        }
     }
 }
 // Proto file describing user list size range.
@@ -8574,6 +13163,34 @@ pub mod user_list_size_range_enum {
         /// User list has over 50 million users.
         OverFiftyMillion = 17,
     }
+    impl UserListSizeRange {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                UserListSizeRange::Unspecified => "UNSPECIFIED",
+                UserListSizeRange::Unknown => "UNKNOWN",
+                UserListSizeRange::LessThanFiveHundred => "LESS_THAN_FIVE_HUNDRED",
+                UserListSizeRange::LessThanOneThousand => "LESS_THAN_ONE_THOUSAND",
+                UserListSizeRange::OneThousandToTenThousand => "ONE_THOUSAND_TO_TEN_THOUSAND",
+                UserListSizeRange::TenThousandToFiftyThousand => "TEN_THOUSAND_TO_FIFTY_THOUSAND",
+                UserListSizeRange::FiftyThousandToOneHundredThousand => "FIFTY_THOUSAND_TO_ONE_HUNDRED_THOUSAND",
+                UserListSizeRange::OneHundredThousandToThreeHundredThousand => "ONE_HUNDRED_THOUSAND_TO_THREE_HUNDRED_THOUSAND",
+                UserListSizeRange::ThreeHundredThousandToFiveHundredThousand => "THREE_HUNDRED_THOUSAND_TO_FIVE_HUNDRED_THOUSAND",
+                UserListSizeRange::FiveHundredThousandToOneMillion => "FIVE_HUNDRED_THOUSAND_TO_ONE_MILLION",
+                UserListSizeRange::OneMillionToTwoMillion => "ONE_MILLION_TO_TWO_MILLION",
+                UserListSizeRange::TwoMillionToThreeMillion => "TWO_MILLION_TO_THREE_MILLION",
+                UserListSizeRange::ThreeMillionToFiveMillion => "THREE_MILLION_TO_FIVE_MILLION",
+                UserListSizeRange::FiveMillionToTenMillion => "FIVE_MILLION_TO_TEN_MILLION",
+                UserListSizeRange::TenMillionToTwentyMillion => "TEN_MILLION_TO_TWENTY_MILLION",
+                UserListSizeRange::TwentyMillionToThirtyMillion => "TWENTY_MILLION_TO_THIRTY_MILLION",
+                UserListSizeRange::ThirtyMillionToFiftyMillion => "THIRTY_MILLION_TO_FIFTY_MILLION",
+                UserListSizeRange::OverFiftyMillion => "OVER_FIFTY_MILLION",
+            }
+        }
+    }
 }
 // Proto file describing user list type.
 
@@ -8605,6 +13222,24 @@ pub mod user_list_type_enum {
         /// emails or other formats.
         CrmBased = 7,
     }
+    impl UserListType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                UserListType::Unspecified => "UNSPECIFIED",
+                UserListType::Unknown => "UNKNOWN",
+                UserListType::Remarketing => "REMARKETING",
+                UserListType::Logical => "LOGICAL",
+                UserListType::ExternalRemarketing => "EXTERNAL_REMARKETING",
+                UserListType::RuleBased => "RULE_BASED",
+                UserListType::Similar => "SIMILAR",
+                UserListType::CrmBased => "CRM_BASED",
+            }
+        }
+    }
 }
 // Proto file describing vanity pharma display url modes.
 
@@ -8626,6 +13261,20 @@ pub mod vanity_pharma_display_url_mode_enum {
         ManufacturerWebsiteUrl = 2,
         /// Replace vanity pharma URL with description of the website.
         WebsiteDescription = 3,
+    }
+    impl VanityPharmaDisplayUrlMode {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                VanityPharmaDisplayUrlMode::Unspecified => "UNSPECIFIED",
+                VanityPharmaDisplayUrlMode::Unknown => "UNKNOWN",
+                VanityPharmaDisplayUrlMode::ManufacturerWebsiteUrl => "MANUFACTURER_WEBSITE_URL",
+                VanityPharmaDisplayUrlMode::WebsiteDescription => "WEBSITE_DESCRIPTION",
+            }
+        }
     }
 }
 // Proto file describing vanity pharma texts.
@@ -8675,5 +13324,29 @@ pub mod vanity_pharma_text_enum {
         /// Prescription vaccine website with website content in Spanish (Sitio de
         /// vacunas con receta).
         PrescriptionVaccineWebsiteEs = 13,
+    }
+    impl VanityPharmaText {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                VanityPharmaText::Unspecified => "UNSPECIFIED",
+                VanityPharmaText::Unknown => "UNKNOWN",
+                VanityPharmaText::PrescriptionTreatmentWebsiteEn => "PRESCRIPTION_TREATMENT_WEBSITE_EN",
+                VanityPharmaText::PrescriptionTreatmentWebsiteEs => "PRESCRIPTION_TREATMENT_WEBSITE_ES",
+                VanityPharmaText::PrescriptionDeviceWebsiteEn => "PRESCRIPTION_DEVICE_WEBSITE_EN",
+                VanityPharmaText::PrescriptionDeviceWebsiteEs => "PRESCRIPTION_DEVICE_WEBSITE_ES",
+                VanityPharmaText::MedicalDeviceWebsiteEn => "MEDICAL_DEVICE_WEBSITE_EN",
+                VanityPharmaText::MedicalDeviceWebsiteEs => "MEDICAL_DEVICE_WEBSITE_ES",
+                VanityPharmaText::PreventativeTreatmentWebsiteEn => "PREVENTATIVE_TREATMENT_WEBSITE_EN",
+                VanityPharmaText::PreventativeTreatmentWebsiteEs => "PREVENTATIVE_TREATMENT_WEBSITE_ES",
+                VanityPharmaText::PrescriptionContraceptionWebsiteEn => "PRESCRIPTION_CONTRACEPTION_WEBSITE_EN",
+                VanityPharmaText::PrescriptionContraceptionWebsiteEs => "PRESCRIPTION_CONTRACEPTION_WEBSITE_ES",
+                VanityPharmaText::PrescriptionVaccineWebsiteEn => "PRESCRIPTION_VACCINE_WEBSITE_EN",
+                VanityPharmaText::PrescriptionVaccineWebsiteEs => "PRESCRIPTION_VACCINE_WEBSITE_ES",
+            }
+        }
     }
 }

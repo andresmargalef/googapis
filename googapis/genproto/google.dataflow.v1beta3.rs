@@ -12,8 +12,8 @@ pub struct Environment {
     ///
     /// Google Cloud Storage:
     ///
-    ///   storage.googleapis.com/{bucket}/{object}
-    ///   bucket.storage.googleapis.com/{object}
+    ///    storage.googleapis.com/{bucket}/{object}
+    ///    bucket.storage.googleapis.com/{object}
     #[prost(string, tag="1")]
     pub temp_storage_prefix: ::prost::alloc::string::String,
     /// The type of cluster manager API to use.  If unknown or
@@ -36,7 +36,7 @@ pub struct Environment {
     /// at rest, AKA a Customer Managed Encryption Key (CMEK).
     ///
     /// Format:
-    ///   projects/PROJECT_ID/locations/LOCATION/keyRings/KEY_RING/cryptoKeys/KEY
+    ///    projects/PROJECT_ID/locations/LOCATION/keyRings/KEY_RING/cryptoKeys/KEY
     #[prost(string, tag="12")]
     pub service_kms_key_name: ::prost::alloc::string::String,
     /// The worker pools. At least one "harness" worker pool must be
@@ -56,7 +56,7 @@ pub struct Environment {
     /// The supported resource type is:
     ///
     /// Google BigQuery:
-    ///   bigquery.googleapis.com/{dataset}
+    ///    bigquery.googleapis.com/{dataset}
     #[prost(string, tag="7")]
     pub dataset: ::prost::alloc::string::String,
     /// The Cloud Dataflow SDK pipeline options specified by the user. These
@@ -113,8 +113,8 @@ pub struct Package {
     ///
     /// Google Cloud Storage:
     ///
-    ///   storage.googleapis.com/{bucket}
-    ///   bucket.storage.googleapis.com/
+    ///    storage.googleapis.com/{bucket}
+    ///    bucket.storage.googleapis.com/
     #[prost(string, tag="2")]
     pub location: ::prost::alloc::string::String,
 }
@@ -184,8 +184,8 @@ pub struct WorkerSettings {
     ///
     /// Google Cloud Storage:
     ///
-    ///   storage.googleapis.com/{bucket}/{object}
-    ///   bucket.storage.googleapis.com/{object}
+    ///    storage.googleapis.com/{bucket}/{object}
+    ///    bucket.storage.googleapis.com/{object}
     #[prost(string, tag="6")]
     pub temp_storage_prefix: ::prost::alloc::string::String,
 }
@@ -240,8 +240,8 @@ pub struct TaskRunnerSettings {
     /// The supported resource type is:
     ///
     /// Google Cloud Storage:
-    ///   storage.googleapis.com/{bucket}/{object}
-    ///   bucket.storage.googleapis.com/{object}
+    ///    storage.googleapis.com/{bucket}/{object}
+    ///    bucket.storage.googleapis.com/{object}
     #[prost(string, tag="11")]
     pub log_upload_location: ::prost::alloc::string::String,
     /// The directory on the VM to store logs.
@@ -253,8 +253,8 @@ pub struct TaskRunnerSettings {
     /// The supported resource type is:
     ///
     /// Google Cloud Storage:
-    ///   storage.googleapis.com/{bucket}/{object}
-    ///   bucket.storage.googleapis.com/{object}
+    ///    storage.googleapis.com/{bucket}/{object}
+    ///    bucket.storage.googleapis.com/{object}
     #[prost(string, tag="13")]
     pub temp_storage_prefix: ::prost::alloc::string::String,
     /// The command to launch the worker harness.
@@ -439,6 +439,19 @@ pub enum JobType {
     /// processed, and written continuously.
     Streaming = 2,
 }
+impl JobType {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            JobType::Unknown => "JOB_TYPE_UNKNOWN",
+            JobType::Batch => "JOB_TYPE_BATCH",
+            JobType::Streaming => "JOB_TYPE_STREAMING",
+        }
+    }
+}
 /// Specifies the resource to optimize for in Flexible Resource Scheduling.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
@@ -449,6 +462,19 @@ pub enum FlexResourceSchedulingGoal {
     FlexrsSpeedOptimized = 1,
     /// Optimize for lower cost.
     FlexrsCostOptimized = 2,
+}
+impl FlexResourceSchedulingGoal {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            FlexResourceSchedulingGoal::FlexrsUnspecified => "FLEXRS_UNSPECIFIED",
+            FlexResourceSchedulingGoal::FlexrsSpeedOptimized => "FLEXRS_SPEED_OPTIMIZED",
+            FlexResourceSchedulingGoal::FlexrsCostOptimized => "FLEXRS_COST_OPTIMIZED",
+        }
+    }
 }
 /// Specifies what happens to a resource when a Cloud Dataflow
 /// \[google.dataflow.v1beta3.Job][google.dataflow.v1beta3.Job\] has completed.
@@ -466,6 +492,20 @@ pub enum TeardownPolicy {
     /// development.
     TeardownNever = 3,
 }
+impl TeardownPolicy {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            TeardownPolicy::Unknown => "TEARDOWN_POLICY_UNKNOWN",
+            TeardownPolicy::TeardownAlways => "TEARDOWN_ALWAYS",
+            TeardownPolicy::TeardownOnSuccess => "TEARDOWN_ON_SUCCESS",
+            TeardownPolicy::TeardownNever => "TEARDOWN_NEVER",
+        }
+    }
+}
 /// The default set of packages to be staged on a pool of workers.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
@@ -479,6 +519,20 @@ pub enum DefaultPackageSet {
     Java = 2,
     /// Stage packages typically useful to workers written in Python.
     Python = 3,
+}
+impl DefaultPackageSet {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            DefaultPackageSet::Unknown => "DEFAULT_PACKAGE_SET_UNKNOWN",
+            DefaultPackageSet::None => "DEFAULT_PACKAGE_SET_NONE",
+            DefaultPackageSet::Java => "DEFAULT_PACKAGE_SET_JAVA",
+            DefaultPackageSet::Python => "DEFAULT_PACKAGE_SET_PYTHON",
+        }
+    }
 }
 /// Specifies the algorithm used to determine the number of worker
 /// processes to run at any given point in time, based on the amount of
@@ -494,6 +548,19 @@ pub enum AutoscalingAlgorithm {
     /// Increase worker count over time to reduce job execution time.
     Basic = 2,
 }
+impl AutoscalingAlgorithm {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            AutoscalingAlgorithm::Unknown => "AUTOSCALING_ALGORITHM_UNKNOWN",
+            AutoscalingAlgorithm::None => "AUTOSCALING_ALGORITHM_NONE",
+            AutoscalingAlgorithm::Basic => "AUTOSCALING_ALGORITHM_BASIC",
+        }
+    }
+}
 /// Specifies how IP addresses should be allocated to the worker machines.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
@@ -504,6 +571,19 @@ pub enum WorkerIpAddressConfiguration {
     WorkerIpPublic = 1,
     /// Workers should have private IP addresses.
     WorkerIpPrivate = 2,
+}
+impl WorkerIpAddressConfiguration {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            WorkerIpAddressConfiguration::WorkerIpUnspecified => "WORKER_IP_UNSPECIFIED",
+            WorkerIpAddressConfiguration::WorkerIpPublic => "WORKER_IP_PUBLIC",
+            WorkerIpAddressConfiguration::WorkerIpPrivate => "WORKER_IP_PRIVATE",
+        }
+    }
 }
 /// Specifies the shuffle mode used by a
 /// \[google.dataflow.v1beta3.Job\], which determines the approach data is shuffled
@@ -518,6 +598,19 @@ pub enum ShuffleMode {
     VmBased = 1,
     /// Shuffle is done on the service side.
     ServiceBased = 2,
+}
+impl ShuffleMode {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            ShuffleMode::Unspecified => "SHUFFLE_MODE_UNSPECIFIED",
+            ShuffleMode::VmBased => "VM_BASED",
+            ShuffleMode::ServiceBased => "SERVICE_BASED",
+        }
+    }
 }
 /// Represents a Pubsub snapshot.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -635,10 +728,27 @@ pub enum SnapshotState {
     /// Snapshot has been deleted.
     Deleted = 5,
 }
+impl SnapshotState {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            SnapshotState::UnknownSnapshotState => "UNKNOWN_SNAPSHOT_STATE",
+            SnapshotState::Pending => "PENDING",
+            SnapshotState::Running => "RUNNING",
+            SnapshotState::Ready => "READY",
+            SnapshotState::Failed => "FAILED",
+            SnapshotState::Deleted => "DELETED",
+        }
+    }
+}
 /// Generated client implementations.
 pub mod snapshots_v1_beta3_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Provides methods to manage snapshots of Google Cloud Dataflow jobs.
     #[derive(Debug, Clone)]
     pub struct SnapshotsV1Beta3Client<T> {
@@ -653,6 +763,10 @@ pub mod snapshots_v1_beta3_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -674,19 +788,19 @@ pub mod snapshots_v1_beta3_client {
         {
             SnapshotsV1Beta3Client::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Gets information about a snapshot.
@@ -857,8 +971,8 @@ pub struct Job {
     ///
     /// Google Cloud Storage:
     ///
-    ///    storage.googleapis.com/{bucket}/{object}
-    ///    bucket.storage.googleapis.com/{object}
+    ///     storage.googleapis.com/{bucket}/{object}
+    ///     bucket.storage.googleapis.com/{object}
     #[prost(string, repeated, tag="16")]
     pub temp_files: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// User-defined labels for this job.
@@ -1008,6 +1122,21 @@ pub mod sdk_version {
         Deprecated = 3,
         /// Support for this SDK version has ended and it should no longer be used.
         Unsupported = 4,
+    }
+    impl SdkSupportStatus {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                SdkSupportStatus::Unknown => "UNKNOWN",
+                SdkSupportStatus::Supported => "SUPPORTED",
+                SdkSupportStatus::Stale => "STALE",
+                SdkSupportStatus::Deprecated => "DEPRECATED",
+                SdkSupportStatus::Unsupported => "UNSUPPORTED",
+            }
+        }
     }
 }
 /// Metadata available primarily for filtering jobs. Will be included in the
@@ -1236,19 +1365,19 @@ pub mod display_data {
 /// Here's an example of a sequence of steps which together implement a
 /// Map-Reduce job:
 ///
-///   * Read a collection of data from some source, parsing the
-///     collection's elements.
+///    * Read a collection of data from some source, parsing the
+///      collection's elements.
 ///
-///   * Validate the elements.
+///    * Validate the elements.
 ///
-///   * Apply a user-defined function to map each element to some value
-///     and extract an element-specific key value.
+///    * Apply a user-defined function to map each element to some value
+///      and extract an element-specific key value.
 ///
-///   * Group elements with the same key into a single element with
-///     that key, transforming a multiply-keyed collection into a
-///     uniquely-keyed collection.
+///    * Group elements with the same key into a single element with
+///      that key, transforming a multiply-keyed collection into a
+///      uniquely-keyed collection.
 ///
-///   * Write the elements out to some data sink.
+///    * Write the elements out to some data sink.
 ///
 /// Note that the Cloud Dataflow service may be used to run many different
 /// types of jobs, not just Map-Reduce.
@@ -1393,6 +1522,20 @@ pub mod list_jobs_request {
         /// Filters the jobs that are running ordered on the creation timestamp.
         Active = 3,
     }
+    impl Filter {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Filter::Unknown => "UNKNOWN",
+                Filter::All => "ALL",
+                Filter::Terminated => "TERMINATED",
+                Filter::Active => "ACTIVE",
+            }
+        }
+    }
 }
 /// Indicates which [regional endpoint]
 /// (<https://cloud.google.com/dataflow/docs/concepts/regional-endpoints>) failed
@@ -1483,6 +1626,25 @@ pub enum KindType {
     /// Opening or closing a shuffle session, often as part of a GroupByKey.
     ShuffleKind = 8,
 }
+impl KindType {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            KindType::UnknownKind => "UNKNOWN_KIND",
+            KindType::ParDoKind => "PAR_DO_KIND",
+            KindType::GroupByKeyKind => "GROUP_BY_KEY_KIND",
+            KindType::FlattenKind => "FLATTEN_KIND",
+            KindType::ReadKind => "READ_KIND",
+            KindType::WriteKind => "WRITE_KIND",
+            KindType::ConstantKind => "CONSTANT_KIND",
+            KindType::SingletonKind => "SINGLETON_KIND",
+            KindType::ShuffleKind => "SHUFFLE_KIND",
+        }
+    }
+}
 /// Describes the overall state of a \[google.dataflow.v1beta3.Job][google.dataflow.v1beta3.Job\].
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
@@ -1546,6 +1708,29 @@ pub enum JobState {
     /// team if you are interested.
     ResourceCleaningUp = 12,
 }
+impl JobState {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            JobState::Unknown => "JOB_STATE_UNKNOWN",
+            JobState::Stopped => "JOB_STATE_STOPPED",
+            JobState::Running => "JOB_STATE_RUNNING",
+            JobState::Done => "JOB_STATE_DONE",
+            JobState::Failed => "JOB_STATE_FAILED",
+            JobState::Cancelled => "JOB_STATE_CANCELLED",
+            JobState::Updated => "JOB_STATE_UPDATED",
+            JobState::Draining => "JOB_STATE_DRAINING",
+            JobState::Drained => "JOB_STATE_DRAINED",
+            JobState::Pending => "JOB_STATE_PENDING",
+            JobState::Cancelling => "JOB_STATE_CANCELLING",
+            JobState::Queued => "JOB_STATE_QUEUED",
+            JobState::ResourceCleaningUp => "JOB_STATE_RESOURCE_CLEANING_UP",
+        }
+    }
+}
 /// Selector for how much information is returned in Job responses.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
@@ -1564,10 +1749,25 @@ pub enum JobView {
     /// environment.
     Description = 3,
 }
+impl JobView {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            JobView::Unknown => "JOB_VIEW_UNKNOWN",
+            JobView::Summary => "JOB_VIEW_SUMMARY",
+            JobView::All => "JOB_VIEW_ALL",
+            JobView::Description => "JOB_VIEW_DESCRIPTION",
+        }
+    }
+}
 /// Generated client implementations.
 pub mod jobs_v1_beta3_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Provides a method to create and modify Google Cloud Dataflow jobs.
     /// A Job is a multi-stage computation graph run by the Cloud Dataflow service.
     #[derive(Debug, Clone)]
@@ -1583,6 +1783,10 @@ pub mod jobs_v1_beta3_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -1604,19 +1808,19 @@ pub mod jobs_v1_beta3_client {
         {
             JobsV1Beta3Client::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Creates a Cloud Dataflow job.
@@ -1885,6 +2089,21 @@ pub mod autoscaling_event {
         /// decision_message.
         NoChange = 4,
     }
+    impl AutoscalingEventType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AutoscalingEventType::TypeUnknown => "TYPE_UNKNOWN",
+                AutoscalingEventType::TargetNumWorkersChanged => "TARGET_NUM_WORKERS_CHANGED",
+                AutoscalingEventType::CurrentNumWorkersChanged => "CURRENT_NUM_WORKERS_CHANGED",
+                AutoscalingEventType::ActuationFailure => "ACTUATION_FAILURE",
+                AutoscalingEventType::NoChange => "NO_CHANGE",
+            }
+        }
+    }
 }
 /// Request to list job messages.
 /// Up to max_results messages will be returned in the time range specified
@@ -1973,10 +2192,27 @@ pub enum JobMessageImportance {
     /// messages are displayed by default in the Dataflow monitoring UI.
     JobMessageError = 4,
 }
+impl JobMessageImportance {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            JobMessageImportance::Unknown => "JOB_MESSAGE_IMPORTANCE_UNKNOWN",
+            JobMessageImportance::JobMessageDebug => "JOB_MESSAGE_DEBUG",
+            JobMessageImportance::JobMessageDetailed => "JOB_MESSAGE_DETAILED",
+            JobMessageImportance::JobMessageBasic => "JOB_MESSAGE_BASIC",
+            JobMessageImportance::JobMessageWarning => "JOB_MESSAGE_WARNING",
+            JobMessageImportance::JobMessageError => "JOB_MESSAGE_ERROR",
+        }
+    }
+}
 /// Generated client implementations.
 pub mod messages_v1_beta3_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The Dataflow Messages API is used for monitoring the progress of
     /// Dataflow jobs.
     #[derive(Debug, Clone)]
@@ -1992,6 +2228,10 @@ pub mod messages_v1_beta3_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -2013,19 +2253,19 @@ pub mod messages_v1_beta3_client {
         {
             MessagesV1Beta3Client::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Request the job status.
@@ -2361,10 +2601,27 @@ pub enum ExecutionState {
     /// Execution of the component was cancelled.
     Cancelled = 5,
 }
+impl ExecutionState {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            ExecutionState::Unknown => "EXECUTION_STATE_UNKNOWN",
+            ExecutionState::NotStarted => "EXECUTION_STATE_NOT_STARTED",
+            ExecutionState::Running => "EXECUTION_STATE_RUNNING",
+            ExecutionState::Succeeded => "EXECUTION_STATE_SUCCEEDED",
+            ExecutionState::Failed => "EXECUTION_STATE_FAILED",
+            ExecutionState::Cancelled => "EXECUTION_STATE_CANCELLED",
+        }
+    }
+}
 /// Generated client implementations.
 pub mod metrics_v1_beta3_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The Dataflow Metrics API lets you monitor the progress of Dataflow
     /// jobs.
     #[derive(Debug, Clone)]
@@ -2380,6 +2637,10 @@ pub mod metrics_v1_beta3_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -2401,19 +2662,19 @@ pub mod metrics_v1_beta3_client {
         {
             MetricsV1Beta3Client::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Request the job status.
@@ -3039,6 +3300,19 @@ pub mod sdk_info {
         /// Python.
         Python = 2,
     }
+    impl Language {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Language::Unknown => "UNKNOWN",
+                Language::Java => "JAVA",
+                Language::Python => "PYTHON",
+            }
+        }
+    }
 }
 /// RuntimeMetadata describing a runtime environment.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -3114,6 +3388,17 @@ pub mod get_template_request {
         /// template.
         MetadataOnly = 0,
     }
+    impl TemplateView {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                TemplateView::MetadataOnly => "METADATA_ONLY",
+            }
+        }
+    }
     /// The template from which to create the job.
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Template {
@@ -3154,6 +3439,19 @@ pub mod get_template_response {
         Legacy = 1,
         /// Flex Template.
         Flex = 2,
+    }
+    impl TemplateType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                TemplateType::Unknown => "UNKNOWN",
+                TemplateType::Legacy => "LEGACY",
+                TemplateType::Flex => "FLEX",
+            }
+        }
     }
 }
 /// Parameters to provide to the template being launched.
@@ -3281,10 +3579,31 @@ pub enum ParameterType {
     /// The parameter specifies a Pub/Sub Subscription.
     PubsubSubscription = 9,
 }
+impl ParameterType {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            ParameterType::Default => "DEFAULT",
+            ParameterType::Text => "TEXT",
+            ParameterType::GcsReadBucket => "GCS_READ_BUCKET",
+            ParameterType::GcsWriteBucket => "GCS_WRITE_BUCKET",
+            ParameterType::GcsReadFile => "GCS_READ_FILE",
+            ParameterType::GcsWriteFile => "GCS_WRITE_FILE",
+            ParameterType::GcsReadFolder => "GCS_READ_FOLDER",
+            ParameterType::GcsWriteFolder => "GCS_WRITE_FOLDER",
+            ParameterType::PubsubTopic => "PUBSUB_TOPIC",
+            ParameterType::PubsubSubscription => "PUBSUB_SUBSCRIPTION",
+        }
+    }
+}
 /// Generated client implementations.
 pub mod templates_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Provides a method to create Cloud Dataflow jobs from templates.
     #[derive(Debug, Clone)]
     pub struct TemplatesServiceClient<T> {
@@ -3299,6 +3618,10 @@ pub mod templates_service_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -3320,19 +3643,19 @@ pub mod templates_service_client {
         {
             TemplatesServiceClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Creates a Cloud Dataflow job from a template.
@@ -3401,6 +3724,7 @@ pub mod templates_service_client {
 pub mod flex_templates_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Provides a service for Flex templates. This feature is not ready yet.
     #[derive(Debug, Clone)]
     pub struct FlexTemplatesServiceClient<T> {
@@ -3415,6 +3739,10 @@ pub mod flex_templates_service_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -3436,19 +3764,19 @@ pub mod flex_templates_service_client {
         {
             FlexTemplatesServiceClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Launch a job with a FlexTemplate.

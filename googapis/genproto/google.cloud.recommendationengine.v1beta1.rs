@@ -10,7 +10,7 @@ pub struct FeatureMap {
     /// Feature names and values must be UTF-8 encoded strings.
     ///
     /// For example: `{ "colors": {"value": ["yellow", "green"]},
-    ///                 "sizes": {"value":["S", "M"]}`
+    ///                  "sizes": {"value":["S", "M"]}`
     #[prost(map="string, message", tag="1")]
     pub categorical_features: ::std::collections::HashMap<::prost::alloc::string::String, feature_map::StringList>,
     /// Numerical features. Some examples would be the height/weight of a product,
@@ -19,7 +19,7 @@ pub struct FeatureMap {
     /// Feature names must be UTF-8 encoded strings.
     ///
     /// For example: `{ "lengths_cm": {"value":[2.3, 15.4]},
-    ///                 "heights_cm": {"value":[8.1, 6.4]} }`
+    ///                  "heights_cm": {"value":[8.1, 6.4]} }`
     #[prost(map="string, message", tag="2")]
     pub numerical_features: ::std::collections::HashMap<::prost::alloc::string::String, feature_map::FloatList>,
 }
@@ -59,10 +59,10 @@ pub struct CatalogItem {
     /// ["Sports & Fitness" -> "Athletic Clothing" -> "Shoes"], it could be
     /// represented as:
     ///
-    ///      "categoryHierarchies": [
-    ///        { "categories": ["Shoes & Accessories", "Shoes"]},
-    ///        { "categories": ["Sports & Fitness", "Athletic Clothing", "Shoes"] }
-    ///      ]
+    ///       "categoryHierarchies": [
+    ///         { "categories": ["Shoes & Accessories", "Shoes"]},
+    ///         { "categories": ["Sports & Fitness", "Athletic Clothing", "Shoes"] }
+    ///       ]
     #[prost(message, repeated, tag="2")]
     pub category_hierarchies: ::prost::alloc::vec::Vec<catalog_item::CategoryHierarchy>,
     /// Required. Catalog item title. UTF-8 encoded string with a length limit of 1
@@ -198,6 +198,20 @@ pub mod product_catalog_item {
         /// Item that is back-ordered (i.e. temporarily out of stock).
         Backorder = 3,
     }
+    impl StockState {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                StockState::Unspecified => "STOCK_STATE_UNSPECIFIED",
+                StockState::OutOfStock => "OUT_OF_STOCK",
+                StockState::Preorder => "PREORDER",
+                StockState::Backorder => "BACKORDER",
+            }
+        }
+    }
     /// Product price. Only one of 'exactPrice'/'priceRange' can be provided.
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Price {
@@ -230,9 +244,9 @@ pub struct UserEvent {
     ///
     /// * `add-to-cart` Products being added to cart.
     /// * `add-to-list` Items being added to a list (shopping list, favorites
-    ///   etc).
+    ///    etc).
     /// * `category-page-view` Special pages such as sale or promotion pages
-    ///   viewed.
+    ///    viewed.
     /// * `checkout-start` User starting a checkout process.
     /// * `detail-page-view` Products detail page viewed.
     /// * `home-page-view` Homepage viewed.
@@ -272,7 +286,7 @@ pub struct UserEvent {
     ///
     /// * `page-visit`
     /// * `shopping-cart-page-view` - note that 'product_event_detail' should be
-    ///   set for this unless the shopping cart is empty.
+    ///    set for this unless the shopping cart is empty.
     ///
     /// This field is not allowed for the following event types:
     ///
@@ -304,6 +318,20 @@ pub mod user_event {
         Ecommerce = 2,
         /// The event is ingested via Import user events API.
         BatchUpload = 3,
+    }
+    impl EventSource {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                EventSource::Unspecified => "EVENT_SOURCE_UNSPECIFIED",
+                EventSource::Automl => "AUTOML",
+                EventSource::Ecommerce => "ECOMMERCE",
+                EventSource::BatchUpload => "BATCH_UPLOAD",
+            }
+        }
     }
 }
 /// Information of end users.
@@ -431,7 +459,7 @@ pub struct ProductEventDetail {
     ///
     /// * `page-visit`
     /// * `shopping-cart-page-view` - note that 'product_details' should be set for
-    ///   this unless the shopping cart is empty.
+    ///    this unless the shopping cart is empty.
     ///
     /// This field is not allowed for the following event types:
     ///
@@ -478,9 +506,9 @@ pub struct PurchaseTransaction {
     /// other costs.
     ///
     /// Total product cost such that
-    ///   profit = revenue - (sum(taxes) + sum(costs))
+    ///    profit = revenue - (sum(taxes) + sum(costs))
     /// If product_cost is not set, then
-    ///   profit = revenue - tax - shipping - sum(CatalogItem.costs).
+    ///    profit = revenue - tax - shipping - sum(CatalogItem.costs).
     ///
     /// If CatalogItem.cost is not specified for one of the items, CatalogItem.cost
     /// based profit *cannot* be calculated for this Transaction.
@@ -788,6 +816,7 @@ pub struct DeleteCatalogItemRequest {
 pub mod catalog_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Service for ingesting catalog information of the customer's website.
     #[derive(Debug, Clone)]
     pub struct CatalogServiceClient<T> {
@@ -802,6 +831,10 @@ pub mod catalog_service_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -823,19 +856,19 @@ pub mod catalog_service_client {
         {
             CatalogServiceClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Creates a catalog item.
@@ -1025,6 +1058,7 @@ pub struct DeletePredictionApiKeyRegistrationRequest {
 pub mod prediction_api_key_registry_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Service for registering API keys for use with the `predict` method. If you
     /// use an API key to request predictions, you must first register the API key.
     /// Otherwise, your prediction request is rejected. If you use OAuth to
@@ -1043,6 +1077,10 @@ pub mod prediction_api_key_registry_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -1066,19 +1104,19 @@ pub mod prediction_api_key_registry_client {
                 InterceptedService::new(inner, interceptor),
             )
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Register an API key for use with predict method.
@@ -1166,24 +1204,24 @@ pub struct PredictRequest {
     /// We currently support three placements with the following IDs by default:
     ///
     /// * `shopping_cart`: Predicts items frequently bought together with one or
-    ///   more catalog items in the same shopping session. Commonly displayed after
-    ///   `add-to-cart` events, on product detail pages, or on the shopping cart
-    ///   page.
+    ///    more catalog items in the same shopping session. Commonly displayed after
+    ///    `add-to-cart` events, on product detail pages, or on the shopping cart
+    ///    page.
     ///
     /// * `home_page`: Predicts the next product that a user will most likely
-    ///   engage with or purchase based on the shopping or viewing history of the
-    ///   specified `userId` or `visitorId`. For example - Recommendations for you.
+    ///    engage with or purchase based on the shopping or viewing history of the
+    ///    specified `userId` or `visitorId`. For example - Recommendations for you.
     ///
     /// * `product_detail`: Predicts the next product that a user will most likely
-    ///   engage with or purchase. The prediction is based on the shopping or
-    ///   viewing history of the specified `userId` or `visitorId` and its
-    ///   relevance to a specified `CatalogItem`. Typically used on product detail
-    ///   pages. For example - More items like this.
+    ///    engage with or purchase. The prediction is based on the shopping or
+    ///    viewing history of the specified `userId` or `visitorId` and its
+    ///    relevance to a specified `CatalogItem`. Typically used on product detail
+    ///    pages. For example - More items like this.
     ///
     /// * `recently_viewed_default`: Returns up to 75 items recently viewed by the
-    ///   specified `userId` or `visitorId`, most recent ones first. Returns
-    ///   nothing if neither of them has viewed any items yet. For example -
-    ///   Recently viewed.
+    ///    specified `userId` or `visitorId`, most recent ones first. Returns
+    ///    nothing if neither of them has viewed any items yet. For example -
+    ///    Recently viewed.
     ///
     /// The full list of available placements can be seen at
     /// <https://console.cloud.google.com/recommendation/datafeeds/default_catalog/dashboard>
@@ -1206,21 +1244,21 @@ pub struct PredictRequest {
     /// Optional. Filter for restricting prediction results. Accepts values for
     /// tags and the `filterOutOfStockItems` flag.
     ///
-    ///  * Tag expressions. Restricts predictions to items that match all of the
-    ///    specified tags. Boolean operators `OR` and `NOT` are supported if the
-    ///    expression is enclosed in parentheses, and must be separated from the
-    ///    tag values by a space. `-"tagA"` is also supported and is equivalent to
-    ///    `NOT "tagA"`. Tag values must be double quoted UTF-8 encoded strings
-    ///    with a size limit of 1 KiB.
+    ///   * Tag expressions. Restricts predictions to items that match all of the
+    ///     specified tags. Boolean operators `OR` and `NOT` are supported if the
+    ///     expression is enclosed in parentheses, and must be separated from the
+    ///     tag values by a space. `-"tagA"` is also supported and is equivalent to
+    ///     `NOT "tagA"`. Tag values must be double quoted UTF-8 encoded strings
+    ///     with a size limit of 1 KiB.
     ///
-    ///  * filterOutOfStockItems. Restricts predictions to items that do not have a
-    ///    stockState value of OUT_OF_STOCK.
+    ///   * filterOutOfStockItems. Restricts predictions to items that do not have a
+    ///     stockState value of OUT_OF_STOCK.
     ///
     /// Examples:
     ///
-    ///  * tag=("Red" OR "Blue") tag="New-Arrival" tag=(NOT "promotional")
-    ///  * filterOutOfStockItems  tag=(-"promotional")
-    ///  * filterOutOfStockItems
+    ///   * tag=("Red" OR "Blue") tag="New-Arrival" tag=(NOT "promotional")
+    ///   * filterOutOfStockItems  tag=(-"promotional")
+    ///   * filterOutOfStockItems
     #[prost(string, tag="3")]
     pub filter: ::prost::alloc::string::String,
     /// Optional. Use dryRun mode for this prediction query. If set to true, a
@@ -1234,23 +1272,23 @@ pub struct PredictRequest {
     /// Allowed values:
     ///
     /// * `returnCatalogItem`: Boolean. If set to true, the associated catalogItem
-    ///    object will be returned in the
-    ///   `PredictResponse.PredictionResult.itemMetadata` object in the method
-    ///    response.
+    ///     object will be returned in the
+    ///    `PredictResponse.PredictionResult.itemMetadata` object in the method
+    ///     response.
     /// * `returnItemScore`: Boolean. If set to true, the prediction 'score'
-    ///    corresponding to each returned item will be set in the `metadata`
-    ///    field in the prediction response. The given 'score' indicates the
-    ///    probability of an item being clicked/purchased given the user's context
-    ///    and history.
+    ///     corresponding to each returned item will be set in the `metadata`
+    ///     field in the prediction response. The given 'score' indicates the
+    ///     probability of an item being clicked/purchased given the user's context
+    ///     and history.
     #[prost(map="string, message", tag="6")]
     pub params: ::std::collections::HashMap<::prost::alloc::string::String, ::prost_types::Value>,
     /// Optional. The labels for the predict request.
     ///
-    ///  * Label keys can contain lowercase letters, digits and hyphens, must start
-    ///    with a letter, and must end with a letter or digit.
-    ///  * Non-zero label values can contain lowercase letters, digits and hyphens,
-    ///    must start with a letter, and must end with a letter or digit.
-    ///  * No more than 64 labels can be associated with a given request.
+    ///   * Label keys can contain lowercase letters, digits and hyphens, must start
+    ///     with a letter, and must end with a letter or digit.
+    ///   * Non-zero label values can contain lowercase letters, digits and hyphens,
+    ///     must start with a letter, and must end with a letter or digit.
+    ///   * No more than 64 labels can be associated with a given request.
     ///
     /// See <https://goo.gl/xmQnxf> for more information on and examples of labels.
     #[prost(map="string, string", tag="9")]
@@ -1295,9 +1333,9 @@ pub mod predict_response {
         /// Possible values:
         ///
         /// * `catalogItem`: JSON representation of the catalogItem. Will be set if
-        ///   `returnCatalogItem` is set to true in `PredictRequest.params`.
+        ///    `returnCatalogItem` is set to true in `PredictRequest.params`.
         /// * `score`: Prediction score in double value. Will be set if
-        ///   `returnItemScore` is set to true in `PredictRequest.params`.
+        ///    `returnItemScore` is set to true in `PredictRequest.params`.
         #[prost(map="string, message", tag="2")]
         pub item_metadata: ::std::collections::HashMap<::prost::alloc::string::String, ::prost_types::Value>,
     }
@@ -1306,6 +1344,7 @@ pub mod predict_response {
 pub mod prediction_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Service for making recommendation prediction.
     #[derive(Debug, Clone)]
     pub struct PredictionServiceClient<T> {
@@ -1320,6 +1359,10 @@ pub mod prediction_service_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -1341,19 +1384,19 @@ pub mod prediction_service_client {
         {
             PredictionServiceClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Makes a recommendation prediction. If using API Key based authentication,
@@ -1490,34 +1533,34 @@ pub struct ListUserEventsRequest {
     /// returned events. This is a sequence of terms, where each term applies some
     /// kind of a restriction to the returned user events. Use this expression to
     /// restrict results to a specific time range, or filter events by eventType.
-    ///    eg: eventTime > "2012-04-23T18:25:43.511Z" eventsMissingCatalogItems
-    ///    eventTime<"2012-04-23T18:25:43.511Z" eventType=search
+    ///     eg: eventTime > "2012-04-23T18:25:43.511Z" eventsMissingCatalogItems
+    ///     eventTime<"2012-04-23T18:25:43.511Z" eventType=search
     ///
-    ///   We expect only 3 types of fields:
+    ///    We expect only 3 types of fields:
     ///
-    ///    * eventTime: this can be specified a maximum of 2 times, once with a
-    ///      less than operator and once with a greater than operator. The
-    ///      eventTime restrict should result in one contiguous valid eventTime
-    ///      range.
+    ///     * eventTime: this can be specified a maximum of 2 times, once with a
+    ///       less than operator and once with a greater than operator. The
+    ///       eventTime restrict should result in one contiguous valid eventTime
+    ///       range.
     ///
-    ///    * eventType: only 1 eventType restriction can be specified.
+    ///     * eventType: only 1 eventType restriction can be specified.
     ///
-    ///    * eventsMissingCatalogItems: specififying this will restrict results
-    ///      to events for which catalog items were not found in the catalog. The
-    ///      default behavior is to return only those events for which catalog
-    ///      items were found.
+    ///     * eventsMissingCatalogItems: specififying this will restrict results
+    ///       to events for which catalog items were not found in the catalog. The
+    ///       default behavior is to return only those events for which catalog
+    ///       items were found.
     ///
-    ///   Some examples of valid filters expressions:
+    ///    Some examples of valid filters expressions:
     ///
-    ///   * Example 1: eventTime > "2012-04-23T18:25:43.511Z"
-    ///             eventTime < "2012-04-23T18:30:43.511Z"
-    ///   * Example 2: eventTime > "2012-04-23T18:25:43.511Z"
-    ///             eventType = detail-page-view
-    ///   * Example 3: eventsMissingCatalogItems
-    ///             eventType = search eventTime < "2018-04-23T18:30:43.511Z"
-    ///   * Example 4: eventTime > "2012-04-23T18:25:43.511Z"
-    ///   * Example 5: eventType = search
-    ///   * Example 6: eventsMissingCatalogItems
+    ///    * Example 1: eventTime > "2012-04-23T18:25:43.511Z"
+    ///              eventTime < "2012-04-23T18:30:43.511Z"
+    ///    * Example 2: eventTime > "2012-04-23T18:25:43.511Z"
+    ///              eventType = detail-page-view
+    ///    * Example 3: eventsMissingCatalogItems
+    ///              eventType = search eventTime < "2018-04-23T18:30:43.511Z"
+    ///    * Example 4: eventTime > "2012-04-23T18:25:43.511Z"
+    ///    * Example 5: eventType = search
+    ///    * Example 6: eventsMissingCatalogItems
     #[prost(string, tag="4")]
     pub filter: ::prost::alloc::string::String,
 }
@@ -1536,6 +1579,7 @@ pub struct ListUserEventsResponse {
 pub mod user_event_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Service for ingesting end user actions on the customer website.
     #[derive(Debug, Clone)]
     pub struct UserEventServiceClient<T> {
@@ -1550,6 +1594,10 @@ pub mod user_event_service_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -1571,19 +1619,19 @@ pub mod user_event_service_client {
         {
             UserEventServiceClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Writes a single user event.

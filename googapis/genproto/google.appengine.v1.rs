@@ -49,6 +49,20 @@ pub mod error_handler {
         /// Deadline reached before the application responds.
         Timeout = 3,
     }
+    impl ErrorCode {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ErrorCode::Unspecified => "ERROR_CODE_UNSPECIFIED",
+                ErrorCode::OverQuota => "ERROR_CODE_OVER_QUOTA",
+                ErrorCode::DosApiDenial => "ERROR_CODE_DOS_API_DENIAL",
+                ErrorCode::Timeout => "ERROR_CODE_TIMEOUT",
+            }
+        }
+    }
 }
 /// URL pattern and description of how the URL should be handled. App Engine can
 /// handle URLs by executing application code or by serving static files
@@ -96,6 +110,21 @@ pub mod url_map {
         RedirectHttpResponseCode303 = 3,
         /// `307 Temporary Redirect` code.
         RedirectHttpResponseCode307 = 4,
+    }
+    impl RedirectHttpResponseCode {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                RedirectHttpResponseCode::Unspecified => "REDIRECT_HTTP_RESPONSE_CODE_UNSPECIFIED",
+                RedirectHttpResponseCode::RedirectHttpResponseCode301 => "REDIRECT_HTTP_RESPONSE_CODE_301",
+                RedirectHttpResponseCode::RedirectHttpResponseCode302 => "REDIRECT_HTTP_RESPONSE_CODE_302",
+                RedirectHttpResponseCode::RedirectHttpResponseCode303 => "REDIRECT_HTTP_RESPONSE_CODE_303",
+                RedirectHttpResponseCode::RedirectHttpResponseCode307 => "REDIRECT_HTTP_RESPONSE_CODE_307",
+            }
+        }
     }
     /// Type of handler for this URL pattern.
     #[derive(Clone, PartialEq, ::prost::Oneof)]
@@ -281,6 +310,19 @@ pub enum AuthFailAction {
     /// message.
     Unauthorized = 2,
 }
+impl AuthFailAction {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            AuthFailAction::Unspecified => "AUTH_FAIL_ACTION_UNSPECIFIED",
+            AuthFailAction::Redirect => "AUTH_FAIL_ACTION_REDIRECT",
+            AuthFailAction::Unauthorized => "AUTH_FAIL_ACTION_UNAUTHORIZED",
+        }
+    }
+}
 /// Methods to restrict access to a URL based on login status.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
@@ -299,6 +341,20 @@ pub enum LoginRequirement {
     /// auth_fail_action is taken.
     LoginRequired = 3,
 }
+impl LoginRequirement {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            LoginRequirement::LoginUnspecified => "LOGIN_UNSPECIFIED",
+            LoginRequirement::LoginOptional => "LOGIN_OPTIONAL",
+            LoginRequirement::LoginAdmin => "LOGIN_ADMIN",
+            LoginRequirement::LoginRequired => "LOGIN_REQUIRED",
+        }
+    }
+}
 /// Methods to enforce security (HTTPS) on a URL.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
@@ -316,6 +372,20 @@ pub enum SecurityLevel {
     /// automatically redirected to the HTTPS URL with the same path. Query
     /// parameters are reserved for the redirect.
     SecureAlways = 3,
+}
+impl SecurityLevel {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            SecurityLevel::SecureUnspecified => "SECURE_UNSPECIFIED",
+            SecurityLevel::SecureNever => "SECURE_NEVER",
+            SecurityLevel::SecureOptional => "SECURE_OPTIONAL",
+            SecurityLevel::SecureAlways => "SECURE_ALWAYS",
+        }
+    }
 }
 /// An Application resource contains the top-level configuration of an App
 /// Engine application.
@@ -451,6 +521,20 @@ pub mod application {
         /// Application has been disabled by the system.
         SystemDisabled = 3,
     }
+    impl ServingStatus {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ServingStatus::Unspecified => "UNSPECIFIED",
+                ServingStatus::Serving => "SERVING",
+                ServingStatus::UserDisabled => "USER_DISABLED",
+                ServingStatus::SystemDisabled => "SYSTEM_DISABLED",
+            }
+        }
+    }
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
     pub enum DatabaseType {
@@ -462,6 +546,20 @@ pub mod application {
         CloudFirestore = 2,
         /// Cloud Firestore in Datastore Mode
         CloudDatastoreCompatibility = 3,
+    }
+    impl DatabaseType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                DatabaseType::Unspecified => "DATABASE_TYPE_UNSPECIFIED",
+                DatabaseType::CloudDatastore => "CLOUD_DATASTORE",
+                DatabaseType::CloudFirestore => "CLOUD_FIRESTORE",
+                DatabaseType::CloudDatastoreCompatibility => "CLOUD_DATASTORE_COMPATIBILITY",
+            }
+        }
     }
 }
 /// Rules to match an HTTP request and dispatch that request to a service.
@@ -629,6 +727,23 @@ pub enum ManagementStatus {
     /// may still be serving.
     FailedRetryingCaaChecking = 8,
 }
+impl ManagementStatus {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            ManagementStatus::Unspecified => "MANAGEMENT_STATUS_UNSPECIFIED",
+            ManagementStatus::Ok => "OK",
+            ManagementStatus::Pending => "PENDING",
+            ManagementStatus::FailedRetryingNotVisible => "FAILED_RETRYING_NOT_VISIBLE",
+            ManagementStatus::FailedPermanent => "FAILED_PERMANENT",
+            ManagementStatus::FailedRetryingCaaForbidden => "FAILED_RETRYING_CAA_FORBIDDEN",
+            ManagementStatus::FailedRetryingCaaChecking => "FAILED_RETRYING_CAA_CHECKING",
+        }
+    }
+}
 /// A domain that a user has been authorized to administer. To authorize use
 /// of a domain, verify ownership via
 /// [Webmaster Central](<https://www.google.com/webmasters/verification/home>).
@@ -717,6 +832,19 @@ pub mod ssl_settings {
         /// explictly mapped to this domain.
         Manual = 2,
     }
+    impl SslManagementType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                SslManagementType::Unspecified => "SSL_MANAGEMENT_TYPE_UNSPECIFIED",
+                SslManagementType::Automatic => "AUTOMATIC",
+                SslManagementType::Manual => "MANUAL",
+            }
+        }
+    }
 }
 /// A DNS resource record.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -748,6 +876,20 @@ pub mod resource_record {
         /// A CNAME resource record. Data is a domain name to be aliased.
         Cname = 3,
     }
+    impl RecordType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                RecordType::Unspecified => "RECORD_TYPE_UNSPECIFIED",
+                RecordType::A => "A",
+                RecordType::Aaaa => "AAAA",
+                RecordType::Cname => "CNAME",
+            }
+        }
+    }
 }
 /// A single firewall rule that is evaluated against incoming traffic
 /// and provides an action to take on matched requests.
@@ -768,7 +910,7 @@ pub struct FirewallRule {
     /// rule applies to. You can use the wildcard character "*" to match all IPs
     /// equivalent to "0/0" and "::/0" together.
     /// Examples: `192.168.1.1` or `192.168.0.0/16` or `2001:db8::/32`
-    ///           or `2001:0db8:0000:0042:0000:8a2e:0370:7334`.
+    ///            or `2001:0db8:0000:0042:0000:8a2e:0370:7334`.
     ///
     ///
     /// <p>Truncation will be silently performed on addresses which are not
@@ -793,6 +935,19 @@ pub mod firewall_rule {
         Allow = 1,
         /// Matching requests are denied.
         Deny = 2,
+    }
+    impl Action {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Action::UnspecifiedAction => "UNSPECIFIED_ACTION",
+                Action::Allow => "ALLOW",
+                Action::Deny => "DENY",
+            }
+        }
     }
 }
 /// An Instance resource is the computing unit that App Engine uses to
@@ -895,6 +1050,22 @@ pub mod instance {
             /// within the specified timeout.
             Timeout = 5,
         }
+        impl LivenessState {
+            /// String value of the enum field names used in the ProtoBuf definition.
+            ///
+            /// The values are not transformed in any way and thus are considered stable
+            /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+            pub fn as_str_name(&self) -> &'static str {
+                match self {
+                    LivenessState::Unspecified => "LIVENESS_STATE_UNSPECIFIED",
+                    LivenessState::Unknown => "UNKNOWN",
+                    LivenessState::Healthy => "HEALTHY",
+                    LivenessState::Unhealthy => "UNHEALTHY",
+                    LivenessState::Draining => "DRAINING",
+                    LivenessState::Timeout => "TIMEOUT",
+                }
+            }
+        }
     }
     /// Availability of the instance.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -903,6 +1074,19 @@ pub mod instance {
         Unspecified = 0,
         Resident = 1,
         Dynamic = 2,
+    }
+    impl Availability {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Availability::Unspecified => "UNSPECIFIED",
+                Availability::Resident => "RESIDENT",
+                Availability::Dynamic => "DYNAMIC",
+            }
+        }
     }
 }
 /// Code and application artifacts used to deploy a version to App Engine.
@@ -1012,6 +1196,20 @@ pub mod network_settings {
         InternalOnly = 2,
         /// Allow HTTP traffic from private VPC sources and through load balancers.
         InternalAndLb = 3,
+    }
+    impl IngressTrafficAllowed {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                IngressTrafficAllowed::Unspecified => "INGRESS_TRAFFIC_ALLOWED_UNSPECIFIED",
+                IngressTrafficAllowed::All => "INGRESS_TRAFFIC_ALLOWED_ALL",
+                IngressTrafficAllowed::InternalOnly => "INGRESS_TRAFFIC_ALLOWED_INTERNAL_ONLY",
+                IngressTrafficAllowed::InternalAndLb => "INGRESS_TRAFFIC_ALLOWED_INTERNAL_AND_LB",
+            }
+        }
     }
 }
 /// A Version resource is a specific set of source code and configuration files
@@ -1281,6 +1479,19 @@ pub mod endpoints_api_service {
         Fixed = 1,
         /// Endpoints service configuration ID will be updated with each rollout.
         Managed = 2,
+    }
+    impl RolloutStrategy {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                RolloutStrategy::UnspecifiedRolloutStrategy => "UNSPECIFIED_ROLLOUT_STRATEGY",
+                RolloutStrategy::Fixed => "FIXED",
+                RolloutStrategy::Managed => "MANAGED",
+            }
+        }
     }
 }
 /// Automatic scaling is based on request rate, response latencies, and other
@@ -1567,6 +1778,25 @@ pub enum InboundServiceType {
     /// Enables warmup requests.
     InboundServiceWarmup = 9,
 }
+impl InboundServiceType {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            InboundServiceType::InboundServiceUnspecified => "INBOUND_SERVICE_UNSPECIFIED",
+            InboundServiceType::InboundServiceMail => "INBOUND_SERVICE_MAIL",
+            InboundServiceType::InboundServiceMailBounce => "INBOUND_SERVICE_MAIL_BOUNCE",
+            InboundServiceType::InboundServiceXmppError => "INBOUND_SERVICE_XMPP_ERROR",
+            InboundServiceType::InboundServiceXmppMessage => "INBOUND_SERVICE_XMPP_MESSAGE",
+            InboundServiceType::InboundServiceXmppSubscribe => "INBOUND_SERVICE_XMPP_SUBSCRIBE",
+            InboundServiceType::InboundServiceXmppPresence => "INBOUND_SERVICE_XMPP_PRESENCE",
+            InboundServiceType::InboundServiceChannelPresence => "INBOUND_SERVICE_CHANNEL_PRESENCE",
+            InboundServiceType::InboundServiceWarmup => "INBOUND_SERVICE_WARMUP",
+        }
+    }
+}
 /// Run states of a version.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
@@ -1580,6 +1810,19 @@ pub enum ServingStatus {
     /// settings are ignored until the state of the version changes
     /// to `SERVING`.
     Stopped = 2,
+}
+impl ServingStatus {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            ServingStatus::Unspecified => "SERVING_STATUS_UNSPECIFIED",
+            ServingStatus::Serving => "SERVING",
+            ServingStatus::Stopped => "STOPPED",
+        }
+    }
 }
 /// A Service resource is a logical component of an application that can share
 /// state and communicate in a secure fashion with other services.
@@ -1648,6 +1891,20 @@ pub mod traffic_split {
         /// randomly routed to a version in the traffic split, with probability
         /// proportional to the version's traffic share.
         Random = 3,
+    }
+    impl ShardBy {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ShardBy::Unspecified => "UNSPECIFIED",
+                ShardBy::Cookie => "COOKIE",
+                ShardBy::Ip => "IP",
+                ShardBy::Random => "RANDOM",
+            }
+        }
     }
 }
 /// Request message for `Applications.GetApplication`.
@@ -2150,6 +2407,18 @@ pub enum VersionView {
     /// is not returned in `Get` or `List` by default.
     Full = 1,
 }
+impl VersionView {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            VersionView::Basic => "BASIC",
+            VersionView::Full => "FULL",
+        }
+    }
+}
 /// Fields that should be returned when an AuthorizedCertificate resource is
 /// retrieved.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -2161,6 +2430,18 @@ pub enum AuthorizedCertificateView {
     /// The information from `BASIC_CERTIFICATE`, plus detailed information on the
     /// domain mappings that have this certificate mapped.
     FullCertificate = 1,
+}
+impl AuthorizedCertificateView {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            AuthorizedCertificateView::BasicCertificate => "BASIC_CERTIFICATE",
+            AuthorizedCertificateView::FullCertificate => "FULL_CERTIFICATE",
+        }
+    }
 }
 /// Override strategy for mutating an existing mapping.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -2178,10 +2459,24 @@ pub enum DomainOverrideStrategy {
     /// longer serve from that domain.
     Override = 2,
 }
+impl DomainOverrideStrategy {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            DomainOverrideStrategy::UnspecifiedDomainOverrideStrategy => "UNSPECIFIED_DOMAIN_OVERRIDE_STRATEGY",
+            DomainOverrideStrategy::Strict => "STRICT",
+            DomainOverrideStrategy::Override => "OVERRIDE",
+        }
+    }
+}
 /// Generated client implementations.
 pub mod applications_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Manages App Engine applications.
     #[derive(Debug, Clone)]
     pub struct ApplicationsClient<T> {
@@ -2196,6 +2491,10 @@ pub mod applications_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -2217,19 +2516,19 @@ pub mod applications_client {
         {
             ApplicationsClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Gets information about an application.
@@ -2346,6 +2645,7 @@ pub mod applications_client {
 pub mod services_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Manages services of an application.
     #[derive(Debug, Clone)]
     pub struct ServicesClient<T> {
@@ -2360,6 +2660,10 @@ pub mod services_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -2381,19 +2685,19 @@ pub mod services_client {
         {
             ServicesClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Lists all the services in the application.
@@ -2488,6 +2792,7 @@ pub mod services_client {
 pub mod versions_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Manages versions of a service.
     #[derive(Debug, Clone)]
     pub struct VersionsClient<T> {
@@ -2502,6 +2807,10 @@ pub mod versions_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -2523,19 +2832,19 @@ pub mod versions_client {
         {
             VersionsClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Lists the versions of a service.
@@ -2690,6 +2999,7 @@ pub mod versions_client {
 pub mod instances_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Manages instances of a version.
     #[derive(Debug, Clone)]
     pub struct InstancesClient<T> {
@@ -2704,6 +3014,10 @@ pub mod instances_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -2725,19 +3039,19 @@ pub mod instances_client {
         {
             InstancesClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Lists the instances of a version.
@@ -2853,6 +3167,7 @@ pub mod instances_client {
 pub mod firewall_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Firewall resources are used to define a collection of access control rules
     /// for an Application. Each rule is defined with a position which specifies
     /// the rule's order in the sequence of rules, an IP range to be matched against
@@ -2878,6 +3193,10 @@ pub mod firewall_client {
             let inner = tonic::client::Grpc::new(inner);
             Self { inner }
         }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
+            Self { inner }
+        }
         pub fn with_interceptor<F>(
             inner: T,
             interceptor: F,
@@ -2897,19 +3216,19 @@ pub mod firewall_client {
         {
             FirewallClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Lists the firewall rules of an application.
@@ -3045,6 +3364,7 @@ pub mod firewall_client {
 pub mod authorized_domains_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Manages domains a user is authorized to administer. To authorize use of a
     /// domain, verify ownership via
     /// [Webmaster Central](https://www.google.com/webmasters/verification/home).
@@ -3061,6 +3381,10 @@ pub mod authorized_domains_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -3082,19 +3406,19 @@ pub mod authorized_domains_client {
         {
             AuthorizedDomainsClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Lists all domains the user is authorized to administer.
@@ -3126,6 +3450,7 @@ pub mod authorized_domains_client {
 pub mod authorized_certificates_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Manages SSL certificates a user is authorized to administer. A user can
     /// administer any SSL certificates applicable to their authorized domains.
     #[derive(Debug, Clone)]
@@ -3141,6 +3466,10 @@ pub mod authorized_certificates_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -3164,19 +3493,19 @@ pub mod authorized_certificates_client {
                 InterceptedService::new(inner, interceptor),
             )
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Lists all SSL certificates the user is authorized to administer.
@@ -3292,6 +3621,7 @@ pub mod authorized_certificates_client {
 pub mod domain_mappings_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Manages domains serving an application.
     #[derive(Debug, Clone)]
     pub struct DomainMappingsClient<T> {
@@ -3306,6 +3636,10 @@ pub mod domain_mappings_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -3327,19 +3661,19 @@ pub mod domain_mappings_client {
         {
             DomainMappingsClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Lists the domain mappings on an application.

@@ -188,6 +188,22 @@ pub mod package {
         /// Apply this package config only if GooGet is available on the system.
         Goo = 5,
     }
+    impl Manager {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Manager::Unspecified => "MANAGER_UNSPECIFIED",
+                Manager::Any => "ANY",
+                Manager::Apt => "APT",
+                Manager::Yum => "YUM",
+                Manager::Zypper => "ZYPPER",
+                Manager::Goo => "GOO",
+            }
+        }
+    }
 }
 /// Represents a single Apt package repository. This repository is added to
 /// a repo file that is stored at
@@ -224,6 +240,19 @@ pub mod apt_repository {
         Deb = 1,
         /// DEB_SRC indicates that the archive contains source files.
         DebSrc = 2,
+    }
+    impl ArchiveType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ArchiveType::Unspecified => "ARCHIVE_TYPE_UNSPECIFIED",
+                ArchiveType::Deb => "DEB",
+                ArchiveType::DebSrc => "DEB_SRC",
+            }
+        }
     }
 }
 /// Represents a single Yum package repository. This repository is added to a
@@ -358,13 +387,13 @@ pub struct SoftwareRecipe {
     /// recipe.
     ///
     /// INSTALLED: The software recipe is installed on the instance but
-    ///            won't be updated to new versions.
+    ///             won't be updated to new versions.
     /// INSTALLED_KEEP_UPDATED: The software recipe is installed on the
-    ///                         instance. The recipe is updated to a higher
-    ///                         version, if a higher version of the recipe is
-    ///                         assigned to this instance.
+    ///                          instance. The recipe is updated to a higher
+    ///                          version, if a higher version of the recipe is
+    ///                          assigned to this instance.
     /// REMOVE: Remove is unsupported for software recipes and attempts to
-    ///         create or update a recipe to the REMOVE state is rejected.
+    ///          create or update a recipe to the REMOVE state is rejected.
     #[prost(enumeration="DesiredState", tag="6")]
     pub desired_state: i32,
 }
@@ -515,6 +544,23 @@ pub mod software_recipe {
                 /// Indicates that the archive is a zip archive.
                 Zip = 11,
             }
+            impl ArchiveType {
+                /// String value of the enum field names used in the ProtoBuf definition.
+                ///
+                /// The values are not transformed in any way and thus are considered stable
+                /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+                pub fn as_str_name(&self) -> &'static str {
+                    match self {
+                        ArchiveType::Unspecified => "ARCHIVE_TYPE_UNSPECIFIED",
+                        ArchiveType::Tar => "TAR",
+                        ArchiveType::TarGzip => "TAR_GZIP",
+                        ArchiveType::TarBzip => "TAR_BZIP",
+                        ArchiveType::TarLzma => "TAR_LZMA",
+                        ArchiveType::TarXz => "TAR_XZ",
+                        ArchiveType::Zip => "ZIP",
+                    }
+                }
+            }
         }
         /// Installs an MSI file.
         #[derive(Clone, PartialEq, ::prost::Message)]
@@ -602,6 +648,19 @@ pub mod software_recipe {
                 Shell = 1,
                 /// Indicates that the script is run with powershell.
                 Powershell = 3,
+            }
+            impl Interpreter {
+                /// String value of the enum field names used in the ProtoBuf definition.
+                ///
+                /// The values are not transformed in any way and thus are considered stable
+                /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+                pub fn as_str_name(&self) -> &'static str {
+                    match self {
+                        Interpreter::Unspecified => "INTERPRETER_UNSPECIFIED",
+                        Interpreter::Shell => "SHELL",
+                        Interpreter::Powershell => "POWERSHELL",
+                    }
+                }
             }
         }
         /// A specific type of step.
@@ -788,6 +847,20 @@ pub enum DesiredState {
     /// The agent ensures that the package is not installed and uninstall it
     /// if detected.
     Removed = 3,
+}
+impl DesiredState {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            DesiredState::Unspecified => "DESIRED_STATE_UNSPECIFIED",
+            DesiredState::Installed => "INSTALLED",
+            DesiredState::Updated => "UPDATED",
+            DesiredState::Removed => "REMOVED",
+        }
+    }
 }
 /// A request message to initiate patching across Google Compute Engine
 /// instances.
@@ -1045,6 +1118,24 @@ pub mod patch_job {
         /// The patch job timed out.
         TimedOut = 7,
     }
+    impl State {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                State::Unspecified => "STATE_UNSPECIFIED",
+                State::Started => "STARTED",
+                State::InstanceLookup => "INSTANCE_LOOKUP",
+                State::Patching => "PATCHING",
+                State::Succeeded => "SUCCEEDED",
+                State::CompletedWithErrors => "COMPLETED_WITH_ERRORS",
+                State::Canceled => "CANCELED",
+                State::TimedOut => "TIMED_OUT",
+            }
+        }
+    }
 }
 /// Patch configuration specifications. Contains details on how to apply the
 /// patch(es) to a VM instance.
@@ -1097,6 +1188,20 @@ pub mod patch_config {
         /// Never reboot the machine after the update completes.
         Never = 3,
     }
+    impl RebootConfig {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                RebootConfig::Unspecified => "REBOOT_CONFIG_UNSPECIFIED",
+                RebootConfig::Default => "DEFAULT",
+                RebootConfig::Always => "ALWAYS",
+                RebootConfig::Never => "NEVER",
+            }
+        }
+    }
 }
 /// Namespace for instance state enums.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -1143,6 +1248,32 @@ pub mod instance {
         /// service.
         NoAgentDetected = 15,
     }
+    impl PatchState {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                PatchState::Unspecified => "PATCH_STATE_UNSPECIFIED",
+                PatchState::Pending => "PENDING",
+                PatchState::Inactive => "INACTIVE",
+                PatchState::Notified => "NOTIFIED",
+                PatchState::Started => "STARTED",
+                PatchState::DownloadingPatches => "DOWNLOADING_PATCHES",
+                PatchState::ApplyingPatches => "APPLYING_PATCHES",
+                PatchState::Rebooting => "REBOOTING",
+                PatchState::Succeeded => "SUCCEEDED",
+                PatchState::SucceededRebootRequired => "SUCCEEDED_REBOOT_REQUIRED",
+                PatchState::Failed => "FAILED",
+                PatchState::Acked => "ACKED",
+                PatchState::TimedOut => "TIMED_OUT",
+                PatchState::RunningPrePatchStep => "RUNNING_PRE_PATCH_STEP",
+                PatchState::RunningPostPatchStep => "RUNNING_POST_PATCH_STEP",
+                PatchState::NoAgentDetected => "NO_AGENT_DETECTED",
+            }
+        }
+    }
 }
 /// Message for canceling a patch job.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -1181,6 +1312,19 @@ pub mod apt_settings {
         Dist = 1,
         /// Runs `apt-get upgrade`.
         Upgrade = 2,
+    }
+    impl Type {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Type::Unspecified => "TYPE_UNSPECIFIED",
+                Type::Dist => "DIST",
+                Type::Upgrade => "UPGRADE",
+            }
+        }
     }
 }
 /// Yum patching is performed by executing `yum update`. Additional options
@@ -1300,6 +1444,26 @@ pub mod windows_update_settings {
         /// noncritical, non-security-related bug." \[1\]
         Update = 9,
     }
+    impl Classification {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Classification::Unspecified => "CLASSIFICATION_UNSPECIFIED",
+                Classification::Critical => "CRITICAL",
+                Classification::Security => "SECURITY",
+                Classification::Definition => "DEFINITION",
+                Classification::Driver => "DRIVER",
+                Classification::FeaturePack => "FEATURE_PACK",
+                Classification::ServicePack => "SERVICE_PACK",
+                Classification::Tool => "TOOL",
+                Classification::UpdateRollup => "UPDATE_ROLLUP",
+                Classification::Update => "UPDATE",
+            }
+        }
+    }
 }
 /// A step that runs an executable for a PatchJob.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -1344,6 +1508,19 @@ pub mod exec_step_config {
         /// Indicates that the file is run with PowerShell flags
         /// `-NonInteractive`, `-NoProfile`, and `-ExecutionPolicy Bypass`.
         Powershell = 2,
+    }
+    impl Interpreter {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Interpreter::Unspecified => "INTERPRETER_UNSPECIFIED",
+                Interpreter::Shell => "SHELL",
+                Interpreter::Powershell => "POWERSHELL",
+            }
+        }
     }
     /// Location of the executable.
     #[derive(Clone, PartialEq, ::prost::Oneof)]
@@ -1530,6 +1707,20 @@ pub mod recurring_schedule {
         /// days.
         Daily = 3,
     }
+    impl Frequency {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Frequency::Unspecified => "FREQUENCY_UNSPECIFIED",
+                Frequency::Weekly => "WEEKLY",
+                Frequency::Monthly => "MONTHLY",
+                Frequency::Daily => "DAILY",
+            }
+        }
+    }
     /// Configurations for this recurring schedule.
     /// Configurations must match frequency.
     #[derive(Clone, PartialEq, ::prost::Oneof)]
@@ -1648,6 +1839,7 @@ pub struct DeletePatchDeploymentRequest {
 pub mod os_config_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// OS Config API
     ///
     /// The OS Config service is a server-side component that you can use to
@@ -1665,6 +1857,10 @@ pub mod os_config_service_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -1686,19 +1882,19 @@ pub mod os_config_service_client {
         {
             OsConfigServiceClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Patch VM instances by creating and running a patch job.

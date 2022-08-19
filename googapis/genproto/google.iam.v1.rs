@@ -26,46 +26,46 @@ pub struct GetPolicyOptions {
 ///
 /// **JSON Example**
 ///
-///     {
-///       "bindings": [
-///         {
-///           "role": "roles/resourcemanager.organizationAdmin",
-///           "members": [
-///             "user:mike@example.com",
-///             "group:admins@example.com",
-///             "domain:google.com",
-///             "serviceAccount:my-project-id@appspot.gserviceaccount.com"
-///           ]
-///         },
-///         {
-///           "role": "roles/resourcemanager.organizationViewer",
-///           "members": \["user:eve@example.com"\],
-///           "condition": {
-///             "title": "expirable access",
-///             "description": "Does not grant access after Sep 2020",
-///             "expression": "request.time <
-///             timestamp('2020-10-01T00:00:00.000Z')",
-///           }
-///         }
-///       ]
-///     }
+///      {
+///        "bindings": [
+///          {
+///            "role": "roles/resourcemanager.organizationAdmin",
+///            "members": [
+///              "user:mike@example.com",
+///              "group:admins@example.com",
+///              "domain:google.com",
+///              "serviceAccount:my-project-id@appspot.gserviceaccount.com"
+///            ]
+///          },
+///          {
+///            "role": "roles/resourcemanager.organizationViewer",
+///            "members": \["user:eve@example.com"\],
+///            "condition": {
+///              "title": "expirable access",
+///              "description": "Does not grant access after Sep 2020",
+///              "expression": "request.time <
+///              timestamp('2020-10-01T00:00:00.000Z')",
+///            }
+///          }
+///        ]
+///      }
 ///
 /// **YAML Example**
 ///
-///     bindings:
-///     - members:
-///       - user:mike@example.com
-///       - group:admins@example.com
-///       - domain:google.com
-///       - serviceAccount:my-project-id@appspot.gserviceaccount.com
-///       role: roles/resourcemanager.organizationAdmin
-///     - members:
-///       - user:eve@example.com
-///       role: roles/resourcemanager.organizationViewer
-///       condition:
-///         title: expirable access
-///         description: Does not grant access after Sep 2020
-///         expression: request.time < timestamp('2020-10-01T00:00:00.000Z')
+///      bindings:
+///      - members:
+///        - user:mike@example.com
+///        - group:admins@example.com
+///        - domain:google.com
+///        - serviceAccount:my-project-id@appspot.gserviceaccount.com
+///        role: roles/resourcemanager.organizationAdmin
+///      - members:
+///        - user:eve@example.com
+///        role: roles/resourcemanager.organizationViewer
+///        condition:
+///          title: expirable access
+///          description: Does not grant access after Sep 2020
+///          expression: request.time < timestamp('2020-10-01T00:00:00.000Z')
 ///
 /// For a description of IAM and its features, see the
 /// [IAM developer's guide](<https://cloud.google.com/iam/docs>).
@@ -118,24 +118,24 @@ pub struct Binding {
     /// `members` can have the following values:
     ///
     /// * `allUsers`: A special identifier that represents anyone who is
-    ///    on the internet; with or without a Google account.
+    ///     on the internet; with or without a Google account.
     ///
     /// * `allAuthenticatedUsers`: A special identifier that represents anyone
-    ///    who is authenticated with a Google account or a service account.
+    ///     who is authenticated with a Google account or a service account.
     ///
     /// * `user:{emailid}`: An email address that represents a specific Google
-    ///    account. For example, `alice@example.com` .
+    ///     account. For example, `alice@example.com` .
     ///
     ///
     /// * `serviceAccount:{emailid}`: An email address that represents a service
-    ///    account. For example, `my-other-app@appspot.gserviceaccount.com`.
+    ///     account. For example, `my-other-app@appspot.gserviceaccount.com`.
     ///
     /// * `group:{emailid}`: An email address that represents a Google group.
-    ///    For example, `admins@example.com`.
+    ///     For example, `admins@example.com`.
     ///
     ///
     /// * `domain:{domain}`: The G Suite domain (primary) that represents all the
-    ///    users of that domain. For example, `google.com` or `example.com`.
+    ///     users of that domain. For example, `google.com` or `example.com`.
     ///
     ///
     #[prost(string, repeated, tag="2")]
@@ -192,6 +192,19 @@ pub mod binding_delta {
         /// Removal of a Binding.
         Remove = 2,
     }
+    impl Action {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Action::Unspecified => "ACTION_UNSPECIFIED",
+                Action::Add => "ADD",
+                Action::Remove => "REMOVE",
+            }
+        }
+    }
 }
 /// One delta entry for AuditConfig. Each individual change (only one
 /// exempted_member in each entry) to a AuditConfig will be a separate entry.
@@ -230,6 +243,19 @@ pub mod audit_config_delta {
         Add = 1,
         /// Removal of an audit configuration.
         Remove = 2,
+    }
+    impl Action {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Action::Unspecified => "ACTION_UNSPECIFIED",
+                Action::Add => "ADD",
+                Action::Remove => "REMOVE",
+            }
+        }
     }
 }
 /// Request message for `SetIamPolicy` method.
@@ -284,6 +310,7 @@ pub struct TestIamPermissionsResponse {
 pub mod iam_policy_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// ## API Overview
     ///
     /// Manages Identity and Access Management (IAM) policies.
@@ -324,6 +351,10 @@ pub mod iam_policy_client {
             let inner = tonic::client::Grpc::new(inner);
             Self { inner }
         }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
+            Self { inner }
+        }
         pub fn with_interceptor<F>(
             inner: T,
             interceptor: F,
@@ -343,19 +374,19 @@ pub mod iam_policy_client {
         {
             IamPolicyClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Sets the access control policy on the specified resource. Replaces any

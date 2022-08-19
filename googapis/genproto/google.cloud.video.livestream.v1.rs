@@ -91,6 +91,19 @@ pub mod manifest {
         /// Create a `DASH` manifest. The corresponding file extension is `.mpd`.
         Dash = 2,
     }
+    impl ManifestType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ManifestType::Unspecified => "MANIFEST_TYPE_UNSPECIFIED",
+                ManifestType::Hls => "HLS",
+                ManifestType::Dash => "DASH",
+            }
+        }
+    }
 }
 /// Sprite sheet configuration.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -485,6 +498,19 @@ pub mod input {
         /// Input will take an srt (Secure Reliable Transport) input stream.
         SrtPush = 2,
     }
+    impl Type {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Type::Unspecified => "TYPE_UNSPECIFIED",
+                Type::RtmpPush => "RTMP_PUSH",
+                Type::SrtPush => "SRT_PUSH",
+            }
+        }
+    }
     /// Tier of the input specification.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -497,6 +523,20 @@ pub mod input {
         Hd = 2,
         /// Resolution more than 1920x1080 to 4096x2160.
         Uhd = 3,
+    }
+    impl Tier {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Tier::Unspecified => "TIER_UNSPECIFIED",
+                Tier::Sd => "SD",
+                Tier::Hd => "HD",
+                Tier::Uhd => "UHD",
+            }
+        }
     }
 }
 /// Channel resource represents the processor that does a user-defined
@@ -588,6 +628,24 @@ pub mod channel {
         /// Channel is stopping.
         Stopping = 8,
     }
+    impl StreamingState {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                StreamingState::Unspecified => "STREAMING_STATE_UNSPECIFIED",
+                StreamingState::Streaming => "STREAMING",
+                StreamingState::AwaitingInput => "AWAITING_INPUT",
+                StreamingState::StreamingError => "STREAMING_ERROR",
+                StreamingState::StreamingNoInput => "STREAMING_NO_INPUT",
+                StreamingState::Stopped => "STOPPED",
+                StreamingState::Starting => "STARTING",
+                StreamingState::Stopping => "STOPPING",
+            }
+        }
+    }
 }
 /// A group of information for attaching an input resource to this channel.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -677,6 +735,22 @@ pub mod event {
         Failed = 4,
         /// Event has been created but not scheduled yet.
         Pending = 5,
+    }
+    impl State {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                State::Unspecified => "STATE_UNSPECIFIED",
+                State::Scheduled => "SCHEDULED",
+                State::Running => "RUNNING",
+                State::Succeeded => "SUCCEEDED",
+                State::Failed => "FAILED",
+                State::Pending => "PENDING",
+            }
+        }
     }
     /// Required. Operation to be executed by this event.
     #[derive(Clone, PartialEq, ::prost::Oneof)]
@@ -1137,6 +1211,7 @@ pub struct OperationMetadata {
 pub mod livestream_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Using Live Stream API, you can generate live streams in the various
     /// renditions and streaming formats. The streaming format include HTTP Live
     /// Streaming (HLS) and Dynamic Adaptive Streaming over HTTP (DASH). You can send
@@ -1155,6 +1230,10 @@ pub mod livestream_service_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -1176,19 +1255,19 @@ pub mod livestream_service_client {
         {
             LivestreamServiceClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Creates a channel with the provided unique ID in the specified

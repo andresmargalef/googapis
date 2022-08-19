@@ -25,6 +25,19 @@ pub enum StorageType {
     /// Magnetic drive (HDD) storage should be used.
     Hdd = 2,
 }
+impl StorageType {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            StorageType::Unspecified => "STORAGE_TYPE_UNSPECIFIED",
+            StorageType::Ssd => "SSD",
+            StorageType::Hdd => "HDD",
+        }
+    }
+}
 /// A collection of Bigtable \[Tables][google.bigtable.admin.v2.Table\] and
 /// the resources that serve them.
 /// All tables in an instance are served from all
@@ -53,9 +66,9 @@ pub struct Instance {
     /// metrics.
     ///
     /// * Label keys must be between 1 and 63 characters long and must conform to
-    ///   the regular expression: `\[\p{Ll}\p{Lo}][\p{Ll}\p{Lo}\p{N}_-\]{0,62}`.
+    ///    the regular expression: `\[\p{Ll}\p{Lo}][\p{Ll}\p{Lo}\p{N}_-\]{0,62}`.
     /// * Label values must be between 0 and 63 characters long and must conform to
-    ///   the regular expression: `\[\p{Ll}\p{Lo}\p{N}_-\]{0,63}`.
+    ///    the regular expression: `\[\p{Ll}\p{Lo}\p{N}_-\]{0,63}`.
     /// * No more than 64 labels can be associated with a given resource.
     /// * Keys and values must both be under 128 bytes.
     #[prost(map="string, string", tag="5")]
@@ -81,6 +94,19 @@ pub mod instance {
         /// if the creation process encounters an error.
         Creating = 2,
     }
+    impl State {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                State::NotKnown => "STATE_NOT_KNOWN",
+                State::Ready => "READY",
+                State::Creating => "CREATING",
+            }
+        }
+    }
     /// The type of the instance.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -100,6 +126,19 @@ pub mod instance {
         /// When creating a development instance, `serve_nodes` on the cluster must
         /// not be set.
         Development = 2,
+    }
+    impl Type {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Type::Unspecified => "TYPE_UNSPECIFIED",
+                Type::Production => "PRODUCTION",
+                Type::Development => "DEVELOPMENT",
+            }
+        }
     }
 }
 /// The Autoscaling targets for a Cluster. These determine the recommended nodes.
@@ -180,11 +219,11 @@ pub mod cluster {
     pub struct EncryptionConfig {
         /// Describes the Cloud KMS encryption key that will be used to protect the
         /// destination Bigtable cluster. The requirements for this key are:
-        ///  1) The Cloud Bigtable service account associated with the project that
-        ///  contains this cluster must be granted the
-        ///  `cloudkms.cryptoKeyEncrypterDecrypter` role on the CMEK key.
-        ///  2) Only regional keys can be used and the region of the CMEK key must
-        ///  match the region of the cluster.
+        ///   1) The Cloud Bigtable service account associated with the project that
+        ///   contains this cluster must be granted the
+        ///   `cloudkms.cryptoKeyEncrypterDecrypter` role on the CMEK key.
+        ///   2) Only regional keys can be used and the region of the CMEK key must
+        ///   match the region of the cluster.
         /// 3) All clusters within an instance must use the same CMEK key.
         #[prost(string, tag="1")]
         pub kms_key_name: ::prost::alloc::string::String,
@@ -210,6 +249,21 @@ pub mod cluster {
         /// The cluster has no backing nodes. The data (tables) still
         /// exist, but no operations can be performed on the cluster.
         Disabled = 4,
+    }
+    impl State {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                State::NotKnown => "STATE_NOT_KNOWN",
+                State::Ready => "READY",
+                State::Creating => "CREATING",
+                State::Resizing => "RESIZING",
+                State::Disabled => "DISABLED",
+            }
+        }
     }
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Config {
@@ -610,6 +664,7 @@ pub struct UpdateAppProfileMetadata {
 pub mod bigtable_instance_admin_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Service for creating, configuring, and deleting Cloud Bigtable Instances and
     /// Clusters. Provides access to the Instance and Cluster schemas only, not the
     /// tables' metadata or data stored in those tables.
@@ -626,6 +681,10 @@ pub mod bigtable_instance_admin_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -647,19 +706,19 @@ pub mod bigtable_instance_admin_client {
         {
             BigtableInstanceAdminClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Create an instance within a project.
@@ -1228,6 +1287,22 @@ pub mod table {
             /// table will transition to `READY` state.
             ReadyOptimizing = 5,
         }
+        impl ReplicationState {
+            /// String value of the enum field names used in the ProtoBuf definition.
+            ///
+            /// The values are not transformed in any way and thus are considered stable
+            /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+            pub fn as_str_name(&self) -> &'static str {
+                match self {
+                    ReplicationState::StateNotKnown => "STATE_NOT_KNOWN",
+                    ReplicationState::Initializing => "INITIALIZING",
+                    ReplicationState::PlannedMaintenance => "PLANNED_MAINTENANCE",
+                    ReplicationState::UnplannedMaintenance => "UNPLANNED_MAINTENANCE",
+                    ReplicationState::Ready => "READY",
+                    ReplicationState::ReadyOptimizing => "READY_OPTIMIZING",
+                }
+            }
+        }
     }
     /// Possible timestamp granularities to use when keeping multiple versions
     /// of data in a table.
@@ -1239,6 +1314,18 @@ pub mod table {
         Unspecified = 0,
         /// The table keeps data versioned at a granularity of 1ms.
         Millis = 1,
+    }
+    impl TimestampGranularity {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                TimestampGranularity::Unspecified => "TIMESTAMP_GRANULARITY_UNSPECIFIED",
+                TimestampGranularity::Millis => "MILLIS",
+            }
+        }
     }
     /// Defines a view over a table's fields.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -1257,6 +1344,22 @@ pub mod table {
         EncryptionView = 5,
         /// Populates all fields.
         Full = 4,
+    }
+    impl View {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                View::Unspecified => "VIEW_UNSPECIFIED",
+                View::NameOnly => "NAME_ONLY",
+                View::SchemaView => "SCHEMA_VIEW",
+                View::ReplicationView => "REPLICATION_VIEW",
+                View::EncryptionView => "ENCRYPTION_VIEW",
+                View::Full => "FULL",
+            }
+        }
     }
 }
 /// A set of columns within a table which share a common configuration.
@@ -1353,6 +1456,19 @@ pub mod encryption_info {
         /// status is not tracked and is reported as `UNKNOWN`.
         CustomerManagedEncryption = 2,
     }
+    impl EncryptionType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                EncryptionType::Unspecified => "ENCRYPTION_TYPE_UNSPECIFIED",
+                EncryptionType::GoogleDefaultEncryption => "GOOGLE_DEFAULT_ENCRYPTION",
+                EncryptionType::CustomerManagedEncryption => "CUSTOMER_MANAGED_ENCRYPTION",
+            }
+        }
+    }
 }
 /// A snapshot of a table at a particular time. A snapshot can be used as a
 /// checkpoint for data restoration or a data source for a new table.
@@ -1407,6 +1523,19 @@ pub mod snapshot {
         /// table while it is being created.
         Creating = 2,
     }
+    impl State {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                State::NotKnown => "STATE_NOT_KNOWN",
+                State::Ready => "READY",
+                State::Creating => "CREATING",
+            }
+        }
+    }
 }
 /// A backup of a Cloud Bigtable table.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -1414,7 +1543,7 @@ pub struct Backup {
     /// Output only. A globally unique identifier for the backup which cannot be
     /// changed. Values are of the form
     /// `projects/{project}/instances/{instance}/clusters/{cluster}/
-    ///    backups/\[_a-zA-Z0-9][-_.a-zA-Z0-9\]*`
+    ///     backups/\[_a-zA-Z0-9][-_.a-zA-Z0-9\]*`
     /// The final segment of the name must be between 1 and 50 characters
     /// in length.
     ///
@@ -1470,6 +1599,19 @@ pub mod backup {
         /// The backup is complete and ready for use.
         Ready = 2,
     }
+    impl State {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                State::Unspecified => "STATE_UNSPECIFIED",
+                State::Creating => "CREATING",
+                State::Ready => "READY",
+            }
+        }
+    }
 }
 /// Information about a backup.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -1497,6 +1639,18 @@ pub enum RestoreSourceType {
     Unspecified = 0,
     /// A backup was used as the source of the restore.
     Backup = 1,
+}
+impl RestoreSourceType {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            RestoreSourceType::Unspecified => "RESTORE_SOURCE_TYPE_UNSPECIFIED",
+            RestoreSourceType::Backup => "BACKUP",
+        }
+    }
 }
 /// The request for
 /// \[RestoreTable][google.bigtable.admin.v2.BigtableTableAdmin.RestoreTable\].
@@ -1605,14 +1759,14 @@ pub struct CreateTableRequest {
     /// Example:
     ///
     /// * Row keys := `["a", "apple", "custom", "customer_1", "customer_2",`
-    ///                `"other", "zz"]`
+    ///                 `"other", "zz"]`
     /// * initial_split_keys := `["apple", "customer_1", "customer_2", "other"]`
     /// * Key assignment:
-    ///     - Tablet 1 `[, apple)                => {"a"}.`
-    ///     - Tablet 2 `[apple, customer_1)      => {"apple", "custom"}.`
-    ///     - Tablet 3 `[customer_1, customer_2) => {"customer_1"}.`
-    ///     - Tablet 4 `[customer_2, other)      => {"customer_2"}.`
-    ///     - Tablet 5 `[other, )                => {"other", "zz"}.`
+    ///      - Tablet 1 `[, apple)                => {"a"}.`
+    ///      - Tablet 2 `[apple, customer_1)      => {"apple", "custom"}.`
+    ///      - Tablet 3 `[customer_1, customer_2) => {"customer_1"}.`
+    ///      - Tablet 4 `[customer_2, other)      => {"customer_2"}.`
+    ///      - Tablet 5 `[other, )                => {"other", "zz"}.`
     #[prost(message, repeated, tag="4")]
     pub initial_splits: ::prost::alloc::vec::Vec<create_table_request::Split>,
 }
@@ -2016,7 +2170,7 @@ pub struct UpdateBackupRequest {
     /// Required. The backup to update. `backup.name`, and the fields to be updated
     /// as specified by `update_mask` are required. Other fields are ignored.
     /// Update is only supported for the following fields:
-    ///  * `backup.expire_time`.
+    ///   * `backup.expire_time`.
     #[prost(message, optional, tag="1")]
     pub backup: ::core::option::Option<Backup>,
     /// Required. A mask specifying which fields (e.g. `expire_time`) in the
@@ -2062,13 +2216,13 @@ pub struct ListBackupsRequest {
     /// roughly synonymous with equality. Filter rules are case insensitive.
     ///
     /// The fields eligible for filtering are:
-    ///   * `name`
-    ///   * `source_table`
-    ///   * `state`
-    ///   * `start_time` (and values are of the format YYYY-MM-DDTHH:MM:SSZ)
-    ///   * `end_time` (and values are of the format YYYY-MM-DDTHH:MM:SSZ)
-    ///   * `expire_time` (and values are of the format YYYY-MM-DDTHH:MM:SSZ)
-    ///   * `size_bytes`
+    ///    * `name`
+    ///    * `source_table`
+    ///    * `state`
+    ///    * `start_time` (and values are of the format YYYY-MM-DDTHH:MM:SSZ)
+    ///    * `end_time` (and values are of the format YYYY-MM-DDTHH:MM:SSZ)
+    ///    * `expire_time` (and values are of the format YYYY-MM-DDTHH:MM:SSZ)
+    ///    * `size_bytes`
     ///
     /// To filter on multiple expressions, provide each separate expression within
     /// parentheses. By default, each expression is an AND expression. However,
@@ -2076,16 +2230,16 @@ pub struct ListBackupsRequest {
     ///
     /// Some examples of using filters are:
     ///
-    ///   * `name:"exact"` --> The backup's name is the string "exact".
-    ///   * `name:howl` --> The backup's name contains the string "howl".
-    ///   * `source_table:prod`
-    ///          --> The source_table's name contains the string "prod".
-    ///   * `state:CREATING` --> The backup is pending creation.
-    ///   * `state:READY` --> The backup is fully created and ready for use.
-    ///   * `(name:howl) AND (start_time < \"2018-03-28T14:50:00Z\")`
-    ///          --> The backup name contains the string "howl" and start_time
-    ///              of the backup is before 2018-03-28T14:50:00Z.
-    ///   * `size_bytes > 10000000000` --> The backup's size is greater than 10GB
+    ///    * `name:"exact"` --> The backup's name is the string "exact".
+    ///    * `name:howl` --> The backup's name contains the string "howl".
+    ///    * `source_table:prod`
+    ///           --> The source_table's name contains the string "prod".
+    ///    * `state:CREATING` --> The backup is pending creation.
+    ///    * `state:READY` --> The backup is fully created and ready for use.
+    ///    * `(name:howl) AND (start_time < \"2018-03-28T14:50:00Z\")`
+    ///           --> The backup name contains the string "howl" and start_time
+    ///               of the backup is before 2018-03-28T14:50:00Z.
+    ///    * `size_bytes > 10000000000` --> The backup's size is greater than 10GB
     #[prost(string, tag="2")]
     pub filter: ::prost::alloc::string::String,
     /// An expression for specifying the sort order of the results of the request.
@@ -2093,13 +2247,13 @@ pub struct ListBackupsRequest {
     /// syntax is described at <https://aip.dev/132#ordering.>
     ///
     /// Fields supported are:
-    ///    * name
-    ///    * source_table
-    ///    * expire_time
-    ///    * start_time
-    ///    * end_time
-    ///    * size_bytes
-    ///    * state
+    ///     * name
+    ///     * source_table
+    ///     * expire_time
+    ///     * start_time
+    ///     * end_time
+    ///     * size_bytes
+    ///     * state
     ///
     /// For example, "start_time". The default sorting order is ascending.
     /// To specify descending order for the field, a suffix " desc" should
@@ -2137,6 +2291,7 @@ pub struct ListBackupsResponse {
 pub mod bigtable_table_admin_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Service for creating, configuring, and deleting Cloud Bigtable tables.
     ///
     ///
@@ -2155,6 +2310,10 @@ pub mod bigtable_table_admin_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -2176,19 +2335,19 @@ pub mod bigtable_table_admin_client {
         {
             BigtableTableAdminClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Creates a new table in the specified instance.

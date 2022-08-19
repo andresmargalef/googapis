@@ -33,7 +33,7 @@ pub struct Position {
 }
 /// TextAnnotation contains a structured representation of OCR extracted text.
 /// The hierarchy of an OCR extracted text structure is like this:
-///     TextAnnotation -> Page -> Block -> Paragraph -> Word -> Symbol
+///      TextAnnotation -> Page -> Block -> Paragraph -> Word -> Symbol
 /// Each structural component, starting from Page, may further have their own
 /// properties. Properties describe detected languages, breaks etc.. Please refer
 /// to the
@@ -92,6 +92,22 @@ pub mod text_annotation {
             /// Line break that ends a paragraph.
             LineBreak = 5,
         }
+        impl BreakType {
+            /// String value of the enum field names used in the ProtoBuf definition.
+            ///
+            /// The values are not transformed in any way and thus are considered stable
+            /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+            pub fn as_str_name(&self) -> &'static str {
+                match self {
+                    BreakType::Unknown => "UNKNOWN",
+                    BreakType::Space => "SPACE",
+                    BreakType::SureSpace => "SURE_SPACE",
+                    BreakType::EolSureSpace => "EOL_SURE_SPACE",
+                    BreakType::Hyphen => "HYPHEN",
+                    BreakType::LineBreak => "LINE_BREAK",
+                }
+            }
+        }
     }
     /// Additional information detected on the structural component.
     #[derive(Clone, PartialEq, ::prost::Message)]
@@ -135,15 +151,15 @@ pub struct Block {
     /// is represented as around the top-left corner as defined when the text is
     /// read in the 'natural' orientation.
     /// For example:
-    ///   * when the text is horizontal it might look like:
-    ///      0----1
-    ///      |    |
-    ///      3----2
-    ///   * when it's rotated 180 degrees around the top-left corner it becomes:
-    ///      2----3
-    ///      |    |
-    ///      1----0
-    ///   and the vertice order will still be (0, 1, 2, 3).
+    ///    * when the text is horizontal it might look like:
+    ///       0----1
+    ///       |    |
+    ///       3----2
+    ///    * when it's rotated 180 degrees around the top-left corner it becomes:
+    ///       2----3
+    ///       |    |
+    ///       1----0
+    ///    and the vertice order will still be (0, 1, 2, 3).
     #[prost(message, optional, tag="2")]
     pub bounding_box: ::core::option::Option<BoundingPoly>,
     /// List of paragraphs in this block (if this blocks is of type text).
@@ -175,6 +191,22 @@ pub mod block {
         /// Barcode block.
         Barcode = 5,
     }
+    impl BlockType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                BlockType::Unknown => "UNKNOWN",
+                BlockType::Text => "TEXT",
+                BlockType::Table => "TABLE",
+                BlockType::Picture => "PICTURE",
+                BlockType::Ruler => "RULER",
+                BlockType::Barcode => "BARCODE",
+            }
+        }
+    }
 }
 /// Structural unit of text representing a number of words in certain order.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -188,15 +220,15 @@ pub struct Paragraph {
     /// is represented as around the top-left corner as defined when the text is
     /// read in the 'natural' orientation.
     /// For example:
-    ///   * when the text is horizontal it might look like:
-    ///      0----1
-    ///      |    |
-    ///      3----2
-    ///   * when it's rotated 180 degrees around the top-left corner it becomes:
-    ///      2----3
-    ///      |    |
-    ///      1----0
-    ///   and the vertice order will still be (0, 1, 2, 3).
+    ///    * when the text is horizontal it might look like:
+    ///       0----1
+    ///       |    |
+    ///       3----2
+    ///    * when it's rotated 180 degrees around the top-left corner it becomes:
+    ///       2----3
+    ///       |    |
+    ///       1----0
+    ///    and the vertice order will still be (0, 1, 2, 3).
     #[prost(message, optional, tag="2")]
     pub bounding_box: ::core::option::Option<BoundingPoly>,
     /// List of words in this paragraph.
@@ -218,15 +250,15 @@ pub struct Word {
     /// is represented as around the top-left corner as defined when the text is
     /// read in the 'natural' orientation.
     /// For example:
-    ///   * when the text is horizontal it might look like:
-    ///      0----1
-    ///      |    |
-    ///      3----2
-    ///   * when it's rotated 180 degrees around the top-left corner it becomes:
-    ///      2----3
-    ///      |    |
-    ///      1----0
-    ///   and the vertice order will still be (0, 1, 2, 3).
+    ///    * when the text is horizontal it might look like:
+    ///       0----1
+    ///       |    |
+    ///       3----2
+    ///    * when it's rotated 180 degrees around the top-left corner it becomes:
+    ///       2----3
+    ///       |    |
+    ///       1----0
+    ///    and the vertice order will still be (0, 1, 2, 3).
     #[prost(message, optional, tag="2")]
     pub bounding_box: ::core::option::Option<BoundingPoly>,
     /// List of symbols in the word.
@@ -249,15 +281,15 @@ pub struct Symbol {
     /// is represented as around the top-left corner as defined when the text is
     /// read in the 'natural' orientation.
     /// For example:
-    ///   * when the text is horizontal it might look like:
-    ///      0----1
-    ///      |    |
-    ///      3----2
-    ///   * when it's rotated 180 degrees around the top-left corner it becomes:
-    ///      2----3
-    ///      |    |
-    ///      1----0
-    ///   and the vertice order will still be (0, 1, 2, 3).
+    ///    * when the text is horizontal it might look like:
+    ///       0----1
+    ///       |    |
+    ///       3----2
+    ///    * when it's rotated 180 degrees around the top-left corner it becomes:
+    ///       2----3
+    ///       |    |
+    ///       1----0
+    ///    and the vertice order will still be (0, 1, 2, 3).
     #[prost(message, optional, tag="2")]
     pub bounding_box: ::core::option::Option<BoundingPoly>,
     /// The actual UTF-8 representation of the symbol.
@@ -401,6 +433,27 @@ pub mod feature {
         CropHints = 9,
         /// Run web detection.
         WebDetection = 10,
+    }
+    impl Type {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Type::Unspecified => "TYPE_UNSPECIFIED",
+                Type::FaceDetection => "FACE_DETECTION",
+                Type::LandmarkDetection => "LANDMARK_DETECTION",
+                Type::LogoDetection => "LOGO_DETECTION",
+                Type::LabelDetection => "LABEL_DETECTION",
+                Type::TextDetection => "TEXT_DETECTION",
+                Type::DocumentTextDetection => "DOCUMENT_TEXT_DETECTION",
+                Type::SafeSearchDetection => "SAFE_SEARCH_DETECTION",
+                Type::ImageProperties => "IMAGE_PROPERTIES",
+                Type::CropHints => "CROP_HINTS",
+                Type::WebDetection => "WEB_DETECTION",
+            }
+        }
     }
 }
 /// External image source (Google Cloud Storage image location).
@@ -597,6 +650,51 @@ pub mod face_annotation {
             ChinLeftGonion = 33,
             /// Chin right gonion.
             ChinRightGonion = 34,
+        }
+        impl Type {
+            /// String value of the enum field names used in the ProtoBuf definition.
+            ///
+            /// The values are not transformed in any way and thus are considered stable
+            /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+            pub fn as_str_name(&self) -> &'static str {
+                match self {
+                    Type::UnknownLandmark => "UNKNOWN_LANDMARK",
+                    Type::LeftEye => "LEFT_EYE",
+                    Type::RightEye => "RIGHT_EYE",
+                    Type::LeftOfLeftEyebrow => "LEFT_OF_LEFT_EYEBROW",
+                    Type::RightOfLeftEyebrow => "RIGHT_OF_LEFT_EYEBROW",
+                    Type::LeftOfRightEyebrow => "LEFT_OF_RIGHT_EYEBROW",
+                    Type::RightOfRightEyebrow => "RIGHT_OF_RIGHT_EYEBROW",
+                    Type::MidpointBetweenEyes => "MIDPOINT_BETWEEN_EYES",
+                    Type::NoseTip => "NOSE_TIP",
+                    Type::UpperLip => "UPPER_LIP",
+                    Type::LowerLip => "LOWER_LIP",
+                    Type::MouthLeft => "MOUTH_LEFT",
+                    Type::MouthRight => "MOUTH_RIGHT",
+                    Type::MouthCenter => "MOUTH_CENTER",
+                    Type::NoseBottomRight => "NOSE_BOTTOM_RIGHT",
+                    Type::NoseBottomLeft => "NOSE_BOTTOM_LEFT",
+                    Type::NoseBottomCenter => "NOSE_BOTTOM_CENTER",
+                    Type::LeftEyeTopBoundary => "LEFT_EYE_TOP_BOUNDARY",
+                    Type::LeftEyeRightCorner => "LEFT_EYE_RIGHT_CORNER",
+                    Type::LeftEyeBottomBoundary => "LEFT_EYE_BOTTOM_BOUNDARY",
+                    Type::LeftEyeLeftCorner => "LEFT_EYE_LEFT_CORNER",
+                    Type::RightEyeTopBoundary => "RIGHT_EYE_TOP_BOUNDARY",
+                    Type::RightEyeRightCorner => "RIGHT_EYE_RIGHT_CORNER",
+                    Type::RightEyeBottomBoundary => "RIGHT_EYE_BOTTOM_BOUNDARY",
+                    Type::RightEyeLeftCorner => "RIGHT_EYE_LEFT_CORNER",
+                    Type::LeftEyebrowUpperMidpoint => "LEFT_EYEBROW_UPPER_MIDPOINT",
+                    Type::RightEyebrowUpperMidpoint => "RIGHT_EYEBROW_UPPER_MIDPOINT",
+                    Type::LeftEarTragion => "LEFT_EAR_TRAGION",
+                    Type::RightEarTragion => "RIGHT_EAR_TRAGION",
+                    Type::LeftEyePupil => "LEFT_EYE_PUPIL",
+                    Type::RightEyePupil => "RIGHT_EYE_PUPIL",
+                    Type::ForeheadGlabella => "FOREHEAD_GLABELLA",
+                    Type::ChinGnathion => "CHIN_GNATHION",
+                    Type::ChinLeftGonion => "CHIN_LEFT_GONION",
+                    Type::ChinRightGonion => "CHIN_RIGHT_GONION",
+                }
+            }
         }
     }
 }
@@ -899,10 +997,27 @@ pub enum Likelihood {
     /// It is very likely that the image belongs to the specified vertical.
     VeryLikely = 5,
 }
+impl Likelihood {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            Likelihood::Unknown => "UNKNOWN",
+            Likelihood::VeryUnlikely => "VERY_UNLIKELY",
+            Likelihood::Unlikely => "UNLIKELY",
+            Likelihood::Possible => "POSSIBLE",
+            Likelihood::Likely => "LIKELY",
+            Likelihood::VeryLikely => "VERY_LIKELY",
+        }
+    }
+}
 /// Generated client implementations.
 pub mod image_annotator_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Service that performs Google Cloud Vision API detection tasks over client
     /// images, such as face, landmark, logo, label, and text detection. The
     /// ImageAnnotator service returns detected entities from the images.
@@ -919,6 +1034,10 @@ pub mod image_annotator_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -940,19 +1059,19 @@ pub mod image_annotator_client {
         {
             ImageAnnotatorClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Run image detection and annotation for a batch of images.

@@ -453,16 +453,16 @@ pub struct LocalInventory {
     /// Additional local inventory attributes, for example, store name, promotion
     /// tags, etc.
     /// * At most 5 values are allowed. Otherwise, an INVALID_ARGUMENT error is
-    ///   returned.
+    ///    returned.
     /// * The key must be a UTF-8 encoded string with a length limit of 10
-    ///   characters.
+    ///    characters.
     /// * The key must match the pattern: `\[a-zA-Z0-9][a-zA-Z0-9_\]*`. For example,
-    ///   key0LikeThis or KEY_1_LIKE_THIS.
+    ///    key0LikeThis or KEY_1_LIKE_THIS.
     /// * The attribute values must be of the same type (text or number).
     /// * The max number of values per attribute is 10.
     /// * For text values, the length limit is 10 UTF-8 characters.
     /// * The attribute does not support search. The `searchable` field should be
-    ///   unset or set to false.
+    ///    unset or set to false.
     #[prost(map="string, message", tag="3")]
     pub attributes: ::std::collections::HashMap<::prost::alloc::string::String, CustomAttribute>,
 }
@@ -559,10 +559,10 @@ pub struct Product {
     /// ["Sports & Fitness" -> "Athletic Clothing" -> "Shoes"], it could be
     /// represented as:
     ///
-    ///      "categories": [
-    ///        "Shoes & Accessories > Shoes",
-    ///        "Sports & Fitness > Athletic Clothing > Shoes"
-    ///      ]
+    ///       "categories": [
+    ///         "Shoes & Accessories > Shoes",
+    ///         "Sports & Fitness > Athletic Clothing > Shoes"
+    ///       ]
     ///
     /// Must be set for
     /// \[Type.PRIMARY][google.cloud.retail.v2alpha.Product.Type.PRIMARY\]
@@ -647,9 +647,9 @@ pub struct Product {
     ///
     /// * Max entries count: 200.
     /// * The key must be a UTF-8 encoded string with a length limit of 128
-    ///   characters.
+    ///    characters.
     /// * For indexable attribute, the key must match the pattern:
-    ///   `\[a-zA-Z0-9][a-zA-Z0-9_\]*`. For example, key0LikeThis or KEY_1_LIKE_THIS.
+    ///    `\[a-zA-Z0-9][a-zA-Z0-9_\]*`. For example, key0LikeThis or KEY_1_LIKE_THIS.
     #[prost(map="string, message", tag="12")]
     pub attributes: ::std::collections::HashMap<::prost::alloc::string::String, CustomAttribute>,
     /// Custom tags associated with the product.
@@ -916,6 +916,20 @@ pub mod product {
         /// such as a jewelry set with necklaces, earrings and rings, etc.
         Collection = 3,
     }
+    impl Type {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Type::Unspecified => "TYPE_UNSPECIFIED",
+                Type::Primary => "PRIMARY",
+                Type::Variant => "VARIANT",
+                Type::Collection => "COLLECTION",
+            }
+        }
+    }
     /// Product availability. If this field is unspecified, the product is
     /// assumed to be in stock.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -933,6 +947,21 @@ pub mod product {
         Preorder = 3,
         /// Product that is back-ordered (i.e. temporarily out of stock).
         Backorder = 4,
+    }
+    impl Availability {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Availability::Unspecified => "AVAILABILITY_UNSPECIFIED",
+                Availability::InStock => "IN_STOCK",
+                Availability::OutOfStock => "OUT_OF_STOCK",
+                Availability::Preorder => "PREORDER",
+                Availability::Backorder => "BACKORDER",
+            }
+        }
     }
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Expiration {
@@ -989,7 +1018,7 @@ pub struct UserEvent {
     ///
     /// * `add-to-cart`: Products being added to cart.
     /// * `category-page-view`: Special pages such as sale or promotion pages
-    ///   viewed.
+    ///    viewed.
     /// * `completion`: Completion query result showed/clicked.
     /// * `detail-page-view`: Products detail page viewed.
     /// * `home-page-view`: Homepage viewed.
@@ -1304,16 +1333,16 @@ pub struct GcsSource {
     ///
     /// * `product` (default): One JSON
     /// \[Product][google.cloud.retail.v2alpha.Product\] per line. Each product must
-    ///   have a valid \[Product.id][google.cloud.retail.v2alpha.Product.id\].
+    ///    have a valid \[Product.id][google.cloud.retail.v2alpha.Product.id\].
     /// * `product_merchant_center`: See [Importing catalog data from Merchant
-    ///   Center](<https://cloud.google.com/retail/recommendations-ai/docs/upload-catalog#mc>).
+    ///    Center](<https://cloud.google.com/retail/recommendations-ai/docs/upload-catalog#mc>).
     ///
     /// Supported values for user events imports:
     ///
     /// * `user_event` (default): One JSON
     /// \[UserEvent][google.cloud.retail.v2alpha.UserEvent\] per line.
     /// * `user_event_ga360`: Using
-    ///   <https://support.google.com/analytics/answer/3437719.>
+    ///    <https://support.google.com/analytics/answer/3437719.>
     #[prost(string, tag="2")]
     pub data_schema: ::prost::alloc::string::String,
 }
@@ -1344,16 +1373,16 @@ pub struct BigQuerySource {
     ///
     /// * `product` (default): One JSON
     /// \[Product][google.cloud.retail.v2alpha.Product\] per line. Each product must
-    ///   have a valid \[Product.id][google.cloud.retail.v2alpha.Product.id\].
+    ///    have a valid \[Product.id][google.cloud.retail.v2alpha.Product.id\].
     /// * `product_merchant_center`: See [Importing catalog data from Merchant
-    ///   Center](<https://cloud.google.com/retail/recommendations-ai/docs/upload-catalog#mc>).
+    ///    Center](<https://cloud.google.com/retail/recommendations-ai/docs/upload-catalog#mc>).
     ///
     /// Supported values for user events imports:
     ///
     /// * `user_event` (default): One JSON
     /// \[UserEvent][google.cloud.retail.v2alpha.UserEvent\] per line.
     /// * `user_event_ga360`: Using
-    ///   <https://support.google.com/analytics/answer/3437719.>
+    ///    <https://support.google.com/analytics/answer/3437719.>
     #[prost(string, tag="4")]
     pub data_schema: ::prost::alloc::string::String,
     /// BigQuery table partition info. Leave this empty if the BigQuery table
@@ -1485,6 +1514,19 @@ pub mod import_products_request {
         /// Please submit a form \[here\](<https://cloud.google.com/contact>) to contact
         /// cloud sales if you are interested in using Retail Search.
         Full = 2,
+    }
+    impl ReconciliationMode {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ReconciliationMode::Unspecified => "RECONCILIATION_MODE_UNSPECIFIED",
+                ReconciliationMode::Incremental => "INCREMENTAL",
+                ReconciliationMode::Full => "FULL",
+            }
+        }
     }
 }
 /// Request message for the ImportUserEvents request.
@@ -1692,16 +1734,16 @@ pub struct ProductLevelConfig {
     ///
     /// * `primary` (default): You can ingest
     /// \[Product][google.cloud.retail.v2alpha.Product\]s of all types. When
-    ///   ingesting a \[Product][google.cloud.retail.v2alpha.Product\], its type will
-    ///   default to
-    ///   \[Product.Type.PRIMARY][google.cloud.retail.v2alpha.Product.Type.PRIMARY\]
-    ///   if unset.
+    ///    ingesting a \[Product][google.cloud.retail.v2alpha.Product\], its type will
+    ///    default to
+    ///    \[Product.Type.PRIMARY][google.cloud.retail.v2alpha.Product.Type.PRIMARY\]
+    ///    if unset.
     /// * `variant`: You can only ingest
     /// \[Product.Type.VARIANT][google.cloud.retail.v2alpha.Product.Type.VARIANT\]
     /// \[Product][google.cloud.retail.v2alpha.Product\]s.
-    ///   This means
-    ///   \[Product.primary_product_id][google.cloud.retail.v2alpha.Product.primary_product_id\]
-    ///   cannot be empty.
+    ///    This means
+    ///    \[Product.primary_product_id][google.cloud.retail.v2alpha.Product.primary_product_id\]
+    ///    cannot be empty.
     ///
     /// If this field is set to an invalid value other than these, an
     /// INVALID_ARGUMENT error is returned.
@@ -1722,8 +1764,8 @@ pub struct ProductLevelConfig {
     ///
     /// * `offerId` (default): Import `offerId` as the product ID.
     /// * `itemGroupId`: Import `itemGroupId` as the product ID. Notice that Retail
-    ///   API will choose one item from the ones with the same `itemGroupId`, and
-    ///   use it to represent the item group.
+    ///    API will choose one item from the ones with the same `itemGroupId`, and
+    ///    use it to represent the item group.
     ///
     /// If this field is set to an invalid value other than these, an
     /// INVALID_ARGUMENT error is returned.
@@ -1918,6 +1960,7 @@ pub struct GetDefaultBranchResponse {
 pub mod catalog_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Service for managing catalog configuration.
     #[derive(Debug, Clone)]
     pub struct CatalogServiceClient<T> {
@@ -1932,6 +1975,10 @@ pub mod catalog_service_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -1953,19 +2000,19 @@ pub mod catalog_service_client {
         {
             CatalogServiceClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Lists all the [Catalog][google.cloud.retail.v2alpha.Catalog]s associated
@@ -2152,8 +2199,8 @@ pub struct CompleteQueryRequest {
     /// * user-data
     ///
     /// * cloud-retail
-    ///   This option requires additional allowlisting. Before using cloud-retail,
-    ///   contact Cloud Retail support team first.
+    ///    This option requires additional allowlisting. Before using cloud-retail,
+    ///    contact Cloud Retail support team first.
     #[prost(string, tag="6")]
     pub dataset: ::prost::alloc::string::String,
     /// Completion max suggestions. If left unset or set to 0, then will fallback
@@ -2186,12 +2233,12 @@ pub struct CompleteQueryResponse {
     /// \[CompleteQueryRequest.visitor_id][google.cloud.retail.v2alpha.CompleteQueryRequest.visitor_id\]
     /// field is set and \[UserEvent][google.cloud.retail.v2alpha.UserEvent\] is
     /// imported. The recent searches satisfy the follow rules:
-    ///  * They are ordered from latest to oldest.
-    ///  * They are matched with
-    ///  \[CompleteQueryRequest.query][google.cloud.retail.v2alpha.CompleteQueryRequest.query\]
-    ///  case insensitively.
-    ///  * They are transformed to lower cases.
-    ///  * They are UTF-8 safe.
+    ///   * They are ordered from latest to oldest.
+    ///   * They are matched with
+    ///   \[CompleteQueryRequest.query][google.cloud.retail.v2alpha.CompleteQueryRequest.query\]
+    ///   case insensitively.
+    ///   * They are transformed to lower cases.
+    ///   * They are UTF-8 safe.
     ///
     /// Recent searches are deduplicated. More recent searches will be reserved
     /// when duplication happens.
@@ -2222,6 +2269,7 @@ pub mod complete_query_response {
 pub mod completion_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Auto-completion service for retail.
     ///
     /// This feature is only available for users who have Retail Search enabled.
@@ -2240,6 +2288,10 @@ pub mod completion_service_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -2261,19 +2313,19 @@ pub mod completion_service_client {
         {
             CompletionServiceClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Completes the specified prefix with keyword suggestions.
@@ -2420,25 +2472,25 @@ pub struct PredictRequest {
     /// Filter for restricting prediction results with a length limit of 5,000
     /// characters. Accepts values for tags and the `filterOutOfStockItems` flag.
     ///
-    ///  * Tag expressions. Restricts predictions to products that match all of the
-    ///    specified tags. Boolean operators `OR` and `NOT` are supported if the
-    ///    expression is enclosed in parentheses, and must be separated from the
-    ///    tag values by a space. `-"tagA"` is also supported and is equivalent to
-    ///    `NOT "tagA"`. Tag values must be double quoted UTF-8 encoded strings
-    ///    with a size limit of 1,000 characters.
+    ///   * Tag expressions. Restricts predictions to products that match all of the
+    ///     specified tags. Boolean operators `OR` and `NOT` are supported if the
+    ///     expression is enclosed in parentheses, and must be separated from the
+    ///     tag values by a space. `-"tagA"` is also supported and is equivalent to
+    ///     `NOT "tagA"`. Tag values must be double quoted UTF-8 encoded strings
+    ///     with a size limit of 1,000 characters.
     ///
-    ///    Note: "Recently viewed" models don't support tag filtering at the
-    ///    moment.
+    ///     Note: "Recently viewed" models don't support tag filtering at the
+    ///     moment.
     ///
-    ///  * filterOutOfStockItems. Restricts predictions to products that do not
-    ///  have a
-    ///    stockState value of OUT_OF_STOCK.
+    ///   * filterOutOfStockItems. Restricts predictions to products that do not
+    ///   have a
+    ///     stockState value of OUT_OF_STOCK.
     ///
     /// Examples:
     ///
-    ///  * tag=("Red" OR "Blue") tag="New-Arrival" tag=(NOT "promotional")
-    ///  * filterOutOfStockItems  tag=(-"promotional")
-    ///  * filterOutOfStockItems
+    ///   * tag=("Red" OR "Blue") tag="New-Arrival" tag=(NOT "promotional")
+    ///   * filterOutOfStockItems  tag=(-"promotional")
+    ///   * filterOutOfStockItems
     ///
     /// If your filter blocks all prediction results, nothing will be returned. If
     /// you want generic (unfiltered) popular products to be returned instead, set
@@ -2456,26 +2508,26 @@ pub struct PredictRequest {
     /// Allowed values:
     ///
     /// * `returnProduct`: Boolean. If set to true, the associated product
-    ///    object will be returned in the `results.metadata` field in the
-    ///    prediction response.
+    ///     object will be returned in the `results.metadata` field in the
+    ///     prediction response.
     /// * `returnScore`: Boolean. If set to true, the prediction 'score'
-    ///    corresponding to each returned product will be set in the
-    ///    `results.metadata` field in the prediction response. The given
-    ///    'score' indicates the probability of an product being clicked/purchased
-    ///    given the user's context and history.
+    ///     corresponding to each returned product will be set in the
+    ///     `results.metadata` field in the prediction response. The given
+    ///     'score' indicates the probability of an product being clicked/purchased
+    ///     given the user's context and history.
     /// * `strictFiltering`: Boolean. True by default. If set to false, the service
-    ///    will return generic (unfiltered) popular products instead of empty if
-    ///    your filter blocks all prediction results.
+    ///     will return generic (unfiltered) popular products instead of empty if
+    ///     your filter blocks all prediction results.
     /// * `priceRerankLevel`: String. Default empty. If set to be non-empty, then
-    ///    it needs to be one of {'no-price-reranking', 'low-price-reranking',
-    ///    'medium-price-reranking', 'high-price-reranking'}. This gives
-    ///    request-level control and adjusts prediction results based on product
-    ///    price.
+    ///     it needs to be one of {'no-price-reranking', 'low-price-reranking',
+    ///     'medium-price-reranking', 'high-price-reranking'}. This gives
+    ///     request-level control and adjusts prediction results based on product
+    ///     price.
     /// * `diversityLevel`: String. Default empty. If set to be non-empty, then
-    ///    it needs to be one of {'no-diversity', 'low-diversity',
-    ///    'medium-diversity', 'high-diversity', 'auto-diversity'}. This gives
-    ///    request-level control and adjusts prediction results based on product
-    ///    category.
+    ///     it needs to be one of {'no-diversity', 'low-diversity',
+    ///     'medium-diversity', 'high-diversity', 'auto-diversity'}. This gives
+    ///     request-level control and adjusts prediction results based on product
+    ///     category.
     #[prost(map="string, message", tag="7")]
     pub params: ::std::collections::HashMap<::prost::alloc::string::String, ::prost_types::Value>,
     /// The labels applied to a resource must meet the following requirements:
@@ -2483,13 +2535,13 @@ pub struct PredictRequest {
     /// * Each resource can have multiple labels, up to a maximum of 64.
     /// * Each label must be a key-value pair.
     /// * Keys have a minimum length of 1 character and a maximum length of 63
-    ///   characters, and cannot be empty. Values can be empty, and have a maximum
-    ///   length of 63 characters.
+    ///    characters, and cannot be empty. Values can be empty, and have a maximum
+    ///    length of 63 characters.
     /// * Keys and values can contain only lowercase letters, numeric characters,
-    ///   underscores, and dashes. All characters must use UTF-8 encoding, and
-    ///   international characters are allowed.
+    ///    underscores, and dashes. All characters must use UTF-8 encoding, and
+    ///    international characters are allowed.
     /// * The key portion of a label must be unique. However, you can use the same
-    ///   key with multiple resources.
+    ///    key with multiple resources.
     /// * Keys must start with a lowercase letter or international character.
     ///
     /// See [Google Cloud
@@ -2531,9 +2583,9 @@ pub mod predict_response {
         /// Possible values:
         ///
         /// * `product`: JSON representation of the product. Will be set if
-        ///   `returnProduct` is set to true in `PredictRequest.params`.
+        ///    `returnProduct` is set to true in `PredictRequest.params`.
         /// * `score`: Prediction score in double value. Will be set if
-        ///   `returnScore` is set to true in `PredictRequest.params`.
+        ///    `returnScore` is set to true in `PredictRequest.params`.
         #[prost(map="string, message", tag="2")]
         pub metadata: ::std::collections::HashMap<::prost::alloc::string::String, ::prost_types::Value>,
     }
@@ -2542,6 +2594,7 @@ pub mod predict_response {
 pub mod prediction_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Service for making recommendation prediction.
     #[derive(Debug, Clone)]
     pub struct PredictionServiceClient<T> {
@@ -2556,6 +2609,10 @@ pub mod prediction_service_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -2577,19 +2634,19 @@ pub mod prediction_service_client {
         {
             PredictionServiceClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Makes a recommendation prediction.
@@ -2636,19 +2693,19 @@ pub struct PurgeUserEventsRequest {
     /// string.
     /// * `eventTime`: in ISO 8601 "zulu" format.
     /// * `visitorId`: Double quoted string. Specifying this will delete all
-    ///   events associated with a visitor.
+    ///    events associated with a visitor.
     /// * `userId`: Double quoted string. Specifying this will delete all events
-    ///   associated with a user.
+    ///    associated with a user.
     ///
     /// Examples:
     ///
     /// * Deleting all events in a time range:
-    ///   `eventTime > "2012-04-23T18:25:43.511Z"
-    ///   eventTime < "2012-04-23T18:30:43.511Z"`
+    ///    `eventTime > "2012-04-23T18:25:43.511Z"
+    ///    eventTime < "2012-04-23T18:30:43.511Z"`
     /// * Deleting specific eventType in time range:
-    ///   `eventTime > "2012-04-23T18:25:43.511Z" eventType = "detail-page-view"`
+    ///    `eventTime > "2012-04-23T18:25:43.511Z" eventType = "detail-page-view"`
     /// * Deleting all events for a specific visitor:
-    ///   `visitorId = "visitor1024"`
+    ///    `visitorId = "visitor1024"`
     ///
     /// The filtering fields are assumed to have an implicit AND.
     #[prost(string, tag="2")]
@@ -2812,19 +2869,19 @@ pub struct ListProductsRequest {
     /// * List
     /// \[Product.Type.VARIANT][google.cloud.retail.v2alpha.Product.Type.VARIANT\]
     /// \[Product][google.cloud.retail.v2alpha.Product\]s sharing the same
-    ///   \[Product.Type.PRIMARY][google.cloud.retail.v2alpha.Product.Type.PRIMARY\]
-    ///   \[Product][google.cloud.retail.v2alpha.Product\]. For example:
-    ///     `primary_product_id = "some_product_id"`
+    ///    \[Product.Type.PRIMARY][google.cloud.retail.v2alpha.Product.Type.PRIMARY\]
+    ///    \[Product][google.cloud.retail.v2alpha.Product\]. For example:
+    ///      `primary_product_id = "some_product_id"`
     /// * List \[Product][google.cloud.retail.v2alpha.Product\]s bundled in a
     /// \[Product.Type.COLLECTION][google.cloud.retail.v2alpha.Product.Type.COLLECTION\]
     /// \[Product][google.cloud.retail.v2alpha.Product\].
-    ///   For example:
-    ///     `collection_product_id = "some_product_id"`
+    ///    For example:
+    ///      `collection_product_id = "some_product_id"`
     /// * List \[Product][google.cloud.retail.v2alpha.Product\]s with a partibular
     /// type. For example:
-    ///     `type = "PRIMARY"`
-    ///     `type = "VARIANT"`
-    ///     `type = "COLLECTION"`
+    ///      `type = "PRIMARY"`
+    ///      `type = "VARIANT"`
+    ///      `type = "COLLECTION"`
     ///
     /// If the field is unrecognizable, an INVALID_ARGUMENT error is returned.
     ///
@@ -3221,6 +3278,7 @@ pub struct RemoveFulfillmentPlacesResponse {
 pub mod product_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Service for ingesting [Product][google.cloud.retail.v2alpha.Product]
     /// information of the customer's website.
     #[derive(Debug, Clone)]
@@ -3236,6 +3294,10 @@ pub mod product_service_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -3257,19 +3319,19 @@ pub mod product_service_client {
         {
             ProductServiceClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Creates a [Product][google.cloud.retail.v2alpha.Product].
@@ -3781,54 +3843,54 @@ pub struct SearchRequest {
     /// * variantId
     /// * inventory(place_id,price)
     /// * inventory(place_id,attributes.key), where key is any key in the
-    ///   \[Product.inventories.attributes][\] map.
+    ///    \[Product.inventories.attributes][\] map.
     /// * attributes.key, where key is any key in the
-    ///   \[Product.attributes][google.cloud.retail.v2alpha.Product.attributes\] map.
+    ///    \[Product.attributes][google.cloud.retail.v2alpha.Product.attributes\] map.
     /// * pickupInStore.id, where id is any
     /// \[FulfillmentInfo.place_ids][google.cloud.retail.v2alpha.FulfillmentInfo.place_ids\]
     /// for
     /// \[FulfillmentInfo.type][google.cloud.retail.v2alpha.FulfillmentInfo.type\]
-    ///   "pickup-in-store".
+    ///    "pickup-in-store".
     /// * shipToStore.id, where id is any
     /// \[FulfillmentInfo.place_ids][google.cloud.retail.v2alpha.FulfillmentInfo.place_ids\]
     /// for
     /// \[FulfillmentInfo.type][google.cloud.retail.v2alpha.FulfillmentInfo.type\]
-    ///   "ship-to-store".
+    ///    "ship-to-store".
     /// * sameDayDelivery.id, where id is any
     /// \[FulfillmentInfo.place_ids][google.cloud.retail.v2alpha.FulfillmentInfo.place_ids\]
     /// for
     /// \[FulfillmentInfo.type][google.cloud.retail.v2alpha.FulfillmentInfo.type\]
-    ///   "same-day-delivery".
+    ///    "same-day-delivery".
     /// * nextDayDelivery.id, where id is any
     /// \[FulfillmentInfo.place_ids][google.cloud.retail.v2alpha.FulfillmentInfo.place_ids\]
     /// for
     /// \[FulfillmentInfo.type][google.cloud.retail.v2alpha.FulfillmentInfo.type\]
-    ///   "next-day-delivery".
+    ///    "next-day-delivery".
     /// * customFulfillment1.id, where id is any
     /// \[FulfillmentInfo.place_ids][google.cloud.retail.v2alpha.FulfillmentInfo.place_ids\]
     /// for
     /// \[FulfillmentInfo.type][google.cloud.retail.v2alpha.FulfillmentInfo.type\]
-    ///   "custom-type-1".
+    ///    "custom-type-1".
     /// * customFulfillment2.id, where id is any
     /// \[FulfillmentInfo.place_ids][google.cloud.retail.v2alpha.FulfillmentInfo.place_ids\]
     /// for
     /// \[FulfillmentInfo.type][google.cloud.retail.v2alpha.FulfillmentInfo.type\]
-    ///   "custom-type-2".
+    ///    "custom-type-2".
     /// * customFulfillment3.id, where id is any
     /// \[FulfillmentInfo.place_ids][google.cloud.retail.v2alpha.FulfillmentInfo.place_ids\]
     /// for
     /// \[FulfillmentInfo.type][google.cloud.retail.v2alpha.FulfillmentInfo.type\]
-    ///   "custom-type-3".
+    ///    "custom-type-3".
     /// * customFulfillment4.id, where id is any
     /// \[FulfillmentInfo.place_ids][google.cloud.retail.v2alpha.FulfillmentInfo.place_ids\]
     /// for
     /// \[FulfillmentInfo.type][google.cloud.retail.v2alpha.FulfillmentInfo.type\]
-    ///   "custom-type-4".
+    ///    "custom-type-4".
     /// * customFulfillment5.id, where id is any
     /// \[FulfillmentInfo.place_ids][google.cloud.retail.v2alpha.FulfillmentInfo.place_ids\]
     /// for
     /// \[FulfillmentInfo.type][google.cloud.retail.v2alpha.FulfillmentInfo.type\]
-    ///   "custom-type-5".
+    ///    "custom-type-5".
     ///
     /// If this field is set to an invalid value other than these, an
     /// INVALID_ARGUMENT error is returned.
@@ -3933,37 +3995,37 @@ pub mod search_request {
             /// is not specified:
             ///
             /// * textual_field =
-            ///     * "brands"
-            ///     * "categories"
-            ///     * "genders"
-            ///     * "ageGroups"
-            ///     * "availability"
-            ///     * "colorFamilies"
-            ///     * "colors"
-            ///     * "sizes"
-            ///     * "materials"
-            ///     * "patterns"
-            ///     * "conditions"
-            ///     * "attributes.key"
-            ///     * "pickupInStore"
-            ///     * "shipToStore"
-            ///     * "sameDayDelivery"
-            ///     * "nextDayDelivery"
-            ///     * "customFulfillment1"
-            ///     * "customFulfillment2"
-            ///     * "customFulfillment3"
-            ///     * "customFulfillment4"
-            ///     * "customFulfillment5"
-            ///     * "inventory(place_id,attributes.key)"
+            ///      * "brands"
+            ///      * "categories"
+            ///      * "genders"
+            ///      * "ageGroups"
+            ///      * "availability"
+            ///      * "colorFamilies"
+            ///      * "colors"
+            ///      * "sizes"
+            ///      * "materials"
+            ///      * "patterns"
+            ///      * "conditions"
+            ///      * "attributes.key"
+            ///      * "pickupInStore"
+            ///      * "shipToStore"
+            ///      * "sameDayDelivery"
+            ///      * "nextDayDelivery"
+            ///      * "customFulfillment1"
+            ///      * "customFulfillment2"
+            ///      * "customFulfillment3"
+            ///      * "customFulfillment4"
+            ///      * "customFulfillment5"
+            ///      * "inventory(place_id,attributes.key)"
             ///
             /// * numerical_field =
-            ///     * "price"
-            ///     * "discount"
-            ///     * "rating"
-            ///     * "ratingCount"
-            ///     * "attributes.key"
-            ///     * "inventory(place_id,price)"
-            ///     * "inventory(place_id,attributes.key)"
+            ///      * "price"
+            ///      * "discount"
+            ///      * "rating"
+            ///      * "ratingCount"
+            ///      * "attributes.key"
+            ///      * "inventory(place_id,price)"
+            ///      * "inventory(place_id,attributes.key)"
             #[prost(string, tag="1")]
             pub key: ::prost::alloc::string::String,
             /// Set only if values should be bucketized into intervals. Must be set
@@ -4021,7 +4083,7 @@ pub mod search_request {
             ///
             /// * "value desc", which means order by \[Facet.FacetValue.value][\]
             /// descending.
-            ///   Only applies to textual facets.
+            ///    Only applies to textual facets.
             ///
             /// If not set, textual values are sorted in [natural
             /// order](<https://en.wikipedia.org/wiki/Natural_sort_order>); numerical
@@ -4080,6 +4142,19 @@ pub mod search_request {
             /// Automatic mode built by Google Retail Search.
             Enabled = 2,
         }
+        impl Mode {
+            /// String value of the enum field names used in the ProtoBuf definition.
+            ///
+            /// The values are not transformed in any way and thus are considered stable
+            /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+            pub fn as_str_name(&self) -> &'static str {
+                match self {
+                    Mode::Unspecified => "MODE_UNSPECIFIED",
+                    Mode::Disabled => "DISABLED",
+                    Mode::Enabled => "ENABLED",
+                }
+            }
+        }
     }
     /// Boost specification to boost certain items.
     #[derive(Clone, PartialEq, ::prost::Message)]
@@ -4105,9 +4180,9 @@ pub mod search_request {
             ///
             /// * To boost products with product ID "product_1" or "product_2", and
             /// color
-            ///   "Red" or "Blue":
-            ///     * (id: ANY("product_1", "product_2")) AND (colorFamilies:
-            ///     ANY("Red","Blue"))
+            ///    "Red" or "Blue":
+            ///      * (id: ANY("product_1", "product_2")) AND (colorFamilies:
+            ///      ANY("Red","Blue"))
             #[prost(string, tag="1")]
             pub condition: ::prost::alloc::string::String,
             /// Strength of the condition boost, which should be in [-1, 1]. Negative
@@ -4161,6 +4236,19 @@ pub mod search_request {
             /// Automatic query expansion built by Google Retail Search.
             Auto = 3,
         }
+        impl Condition {
+            /// String value of the enum field names used in the ProtoBuf definition.
+            ///
+            /// The values are not transformed in any way and thus are considered stable
+            /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+            pub fn as_str_name(&self) -> &'static str {
+                match self {
+                    Condition::Unspecified => "CONDITION_UNSPECIFIED",
+                    Condition::Disabled => "DISABLED",
+                    Condition::Auto => "AUTO",
+                }
+            }
+        }
     }
     /// The relevance threshold of the search results. The higher relevance
     /// threshold is, the higher relevant results are shown and the less number of
@@ -4179,6 +4267,21 @@ pub mod search_request {
         Low = 3,
         /// Lowest relevance threshold.
         Lowest = 4,
+    }
+    impl RelevanceThreshold {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                RelevanceThreshold::Unspecified => "RELEVANCE_THRESHOLD_UNSPECIFIED",
+                RelevanceThreshold::High => "HIGH",
+                RelevanceThreshold::Medium => "MEDIUM",
+                RelevanceThreshold::Low => "LOW",
+                RelevanceThreshold::Lowest => "LOWEST",
+            }
+        }
     }
     /// The search mode of each search request.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -4207,6 +4310,19 @@ pub mod search_request {
         /// \[SearchResponse.Facet\] will be returned. \[SearchResponse.SearchResult\]
         /// will not be returned.
         FacetedSearchOnly = 2,
+    }
+    impl SearchMode {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                SearchMode::Unspecified => "SEARCH_MODE_UNSPECIFIED",
+                SearchMode::ProductSearchOnly => "PRODUCT_SEARCH_ONLY",
+                SearchMode::FacetedSearchOnly => "FACETED_SEARCH_ONLY",
+            }
+        }
     }
 }
 /// Response message for
@@ -4313,14 +4429,14 @@ pub mod search_response {
         /// there are two variants with colors "red" and "blue", the rollup values
         /// are
         ///
-        ///     { key: "colorFamilies"
-        ///       value {
-        ///         list_value {
-        ///           values { string_value: "red" }
-        ///           values { string_value: "blue" }
-        ///          }
-        ///       }
-        ///     }
+        ///      { key: "colorFamilies"
+        ///        value {
+        ///          list_value {
+        ///            values { string_value: "red" }
+        ///            values { string_value: "blue" }
+        ///           }
+        ///        }
+        ///      }
         ///
         /// For \[FulfillmentInfo][google.cloud.retail.v2alpha.FulfillmentInfo\], the
         /// rollup values is a double value with type
@@ -4389,6 +4505,7 @@ pub mod search_response {
 pub mod search_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Service for search.
     ///
     /// This feature is only available for users who have Retail Search enabled.
@@ -4407,6 +4524,10 @@ pub mod search_service_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -4428,19 +4549,19 @@ pub mod search_service_client {
         {
             SearchServiceClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Performs a search.
@@ -4537,6 +4658,19 @@ pub mod rejoin_user_events_request {
         /// Only rejoin unjoined events with the latest product catalog.
         UnjoinedEvents = 2,
     }
+    impl UserEventRejoinScope {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                UserEventRejoinScope::Unspecified => "USER_EVENT_REJOIN_SCOPE_UNSPECIFIED",
+                UserEventRejoinScope::JoinedEvents => "JOINED_EVENTS",
+                UserEventRejoinScope::UnjoinedEvents => "UNJOINED_EVENTS",
+            }
+        }
+    }
 }
 /// Response message for RejoinUserEvents method.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -4553,6 +4687,7 @@ pub struct RejoinUserEventsMetadata {
 pub mod user_event_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Service for ingesting end user actions on the customer website.
     #[derive(Debug, Clone)]
     pub struct UserEventServiceClient<T> {
@@ -4567,6 +4702,10 @@ pub mod user_event_service_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -4588,19 +4727,19 @@ pub mod user_event_service_client {
         {
             UserEventServiceClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Writes a single user event.

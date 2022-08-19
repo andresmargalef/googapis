@@ -202,6 +202,19 @@ pub mod subscription {
             /// in higher end-to-end latency, but consistent delivery.
             DeliverAfterStored = 2,
         }
+        impl DeliveryRequirement {
+            /// String value of the enum field names used in the ProtoBuf definition.
+            ///
+            /// The values are not transformed in any way and thus are considered stable
+            /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+            pub fn as_str_name(&self) -> &'static str {
+                match self {
+                    DeliveryRequirement::Unspecified => "DELIVERY_REQUIREMENT_UNSPECIFIED",
+                    DeliveryRequirement::DeliverImmediately => "DELIVER_IMMEDIATELY",
+                    DeliveryRequirement::DeliverAfterStored => "DELIVER_AFTER_STORED",
+                }
+            }
+        }
     }
 }
 /// A target publish or event time. Can be used for seeking to or retrieving the
@@ -452,6 +465,19 @@ pub mod seek_subscription_request {
         /// backlog.
         Head = 2,
     }
+    impl NamedTarget {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                NamedTarget::Unspecified => "NAMED_TARGET_UNSPECIFIED",
+                NamedTarget::Tail => "TAIL",
+                NamedTarget::Head => "HEAD",
+            }
+        }
+    }
     /// The target to seek to. Must be set.
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Target {
@@ -602,6 +628,7 @@ pub struct ListReservationTopicsResponse {
 pub mod admin_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The service that a client application uses to manage topics and
     /// subscriptions, such creating, listing, and deleting topics and subscriptions.
     #[derive(Debug, Clone)]
@@ -617,6 +644,10 @@ pub mod admin_service_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -638,19 +669,19 @@ pub mod admin_service_client {
         {
             AdminServiceClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Creates a new topic.
@@ -1202,6 +1233,7 @@ pub struct ListPartitionCursorsResponse {
 pub mod cursor_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The service that a subscriber client application uses to manage committed
     /// cursors while receiving messsages. A cursor represents a subscriber's
     /// progress within a topic partition for a given subscription.
@@ -1218,6 +1250,10 @@ pub mod cursor_service_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -1239,19 +1275,19 @@ pub mod cursor_service_client {
         {
             CursorServiceClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Establishes a stream with the server for managing committed cursors.
@@ -1401,6 +1437,7 @@ pub mod publish_response {
 pub mod publisher_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The service that a publisher client application uses to publish messages to
     /// topics. Published messages are retained by the service for the duration of
     /// the retention period configured for the respective topic, and are delivered
@@ -1418,6 +1455,10 @@ pub mod publisher_service_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -1439,19 +1480,19 @@ pub mod publisher_service_client {
         {
             PublisherServiceClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Establishes a stream with the server for publishing messages. Once the
@@ -1537,6 +1578,19 @@ pub mod seek_request {
         /// and topic partition.
         CommittedCursor = 2,
     }
+    impl NamedTarget {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                NamedTarget::Unspecified => "NAMED_TARGET_UNSPECIFIED",
+                NamedTarget::Head => "HEAD",
+                NamedTarget::CommittedCursor => "COMMITTED_CURSOR",
+            }
+        }
+    }
     /// The target to seek to. Must be set.
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Target {
@@ -1593,9 +1647,9 @@ pub mod subscribe_request {
 /// Response containing a list of messages. Upon delivering a MessageResponse to
 /// the client, the server:
 /// *  Updates the stream's delivery cursor to one greater than the cursor of the
-///    last message in the list.
+///     last message in the list.
 /// *  Subtracts the total number of bytes and messages from the tokens available
-///    to the server.
+///     to the server.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MessageResponse {
     /// Messages from the topic partition.
@@ -1686,6 +1740,7 @@ pub mod partition_assignment_request {
 pub mod subscriber_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The service that a subscriber client application uses to receive messages
     /// from subscriptions.
     #[derive(Debug, Clone)]
@@ -1701,6 +1756,10 @@ pub mod subscriber_service_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -1722,19 +1781,19 @@ pub mod subscriber_service_client {
         {
             SubscriberServiceClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Establishes a stream with the server for receiving messages.
@@ -1766,6 +1825,7 @@ pub mod subscriber_service_client {
 pub mod partition_assignment_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The service that a subscriber client application uses to determine which
     /// partitions it should connect to.
     #[derive(Debug, Clone)]
@@ -1781,6 +1841,10 @@ pub mod partition_assignment_service_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -1804,19 +1868,19 @@ pub mod partition_assignment_service_client {
                 InterceptedService::new(inner, interceptor),
             )
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Assign partitions for this client to handle for the specified subscription.
@@ -1936,6 +2000,7 @@ pub struct ComputeTimeCursorResponse {
 pub mod topic_stats_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// This service allows users to get stats about messages in their topic.
     #[derive(Debug, Clone)]
     pub struct TopicStatsServiceClient<T> {
@@ -1950,6 +2015,10 @@ pub mod topic_stats_service_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -1971,19 +2040,19 @@ pub mod topic_stats_service_client {
         {
             TopicStatsServiceClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Compute statistics about a range of messages in a given topic and

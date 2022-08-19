@@ -19,6 +19,18 @@ pub mod hash {
         /// SHA256 hash.
         Sha256 = 1,
     }
+    impl HashType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                HashType::Unspecified => "HASH_TYPE_UNSPECIFIED",
+                HashType::Sha256 => "SHA256",
+            }
+        }
+    }
 }
 /// Files store content that is potentially associated with Packages or Versions.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -52,15 +64,15 @@ pub struct ListFilesRequest {
     /// An expression for filtering the results of the request. Filter rules are
     /// case insensitive. The fields eligible for filtering are:
     ///
-    ///   * `name`
-    ///   * `owner`
+    ///    * `name`
+    ///    * `owner`
     ///
-    ///  An example of using a filter:
+    ///   An example of using a filter:
     ///
-    ///   * `name="projects/p1/locations/us-central1/repositories/repo1/files/a/b/*"` --> Files with an
-    ///   ID starting with "a/b/".
-    ///   * `owner="projects/p1/locations/us-central1/repositories/repo1/packages/pkg1/versions/1.0"` -->
-    ///   Files owned by the version `1.0` in package `pkg1`.
+    ///    * `name="projects/p1/locations/us-central1/repositories/repo1/files/a/b/*"` --> Files with an
+    ///    ID starting with "a/b/".
+    ///    * `owner="projects/p1/locations/us-central1/repositories/repo1/packages/pkg1/versions/1.0"` -->
+    ///    Files owned by the version `1.0` in package `pkg1`.
     #[prost(string, tag="4")]
     pub filter: ::prost::alloc::string::String,
     /// The maximum number of files to return.
@@ -189,6 +201,18 @@ pub mod repository {
         /// Docker package format.
         Docker = 1,
     }
+    impl Format {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Format::Unspecified => "FORMAT_UNSPECIFIED",
+                Format::Docker => "DOCKER",
+            }
+        }
+    }
 }
 /// The request to list repositories.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -276,12 +300,12 @@ pub struct ListTagsRequest {
     /// An expression for filtering the results of the request. Filter rules are
     /// case insensitive. The fields eligible for filtering are:
     ///
-    ///   * `version`
+    ///    * `version`
     ///
-    ///  An example of using a filter:
+    ///   An example of using a filter:
     ///
-    ///   * `version="projects/p1/locations/us-central1/repositories/repo1/packages/pkg1/versions/1.0"`
-    ///   --> Tags that are applied to the version `1.0` in package `pkg1`.
+    ///    * `version="projects/p1/locations/us-central1/repositories/repo1/packages/pkg1/versions/1.0"`
+    ///    --> Tags that are applied to the version `1.0` in package `pkg1`.
     #[prost(string, tag="4")]
     pub filter: ::prost::alloc::string::String,
     /// The maximum number of tags to return.
@@ -427,6 +451,19 @@ pub enum VersionView {
     /// Include everything.
     Full = 2,
 }
+impl VersionView {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            VersionView::Unspecified => "VERSION_VIEW_UNSPECIFIED",
+            VersionView::Basic => "BASIC",
+            VersionView::Full => "FULL",
+        }
+    }
+}
 /// Metadata type for longrunning-operations, currently empty.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OperationMetadata {
@@ -435,6 +472,7 @@ pub struct OperationMetadata {
 pub mod artifact_registry_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The Artifact Registry API service.
     ///
     /// Artifact Registry is an artifact management system for storing artifacts
@@ -463,6 +501,10 @@ pub mod artifact_registry_client {
             let inner = tonic::client::Grpc::new(inner);
             Self { inner }
         }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
+            Self { inner }
+        }
         pub fn with_interceptor<F>(
             inner: T,
             interceptor: F,
@@ -482,19 +524,19 @@ pub mod artifact_registry_client {
         {
             ArtifactRegistryClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Lists repositories.

@@ -57,6 +57,20 @@ pub mod operation_status {
         PermissionDenied = 2,
         ClusterConnection = 3,
     }
+    impl ErrorCode {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ErrorCode::Unspecified => "ERROR_CODE_UNSPECIFIED",
+                ErrorCode::InternalError => "INTERNAL_ERROR",
+                ErrorCode::PermissionDenied => "PERMISSION_DENIED",
+                ErrorCode::ClusterConnection => "CLUSTER_CONNECTION",
+            }
+        }
+    }
 }
 /// The label selector, used to group labels on the resources.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -449,9 +463,9 @@ pub mod game_server_cluster_connection_info {
 pub struct GkeClusterReference {
     /// The full or partial name of a GKE cluster, using one of the following
     /// forms:
-    ///  * `projects/{project}/locations/{location}/clusters/{cluster}`
-    ///  * `locations/{location}/clusters/{cluster}`
-    ///  * `{cluster}`
+    ///   * `projects/{project}/locations/{location}/clusters/{cluster}`
+    ///   * `locations/{location}/clusters/{cluster}`
+    ///   * `{cluster}`
     /// If project and location are not specified, the project and location of the
     /// GameServerCluster resource are used to generate the full name of the
     /// GKE cluster.
@@ -550,6 +564,24 @@ pub mod kubernetes_cluster_state {
         /// Agones is not installed.
         AgonesNotInstalled = 7,
     }
+    impl InstallationState {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                InstallationState::Unspecified => "INSTALLATION_STATE_UNSPECIFIED",
+                InstallationState::AgonesKubernetesVersionSupported => "AGONES_KUBERNETES_VERSION_SUPPORTED",
+                InstallationState::AgonesVersionUnsupported => "AGONES_VERSION_UNSUPPORTED",
+                InstallationState::AgonesKubernetesVersionUnsupported => "AGONES_KUBERNETES_VERSION_UNSUPPORTED",
+                InstallationState::AgonesVersionUnrecognized => "AGONES_VERSION_UNRECOGNIZED",
+                InstallationState::KubernetesVersionUnrecognized => "KUBERNETES_VERSION_UNRECOGNIZED",
+                InstallationState::VersionVerificationFailed => "VERSION_VERIFICATION_FAILED",
+                InstallationState::AgonesNotInstalled => "AGONES_NOT_INSTALLED",
+            }
+        }
+    }
 }
 /// A view for GameServerCluster objects.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -565,10 +597,24 @@ pub enum GameServerClusterView {
     /// Include everything.
     Full = 2,
 }
+impl GameServerClusterView {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            GameServerClusterView::Unspecified => "GAME_SERVER_CLUSTER_VIEW_UNSPECIFIED",
+            GameServerClusterView::Basic => "BASIC",
+            GameServerClusterView::Full => "FULL",
+        }
+    }
+}
 /// Generated client implementations.
 pub mod game_server_clusters_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The game server cluster maps to Kubernetes clusters running Agones and is
     /// used to manage fleets within clusters.
     #[derive(Debug, Clone)]
@@ -584,6 +630,10 @@ pub mod game_server_clusters_service_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -607,19 +657,19 @@ pub mod game_server_clusters_service_client {
                 InterceptedService::new(inner, interceptor),
             )
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Lists game server clusters in a given project and location.
@@ -945,6 +995,7 @@ pub struct GameServerConfig {
 pub mod game_server_configs_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The game server config configures the game servers in an Agones fleet.
     #[derive(Debug, Clone)]
     pub struct GameServerConfigsServiceClient<T> {
@@ -959,6 +1010,10 @@ pub mod game_server_configs_service_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -982,19 +1037,19 @@ pub mod game_server_configs_service_client {
                 InterceptedService::new(inner, interceptor),
             )
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Lists game server configs in a given project, location, and game server
@@ -1350,6 +1405,7 @@ pub struct PreviewGameServerDeploymentRolloutResponse {
 pub mod game_server_deployments_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The game server deployment is used to control the deployment of Agones
     /// fleets.
     #[derive(Debug, Clone)]
@@ -1365,6 +1421,10 @@ pub mod game_server_deployments_service_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -1388,19 +1448,19 @@ pub mod game_server_deployments_service_client {
                 InterceptedService::new(inner, interceptor),
             )
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Lists game server deployments in a given project and location.
@@ -1762,6 +1822,7 @@ pub struct Realm {
 pub mod realms_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// A realm is a grouping of game server clusters that are considered
     /// interchangeable.
     #[derive(Debug, Clone)]
@@ -1777,6 +1838,10 @@ pub mod realms_service_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -1798,19 +1863,19 @@ pub mod realms_service_client {
         {
             RealmsServiceClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Lists realms in a given project and location.

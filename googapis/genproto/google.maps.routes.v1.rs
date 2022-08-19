@@ -36,6 +36,19 @@ pub enum PolylineQuality {
     /// `HIGH_QUALITY` option.
     Overview = 2,
 }
+impl PolylineQuality {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            PolylineQuality::Unspecified => "POLYLINE_QUALITY_UNSPECIFIED",
+            PolylineQuality::HighQuality => "HIGH_QUALITY",
+            PolylineQuality::Overview => "OVERVIEW",
+        }
+    }
+}
 /// Specifies the preferred type of polyline to be returned.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
@@ -48,6 +61,19 @@ pub enum PolylineEncoding {
     /// Specifies a polyline using the [GeoJSON LineString
     /// format](<https://tools.ietf.org/html/rfc7946#section-3.1.4>)
     GeoJsonLinestring = 2,
+}
+impl PolylineEncoding {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            PolylineEncoding::Unspecified => "POLYLINE_ENCODING_UNSPECIFIED",
+            PolylineEncoding::EncodedPolyline => "ENCODED_POLYLINE",
+            PolylineEncoding::GeoJsonLinestring => "GEO_JSON_LINESTRING",
+        }
+    }
 }
 /// List of toll passes around the world that we support.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -102,6 +128,33 @@ pub enum TollPass {
     /// State pass of the Washington state, United States.
     UsWaGoodToGo = 1,
 }
+impl TollPass {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            TollPass::Unspecified => "TOLL_PASS_UNSPECIFIED",
+            TollPass::AuLinkt => "AU_LINKT",
+            TollPass::ArTelepase => "AR_TELEPASE",
+            TollPass::BrConectcar => "BR_CONECTCAR",
+            TollPass::BrMoveMais => "BR_MOVE_MAIS",
+            TollPass::BrSemParar => "BR_SEM_PARAR",
+            TollPass::BrTaggy => "BR_TAGGY",
+            TollPass::BrVeloe => "BR_VELOE",
+            TollPass::IdEToll => "ID_E_TOLL",
+            TollPass::MxTagIave => "MX_TAG_IAVE",
+            TollPass::MxTagTelevia => "MX_TAG_TELEVIA",
+            TollPass::MxViapass => "MX_VIAPASS",
+            TollPass::UsCaFastrak => "US_CA_FASTRAK",
+            TollPass::UsIlIpass => "US_IL_IPASS",
+            TollPass::UsMaEzpassma => "US_MA_EZPASSMA",
+            TollPass::UsNyEzpassny => "US_NY_EZPASSNY",
+            TollPass::UsWaGoodToGo => "US_WA_GOOD_TO_GO",
+        }
+    }
+}
 /// A set of values describing the vehicle's emission type.
 /// Applies only to the DRIVE travel mode.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -115,6 +168,20 @@ pub enum VehicleEmissionType {
     Electric = 2,
     /// Hybrid fuel (such as gasoline + electric) vehicle.
     Hybrid = 3,
+}
+impl VehicleEmissionType {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            VehicleEmissionType::Unspecified => "VEHICLE_EMISSION_TYPE_UNSPECIFIED",
+            VehicleEmissionType::Gasoline => "GASOLINE",
+            VehicleEmissionType::Electric => "ELECTRIC",
+            VehicleEmissionType::Hybrid => "HYBRID",
+        }
+    }
 }
 /// Encapsulates a waypoint. Waypoints mark both the beginning and end of a
 /// route, and include intermediate stops along the route.
@@ -196,7 +263,7 @@ pub struct ComputeRoutesRequest {
     pub travel_mode: i32,
     /// Optional. Specifies how to compute the route. The server
     /// attempts to use the selected routing preference to compute the route. If
-    ///  the routing preference results in an error or an extra long latency, then
+    ///   the routing preference results in an error or an extra long latency, then
     /// an error is returned. In the future, we might implement a fallback
     /// mechanism to use a different option when the preferred option does not give
     /// a valid result. You can specify this option only when the `travel_mode` is
@@ -303,6 +370,22 @@ pub enum RouteTravelMode {
     /// designated taxi lanes in some areas.
     Taxi = 5,
 }
+impl RouteTravelMode {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            RouteTravelMode::TravelModeUnspecified => "TRAVEL_MODE_UNSPECIFIED",
+            RouteTravelMode::Drive => "DRIVE",
+            RouteTravelMode::Bicycle => "BICYCLE",
+            RouteTravelMode::Walk => "WALK",
+            RouteTravelMode::TwoWheeler => "TWO_WHEELER",
+            RouteTravelMode::Taxi => "TAXI",
+        }
+    }
+}
 /// A set of values that specify factors to take into consideration when
 /// calculating the route.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -323,6 +406,20 @@ pub enum RoutingPreference {
     /// the highest latency.
     TrafficAwareOptimal = 3,
 }
+impl RoutingPreference {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            RoutingPreference::Unspecified => "ROUTING_PREFERENCE_UNSPECIFIED",
+            RoutingPreference::TrafficUnaware => "TRAFFIC_UNAWARE",
+            RoutingPreference::TrafficAware => "TRAFFIC_AWARE",
+            RoutingPreference::TrafficAwareOptimal => "TRAFFIC_AWARE_OPTIMAL",
+        }
+    }
+}
 /// A set of values that specify the unit of measure used in the display.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
@@ -334,6 +431,19 @@ pub enum Units {
     Metric = 1,
     /// Imperial (English) units of measure.
     Imperial = 2,
+}
+impl Units {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            Units::Unspecified => "UNITS_UNSPECIFIED",
+            Units::Metric => "METRIC",
+            Units::Imperial => "IMPERIAL",
+        }
+    }
 }
 /// ComputeCustomRoutes request message.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -501,8 +611,8 @@ pub struct RouteTravelAdvisory {
     ///
     /// Example:
     ///
-    ///     polyline: A ---- B ---- C ---- D ---- E ---- F ---- G
-    ///     speed_reading_intervals: [A,C), [C,D), [D,G).
+    ///      polyline: A ---- B ---- C ---- D ---- E ---- F ---- G
+    ///      speed_reading_intervals: [A,C), [C,D), [D,G).
     #[prost(message, repeated, tag="3")]
     pub speed_reading_intervals: ::prost::alloc::vec::Vec<SpeedReadingInterval>,
 }
@@ -525,8 +635,8 @@ pub struct RouteLegTravelAdvisory {
     ///
     /// Example:
     ///
-    ///     polyline: A ---- B ---- C ---- D ---- E ---- F ---- G
-    ///     speed_reading_intervals: [A,C), [C,D), [D,G).
+    ///      polyline: A ---- B ---- C ---- D ---- E ---- F ---- G
+    ///      speed_reading_intervals: [A,C), [C,D), [D,G).
     #[prost(message, repeated, tag="2")]
     pub speed_reading_intervals: ::prost::alloc::vec::Vec<SpeedReadingInterval>,
 }
@@ -542,8 +652,8 @@ pub struct RouteLegStepTravelAdvisory {
     ///
     /// Example:
     ///
-    ///     polyline: A ---- B ---- C ---- D ---- E ---- F ---- G
-    ///     speed_reading_intervals: [A,C), [C,D), [D,G).
+    ///      polyline: A ---- B ---- C ---- D ---- E ---- F ---- G
+    ///      speed_reading_intervals: [A,C), [C,D), [D,G).
     #[prost(message, repeated, tag="1")]
     pub speed_reading_intervals: ::prost::alloc::vec::Vec<SpeedReadingInterval>,
 }
@@ -690,6 +800,20 @@ pub mod speed_reading_interval {
         /// Traffic jam detected.
         TrafficJam = 3,
     }
+    impl Speed {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Speed::Unspecified => "SPEED_UNSPECIFIED",
+                Speed::Normal => "NORMAL",
+                Speed::Slow => "SLOW",
+                Speed::TrafficJam => "TRAFFIC_JAM",
+            }
+        }
+    }
 }
 /// A set of values that specify the navigation action to take for the current
 /// step (e.g., turn left, merge, straight, etc.).
@@ -734,6 +858,35 @@ pub enum Maneuver {
     RoundaboutLeft = 17,
     /// Turn right at the roundabout.
     RoundaboutRight = 18,
+}
+impl Maneuver {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            Maneuver::Unspecified => "MANEUVER_UNSPECIFIED",
+            Maneuver::TurnSlightLeft => "TURN_SLIGHT_LEFT",
+            Maneuver::TurnSharpLeft => "TURN_SHARP_LEFT",
+            Maneuver::UturnLeft => "UTURN_LEFT",
+            Maneuver::TurnLeft => "TURN_LEFT",
+            Maneuver::TurnSlightRight => "TURN_SLIGHT_RIGHT",
+            Maneuver::TurnSharpRight => "TURN_SHARP_RIGHT",
+            Maneuver::UturnRight => "UTURN_RIGHT",
+            Maneuver::TurnRight => "TURN_RIGHT",
+            Maneuver::Straight => "STRAIGHT",
+            Maneuver::RampLeft => "RAMP_LEFT",
+            Maneuver::RampRight => "RAMP_RIGHT",
+            Maneuver::Merge => "MERGE",
+            Maneuver::ForkLeft => "FORK_LEFT",
+            Maneuver::ForkRight => "FORK_RIGHT",
+            Maneuver::Ferry => "FERRY",
+            Maneuver::FerryTrain => "FERRY_TRAIN",
+            Maneuver::RoundaboutLeft => "ROUNDABOUT_LEFT",
+            Maneuver::RoundaboutRight => "ROUNDABOUT_RIGHT",
+        }
+    }
 }
 /// Encapsulates a custom route computed based on the route objective specified
 /// by the customer. CustomRoute contains a route and a route token, which can be
@@ -782,6 +935,19 @@ pub enum FallbackReason {
     /// mode.
     LatencyExceeded = 2,
 }
+impl FallbackReason {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            FallbackReason::Unspecified => "FALLBACK_REASON_UNSPECIFIED",
+            FallbackReason::ServerError => "SERVER_ERROR",
+            FallbackReason::LatencyExceeded => "LATENCY_EXCEEDED",
+        }
+    }
+}
 /// Actual routing mode used for returned fallback response.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
@@ -794,6 +960,19 @@ pub enum FallbackRoutingMode {
     /// Indicates the "TRAFFIC_AWARE" routing mode was used to compute the
     /// response.
     FallbackTrafficAware = 2,
+}
+impl FallbackRoutingMode {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            FallbackRoutingMode::Unspecified => "FALLBACK_ROUTING_MODE_UNSPECIFIED",
+            FallbackRoutingMode::FallbackTrafficUnaware => "FALLBACK_TRAFFIC_UNAWARE",
+            FallbackRoutingMode::FallbackTrafficAware => "FALLBACK_TRAFFIC_AWARE",
+        }
+    }
 }
 /// ComputeCustomRoutes response message.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -857,6 +1036,18 @@ pub mod compute_custom_routes_response {
             /// Google does not have toll price data for the route, the API falls back
             /// to RateCard without considering toll price.
             FallbackRatecardWithoutTollPriceData = 1,
+        }
+        impl FallbackRouteObjective {
+            /// String value of the enum field names used in the ProtoBuf definition.
+            ///
+            /// The values are not transformed in any way and thus are considered stable
+            /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+            pub fn as_str_name(&self) -> &'static str {
+                match self {
+                    FallbackRouteObjective::Unspecified => "FALLBACK_ROUTE_OBJECTIVE_UNSPECIFIED",
+                    FallbackRouteObjective::FallbackRatecardWithoutTollPriceData => "FALLBACK_RATECARD_WITHOUT_TOLL_PRICE_DATA",
+                }
+            }
         }
     }
 }
@@ -985,10 +1176,24 @@ pub enum RouteMatrixElementCondition {
     /// `distance_meters` or `duration`, will not be filled out in the element.
     RouteNotFound = 2,
 }
+impl RouteMatrixElementCondition {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            RouteMatrixElementCondition::Unspecified => "ROUTE_MATRIX_ELEMENT_CONDITION_UNSPECIFIED",
+            RouteMatrixElementCondition::RouteExists => "ROUTE_EXISTS",
+            RouteMatrixElementCondition::RouteNotFound => "ROUTE_NOT_FOUND",
+        }
+    }
+}
 /// Generated client implementations.
 pub mod routes_preferred_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The Routes Preferred API.
     #[derive(Debug, Clone)]
     pub struct RoutesPreferredClient<T> {
@@ -1003,6 +1208,10 @@ pub mod routes_preferred_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -1024,19 +1233,19 @@ pub mod routes_preferred_client {
         {
             RoutesPreferredClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Returns the primary route along with optional alternate routes, given a set

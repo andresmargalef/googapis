@@ -77,6 +77,21 @@ pub mod auto_ml_image_classification_inputs {
         /// prediction quality than other mobile models.
         MobileTfHighAccuracy1 = 4,
     }
+    impl ModelType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ModelType::Unspecified => "MODEL_TYPE_UNSPECIFIED",
+                ModelType::Cloud => "CLOUD",
+                ModelType::MobileTfLowLatency1 => "MOBILE_TF_LOW_LATENCY_1",
+                ModelType::MobileTfVersatile1 => "MOBILE_TF_VERSATILE_1",
+                ModelType::MobileTfHighAccuracy1 => "MOBILE_TF_HIGH_ACCURACY_1",
+            }
+        }
+    }
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AutoMlImageClassificationMetadata {
@@ -102,6 +117,19 @@ pub mod auto_ml_image_classification_metadata {
         /// Further training of the Model ceased to increase its quality, since it
         /// already has converged.
         ModelConverged = 2,
+    }
+    impl SuccessfulStopReason {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                SuccessfulStopReason::Unspecified => "SUCCESSFUL_STOP_REASON_UNSPECIFIED",
+                SuccessfulStopReason::BudgetReached => "BUDGET_REACHED",
+                SuccessfulStopReason::ModelConverged => "MODEL_CONVERGED",
+            }
+        }
     }
 }
 /// A TrainingJob that trains and uploads an AutoML Image Object Detection Model.
@@ -174,6 +202,22 @@ pub mod auto_ml_image_object_detection_inputs {
         /// prediction quality than other mobile models.
         MobileTfHighAccuracy1 = 5,
     }
+    impl ModelType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ModelType::Unspecified => "MODEL_TYPE_UNSPECIFIED",
+                ModelType::CloudHighAccuracy1 => "CLOUD_HIGH_ACCURACY_1",
+                ModelType::CloudLowLatency1 => "CLOUD_LOW_LATENCY_1",
+                ModelType::MobileTfLowLatency1 => "MOBILE_TF_LOW_LATENCY_1",
+                ModelType::MobileTfVersatile1 => "MOBILE_TF_VERSATILE_1",
+                ModelType::MobileTfHighAccuracy1 => "MOBILE_TF_HIGH_ACCURACY_1",
+            }
+        }
+    }
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AutoMlImageObjectDetectionMetadata {
@@ -200,6 +244,19 @@ pub mod auto_ml_image_object_detection_metadata {
         /// already has converged.
         ModelConverged = 2,
     }
+    impl SuccessfulStopReason {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                SuccessfulStopReason::Unspecified => "SUCCESSFUL_STOP_REASON_UNSPECIFIED",
+                SuccessfulStopReason::BudgetReached => "BUDGET_REACHED",
+                SuccessfulStopReason::ModelConverged => "MODEL_CONVERGED",
+            }
+        }
+    }
 }
 /// A TrainingJob that trains and uploads an AutoML Image Segmentation Model.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -223,7 +280,7 @@ pub struct AutoMlImageSegmentationInputs {
     /// will be `model-converged`.
     /// Note, node_hour  = actual_hour * number_of_nodes_involved. Or
     /// actaul_wall_clock_hours = train_budget_milli_node_hours /
-    ///                           (number_of_nodes_involved * 1000)
+    ///                            (number_of_nodes_involved * 1000)
     /// For modelType `cloud-high-accuracy-1`(default), the budget must be between
     /// 20,000 and 2,000,000 milli node hours, inclusive. The default value is
     /// 192,000 which represents one day in wall time
@@ -259,6 +316,20 @@ pub mod auto_ml_image_segmentation_inputs {
         /// quality than other mobile models.
         MobileTfLowLatency1 = 3,
     }
+    impl ModelType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ModelType::Unspecified => "MODEL_TYPE_UNSPECIFIED",
+                ModelType::CloudHighAccuracy1 => "CLOUD_HIGH_ACCURACY_1",
+                ModelType::CloudLowAccuracy1 => "CLOUD_LOW_ACCURACY_1",
+                ModelType::MobileTfLowLatency1 => "MOBILE_TF_LOW_LATENCY_1",
+            }
+        }
+    }
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AutoMlImageSegmentationMetadata {
@@ -284,6 +355,19 @@ pub mod auto_ml_image_segmentation_metadata {
         /// Further training of the Model ceased to increase its quality, since it
         /// already has converged.
         ModelConverged = 2,
+    }
+    impl SuccessfulStopReason {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                SuccessfulStopReason::Unspecified => "SUCCESSFUL_STOP_REASON_UNSPECIFIED",
+                SuccessfulStopReason::BudgetReached => "BUDGET_REACHED",
+                SuccessfulStopReason::ModelConverged => "MODEL_CONVERGED",
+            }
+        }
     }
 }
 /// Configuration for exporting test set predictions to a BigQuery table.
@@ -316,12 +400,12 @@ pub struct AutoMlTables {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AutoMlTablesInputs {
     /// The type of prediction the Model is to produce.
-    ///   "classification" - Predict one out of multiple target values is
-    ///                      picked for each row.
-    ///   "regression" - Predict a value based on its relation to other values.
-    ///                  This type is available only to columns that contain
-    ///                  semantically numeric values, i.e. integers or floating
-    ///                  point number, even if stored as e.g. strings.
+    ///    "classification" - Predict one out of multiple target values is
+    ///                       picked for each row.
+    ///    "regression" - Predict a value based on its relation to other values.
+    ///                   This type is available only to columns that contain
+    ///                   semantically numeric values, i.e. integers or floating
+    ///                   point number, even if stored as e.g. strings.
     #[prost(string, tag="1")]
     pub prediction_type: ::prost::alloc::string::String,
     /// The column name of the target column that the model is to predict.
@@ -341,22 +425,22 @@ pub struct AutoMlTablesInputs {
     /// If the field is not set, a default objective function is used.
     ///
     /// classification (binary):
-    ///   "maximize-au-roc" (default) - Maximize the area under the receiver
-    ///                                 operating characteristic (ROC) curve.
-    ///   "minimize-log-loss" - Minimize log loss.
-    ///   "maximize-au-prc" - Maximize the area under the precision-recall curve.
-    ///   "maximize-precision-at-recall" - Maximize precision for a specified
-    ///                                   recall value.
-    ///   "maximize-recall-at-precision" - Maximize recall for a specified
-    ///                                    precision value.
+    ///    "maximize-au-roc" (default) - Maximize the area under the receiver
+    ///                                  operating characteristic (ROC) curve.
+    ///    "minimize-log-loss" - Minimize log loss.
+    ///    "maximize-au-prc" - Maximize the area under the precision-recall curve.
+    ///    "maximize-precision-at-recall" - Maximize precision for a specified
+    ///                                    recall value.
+    ///    "maximize-recall-at-precision" - Maximize recall for a specified
+    ///                                     precision value.
     ///
     /// classification (multi-class):
-    ///   "minimize-log-loss" (default) - Minimize log loss.
+    ///    "minimize-log-loss" (default) - Minimize log loss.
     ///
     /// regression:
-    ///   "minimize-rmse" (default) - Minimize root-mean-squared error (RMSE).
-    ///   "minimize-mae" - Minimize mean-absolute error (MAE).
-    ///   "minimize-rmsle" - Minimize root-mean-squared log error (RMSLE).
+    ///    "minimize-rmse" (default) - Minimize root-mean-squared error (RMSE).
+    ///    "minimize-mae" - Minimize mean-absolute error (MAE).
+    ///    "minimize-rmsle" - Minimize root-mean-squared log error (RMSLE).
     #[prost(string, tag="4")]
     pub optimization_objective: ::prost::alloc::string::String,
     /// Required. The train budget of creating this model, expressed in milli node
@@ -423,11 +507,11 @@ pub mod auto_ml_tables_inputs {
         /// *  The value converted to float32.
         /// *  The z_score of the value.
         /// *  log(value+1) when the value is greater than or equal to 0. Otherwise,
-        ///    this transformation is not applied and the value is considered a
-        ///    missing value.
+        ///     this transformation is not applied and the value is considered a
+        ///     missing value.
         /// *  z_score of log(value+1) when the value is greater than or equal to 0.
-        ///    Otherwise, this transformation is not applied and the value is
-        ///    considered a missing value.
+        ///     Otherwise, this transformation is not applied and the value is
+        ///     considered a missing value.
         /// *  A boolean value that indicates whether the value is valid.
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct NumericTransformation {
@@ -443,12 +527,12 @@ pub mod auto_ml_tables_inputs {
         /// Training pipeline will perform following transformation functions.
         /// *  The categorical string as is--no change to case, punctuation,
         /// spelling,
-        ///    tense, and so on.
+        ///     tense, and so on.
         /// *  Convert the category name to a dictionary lookup index and generate an
-        ///    embedding for each index.
+        ///     embedding for each index.
         /// *  Categories that appear less than 5 times in the training dataset are
-        ///    treated as the "unknown" category. The "unknown" category gets its own
-        ///    special lookup index and resulting embedding.
+        ///     treated as the "unknown" category. The "unknown" category gets its own
+        ///     special lookup index and resulting embedding.
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct CategoricalTransformation {
             #[prost(string, tag="1")]
@@ -459,8 +543,8 @@ pub mod auto_ml_tables_inputs {
         /// *  Determine the year, month, day,and weekday. Treat each value from the
         /// *  timestamp as a Categorical column.
         /// *  Invalid numerical values (for example, values that fall outside of a
-        ///    typical timestamp range, or are extreme values) receive no special
-        ///    treatment and are not removed.
+        ///     typical timestamp range, or are extreme values) receive no special
+        ///     treatment and are not removed.
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct TimestampTransformation {
             #[prost(string, tag="1")]
@@ -488,11 +572,11 @@ pub mod auto_ml_tables_inputs {
         /// Training pipeline will perform following transformation functions.
         /// *  The text as is--no change to case, punctuation, spelling, tense, and
         /// so
-        ///    on.
+        ///     on.
         /// *  Tokenize text to words. Convert each words to a dictionary lookup
         /// index
-        ///    and generate an embedding for each index. Combine the embedding of all
-        ///    elements into a single embedding using the mean.
+        ///     and generate an embedding for each index. Combine the embedding of all
+        ///     elements into a single embedding using the mean.
         /// *  Tokenization is based on unicode script boundaries.
         /// *  Missing values get their own lookup index and resulting embedding.
         /// *  Stop-words receive no special treatment and are not removed.
@@ -504,7 +588,7 @@ pub mod auto_ml_tables_inputs {
         /// Treats the column as numerical array and performs following
         /// transformation functions.
         /// *  All transformations for Numerical types applied to the average of the
-        ///    all elements.
+        ///     all elements.
         /// *  The average of empty arrays is treated as zero.
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct NumericArrayTransformation {
@@ -521,9 +605,9 @@ pub mod auto_ml_tables_inputs {
         /// transformation functions.
         /// *  For each element in the array, convert the category name to a
         /// dictionary
-        ///    lookup index and generate an embedding for each index.
-        ///    Combine the embedding of all elements into a single embedding using
-        ///    the mean.
+        ///     lookup index and generate an embedding for each index.
+        ///     Combine the embedding of all elements into a single embedding using
+        ///     the mean.
         /// *  Empty arrays treated as an embedding of zeroes.
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct CategoricalArrayTransformation {
@@ -534,8 +618,8 @@ pub mod auto_ml_tables_inputs {
         /// functions.
         /// *  Concatenate all text values in the array into a single text value
         /// using
-        ///    a space (" ") as a delimiter, and then treat the result as a single
-        ///    text value. Apply the transformations for Text columns.
+        ///     a space (" ") as a delimiter, and then treat the result as a single
+        ///     text value. Apply the transformations for Text columns.
         /// *  Empty arrays treated as an empty text.
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct TextArrayTransformation {
@@ -662,19 +746,19 @@ pub struct AutoMlForecastingInputs {
     ///
     /// The supported optimization objectives:
     ///
-    ///   * "minimize-rmse" (default) - Minimize root-mean-squared error (RMSE).
+    ///    * "minimize-rmse" (default) - Minimize root-mean-squared error (RMSE).
     ///
-    ///   * "minimize-mae" - Minimize mean-absolute error (MAE).
+    ///    * "minimize-mae" - Minimize mean-absolute error (MAE).
     ///
-    ///   * "minimize-rmsle" - Minimize root-mean-squared log error (RMSLE).
+    ///    * "minimize-rmsle" - Minimize root-mean-squared log error (RMSLE).
     ///
-    ///   * "minimize-rmspe" - Minimize root-mean-squared percentage error (RMSPE).
+    ///    * "minimize-rmspe" - Minimize root-mean-squared percentage error (RMSPE).
     ///
-    ///   * "minimize-wape-mae" - Minimize the combination of weighted absolute
-    ///     percentage error (WAPE) and mean-absolute-error (MAE).
+    ///    * "minimize-wape-mae" - Minimize the combination of weighted absolute
+    ///      percentage error (WAPE) and mean-absolute-error (MAE).
     ///
-    ///   * "minimize-quantile-loss" - Minimize the quantile loss at the quantiles
-    ///     defined in `quantiles`.
+    ///    * "minimize-quantile-loss" - Minimize the quantile loss at the quantiles
+    ///      defined in `quantiles`.
     #[prost(string, tag="5")]
     pub optimization_objective: ::prost::alloc::string::String,
     /// Required. The train budget of creating this model, expressed in milli node
@@ -745,10 +829,10 @@ pub struct AutoMlForecastingInputs {
     /// Validation options for the data validation component. The available options
     /// are:
     ///
-    ///   * "fail-pipeline" - default, will validate against the validation and
-    ///      fail the pipeline if it fails.
+    ///    * "fail-pipeline" - default, will validate against the validation and
+    ///       fail the pipeline if it fails.
     ///
-    ///   * "ignore-validation" - ignore the results of the validation and continue
+    ///    * "ignore-validation" - ignore the results of the validation and continue
     #[prost(string, tag="17")]
     pub validation_options: ::prost::alloc::string::String,
     /// Additional experiment flags for the time series forcasting training.
@@ -780,12 +864,12 @@ pub mod auto_ml_forecasting_inputs {
         /// *  The z_score of the value.
         ///
         /// *  log(value+1) when the value is greater than or equal to 0. Otherwise,
-        ///    this transformation is not applied and the value is considered a
-        ///    missing value.
+        ///     this transformation is not applied and the value is considered a
+        ///     missing value.
         ///
         /// *  z_score of log(value+1) when the value is greater than or equal to 0.
-        ///    Otherwise, this transformation is not applied and the value is
-        ///    considered a missing value.
+        ///     Otherwise, this transformation is not applied and the value is
+        ///     considered a missing value.
         ///
         /// *  A boolean value that indicates whether the value is valid.
         #[derive(Clone, PartialEq, ::prost::Message)]
@@ -796,14 +880,14 @@ pub mod auto_ml_forecasting_inputs {
         /// Training pipeline will perform following transformation functions.
         ///
         /// *  The categorical string as is--no change to case, punctuation,
-        ///    spelling, tense, and so on.
+        ///     spelling, tense, and so on.
         ///
         /// *  Convert the category name to a dictionary lookup index and generate an
-        ///    embedding for each index.
+        ///     embedding for each index.
         ///
         /// *  Categories that appear less than 5 times in the training dataset are
-        ///    treated as the "unknown" category. The "unknown" category gets its own
-        ///    special lookup index and resulting embedding.
+        ///     treated as the "unknown" category. The "unknown" category gets its own
+        ///     special lookup index and resulting embedding.
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct CategoricalTransformation {
             #[prost(string, tag="1")]
@@ -814,11 +898,11 @@ pub mod auto_ml_forecasting_inputs {
         /// *  Apply the transformation functions for Numerical columns.
         ///
         /// *  Determine the year, month, day,and weekday. Treat each value from the
-        ///    timestamp as a Categorical column.
+        ///     timestamp as a Categorical column.
         ///
         /// *  Invalid numerical values (for example, values that fall outside of a
-        ///    typical timestamp range, or are extreme values) receive no special
-        ///    treatment and are not removed.
+        ///     typical timestamp range, or are extreme values) receive no special
+        ///     treatment and are not removed.
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct TimestampTransformation {
             #[prost(string, tag="1")]
@@ -848,10 +932,10 @@ pub mod auto_ml_forecasting_inputs {
         /// Training pipeline will perform following transformation functions.
         ///
         /// *  The text as is--no change to case, punctuation, spelling, tense, and
-        ///    so on.
+        ///     so on.
         ///
         /// *  Convert the category name to a dictionary lookup index and generate an
-        ///    embedding for each index.
+        ///     embedding for each index.
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct TextTransformation {
             #[prost(string, tag="1")]
@@ -879,17 +963,17 @@ pub mod auto_ml_forecasting_inputs {
         /// The time granularity unit of this time period.
         /// The supported units are:
         ///
-        ///  * "minute"
+        ///   * "minute"
         ///
-        ///  * "hour"
+        ///   * "hour"
         ///
-        ///  * "day"
+        ///   * "day"
         ///
-        ///  * "week"
+        ///   * "week"
         ///
-        ///  * "month"
+        ///   * "month"
         ///
-        ///  * "year"
+        ///   * "year"
         #[prost(string, tag="1")]
         pub unit: ::prost::alloc::string::String,
         /// The number of granularity_units between data points in the training
@@ -945,6 +1029,21 @@ pub mod auto_ml_video_action_recognition_inputs {
         /// TensorFlow Lite model and used on a Coral device afterwards.
         MobileCoralVersatile1 = 4,
     }
+    impl ModelType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ModelType::Unspecified => "MODEL_TYPE_UNSPECIFIED",
+                ModelType::Cloud => "CLOUD",
+                ModelType::MobileVersatile1 => "MOBILE_VERSATILE_1",
+                ModelType::MobileJetsonVersatile1 => "MOBILE_JETSON_VERSATILE_1",
+                ModelType::MobileCoralVersatile1 => "MOBILE_CORAL_VERSATILE_1",
+            }
+        }
+    }
 }
 /// A TrainingJob that trains and uploads an AutoML Video Classification Model.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -976,6 +1075,20 @@ pub mod auto_ml_video_classification_inputs {
         /// also be exported (see ModelService.ExportModel) to a Jetson device
         /// afterwards.
         MobileJetsonVersatile1 = 3,
+    }
+    impl ModelType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ModelType::Unspecified => "MODEL_TYPE_UNSPECIFIED",
+                ModelType::Cloud => "CLOUD",
+                ModelType::MobileVersatile1 => "MOBILE_VERSATILE_1",
+                ModelType::MobileJetsonVersatile1 => "MOBILE_JETSON_VERSATILE_1",
+            }
+        }
     }
 }
 /// A TrainingJob that trains and uploads an AutoML Video ObjectTracking Model.
@@ -1016,5 +1129,22 @@ pub mod auto_ml_video_object_tracking_inputs {
         /// A model that trades off quality for low latency, to be exported (see
         /// ModelService.ExportModel) and used on an NVIDIA Jetson device.
         MobileJetsonLowLatency1 = 6,
+    }
+    impl ModelType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ModelType::Unspecified => "MODEL_TYPE_UNSPECIFIED",
+                ModelType::Cloud => "CLOUD",
+                ModelType::MobileVersatile1 => "MOBILE_VERSATILE_1",
+                ModelType::MobileCoralVersatile1 => "MOBILE_CORAL_VERSATILE_1",
+                ModelType::MobileCoralLowLatency1 => "MOBILE_CORAL_LOW_LATENCY_1",
+                ModelType::MobileJetsonVersatile1 => "MOBILE_JETSON_VERSATILE_1",
+                ModelType::MobileJetsonLowLatency1 => "MOBILE_JETSON_LOW_LATENCY_1",
+            }
+        }
     }
 }

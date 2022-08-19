@@ -192,6 +192,28 @@ pub mod finding {
         /// Mismatching values in a duplicate security header.
         MismatchingSecurityHeaderValues = 11,
     }
+    impl FindingType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                FindingType::Unspecified => "FINDING_TYPE_UNSPECIFIED",
+                FindingType::MixedContent => "MIXED_CONTENT",
+                FindingType::OutdatedLibrary => "OUTDATED_LIBRARY",
+                FindingType::RosettaFlash => "ROSETTA_FLASH",
+                FindingType::XssCallback => "XSS_CALLBACK",
+                FindingType::XssError => "XSS_ERROR",
+                FindingType::ClearTextPassword => "CLEAR_TEXT_PASSWORD",
+                FindingType::InvalidContentType => "INVALID_CONTENT_TYPE",
+                FindingType::XssAngularCallback => "XSS_ANGULAR_CALLBACK",
+                FindingType::InvalidHeader => "INVALID_HEADER",
+                FindingType::MisspelledSecurityHeaderName => "MISSPELLED_SECURITY_HEADER_NAME",
+                FindingType::MismatchingSecurityHeaderValues => "MISMATCHING_SECURITY_HEADER_VALUES",
+            }
+        }
+    }
 }
 /// A FindingTypeStats resource represents stats regarding a specific FindingType
 /// of Findings under a given ScanRun.
@@ -262,6 +284,20 @@ pub mod scan_run {
         /// The scan is either finished or stopped by user.
         Finished = 3,
     }
+    impl ExecutionState {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ExecutionState::Unspecified => "EXECUTION_STATE_UNSPECIFIED",
+                ExecutionState::Queued => "QUEUED",
+                ExecutionState::Scanning => "SCANNING",
+                ExecutionState::Finished => "FINISHED",
+            }
+        }
+    }
     /// Types of ScanRun result state.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -275,6 +311,20 @@ pub mod scan_run {
         Error = 2,
         /// The scan was terminated by user.
         Killed = 3,
+    }
+    impl ResultState {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ResultState::Unspecified => "RESULT_STATE_UNSPECIFIED",
+                ResultState::Success => "SUCCESS",
+                ResultState::Error => "ERROR",
+                ResultState::Killed => "KILLED",
+            }
+        }
     }
 }
 /// A ScanConfig resource contains the configurations to launch a scan.
@@ -395,6 +445,20 @@ pub mod scan_config {
         /// Safari on IPhone.
         SafariIphone = 3,
     }
+    impl UserAgent {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                UserAgent::Unspecified => "USER_AGENT_UNSPECIFIED",
+                UserAgent::ChromeLinux => "CHROME_LINUX",
+                UserAgent::ChromeAndroid => "CHROME_ANDROID",
+                UserAgent::SafariIphone => "SAFARI_IPHONE",
+            }
+        }
+    }
     /// Cloud platforms supported by Cloud Web Security Scanner.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -406,6 +470,19 @@ pub mod scan_config {
         AppEngine = 1,
         /// Google Compute Engine service.
         Compute = 2,
+    }
+    impl TargetPlatform {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                TargetPlatform::Unspecified => "TARGET_PLATFORM_UNSPECIFIED",
+                TargetPlatform::AppEngine => "APP_ENGINE",
+                TargetPlatform::Compute => "COMPUTE",
+            }
+        }
     }
 }
 /// Request for the `CreateScanConfig` method.
@@ -628,6 +705,7 @@ pub struct ListFindingTypeStatsResponse {
 pub mod web_security_scanner_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Cloud Web Security Scanner Service identifies security vulnerabilities in web
     /// applications hosted on Google Cloud Platform. It crawls your application, and
     /// attempts to exercise as many user inputs and event handlers as possible.
@@ -644,6 +722,10 @@ pub mod web_security_scanner_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -665,19 +747,19 @@ pub mod web_security_scanner_client {
         {
             WebSecurityScannerClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Creates a new ScanConfig.

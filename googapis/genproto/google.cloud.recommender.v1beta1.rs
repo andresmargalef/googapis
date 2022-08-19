@@ -66,6 +66,21 @@ pub mod insight {
         /// This insight is related to manageability.
         Manageability = 4,
     }
+    impl Category {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Category::Unspecified => "CATEGORY_UNSPECIFIED",
+                Category::Cost => "COST",
+                Category::Security => "SECURITY",
+                Category::Performance => "PERFORMANCE",
+                Category::Manageability => "MANAGEABILITY",
+            }
+        }
+    }
 }
 /// Information related to insight state.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -98,6 +113,20 @@ pub mod insight_state_info {
         /// Google. DISMISSED insights can be marked as ACTIVE.
         Dismissed = 3,
     }
+    impl State {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                State::Unspecified => "STATE_UNSPECIFIED",
+                State::Active => "ACTIVE",
+                State::Accepted => "ACCEPTED",
+                State::Dismissed => "DISMISSED",
+            }
+        }
+    }
 }
 /// A recommendation along with a suggested action. E.g., a rightsizing
 /// recommendation for an underutilized VM, IAM role recommendations, etc
@@ -117,8 +146,8 @@ pub struct Recommendation {
     /// to see a list of subtypes for a given Recommender.
     ///
     /// Examples:
-    ///   For recommender = "google.iam.policy.Recommender",
-    ///   recommender_subtype can be one of "REMOVE_ROLE"/"REPLACE_ROLE"
+    ///    For recommender = "google.iam.policy.Recommender",
+    ///    recommender_subtype can be one of "REMOVE_ROLE"/"REPLACE_ROLE"
     #[prost(string, tag="12")]
     pub recommender_subtype: ::prost::alloc::string::String,
     /// Last time this recommendation was refreshed by the system that created it
@@ -182,7 +211,7 @@ pub struct OperationGroup {
 /// * Custom filters for describing partial array patch.
 /// * Extended path values for describing nested arrays.
 /// * Custom fields for describing the resource for which the operation is being
-///   described.
+///    described.
 /// * Allows extension to custom operations not natively supported by RFC6902.
 /// See <https://tools.ietf.org/html/rfc6902> for details on the original RFC.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -225,22 +254,22 @@ pub struct Operation {
     /// * Example:
     /// ```
     /// {
-    ///   "/versions/*/name" : "it-123"
-    ///   "/versions/*/targetSize/percent": 20
+    ///    "/versions/*/name" : "it-123"
+    ///    "/versions/*/targetSize/percent": 20
     /// }
     /// ```
     /// * Example:
     /// ```
     /// {
-    ///   "/bindings/*/role": "roles/owner"
-    ///   "/bindings/*/condition" : null
+    ///    "/bindings/*/role": "roles/owner"
+    ///    "/bindings/*/condition" : null
     /// }
     /// ```
     /// * Example:
     /// ```
     /// {
-    ///   "/bindings/*/role": "roles/owner"
-    ///   "/bindings/*/members/*" : ["x@example.com", "y@example.com"]
+    ///    "/bindings/*/role": "roles/owner"
+    ///    "/bindings/*/members/*" : ["x@example.com", "y@example.com"]
     /// }
     /// ```
     /// When both path_filters and path_value_matchers are set, an implicit AND
@@ -332,6 +361,21 @@ pub mod impact {
         /// Indicates a potential increase or decrease in manageability.
         Manageability = 4,
     }
+    impl Category {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Category::Unspecified => "CATEGORY_UNSPECIFIED",
+                Category::Cost => "COST",
+                Category::Security => "SECURITY",
+                Category::Performance => "PERFORMANCE",
+                Category::Manageability => "MANAGEABILITY",
+            }
+        }
+    }
     /// Contains projections (if any) for this category.
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Projection {
@@ -383,6 +427,22 @@ pub mod recommendation_state_info {
         ///
         /// DISMISSED recommendations can be marked as ACTIVE.
         Dismissed = 5,
+    }
+    impl State {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                State::Unspecified => "STATE_UNSPECIFIED",
+                State::Active => "ACTIVE",
+                State::Claimed => "CLAIMED",
+                State::Succeeded => "SUCCEEDED",
+                State::Failed => "FAILED",
+                State::Dismissed => "DISMISSED",
+            }
+        }
     }
 }
 /// Request for the `ListInsights` method.
@@ -551,6 +611,7 @@ pub struct MarkRecommendationFailedRequest {
 pub mod recommender_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Provides insights and recommendations for cloud customers for various
     /// categories like performance optimization, cost savings, reliability, feature
     /// discovery, etc. Insights and recommendations are generated automatically
@@ -568,6 +629,10 @@ pub mod recommender_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -589,19 +654,19 @@ pub mod recommender_client {
         {
             RecommenderClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Lists insights for a Cloud project. Requires the recommender.*.list IAM

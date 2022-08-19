@@ -1470,10 +1470,10 @@ pub struct LanguageInfo {
     pub language_constant: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// An IpBlock criterion used for IP exclusions. We allow:
-///  - IPv4 and IPv6 addresses
-///  - individual addresses (192.168.0.1)
-///  - masks for individual addresses (192.168.0.1/32)
-///  - masks for Class C networks (192.168.0.1/24)
+///   - IPv4 and IPv6 addresses
+///   - individual addresses (192.168.0.1)
+///   - masks for individual addresses (192.168.0.1/32)
+///   - masks for Class C networks (192.168.0.1/24)
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct IpBlockInfo {
     /// The IP address of this IP block.
@@ -4583,6 +4583,20 @@ pub mod target_restriction_operation {
         Add = 2,
         /// Remove the restriction from the existing restrictions.
         Remove = 3,
+    }
+    impl Operator {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Operator::Unspecified => "UNSPECIFIED",
+                Operator::Unknown => "UNKNOWN",
+                Operator::Add => "ADD",
+                Operator::Remove => "REMOVE",
+            }
+        }
     }
 }
 /// A type of label displaying text on a colored background.

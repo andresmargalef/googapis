@@ -11,46 +11,46 @@ pub struct TrainingInput {
     /// The following types are supported:
     ///
     /// <dl>
-    ///   <dt>standard</dt>
-    ///   <dd>
-    ///   A basic machine configuration suitable for training simple models with
-    ///   small to moderate datasets.
-    ///   </dd>
-    ///   <dt>large_model</dt>
-    ///   <dd>
-    ///   A machine with a lot of memory, specially suited for parameter servers
-    ///   when your model is large (having many hidden layers or layers with very
-    ///   large numbers of nodes).
-    ///   </dd>
-    ///   <dt>complex_model_s</dt>
-    ///   <dd>
-    ///   A machine suitable for the master and workers of the cluster when your
-    ///   model requires more computation than the standard machine can handle
-    ///   satisfactorily.
-    ///   </dd>
-    ///   <dt>complex_model_m</dt>
-    ///   <dd>
-    ///   A machine with roughly twice the number of cores and roughly double the
-    ///   memory of <code suppresswarning="true">complex_model_s</code>.
-    ///   </dd>
-    ///   <dt>complex_model_l</dt>
-    ///   <dd>
-    ///   A machine with roughly twice the number of cores and roughly double the
-    ///   memory of <code suppresswarning="true">complex_model_m</code>.
-    ///   </dd>
-    ///   <dt>standard_gpu</dt>
-    ///   <dd>
-    ///   A machine equivalent to <code suppresswarning="true">standard</code> that
-    ///   also includes a
-    ///   <a href="ml/docs/how-tos/using-gpus">
-    ///   GPU that you can use in your trainer</a>.
-    ///   </dd>
-    ///   <dt>complex_model_m_gpu</dt>
-    ///   <dd>
-    ///   A machine equivalent to
-    ///   <code suppresswarning="true">coplex_model_m</code> that also includes
-    ///   four GPUs.
-    ///   </dd>
+    ///    <dt>standard</dt>
+    ///    <dd>
+    ///    A basic machine configuration suitable for training simple models with
+    ///    small to moderate datasets.
+    ///    </dd>
+    ///    <dt>large_model</dt>
+    ///    <dd>
+    ///    A machine with a lot of memory, specially suited for parameter servers
+    ///    when your model is large (having many hidden layers or layers with very
+    ///    large numbers of nodes).
+    ///    </dd>
+    ///    <dt>complex_model_s</dt>
+    ///    <dd>
+    ///    A machine suitable for the master and workers of the cluster when your
+    ///    model requires more computation than the standard machine can handle
+    ///    satisfactorily.
+    ///    </dd>
+    ///    <dt>complex_model_m</dt>
+    ///    <dd>
+    ///    A machine with roughly twice the number of cores and roughly double the
+    ///    memory of <code suppresswarning="true">complex_model_s</code>.
+    ///    </dd>
+    ///    <dt>complex_model_l</dt>
+    ///    <dd>
+    ///    A machine with roughly twice the number of cores and roughly double the
+    ///    memory of <code suppresswarning="true">complex_model_m</code>.
+    ///    </dd>
+    ///    <dt>standard_gpu</dt>
+    ///    <dd>
+    ///    A machine equivalent to <code suppresswarning="true">standard</code> that
+    ///    also includes a
+    ///    <a href="ml/docs/how-tos/using-gpus">
+    ///    GPU that you can use in your trainer</a>.
+    ///    </dd>
+    ///    <dt>complex_model_m_gpu</dt>
+    ///    <dd>
+    ///    A machine equivalent to
+    ///    <code suppresswarning="true">coplex_model_m</code> that also includes
+    ///    four GPUs.
+    ///    </dd>
     /// </dl>
     ///
     /// You must set this value when `scaleTier` is set to `CUSTOM`.
@@ -148,25 +148,40 @@ pub mod training_input {
         /// configure your processing cluster according to these guidelines:
         ///
         /// *   You _must_ set `TrainingInput.masterType` to specify the type
-        ///     of machine to use for your master node. This is the only required
-        ///     setting.
+        ///      of machine to use for your master node. This is the only required
+        ///      setting.
         ///
         /// *   You _may_ set `TrainingInput.workerCount` to specify the number of
-        ///     workers to use. If you specify one or more workers, you _must_ also
-        ///     set `TrainingInput.workerType` to specify the type of machine to use
-        ///     for your worker nodes.
+        ///      workers to use. If you specify one or more workers, you _must_ also
+        ///      set `TrainingInput.workerType` to specify the type of machine to use
+        ///      for your worker nodes.
         ///
         /// *   You _may_ set `TrainingInput.parameterServerCount` to specify the
-        ///     number of parameter servers to use. If you specify one or more
-        ///     parameter servers, you _must_ also set
-        ///     `TrainingInput.parameterServerType` to specify the type of machine to
-        ///     use for your parameter servers.
+        ///      number of parameter servers to use. If you specify one or more
+        ///      parameter servers, you _must_ also set
+        ///      `TrainingInput.parameterServerType` to specify the type of machine to
+        ///      use for your parameter servers.
         ///
         /// Note that all of your workers must use the same machine type, which can
         /// be different from your parameter server type and master type. Your
         /// parameter servers must likewise use the same machine type, which can be
         /// different from your worker type and master type.
         Custom = 5,
+    }
+    impl ScaleTier {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ScaleTier::Basic => "BASIC",
+                ScaleTier::Standard1 => "STANDARD_1",
+                ScaleTier::Premium1 => "PREMIUM_1",
+                ScaleTier::BasicGpu => "BASIC_GPU",
+                ScaleTier::Custom => "CUSTOM",
+            }
+        }
     }
 }
 /// Represents a set of hyperparameters to optimize.
@@ -219,6 +234,19 @@ pub mod hyperparameter_spec {
         Maximize = 1,
         /// Minimize the goal metric.
         Minimize = 2,
+    }
+    impl GoalType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                GoalType::Unspecified => "GOAL_TYPE_UNSPECIFIED",
+                GoalType::Maximize => "MAXIMIZE",
+                GoalType::Minimize => "MINIMIZE",
+            }
+        }
     }
 }
 /// Represents a single hyperparameter to optimize.
@@ -279,6 +307,21 @@ pub mod parameter_spec {
         /// {`min_value`, `max_value`} will be ignored.
         Discrete = 4,
     }
+    impl ParameterType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ParameterType::Unspecified => "PARAMETER_TYPE_UNSPECIFIED",
+                ParameterType::Double => "DOUBLE",
+                ParameterType::Integer => "INTEGER",
+                ParameterType::Categorical => "CATEGORICAL",
+                ParameterType::Discrete => "DISCRETE",
+            }
+        }
+    }
     /// The type of scaling that should be applied to this parameter.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -295,6 +338,20 @@ pub mod parameter_spec {
         /// than points near the bottom. The entire feasible space must be strictly
         /// positive.
         UnitReverseLogScale = 3,
+    }
+    impl ScaleType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ScaleType::None => "NONE",
+                ScaleType::UnitLinearScale => "UNIT_LINEAR_SCALE",
+                ScaleType::UnitLogScale => "UNIT_LOG_SCALE",
+                ScaleType::UnitReverseLogScale => "UNIT_REVERSE_LOG_SCALE",
+            }
+        }
     }
 }
 /// Represents the result of a single hyperparameter tuning trial from a
@@ -394,6 +451,20 @@ pub mod prediction_input {
         /// The source file is a GZIP-compressed TFRecord file.
         TfRecordGzip = 3,
     }
+    impl DataFormat {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                DataFormat::Unspecified => "DATA_FORMAT_UNSPECIFIED",
+                DataFormat::Text => "TEXT",
+                DataFormat::TfRecord => "TF_RECORD",
+                DataFormat::TfRecordGzip => "TF_RECORD_GZIP",
+            }
+        }
+    }
     /// Required. The model or the version to use for prediction.
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum ModelVersion {
@@ -486,6 +557,24 @@ pub mod job {
         /// `error_message` should describe the reason for the cancellation.
         Cancelled = 7,
     }
+    impl State {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                State::Unspecified => "STATE_UNSPECIFIED",
+                State::Queued => "QUEUED",
+                State::Preparing => "PREPARING",
+                State::Running => "RUNNING",
+                State::Succeeded => "SUCCEEDED",
+                State::Failed => "FAILED",
+                State::Cancelling => "CANCELLING",
+                State::Cancelled => "CANCELLED",
+            }
+        }
+    }
     /// Required. Parameters to create a job.
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Input {
@@ -577,6 +666,7 @@ pub struct CancelJobRequest {
 pub mod job_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Service to create and manage training and batch prediction jobs.
     #[derive(Debug, Clone)]
     pub struct JobServiceClient<T> {
@@ -591,6 +681,10 @@ pub mod job_service_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -612,19 +706,19 @@ pub mod job_service_client {
         {
             JobServiceClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Creates a training or a batch prediction job.
@@ -948,6 +1042,7 @@ pub struct SetDefaultVersionRequest {
 pub mod model_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Provides methods that create and manage machine learning models and their
     /// versions.
     ///
@@ -989,6 +1084,10 @@ pub mod model_service_client {
             let inner = tonic::client::Grpc::new(inner);
             Self { inner }
         }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
+            Self { inner }
+        }
         pub fn with_interceptor<F>(
             inner: T,
             interceptor: F,
@@ -1008,19 +1107,19 @@ pub mod model_service_client {
         {
             ModelServiceClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Creates a model which will later contain one or more versions.
@@ -1301,6 +1400,20 @@ pub mod operation_metadata {
         /// An operation to delete an existing model.
         DeleteModel = 3,
     }
+    impl OperationType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                OperationType::Unspecified => "OPERATION_TYPE_UNSPECIFIED",
+                OperationType::CreateVersion => "CREATE_VERSION",
+                OperationType::DeleteVersion => "DELETE_VERSION",
+                OperationType::DeleteModel => "DELETE_MODEL",
+            }
+        }
+    }
 }
 /// Request for predictions to be issued against a trained model.
 ///
@@ -1308,9 +1421,9 @@ pub mod operation_metadata {
 /// field:
 ///
 /// <dl>
-///   <dt>instances</dt>
-///   <dd>A JSON array containing values representing the instances to use for
-///       prediction.</dd>
+///    <dt>instances</dt>
+///    <dd>A JSON array containing values representing the instances to use for
+///        prediction.</dd>
 /// </dl>
 ///
 /// The structure of each element of the instances list is determined by your
@@ -1333,11 +1446,11 @@ pub mod operation_metadata {
 /// Sentences encoded as lists of words (vectors of strings):
 /// <pre>
 /// {
-///   "instances": [
-///     \["the","quick","brown"\],
-///     \["la","bruja","le"\],
-///     ...
-///   ]
+///    "instances": [
+///      \["the","quick","brown"\],
+///      \["la","bruja","le"\],
+///      ...
+///    ]
 /// }
 /// </pre>
 /// Floating point scalar values:
@@ -1347,23 +1460,23 @@ pub mod operation_metadata {
 /// Vectors of integers:
 /// <pre>
 /// {
-///   "instances": [
-///     [0, 1, 2],
-///     [3, 4, 5],
-///     ...
-///   ]
+///    "instances": [
+///      [0, 1, 2],
+///      [3, 4, 5],
+///      ...
+///    ]
 /// }
 /// </pre>
 /// Tensors (in this case, two-dimensional tensors):
 /// <pre>
 /// {
-///   "instances": [
-///     [
-///       [0, 1, 2],
-///       [3, 4, 5]
-///     ],
-///     ...
-///   ]
+///    "instances": [
+///      [
+///        [0, 1, 2],
+///        [3, 4, 5]
+///      ],
+///      ...
+///    ]
 /// }
 /// </pre>
 /// Images can be represented different ways. In this encoding scheme the first
@@ -1371,22 +1484,22 @@ pub mod operation_metadata {
 /// contains lists (vectors) of the R, G, and B values for each pixel.
 /// <pre>
 /// {
-///   "instances": [
-///     [
-///       [
-///         [138, 30, 66],
-///         [130, 20, 56],
-///         ...
-///       ],
-///       [
-///         [126, 38, 61],
-///         [122, 24, 57],
-///         ...
-///       ],
-///       ...
-///     ],
-///     ...
-///   ]
+///    "instances": [
+///      [
+///        [
+///          [138, 30, 66],
+///          [130, 20, 56],
+///          ...
+///        ],
+///        [
+///          [126, 38, 61],
+///          [122, 24, 57],
+///          ...
+///        ],
+///        ...
+///      ],
+///      ...
+///    ]
 /// }
 /// </pre>
 /// JSON strings must be encoded as UTF-8. To send binary data, you must
@@ -1409,18 +1522,18 @@ pub mod operation_metadata {
 /// JSON input data to be preprocessed:
 /// <pre>
 /// {
-///   "instances": [
-///     {
-///       "a": 1.0,
-///       "b": true,
-///       "c": "x"
-///     },
-///     {
-///       "a": -2.0,
-///       "b": false,
-///       "c": "y"
-///     }
-///   ]
+///    "instances": [
+///      {
+///        "a": 1.0,
+///        "b": true,
+///        "c": "x"
+///      },
+///      {
+///        "a": -2.0,
+///        "b": false,
+///        "c": "y"
+///      }
+///    ]
 /// }
 /// </pre>
 /// Some models have an underlying TensorFlow graph that accepts multiple input
@@ -1431,57 +1544,57 @@ pub mod operation_metadata {
 /// (base64-encoded string):
 /// <pre>
 /// {
-///   "instances": [
-///     {
-///       "tag": "beach",
-///       "image": {"b64": "ASa8asdf"}
-///     },
-///     {
-///       "tag": "car",
-///       "image": {"b64": "JLK7ljk3"}
-///     }
-///   ]
+///    "instances": [
+///      {
+///        "tag": "beach",
+///        "image": {"b64": "ASa8asdf"}
+///      },
+///      {
+///        "tag": "car",
+///        "image": {"b64": "JLK7ljk3"}
+///      }
+///    ]
 /// }
 /// </pre>
 /// For a graph with input tensor aliases "tag" (string) and "image"
 /// (3-dimensional array of 8-bit ints):
 /// <pre>
 /// {
-///   "instances": [
-///     {
-///       "tag": "beach",
-///       "image": [
-///         [
-///           [138, 30, 66],
-///           [130, 20, 56],
-///           ...
-///         ],
-///         [
-///           [126, 38, 61],
-///           [122, 24, 57],
-///           ...
-///         ],
-///         ...
-///       ]
-///     },
-///     {
-///       "tag": "car",
-///       "image": [
-///         [
-///           [255, 0, 102],
-///           [255, 0, 97],
-///           ...
-///         ],
-///         [
-///           [254, 1, 101],
-///           [254, 2, 93],
-///           ...
-///         ],
-///         ...
-///       ]
-///     },
-///     ...
-///   ]
+///    "instances": [
+///      {
+///        "tag": "beach",
+///        "image": [
+///          [
+///            [138, 30, 66],
+///            [130, 20, 56],
+///            ...
+///          ],
+///          [
+///            [126, 38, 61],
+///            [122, 24, 57],
+///            ...
+///          ],
+///          ...
+///        ]
+///      },
+///      {
+///        "tag": "car",
+///        "image": [
+///          [
+///            [255, 0, 102],
+///            [255, 0, 97],
+///            ...
+///          ],
+///          [
+///            [254, 1, 101],
+///            [254, 2, 93],
+///            ...
+///          ],
+///          ...
+///        ]
+///      },
+///      ...
+///    ]
 /// }
 /// </pre>
 /// If the call is successful, the response body will contain one prediction
@@ -1504,6 +1617,7 @@ pub struct PredictRequest {
 pub mod online_prediction_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The Prediction API, which serves predictions for models managed by
     /// ModelService.
     #[derive(Debug, Clone)]
@@ -1519,6 +1633,10 @@ pub mod online_prediction_service_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -1542,19 +1660,19 @@ pub mod online_prediction_service_client {
                 InterceptedService::new(inner, interceptor),
             )
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Performs prediction on the data in the request.
@@ -1607,6 +1725,7 @@ pub struct GetConfigResponse {
 pub mod project_management_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Allows retrieving project related information.
     #[derive(Debug, Clone)]
     pub struct ProjectManagementServiceClient<T> {
@@ -1621,6 +1740,10 @@ pub mod project_management_service_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -1644,19 +1767,19 @@ pub mod project_management_service_client {
                 InterceptedService::new(inner, interceptor),
             )
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Get the service account information associated with your project. You need

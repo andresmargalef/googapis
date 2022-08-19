@@ -68,6 +68,27 @@ pub mod location {
         /// A street address level location.
         StreetAddress = 10,
     }
+    impl LocationType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                LocationType::Unspecified => "LOCATION_TYPE_UNSPECIFIED",
+                LocationType::Country => "COUNTRY",
+                LocationType::AdministrativeArea => "ADMINISTRATIVE_AREA",
+                LocationType::SubAdministrativeArea => "SUB_ADMINISTRATIVE_AREA",
+                LocationType::Locality => "LOCALITY",
+                LocationType::PostalCode => "POSTAL_CODE",
+                LocationType::SubLocality => "SUB_LOCALITY",
+                LocationType::SubLocality1 => "SUB_LOCALITY_1",
+                LocationType::SubLocality2 => "SUB_LOCALITY_2",
+                LocationType::Neighborhood => "NEIGHBORHOOD",
+                LocationType::StreetAddress => "STREET_ADDRESS",
+            }
+        }
+    }
 }
 /// Meta information related to the job searcher or entity
 /// conducting the job search. This information is used to improve the
@@ -174,6 +195,23 @@ pub mod device_info {
         Bot = 5,
         /// Other devices types.
         Other = 6,
+    }
+    impl DeviceType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                DeviceType::Unspecified => "DEVICE_TYPE_UNSPECIFIED",
+                DeviceType::Web => "WEB",
+                DeviceType::MobileWeb => "MOBILE_WEB",
+                DeviceType::Android => "ANDROID",
+                DeviceType::Ios => "IOS",
+                DeviceType::Bot => "BOT",
+                DeviceType::Other => "OTHER",
+            }
+        }
     }
 }
 /// Custom attribute values that are either filterable or non-filterable.
@@ -360,6 +398,25 @@ pub mod compensation_info {
         /// Other compensation type.
         OtherCompensationType = 8,
     }
+    impl CompensationType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                CompensationType::Unspecified => "COMPENSATION_TYPE_UNSPECIFIED",
+                CompensationType::Base => "BASE",
+                CompensationType::Bonus => "BONUS",
+                CompensationType::SigningBonus => "SIGNING_BONUS",
+                CompensationType::Equity => "EQUITY",
+                CompensationType::ProfitSharing => "PROFIT_SHARING",
+                CompensationType::Commissions => "COMMISSIONS",
+                CompensationType::Tips => "TIPS",
+                CompensationType::OtherCompensationType => "OTHER_COMPENSATION_TYPE",
+            }
+        }
+    }
     /// Pay frequency.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -380,6 +437,24 @@ pub mod compensation_info {
         OneTime = 6,
         /// Other compensation units.
         OtherCompensationUnit = 7,
+    }
+    impl CompensationUnit {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                CompensationUnit::Unspecified => "COMPENSATION_UNIT_UNSPECIFIED",
+                CompensationUnit::Hourly => "HOURLY",
+                CompensationUnit::Daily => "DAILY",
+                CompensationUnit::Weekly => "WEEKLY",
+                CompensationUnit::Monthly => "MONTHLY",
+                CompensationUnit::Yearly => "YEARLY",
+                CompensationUnit::OneTime => "ONE_TIME",
+                CompensationUnit::OtherCompensationUnit => "OTHER_COMPENSATION_UNIT",
+            }
+        }
     }
 }
 /// Resource that represents a license or certification.
@@ -519,6 +594,23 @@ pub mod batch_operation_metadata {
         /// processed before cancelling are returned in the response.
         Cancelled = 6,
     }
+    impl State {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                State::Unspecified => "STATE_UNSPECIFIED",
+                State::Initializing => "INITIALIZING",
+                State::Processing => "PROCESSING",
+                State::Succeeded => "SUCCEEDED",
+                State::Failed => "FAILED",
+                State::Cancelling => "CANCELLING",
+                State::Cancelled => "CANCELLED",
+            }
+        }
+    }
 }
 /// An enum that represents the size of the company.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -540,6 +632,24 @@ pub enum CompanySize {
     Bigger = 6,
     /// The company has 10,000 or more employees.
     Giant = 7,
+}
+impl CompanySize {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            CompanySize::Unspecified => "COMPANY_SIZE_UNSPECIFIED",
+            CompanySize::Mini => "MINI",
+            CompanySize::Small => "SMALL",
+            CompanySize::Smedium => "SMEDIUM",
+            CompanySize::Medium => "MEDIUM",
+            CompanySize::Big => "BIG",
+            CompanySize::Bigger => "BIGGER",
+            CompanySize::Giant => "GIANT",
+        }
+    }
 }
 /// An enum that represents employee benefits included with the job.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -575,6 +685,28 @@ pub enum JobBenefit {
     /// The job includes vision services covered by a vision
     /// insurance plan.
     Vision = 11,
+}
+impl JobBenefit {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            JobBenefit::Unspecified => "JOB_BENEFIT_UNSPECIFIED",
+            JobBenefit::ChildCare => "CHILD_CARE",
+            JobBenefit::Dental => "DENTAL",
+            JobBenefit::DomesticPartner => "DOMESTIC_PARTNER",
+            JobBenefit::FlexibleHours => "FLEXIBLE_HOURS",
+            JobBenefit::Medical => "MEDICAL",
+            JobBenefit::LifeInsurance => "LIFE_INSURANCE",
+            JobBenefit::ParentalLeave => "PARENTAL_LEAVE",
+            JobBenefit::RetirementPlan => "RETIREMENT_PLAN",
+            JobBenefit::SickDays => "SICK_DAYS",
+            JobBenefit::Vacation => "VACATION",
+            JobBenefit::Vision => "VISION",
+        }
+    }
 }
 /// Educational degree level defined in International Standard Classification
 /// of Education (ISCED).
@@ -624,6 +756,25 @@ pub enum DegreeType {
     /// original research. ISCED code 8.
     DoctoralOrEquivalent = 8,
 }
+impl DegreeType {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            DegreeType::Unspecified => "DEGREE_TYPE_UNSPECIFIED",
+            DegreeType::PrimaryEducation => "PRIMARY_EDUCATION",
+            DegreeType::LowerSecondaryEducation => "LOWER_SECONDARY_EDUCATION",
+            DegreeType::UpperSecondaryEducation => "UPPER_SECONDARY_EDUCATION",
+            DegreeType::AdultRemedialEducation => "ADULT_REMEDIAL_EDUCATION",
+            DegreeType::AssociatesOrEquivalent => "ASSOCIATES_OR_EQUIVALENT",
+            DegreeType::BachelorsOrEquivalent => "BACHELORS_OR_EQUIVALENT",
+            DegreeType::MastersOrEquivalent => "MASTERS_OR_EQUIVALENT",
+            DegreeType::DoctoralOrEquivalent => "DOCTORAL_OR_EQUIVALENT",
+        }
+    }
+}
 /// An enum that represents the employment type of a job.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
@@ -664,6 +815,27 @@ pub enum EmploymentType {
     /// The job does not fit any of the other listed types.
     OtherEmploymentType = 10,
 }
+impl EmploymentType {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            EmploymentType::Unspecified => "EMPLOYMENT_TYPE_UNSPECIFIED",
+            EmploymentType::FullTime => "FULL_TIME",
+            EmploymentType::PartTime => "PART_TIME",
+            EmploymentType::Contractor => "CONTRACTOR",
+            EmploymentType::ContractToHire => "CONTRACT_TO_HIRE",
+            EmploymentType::Temporary => "TEMPORARY",
+            EmploymentType::Intern => "INTERN",
+            EmploymentType::Volunteer => "VOLUNTEER",
+            EmploymentType::PerDiem => "PER_DIEM",
+            EmploymentType::FlyInFlyOut => "FLY_IN_FLY_OUT",
+            EmploymentType::OtherEmploymentType => "OTHER_EMPLOYMENT_TYPE",
+        }
+    }
+}
 /// An enum that represents the required experience level required for the job.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
@@ -682,6 +854,22 @@ pub enum JobLevel {
     Director = 4,
     /// Executive-level managers and above, including C-level positions.
     Executive = 5,
+}
+impl JobLevel {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            JobLevel::Unspecified => "JOB_LEVEL_UNSPECIFIED",
+            JobLevel::EntryLevel => "ENTRY_LEVEL",
+            JobLevel::Experienced => "EXPERIENCED",
+            JobLevel::Manager => "MANAGER",
+            JobLevel::Director => "DIRECTOR",
+            JobLevel::Executive => "EXECUTIVE",
+        }
+    }
 }
 /// An enum that represents the categorization or primary focus of specific
 /// role. This value is different than the "industry" associated with a role,
@@ -753,6 +941,47 @@ pub enum JobCategory {
     /// A transportation or logistics job, such as Truck Driver.
     TransportationAndLogistics = 30,
 }
+impl JobCategory {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            JobCategory::Unspecified => "JOB_CATEGORY_UNSPECIFIED",
+            JobCategory::AccountingAndFinance => "ACCOUNTING_AND_FINANCE",
+            JobCategory::AdministrativeAndOffice => "ADMINISTRATIVE_AND_OFFICE",
+            JobCategory::AdvertisingAndMarketing => "ADVERTISING_AND_MARKETING",
+            JobCategory::AnimalCare => "ANIMAL_CARE",
+            JobCategory::ArtFashionAndDesign => "ART_FASHION_AND_DESIGN",
+            JobCategory::BusinessOperations => "BUSINESS_OPERATIONS",
+            JobCategory::CleaningAndFacilities => "CLEANING_AND_FACILITIES",
+            JobCategory::ComputerAndIt => "COMPUTER_AND_IT",
+            JobCategory::Construction => "CONSTRUCTION",
+            JobCategory::CustomerService => "CUSTOMER_SERVICE",
+            JobCategory::Education => "EDUCATION",
+            JobCategory::EntertainmentAndTravel => "ENTERTAINMENT_AND_TRAVEL",
+            JobCategory::FarmingAndOutdoors => "FARMING_AND_OUTDOORS",
+            JobCategory::Healthcare => "HEALTHCARE",
+            JobCategory::HumanResources => "HUMAN_RESOURCES",
+            JobCategory::InstallationMaintenanceAndRepair => "INSTALLATION_MAINTENANCE_AND_REPAIR",
+            JobCategory::Legal => "LEGAL",
+            JobCategory::Management => "MANAGEMENT",
+            JobCategory::ManufacturingAndWarehouse => "MANUFACTURING_AND_WAREHOUSE",
+            JobCategory::MediaCommunicationsAndWriting => "MEDIA_COMMUNICATIONS_AND_WRITING",
+            JobCategory::OilGasAndMining => "OIL_GAS_AND_MINING",
+            JobCategory::PersonalCareAndServices => "PERSONAL_CARE_AND_SERVICES",
+            JobCategory::ProtectiveServices => "PROTECTIVE_SERVICES",
+            JobCategory::RealEstate => "REAL_ESTATE",
+            JobCategory::RestaurantAndHospitality => "RESTAURANT_AND_HOSPITALITY",
+            JobCategory::SalesAndRetail => "SALES_AND_RETAIL",
+            JobCategory::ScienceAndEngineering => "SCIENCE_AND_ENGINEERING",
+            JobCategory::SocialServicesAndNonProfit => "SOCIAL_SERVICES_AND_NON_PROFIT",
+            JobCategory::SportsFitnessAndRecreation => "SPORTS_FITNESS_AND_RECREATION",
+            JobCategory::TransportationAndLogistics => "TRANSPORTATION_AND_LOGISTICS",
+        }
+    }
+}
 /// An enum that represents the job posting region. In most cases, job postings
 /// don't need to specify a region. If a region is given, jobs are
 /// eligible for searches in the specified region.
@@ -782,6 +1011,20 @@ pub enum PostingRegion {
     /// considered as having a location, but telecommuting is allowed.
     Telecommute = 3,
 }
+impl PostingRegion {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            PostingRegion::Unspecified => "POSTING_REGION_UNSPECIFIED",
+            PostingRegion::AdministrativeArea => "ADMINISTRATIVE_AREA",
+            PostingRegion::Nation => "NATION",
+            PostingRegion::Telecommute => "TELECOMMUTE",
+        }
+    }
+}
 /// Deprecated. All resources are only visible to the owner.
 ///
 /// An enum that represents who has view access to the resource.
@@ -799,6 +1042,20 @@ pub enum Visibility {
     /// clients.
     SharedWithPublic = 3,
 }
+impl Visibility {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            Visibility::Unspecified => "VISIBILITY_UNSPECIFIED",
+            Visibility::AccountOnly => "ACCOUNT_ONLY",
+            Visibility::SharedWithGoogle => "SHARED_WITH_GOOGLE",
+            Visibility::SharedWithPublic => "SHARED_WITH_PUBLIC",
+        }
+    }
+}
 /// Enum that represents the usage of the contact information.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
@@ -811,6 +1068,20 @@ pub enum ContactInfoUsage {
     Work = 2,
     /// School use.
     School = 3,
+}
+impl ContactInfoUsage {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            ContactInfoUsage::Unspecified => "CONTACT_INFO_USAGE_UNSPECIFIED",
+            ContactInfoUsage::Personal => "PERSONAL",
+            ContactInfoUsage::Work => "WORK",
+            ContactInfoUsage::School => "SCHOOL",
+        }
+    }
 }
 /// Option for HTML content sanitization on user input fields, for example, job
 /// description. By setting this option, user can determine whether and how
@@ -825,6 +1096,19 @@ pub enum HtmlSanitization {
     /// Sanitizes HTML input, only accepts bold, italic, ordered list, and
     /// unordered list markup tags.
     SimpleFormattingOnly = 2,
+}
+impl HtmlSanitization {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            HtmlSanitization::Unspecified => "HTML_SANITIZATION_UNSPECIFIED",
+            HtmlSanitization::Disabled => "HTML_SANITIZATION_DISABLED",
+            HtmlSanitization::SimpleFormattingOnly => "SIMPLE_FORMATTING_ONLY",
+        }
+    }
 }
 /// Method for commute.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -841,6 +1125,21 @@ pub enum CommuteMethod {
     Walking = 3,
     /// Commute time is calculated based on biking time.
     Cycling = 4,
+}
+impl CommuteMethod {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            CommuteMethod::Unspecified => "COMMUTE_METHOD_UNSPECIFIED",
+            CommuteMethod::Driving => "DRIVING",
+            CommuteMethod::Transit => "TRANSIT",
+            CommuteMethod::Walking => "WALKING",
+            CommuteMethod::Cycling => "CYCLING",
+        }
+    }
 }
 /// Enum that represents the skill proficiency level.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -865,6 +1164,23 @@ pub enum SkillProficiencyLevel {
     /// Known as an expert in this area.
     Expert = 5,
 }
+impl SkillProficiencyLevel {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            SkillProficiencyLevel::Unspecified => "SKILL_PROFICIENCY_LEVEL_UNSPECIFIED",
+            SkillProficiencyLevel::Unskilled => "UNSKILLED",
+            SkillProficiencyLevel::FundamentalAwareness => "FUNDAMENTAL_AWARENESS",
+            SkillProficiencyLevel::Novice => "NOVICE",
+            SkillProficiencyLevel::Intermediate => "INTERMEDIATE",
+            SkillProficiencyLevel::Advanced => "ADVANCED",
+            SkillProficiencyLevel::Expert => "EXPERT",
+        }
+    }
+}
 /// The overall outcome /decision / result indicator.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
@@ -885,6 +1201,21 @@ pub enum Outcome {
     /// candidate did not complete assessment).
     NotAvailable = 4,
 }
+impl Outcome {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            Outcome::Unspecified => "OUTCOME_UNSPECIFIED",
+            Outcome::Positive => "POSITIVE",
+            Outcome::Neutral => "NEUTRAL",
+            Outcome::Negative => "NEGATIVE",
+            Outcome::NotAvailable => "OUTCOME_NOT_AVAILABLE",
+        }
+    }
+}
 /// The type of candidate availability signal.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
@@ -898,11 +1229,11 @@ pub enum AvailabilitySignalType {
     /// \[last_update_time][google.cloud.talent.v4beta1.AvailabilitySignal.last_update_time\] is
     /// calculated from max(\[Application.create_time][google.cloud.talent.v4beta1.Application.create_time\]) from all \[Application][google.cloud.talent.v4beta1.Application\]
     /// records where \[Application.source][google.cloud.talent.v4beta1.Application.source\] is any of the following:
-    ///  \[APPLY_DIRECT_WEB][google.cloud.talent.v4beta1.Application.ApplicationSource.APPLY_DIRECT_WEB\]
-    ///  \[APPLY_DIRECT_MOBILE_WEB][google.cloud.talent.v4beta1.Application.ApplicationSource.APPLY_DIRECT_MOBILE_WEB\]
-    ///  \[APPLY_DIRECT_MOBILE_APP][google.cloud.talent.v4beta1.Application.ApplicationSource.APPLY_DIRECT_MOBILE_APP\]
-    ///  \[APPLY_DIRECT_IN_PERSON][google.cloud.talent.v4beta1.Application.ApplicationSource.APPLY_DIRECT_IN_PERSON\]
-    ///  \[APPLY_INDIRECT][google.cloud.talent.v4beta1.Application.ApplicationSource.APPLY_INDIRECT\]
+    ///   \[APPLY_DIRECT_WEB][google.cloud.talent.v4beta1.Application.ApplicationSource.APPLY_DIRECT_WEB\]
+    ///   \[APPLY_DIRECT_MOBILE_WEB][google.cloud.talent.v4beta1.Application.ApplicationSource.APPLY_DIRECT_MOBILE_WEB\]
+    ///   \[APPLY_DIRECT_MOBILE_APP][google.cloud.talent.v4beta1.Application.ApplicationSource.APPLY_DIRECT_MOBILE_APP\]
+    ///   \[APPLY_DIRECT_IN_PERSON][google.cloud.talent.v4beta1.Application.ApplicationSource.APPLY_DIRECT_IN_PERSON\]
+    ///   \[APPLY_INDIRECT][google.cloud.talent.v4beta1.Application.ApplicationSource.APPLY_INDIRECT\]
     ///
     /// In the context of \[AvailabilityFilter][google.cloud.talent.v4beta1.AvailabilityFilter\], the filter is applied on
     /// \[Profile.availability_signals][google.cloud.talent.v4beta1.Profile.availability_signals\] where
@@ -941,16 +1272,31 @@ pub enum AvailabilitySignalType {
     /// \[last_update_time][google.cloud.talent.v4beta1.AvailabilitySignal.last_update_time\] is
     /// calculated from max(\[Application.create_time][google.cloud.talent.v4beta1.Application.create_time\]) from all \[Application][google.cloud.talent.v4beta1.Application\]
     /// records where \[Application.stage][google.cloud.talent.v4beta1.Application.stage\] is any of the following:
-    ///  \[HIRING_MANAGER_REVIEW][google.cloud.talent.v4beta1.Application.ApplicationStage.HIRING_MANAGER_REVIEW\]
-    ///  \[INTERVIEW][google.cloud.talent.v4beta1.Application.ApplicationStage.INTERVIEW\]
-    ///  \[OFFER_EXTENDED][google.cloud.talent.v4beta1.Application.ApplicationStage.OFFER_EXTENDED\]
-    ///  \[OFFER_ACCEPTED][google.cloud.talent.v4beta1.Application.ApplicationStage.OFFER_ACCEPTED\]
-    ///  \[STARTED][google.cloud.talent.v4beta1.Application.ApplicationStage.STARTED\]
+    ///   \[HIRING_MANAGER_REVIEW][google.cloud.talent.v4beta1.Application.ApplicationStage.HIRING_MANAGER_REVIEW\]
+    ///   \[INTERVIEW][google.cloud.talent.v4beta1.Application.ApplicationStage.INTERVIEW\]
+    ///   \[OFFER_EXTENDED][google.cloud.talent.v4beta1.Application.ApplicationStage.OFFER_EXTENDED\]
+    ///   \[OFFER_ACCEPTED][google.cloud.talent.v4beta1.Application.ApplicationStage.OFFER_ACCEPTED\]
+    ///   \[STARTED][google.cloud.talent.v4beta1.Application.ApplicationStage.STARTED\]
     ///
     /// In the context of \[AvailabilityFilter][google.cloud.talent.v4beta1.AvailabilityFilter\], the filter is applied on
     /// \[Profile.availability_signals][google.cloud.talent.v4beta1.Profile.availability_signals\] where
     /// \[type][google.cloud.talent.v4beta1.AvailabilitySignal.type\] is CLIENT_SUBMISSION.
     ClientSubmission = 4,
+}
+impl AvailabilitySignalType {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            AvailabilitySignalType::Unspecified => "AVAILABILITY_SIGNAL_TYPE_UNSPECIFIED",
+            AvailabilitySignalType::JobApplication => "JOB_APPLICATION",
+            AvailabilitySignalType::ResumeUpdate => "RESUME_UPDATE",
+            AvailabilitySignalType::CandidateUpdate => "CANDIDATE_UPDATE",
+            AvailabilitySignalType::ClientSubmission => "CLIENT_SUBMISSION",
+        }
+    }
 }
 /// Resource that represents a job application record of a candidate.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -1059,6 +1405,22 @@ pub mod application {
         /// reasons unrealated to the candidate.
         Closed = 5,
     }
+    impl ApplicationState {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ApplicationState::Unspecified => "APPLICATION_STATE_UNSPECIFIED",
+                ApplicationState::InProgress => "IN_PROGRESS",
+                ApplicationState::CandidateWithdrew => "CANDIDATE_WITHDREW",
+                ApplicationState::EmployerWithdrew => "EMPLOYER_WITHDREW",
+                ApplicationState::Completed => "COMPLETED",
+                ApplicationState::Closed => "CLOSED",
+            }
+        }
+    }
     /// The stage of the application.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -1084,6 +1446,24 @@ pub mod application {
         /// Candidate has begun (or completed) their employment or assignment with
         /// the employer.
         Started = 7,
+    }
+    impl ApplicationStage {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ApplicationStage::Unspecified => "APPLICATION_STAGE_UNSPECIFIED",
+                ApplicationStage::New => "NEW",
+                ApplicationStage::Screen => "SCREEN",
+                ApplicationStage::HiringManagerReview => "HIRING_MANAGER_REVIEW",
+                ApplicationStage::Interview => "INTERVIEW",
+                ApplicationStage::OfferExtended => "OFFER_EXTENDED",
+                ApplicationStage::OfferAccepted => "OFFER_ACCEPTED",
+                ApplicationStage::Started => "STARTED",
+            }
+        }
     }
 }
 /// The Request of the CreateApplication method.
@@ -1174,6 +1554,7 @@ pub struct ListApplicationsResponse {
 pub mod application_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// A service that handles application management, including CRUD and
     /// enumeration.
     #[derive(Debug, Clone)]
@@ -1189,6 +1570,10 @@ pub mod application_service_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -1210,19 +1595,19 @@ pub mod application_service_client {
         {
             ApplicationServiceClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Creates a new application entity.
@@ -1521,6 +1906,7 @@ pub struct ListCompaniesResponse {
 pub mod company_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// A service that handles company management, including CRUD and enumeration.
     #[derive(Debug, Clone)]
     pub struct CompanyServiceClient<T> {
@@ -1535,6 +1921,10 @@ pub mod company_service_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -1556,19 +1946,19 @@ pub mod company_service_client {
         {
             CompanyServiceClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Creates a new company entity.
@@ -1735,6 +2125,19 @@ pub mod complete_query_request {
         /// the client
         Public = 2,
     }
+    impl CompletionScope {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                CompletionScope::Unspecified => "COMPLETION_SCOPE_UNSPECIFIED",
+                CompletionScope::Tenant => "TENANT",
+                CompletionScope::Public => "PUBLIC",
+            }
+        }
+    }
     /// Enum to specify auto-completion topics.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -1758,6 +2161,20 @@ pub mod complete_query_request {
         /// \[language_codes][google.cloud.talent.v4beta1.CompleteQueryRequest.language_codes\] or companies having open jobs with the same
         /// \[language_codes][google.cloud.talent.v4beta1.CompleteQueryRequest.language_codes\] are returned.
         Combined = 3,
+    }
+    impl CompletionType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                CompletionType::Unspecified => "COMPLETION_TYPE_UNSPECIFIED",
+                CompletionType::JobTitle => "JOB_TITLE",
+                CompletionType::CompanyName => "COMPANY_NAME",
+                CompletionType::Combined => "COMBINED",
+            }
+        }
     }
 }
 /// Response of auto-complete query.
@@ -1792,6 +2209,7 @@ pub mod complete_query_response {
 pub mod completion_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// A service handles auto completion.
     #[derive(Debug, Clone)]
     pub struct CompletionClient<T> {
@@ -1806,6 +2224,10 @@ pub mod completion_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -1827,19 +2249,19 @@ pub mod completion_client {
         {
             CompletionClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Completes the specified prefix with keyword suggestions.
@@ -2019,6 +2441,32 @@ pub mod job_event {
         /// recommendation provided by the Cloud Talent Solution service.
         InterviewGranted = 15,
     }
+    impl JobEventType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                JobEventType::Unspecified => "JOB_EVENT_TYPE_UNSPECIFIED",
+                JobEventType::Impression => "IMPRESSION",
+                JobEventType::View => "VIEW",
+                JobEventType::ViewRedirect => "VIEW_REDIRECT",
+                JobEventType::ApplicationStart => "APPLICATION_START",
+                JobEventType::ApplicationFinish => "APPLICATION_FINISH",
+                JobEventType::ApplicationQuickSubmission => "APPLICATION_QUICK_SUBMISSION",
+                JobEventType::ApplicationRedirect => "APPLICATION_REDIRECT",
+                JobEventType::ApplicationStartFromSearch => "APPLICATION_START_FROM_SEARCH",
+                JobEventType::ApplicationRedirectFromSearch => "APPLICATION_REDIRECT_FROM_SEARCH",
+                JobEventType::ApplicationCompanySubmit => "APPLICATION_COMPANY_SUBMIT",
+                JobEventType::Bookmark => "BOOKMARK",
+                JobEventType::Notification => "NOTIFICATION",
+                JobEventType::Hired => "HIRED",
+                JobEventType::SentCv => "SENT_CV",
+                JobEventType::InterviewGranted => "INTERVIEW_GRANTED",
+            }
+        }
+    }
 }
 /// An event issued when a profile searcher interacts with the application
 /// that implements Cloud Talent Solution.
@@ -2073,6 +2521,20 @@ pub mod profile_event {
         /// The profile is bookmarked.
         Bookmark = 3,
     }
+    impl ProfileEventType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ProfileEventType::Unspecified => "PROFILE_EVENT_TYPE_UNSPECIFIED",
+                ProfileEventType::Impression => "IMPRESSION",
+                ProfileEventType::View => "VIEW",
+                ProfileEventType::Bookmark => "BOOKMARK",
+            }
+        }
+    }
 }
 /// The report event request.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -2093,6 +2555,7 @@ pub struct CreateClientEventRequest {
 pub mod event_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// A service handles client event report.
     #[derive(Debug, Clone)]
     pub struct EventServiceClient<T> {
@@ -2107,6 +2570,10 @@ pub mod event_service_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -2128,19 +2595,19 @@ pub mod event_service_client {
         {
             EventServiceClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Report events issued when end user interacts with customer's application
@@ -2233,12 +2700,12 @@ pub struct JobQuery {
     #[prost(enumeration="JobCategory", repeated, tag="4")]
     pub job_categories: ::prost::alloc::vec::Vec<i32>,
     /// Allows filtering jobs by commute time with different travel methods (for
-    ///  example, driving or public transit).
+    ///   example, driving or public transit).
     ///
     /// Note: This only works when you specify a \[CommuteMethod][google.cloud.talent.v4beta1.CommuteMethod\]. In this case,
     /// \[location_filters][google.cloud.talent.v4beta1.JobQuery.location_filters\] is ignored.
     ///
-    ///  Currently we don't support sorting by commute time.
+    ///   Currently we don't support sorting by commute time.
     #[prost(message, optional, tag="5")]
     pub commute_filter: ::core::option::Option<CommuteFilter>,
     /// This filter specifies the exact company \[Company.display_name][google.cloud.talent.v4beta1.Company.display_name\]
@@ -2631,6 +3098,19 @@ pub mod location_filter {
         /// Allow telecommute jobs.
         TelecommuteAllowed = 2,
     }
+    impl TelecommutePreference {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                TelecommutePreference::Unspecified => "TELECOMMUTE_PREFERENCE_UNSPECIFIED",
+                TelecommutePreference::TelecommuteExcluded => "TELECOMMUTE_EXCLUDED",
+                TelecommutePreference::TelecommuteAllowed => "TELECOMMUTE_ALLOWED",
+            }
+        }
+    }
 }
 /// Filter on job compensation type and amount.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -2685,6 +3165,21 @@ pub mod compensation_filter {
         /// entry's` unit . Populate \[range][google.cloud.talent.v4beta1.CompensationFilter.range\] and zero or more \[units][google.cloud.talent.v4beta1.CompensationFilter.units\].
         AnnualizedTotalAmount = 4,
     }
+    impl FilterType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                FilterType::Unspecified => "FILTER_TYPE_UNSPECIFIED",
+                FilterType::UnitOnly => "UNIT_ONLY",
+                FilterType::UnitAndAmount => "UNIT_AND_AMOUNT",
+                FilterType::AnnualizedBaseAmount => "ANNUALIZED_BASE_AMOUNT",
+                FilterType::AnnualizedTotalAmount => "ANNUALIZED_TOTAL_AMOUNT",
+            }
+        }
+    }
 }
 /// Parameters needed for commute search.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -2723,6 +3218,19 @@ pub mod commute_filter {
         TrafficFree = 1,
         /// Commute time calculation takes in account the peak traffic impact.
         BusyHour = 2,
+    }
+    impl RoadTraffic {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                RoadTraffic::Unspecified => "ROAD_TRAFFIC_UNSPECIFIED",
+                RoadTraffic::TrafficFree => "TRAFFIC_FREE",
+                RoadTraffic::BusyHour => "BUSY_HOUR",
+            }
+        }
     }
     /// Traffic factor to take into account while searching by commute.
     #[derive(Clone, PartialEq, ::prost::Oneof)]
@@ -2792,6 +3300,20 @@ pub mod employer_filter {
         /// Apply only to past (not current) employers in
         /// \[Profile.employment_records][google.cloud.talent.v4beta1.Profile.employment_records\].
         PastEmploymentRecordsOnly = 3,
+    }
+    impl EmployerFilterMode {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                EmployerFilterMode::Unspecified => "EMPLOYER_FILTER_MODE_UNSPECIFIED",
+                EmployerFilterMode::AllEmploymentRecords => "ALL_EMPLOYMENT_RECORDS",
+                EmployerFilterMode::CurrentEmploymentRecordsOnly => "CURRENT_EMPLOYMENT_RECORDS_ONLY",
+                EmployerFilterMode::PastEmploymentRecordsOnly => "PAST_EMPLOYMENT_RECORDS_ONLY",
+            }
+        }
     }
 }
 /// Education filter of the search.
@@ -2905,6 +3427,19 @@ pub mod time_filter {
         /// Latest profile update time.
         UpdateTime = 2,
     }
+    impl TimeField {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                TimeField::Unspecified => "TIME_FIELD_UNSPECIFIED",
+                TimeField::CreateTime => "CREATE_TIME",
+                TimeField::UpdateTime => "UPDATE_TIME",
+            }
+        }
+    }
 }
 /// Deprecated. Use AvailabilityFilter instead.
 ///
@@ -2968,9 +3503,9 @@ pub struct HistogramQueryResult {
     ///
     /// * (for string histogram) string values stored in the field.
     /// * (for named numeric bucket) name specified in `bucket()` function, like
-    ///   for `bucket(0, MAX, "non-negative")`, the key will be `non-negative`.
+    ///    for `bucket(0, MAX, "non-negative")`, the key will be `non-negative`.
     /// * (for anonymous numeric bucket) range formatted as `<low>-<high>`, for
-    ///   example, `0-1000`, `MIN-0`, and `0-MAX`.
+    ///    example, `0-1000`, `MIN-0`, and `0-MAX`.
     #[prost(map="string, int64", tag="2")]
     pub histogram: ::std::collections::HashMap<::prost::alloc::string::String, i64>,
 }
@@ -3512,54 +4047,54 @@ pub struct SearchJobsRequest {
     ///
     /// * company_display_name: histogram by \[Job.company_display_name][google.cloud.talent.v4beta1.Job.company_display_name\].
     /// * employment_type: histogram by \[Job.employment_types][google.cloud.talent.v4beta1.Job.employment_types\], for example,
-    ///   "FULL_TIME", "PART_TIME".
+    ///    "FULL_TIME", "PART_TIME".
     /// * company_size: histogram by \[CompanySize][google.cloud.talent.v4beta1.CompanySize\], for example, "SMALL",
     /// "MEDIUM", "BIG".
     /// * publish_time_in_month: histogram by the \[Job.posting_publish_time][google.cloud.talent.v4beta1.Job.posting_publish_time\]
-    ///   in months.
-    ///   Must specify list of numeric buckets in spec.
+    ///    in months.
+    ///    Must specify list of numeric buckets in spec.
     /// * publish_time_in_year: histogram by the \[Job.posting_publish_time][google.cloud.talent.v4beta1.Job.posting_publish_time\]
-    ///   in years.
-    ///   Must specify list of numeric buckets in spec.
+    ///    in years.
+    ///    Must specify list of numeric buckets in spec.
     /// * degree_types: histogram by the \[Job.degree_types][google.cloud.talent.v4beta1.Job.degree_types\], for example,
-    ///   "Bachelors", "Masters".
+    ///    "Bachelors", "Masters".
     /// * job_level: histogram by the \[Job.job_level][google.cloud.talent.v4beta1.Job.job_level\], for example, "Entry
-    ///   Level".
+    ///    Level".
     /// * country: histogram by the country code of jobs, for example, "US", "FR".
     /// * admin1: histogram by the admin1 code of jobs, which is a global
-    ///   placeholder referring to the state, province, or the particular term a
-    ///   country uses to define the geographic structure below the country level,
-    ///   for example, "CA", "IL".
+    ///    placeholder referring to the state, province, or the particular term a
+    ///    country uses to define the geographic structure below the country level,
+    ///    for example, "CA", "IL".
     /// * city: histogram by a combination of the "city name, admin1 code". For
-    ///   example,  "Mountain View, CA", "New York, NY".
+    ///    example,  "Mountain View, CA", "New York, NY".
     /// * admin1_country: histogram by a combination of the "admin1 code, country",
-    ///   for example, "CA, US", "IL, US".
+    ///    for example, "CA, US", "IL, US".
     /// * city_coordinate: histogram by the city center's GPS coordinates (latitude
-    ///   and longitude), for example, 37.4038522,-122.0987765. Since the
-    ///   coordinates of a city center can change, customers may need to refresh
-    ///   them periodically.
+    ///    and longitude), for example, 37.4038522,-122.0987765. Since the
+    ///    coordinates of a city center can change, customers may need to refresh
+    ///    them periodically.
     /// * locale: histogram by the \[Job.language_code][google.cloud.talent.v4beta1.Job.language_code\], for example, "en-US",
-    ///   "fr-FR".
+    ///    "fr-FR".
     /// * language: histogram by the language subtag of the \[Job.language_code][google.cloud.talent.v4beta1.Job.language_code\],
-    ///   for example, "en", "fr".
+    ///    for example, "en", "fr".
     /// * category: histogram by the \[JobCategory][google.cloud.talent.v4beta1.JobCategory\], for example,
-    ///   "COMPUTER_AND_IT", "HEALTHCARE".
+    ///    "COMPUTER_AND_IT", "HEALTHCARE".
     /// * base_compensation_unit: histogram by the
-    ///   \[CompensationInfo.CompensationUnit][google.cloud.talent.v4beta1.CompensationInfo.CompensationUnit\] of base
-    ///   salary, for example, "WEEKLY", "MONTHLY".
+    ///    \[CompensationInfo.CompensationUnit][google.cloud.talent.v4beta1.CompensationInfo.CompensationUnit\] of base
+    ///    salary, for example, "WEEKLY", "MONTHLY".
     /// * base_compensation: histogram by the base salary. Must specify list of
-    ///   numeric buckets to group results by.
+    ///    numeric buckets to group results by.
     /// * annualized_base_compensation: histogram by the base annualized salary.
-    ///   Must specify list of numeric buckets to group results by.
+    ///    Must specify list of numeric buckets to group results by.
     /// * annualized_total_compensation: histogram by the total annualized salary.
-    ///   Must specify list of numeric buckets to group results by.
+    ///    Must specify list of numeric buckets to group results by.
     /// * string_custom_attribute: histogram by string \[Job.custom_attributes][google.cloud.talent.v4beta1.Job.custom_attributes\].
-    ///   Values can be accessed via square bracket notations like
-    ///   string_custom_attribute\["key1"\].
+    ///    Values can be accessed via square bracket notations like
+    ///    string_custom_attribute\["key1"\].
     /// * numeric_custom_attribute: histogram by numeric \[Job.custom_attributes][google.cloud.talent.v4beta1.Job.custom_attributes\].
-    ///   Values can be accessed via square bracket notations like
-    ///   numeric_custom_attribute\["key1"\]. Must specify list of numeric buckets to
-    ///   group results by.
+    ///    Values can be accessed via square bracket notations like
+    ///    numeric_custom_attribute\["key1"\]. Must specify list of numeric buckets to
+    ///    group results by.
     ///
     /// Example expressions:
     ///
@@ -3568,7 +4103,7 @@ pub struct SearchJobsRequest {
     /// bucket(100000, MAX)])`
     /// * `count(string_custom_attribute\["some-string-custom-attribute"\])`
     /// * `count(numeric_custom_attribute\["some-numeric-custom-attribute"\],
-    ///   [bucket(MIN, 0, "negative"), bucket(0, MAX, "non-negative"])`
+    ///    [bucket(MIN, 0, "negative"), bucket(0, MAX, "non-negative"])`
     #[prost(message, repeated, tag="7")]
     pub histogram_queries: ::prost::alloc::vec::Vec<HistogramQuery>,
     /// The desired job attributes returned for jobs in the search response.
@@ -3603,50 +4138,50 @@ pub struct SearchJobsRequest {
     /// Supported options are:
     ///
     /// * `"relevance desc"`: By relevance descending, as determined by the API
-    ///   algorithms. Relevance thresholding of query results is only available
-    ///   with this ordering.
+    ///    algorithms. Relevance thresholding of query results is only available
+    ///    with this ordering.
     /// * `"posting_publish_time desc"`: By \[Job.posting_publish_time][google.cloud.talent.v4beta1.Job.posting_publish_time\]
-    ///   descending.
+    ///    descending.
     /// * `"posting_update_time desc"`: By \[Job.posting_update_time][google.cloud.talent.v4beta1.Job.posting_update_time\]
-    ///   descending.
+    ///    descending.
     /// * `"title"`: By \[Job.title][google.cloud.talent.v4beta1.Job.title\] ascending.
     /// * `"title desc"`: By \[Job.title][google.cloud.talent.v4beta1.Job.title\] descending.
     /// * `"annualized_base_compensation"`: By job's
-    ///   \[CompensationInfo.annualized_base_compensation_range][google.cloud.talent.v4beta1.CompensationInfo.annualized_base_compensation_range\] ascending. Jobs
-    ///   whose annualized base compensation is unspecified are put at the end of
-    ///   search results.
+    ///    \[CompensationInfo.annualized_base_compensation_range][google.cloud.talent.v4beta1.CompensationInfo.annualized_base_compensation_range\] ascending. Jobs
+    ///    whose annualized base compensation is unspecified are put at the end of
+    ///    search results.
     /// * `"annualized_base_compensation desc"`: By job's
-    ///   \[CompensationInfo.annualized_base_compensation_range][google.cloud.talent.v4beta1.CompensationInfo.annualized_base_compensation_range\] descending. Jobs
-    ///   whose annualized base compensation is unspecified are put at the end of
-    ///   search results.
+    ///    \[CompensationInfo.annualized_base_compensation_range][google.cloud.talent.v4beta1.CompensationInfo.annualized_base_compensation_range\] descending. Jobs
+    ///    whose annualized base compensation is unspecified are put at the end of
+    ///    search results.
     /// * `"annualized_total_compensation"`: By job's
-    ///   \[CompensationInfo.annualized_total_compensation_range][google.cloud.talent.v4beta1.CompensationInfo.annualized_total_compensation_range\] ascending. Jobs
-    ///   whose annualized base compensation is unspecified are put at the end of
-    ///   search results.
+    ///    \[CompensationInfo.annualized_total_compensation_range][google.cloud.talent.v4beta1.CompensationInfo.annualized_total_compensation_range\] ascending. Jobs
+    ///    whose annualized base compensation is unspecified are put at the end of
+    ///    search results.
     /// * `"annualized_total_compensation desc"`: By job's
-    ///   \[CompensationInfo.annualized_total_compensation_range][google.cloud.talent.v4beta1.CompensationInfo.annualized_total_compensation_range\] descending. Jobs
-    ///   whose annualized base compensation is unspecified are put at the end of
-    ///   search results.
+    ///    \[CompensationInfo.annualized_total_compensation_range][google.cloud.talent.v4beta1.CompensationInfo.annualized_total_compensation_range\] descending. Jobs
+    ///    whose annualized base compensation is unspecified are put at the end of
+    ///    search results.
     /// * `"custom_ranking desc"`: By the relevance score adjusted to the
-    ///   \[SearchJobsRequest.CustomRankingInfo.ranking_expression][google.cloud.talent.v4beta1.SearchJobsRequest.CustomRankingInfo.ranking_expression\] with weight
-    ///   factor assigned by
-    ///   \[SearchJobsRequest.CustomRankingInfo.importance_level][google.cloud.talent.v4beta1.SearchJobsRequest.CustomRankingInfo.importance_level\] in descending
-    ///   order.
+    ///    \[SearchJobsRequest.CustomRankingInfo.ranking_expression][google.cloud.talent.v4beta1.SearchJobsRequest.CustomRankingInfo.ranking_expression\] with weight
+    ///    factor assigned by
+    ///    \[SearchJobsRequest.CustomRankingInfo.importance_level][google.cloud.talent.v4beta1.SearchJobsRequest.CustomRankingInfo.importance_level\] in descending
+    ///    order.
     /// * Location sorting: Use the special syntax to order jobs by distance:<br>
-    ///   `"distance_from('Hawaii')"`: Order by distance from Hawaii.<br>
-    ///   `"distance_from(19.89, 155.5)"`: Order by distance from a coordinate.<br>
-    ///   `"distance_from('Hawaii'), distance_from('Puerto Rico')"`: Order by
-    ///   multiple locations. See details below.<br>
-    ///   `"distance_from('Hawaii'), distance_from(19.89, 155.5)"`: Order by
-    ///   multiple locations. See details below.<br>
-    ///   The string can have a maximum of 256 characters. When multiple distance
-    ///   centers are provided, a job that is close to any of the distance centers
-    ///   would have a high rank. When a job has multiple locations, the job
-    ///   location closest to one of the distance centers will be used. Jobs that
-    ///   don't have locations will be ranked at the bottom. Distance is calculated
-    ///   with a precision of 11.3 meters (37.4 feet). Diversification strategy is
-    ///   still applied unless explicitly disabled in
-    ///   \[diversification_level][google.cloud.talent.v4beta1.SearchJobsRequest.diversification_level\].
+    ///    `"distance_from('Hawaii')"`: Order by distance from Hawaii.<br>
+    ///    `"distance_from(19.89, 155.5)"`: Order by distance from a coordinate.<br>
+    ///    `"distance_from('Hawaii'), distance_from('Puerto Rico')"`: Order by
+    ///    multiple locations. See details below.<br>
+    ///    `"distance_from('Hawaii'), distance_from(19.89, 155.5)"`: Order by
+    ///    multiple locations. See details below.<br>
+    ///    The string can have a maximum of 256 characters. When multiple distance
+    ///    centers are provided, a job that is close to any of the distance centers
+    ///    would have a high rank. When a job has multiple locations, the job
+    ///    location closest to one of the distance centers will be used. Jobs that
+    ///    don't have locations will be ranked at the bottom. Distance is calculated
+    ///    with a precision of 11.3 meters (37.4 feet). Diversification strategy is
+    ///    still applied unless explicitly disabled in
+    ///    \[diversification_level][google.cloud.talent.v4beta1.SearchJobsRequest.diversification_level\].
     #[prost(string, tag="12")]
     pub order_by: ::prost::alloc::string::String,
     /// Controls whether highly similar jobs are returned next to each other in
@@ -3755,6 +4290,23 @@ pub mod search_jobs_request {
             /// score (determined by API algorithm) ignored.
             Extreme = 6,
         }
+        impl ImportanceLevel {
+            /// String value of the enum field names used in the ProtoBuf definition.
+            ///
+            /// The values are not transformed in any way and thus are considered stable
+            /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+            pub fn as_str_name(&self) -> &'static str {
+                match self {
+                    ImportanceLevel::Unspecified => "IMPORTANCE_LEVEL_UNSPECIFIED",
+                    ImportanceLevel::None => "NONE",
+                    ImportanceLevel::Low => "LOW",
+                    ImportanceLevel::Mild => "MILD",
+                    ImportanceLevel::Medium => "MEDIUM",
+                    ImportanceLevel::High => "HIGH",
+                    ImportanceLevel::Extreme => "EXTREME",
+                }
+            }
+        }
     }
     /// A string-represented enumeration of the job search mode. The service
     /// operate differently for different modes of service.
@@ -3773,6 +4325,19 @@ pub mod search_jobs_request {
         /// promotionValue (jobs with a higher promotionValue are returned higher up
         /// in the search results), with relevance being used as a tiebreaker.
         FeaturedJobSearch = 2,
+    }
+    impl SearchMode {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                SearchMode::Unspecified => "SEARCH_MODE_UNSPECIFIED",
+                SearchMode::JobSearch => "JOB_SEARCH",
+                SearchMode::FeaturedJobSearch => "FEATURED_JOB_SEARCH",
+            }
+        }
     }
     /// Controls whether highly similar jobs are returned next to each other in
     /// the search results. Jobs are identified as highly similar based on
@@ -3796,6 +4361,19 @@ pub mod search_jobs_request {
         /// returned. If you are using page offset, latency might be higher but all
         /// results are returned.
         Simple = 2,
+    }
+    impl DiversificationLevel {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                DiversificationLevel::Unspecified => "DIVERSIFICATION_LEVEL_UNSPECIFIED",
+                DiversificationLevel::Disabled => "DISABLED",
+                DiversificationLevel::Simple => "SIMPLE",
+            }
+        }
     }
 }
 /// Response for SearchJob method.
@@ -3869,7 +4447,7 @@ pub mod search_jobs_response {
         #[prost(string, tag="4")]
         pub search_text_snippet: ::prost::alloc::string::String,
         /// Commute information which is generated based on specified
-        ///  \[CommuteFilter][google.cloud.talent.v4beta1.CommuteFilter\].
+        ///   \[CommuteFilter][google.cloud.talent.v4beta1.CommuteFilter\].
         #[prost(message, optional, tag="5")]
         pub commute_info: ::core::option::Option<CommuteInfo>,
     }
@@ -3981,10 +4559,26 @@ pub enum JobView {
     /// All available attributes are included in the search results.
     Full = 4,
 }
+impl JobView {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            JobView::Unspecified => "JOB_VIEW_UNSPECIFIED",
+            JobView::IdOnly => "JOB_VIEW_ID_ONLY",
+            JobView::Minimal => "JOB_VIEW_MINIMAL",
+            JobView::Small => "JOB_VIEW_SMALL",
+            JobView::Full => "JOB_VIEW_FULL",
+        }
+    }
+}
 /// Generated client implementations.
 pub mod job_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// A service handles job management, including job CRUD, enumeration and search.
     #[derive(Debug, Clone)]
     pub struct JobServiceClient<T> {
@@ -3999,6 +4593,10 @@ pub mod job_service_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -4020,19 +4618,19 @@ pub mod job_service_client {
         {
             JobServiceClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Creates a new job.
@@ -4548,6 +5146,19 @@ pub mod resume {
         /// Resume type not specified.
         OtherResumeType = 2,
     }
+    impl ResumeType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ResumeType::Unspecified => "RESUME_TYPE_UNSPECIFIED",
+                ResumeType::Hrxml => "HRXML",
+                ResumeType::OtherResumeType => "OTHER_RESUME_TYPE",
+            }
+        }
+    }
 }
 /// Resource that represents the name of a person.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -4727,6 +5338,26 @@ pub mod phone {
         /// In some regions (e.g. the USA), it is impossible to distinguish between
         /// fixed-line and mobile numbers by looking at the phone number itself.
         MobileOrLandline = 9,
+    }
+    impl PhoneType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                PhoneType::Unspecified => "PHONE_TYPE_UNSPECIFIED",
+                PhoneType::Landline => "LANDLINE",
+                PhoneType::Mobile => "MOBILE",
+                PhoneType::Fax => "FAX",
+                PhoneType::Pager => "PAGER",
+                PhoneType::TtyOrTdd => "TTY_OR_TDD",
+                PhoneType::Voicemail => "VOICEMAIL",
+                PhoneType::Virtual => "VIRTUAL",
+                PhoneType::Voip => "VOIP",
+                PhoneType::MobileOrLandline => "MOBILE_OR_LANDLINE",
+            }
+        }
     }
 }
 /// Resource that represents a valid URI for a personal use.
@@ -5211,19 +5842,19 @@ pub struct SearchProfilesRequest {
     /// Supported options are:
     ///
     /// * "relevance desc": By descending relevance, as determined by the API
-    ///    algorithms.
+    ///     algorithms.
     /// * "update_date desc": Sort by \[Profile.update_time][google.cloud.talent.v4beta1.Profile.update_time\] in descending order
-    ///   (recently updated profiles first).
+    ///    (recently updated profiles first).
     /// * "create_date desc": Sort by \[Profile.create_time][google.cloud.talent.v4beta1.Profile.create_time\] in descending order
-    ///   (recently created profiles first).
+    ///    (recently created profiles first).
     /// * "first_name": Sort by \[PersonName.PersonStructuredName.given_name][google.cloud.talent.v4beta1.PersonName.PersonStructuredName.given_name\] in
-    ///   ascending order.
+    ///    ascending order.
     /// * "first_name desc": Sort by \[PersonName.PersonStructuredName.given_name][google.cloud.talent.v4beta1.PersonName.PersonStructuredName.given_name\]
-    ///   in descending order.
+    ///    in descending order.
     /// * "last_name": Sort by \[PersonName.PersonStructuredName.family_name][google.cloud.talent.v4beta1.PersonName.PersonStructuredName.family_name\] in
-    ///   ascending order.
+    ///    ascending order.
     /// * "last_name desc": Sort by \[PersonName.PersonStructuredName.family_name][google.cloud.talent.v4beta1.PersonName.PersonStructuredName.family_name\]
-    ///   in ascending order.
+    ///    in ascending order.
     #[prost(string, tag="8")]
     pub order_by: ::prost::alloc::string::String,
     /// When sort by field is based on alphabetical order, sort values case
@@ -5273,7 +5904,7 @@ pub struct SearchProfilesRequest {
     /// "New York, NY".
     /// * postal_code: Postal code of profile which follows locale code.
     /// * country: Country code (ISO-3166-1 alpha-2 code) of profile, such as US,
-    ///  JP, GB.
+    ///   JP, GB.
     /// * job_title: Normalized job titles specified in EmploymentHistory.
     /// * company_name: Normalized company name of profiles to match on.
     /// * institution: The school name. For example, "MIT",
@@ -5403,6 +6034,7 @@ pub struct SummarizedProfile {
 pub mod profile_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// A service that handles profile management, including profile CRUD,
     /// enumeration and search.
     #[derive(Debug, Clone)]
@@ -5418,6 +6050,10 @@ pub mod profile_service_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -5439,19 +6075,19 @@ pub mod profile_service_client {
         {
             ProfileServiceClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Lists profiles by filter. The order is unspecified.
@@ -5633,6 +6269,19 @@ pub mod tenant {
         /// quality for this tenant only.
         Isolated = 2,
     }
+    impl DataUsageType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                DataUsageType::Unspecified => "DATA_USAGE_TYPE_UNSPECIFIED",
+                DataUsageType::Aggregated => "AGGREGATED",
+                DataUsageType::Isolated => "ISOLATED",
+            }
+        }
+    }
 }
 /// The Request of the CreateTenant method.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -5718,6 +6367,7 @@ pub struct ListTenantsResponse {
 pub mod tenant_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// A service that handles tenant management, including CRUD and enumeration.
     #[derive(Debug, Clone)]
     pub struct TenantServiceClient<T> {
@@ -5732,6 +6382,10 @@ pub mod tenant_service_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -5753,19 +6407,19 @@ pub mod tenant_service_client {
         {
             TenantServiceClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Creates a new tenant entity.

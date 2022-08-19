@@ -22,6 +22,18 @@ pub mod big_query_connection_spec {
         /// Cloud SQL connection.
         CloudSql = 1,
     }
+    impl ConnectionType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ConnectionType::Unspecified => "CONNECTION_TYPE_UNSPECIFIED",
+                ConnectionType::CloudSql => "CLOUD_SQL",
+            }
+        }
+    }
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum ConnectionSpec {
         /// Specification for the BigQuery connection to a Cloud SQL instance.
@@ -55,6 +67,19 @@ pub mod cloud_sql_big_query_connection_spec {
         /// Cloud SQL for MySQL.
         Mysql = 2,
     }
+    impl DatabaseType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                DatabaseType::Unspecified => "DATABASE_TYPE_UNSPECIFIED",
+                DatabaseType::Postgres => "POSTGRES",
+                DatabaseType::Mysql => "MYSQL",
+            }
+        }
+    }
 }
 /// Fields specific for BigQuery routines.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -75,6 +100,20 @@ pub enum IntegratedSystem {
     CloudPubsub = 2,
     /// Dataproc Metastore.
     DataprocMetastore = 3,
+}
+impl IntegratedSystem {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            IntegratedSystem::Unspecified => "INTEGRATED_SYSTEM_UNSPECIFIED",
+            IntegratedSystem::Bigquery => "BIGQUERY",
+            IntegratedSystem::CloudPubsub => "CLOUD_PUBSUB",
+            IntegratedSystem::DataprocMetastore => "DATAPROC_METASTORE",
+        }
+    }
 }
 /// Physical location of an entry.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -100,6 +139,19 @@ pub mod data_source {
         CloudStorage = 1,
         /// BigQuery service.
         Bigquery = 2,
+    }
+    impl Service {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Service::Unspecified => "SERVICE_UNSPECIFIED",
+                Service::CloudStorage => "CLOUD_STORAGE",
+                Service::Bigquery => "BIGQUERY",
+            }
+        }
     }
 }
 /// Timestamps associated with this resource in a particular system.
@@ -135,22 +187,22 @@ pub struct GcsFilesetSpec {
     ///
     /// Examples of valid `file_patterns`:
     ///
-    ///  * `gs://bucket_name/dir/*`: matches all files in `bucket_name/dir`
-    ///                              directory
-    ///  * `gs://bucket_name/dir/**`: matches all files in `bucket_name/dir`
-    ///                               and all subdirectories
-    ///  * `gs://bucket_name/file*`: matches files prefixed by `file` in
-    ///                              `bucket_name`
-    ///  * `gs://bucket_name/??.txt`: matches files with two characters followed by
-    ///                               `.txt` in `bucket_name`
-    ///  * `gs://bucket_name/\[aeiou\].txt`: matches files that contain a single
-    ///                                    vowel character followed by `.txt` in
-    ///                                    `bucket_name`
-    ///  * `gs://bucket_name/\[a-m\].txt`: matches files that contain `a`, `b`, ...
-    ///                                  or `m` followed by `.txt` in `bucket_name`
-    ///  * `gs://bucket_name/a/*/b`: matches all files in `bucket_name` that match
-    ///                              the `a/*/b` pattern, such as `a/c/b`, `a/d/b`
-    ///  * `gs://another_bucket/a.txt`: matches `gs://another_bucket/a.txt`
+    ///   * `gs://bucket_name/dir/*`: matches all files in `bucket_name/dir`
+    ///                               directory
+    ///   * `gs://bucket_name/dir/**`: matches all files in `bucket_name/dir`
+    ///                                and all subdirectories
+    ///   * `gs://bucket_name/file*`: matches files prefixed by `file` in
+    ///                               `bucket_name`
+    ///   * `gs://bucket_name/??.txt`: matches files with two characters followed by
+    ///                                `.txt` in `bucket_name`
+    ///   * `gs://bucket_name/\[aeiou\].txt`: matches files that contain a single
+    ///                                     vowel character followed by `.txt` in
+    ///                                     `bucket_name`
+    ///   * `gs://bucket_name/\[a-m\].txt`: matches files that contain `a`, `b`, ...
+    ///                                   or `m` followed by `.txt` in `bucket_name`
+    ///   * `gs://bucket_name/a/*/b`: matches all files in `bucket_name` that match
+    ///                               the `a/*/b` pattern, such as `a/c/b`, `a/d/b`
+    ///   * `gs://another_bucket/a.txt`: matches `gs://another_bucket/a.txt`
     ///
     /// You can combine wildcards to match complex sets of files, for example:
     ///
@@ -240,8 +292,8 @@ pub struct SearchCatalogResult {
     ///
     /// Examples:
     ///
-    ///  * `projects/{PROJECT_ID}/locations/{LOCATION_ID}/entryGroups/{ENTRY_GROUP_ID}/entries/{ENTRY_ID}`
-    ///  * `projects/{PROJECT_ID}/tagTemplates/{TAG_TEMPLATE_ID}`
+    ///   * `projects/{PROJECT_ID}/locations/{LOCATION_ID}/entryGroups/{ENTRY_GROUP_ID}/entries/{ENTRY_ID}`
+    ///   * `projects/{PROJECT_ID}/tagTemplates/{TAG_TEMPLATE_ID}`
     #[prost(string, tag="3")]
     pub relative_resource_name: ::prost::alloc::string::String,
     /// The full name of the Google Cloud resource the entry belongs to.
@@ -263,11 +315,11 @@ pub struct SearchCatalogResult {
     ///
     /// * For non-regionalized resources:
     ///
-    ///   `{SYSTEM}:{PROJECT}.{PATH_TO_RESOURCE_SEPARATED_WITH_DOTS}`
+    ///    `{SYSTEM}:{PROJECT}.{PATH_TO_RESOURCE_SEPARATED_WITH_DOTS}`
     ///
     /// * For regionalized resources:
     ///
-    ///   `{SYSTEM}:{PROJECT}.{LOCATION_ID}.{PATH_TO_RESOURCE_SEPARATED_WITH_DOTS}`
+    ///    `{SYSTEM}:{PROJECT}.{LOCATION_ID}.{PATH_TO_RESOURCE_SEPARATED_WITH_DOTS}`
     ///
     /// Example for a DPMS table:
     ///
@@ -313,6 +365,20 @@ pub enum SearchResultType {
     TagTemplate = 2,
     /// An \[EntryGroup][google.cloud.datacatalog.v1.EntryGroup\].
     EntryGroup = 3,
+}
+impl SearchResultType {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            SearchResultType::Unspecified => "SEARCH_RESULT_TYPE_UNSPECIFIED",
+            SearchResultType::Entry => "ENTRY",
+            SearchResultType::TagTemplate => "TAG_TEMPLATE",
+            SearchResultType::EntryGroup => "ENTRY_GROUP",
+        }
+    }
 }
 /// Describes a BigQuery table.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -398,6 +464,20 @@ pub enum TableSourceType {
     BigqueryTable = 5,
     /// BigQuery materialized view.
     BigqueryMaterializedView = 7,
+}
+impl TableSourceType {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            TableSourceType::Unspecified => "TABLE_SOURCE_TYPE_UNSPECIFIED",
+            TableSourceType::BigqueryView => "BIGQUERY_VIEW",
+            TableSourceType::BigqueryTable => "BIGQUERY_TABLE",
+            TableSourceType::BigqueryMaterializedView => "BIGQUERY_MATERIALIZED_VIEW",
+        }
+    }
 }
 /// Tags contain custom metadata and are attached to Data Catalog resources. Tags
 /// conform with the specification of their tag template.
@@ -549,14 +629,14 @@ pub struct TagTemplate {
     /// Every user has view access to a *public* tag template by default.
     /// This means that:
     ///
-    ///   * Every user can use this tag template to tag an entry.
-    ///   * If an entry is tagged using the tag template, the tag is always
-    ///     shown in the response to ``ListTags`` called on the entry.
-    ///   * To get the template using the GetTagTemplate method, you
-    ///     need view access either on the project or the organization the tag
-    ///     template resides in but no other permission is needed.
-    ///   * Operations on the tag template other than viewing (for example,
-    ///     editing IAM policies) follow standard IAM structures.
+    ///    * Every user can use this tag template to tag an entry.
+    ///    * If an entry is tagged using the tag template, the tag is always
+    ///      shown in the response to ``ListTags`` called on the entry.
+    ///    * To get the template using the GetTagTemplate method, you
+    ///      need view access either on the project or the organization the tag
+    ///      template resides in but no other permission is needed.
+    ///    * Operations on the tag template other than viewing (for example,
+    ///      editing IAM policies) follow standard IAM structures.
     ///
     /// Tags created with a public tag template are referred to as public tags.
     ///
@@ -581,7 +661,7 @@ pub struct TagTemplate {
     /// following limitations:
     ///
     /// * Can contain uppercase and lowercase letters, numbers (0-9) and
-    ///   underscores (_).
+    ///    underscores (_).
     /// * Must be at least 1 character and at most 64 characters long.
     /// * Must start with a letter or underscore.
     #[prost(map="string, message", tag="3")]
@@ -678,6 +758,22 @@ pub mod field_type {
         /// A Richtext description.
         Richtext = 5,
     }
+    impl PrimitiveType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                PrimitiveType::Unspecified => "PRIMITIVE_TYPE_UNSPECIFIED",
+                PrimitiveType::Double => "DOUBLE",
+                PrimitiveType::String => "STRING",
+                PrimitiveType::Bool => "BOOL",
+                PrimitiveType::Timestamp => "TIMESTAMP",
+                PrimitiveType::Richtext => "RICHTEXT",
+            }
+        }
+    }
     /// Required.
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum TypeDecl {
@@ -696,9 +792,9 @@ pub mod field_type {
 /// - Only BigQuery tables have them.
 /// - They only include BigQuery query jobs.
 /// - They might be underestimated because wildcard table references
-///   are not yet counted. For more information, see
-///   [Querying multiple tables using a wildcard table]
-///   (<https://cloud.google.com/bigquery/docs/querying-wildcard-tables>)
+///    are not yet counted. For more information, see
+///    [Querying multiple tables using a wildcard table]
+///    (<https://cloud.google.com/bigquery/docs/querying-wildcard-tables>)
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UsageStats {
     /// The number of successful uses of the underlying entry.
@@ -1039,8 +1135,8 @@ pub mod lookup_entry_request {
         ///
         /// Full names are case-sensitive. For example:
         ///
-        ///  * `//bigquery.googleapis.com/projects/{PROJECT_ID}/datasets/{DATASET_ID}/tables/{TABLE_ID}`
-        ///  * `//pubsub.googleapis.com/projects/{PROJECT_ID}/topics/{TOPIC_ID}`
+        ///   * `//bigquery.googleapis.com/projects/{PROJECT_ID}/datasets/{DATASET_ID}/tables/{TABLE_ID}`
+        ///   * `//pubsub.googleapis.com/projects/{PROJECT_ID}/topics/{TOPIC_ID}`
         #[prost(string, tag="1")]
         LinkedResource(::prost::alloc::string::String),
         /// The SQL name of the entry. SQL names are case-sensitive.
@@ -1064,11 +1160,11 @@ pub mod lookup_entry_request {
         ///
         /// * For non-regionalized resources:
         ///
-        ///   `{SYSTEM}:{PROJECT}.{PATH_TO_RESOURCE_SEPARATED_WITH_DOTS}`
+        ///    `{SYSTEM}:{PROJECT}.{PATH_TO_RESOURCE_SEPARATED_WITH_DOTS}`
         ///
         /// * For regionalized resources:
         ///
-        ///   `{SYSTEM}:{PROJECT}.{LOCATION_ID}.{PATH_TO_RESOURCE_SEPARATED_WITH_DOTS}`
+        ///    `{SYSTEM}:{PROJECT}.{LOCATION_ID}.{PATH_TO_RESOURCE_SEPARATED_WITH_DOTS}`
         ///
         /// Example for a DPMS table:
         ///
@@ -1125,11 +1221,11 @@ pub struct Entry {
     ///
     /// * For non-regionalized resources:
     ///
-    ///   `{SYSTEM}:{PROJECT}.{PATH_TO_RESOURCE_SEPARATED_WITH_DOTS}`
+    ///    `{SYSTEM}:{PROJECT}.{PATH_TO_RESOURCE_SEPARATED_WITH_DOTS}`
     ///
     /// * For regionalized resources:
     ///
-    ///   `{SYSTEM}:{PROJECT}.{LOCATION_ID}.{PATH_TO_RESOURCE_SEPARATED_WITH_DOTS}`
+    ///    `{SYSTEM}:{PROJECT}.{LOCATION_ID}.{PATH_TO_RESOURCE_SEPARATED_WITH_DOTS}`
     ///
     /// Example for a DPMS table:
     ///
@@ -1305,6 +1401,19 @@ pub mod database_table_spec {
         /// External table.
         External = 2,
     }
+    impl TableType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                TableType::Unspecified => "TABLE_TYPE_UNSPECIFIED",
+                TableType::Native => "NATIVE",
+                TableType::External => "EXTERNAL",
+            }
+        }
+    }
 }
 /// Specification that applies to a data source connection. Valid only for
 /// entries with the `DATA_SOURCE_CONNECTION` type.
@@ -1374,6 +1483,20 @@ pub mod routine_spec {
             /// The argument is both an input and an output.
             Inout = 3,
         }
+        impl Mode {
+            /// String value of the enum field names used in the ProtoBuf definition.
+            ///
+            /// The values are not transformed in any way and thus are considered stable
+            /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+            pub fn as_str_name(&self) -> &'static str {
+                match self {
+                    Mode::Unspecified => "MODE_UNSPECIFIED",
+                    Mode::In => "IN",
+                    Mode::Out => "OUT",
+                    Mode::Inout => "INOUT",
+                }
+            }
+        }
     }
     /// The fine-grained type of the routine.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -1385,6 +1508,19 @@ pub mod routine_spec {
         ScalarFunction = 1,
         /// Stored procedure.
         Procedure = 2,
+    }
+    impl RoutineType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                RoutineType::Unspecified => "ROUTINE_TYPE_UNSPECIFIED",
+                RoutineType::ScalarFunction => "SCALAR_FUNCTION",
+                RoutineType::Procedure => "PROCEDURE",
+            }
+        }
     }
     /// Contains fields specific to the source system.
     #[derive(Clone, PartialEq, ::prost::Oneof)]
@@ -1707,10 +1843,31 @@ pub enum EntryType {
     /// A service, for example, a Dataproc Metastore service.
     Service = 14,
 }
+impl EntryType {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            EntryType::Unspecified => "ENTRY_TYPE_UNSPECIFIED",
+            EntryType::Table => "TABLE",
+            EntryType::Model => "MODEL",
+            EntryType::DataStream => "DATA_STREAM",
+            EntryType::Fileset => "FILESET",
+            EntryType::Cluster => "CLUSTER",
+            EntryType::Database => "DATABASE",
+            EntryType::DataSourceConnection => "DATA_SOURCE_CONNECTION",
+            EntryType::Routine => "ROUTINE",
+            EntryType::Service => "SERVICE",
+        }
+    }
+}
 /// Generated client implementations.
 pub mod data_catalog_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Data Catalog API service allows you to discover, understand, and manage
     /// your data.
     #[derive(Debug, Clone)]
@@ -1726,6 +1883,10 @@ pub mod data_catalog_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -1747,19 +1908,19 @@ pub mod data_catalog_client {
         {
             DataCatalogClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Searches Data Catalog for multiple resources like entries and tags that
@@ -2530,12 +2691,12 @@ pub mod data_catalog_client {
 ///
 /// ```
 /// + PII
-///   + Account number
-///   + Age
-///   + SSN
-///   + Zipcode
+///    + Account number
+///    + Age
+///    + SSN
+///    + Zipcode
 /// + Financials
-///   + Revenue
+///    + Revenue
 /// ```
 ///
 /// A "data origin" taxonomy might contain the following policy tags:
@@ -2590,6 +2751,18 @@ pub mod taxonomy {
         /// tagged sub-resources.
         FineGrainedAccessControl = 1,
     }
+    impl PolicyType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                PolicyType::Unspecified => "POLICY_TYPE_UNSPECIFIED",
+                PolicyType::FineGrainedAccessControl => "FINE_GRAINED_ACCESS_CONTROL",
+            }
+        }
+    }
 }
 /// Denotes one policy tag in a taxonomy, for example, SSN.
 ///
@@ -2597,9 +2770,9 @@ pub mod taxonomy {
 ///
 /// ```
 /// + Geolocation
-///   + LatLong
-///   + City
-///   + ZipCode
+///    + LatLong
+///    + City
+///    + ZipCode
 /// ```
 ///
 /// Where the "Geolocation" policy tag contains three children.
@@ -2792,6 +2965,7 @@ pub struct GetPolicyTagRequest {
 pub mod policy_tag_manager_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Policy Tag Manager API service allows you to manage your policy tags and
     /// taxonomies.
     ///
@@ -2813,6 +2987,10 @@ pub mod policy_tag_manager_client {
             let inner = tonic::client::Grpc::new(inner);
             Self { inner }
         }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
+            Self { inner }
+        }
         pub fn with_interceptor<F>(
             inner: T,
             interceptor: F,
@@ -2832,19 +3010,19 @@ pub mod policy_tag_manager_client {
         {
             PolicyTagManagerClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Creates a taxonomy in a specified project.
@@ -3275,6 +3453,7 @@ pub struct ExportTaxonomiesResponse {
 pub mod policy_tag_manager_serialization_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Policy Tag Manager Serialization API service allows you to manipulate
     /// your policy tags and taxonomies in a serialized format.
     ///
@@ -3292,6 +3471,10 @@ pub mod policy_tag_manager_serialization_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -3315,19 +3498,19 @@ pub mod policy_tag_manager_serialization_client {
                 InterceptedService::new(inner, interceptor),
             )
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Replaces (updates) a taxonomy and all its policy tags.

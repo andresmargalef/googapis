@@ -13,12 +13,12 @@ pub struct AutoscalingPolicy {
     /// in <https://cloud.google.com/apis/design/resource_names.>
     ///
     /// * For `projects.regions.autoscalingPolicies`, the resource name of the
-    ///   policy has the following format:
-    ///   `projects/{project_id}/regions/{region}/autoscalingPolicies/{policy_id}`
+    ///    policy has the following format:
+    ///    `projects/{project_id}/regions/{region}/autoscalingPolicies/{policy_id}`
     ///
     /// * For `projects.locations.autoscalingPolicies`, the resource name of the
-    ///   policy has the following format:
-    ///   `projects/{project_id}/locations/{location}/autoscalingPolicies/{policy_id}`
+    ///    policy has the following format:
+    ///    `projects/{project_id}/locations/{location}/autoscalingPolicies/{policy_id}`
     #[prost(string, tag="2")]
     pub name: ::prost::alloc::string::String,
     /// Required. Describes how the autoscaler will operate for primary workers.
@@ -162,12 +162,12 @@ pub struct CreateAutoscalingPolicyRequest {
     /// in <https://cloud.google.com/apis/design/resource_names.>
     ///
     /// * For `projects.regions.autoscalingPolicies.create`, the resource name
-    ///   of the region has the following format:
-    ///   `projects/{project_id}/regions/{region}`
+    ///    of the region has the following format:
+    ///    `projects/{project_id}/regions/{region}`
     ///
     /// * For `projects.locations.autoscalingPolicies.create`, the resource name
-    ///   of the location has the following format:
-    ///   `projects/{project_id}/locations/{location}`
+    ///    of the location has the following format:
+    ///    `projects/{project_id}/locations/{location}`
     #[prost(string, tag="1")]
     pub parent: ::prost::alloc::string::String,
     /// Required. The autoscaling policy to create.
@@ -181,12 +181,12 @@ pub struct GetAutoscalingPolicyRequest {
     /// in <https://cloud.google.com/apis/design/resource_names.>
     ///
     /// * For `projects.regions.autoscalingPolicies.get`, the resource name
-    ///   of the policy has the following format:
-    ///   `projects/{project_id}/regions/{region}/autoscalingPolicies/{policy_id}`
+    ///    of the policy has the following format:
+    ///    `projects/{project_id}/regions/{region}/autoscalingPolicies/{policy_id}`
     ///
     /// * For `projects.locations.autoscalingPolicies.get`, the resource name
-    ///   of the policy has the following format:
-    ///   `projects/{project_id}/locations/{location}/autoscalingPolicies/{policy_id}`
+    ///    of the policy has the following format:
+    ///    `projects/{project_id}/locations/{location}/autoscalingPolicies/{policy_id}`
     #[prost(string, tag="1")]
     pub name: ::prost::alloc::string::String,
 }
@@ -206,12 +206,12 @@ pub struct DeleteAutoscalingPolicyRequest {
     /// in <https://cloud.google.com/apis/design/resource_names.>
     ///
     /// * For `projects.regions.autoscalingPolicies.delete`, the resource name
-    ///   of the policy has the following format:
-    ///   `projects/{project_id}/regions/{region}/autoscalingPolicies/{policy_id}`
+    ///    of the policy has the following format:
+    ///    `projects/{project_id}/regions/{region}/autoscalingPolicies/{policy_id}`
     ///
     /// * For `projects.locations.autoscalingPolicies.delete`, the resource name
-    ///   of the policy has the following format:
-    ///   `projects/{project_id}/locations/{location}/autoscalingPolicies/{policy_id}`
+    ///    of the policy has the following format:
+    ///    `projects/{project_id}/locations/{location}/autoscalingPolicies/{policy_id}`
     #[prost(string, tag="1")]
     pub name: ::prost::alloc::string::String,
 }
@@ -222,12 +222,12 @@ pub struct ListAutoscalingPoliciesRequest {
     /// in <https://cloud.google.com/apis/design/resource_names.>
     ///
     /// * For `projects.regions.autoscalingPolicies.list`, the resource name
-    ///   of the region has the following format:
-    ///   `projects/{project_id}/regions/{region}`
+    ///    of the region has the following format:
+    ///    `projects/{project_id}/regions/{region}`
     ///
     /// * For `projects.locations.autoscalingPolicies.list`, the resource name
-    ///   of the location has the following format:
-    ///   `projects/{project_id}/locations/{location}`
+    ///    of the location has the following format:
+    ///    `projects/{project_id}/locations/{location}`
     #[prost(string, tag="1")]
     pub parent: ::prost::alloc::string::String,
     /// Optional. The maximum number of results to return in each response.
@@ -254,6 +254,7 @@ pub struct ListAutoscalingPoliciesResponse {
 pub mod autoscaling_policy_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The API interface for managing autoscaling policies in the
     /// Dataproc API.
     #[derive(Debug, Clone)]
@@ -269,6 +270,10 @@ pub mod autoscaling_policy_service_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -292,19 +297,19 @@ pub mod autoscaling_policy_service_client {
                 InterceptedService::new(inner, interceptor),
             )
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Creates new autoscaling policy.
@@ -535,6 +540,29 @@ pub enum Component {
     /// The Zookeeper service.
     Zookeeper = 8,
 }
+impl Component {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            Component::Unspecified => "COMPONENT_UNSPECIFIED",
+            Component::Anaconda => "ANACONDA",
+            Component::Docker => "DOCKER",
+            Component::Druid => "DRUID",
+            Component::Flink => "FLINK",
+            Component::Hbase => "HBASE",
+            Component::HiveWebhcat => "HIVE_WEBHCAT",
+            Component::Jupyter => "JUPYTER",
+            Component::Presto => "PRESTO",
+            Component::Ranger => "RANGER",
+            Component::Solr => "SOLR",
+            Component::Zeppelin => "ZEPPELIN",
+            Component::Zookeeper => "ZOOKEEPER",
+        }
+    }
+}
 /// Actions in response to failure of a resource associated with a cluster.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
@@ -546,6 +574,19 @@ pub enum FailureAction {
     NoAction = 1,
     /// Delete the failed cluster resource.
     Delete = 2,
+}
+impl FailureAction {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            FailureAction::Unspecified => "FAILURE_ACTION_UNSPECIFIED",
+            FailureAction::NoAction => "NO_ACTION",
+            FailureAction::Delete => "DELETE",
+        }
+    }
 }
 /// A request to create a batch workload.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -706,6 +747,23 @@ pub mod batch {
         /// The batch is no longer running due to an error.
         Failed = 6,
     }
+    impl State {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                State::Unspecified => "STATE_UNSPECIFIED",
+                State::Pending => "PENDING",
+                State::Running => "RUNNING",
+                State::Cancelling => "CANCELLING",
+                State::Cancelled => "CANCELLED",
+                State::Succeeded => "SUCCEEDED",
+                State::Failed => "FAILED",
+            }
+        }
+    }
     /// The application/framework-specific portion of the batch configuration.
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum BatchConfig {
@@ -847,6 +905,7 @@ pub struct SparkSqlBatch {
 pub mod batch_controller_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The BatchController provides methods to manage batch workloads.
     #[derive(Debug, Clone)]
     pub struct BatchControllerClient<T> {
@@ -861,6 +920,10 @@ pub mod batch_controller_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -882,19 +945,19 @@ pub mod batch_controller_client {
         {
             BatchControllerClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Creates a batch workload that executes asynchronously.
@@ -1080,13 +1143,13 @@ pub struct ClusterConfig {
     /// a master or worker node, as shown below using `curl` (you can also use
     /// `wget`):
     ///
-    ///     ROLE=$(curl -H Metadata-Flavor:Google
-    ///     <http://metadata/computeMetadata/v1/instance/attributes/dataproc-role>)
-    ///     if [[ "${ROLE}" == 'Master' ]]; then
-    ///       ... master specific actions ...
-    ///     else
-    ///       ... worker specific actions ...
-    ///     fi
+    ///      ROLE=$(curl -H Metadata-Flavor:Google
+    ///      <http://metadata/computeMetadata/v1/instance/attributes/dataproc-role>)
+    ///      if [[ "${ROLE}" == 'Master' ]]; then
+    ///        ... master specific actions ...
+    ///      else
+    ///        ... worker specific actions ...
+    ///      fi
     #[prost(message, repeated, tag="11")]
     pub initialization_actions: ::prost::alloc::vec::Vec<NodeInitializationAction>,
     /// Optional. Encryption settings for the cluster.
@@ -1300,6 +1363,20 @@ pub mod gce_cluster_config {
         /// Dataproc cluster.
         Bidirectional = 3,
     }
+    impl PrivateIpv6GoogleAccess {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                PrivateIpv6GoogleAccess::Unspecified => "PRIVATE_IPV6_GOOGLE_ACCESS_UNSPECIFIED",
+                PrivateIpv6GoogleAccess::InheritFromSubnetwork => "INHERIT_FROM_SUBNETWORK",
+                PrivateIpv6GoogleAccess::Outbound => "OUTBOUND",
+                PrivateIpv6GoogleAccess::Bidirectional => "BIDIRECTIONAL",
+            }
+        }
+    }
 }
 /// Node Group Affinity for clusters using sole-tenant node groups.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -1443,6 +1520,19 @@ pub mod instance_group_config {
         /// This option is allowed only for secondary worker groups.
         Preemptible = 2,
     }
+    impl Preemptibility {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Preemptibility::Unspecified => "PREEMPTIBILITY_UNSPECIFIED",
+                Preemptibility::NonPreemptible => "NON_PREEMPTIBLE",
+                Preemptibility::Preemptible => "PREEMPTIBLE",
+            }
+        }
+    }
 }
 /// Specifies the resources used to actively manage an instance group.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -1567,6 +1657,26 @@ pub mod cluster_status {
         /// The cluster is being started. It is not ready for use.
         Starting = 8,
     }
+    impl State {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                State::Unknown => "UNKNOWN",
+                State::Creating => "CREATING",
+                State::Running => "RUNNING",
+                State::Error => "ERROR",
+                State::ErrorDueToUpdate => "ERROR_DUE_TO_UPDATE",
+                State::Deleting => "DELETING",
+                State::Updating => "UPDATING",
+                State::Stopping => "STOPPING",
+                State::Stopped => "STOPPED",
+                State::Starting => "STARTING",
+            }
+        }
+    }
     /// The cluster substate.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -1584,6 +1694,19 @@ pub mod cluster_status {
         ///
         /// Applies to RUNNING state.
         StaleStatus = 2,
+    }
+    impl Substate {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Substate::Unspecified => "UNSPECIFIED",
+                Substate::Unhealthy => "UNHEALTHY",
+                Substate::StaleStatus => "STALE_STATUS",
+            }
+        }
     }
 }
 /// Security related configuration, including encryption, Kerberos, etc.
@@ -1838,51 +1961,51 @@ pub struct UpdateClusterRequest {
     /// specified as `config.worker_config.num_instances`,
     /// and the `PATCH` request body would specify the new value, as follows:
     ///
-    ///     {
-    ///       "config":{
-    ///         "workerConfig":{
-    ///           "numInstances":"5"
-    ///         }
-    ///       }
-    ///     }
+    ///      {
+    ///        "config":{
+    ///          "workerConfig":{
+    ///            "numInstances":"5"
+    ///          }
+    ///        }
+    ///      }
     /// Similarly, to change the number of preemptible workers in a cluster to 5,
     /// the `update_mask` parameter would be
     /// `config.secondary_worker_config.num_instances`, and the `PATCH` request
     /// body would be set as follows:
     ///
-    ///     {
-    ///       "config":{
-    ///         "secondaryWorkerConfig":{
-    ///           "numInstances":"5"
-    ///         }
-    ///       }
-    ///     }
+    ///      {
+    ///        "config":{
+    ///          "secondaryWorkerConfig":{
+    ///            "numInstances":"5"
+    ///          }
+    ///        }
+    ///      }
     /// <strong>Note:</strong> Currently, only the following fields can be updated:
     ///
-    ///  <table>
-    ///  <tbody>
-    ///  <tr>
-    ///  <td><strong>Mask</strong></td>
-    ///  <td><strong>Purpose</strong></td>
-    ///  </tr>
-    ///  <tr>
-    ///  <td><strong><em>labels</em></strong></td>
-    ///  <td>Update labels</td>
-    ///  </tr>
-    ///  <tr>
-    ///  <td><strong><em>config.worker_config.num_instances</em></strong></td>
-    ///  <td>Resize primary worker group</td>
-    ///  </tr>
-    ///  <tr>
-    ///  <td><strong><em>config.secondary_worker_config.num_instances</em></strong></td>
-    ///  <td>Resize secondary worker group</td>
-    ///  </tr>
-    ///  <tr>
-    ///  <td>config.autoscaling_config.policy_uri</td><td>Use, stop using, or
-    ///  change autoscaling policies</td>
-    ///  </tr>
-    ///  </tbody>
-    ///  </table>
+    ///   <table>
+    ///   <tbody>
+    ///   <tr>
+    ///   <td><strong>Mask</strong></td>
+    ///   <td><strong>Purpose</strong></td>
+    ///   </tr>
+    ///   <tr>
+    ///   <td><strong><em>labels</em></strong></td>
+    ///   <td>Update labels</td>
+    ///   </tr>
+    ///   <tr>
+    ///   <td><strong><em>config.worker_config.num_instances</em></strong></td>
+    ///   <td>Resize primary worker group</td>
+    ///   </tr>
+    ///   <tr>
+    ///   <td><strong><em>config.secondary_worker_config.num_instances</em></strong></td>
+    ///   <td>Resize secondary worker group</td>
+    ///   </tr>
+    ///   <tr>
+    ///   <td>config.autoscaling_config.policy_uri</td><td>Use, stop using, or
+    ///   change autoscaling policies</td>
+    ///   </tr>
+    ///   </tbody>
+    ///   </table>
     #[prost(message, optional, tag="4")]
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
     /// Optional. A unique ID used to identify the request. If the server
@@ -2111,11 +2234,26 @@ pub mod reservation_affinity {
         /// for specifying the reservations.
         SpecificReservation = 3,
     }
+    impl Type {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Type::Unspecified => "TYPE_UNSPECIFIED",
+                Type::NoReservation => "NO_RESERVATION",
+                Type::AnyReservation => "ANY_RESERVATION",
+                Type::SpecificReservation => "SPECIFIC_RESERVATION",
+            }
+        }
+    }
 }
 /// Generated client implementations.
 pub mod cluster_controller_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The ClusterControllerService provides methods to manage clusters
     /// of Compute Engine instances.
     #[derive(Debug, Clone)]
@@ -2131,6 +2269,10 @@ pub mod cluster_controller_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -2152,19 +2294,19 @@ pub mod cluster_controller_client {
         {
             ClusterControllerClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Creates a cluster in a project. The returned
@@ -2367,7 +2509,7 @@ pub struct LoggingConfig {
     /// The per-package log levels for the driver. This may include
     /// "root" package name to configure rootLogger.
     /// Examples:
-    ///   'com.google = FATAL', 'root = INFO', 'org.apache = DEBUG'
+    ///    'com.google = FATAL', 'root = INFO', 'org.apache = DEBUG'
     #[prost(map="string, enumeration(logging_config::Level)", tag="2")]
     pub driver_log_levels: ::std::collections::HashMap<::prost::alloc::string::String, i32>,
 }
@@ -2397,6 +2539,25 @@ pub mod logging_config {
         Fatal = 7,
         /// Turn off log4j.
         Off = 8,
+    }
+    impl Level {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Level::Unspecified => "LEVEL_UNSPECIFIED",
+                Level::All => "ALL",
+                Level::Trace => "TRACE",
+                Level::Debug => "DEBUG",
+                Level::Info => "INFO",
+                Level::Warn => "WARN",
+                Level::Error => "ERROR",
+                Level::Fatal => "FATAL",
+                Level::Off => "OFF",
+            }
+        }
     }
 }
 /// A Dataproc job for running
@@ -2452,9 +2613,9 @@ pub mod hadoop_job {
     pub enum Driver {
         /// The HCFS URI of the jar file containing the main class.
         /// Examples:
-        ///     'gs://foo-bucket/analytics-binaries/extract-useful-metrics-mr.jar'
-        ///     'hdfs:/tmp/test-samples/custom-wordcount.jar'
-        ///     'file:///home/usr/lib/hadoop-mapreduce/hadoop-mapreduce-examples.jar'
+        ///      'gs://foo-bucket/analytics-binaries/extract-useful-metrics-mr.jar'
+        ///      'hdfs:/tmp/test-samples/custom-wordcount.jar'
+        ///      'file:///home/usr/lib/hadoop-mapreduce/hadoop-mapreduce-examples.jar'
         #[prost(string, tag="1")]
         MainJarFileUri(::prost::alloc::string::String),
         /// The name of the driver's main class. The jar file containing the class
@@ -2570,15 +2731,15 @@ pub struct QueryList {
     /// string by separating each with a semicolon. Here is an example of a
     /// Dataproc API snippet that uses a QueryList to specify a HiveJob:
     ///
-    ///     "hiveJob": {
-    ///       "queryList": {
-    ///         "queries": [
-    ///           "query1",
-    ///           "query2",
-    ///           "query3;query4",
-    ///         ]
-    ///       }
-    ///     }
+    ///      "hiveJob": {
+    ///        "queryList": {
+    ///          "queries": [
+    ///            "query1",
+    ///            "query2",
+    ///            "query3;query4",
+    ///          ]
+    ///        }
+    ///      }
     #[prost(string, repeated, tag="1")]
     pub queries: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
@@ -2851,6 +3012,26 @@ pub mod job_status {
         /// Applies to restartable jobs only.
         AttemptFailure = 9,
     }
+    impl State {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                State::Unspecified => "STATE_UNSPECIFIED",
+                State::Pending => "PENDING",
+                State::SetupDone => "SETUP_DONE",
+                State::Running => "RUNNING",
+                State::CancelPending => "CANCEL_PENDING",
+                State::CancelStarted => "CANCEL_STARTED",
+                State::Cancelled => "CANCELLED",
+                State::Done => "DONE",
+                State::Error => "ERROR",
+                State::AttemptFailure => "ATTEMPT_FAILURE",
+            }
+        }
+    }
     /// The job substate.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -2873,6 +3054,20 @@ pub mod job_status {
         ///
         /// Applies to RUNNING state.
         StaleStatus = 3,
+    }
+    impl Substate {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Substate::Unspecified => "UNSPECIFIED",
+                Substate::Submitted => "SUBMITTED",
+                Substate::Queued => "QUEUED",
+                Substate::StaleStatus => "STALE_STATUS",
+            }
+        }
     }
 }
 /// Encapsulates the full scoping used to reference a job.
@@ -2939,6 +3134,25 @@ pub mod yarn_application {
         Failed = 7,
         /// Status is KILLED.
         Killed = 8,
+    }
+    impl State {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                State::Unspecified => "STATE_UNSPECIFIED",
+                State::New => "NEW",
+                State::NewSaving => "NEW_SAVING",
+                State::Submitted => "SUBMITTED",
+                State::Accepted => "ACCEPTED",
+                State::Running => "RUNNING",
+                State::Finished => "FINISHED",
+                State::Failed => "FAILED",
+                State::Killed => "KILLED",
+            }
+        }
     }
 }
 /// A Dataproc job resource.
@@ -3170,6 +3384,19 @@ pub mod list_jobs_request {
         /// Only match jobs in terminal states: CANCELLED, DONE, or ERROR.
         NonActive = 2,
     }
+    impl JobStateMatcher {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                JobStateMatcher::All => "ALL",
+                JobStateMatcher::Active => "ACTIVE",
+                JobStateMatcher::NonActive => "NON_ACTIVE",
+            }
+        }
+    }
 }
 /// A request to update a job.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -3240,6 +3467,7 @@ pub struct DeleteJobRequest {
 pub mod job_controller_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The JobController provides methods to manage jobs.
     #[derive(Debug, Clone)]
     pub struct JobControllerClient<T> {
@@ -3254,6 +3482,10 @@ pub mod job_controller_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -3275,19 +3507,19 @@ pub mod job_controller_client {
         {
             JobControllerClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Submits a job to a cluster.
@@ -3479,6 +3711,18 @@ pub mod batch_operation_metadata {
         /// Batch operation type.
         Batch = 1,
     }
+    impl BatchOperationType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                BatchOperationType::Unspecified => "BATCH_OPERATION_TYPE_UNSPECIFIED",
+                BatchOperationType::Batch => "BATCH",
+            }
+        }
+    }
 }
 /// The status of the operation.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -3510,6 +3754,20 @@ pub mod cluster_operation_status {
         Running = 2,
         /// The operation is done; either cancelled or completed.
         Done = 3,
+    }
+    impl State {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                State::Unknown => "UNKNOWN",
+                State::Pending => "PENDING",
+                State::Running => "RUNNING",
+                State::Done => "DONE",
+            }
+        }
     }
 }
 /// Metadata describing the operation.
@@ -3549,12 +3807,12 @@ pub struct WorkflowTemplate {
     /// in <https://cloud.google.com/apis/design/resource_names.>
     ///
     /// * For `projects.regions.workflowTemplates`, the resource name of the
-    ///   template has the following format:
-    ///   `projects/{project_id}/regions/{region}/workflowTemplates/{template_id}`
+    ///    template has the following format:
+    ///    `projects/{project_id}/regions/{region}/workflowTemplates/{template_id}`
     ///
     /// * For `projects.locations.workflowTemplates`, the resource name of the
-    ///   template has the following format:
-    ///   `projects/{project_id}/locations/{location}/workflowTemplates/{template_id}`
+    ///    template has the following format:
+    ///    `projects/{project_id}/locations/{location}/workflowTemplates/{template_id}`
     #[prost(string, tag="1")]
     pub name: ::prost::alloc::string::String,
     /// Optional. Used to perform a consistent read-modify-write.
@@ -3783,30 +4041,30 @@ pub struct TemplateParameter {
     /// Also, field paths can reference fields using the following syntax:
     ///
     /// * Values in maps can be referenced by key:
-    ///     * labels\['key'\]
-    ///     * placement.clusterSelector.clusterLabels\['key'\]
-    ///     * placement.managedCluster.labels\['key'\]
-    ///     * placement.clusterSelector.clusterLabels\['key'\]
-    ///     * jobs\['step-id'].labels['key'\]
+    ///      * labels\['key'\]
+    ///      * placement.clusterSelector.clusterLabels\['key'\]
+    ///      * placement.managedCluster.labels\['key'\]
+    ///      * placement.clusterSelector.clusterLabels\['key'\]
+    ///      * jobs\['step-id'].labels['key'\]
     ///
     /// * Jobs in the jobs list can be referenced by step-id:
-    ///     * jobs\['step-id'\].hadoopJob.mainJarFileUri
-    ///     * jobs\['step-id'\].hiveJob.queryFileUri
-    ///     * jobs\['step-id'\].pySparkJob.mainPythonFileUri
-    ///     * jobs\['step-id'].hadoopJob.jarFileUris[0\]
-    ///     * jobs\['step-id'].hadoopJob.archiveUris[0\]
-    ///     * jobs\['step-id'].hadoopJob.fileUris[0\]
-    ///     * jobs\['step-id'].pySparkJob.pythonFileUris[0\]
+    ///      * jobs\['step-id'\].hadoopJob.mainJarFileUri
+    ///      * jobs\['step-id'\].hiveJob.queryFileUri
+    ///      * jobs\['step-id'\].pySparkJob.mainPythonFileUri
+    ///      * jobs\['step-id'].hadoopJob.jarFileUris[0\]
+    ///      * jobs\['step-id'].hadoopJob.archiveUris[0\]
+    ///      * jobs\['step-id'].hadoopJob.fileUris[0\]
+    ///      * jobs\['step-id'].pySparkJob.pythonFileUris[0\]
     ///
     /// * Items in repeated fields can be referenced by a zero-based index:
-    ///     * jobs\['step-id'].sparkJob.args[0\]
+    ///      * jobs\['step-id'].sparkJob.args[0\]
     ///
     /// * Other examples:
-    ///     * jobs\['step-id'].hadoopJob.properties['key'\]
-    ///     * jobs\['step-id'].hadoopJob.args[0\]
-    ///     * jobs\['step-id'].hiveJob.scriptVariables['key'\]
-    ///     * jobs\['step-id'\].hadoopJob.mainJarFileUri
-    ///     * placement.clusterSelector.zone
+    ///      * jobs\['step-id'].hadoopJob.properties['key'\]
+    ///      * jobs\['step-id'].hadoopJob.args[0\]
+    ///      * jobs\['step-id'].hiveJob.scriptVariables['key'\]
+    ///      * jobs\['step-id'\].hadoopJob.mainJarFileUri
+    ///      * placement.clusterSelector.zone
     ///
     /// It may not be possible to parameterize maps and repeated fields in their
     /// entirety since only individual map values and individual items in repeated
@@ -3868,12 +4126,12 @@ pub struct WorkflowMetadata {
     /// in <https://cloud.google.com/apis/design/resource_names.>
     ///
     /// * For `projects.regions.workflowTemplates`, the resource name of the
-    ///   template has the following format:
-    ///   `projects/{project_id}/regions/{region}/workflowTemplates/{template_id}`
+    ///    template has the following format:
+    ///    `projects/{project_id}/regions/{region}/workflowTemplates/{template_id}`
     ///
     /// * For `projects.locations.workflowTemplates`, the resource name of the
-    ///   template has the following format:
-    ///   `projects/{project_id}/locations/{location}/workflowTemplates/{template_id}`
+    ///    template has the following format:
+    ///    `projects/{project_id}/locations/{location}/workflowTemplates/{template_id}`
     #[prost(string, tag="1")]
     pub template: ::prost::alloc::string::String,
     /// Output only. The version of template at the time of
@@ -3935,6 +4193,20 @@ pub mod workflow_metadata {
         /// The operation is done; either cancelled or completed.
         Done = 3,
     }
+    impl State {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                State::Unknown => "UNKNOWN",
+                State::Pending => "PENDING",
+                State::Running => "RUNNING",
+                State::Done => "DONE",
+            }
+        }
+    }
 }
 /// The cluster operation triggered by a workflow.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -3995,6 +4267,22 @@ pub mod workflow_node {
         /// its ancestor or peer failed.
         Failed = 5,
     }
+    impl NodeState {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                NodeState::Unspecified => "NODE_STATE_UNSPECIFIED",
+                NodeState::Blocked => "BLOCKED",
+                NodeState::Runnable => "RUNNABLE",
+                NodeState::Running => "RUNNING",
+                NodeState::Completed => "COMPLETED",
+                NodeState::Failed => "FAILED",
+            }
+        }
+    }
 }
 /// A request to create a workflow template.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -4003,12 +4291,12 @@ pub struct CreateWorkflowTemplateRequest {
     /// in <https://cloud.google.com/apis/design/resource_names.>
     ///
     /// * For `projects.regions.workflowTemplates,create`, the resource name of the
-    ///   region has the following format:
-    ///   `projects/{project_id}/regions/{region}`
+    ///    region has the following format:
+    ///    `projects/{project_id}/regions/{region}`
     ///
     /// * For `projects.locations.workflowTemplates.create`, the resource name of
-    ///   the location has the following format:
-    ///   `projects/{project_id}/locations/{location}`
+    ///    the location has the following format:
+    ///    `projects/{project_id}/locations/{location}`
     #[prost(string, tag="1")]
     pub parent: ::prost::alloc::string::String,
     /// Required. The Dataproc workflow template to create.
@@ -4022,12 +4310,12 @@ pub struct GetWorkflowTemplateRequest {
     /// in <https://cloud.google.com/apis/design/resource_names.>
     ///
     /// * For `projects.regions.workflowTemplates.get`, the resource name of the
-    ///   template has the following format:
-    ///   `projects/{project_id}/regions/{region}/workflowTemplates/{template_id}`
+    ///    template has the following format:
+    ///    `projects/{project_id}/regions/{region}/workflowTemplates/{template_id}`
     ///
     /// * For `projects.locations.workflowTemplates.get`, the resource name of the
-    ///   template has the following format:
-    ///   `projects/{project_id}/locations/{location}/workflowTemplates/{template_id}`
+    ///    template has the following format:
+    ///    `projects/{project_id}/locations/{location}/workflowTemplates/{template_id}`
     #[prost(string, tag="1")]
     pub name: ::prost::alloc::string::String,
     /// Optional. The version of workflow template to retrieve. Only previously
@@ -4045,11 +4333,11 @@ pub struct InstantiateWorkflowTemplateRequest {
     ///
     /// * For `projects.regions.workflowTemplates.instantiate`, the resource name
     /// of the template has the following format:
-    ///   `projects/{project_id}/regions/{region}/workflowTemplates/{template_id}`
+    ///    `projects/{project_id}/regions/{region}/workflowTemplates/{template_id}`
     ///
     /// * For `projects.locations.workflowTemplates.instantiate`, the resource name
-    ///   of the template has the following format:
-    ///   `projects/{project_id}/locations/{location}/workflowTemplates/{template_id}`
+    ///    of the template has the following format:
+    ///    `projects/{project_id}/locations/{location}/workflowTemplates/{template_id}`
     #[prost(string, tag="1")]
     pub name: ::prost::alloc::string::String,
     /// Optional. The version of workflow template to instantiate. If specified,
@@ -4083,12 +4371,12 @@ pub struct InstantiateInlineWorkflowTemplateRequest {
     /// in <https://cloud.google.com/apis/design/resource_names.>
     ///
     /// * For `projects.regions.workflowTemplates,instantiateinline`, the resource
-    ///   name of the region has the following format:
-    ///   `projects/{project_id}/regions/{region}`
+    ///    name of the region has the following format:
+    ///    `projects/{project_id}/regions/{region}`
     ///
     /// * For `projects.locations.workflowTemplates.instantiateinline`, the
-    ///   resource name of the location has the following format:
-    ///   `projects/{project_id}/locations/{location}`
+    ///    resource name of the location has the following format:
+    ///    `projects/{project_id}/locations/{location}`
     #[prost(string, tag="1")]
     pub parent: ::prost::alloc::string::String,
     /// Required. The workflow template to instantiate.
@@ -4122,12 +4410,12 @@ pub struct ListWorkflowTemplatesRequest {
     /// in <https://cloud.google.com/apis/design/resource_names.>
     ///
     /// * For `projects.regions.workflowTemplates,list`, the resource
-    ///   name of the region has the following format:
-    ///   `projects/{project_id}/regions/{region}`
+    ///    name of the region has the following format:
+    ///    `projects/{project_id}/regions/{region}`
     ///
     /// * For `projects.locations.workflowTemplates.list`, the
-    ///   resource name of the location has the following format:
-    ///   `projects/{project_id}/locations/{location}`
+    ///    resource name of the location has the following format:
+    ///    `projects/{project_id}/locations/{location}`
     #[prost(string, tag="1")]
     pub parent: ::prost::alloc::string::String,
     /// Optional. The maximum number of results to return in each response.
@@ -4160,11 +4448,11 @@ pub struct DeleteWorkflowTemplateRequest {
     ///
     /// * For `projects.regions.workflowTemplates.delete`, the resource name
     /// of the template has the following format:
-    ///   `projects/{project_id}/regions/{region}/workflowTemplates/{template_id}`
+    ///    `projects/{project_id}/regions/{region}/workflowTemplates/{template_id}`
     ///
     /// * For `projects.locations.workflowTemplates.instantiate`, the resource name
-    ///   of the template has the following format:
-    ///   `projects/{project_id}/locations/{location}/workflowTemplates/{template_id}`
+    ///    of the template has the following format:
+    ///    `projects/{project_id}/locations/{location}/workflowTemplates/{template_id}`
     #[prost(string, tag="1")]
     pub name: ::prost::alloc::string::String,
     /// Optional. The version of workflow template to delete. If specified,
@@ -4177,6 +4465,7 @@ pub struct DeleteWorkflowTemplateRequest {
 pub mod workflow_template_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The API interface for managing Workflow Templates in the
     /// Dataproc API.
     #[derive(Debug, Clone)]
@@ -4192,6 +4481,10 @@ pub mod workflow_template_service_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -4215,19 +4508,19 @@ pub mod workflow_template_service_client {
                 InterceptedService::new(inner, interceptor),
             )
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Creates new workflow template.

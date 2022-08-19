@@ -96,6 +96,18 @@ pub mod inventory {
             /// reporting inventory via the reporting API.
             InventoryReport = 1,
         }
+        impl OriginType {
+            /// String value of the enum field names used in the ProtoBuf definition.
+            ///
+            /// The values are not transformed in any way and thus are considered stable
+            /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+            pub fn as_str_name(&self) -> &'static str {
+                match self {
+                    OriginType::Unspecified => "ORIGIN_TYPE_UNSPECIFIED",
+                    OriginType::InventoryReport => "INVENTORY_REPORT",
+                }
+            }
+        }
         /// The different types of inventory that are tracked on a VM.
         #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
         #[repr(i32)]
@@ -106,6 +118,19 @@ pub mod inventory {
             InstalledPackage = 1,
             /// This represents an update that is available for a package.
             AvailablePackage = 2,
+        }
+        impl Type {
+            /// String value of the enum field names used in the ProtoBuf definition.
+            ///
+            /// The values are not transformed in any way and thus are considered stable
+            /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+            pub fn as_str_name(&self) -> &'static str {
+                match self {
+                    Type::Unspecified => "TYPE_UNSPECIFIED",
+                    Type::InstalledPackage => "INSTALLED_PACKAGE",
+                    Type::AvailablePackage => "AVAILABLE_PACKAGE",
+                }
+            }
         }
         /// Specific details of this inventory item based on its type.
         #[derive(Clone, PartialEq, ::prost::Oneof)]
@@ -146,8 +171,8 @@ pub mod inventory {
             #[prost(message, tag="3")]
             ZypperPackage(super::VersionedPackage),
             /// Details of a Googet package.
-            ///  For details about the googet package manager, see
-            ///  <https://github.com/google/googet.>
+            ///   For details about the googet package manager, see
+            ///   <https://github.com/google/googet.>
             #[prost(message, tag="4")]
             GoogetPackage(super::VersionedPackage),
             /// Details of a Zypper patch.
@@ -369,6 +394,19 @@ pub enum InventoryView {
     Basic = 1,
     /// Returns all fields.
     Full = 2,
+}
+impl InventoryView {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            InventoryView::Unspecified => "INVENTORY_VIEW_UNSPECIFIED",
+            InventoryView::Basic => "BASIC",
+            InventoryView::Full => "FULL",
+        }
+    }
 }
 /// An OS policy defines the desired state configuration for a VM.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -600,6 +638,19 @@ pub mod os_policy {
                 /// uninstalls it if detected.
                 Removed = 2,
             }
+            impl DesiredState {
+                /// String value of the enum field names used in the ProtoBuf definition.
+                ///
+                /// The values are not transformed in any way and thus are considered stable
+                /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+                pub fn as_str_name(&self) -> &'static str {
+                    match self {
+                        DesiredState::Unspecified => "DESIRED_STATE_UNSPECIFIED",
+                        DesiredState::Installed => "INSTALLED",
+                        DesiredState::Removed => "REMOVED",
+                    }
+                }
+            }
             /// A system package.
             #[derive(Clone, PartialEq, ::prost::Oneof)]
             pub enum SystemPackage {
@@ -670,6 +721,19 @@ pub mod os_policy {
                     Deb = 1,
                     /// Deb-src indicates that the archive contains source files.
                     DebSrc = 2,
+                }
+                impl ArchiveType {
+                    /// String value of the enum field names used in the ProtoBuf definition.
+                    ///
+                    /// The values are not transformed in any way and thus are considered stable
+                    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+                    pub fn as_str_name(&self) -> &'static str {
+                        match self {
+                            ArchiveType::Unspecified => "ARCHIVE_TYPE_UNSPECIFIED",
+                            ArchiveType::Deb => "DEB",
+                            ArchiveType::DebSrc => "DEB_SRC",
+                        }
+                    }
                 }
             }
             /// Represents a single yum package repository. These are added to a
@@ -826,6 +890,20 @@ pub mod os_policy {
                     /// Indicates that the script runs with PowerShell.
                     Powershell = 3,
                 }
+                impl Interpreter {
+                    /// String value of the enum field names used in the ProtoBuf definition.
+                    ///
+                    /// The values are not transformed in any way and thus are considered stable
+                    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+                    pub fn as_str_name(&self) -> &'static str {
+                        match self {
+                            Interpreter::Unspecified => "INTERPRETER_UNSPECIFIED",
+                            Interpreter::None => "NONE",
+                            Interpreter::Shell => "SHELL",
+                            Interpreter::Powershell => "POWERSHELL",
+                        }
+                    }
+                }
                 /// What to execute.
                 #[derive(Clone, PartialEq, ::prost::Oneof)]
                 pub enum Source {
@@ -882,6 +960,20 @@ pub mod os_policy {
                 /// Ensure the contents of the file at path matches. If the file does
                 /// not exist it will be created.
                 ContentsMatch = 3,
+            }
+            impl DesiredState {
+                /// String value of the enum field names used in the ProtoBuf definition.
+                ///
+                /// The values are not transformed in any way and thus are considered stable
+                /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+                pub fn as_str_name(&self) -> &'static str {
+                    match self {
+                        DesiredState::Unspecified => "DESIRED_STATE_UNSPECIFIED",
+                        DesiredState::Present => "PRESENT",
+                        DesiredState::Absent => "ABSENT",
+                        DesiredState::ContentsMatch => "CONTENTS_MATCH",
+                    }
+                }
             }
             /// The source for the contents of the file.
             #[derive(Clone, PartialEq, ::prost::Oneof)]
@@ -956,6 +1048,19 @@ pub mod os_policy {
         /// their desired state, and if not, enforces the desired state.
         Enforcement = 2,
     }
+    impl Mode {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Mode::Unspecified => "MODE_UNSPECIFIED",
+                Mode::Validation => "VALIDATION",
+                Mode::Enforcement => "ENFORCEMENT",
+            }
+        }
+    }
 }
 /// Get a report of the OS policy assignment for a VM instance.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -991,11 +1096,11 @@ pub struct ListOsPolicyAssignmentReportsRequest {
     ///
     /// For example:
     /// `projects/{project}/locations/{location}/instances/{instance}/osPolicyAssignments/-/reports`
-    ///  returns all reports for the instance
+    ///   returns all reports for the instance
     /// `projects/{project}/locations/{location}/instances/-/osPolicyAssignments/{assignment-id}/reports`
-    ///  returns all the reports for the given assignment across all instances.
+    ///   returns all the reports for the given assignment across all instances.
     /// `projects/{project}/locations/{location}/instances/-/osPolicyAssignments/-/reports`
-    ///  returns all the reports for all assignments across all instances.
+    ///   returns all the reports for all assignments across all instances.
     #[prost(string, tag="1")]
     pub parent: ::prost::alloc::string::String,
     /// The maximum number of results to return.
@@ -1169,6 +1274,21 @@ pub mod os_policy_assignment_report {
                     /// resources.
                     DesiredStateCheckPostEnforcement = 4,
                 }
+                impl Type {
+                    /// String value of the enum field names used in the ProtoBuf definition.
+                    ///
+                    /// The values are not transformed in any way and thus are considered stable
+                    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+                    pub fn as_str_name(&self) -> &'static str {
+                        match self {
+                            Type::Unspecified => "TYPE_UNSPECIFIED",
+                            Type::Validation => "VALIDATION",
+                            Type::DesiredStateCheck => "DESIRED_STATE_CHECK",
+                            Type::DesiredStateEnforcement => "DESIRED_STATE_ENFORCEMENT",
+                            Type::DesiredStateCheckPostEnforcement => "DESIRED_STATE_CHECK_POST_ENFORCEMENT",
+                        }
+                    }
+                }
             }
             /// ExecResource specific output.
             #[derive(Clone, PartialEq, ::prost::Message)]
@@ -1191,6 +1311,19 @@ pub mod os_policy_assignment_report {
                 Compliant = 1,
                 /// Resource is non-compliant.
                 NonCompliant = 2,
+            }
+            impl ComplianceState {
+                /// String value of the enum field names used in the ProtoBuf definition.
+                ///
+                /// The values are not transformed in any way and thus are considered stable
+                /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+                pub fn as_str_name(&self) -> &'static str {
+                    match self {
+                        ComplianceState::Unknown => "UNKNOWN",
+                        ComplianceState::Compliant => "COMPLIANT",
+                        ComplianceState::NonCompliant => "NON_COMPLIANT",
+                    }
+                }
             }
             /// Resource specific output.
             #[derive(Clone, PartialEq, ::prost::Oneof)]
@@ -1219,6 +1352,19 @@ pub mod os_policy_assignment_report {
             /// The policy is non-compliant if one or more underlying resources are
             /// non-compliant.
             NonCompliant = 2,
+        }
+        impl ComplianceState {
+            /// String value of the enum field names used in the ProtoBuf definition.
+            ///
+            /// The values are not transformed in any way and thus are considered stable
+            /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+            pub fn as_str_name(&self) -> &'static str {
+                match self {
+                    ComplianceState::Unknown => "UNKNOWN",
+                    ComplianceState::Compliant => "COMPLIANT",
+                    ComplianceState::NonCompliant => "NON_COMPLIANT",
+                }
+            }
         }
     }
 }
@@ -1280,8 +1426,8 @@ pub struct OsPolicyAssignment {
     /// 1) OSPolicyAssignment is created.
     /// 2) OSPolicyAssignment is updated and the update contains changes to one of
     /// the following fields:
-    ///    - instance_filter
-    ///    - os_policies
+    ///     - instance_filter
+    ///     - os_policies
     /// 3) OSPolicyAssignment is deleted.
     #[prost(message, optional, tag="5")]
     pub rollout: ::core::option::Option<os_policy_assignment::Rollout>,
@@ -1327,11 +1473,11 @@ pub mod os_policy_assignment {
     /// * A label is a key value pair set for a VM.
     /// * A LabelSet is a set of labels.
     /// * Labels within a LabelSet are ANDed. In other words, a LabelSet is
-    ///   applicable for a VM only if it matches all the labels in the
-    ///   LabelSet.
+    ///    applicable for a VM only if it matches all the labels in the
+    ///    LabelSet.
     /// * Example: A LabelSet with 2 labels: `env=prod` and `type=webserver` will
-    ///            only be applicable for those VMs with both labels
-    ///            present.
+    ///             only be applicable for those VMs with both labels
+    ///             present.
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct LabelSet {
         /// Labels are identified by key/value pairs in this map.
@@ -1419,6 +1565,21 @@ pub mod os_policy_assignment {
         /// The rollout has completed successfully.
         Succeeded = 4,
     }
+    impl RolloutState {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                RolloutState::Unspecified => "ROLLOUT_STATE_UNSPECIFIED",
+                RolloutState::InProgress => "IN_PROGRESS",
+                RolloutState::Cancelling => "CANCELLING",
+                RolloutState::Cancelled => "CANCELLED",
+                RolloutState::Succeeded => "SUCCEEDED",
+            }
+        }
+    }
 }
 /// OS policy assignment operation metadata provided by OS policy assignment API
 /// methods that return long running operations.
@@ -1458,6 +1619,20 @@ pub mod os_policy_assignment_operation_metadata {
         /// Delete OS policy assignment API method
         Delete = 3,
     }
+    impl ApiMethod {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ApiMethod::Unspecified => "API_METHOD_UNSPECIFIED",
+                ApiMethod::Create => "CREATE",
+                ApiMethod::Update => "UPDATE",
+                ApiMethod::Delete => "DELETE",
+            }
+        }
+    }
     /// State of the rollout
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -1472,6 +1647,21 @@ pub mod os_policy_assignment_operation_metadata {
         Cancelled = 3,
         /// The rollout has completed successfully.
         Succeeded = 4,
+    }
+    impl RolloutState {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                RolloutState::Unspecified => "ROLLOUT_STATE_UNSPECIFIED",
+                RolloutState::InProgress => "IN_PROGRESS",
+                RolloutState::Cancelling => "CANCELLING",
+                RolloutState::Cancelled => "CANCELLED",
+                RolloutState::Succeeded => "SUCCEEDED",
+            }
+        }
     }
 }
 /// A request message to create an OS policy assignment
@@ -1838,6 +2028,24 @@ pub mod patch_job {
         /// The patch job timed out.
         TimedOut = 7,
     }
+    impl State {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                State::Unspecified => "STATE_UNSPECIFIED",
+                State::Started => "STARTED",
+                State::InstanceLookup => "INSTANCE_LOOKUP",
+                State::Patching => "PATCHING",
+                State::Succeeded => "SUCCEEDED",
+                State::CompletedWithErrors => "COMPLETED_WITH_ERRORS",
+                State::Canceled => "CANCELED",
+                State::TimedOut => "TIMED_OUT",
+            }
+        }
+    }
 }
 /// Patch configuration specifications. Contains details on how to apply the
 /// patch(es) to a VM instance.
@@ -1890,6 +2098,20 @@ pub mod patch_config {
         /// Never reboot the machine after the update completes.
         Never = 3,
     }
+    impl RebootConfig {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                RebootConfig::Unspecified => "REBOOT_CONFIG_UNSPECIFIED",
+                RebootConfig::Default => "DEFAULT",
+                RebootConfig::Always => "ALWAYS",
+                RebootConfig::Never => "NEVER",
+            }
+        }
+    }
 }
 /// Namespace for instance state enums.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -1936,6 +2158,32 @@ pub mod instance {
         /// service.
         NoAgentDetected = 15,
     }
+    impl PatchState {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                PatchState::Unspecified => "PATCH_STATE_UNSPECIFIED",
+                PatchState::Pending => "PENDING",
+                PatchState::Inactive => "INACTIVE",
+                PatchState::Notified => "NOTIFIED",
+                PatchState::Started => "STARTED",
+                PatchState::DownloadingPatches => "DOWNLOADING_PATCHES",
+                PatchState::ApplyingPatches => "APPLYING_PATCHES",
+                PatchState::Rebooting => "REBOOTING",
+                PatchState::Succeeded => "SUCCEEDED",
+                PatchState::SucceededRebootRequired => "SUCCEEDED_REBOOT_REQUIRED",
+                PatchState::Failed => "FAILED",
+                PatchState::Acked => "ACKED",
+                PatchState::TimedOut => "TIMED_OUT",
+                PatchState::RunningPrePatchStep => "RUNNING_PRE_PATCH_STEP",
+                PatchState::RunningPostPatchStep => "RUNNING_POST_PATCH_STEP",
+                PatchState::NoAgentDetected => "NO_AGENT_DETECTED",
+            }
+        }
+    }
 }
 /// Message for canceling a patch job.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -1974,6 +2222,19 @@ pub mod apt_settings {
         Dist = 1,
         /// Runs `apt-get upgrade`.
         Upgrade = 2,
+    }
+    impl Type {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Type::Unspecified => "TYPE_UNSPECIFIED",
+                Type::Dist => "DIST",
+                Type::Upgrade => "UPGRADE",
+            }
+        }
     }
 }
 /// Yum patching is performed by executing `yum update`. Additional options
@@ -2093,6 +2354,26 @@ pub mod windows_update_settings {
         /// noncritical, non-security-related bug." \[1\]
         Update = 9,
     }
+    impl Classification {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Classification::Unspecified => "CLASSIFICATION_UNSPECIFIED",
+                Classification::Critical => "CRITICAL",
+                Classification::Security => "SECURITY",
+                Classification::Definition => "DEFINITION",
+                Classification::Driver => "DRIVER",
+                Classification::FeaturePack => "FEATURE_PACK",
+                Classification::ServicePack => "SERVICE_PACK",
+                Classification::Tool => "TOOL",
+                Classification::UpdateRollup => "UPDATE_ROLLUP",
+                Classification::Update => "UPDATE",
+            }
+        }
+    }
 }
 /// A step that runs an executable for a PatchJob.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -2137,6 +2418,19 @@ pub mod exec_step_config {
         /// Indicates that the file is run with PowerShell flags
         /// `-NonInteractive`, `-NoProfile`, and `-ExecutionPolicy Bypass`.
         Powershell = 2,
+    }
+    impl Interpreter {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Interpreter::Unspecified => "INTERPRETER_UNSPECIFIED",
+                Interpreter::Shell => "SHELL",
+                Interpreter::Powershell => "POWERSHELL",
+            }
+        }
     }
     /// Location of the executable.
     #[derive(Clone, PartialEq, ::prost::Oneof)]
@@ -2262,6 +2556,19 @@ pub mod patch_rollout {
         /// Patches are applied to VMs in all zones at the same time.
         ConcurrentZones = 2,
     }
+    impl Mode {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Mode::Unspecified => "MODE_UNSPECIFIED",
+                Mode::ZoneByZone => "ZONE_BY_ZONE",
+                Mode::ConcurrentZones => "CONCURRENT_ZONES",
+            }
+        }
+    }
 }
 /// Patch deployments are configurations that individual patch jobs use to
 /// complete a patch. These configurations include instance filter, package
@@ -2380,6 +2687,20 @@ pub mod recurring_schedule {
         /// Indicates that the frequency should be expressed in terms of
         /// days.
         Daily = 3,
+    }
+    impl Frequency {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Frequency::Unspecified => "FREQUENCY_UNSPECIFIED",
+                Frequency::Weekly => "WEEKLY",
+                Frequency::Monthly => "MONTHLY",
+                Frequency::Daily => "DAILY",
+            }
+        }
     }
     /// Configurations for this recurring schedule.
     /// Configurations must match frequency.
@@ -2502,6 +2823,7 @@ pub struct DeletePatchDeploymentRequest {
 pub mod os_config_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// OS Config API
     ///
     /// The OS Config service is a server-side component that you can use to
@@ -2519,6 +2841,10 @@ pub mod os_config_service_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -2540,19 +2866,19 @@ pub mod os_config_service_client {
         {
             OsConfigServiceClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Patch VM instances by creating and running a patch job.
@@ -2996,6 +3322,21 @@ pub mod cvs_sv3 {
         /// vulnerable component.
         Physical = 4,
     }
+    impl AttackVector {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AttackVector::Unspecified => "ATTACK_VECTOR_UNSPECIFIED",
+                AttackVector::Network => "ATTACK_VECTOR_NETWORK",
+                AttackVector::Adjacent => "ATTACK_VECTOR_ADJACENT",
+                AttackVector::Local => "ATTACK_VECTOR_LOCAL",
+                AttackVector::Physical => "ATTACK_VECTOR_PHYSICAL",
+            }
+        }
+    }
     /// This metric describes the conditions beyond the attacker's control that
     /// must exist in order to exploit the vulnerability.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -3013,6 +3354,19 @@ pub mod cvs_sv3 {
         /// or execution against the vulnerable component before a successful attack
         /// can be expected.
         High = 2,
+    }
+    impl AttackComplexity {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AttackComplexity::Unspecified => "ATTACK_COMPLEXITY_UNSPECIFIED",
+                AttackComplexity::Low => "ATTACK_COMPLEXITY_LOW",
+                AttackComplexity::High => "ATTACK_COMPLEXITY_HIGH",
+            }
+        }
     }
     /// This metric describes the level of privileges an attacker must possess
     /// before successfully exploiting the vulnerability.
@@ -3035,6 +3389,20 @@ pub mod cvs_sv3 {
         /// component-wide settings and files.
         High = 3,
     }
+    impl PrivilegesRequired {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                PrivilegesRequired::Unspecified => "PRIVILEGES_REQUIRED_UNSPECIFIED",
+                PrivilegesRequired::None => "PRIVILEGES_REQUIRED_NONE",
+                PrivilegesRequired::Low => "PRIVILEGES_REQUIRED_LOW",
+                PrivilegesRequired::High => "PRIVILEGES_REQUIRED_HIGH",
+            }
+        }
+    }
     /// This metric captures the requirement for a human user, other than the
     /// attacker, to participate in the successful compromise of the vulnerable
     /// component.
@@ -3049,6 +3417,19 @@ pub mod cvs_sv3 {
         /// some action before the vulnerability can be exploited.
         Required = 2,
     }
+    impl UserInteraction {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                UserInteraction::Unspecified => "USER_INTERACTION_UNSPECIFIED",
+                UserInteraction::None => "USER_INTERACTION_NONE",
+                UserInteraction::Required => "USER_INTERACTION_REQUIRED",
+            }
+        }
+    }
     /// The Scope metric captures whether a vulnerability in one vulnerable
     /// component impacts resources in components beyond its security scope.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -3062,6 +3443,19 @@ pub mod cvs_sv3 {
         /// An exploited vulnerability can affect resources beyond the security scope
         /// managed by the security authority of the vulnerable component.
         Changed = 2,
+    }
+    impl Scope {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Scope::Unspecified => "SCOPE_UNSPECIFIED",
+                Scope::Unchanged => "SCOPE_UNCHANGED",
+                Scope::Changed => "SCOPE_CHANGED",
+            }
+        }
     }
     /// The Impact metrics capture the effects of a successfully exploited
     /// vulnerability on the component that suffers the worst outcome that is most
@@ -3078,11 +3472,26 @@ pub mod cvs_sv3 {
         /// No impact.
         None = 3,
     }
+    impl Impact {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Impact::Unspecified => "IMPACT_UNSPECIFIED",
+                Impact::High => "IMPACT_HIGH",
+                Impact::Low => "IMPACT_LOW",
+                Impact::None => "IMPACT_NONE",
+            }
+        }
+    }
 }
 /// Generated client implementations.
 pub mod os_config_zonal_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// Zonal OS Config API
     ///
     /// The OS Config service is the server-side component that allows users to
@@ -3100,6 +3509,10 @@ pub mod os_config_zonal_service_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -3121,19 +3534,19 @@ pub mod os_config_zonal_service_client {
         {
             OsConfigZonalServiceClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Create an OS policy assignment.

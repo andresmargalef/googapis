@@ -26,11 +26,11 @@ pub struct SecurityMarks {
     /// Mutable user specified security marks belonging to the parent resource.
     /// Constraints are as follows:
     ///
-    ///   * Keys and values are treated as case insensitive
-    ///   * Keys must be between 1 - 256 characters (inclusive)
-    ///   * Keys must be letters, numbers, underscores, or dashes
-    ///   * Values have leading and trailing whitespace trimmed, remaining
-    ///     characters must be between 1 - 4096 characters (inclusive)
+    ///    * Keys and values are treated as case insensitive
+    ///    * Keys must be between 1 - 256 characters (inclusive)
+    ///    * Keys must be letters, numbers, underscores, or dashes
+    ///    * Values have leading and trailing whitespace trimmed, remaining
+    ///      characters must be between 1 - 4096 characters (inclusive)
     #[prost(map="string, string", tag="2")]
     pub marks: ::std::collections::HashMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
     /// The canonical name of the marks.
@@ -151,7 +151,7 @@ pub mod asset {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExternalSystem {
     /// External System Name e.g. jira, demisto, etc.
-    ///  e.g.: `organizations/1234/sources/5678/findings/123456/externalSystems/jira`
+    ///   e.g.: `organizations/1234/sources/5678/findings/123456/externalSystems/jira`
     /// `folders/1234/sources/5678/findings/123456/externalSystems/jira`
     /// `projects/1234/sources/5678/findings/123456/externalSystems/jira`
     #[prost(string, tag="1")]
@@ -286,6 +286,21 @@ pub mod cvssv3 {
         /// vulnerable component.
         Physical = 4,
     }
+    impl AttackVector {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AttackVector::Unspecified => "ATTACK_VECTOR_UNSPECIFIED",
+                AttackVector::Network => "ATTACK_VECTOR_NETWORK",
+                AttackVector::Adjacent => "ATTACK_VECTOR_ADJACENT",
+                AttackVector::Local => "ATTACK_VECTOR_LOCAL",
+                AttackVector::Physical => "ATTACK_VECTOR_PHYSICAL",
+            }
+        }
+    }
     /// This metric describes the conditions beyond the attacker's control that
     /// must exist in order to exploit the vulnerability.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -303,6 +318,19 @@ pub mod cvssv3 {
         /// or execution against the vulnerable component before a successful attack
         /// can be expected.
         High = 2,
+    }
+    impl AttackComplexity {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AttackComplexity::Unspecified => "ATTACK_COMPLEXITY_UNSPECIFIED",
+                AttackComplexity::Low => "ATTACK_COMPLEXITY_LOW",
+                AttackComplexity::High => "ATTACK_COMPLEXITY_HIGH",
+            }
+        }
     }
     /// This metric describes the level of privileges an attacker must possess
     /// before successfully exploiting the vulnerability.
@@ -325,6 +353,20 @@ pub mod cvssv3 {
         /// component-wide settings and files.
         High = 3,
     }
+    impl PrivilegesRequired {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                PrivilegesRequired::Unspecified => "PRIVILEGES_REQUIRED_UNSPECIFIED",
+                PrivilegesRequired::None => "PRIVILEGES_REQUIRED_NONE",
+                PrivilegesRequired::Low => "PRIVILEGES_REQUIRED_LOW",
+                PrivilegesRequired::High => "PRIVILEGES_REQUIRED_HIGH",
+            }
+        }
+    }
     /// This metric captures the requirement for a human user, other than the
     /// attacker, to participate in the successful compromise of the vulnerable
     /// component.
@@ -338,6 +380,19 @@ pub mod cvssv3 {
         /// Successful exploitation of this vulnerability requires a user to take
         /// some action before the vulnerability can be exploited.
         Required = 2,
+    }
+    impl UserInteraction {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                UserInteraction::Unspecified => "USER_INTERACTION_UNSPECIFIED",
+                UserInteraction::None => "USER_INTERACTION_NONE",
+                UserInteraction::Required => "USER_INTERACTION_REQUIRED",
+            }
+        }
     }
     /// The Scope metric captures whether a vulnerability in one vulnerable
     /// component impacts resources in components beyond its security scope.
@@ -353,6 +408,19 @@ pub mod cvssv3 {
         /// managed by the security authority of the vulnerable component.
         Changed = 2,
     }
+    impl Scope {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Scope::Unspecified => "SCOPE_UNSPECIFIED",
+                Scope::Unchanged => "SCOPE_UNCHANGED",
+                Scope::Changed => "SCOPE_CHANGED",
+            }
+        }
+    }
     /// The Impact metrics capture the effects of a successfully exploited
     /// vulnerability on the component that suffers the worst outcome that is most
     /// directly and predictably associated with the attack.
@@ -367,6 +435,20 @@ pub mod cvssv3 {
         Low = 2,
         /// No impact.
         None = 3,
+    }
+    impl Impact {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Impact::Unspecified => "IMPACT_UNSPECIFIED",
+                Impact::High => "IMPACT_HIGH",
+                Impact::Low => "IMPACT_LOW",
+                Impact::None => "IMPACT_NONE",
+            }
+        }
     }
 }
 /// Security Command Center finding.
@@ -492,6 +574,19 @@ pub mod finding {
         /// and is no longer active.
         Inactive = 2,
     }
+    impl State {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                State::Unspecified => "STATE_UNSPECIFIED",
+                State::Active => "ACTIVE",
+                State::Inactive => "INACTIVE",
+            }
+        }
+    }
     /// The severity of the finding.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -548,6 +643,21 @@ pub mod finding {
         /// is not able to access data, execute code, or create resources.
         Low = 4,
     }
+    impl Severity {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Severity::Unspecified => "SEVERITY_UNSPECIFIED",
+                Severity::Critical => "CRITICAL",
+                Severity::High => "HIGH",
+                Severity::Medium => "MEDIUM",
+                Severity::Low => "LOW",
+            }
+        }
+    }
     /// Mute state a finding can be in.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -560,6 +670,20 @@ pub mod finding {
         Unmuted = 2,
         /// Finding has never been muted/unmuted.
         Undefined = 4,
+    }
+    impl Mute {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Mute::Unspecified => "MUTE_UNSPECIFIED",
+                Mute::Muted => "MUTED",
+                Mute::Unmuted => "UNMUTED",
+                Mute::Undefined => "UNDEFINED",
+            }
+        }
     }
     /// Represents what kind of Finding it is.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -577,6 +701,21 @@ pub mod finding {
         Misconfiguration = 3,
         /// Describes a security observation that is for informational purposes.
         Observation = 4,
+    }
+    impl FindingClass {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                FindingClass::Unspecified => "FINDING_CLASS_UNSPECIFIED",
+                FindingClass::Threat => "THREAT",
+                FindingClass::Vulnerability => "VULNERABILITY",
+                FindingClass::Misconfiguration => "MISCONFIGURATION",
+                FindingClass::Observation => "OBSERVATION",
+            }
+        }
     }
 }
 /// A mute config is a Cloud SCC resource that contains the configuration
@@ -813,6 +952,19 @@ pub mod organization_settings {
             /// All other resources will be retrieved.
             Exclude = 2,
         }
+        impl InclusionMode {
+            /// String value of the enum field names used in the ProtoBuf definition.
+            ///
+            /// The values are not transformed in any way and thus are considered stable
+            /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+            pub fn as_str_name(&self) -> &'static str {
+                match self {
+                    InclusionMode::Unspecified => "INCLUSION_MODE_UNSPECIFIED",
+                    InclusionMode::IncludeOnly => "INCLUDE_ONLY",
+                    InclusionMode::Exclude => "EXCLUDE",
+                }
+            }
+        }
     }
 }
 /// Response of asset discovery run
@@ -840,6 +992,20 @@ pub mod run_asset_discovery_response {
         Superseded = 2,
         /// Asset discovery run was killed and terminated.
         Terminated = 3,
+    }
+    impl State {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                State::Unspecified => "STATE_UNSPECIFIED",
+                State::Completed => "COMPLETED",
+                State::Superseded => "SUPERSEDED",
+                State::Terminated => "TERMINATED",
+            }
+        }
     }
 }
 /// Security Command Center finding source. A finding source
@@ -1080,17 +1246,17 @@ pub struct GroupAssetsRequest {
     /// * name: `=`
     /// * update_time: `=`, `>`, `<`, `>=`, `<=`
     ///
-    ///   Usage: This should be milliseconds since epoch or an RFC3339 string.
-    ///   Examples:
-    ///     `update_time = "2019-06-10T16:07:18-07:00"`
-    ///     `update_time = 1560208038000`
+    ///    Usage: This should be milliseconds since epoch or an RFC3339 string.
+    ///    Examples:
+    ///      `update_time = "2019-06-10T16:07:18-07:00"`
+    ///      `update_time = 1560208038000`
     ///
     /// * create_time: `=`, `>`, `<`, `>=`, `<=`
     ///
-    ///   Usage: This should be milliseconds since epoch or an RFC3339 string.
-    ///   Examples:
-    ///     `create_time = "2019-06-10T16:07:18-07:00"`
-    ///     `create_time = 1560208038000`
+    ///    Usage: This should be milliseconds since epoch or an RFC3339 string.
+    ///    Examples:
+    ///      `create_time = "2019-06-10T16:07:18-07:00"`
+    ///      `create_time = 1560208038000`
     ///
     /// * iam_policy.policy_blob: `=`, `:`
     /// * resource_properties: `=`, `:`, `>`, `<`, `>=`, `<=`
@@ -1147,12 +1313,12 @@ pub struct GroupAssetsRequest {
     /// Possible "state_change" values when compare_duration is specified:
     ///
     /// * "ADDED":   indicates that the asset was not present at the start of
-    ///                compare_duration, but present at reference_time.
+    ///                 compare_duration, but present at reference_time.
     /// * "REMOVED": indicates that the asset was present at the start of
-    ///                compare_duration, but not present at reference_time.
+    ///                 compare_duration, but not present at reference_time.
     /// * "ACTIVE":  indicates that the asset was present at both the
-    ///                start and the end of the time period defined by
-    ///                compare_duration and reference_time.
+    ///                 start and the end of the time period defined by
+    ///                 compare_duration and reference_time.
     ///
     /// If compare_duration is not specified, then the only possible state_change
     /// is "UNUSED", which will be the state_change set for all assets present at
@@ -1217,9 +1383,9 @@ pub struct GroupFindingsRequest {
     /// Restrictions have the form `<field> <operator> <value>` and may have a `-`
     /// character in front of them to indicate negation. Examples include:
     ///
-    ///  * name
-    ///  * source_properties.a_property
-    ///  * security_marks.marks.marka
+    ///   * name
+    ///   * source_properties.a_property
+    ///   * security_marks.marks.marka
     ///
     /// The supported operators are:
     ///
@@ -1243,31 +1409,31 @@ pub struct GroupFindingsRequest {
     /// * external_uri: `=`, `:`
     /// * event_time: `=`, `>`, `<`, `>=`, `<=`
     ///
-    ///   Usage: This should be milliseconds since epoch or an RFC3339 string.
-    ///   Examples:
-    ///     `event_time = "2019-06-10T16:07:18-07:00"`
-    ///     `event_time = 1560208038000`
+    ///    Usage: This should be milliseconds since epoch or an RFC3339 string.
+    ///    Examples:
+    ///      `event_time = "2019-06-10T16:07:18-07:00"`
+    ///      `event_time = 1560208038000`
     ///
     /// * severity: `=`, `:`
     /// * workflow_state: `=`, `:`
     /// * security_marks.marks: `=`, `:`
     /// * source_properties: `=`, `:`, `>`, `<`, `>=`, `<=`
     ///
-    ///   For example, `source_properties.size = 100` is a valid filter string.
+    ///    For example, `source_properties.size = 100` is a valid filter string.
     ///
-    ///   Use a partial match on the empty string to filter based on a property
-    ///   existing: `source_properties.my_property : ""`
+    ///    Use a partial match on the empty string to filter based on a property
+    ///    existing: `source_properties.my_property : ""`
     ///
-    ///   Use a negated partial match on the empty string to filter based on a
-    ///   property not existing: `-source_properties.my_property : ""`
+    ///    Use a negated partial match on the empty string to filter based on a
+    ///    property not existing: `-source_properties.my_property : ""`
     ///
     /// * resource:
-    ///   * resource.name: `=`, `:`
-    ///   * resource.parent_name: `=`, `:`
-    ///   * resource.parent_display_name: `=`, `:`
-    ///   * resource.project_name: `=`, `:`
-    ///   * resource.project_display_name: `=`, `:`
-    ///   * resource.type: `=`, `:`
+    ///    * resource.name: `=`, `:`
+    ///    * resource.parent_name: `=`, `:`
+    ///    * resource.parent_display_name: `=`, `:`
+    ///    * resource.project_name: `=`, `:`
+    ///    * resource.project_display_name: `=`, `:`
+    ///    * resource.type: `=`, `:`
     #[prost(string, tag="2")]
     pub filter: ::prost::alloc::string::String,
     /// Required. Expression that defines what assets fields to use for grouping (including
@@ -1307,17 +1473,17 @@ pub struct GroupFindingsRequest {
     /// Possible "state_change" values when compare_duration is specified:
     ///
     /// * "CHANGED":   indicates that the finding was present and matched the given
-    ///                  filter at the start of compare_duration, but changed its
-    ///                  state at read_time.
+    ///                   filter at the start of compare_duration, but changed its
+    ///                   state at read_time.
     /// * "UNCHANGED": indicates that the finding was present and matched the given
-    ///                  filter at the start of compare_duration and did not change
-    ///                  state at read_time.
+    ///                   filter at the start of compare_duration and did not change
+    ///                   state at read_time.
     /// * "ADDED":     indicates that the finding did not match the given filter or
-    ///                  was not present at the start of compare_duration, but was
-    ///                  present at read_time.
+    ///                   was not present at the start of compare_duration, but was
+    ///                   present at read_time.
     /// * "REMOVED":   indicates that the finding was present and matched the
-    ///                  filter at the start of compare_duration, but did not match
-    ///                  the filter at read_time.
+    ///                   filter at the start of compare_duration, but did not match
+    ///                   the filter at read_time.
     ///
     /// If compare_duration is not specified, then the only possible state_change
     /// is "UNUSED",  which will be the state_change set for all findings present
@@ -1496,17 +1662,17 @@ pub struct ListAssetsRequest {
     /// * name: `=`
     /// * update_time: `=`, `>`, `<`, `>=`, `<=`
     ///
-    ///   Usage: This should be milliseconds since epoch or an RFC3339 string.
-    ///   Examples:
-    ///     `update_time = "2019-06-10T16:07:18-07:00"`
-    ///     `update_time = 1560208038000`
+    ///    Usage: This should be milliseconds since epoch or an RFC3339 string.
+    ///    Examples:
+    ///      `update_time = "2019-06-10T16:07:18-07:00"`
+    ///      `update_time = 1560208038000`
     ///
     /// * create_time: `=`, `>`, `<`, `>=`, `<=`
     ///
-    ///   Usage: This should be milliseconds since epoch or an RFC3339 string.
-    ///   Examples:
-    ///     `create_time = "2019-06-10T16:07:18-07:00"`
-    ///     `create_time = 1560208038000`
+    ///    Usage: This should be milliseconds since epoch or an RFC3339 string.
+    ///    Examples:
+    ///      `create_time = "2019-06-10T16:07:18-07:00"`
+    ///      `create_time = 1560208038000`
     ///
     /// * iam_policy.policy_blob: `=`, `:`
     /// * resource_properties: `=`, `:`, `>`, `<`, `>=`, `<=`
@@ -1572,12 +1738,12 @@ pub struct ListAssetsRequest {
     /// Possible "state_change" values when compare_duration is specified:
     ///
     /// * "ADDED":   indicates that the asset was not present at the start of
-    ///                compare_duration, but present at read_time.
+    ///                 compare_duration, but present at read_time.
     /// * "REMOVED": indicates that the asset was present at the start of
-    ///                compare_duration, but not present at read_time.
+    ///                 compare_duration, but not present at read_time.
     /// * "ACTIVE":  indicates that the asset was present at both the
-    ///                start and the end of the time period defined by
-    ///                compare_duration and read_time.
+    ///                 start and the end of the time period defined by
+    ///                 compare_duration and read_time.
     ///
     /// If compare_duration is not specified, then the only possible state_change
     /// is "UNUSED",  which will be the state_change set for all assets present at
@@ -1648,6 +1814,20 @@ pub mod list_assets_response {
             /// Asset was present at both point(s) in time.
             Active = 3,
         }
+        impl StateChange {
+            /// String value of the enum field names used in the ProtoBuf definition.
+            ///
+            /// The values are not transformed in any way and thus are considered stable
+            /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+            pub fn as_str_name(&self) -> &'static str {
+                match self {
+                    StateChange::Unused => "UNUSED",
+                    StateChange::Added => "ADDED",
+                    StateChange::Removed => "REMOVED",
+                    StateChange::Active => "ACTIVE",
+                }
+            }
+        }
     }
 }
 /// Request message for listing findings.
@@ -1670,9 +1850,9 @@ pub struct ListFindingsRequest {
     /// Restrictions have the form `<field> <operator> <value>` and may have a `-`
     /// character in front of them to indicate negation. Examples include:
     ///
-    ///  * name
-    ///  * source_properties.a_property
-    ///  * security_marks.marks.marka
+    ///   * name
+    ///   * source_properties.a_property
+    ///   * security_marks.marks.marka
     ///
     /// The supported operators are:
     ///
@@ -1696,33 +1876,33 @@ pub struct ListFindingsRequest {
     /// * external_uri: `=`, `:`
     /// * event_time: `=`, `>`, `<`, `>=`, `<=`
     ///
-    ///   Usage: This should be milliseconds since epoch or an RFC3339 string.
-    ///   Examples:
-    ///     `event_time = "2019-06-10T16:07:18-07:00"`
-    ///     `event_time = 1560208038000`
+    ///    Usage: This should be milliseconds since epoch or an RFC3339 string.
+    ///    Examples:
+    ///      `event_time = "2019-06-10T16:07:18-07:00"`
+    ///      `event_time = 1560208038000`
     ///
     /// * severity: `=`, `:`
     /// * workflow_state: `=`, `:`
     /// * security_marks.marks: `=`, `:`
     /// * source_properties: `=`, `:`, `>`, `<`, `>=`, `<=`
     ///
-    ///   For example, `source_properties.size = 100` is a valid filter string.
+    ///    For example, `source_properties.size = 100` is a valid filter string.
     ///
-    ///   Use a partial match on the empty string to filter based on a property
-    ///   existing: `source_properties.my_property : ""`
+    ///    Use a partial match on the empty string to filter based on a property
+    ///    existing: `source_properties.my_property : ""`
     ///
-    ///   Use a negated partial match on the empty string to filter based on a
-    ///   property not existing: `-source_properties.my_property : ""`
+    ///    Use a negated partial match on the empty string to filter based on a
+    ///    property not existing: `-source_properties.my_property : ""`
     ///
     /// * resource:
-    ///   * resource.name: `=`, `:`
-    ///   * resource.parent_name: `=`, `:`
-    ///   * resource.parent_display_name: `=`, `:`
-    ///   * resource.project_name: `=`, `:`
-    ///   * resource.project_display_name: `=`, `:`
-    ///   * resource.type: `=`, `:`
-    ///   * resource.folders.resource_folder: `=`, `:`
-    ///   * resource.display_name: `=`, `:`
+    ///    * resource.name: `=`, `:`
+    ///    * resource.parent_name: `=`, `:`
+    ///    * resource.parent_display_name: `=`, `:`
+    ///    * resource.project_name: `=`, `:`
+    ///    * resource.project_display_name: `=`, `:`
+    ///    * resource.type: `=`, `:`
+    ///    * resource.folders.resource_folder: `=`, `:`
+    ///    * resource.display_name: `=`, `:`
     #[prost(string, tag="2")]
     pub filter: ::prost::alloc::string::String,
     /// Expression that defines what fields and order to use for sorting. The
@@ -1766,17 +1946,17 @@ pub struct ListFindingsRequest {
     /// Possible "state_change" values when compare_duration is specified:
     ///
     /// * "CHANGED":   indicates that the finding was present and matched the given
-    ///                  filter at the start of compare_duration, but changed its
-    ///                  state at read_time.
+    ///                   filter at the start of compare_duration, but changed its
+    ///                   state at read_time.
     /// * "UNCHANGED": indicates that the finding was present and matched the given
-    ///                  filter at the start of compare_duration and did not change
-    ///                  state at read_time.
+    ///                   filter at the start of compare_duration and did not change
+    ///                   state at read_time.
     /// * "ADDED":     indicates that the finding did not match the given filter or
-    ///                  was not present at the start of compare_duration, but was
-    ///                  present at read_time.
+    ///                   was not present at the start of compare_duration, but was
+    ///                   present at read_time.
     /// * "REMOVED":   indicates that the finding was present and matched the
-    ///                  filter at the start of compare_duration, but did not match
-    ///                  the filter at read_time.
+    ///                   filter at the start of compare_duration, but did not match
+    ///                   the filter at read_time.
     ///
     /// If compare_duration is not specified, then the only possible state_change
     /// is "UNUSED", which will be the state_change set for all findings present at
@@ -1887,6 +2067,21 @@ pub mod list_findings_response {
             /// The finding at timestamp does not match the filter specified, but it
             /// did at timestamp - compare_duration.
             Removed = 4,
+        }
+        impl StateChange {
+            /// String value of the enum field names used in the ProtoBuf definition.
+            ///
+            /// The values are not transformed in any way and thus are considered stable
+            /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+            pub fn as_str_name(&self) -> &'static str {
+                match self {
+                    StateChange::Unused => "UNUSED",
+                    StateChange::Changed => "CHANGED",
+                    StateChange::Unchanged => "UNCHANGED",
+                    StateChange::Added => "ADDED",
+                    StateChange::Removed => "REMOVED",
+                }
+            }
         }
     }
 }
@@ -2032,6 +2227,7 @@ pub struct UpdateSecurityMarksRequest {
 pub mod security_center_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// V1 APIs for Security Center service.
     #[derive(Debug, Clone)]
     pub struct SecurityCenterClient<T> {
@@ -2046,6 +2242,10 @@ pub mod security_center_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -2067,19 +2267,19 @@ pub mod security_center_client {
         {
             SecurityCenterClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Kicks off an LRO to bulk mute findings for a parent based on a filter. The

@@ -193,6 +193,19 @@ pub mod access_config {
         /// Public internet quality, only limited support for other networking products.
         Standard = 484642493,
     }
+    impl NetworkTier {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                NetworkTier::UndefinedNetworkTier => "UNDEFINED_NETWORK_TIER",
+                NetworkTier::Premium => "PREMIUM",
+                NetworkTier::Standard => "STANDARD",
+            }
+        }
+    }
     /// The type of configuration. The default and only option is ONE_TO_ONE_NAT.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -201,6 +214,19 @@ pub mod access_config {
         UndefinedType = 0,
         DirectIpv6 = 4397213,
         OneToOneNat = 84090205,
+    }
+    impl Type {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Type::UndefinedType => "UNDEFINED_TYPE",
+                Type::DirectIpv6 => "DIRECT_IPV6",
+                Type::OneToOneNat => "ONE_TO_ONE_NAT",
+            }
+        }
     }
 }
 /// A request message for Instances.AddAccessConfig. See the method description for details.
@@ -522,6 +548,20 @@ pub mod address {
         Internal = 279295677,
         UnspecifiedType = 53933922,
     }
+    impl AddressType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AddressType::UndefinedAddressType => "UNDEFINED_ADDRESS_TYPE",
+                AddressType::External => "EXTERNAL",
+                AddressType::Internal => "INTERNAL",
+                AddressType::UnspecifiedType => "UNSPECIFIED_TYPE",
+            }
+        }
+    }
     /// The IP version that will be used by this address. Valid options are IPV4 or IPV6. This can only be specified for a global address.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -531,6 +571,20 @@ pub mod address {
         Ipv4 = 2254341,
         Ipv6 = 2254343,
         UnspecifiedVersion = 21850000,
+    }
+    impl IpVersion {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                IpVersion::UndefinedIpVersion => "UNDEFINED_IP_VERSION",
+                IpVersion::Ipv4 => "IPV4",
+                IpVersion::Ipv6 => "IPV6",
+                IpVersion::UnspecifiedVersion => "UNSPECIFIED_VERSION",
+            }
+        }
     }
     /// This signifies the networking tier used for configuring this address and can only take the following values: PREMIUM or STANDARD. Internal IP addresses are always Premium Tier; global external IP addresses are always Premium Tier; regional external IP addresses can be either Standard or Premium Tier. If this field is not specified, it is assumed to be PREMIUM.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -542,6 +596,19 @@ pub mod address {
         Premium = 399530551,
         /// Public internet quality, only limited support for other networking products.
         Standard = 484642493,
+    }
+    impl NetworkTier {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                NetworkTier::UndefinedNetworkTier => "UNDEFINED_NETWORK_TIER",
+                NetworkTier::Premium => "PREMIUM",
+                NetworkTier::Standard => "STANDARD",
+            }
+        }
     }
     /// The purpose of this resource, which can be one of the following values: - GCE_ENDPOINT for addresses that are used by VM instances, alias IP ranges, load balancers, and similar resources. - DNS_RESOLVER for a DNS resolver address in a subnetwork for a Cloud DNS inbound forwarder IP addresses (regional internal IP address in a subnet of a VPC network) - VPC_PEERING for global internal IP addresses used for private services access allocated ranges. - NAT_AUTO for the regional external IP addresses used by Cloud NAT when allocating addresses using . - IPSEC_INTERCONNECT for addresses created from a private IP range that are reserved for a VLAN attachment in an *IPsec-encrypted Cloud Interconnect* configuration. These addresses are regional resources. Not currently available publicly. - `SHARED_LOADBALANCER_VIP` for an internal IP address that is assigned to multiple internal forwarding rules. - `PRIVATE_SERVICE_CONNECT` for a private network address that is used to configure Private Service Connect. Only global internal addresses can use this purpose. 
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -564,6 +631,24 @@ pub mod address {
         /// IP range for peer networks.
         VpcPeering = 400800170,
     }
+    impl Purpose {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Purpose::UndefinedPurpose => "UNDEFINED_PURPOSE",
+                Purpose::DnsResolver => "DNS_RESOLVER",
+                Purpose::GceEndpoint => "GCE_ENDPOINT",
+                Purpose::IpsecInterconnect => "IPSEC_INTERCONNECT",
+                Purpose::NatAuto => "NAT_AUTO",
+                Purpose::PrivateServiceConnect => "PRIVATE_SERVICE_CONNECT",
+                Purpose::SharedLoadbalancerVip => "SHARED_LOADBALANCER_VIP",
+                Purpose::VpcPeering => "VPC_PEERING",
+            }
+        }
+    }
     /// [Output Only] The status of the address, which can be one of RESERVING, RESERVED, or IN_USE. An address that is RESERVING is currently in the process of being reserved. A RESERVED address is currently reserved and available to use. An IN_USE address is currently being used by another resource and is not available.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -576,6 +661,20 @@ pub mod address {
         Reserved = 432241448,
         /// Address is being reserved.
         Reserving = 514587225,
+    }
+    impl Status {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Status::UndefinedStatus => "UNDEFINED_STATUS",
+                Status::InUse => "IN_USE",
+                Status::Reserved => "RESERVED",
+                Status::Reserving => "RESERVING",
+            }
+        }
     }
 }
 ///
@@ -1552,6 +1651,19 @@ pub mod allocation_specific_sku_allocation_allocated_instance_properties_reserve
         Nvme = 2408800,
         Scsi = 2539686,
     }
+    impl Interface {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Interface::UndefinedInterface => "UNDEFINED_INTERFACE",
+                Interface::Nvme => "NVME",
+                Interface::Scsi => "SCSI",
+            }
+        }
+    }
 }
 /// Properties of the SKU instances being reserved. Next ID: 9
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -1747,6 +1859,19 @@ pub mod attached_disk {
         Nvme = 2408800,
         Scsi = 2539686,
     }
+    impl Interface {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Interface::UndefinedInterface => "UNDEFINED_INTERFACE",
+                Interface::Nvme => "NVME",
+                Interface::Scsi => "SCSI",
+            }
+        }
+    }
     /// The mode in which to attach this disk, either READ_WRITE or READ_ONLY. If not specified, the default is to attach the disk in READ_WRITE mode.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -1758,6 +1883,19 @@ pub mod attached_disk {
         /// *\[Default\]* Attaches this disk in read-write mode. Only one virtual machine at a time can be attached to a disk in read-write mode.
         ReadWrite = 173607894,
     }
+    impl Mode {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Mode::UndefinedMode => "UNDEFINED_MODE",
+                Mode::ReadOnly => "READ_ONLY",
+                Mode::ReadWrite => "READ_WRITE",
+            }
+        }
+    }
     /// Specifies the type of the disk, either SCRATCH or PERSISTENT. If not specified, the default is PERSISTENT.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -1766,6 +1904,19 @@ pub mod attached_disk {
         UndefinedType = 0,
         Persistent = 460683927,
         Scratch = 496778970,
+    }
+    impl Type {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Type::UndefinedType => "UNDEFINED_TYPE",
+                Type::Persistent => "PERSISTENT",
+                Type::Scratch => "SCRATCH",
+            }
+        }
     }
 }
 /// [Input Only] Specifies the parameters for a new disk that will be created alongside the new instance. Use initialization parameters to create boot disks or local SSDs attached to the new instance. This property is mutually exclusive with the source property; you can only define one or the other, but not both.
@@ -1824,6 +1975,20 @@ pub mod attached_disk_initialize_params {
         /// Use the existing disk, this is the default behaviour.
         UseExistingDisk = 232682233,
     }
+    impl OnUpdateAction {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                OnUpdateAction::UndefinedOnUpdateAction => "UNDEFINED_ON_UPDATE_ACTION",
+                OnUpdateAction::RecreateDisk => "RECREATE_DISK",
+                OnUpdateAction::RecreateDiskIfSourceChanged => "RECREATE_DISK_IF_SOURCE_CHANGED",
+                OnUpdateAction::UseExistingDisk => "USE_EXISTING_DISK",
+            }
+        }
+    }
 }
 /// Specifies the audit configuration for a service. The configuration determines which permission types are logged, and what identities, if any, are exempted from logging. An AuditConfig must have one or more AuditLogConfigs. If there are AuditConfigs for both `allServices` and a specific service, the union of the two AuditConfigs is used for that service: the log_types specified in each AuditConfig are enabled, and the exempted_members in each AuditLogConfig are exempted. Example Policy with multiple AuditConfigs: { "audit_configs": [ { "service": "allServices", "audit_log_configs": [ { "log_type": "DATA_READ", "exempted_members": [ "user:jose@example.com" ] }, { "log_type": "DATA_WRITE" }, { "log_type": "ADMIN_READ" } ] }, { "service": "sampleservice.googleapis.com", "audit_log_configs": [ { "log_type": "DATA_READ" }, { "log_type": "DATA_WRITE", "exempted_members": [ "user:aliya@example.com" ] } ] } ] } For sampleservice, this policy enables DATA_READ, DATA_WRITE and ADMIN_READ logging. It also exempts jose@example.com from DATA_READ logging, and aliya@example.com from DATA_WRITE logging.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -1869,6 +2034,21 @@ pub mod audit_log_config {
         /// Default case. Should never be this.
         Unspecified = 154527053,
     }
+    impl LogType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                LogType::UndefinedLogType => "UNDEFINED_LOG_TYPE",
+                LogType::AdminRead => "ADMIN_READ",
+                LogType::DataRead => "DATA_READ",
+                LogType::DataWrite => "DATA_WRITE",
+                LogType::Unspecified => "LOG_TYPE_UNSPECIFIED",
+            }
+        }
+    }
 }
 /// This is deprecated and has no effect. Do not use.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -1896,6 +2076,22 @@ pub mod authorization_logging_options {
         DataWrite = 340181738,
         /// This is deprecated and has no effect. Do not use.
         Unspecified = 440313346,
+    }
+    impl PermissionType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                PermissionType::UndefinedPermissionType => "UNDEFINED_PERMISSION_TYPE",
+                PermissionType::AdminRead => "ADMIN_READ",
+                PermissionType::AdminWrite => "ADMIN_WRITE",
+                PermissionType::DataRead => "DATA_READ",
+                PermissionType::DataWrite => "DATA_WRITE",
+                PermissionType::Unspecified => "PERMISSION_TYPE_UNSPECIFIED",
+            }
+        }
     }
 }
 /// Represents an Autoscaler resource. Google Compute Engine has two Autoscaler resources: * \[Zonal\](/compute/docs/reference/rest/v1/autoscalers) * \[Regional\](/compute/docs/reference/rest/v1/regionAutoscalers) Use autoscalers to automatically add or delete instances from a managed instance group according to your defined autoscaling policy. For more information, read Autoscaling Groups of Instances. For zonal managed instance groups resource, use the autoscaler resource. For regional managed instance groups, use the regionAutoscalers resource.
@@ -1961,6 +2157,21 @@ pub mod autoscaler {
         Error = 66247144,
         /// Autoscaler backend hasn't read new/updated configuration
         Pending = 35394935,
+    }
+    impl Status {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Status::UndefinedStatus => "UNDEFINED_STATUS",
+                Status::Active => "ACTIVE",
+                Status::Deleting => "DELETING",
+                Status::Error => "ERROR",
+                Status::Pending => "PENDING",
+            }
+        }
     }
 }
 ///
@@ -2069,6 +2280,37 @@ pub mod autoscaler_status_details {
         /// For zonal autoscalers: there is a resource stockout in the chosen zone. For regional autoscalers: in at least one of the zones you're using there is a resource stockout.
         ZoneResourceStockout = 210200502,
     }
+    impl Type {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Type::UndefinedType => "UNDEFINED_TYPE",
+                Type::AllInstancesUnhealthy => "ALL_INSTANCES_UNHEALTHY",
+                Type::BackendServiceDoesNotExist => "BACKEND_SERVICE_DOES_NOT_EXIST",
+                Type::CappedAtMaxNumReplicas => "CAPPED_AT_MAX_NUM_REPLICAS",
+                Type::CustomMetricDataPointsTooSparse => "CUSTOM_METRIC_DATA_POINTS_TOO_SPARSE",
+                Type::CustomMetricInvalid => "CUSTOM_METRIC_INVALID",
+                Type::MinEqualsMax => "MIN_EQUALS_MAX",
+                Type::MissingCustomMetricDataPoints => "MISSING_CUSTOM_METRIC_DATA_POINTS",
+                Type::MissingLoadBalancingDataPoints => "MISSING_LOAD_BALANCING_DATA_POINTS",
+                Type::ModeOff => "MODE_OFF",
+                Type::ModeOnlyScaleOut => "MODE_ONLY_SCALE_OUT",
+                Type::ModeOnlyUp => "MODE_ONLY_UP",
+                Type::MoreThanOneBackendService => "MORE_THAN_ONE_BACKEND_SERVICE",
+                Type::NotEnoughQuotaAvailable => "NOT_ENOUGH_QUOTA_AVAILABLE",
+                Type::RegionResourceStockout => "REGION_RESOURCE_STOCKOUT",
+                Type::ScalingTargetDoesNotExist => "SCALING_TARGET_DOES_NOT_EXIST",
+                Type::ScheduledInstancesGreaterThanAutoscalerMax => "SCHEDULED_INSTANCES_GREATER_THAN_AUTOSCALER_MAX",
+                Type::ScheduledInstancesLessThanAutoscalerMin => "SCHEDULED_INSTANCES_LESS_THAN_AUTOSCALER_MIN",
+                Type::Unknown => "UNKNOWN",
+                Type::UnsupportedMaxRateLoadBalancingConfiguration => "UNSUPPORTED_MAX_RATE_LOAD_BALANCING_CONFIGURATION",
+                Type::ZoneResourceStockout => "ZONE_RESOURCE_STOCKOUT",
+            }
+        }
+    }
 }
 ///
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -2128,6 +2370,21 @@ pub mod autoscaling_policy {
         /// Automatically create VMs according to the policy, but do not scale the MIG in.
         OnlyUp = 478095374,
     }
+    impl Mode {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Mode::UndefinedMode => "UNDEFINED_MODE",
+                Mode::Off => "OFF",
+                Mode::On => "ON",
+                Mode::OnlyScaleOut => "ONLY_SCALE_OUT",
+                Mode::OnlyUp => "ONLY_UP",
+            }
+        }
+    }
 }
 /// CPU utilization policy.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -2152,6 +2409,19 @@ pub mod autoscaling_policy_cpu_utilization {
         None = 2402104,
         /// Predictive autoscaling improves availability by monitoring daily and weekly load patterns and scaling out ahead of anticipated demand.
         OptimizeAvailability = 11629437,
+    }
+    impl PredictiveMethod {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                PredictiveMethod::UndefinedPredictiveMethod => "UNDEFINED_PREDICTIVE_METHOD",
+                PredictiveMethod::None => "NONE",
+                PredictiveMethod::OptimizeAvailability => "OPTIMIZE_AVAILABILITY",
+            }
+        }
     }
 }
 /// Custom utilization metric policy.
@@ -2188,6 +2458,20 @@ pub mod autoscaling_policy_custom_metric_utilization {
         DeltaPerSecond = 255180029,
         /// Sets the utilization target value for a gauge metric. The autoscaler will collect the average utilization of the virtual machines from the last couple of minutes, and compare the value to the utilization target value to perform autoscaling.
         Gauge = 67590361,
+    }
+    impl UtilizationTargetType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                UtilizationTargetType::UndefinedUtilizationTargetType => "UNDEFINED_UTILIZATION_TARGET_TYPE",
+                UtilizationTargetType::DeltaPerMinute => "DELTA_PER_MINUTE",
+                UtilizationTargetType::DeltaPerSecond => "DELTA_PER_SECOND",
+                UtilizationTargetType::Gauge => "GAUGE",
+            }
+        }
     }
 }
 /// Configuration parameters of autoscaling based on load balancing.
@@ -2285,6 +2569,20 @@ pub mod backend {
         /// Balance based on the backend utilization.
         Utilization = 157008386,
     }
+    impl BalancingMode {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                BalancingMode::UndefinedBalancingMode => "UNDEFINED_BALANCING_MODE",
+                BalancingMode::Connection => "CONNECTION",
+                BalancingMode::Rate => "RATE",
+                BalancingMode::Utilization => "UTILIZATION",
+            }
+        }
+    }
 }
 /// Represents a Cloud Storage Bucket resource. This Cloud Storage bucket resource is referenced by a URL map of a load balancer. For more information, read Backend Buckets.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -2373,6 +2671,21 @@ pub mod backend_bucket_cdn_policy {
         InvalidCacheMode = 381295560,
         /// Requires the origin to set valid caching headers to cache content. Responses without these headers will not be cached at Google's edge, and will require a full trip to the origin on every request, potentially impacting performance and increasing load on the origin server.
         UseOriginHeaders = 55380261,
+    }
+    impl CacheMode {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                CacheMode::UndefinedCacheMode => "UNDEFINED_CACHE_MODE",
+                CacheMode::CacheAllStatic => "CACHE_ALL_STATIC",
+                CacheMode::ForceCacheAll => "FORCE_CACHE_ALL",
+                CacheMode::InvalidCacheMode => "INVALID_CACHE_MODE",
+                CacheMode::UseOriginHeaders => "USE_ORIGIN_HEADERS",
+            }
+        }
     }
 }
 /// Bypass the cache when the specified request headers are present, e.g. Pragma or Authorization headers. Values are case insensitive. The presence of such a header overrides the cache_mode setting.
@@ -2539,6 +2852,22 @@ pub mod backend_service {
         InternalSelfManaged = 236211150,
         InvalidLoadBalancingScheme = 275352060,
     }
+    impl LoadBalancingScheme {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                LoadBalancingScheme::UndefinedLoadBalancingScheme => "UNDEFINED_LOAD_BALANCING_SCHEME",
+                LoadBalancingScheme::External => "EXTERNAL",
+                LoadBalancingScheme::Internal => "INTERNAL",
+                LoadBalancingScheme::InternalManaged => "INTERNAL_MANAGED",
+                LoadBalancingScheme::InternalSelfManaged => "INTERNAL_SELF_MANAGED",
+                LoadBalancingScheme::InvalidLoadBalancingScheme => "INVALID_LOAD_BALANCING_SCHEME",
+            }
+        }
+    }
     /// The load balancing algorithm used within the scope of the locality. The possible values are: - ROUND_ROBIN: This is a simple policy in which each healthy backend is selected in round robin order. This is the default. - LEAST_REQUEST: An O(1) algorithm which selects two random healthy hosts and picks the host which has fewer active requests. - RING_HASH: The ring/modulo hash load balancer implements consistent hashing to backends. The algorithm has the property that the addition/removal of a host from a set of N hosts only affects 1/N of the requests. - RANDOM: The load balancer selects a random healthy host. - ORIGINAL_DESTINATION: Backend host is selected based on the client connection metadata, i.e., connections are opened to the same address as the destination address of the incoming connection before the connection was redirected to the load balancer. - MAGLEV: used as a drop in replacement for the ring hash load balancer. Maglev is not as stable as ring hash but has faster table lookup build times and host selection times. For more information about Maglev, see <https://ai.google/research/pubs/pub44824> This field is applicable to either: - A regional backend service with the service_protocol set to HTTP, HTTPS, or HTTP2, and load_balancing_scheme set to INTERNAL_MANAGED. - A global backend service with the load_balancing_scheme set to INTERNAL_SELF_MANAGED. If sessionAffinity is not NONE, and this field is not set to MAGLEV or RING_HASH, session affinity settings will not take effect. Only the default ROUND_ROBIN policy is supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -2559,6 +2888,24 @@ pub mod backend_service {
         /// This is a simple policy in which each healthy backend is selected in round robin order. This is the default.
         RoundRobin = 153895801,
     }
+    impl LocalityLbPolicy {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                LocalityLbPolicy::UndefinedLocalityLbPolicy => "UNDEFINED_LOCALITY_LB_POLICY",
+                LocalityLbPolicy::InvalidLbPolicy => "INVALID_LB_POLICY",
+                LocalityLbPolicy::LeastRequest => "LEAST_REQUEST",
+                LocalityLbPolicy::Maglev => "MAGLEV",
+                LocalityLbPolicy::OriginalDestination => "ORIGINAL_DESTINATION",
+                LocalityLbPolicy::Random => "RANDOM",
+                LocalityLbPolicy::RingHash => "RING_HASH",
+                LocalityLbPolicy::RoundRobin => "ROUND_ROBIN",
+            }
+        }
+    }
     /// The protocol this BackendService uses to communicate with backends. Possible values are HTTP, HTTPS, HTTP2, TCP, SSL, UDP or GRPC. depending on the chosen load balancer or Traffic Director configuration. Refer to the documentation for the load balancers or for Traffic Director for more information. Must be set to GRPC when the backend service is referenced by a URL map that is bound to target gRPC proxy.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -2577,6 +2924,24 @@ pub mod backend_service {
         Tcp = 82881,
         /// UDP.
         Udp = 83873,
+    }
+    impl Protocol {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Protocol::UndefinedProtocol => "UNDEFINED_PROTOCOL",
+                Protocol::Grpc => "GRPC",
+                Protocol::Http => "HTTP",
+                Protocol::Http2 => "HTTP2",
+                Protocol::Https => "HTTPS",
+                Protocol::Ssl => "SSL",
+                Protocol::Tcp => "TCP",
+                Protocol::Udp => "UDP",
+            }
+        }
     }
     /// Type of session affinity to use. The default is NONE. For a detailed description of session affinity options, see: [Session affinity](<https://cloud.google.com/load-balancing/docs/backend-service#session_affinity>). Not supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -2600,6 +2965,25 @@ pub mod backend_service {
         HttpCookie = 494981627,
         /// No session affinity. Connections from the same client IP may go to any instance in the pool.
         None = 2402104,
+    }
+    impl SessionAffinity {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                SessionAffinity::UndefinedSessionAffinity => "UNDEFINED_SESSION_AFFINITY",
+                SessionAffinity::ClientIp => "CLIENT_IP",
+                SessionAffinity::ClientIpNoDestination => "CLIENT_IP_NO_DESTINATION",
+                SessionAffinity::ClientIpPortProto => "CLIENT_IP_PORT_PROTO",
+                SessionAffinity::ClientIpProto => "CLIENT_IP_PROTO",
+                SessionAffinity::GeneratedCookie => "GENERATED_COOKIE",
+                SessionAffinity::HeaderField => "HEADER_FIELD",
+                SessionAffinity::HttpCookie => "HTTP_COOKIE",
+                SessionAffinity::None => "NONE",
+            }
+        }
     }
 }
 /// Contains a list of BackendServicesScopedList.
@@ -2683,6 +3067,21 @@ pub mod backend_service_cdn_policy {
         InvalidCacheMode = 381295560,
         /// Requires the origin to set valid caching headers to cache content. Responses without these headers will not be cached at Google's edge, and will require a full trip to the origin on every request, potentially impacting performance and increasing load on the origin server.
         UseOriginHeaders = 55380261,
+    }
+    impl CacheMode {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                CacheMode::UndefinedCacheMode => "UNDEFINED_CACHE_MODE",
+                CacheMode::CacheAllStatic => "CACHE_ALL_STATIC",
+                CacheMode::ForceCacheAll => "FORCE_CACHE_ALL",
+                CacheMode::InvalidCacheMode => "INVALID_CACHE_MODE",
+                CacheMode::UseOriginHeaders => "USE_ORIGIN_HEADERS",
+            }
+        }
     }
 }
 /// Bypass the cache when the specified request headers are present, e.g. Pragma or Authorization headers. Values are case insensitive. The presence of such a header overrides the cache_mode setting.
@@ -3003,6 +3402,20 @@ pub mod commitment {
         License = 347869217,
         Machine = 469553191,
     }
+    impl Category {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Category::UndefinedCategory => "UNDEFINED_CATEGORY",
+                Category::Unspecified => "CATEGORY_UNSPECIFIED",
+                Category::License => "LICENSE",
+                Category::Machine => "MACHINE",
+            }
+        }
+    }
     /// The plan for this commitment, which determines duration and discount rate. The currently supported plans are TWELVE_MONTH (1 year), and THIRTY_SIX_MONTH (3 years).
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -3012,6 +3425,20 @@ pub mod commitment {
         Invalid = 530283991,
         ThirtySixMonth = 266295942,
         TwelveMonth = 173083962,
+    }
+    impl Plan {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Plan::UndefinedPlan => "UNDEFINED_PLAN",
+                Plan::Invalid => "INVALID",
+                Plan::ThirtySixMonth => "THIRTY_SIX_MONTH",
+                Plan::TwelveMonth => "TWELVE_MONTH",
+            }
+        }
     }
     /// [Output Only] Status of the commitment with regards to eventual expiration (each commitment has an end date defined). One of the following values: NOT_YET_ACTIVE, ACTIVE, EXPIRED.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -3023,6 +3450,21 @@ pub mod commitment {
         Creating = 455564985,
         Expired = 482489093,
         NotYetActive = 20607337,
+    }
+    impl Status {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Status::UndefinedStatus => "UNDEFINED_STATUS",
+                Status::Active => "ACTIVE",
+                Status::Creating => "CREATING",
+                Status::Expired => "EXPIRED",
+                Status::NotYetActive => "NOT_YET_ACTIVE",
+            }
+        }
     }
     /// The type of commitment, which affects the discount rate and the eligible resources. Type MEMORY_OPTIMIZED specifies a commitment that will only apply to memory optimized machines. Type ACCELERATOR_OPTIMIZED specifies a commitment that will only apply to accelerator optimized machines.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -3038,6 +3480,25 @@ pub mod commitment {
         GeneralPurposeN2d = 232471400,
         MemoryOptimized = 281753417,
         Unspecified = 437714322,
+    }
+    impl Type {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Type::UndefinedType => "UNDEFINED_TYPE",
+                Type::AcceleratorOptimized => "ACCELERATOR_OPTIMIZED",
+                Type::ComputeOptimized => "COMPUTE_OPTIMIZED",
+                Type::GeneralPurpose => "GENERAL_PURPOSE",
+                Type::GeneralPurposeE2 => "GENERAL_PURPOSE_E2",
+                Type::GeneralPurposeN2 => "GENERAL_PURPOSE_N2",
+                Type::GeneralPurposeN2d => "GENERAL_PURPOSE_N2D",
+                Type::MemoryOptimized => "MEMORY_OPTIMIZED",
+                Type::Unspecified => "TYPE_UNSPECIFIED",
+            }
+        }
     }
 }
 ///
@@ -4474,6 +4935,21 @@ pub mod deprecation_status {
         Deprecated = 463360435,
         Obsolete = 66532761,
     }
+    impl State {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                State::UndefinedState => "UNDEFINED_STATE",
+                State::Active => "ACTIVE",
+                State::Deleted => "DELETED",
+                State::Deprecated => "DEPRECATED",
+                State::Obsolete => "OBSOLETE",
+            }
+        }
+    }
 }
 /// A request message for Instances.DetachDisk. See the method description for details.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -4684,6 +5160,22 @@ pub mod disk {
         /// Source data is being copied into the disk.
         Restoring = 404263851,
     }
+    impl Status {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Status::UndefinedStatus => "UNDEFINED_STATUS",
+                Status::Creating => "CREATING",
+                Status::Deleting => "DELETING",
+                Status::Failed => "FAILED",
+                Status::Ready => "READY",
+                Status::Restoring => "RESTORING",
+            }
+        }
+    }
 }
 ///
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -4749,6 +5241,24 @@ pub mod disk_instantiation_config {
         SourceImage = 62631959,
         /// Use the same source image family used for creation of the source instance's corresponding disk. The request will fail if the source image of the source disk does not belong to any image family. Applicable to: boot disk, additional read-write disks.
         SourceImageFamily = 76850316,
+    }
+    impl InstantiateFrom {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                InstantiateFrom::UndefinedInstantiateFrom => "UNDEFINED_INSTANTIATE_FROM",
+                InstantiateFrom::AttachReadOnly => "ATTACH_READ_ONLY",
+                InstantiateFrom::Blank => "BLANK",
+                InstantiateFrom::CustomImage => "CUSTOM_IMAGE",
+                InstantiateFrom::Default => "DEFAULT",
+                InstantiateFrom::DoNotInclude => "DO_NOT_INCLUDE",
+                InstantiateFrom::SourceImage => "SOURCE_IMAGE",
+                InstantiateFrom::SourceImageFamily => "SOURCE_IMAGE_FAMILY",
+            }
+        }
     }
 }
 /// A list of Disk resources.
@@ -4941,6 +5451,20 @@ pub mod distribution_policy {
         /// The group schedules VM instance creation and deletion to achieve and maintain an even number of managed instances across the selected zones. The distribution is even when the number of managed instances does not differ by more than 1 between any two zones. Recommended for highly available serving workloads.
         Even = 2140442,
     }
+    impl TargetShape {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                TargetShape::UndefinedTargetShape => "UNDEFINED_TARGET_SHAPE",
+                TargetShape::Any => "ANY",
+                TargetShape::Balanced => "BALANCED",
+                TargetShape::Even => "EVEN",
+            }
+        }
+    }
 }
 ///
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -5036,6 +5560,20 @@ pub mod exchanged_peering_route {
         StaticPeeringRoute = 473407545,
         /// The peering route corresponding to subnetwork range.
         SubnetPeeringRoute = 465782504,
+    }
+    impl Type {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Type::UndefinedType => "UNDEFINED_TYPE",
+                Type::DynamicPeeringRoute => "DYNAMIC_PEERING_ROUTE",
+                Type::StaticPeeringRoute => "STATIC_PEERING_ROUTE",
+                Type::SubnetPeeringRoute => "SUBNET_PEERING_ROUTE",
+            }
+        }
     }
 }
 ///
@@ -5145,6 +5683,20 @@ pub mod external_vpn_gateway {
         /// The external VPN gateway has two public IP addresses which are redundant with each other, the following two types of setup on your on-premises side would have this type of redundancy: (1) Two separate on-premises gateways, each with one public IP address, the two on-premises gateways are redundant with each other. (2) A single on-premise gateway with two public IP addresses that are redundant with eatch other.
         TwoIpsRedundancy = 367049635,
     }
+    impl RedundancyType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                RedundancyType::UndefinedRedundancyType => "UNDEFINED_REDUNDANCY_TYPE",
+                RedundancyType::FourIpsRedundancy => "FOUR_IPS_REDUNDANCY",
+                RedundancyType::SingleIpInternallyRedundant => "SINGLE_IP_INTERNALLY_REDUNDANT",
+                RedundancyType::TwoIpsRedundancy => "TWO_IPS_REDUNDANCY",
+            }
+        }
+    }
 }
 /// The interface for the external VPN gateway.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -5202,6 +5754,20 @@ pub mod file_content_buffer {
         Bin = 65767,
         Undefined = 137851184,
         X509 = 2674086,
+    }
+    impl FileType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                FileType::UndefinedFileType => "UNDEFINED_FILE_TYPE",
+                FileType::Bin => "BIN",
+                FileType::Undefined => "UNDEFINED",
+                FileType::X509 => "X509",
+            }
+        }
     }
 }
 /// Represents a Firewall Rule resource. Firewall rules allow or deny ingress traffic to, and egress traffic from your instances. For more information, read Firewall rules.
@@ -5279,6 +5845,19 @@ pub mod firewall {
         /// Indicates that firewall should apply to incoming traffic.
         Ingress = 516931221,
     }
+    impl Direction {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Direction::UndefinedDirection => "UNDEFINED_DIRECTION",
+                Direction::Egress => "EGRESS",
+                Direction::Ingress => "INGRESS",
+            }
+        }
+    }
 }
 /// Contains a list of firewalls.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -5323,6 +5902,19 @@ pub mod firewall_log_config {
         UndefinedMetadata = 0,
         ExcludeAllMetadata = 334519954,
         IncludeAllMetadata = 164619908,
+    }
+    impl Metadata {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Metadata::UndefinedMetadata => "UNDEFINED_METADATA",
+                Metadata::ExcludeAllMetadata => "EXCLUDE_ALL_METADATA",
+                Metadata::IncludeAllMetadata => "INCLUDE_ALL_METADATA",
+            }
+        }
     }
 }
 ///
@@ -5467,6 +6059,19 @@ pub mod firewall_policy_rule {
         UndefinedDirection = 0,
         Egress = 432880501,
         Ingress = 516931221,
+    }
+    impl Direction {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Direction::UndefinedDirection => "UNDEFINED_DIRECTION",
+                Direction::Egress => "EGRESS",
+                Direction::Ingress => "INGRESS",
+            }
+        }
     }
 }
 /// Represents a match condition that incoming traffic is evaluated against. Exactly one field must be specified.
@@ -5618,6 +6223,23 @@ pub mod forwarding_rule {
         Tcp = 82881,
         Udp = 83873,
     }
+    impl IpProtocol {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                IpProtocol::UndefinedIPProtocol => "UNDEFINED_I_P_PROTOCOL",
+                IpProtocol::Ah => "AH",
+                IpProtocol::Esp => "ESP",
+                IpProtocol::Icmp => "ICMP",
+                IpProtocol::Sctp => "SCTP",
+                IpProtocol::Tcp => "TCP",
+                IpProtocol::Udp => "UDP",
+            }
+        }
+    }
     /// The IP Version that will be used by this forwarding rule. Valid options are IPV4 or IPV6. This can only be specified for an external global forwarding rule.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -5627,6 +6249,20 @@ pub mod forwarding_rule {
         Ipv4 = 2254341,
         Ipv6 = 2254343,
         UnspecifiedVersion = 21850000,
+    }
+    impl IpVersion {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                IpVersion::UndefinedIpVersion => "UNDEFINED_IP_VERSION",
+                IpVersion::Ipv4 => "IPV4",
+                IpVersion::Ipv6 => "IPV6",
+                IpVersion::UnspecifiedVersion => "UNSPECIFIED_VERSION",
+            }
+        }
     }
     /// Specifies the forwarding rule type. For more information about forwarding rules, refer to Forwarding rule concepts.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -5640,6 +6276,22 @@ pub mod forwarding_rule {
         InternalSelfManaged = 236211150,
         Invalid = 530283991,
     }
+    impl LoadBalancingScheme {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                LoadBalancingScheme::UndefinedLoadBalancingScheme => "UNDEFINED_LOAD_BALANCING_SCHEME",
+                LoadBalancingScheme::External => "EXTERNAL",
+                LoadBalancingScheme::Internal => "INTERNAL",
+                LoadBalancingScheme::InternalManaged => "INTERNAL_MANAGED",
+                LoadBalancingScheme::InternalSelfManaged => "INTERNAL_SELF_MANAGED",
+                LoadBalancingScheme::Invalid => "INVALID",
+            }
+        }
+    }
     /// This signifies the networking tier used for configuring this load balancer and can only take the following values: PREMIUM, STANDARD. For regional ForwardingRule, the valid values are PREMIUM and STANDARD. For GlobalForwardingRule, the valid value is PREMIUM. If this field is not specified, it is assumed to be PREMIUM. If IPAddress is specified, this value must be equal to the networkTier of the Address.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -5650,6 +6302,19 @@ pub mod forwarding_rule {
         Premium = 399530551,
         /// Public internet quality, only limited support for other networking products.
         Standard = 484642493,
+    }
+    impl NetworkTier {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                NetworkTier::UndefinedNetworkTier => "UNDEFINED_NETWORK_TIER",
+                NetworkTier::Premium => "PREMIUM",
+                NetworkTier::Standard => "STANDARD",
+            }
+        }
     }
     ///
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -5666,6 +6331,22 @@ pub mod forwarding_rule {
         /// The connection has been rejected by the producer.
         Rejected = 174130302,
         StatusUnspecified = 42133066,
+    }
+    impl PscConnectionStatus {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                PscConnectionStatus::UndefinedPscConnectionStatus => "UNDEFINED_PSC_CONNECTION_STATUS",
+                PscConnectionStatus::Accepted => "ACCEPTED",
+                PscConnectionStatus::Closed => "CLOSED",
+                PscConnectionStatus::Pending => "PENDING",
+                PscConnectionStatus::Rejected => "REJECTED",
+                PscConnectionStatus::StatusUnspecified => "STATUS_UNSPECIFIED",
+            }
+        }
     }
 }
 ///
@@ -5775,6 +6456,20 @@ pub mod grpc_health_check {
         UseNamedPort = 349300671,
         /// For NetworkEndpointGroup, the port specified for each network endpoint is used for health checking. For other backends, the port or named port specified in the Backend Service is used for health checking.
         UseServingPort = 362637516,
+    }
+    impl PortSpecification {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                PortSpecification::UndefinedPortSpecification => "UNDEFINED_PORT_SPECIFICATION",
+                PortSpecification::UseFixedPort => "USE_FIXED_PORT",
+                PortSpecification::UseNamedPort => "USE_NAMED_PORT",
+                PortSpecification::UseServingPort => "USE_SERVING_PORT",
+            }
+        }
     }
 }
 /// A request message for AcceleratorTypes.Get. See the method description for details.
@@ -7287,6 +7982,25 @@ pub mod guest_os_feature {
         VirtioScsiMultiqueue = 201597069,
         Windows = 456863331,
     }
+    impl Type {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Type::UndefinedType => "UNDEFINED_TYPE",
+                Type::FeatureTypeUnspecified => "FEATURE_TYPE_UNSPECIFIED",
+                Type::Gvnic => "GVNIC",
+                Type::MultiIpSubnet => "MULTI_IP_SUBNET",
+                Type::SecureBoot => "SECURE_BOOT",
+                Type::SevCapable => "SEV_CAPABLE",
+                Type::UefiCompatible => "UEFI_COMPATIBLE",
+                Type::VirtioScsiMultiqueue => "VIRTIO_SCSI_MULTIQUEUE",
+                Type::Windows => "WINDOWS",
+            }
+        }
+    }
 }
 ///
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -7330,6 +8044,20 @@ pub mod http2_health_check {
         /// For NetworkEndpointGroup, the port specified for each network endpoint is used for health checking. For other backends, the port or named port specified in the Backend Service is used for health checking.
         UseServingPort = 362637516,
     }
+    impl PortSpecification {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                PortSpecification::UndefinedPortSpecification => "UNDEFINED_PORT_SPECIFICATION",
+                PortSpecification::UseFixedPort => "USE_FIXED_PORT",
+                PortSpecification::UseNamedPort => "USE_NAMED_PORT",
+                PortSpecification::UseServingPort => "USE_SERVING_PORT",
+            }
+        }
+    }
     /// Specifies the type of proxy header to append before sending data to the backend, either NONE or PROXY_V1. The default is NONE.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -7338,6 +8066,19 @@ pub mod http2_health_check {
         UndefinedProxyHeader = 0,
         None = 2402104,
         ProxyV1 = 334352940,
+    }
+    impl ProxyHeader {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ProxyHeader::UndefinedProxyHeader => "UNDEFINED_PROXY_HEADER",
+                ProxyHeader::None => "NONE",
+                ProxyHeader::ProxyV1 => "PROXY_V1",
+            }
+        }
     }
 }
 ///
@@ -7382,6 +8123,20 @@ pub mod http_health_check {
         /// For NetworkEndpointGroup, the port specified for each network endpoint is used for health checking. For other backends, the port or named port specified in the Backend Service is used for health checking.
         UseServingPort = 362637516,
     }
+    impl PortSpecification {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                PortSpecification::UndefinedPortSpecification => "UNDEFINED_PORT_SPECIFICATION",
+                PortSpecification::UseFixedPort => "USE_FIXED_PORT",
+                PortSpecification::UseNamedPort => "USE_NAMED_PORT",
+                PortSpecification::UseServingPort => "USE_SERVING_PORT",
+            }
+        }
+    }
     /// Specifies the type of proxy header to append before sending data to the backend, either NONE or PROXY_V1. The default is NONE.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -7390,6 +8145,19 @@ pub mod http_health_check {
         UndefinedProxyHeader = 0,
         None = 2402104,
         ProxyV1 = 334352940,
+    }
+    impl ProxyHeader {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ProxyHeader::UndefinedProxyHeader => "UNDEFINED_PROXY_HEADER",
+                ProxyHeader::None => "NONE",
+                ProxyHeader::ProxyV1 => "PROXY_V1",
+            }
+        }
     }
 }
 ///
@@ -7434,6 +8202,20 @@ pub mod https_health_check {
         /// For NetworkEndpointGroup, the port specified for each network endpoint is used for health checking. For other backends, the port or named port specified in the Backend Service is used for health checking.
         UseServingPort = 362637516,
     }
+    impl PortSpecification {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                PortSpecification::UndefinedPortSpecification => "UNDEFINED_PORT_SPECIFICATION",
+                PortSpecification::UseFixedPort => "USE_FIXED_PORT",
+                PortSpecification::UseNamedPort => "USE_NAMED_PORT",
+                PortSpecification::UseServingPort => "USE_SERVING_PORT",
+            }
+        }
+    }
     /// Specifies the type of proxy header to append before sending data to the backend, either NONE or PROXY_V1. The default is NONE.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -7442,6 +8224,19 @@ pub mod https_health_check {
         UndefinedProxyHeader = 0,
         None = 2402104,
         ProxyV1 = 334352940,
+    }
+    impl ProxyHeader {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ProxyHeader::UndefinedProxyHeader => "UNDEFINED_PROXY_HEADER",
+                ProxyHeader::None => "NONE",
+                ProxyHeader::ProxyV1 => "PROXY_V1",
+            }
+        }
     }
 }
 /// Represents a Health Check resource. Google Compute Engine has two Health Check resources: * \[Global\](/compute/docs/reference/rest/v1/healthChecks) * \[Regional\](/compute/docs/reference/rest/v1/regionHealthChecks) Internal HTTP(S) load balancers must use regional health checks (`compute.v1.regionHealthChecks`). Traffic Director must use global health checks (`compute.v1.HealthChecks`). Internal TCP/UDP load balancers can use either regional or global health checks (`compute.v1.regionHealthChecks` or `compute.v1.HealthChecks`). External HTTP(S), TCP proxy, and SSL proxy load balancers as well as managed instance group auto-healing must use global health checks (`compute.v1.HealthChecks`). Backend service-based network load balancers must use regional health checks (`compute.v1.regionHealthChecks`). Target pool-based network load balancers must use legacy HTTP health checks (`compute.v1.httpHealthChecks`). For more information, see Health checks overview.
@@ -7515,6 +8310,24 @@ pub mod health_check {
         Invalid = 530283991,
         Ssl = 82412,
         Tcp = 82881,
+    }
+    impl Type {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Type::UndefinedType => "UNDEFINED_TYPE",
+                Type::Grpc => "GRPC",
+                Type::Http => "HTTP",
+                Type::Http2 => "HTTP2",
+                Type::Https => "HTTPS",
+                Type::Invalid => "INVALID",
+                Type::Ssl => "SSL",
+                Type::Tcp => "TCP",
+            }
+        }
     }
 }
 /// Contains a list of HealthCheck resources.
@@ -7605,6 +8418,19 @@ pub mod health_check_service {
         And = 64951,
         /// An EndpointHealth message is returned for each backend in the health check service.
         NoAggregation = 426445124,
+    }
+    impl HealthStatusAggregationPolicy {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                HealthStatusAggregationPolicy::UndefinedHealthStatusAggregationPolicy => "UNDEFINED_HEALTH_STATUS_AGGREGATION_POLICY",
+                HealthStatusAggregationPolicy::And => "AND",
+                HealthStatusAggregationPolicy::NoAggregation => "NO_AGGREGATION",
+            }
+        }
     }
 }
 /// A full or valid partial URL to a health check service. For example, the following are valid URLs: - <https://www.googleapis.com/compute/beta/projects/project-id/regions/us-west1/healthCheckServices/health-check-service> - projects/project-id/regions/us-west1/healthCheckServices/health-check-service - regions/us-west1/healthCheckServices/health-check-service 
@@ -7713,6 +8539,19 @@ pub mod health_status {
         Healthy = 439801213,
         Unhealthy = 462118084,
     }
+    impl HealthState {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                HealthState::UndefinedHealthState => "UNDEFINED_HEALTH_STATE",
+                HealthState::Healthy => "HEALTHY",
+                HealthState::Unhealthy => "UNHEALTHY",
+            }
+        }
+    }
     ///
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -7727,6 +8566,21 @@ pub mod health_status {
         UnavailableWeight = 439464295,
         /// This is the default value when WeightReportMode is DISABLE, and is also the initial value when WeightReportMode has just updated to ENABLE or DRY_RUN and there has not been sufficient time to parse and report the backend weight.
         WeightNone = 502428831,
+    }
+    impl WeightError {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                WeightError::UndefinedWeightError => "UNDEFINED_WEIGHT_ERROR",
+                WeightError::InvalidWeight => "INVALID_WEIGHT",
+                WeightError::MissingWeight => "MISSING_WEIGHT",
+                WeightError::UnavailableWeight => "UNAVAILABLE_WEIGHT",
+                WeightError::WeightNone => "WEIGHT_NONE",
+            }
+        }
     }
 }
 ///
@@ -7761,6 +8615,21 @@ pub mod health_status_for_network_endpoint {
         Healthy = 439801213,
         Unhealthy = 462118084,
         Unknown = 433141802,
+    }
+    impl HealthState {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                HealthState::UndefinedHealthState => "UNDEFINED_HEALTH_STATE",
+                HealthState::Draining => "DRAINING",
+                HealthState::Healthy => "HEALTHY",
+                HealthState::Unhealthy => "UNHEALTHY",
+                HealthState::Unknown => "UNKNOWN",
+            }
+        }
     }
 }
 /// UrlMaps A host-matching rule for a URL. If matched, will use the named PathMatcher to select the BackendService.
@@ -7920,6 +8789,22 @@ pub mod http_redirect_action {
         SeeOther = 445380580,
         /// Http Status Code 307 - Temporary Redirect maintaining HTTP method.
         TemporaryRedirect = 489550378,
+    }
+    impl RedirectResponseCode {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                RedirectResponseCode::UndefinedRedirectResponseCode => "UNDEFINED_REDIRECT_RESPONSE_CODE",
+                RedirectResponseCode::Found => "FOUND",
+                RedirectResponseCode::MovedPermanentlyDefault => "MOVED_PERMANENTLY_DEFAULT",
+                RedirectResponseCode::PermanentRedirect => "PERMANENT_REDIRECT",
+                RedirectResponseCode::SeeOther => "SEE_OTHER",
+                RedirectResponseCode::TemporaryRedirect => "TEMPORARY_REDIRECT",
+            }
+        }
     }
 }
 /// The retry policy associates with HttpRouteRule
@@ -8122,6 +9007,18 @@ pub mod image {
         UndefinedSourceType = 0,
         Raw = 80904,
     }
+    impl SourceType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                SourceType::UndefinedSourceType => "UNDEFINED_SOURCE_TYPE",
+                SourceType::Raw => "RAW",
+            }
+        }
+    }
     /// [Output Only] The status of the image. An image can be used to create other resources, such as instances, only after the image has been successfully created and the status is set to READY. Possible values are FAILED, PENDING, or READY.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -8136,6 +9033,21 @@ pub mod image {
         Pending = 35394935,
         /// Image has been successfully created.
         Ready = 77848963,
+    }
+    impl Status {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Status::UndefinedStatus => "UNDEFINED_STATUS",
+                Status::Deleting => "DELETING",
+                Status::Failed => "FAILED",
+                Status::Pending => "PENDING",
+                Status::Ready => "READY",
+            }
+        }
     }
 }
 ///
@@ -9247,6 +10159,20 @@ pub mod instance {
         /// Each network interface inherits PrivateIpv6GoogleAccess from its subnetwork.
         InheritFromSubnetwork = 530256959,
     }
+    impl PrivateIpv6GoogleAccess {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                PrivateIpv6GoogleAccess::UndefinedPrivateIpv6GoogleAccess => "UNDEFINED_PRIVATE_IPV6_GOOGLE_ACCESS",
+                PrivateIpv6GoogleAccess::EnableBidirectionalAccessToGoogle => "ENABLE_BIDIRECTIONAL_ACCESS_TO_GOOGLE",
+                PrivateIpv6GoogleAccess::EnableOutboundVmAccessToGoogle => "ENABLE_OUTBOUND_VM_ACCESS_TO_GOOGLE",
+                PrivateIpv6GoogleAccess::InheritFromSubnetwork => "INHERIT_FROM_SUBNETWORK",
+            }
+        }
+    }
     /// [Output Only] The status of the instance. One of the following values: PROVISIONING, STAGING, RUNNING, STOPPING, SUSPENDING, SUSPENDED, REPAIRING, and TERMINATED. For more information about the status of the instance, see Instance life cycle.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -9273,6 +10199,27 @@ pub mod instance {
         Suspending = 514206246,
         /// The instance has stopped (either by explicit action or underlying failure).
         Terminated = 250018339,
+    }
+    impl Status {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Status::UndefinedStatus => "UNDEFINED_STATUS",
+                Status::Deprovisioning => "DEPROVISIONING",
+                Status::Provisioning => "PROVISIONING",
+                Status::Repairing => "REPAIRING",
+                Status::Running => "RUNNING",
+                Status::Staging => "STAGING",
+                Status::Stopped => "STOPPED",
+                Status::Stopping => "STOPPING",
+                Status::Suspended => "SUSPENDED",
+                Status::Suspending => "SUSPENDING",
+                Status::Terminated => "TERMINATED",
+            }
+        }
     }
 }
 ///
@@ -9321,7 +10268,7 @@ pub struct InstanceGroup {
     /// The name of the instance group. The name must be 1-63 characters long, and comply with RFC1035.
     #[prost(string, optional, tag="3373707")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
-    ///  Assigns a name to a port number. For example: {name: "http", port: 80} This allows the system to reference ports by the assigned name instead of a port number. Named ports can also contain multiple ports. For example: [{name: "http", port: 80},{name: "http", port: 8080}] Named ports apply to all instances in this instance group. 
+    ///   Assigns a name to a port number. For example: {name: "http", port: 80} This allows the system to reference ports by the assigned name instead of a port number. Named ports can also contain multiple ports. For example: [{name: "http", port: 80},{name: "http", port: 8080}] Named ports apply to all instances in this instance group. 
     #[prost(message, repeated, tag="427598732")]
     pub named_ports: ::prost::alloc::vec::Vec<NamedPort>,
     /// [Output Only] The URL of the network to which all instances in the instance group belong. If your instance has multiple network interfaces, then the network and subnetwork fields only refer to the network and subnet used by your primary interface (nic0).
@@ -9801,6 +10748,19 @@ pub mod instance_groups_list_instances_request {
         /// Includes instances in the generated list only if they have a RUNNING state.
         Running = 121282975,
     }
+    impl InstanceState {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                InstanceState::UndefinedInstanceState => "UNDEFINED_INSTANCE_STATE",
+                InstanceState::All => "ALL",
+                InstanceState::Running => "RUNNING",
+            }
+        }
+    }
 }
 ///
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -9927,6 +10887,26 @@ pub mod instance_managed_by_igm_error_instance_action_details {
         /// The managed instance group is verifying this already created instance. Verification happens every time the instance is (re)created or restarted and consists of: 1. Waiting until health check specified as part of this managed instance group's autohealing policy reports HEALTHY. Note: Applies only if autohealing policy has a health check specified 2. Waiting for addition verification steps performed as post-instance creation (subject to future extensions).
         Verifying = 16982185,
     }
+    impl Action {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Action::UndefinedAction => "UNDEFINED_ACTION",
+                Action::Abandoning => "ABANDONING",
+                Action::Creating => "CREATING",
+                Action::CreatingWithoutRetries => "CREATING_WITHOUT_RETRIES",
+                Action::Deleting => "DELETING",
+                Action::None => "NONE",
+                Action::Recreating => "RECREATING",
+                Action::Refreshing => "REFRESHING",
+                Action::Restarting => "RESTARTING",
+                Action::Verifying => "VERIFYING",
+            }
+        }
+    }
 }
 ///
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -10020,6 +11000,20 @@ pub mod instance_properties {
         EnableOutboundVmAccessToGoogle = 288210263,
         /// Each network interface inherits PrivateIpv6GoogleAccess from its subnetwork.
         InheritFromSubnetwork = 530256959,
+    }
+    impl PrivateIpv6GoogleAccess {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                PrivateIpv6GoogleAccess::UndefinedPrivateIpv6GoogleAccess => "UNDEFINED_PRIVATE_IPV6_GOOGLE_ACCESS",
+                PrivateIpv6GoogleAccess::EnableBidirectionalAccessToGoogle => "ENABLE_BIDIRECTIONAL_ACCESS_TO_GOOGLE",
+                PrivateIpv6GoogleAccess::EnableOutboundVmAccessToGoogle => "ENABLE_OUTBOUND_VM_ACCESS_TO_GOOGLE",
+                PrivateIpv6GoogleAccess::InheritFromSubnetwork => "INHERIT_FROM_SUBNETWORK",
+            }
+        }
     }
 }
 ///
@@ -10125,6 +11119,27 @@ pub mod instance_with_named_ports {
         /// The instance has stopped (either by explicit action or underlying failure).
         Terminated = 250018339,
     }
+    impl Status {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Status::UndefinedStatus => "UNDEFINED_STATUS",
+                Status::Deprovisioning => "DEPROVISIONING",
+                Status::Provisioning => "PROVISIONING",
+                Status::Repairing => "REPAIRING",
+                Status::Running => "RUNNING",
+                Status::Staging => "STAGING",
+                Status::Stopped => "STOPPED",
+                Status::Stopping => "STOPPING",
+                Status::Suspended => "SUSPENDED",
+                Status::Suspending => "SUSPENDING",
+                Status::Terminated => "TERMINATED",
+            }
+        }
+    }
 }
 ///
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -10173,6 +11188,19 @@ pub mod instances_get_effective_firewalls_response_effective_firewall_policy {
         UndefinedType = 0,
         Hierarchy = 69902869,
         Unspecified = 526786327,
+    }
+    impl Type {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Type::UndefinedType => "UNDEFINED_TYPE",
+                Type::Hierarchy => "HIERARCHY",
+                Type::Unspecified => "UNSPECIFIED",
+            }
+        }
     }
 }
 ///
@@ -10341,6 +11369,20 @@ pub mod interconnect {
         /// A partner-managed interconnection shared between customers via partner.
         Partner = 461924520,
     }
+    impl InterconnectType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                InterconnectType::UndefinedInterconnectType => "UNDEFINED_INTERCONNECT_TYPE",
+                InterconnectType::Dedicated => "DEDICATED",
+                InterconnectType::ItPrivate => "IT_PRIVATE",
+                InterconnectType::Partner => "PARTNER",
+            }
+        }
+    }
     /// Type of link requested, which can take one of the following values: - LINK_TYPE_ETHERNET_10G_LR: A 10G Ethernet with LR optics - LINK_TYPE_ETHERNET_100G_LR: A 100G Ethernet with LR optics. Note that this field indicates the speed of each of the links in the bundle, not the speed of the entire bundle.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -10351,6 +11393,19 @@ pub mod interconnect {
         Ethernet100gLr = 337672551,
         /// 10G Ethernet, LR Optics. [(rate_bps) = 10000000000];
         Ethernet10gLr = 236739749,
+    }
+    impl LinkType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                LinkType::UndefinedLinkType => "UNDEFINED_LINK_TYPE",
+                LinkType::Ethernet100gLr => "LINK_TYPE_ETHERNET_100G_LR",
+                LinkType::Ethernet10gLr => "LINK_TYPE_ETHERNET_10G_LR",
+            }
+        }
     }
     /// [Output Only] The current status of this Interconnect's functionality, which can take one of the following values: - OS_ACTIVE: A valid Interconnect, which is turned up and is ready to use. Attachments may be provisioned on this Interconnect. - OS_UNPROVISIONED: An Interconnect that has not completed turnup. No attachments may be provisioned on this Interconnect. - OS_UNDER_MAINTENANCE: An Interconnect that is undergoing internal maintenance. No attachments may be provisioned or updated on this Interconnect. 
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -10363,6 +11418,19 @@ pub mod interconnect {
         /// The interconnect has not completed turnup. No attachments may be provisioned on this interconnect.
         OsUnprovisioned = 239771840,
     }
+    impl OperationalStatus {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                OperationalStatus::UndefinedOperationalStatus => "UNDEFINED_OPERATIONAL_STATUS",
+                OperationalStatus::OsActive => "OS_ACTIVE",
+                OperationalStatus::OsUnprovisioned => "OS_UNPROVISIONED",
+            }
+        }
+    }
     /// [Output Only] The current state of Interconnect functionality, which can take one of the following values: - ACTIVE: The Interconnect is valid, turned up and ready to use. Attachments may be provisioned on this Interconnect. - UNPROVISIONED: The Interconnect has not completed turnup. No attachments may be provisioned on this Interconnect. - UNDER_MAINTENANCE: The Interconnect is undergoing internal maintenance. No attachments may be provisioned or updated on this Interconnect. 
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -10373,6 +11441,19 @@ pub mod interconnect {
         Active = 314733318,
         /// The interconnect has not completed turnup. No attachments may be provisioned on this interconnect.
         Unprovisioned = 517333979,
+    }
+    impl State {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                State::UndefinedState => "UNDEFINED_STATE",
+                State::Active => "ACTIVE",
+                State::Unprovisioned => "UNPROVISIONED",
+            }
+        }
     }
 }
 /// Represents an Interconnect Attachment (VLAN) resource. You can use Interconnect attachments (VLANS) to connect your Virtual Private Cloud networks to your on-premises networks through an Interconnect. For more information, read Creating VLAN Attachments.
@@ -10505,6 +11586,29 @@ pub mod interconnect_attachment {
         /// 5 Gbit/s
         Bps5g = 355358572,
     }
+    impl Bandwidth {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Bandwidth::UndefinedBandwidth => "UNDEFINED_BANDWIDTH",
+                Bandwidth::Bps100m => "BPS_100M",
+                Bandwidth::Bps10g => "BPS_10G",
+                Bandwidth::Bps1g => "BPS_1G",
+                Bandwidth::Bps200m => "BPS_200M",
+                Bandwidth::Bps20g => "BPS_20G",
+                Bandwidth::Bps2g => "BPS_2G",
+                Bandwidth::Bps300m => "BPS_300M",
+                Bandwidth::Bps400m => "BPS_400M",
+                Bandwidth::Bps500m => "BPS_500M",
+                Bandwidth::Bps50g => "BPS_50G",
+                Bandwidth::Bps50m => "BPS_50M",
+                Bandwidth::Bps5g => "BPS_5G",
+            }
+        }
+    }
     /// Desired availability domain for the attachment. Only available for type PARTNER, at creation time, and can take one of the following values: - AVAILABILITY_DOMAIN_ANY - AVAILABILITY_DOMAIN_1 - AVAILABILITY_DOMAIN_2 For improved reliability, customers should configure a pair of attachments, one per availability domain. The selected availability domain will be provided to the Partner via the pairing key, so that the provisioned circuit will lie in the specified domain. If not specified, the value will default to AVAILABILITY_DOMAIN_ANY.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -10514,6 +11618,20 @@ pub mod interconnect_attachment {
         AvailabilityDomain1 = 349552090,
         AvailabilityDomain2 = 349552091,
         AvailabilityDomainAny = 375256373,
+    }
+    impl EdgeAvailabilityDomain {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                EdgeAvailabilityDomain::UndefinedEdgeAvailabilityDomain => "UNDEFINED_EDGE_AVAILABILITY_DOMAIN",
+                EdgeAvailabilityDomain::AvailabilityDomain1 => "AVAILABILITY_DOMAIN_1",
+                EdgeAvailabilityDomain::AvailabilityDomain2 => "AVAILABILITY_DOMAIN_2",
+                EdgeAvailabilityDomain::AvailabilityDomainAny => "AVAILABILITY_DOMAIN_ANY",
+            }
+        }
     }
     /// Indicates the user-supplied encryption option of this VLAN attachment (interconnectAttachment). Can only be specified at attachment creation for PARTNER or DEDICATED attachments. Possible values are: - NONE - This is the default value, which means that the VLAN attachment carries unencrypted traffic. VMs are able to send traffic to, or receive traffic from, such a VLAN attachment. - IPSEC - The VLAN attachment carries only encrypted traffic that is encrypted by an IPsec device, such as an HA VPN gateway or third-party IPsec VPN. VMs cannot directly send traffic to, or receive traffic from, such a VLAN attachment. To use *IPsec-encrypted Cloud Interconnect*, the VLAN attachment must be created with this option. Not currently available publicly. 
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -10526,6 +11644,19 @@ pub mod interconnect_attachment {
         /// This is the default value, which means the Interconnect Attachment will carry unencrypted traffic. VMs will be able to send traffic to or receive traffic from such interconnect attachment.
         None = 2402104,
     }
+    impl Encryption {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Encryption::UndefinedEncryption => "UNDEFINED_ENCRYPTION",
+                Encryption::Ipsec => "IPSEC",
+                Encryption::None => "NONE",
+            }
+        }
+    }
     /// [Output Only] The current status of whether or not this interconnect attachment is functional, which can take one of the following values: - OS_ACTIVE: The attachment has been turned up and is ready to use. - OS_UNPROVISIONED: The attachment is not ready to use yet, because turnup is not complete. 
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -10536,6 +11667,19 @@ pub mod interconnect_attachment {
         OsActive = 55721409,
         /// Indicates that attachment is not ready to use yet, because turnup is not complete.
         OsUnprovisioned = 239771840,
+    }
+    impl OperationalStatus {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                OperationalStatus::UndefinedOperationalStatus => "UNDEFINED_OPERATIONAL_STATUS",
+                OperationalStatus::OsActive => "OS_ACTIVE",
+                OperationalStatus::OsUnprovisioned => "OS_UNPROVISIONED",
+            }
+        }
     }
     /// [Output Only] The current state of this attachment's functionality. Enum values ACTIVE and UNPROVISIONED are shared by DEDICATED/PRIVATE, PARTNER, and PARTNER_PROVIDER interconnect attachments, while enum values PENDING_PARTNER, PARTNER_REQUEST_RECEIVED, and PENDING_CUSTOMER are used for only PARTNER and PARTNER_PROVIDER interconnect attachments. This state can take one of the following values: - ACTIVE: The attachment has been turned up and is ready to use. - UNPROVISIONED: The attachment is not ready to use yet, because turnup is not complete. - PENDING_PARTNER: A newly-created PARTNER attachment that has not yet been configured on the Partner side. - PARTNER_REQUEST_RECEIVED: A PARTNER attachment is in the process of provisioning after a PARTNER_PROVIDER attachment was created that references it. - PENDING_CUSTOMER: A PARTNER or PARTNER_PROVIDER attachment that is waiting for a customer to activate it. - DEFUNCT: The attachment was deleted externally and is no longer functional. This could be because the associated Interconnect was removed, or because the other side of a Partner attachment was deleted. 
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -10557,6 +11701,24 @@ pub mod interconnect_attachment {
         /// Indicates that attachment is not ready to use yet, because turnup is not complete.
         Unprovisioned = 517333979,
     }
+    impl State {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                State::UndefinedState => "UNDEFINED_STATE",
+                State::Active => "ACTIVE",
+                State::Defunct => "DEFUNCT",
+                State::PartnerRequestReceived => "PARTNER_REQUEST_RECEIVED",
+                State::PendingCustomer => "PENDING_CUSTOMER",
+                State::PendingPartner => "PENDING_PARTNER",
+                State::Unspecified => "STATE_UNSPECIFIED",
+                State::Unprovisioned => "UNPROVISIONED",
+            }
+        }
+    }
     /// The type of interconnect attachment this is, which can take one of the following values: - DEDICATED: an attachment to a Dedicated Interconnect. - PARTNER: an attachment to a Partner Interconnect, created by the customer. - PARTNER_PROVIDER: an attachment to a Partner Interconnect, created by the partner. 
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -10569,6 +11731,20 @@ pub mod interconnect_attachment {
         Partner = 461924520,
         /// Attachment to a partner interconnect, created by the partner.
         PartnerProvider = 483261352,
+    }
+    impl Type {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Type::UndefinedType => "UNDEFINED_TYPE",
+                Type::Dedicated => "DEDICATED",
+                Type::Partner => "PARTNER",
+                Type::PartnerProvider => "PARTNER_PROVIDER",
+            }
+        }
     }
 }
 ///
@@ -10711,6 +11887,19 @@ pub mod interconnect_diagnostics_link_lacp_status {
         /// The link is not configured within the bundle, this means the rest of the object should be empty.
         Detached = 216562546,
     }
+    impl State {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                State::UndefinedState => "UNDEFINED_STATE",
+                State::Active => "ACTIVE",
+                State::Detached => "DETACHED",
+            }
+        }
+    }
 }
 ///
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -10741,6 +11930,22 @@ pub mod interconnect_diagnostics_link_optical_power {
         LowWarning = 338793841,
         /// The value of the current optical power has not crossed a warning threshold.
         Ok = 2524,
+    }
+    impl State {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                State::UndefinedState => "UNDEFINED_STATE",
+                State::HighAlarm => "HIGH_ALARM",
+                State::HighWarning => "HIGH_WARNING",
+                State::LowAlarm => "LOW_ALARM",
+                State::LowWarning => "LOW_WARNING",
+                State::Ok => "OK",
+            }
+        }
     }
 }
 ///
@@ -10859,6 +12064,27 @@ pub mod interconnect_location {
         NorthAmerica = 448015508,
         SouthAmerica = 32597340,
     }
+    impl Continent {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Continent::UndefinedContinent => "UNDEFINED_CONTINENT",
+                Continent::Africa => "AFRICA",
+                Continent::AsiaPac => "ASIA_PAC",
+                Continent::CAfrica => "C_AFRICA",
+                Continent::CAsiaPac => "C_ASIA_PAC",
+                Continent::CEurope => "C_EUROPE",
+                Continent::CNorthAmerica => "C_NORTH_AMERICA",
+                Continent::CSouthAmerica => "C_SOUTH_AMERICA",
+                Continent::Europe => "EUROPE",
+                Continent::NorthAmerica => "NORTH_AMERICA",
+                Continent::SouthAmerica => "SOUTH_AMERICA",
+            }
+        }
+    }
     /// [Output Only] The status of this InterconnectLocation, which can take one of the following values: - CLOSED: The InterconnectLocation is closed and is unavailable for provisioning new Interconnects. - AVAILABLE: The InterconnectLocation is available for provisioning new Interconnects. 
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -10869,6 +12095,19 @@ pub mod interconnect_location {
         Available = 442079913,
         /// The InterconnectLocation is closed for provisioning new Interconnects.
         Closed = 380163436,
+    }
+    impl Status {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Status::UndefinedStatus => "UNDEFINED_STATUS",
+                Status::Available => "AVAILABLE",
+                Status::Closed => "CLOSED",
+            }
+        }
     }
 }
 /// Response to the list request, and contains a list of interconnect locations.
@@ -10924,6 +12163,21 @@ pub mod interconnect_location_region_info {
         /// \[Deprecated\] This region shares the same regional network presence as this InterconnectLocation.
         LpLocalRegion = 488598851,
     }
+    impl LocationPresence {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                LocationPresence::UndefinedLocationPresence => "UNDEFINED_LOCATION_PRESENCE",
+                LocationPresence::Global => "GLOBAL",
+                LocationPresence::LocalRegion => "LOCAL_REGION",
+                LocationPresence::LpGlobal => "LP_GLOBAL",
+                LocationPresence::LpLocalRegion => "LP_LOCAL_REGION",
+            }
+        }
+    }
 }
 /// Description of a planned outage on this Interconnect.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -10973,6 +12227,21 @@ pub mod interconnect_outage_notification {
         /// Some circuits comprising the Interconnect will be out of service during the expected window. The interconnect as a whole should remain up, albeit with reduced bandwidth.
         PartialOutage = 147053455,
     }
+    impl IssueType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                IssueType::UndefinedIssueType => "UNDEFINED_ISSUE_TYPE",
+                IssueType::ItOutage => "IT_OUTAGE",
+                IssueType::ItPartialOutage => "IT_PARTIAL_OUTAGE",
+                IssueType::Outage => "OUTAGE",
+                IssueType::PartialOutage => "PARTIAL_OUTAGE",
+            }
+        }
+    }
     /// The party that generated this notification, which can take the following value: - GOOGLE: this notification as generated by Google. Note that the value of NSRC_GOOGLE has been deprecated in favor of GOOGLE.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -10983,6 +12252,19 @@ pub mod interconnect_outage_notification {
         Google = 497439289,
         /// \[Deprecated\] This notification was generated by Google.
         NsrcGoogle = 510574562,
+    }
+    impl Source {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Source::UndefinedSource => "UNDEFINED_SOURCE",
+                Source::Google => "GOOGLE",
+                Source::NsrcGoogle => "NSRC_GOOGLE",
+            }
+        }
     }
     /// State of this notification, which can take one of the following values: - ACTIVE: This outage notification is active. The event could be in the past, present, or future. See start_time and end_time for scheduling. - CANCELLED: The outage associated with this notification was cancelled before the outage was due to start. - COMPLETED: The outage associated with this notification is complete. Note that the versions of this enum prefixed with "NS_" have been deprecated in favor of the unprefixed values.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -11000,6 +12282,22 @@ pub mod interconnect_outage_notification {
         NsActive = 252563136,
         /// \[Deprecated\] The outage associated with this notification was canceled before the outage was due to start.
         NsCanceled = 506579411,
+    }
+    impl State {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                State::UndefinedState => "UNDEFINED_STATE",
+                State::Active => "ACTIVE",
+                State::Cancelled => "CANCELLED",
+                State::Completed => "COMPLETED",
+                State::NsActive => "NS_ACTIVE",
+                State::NsCanceled => "NS_CANCELED",
+            }
+        }
     }
 }
 /// Response for the InterconnectsGetDiagnosticsRequest.
@@ -11116,6 +12414,22 @@ pub mod license_code {
         Unspecified = 470755401,
         /// Reserved state.
         Terminated = 250018339,
+    }
+    impl State {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                State::UndefinedState => "UNDEFINED_STATE",
+                State::Disabled => "DISABLED",
+                State::Enabled => "ENABLED",
+                State::Restricted => "RESTRICTED",
+                State::Unspecified => "STATE_UNSPECIFIED",
+                State::Terminated => "TERMINATED",
+            }
+        }
     }
 }
 ///
@@ -12300,6 +13614,19 @@ pub mod list_peering_routes_networks_request {
         Incoming = 338552870,
         /// For routes exported from local network.
         Outgoing = 307438444,
+    }
+    impl Direction {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Direction::UndefinedDirection => "UNDEFINED_DIRECTION",
+                Direction::Incoming => "INCOMING",
+                Direction::Outgoing => "OUTGOING",
+            }
+        }
     }
 }
 /// A request message for InstanceGroupManagers.ListPerInstanceConfigs. See the method description for details.
@@ -13506,6 +14833,20 @@ pub mod location_policy_location {
         /// Default value, unused.
         Unspecified = 496219571,
     }
+    impl Preference {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Preference::UndefinedPreference => "UNDEFINED_PREFERENCE",
+                Preference::Allow => "ALLOW",
+                Preference::Deny => "DENY",
+                Preference::Unspecified => "PREFERENCE_UNSPECIFIED",
+            }
+        }
+    }
 }
 /// This is deprecated and has no effect. Do not use.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -13545,6 +14886,20 @@ pub mod log_config_cloud_audit_options {
         DataAccess = 238070681,
         /// This is deprecated and has no effect. Do not use.
         UnspecifiedLogName = 410515182,
+    }
+    impl LogName {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                LogName::UndefinedLogName => "UNDEFINED_LOG_NAME",
+                LogName::AdminActivity => "ADMIN_ACTIVITY",
+                LogName::DataAccess => "DATA_ACCESS",
+                LogName::UnspecifiedLogName => "UNSPECIFIED_LOG_NAME",
+            }
+        }
     }
 }
 /// This is deprecated and has no effect. Do not use.
@@ -13590,6 +14945,19 @@ pub mod log_config_data_access_options {
         LogFailClosed = 360469778,
         /// This is deprecated and has no effect. Do not use.
         Unspecified = 88160822,
+    }
+    impl LogMode {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                LogMode::UndefinedLogMode => "UNDEFINED_LOG_MODE",
+                LogMode::LogFailClosed => "LOG_FAIL_CLOSED",
+                LogMode::Unspecified => "LOG_MODE_UNSPECIFIED",
+            }
+        }
     }
 }
 /// Represents a Machine Type resource. You can use specific machine types for your VM instances based on performance and pricing requirements. For more information, read Machine Types.
@@ -13761,6 +15129,26 @@ pub mod managed_instance {
         /// The managed instance group is verifying this already created instance. Verification happens every time the instance is (re)created or restarted and consists of: 1. Waiting until health check specified as part of this managed instance group's autohealing policy reports HEALTHY. Note: Applies only if autohealing policy has a health check specified 2. Waiting for addition verification steps performed as post-instance creation (subject to future extensions).
         Verifying = 16982185,
     }
+    impl CurrentAction {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                CurrentAction::UndefinedCurrentAction => "UNDEFINED_CURRENT_ACTION",
+                CurrentAction::Abandoning => "ABANDONING",
+                CurrentAction::Creating => "CREATING",
+                CurrentAction::CreatingWithoutRetries => "CREATING_WITHOUT_RETRIES",
+                CurrentAction::Deleting => "DELETING",
+                CurrentAction::None => "NONE",
+                CurrentAction::Recreating => "RECREATING",
+                CurrentAction::Refreshing => "REFRESHING",
+                CurrentAction::Restarting => "RESTARTING",
+                CurrentAction::Verifying => "VERIFYING",
+            }
+        }
+    }
     /// [Output Only] The status of the instance. This field is empty when the instance does not exist.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -13787,6 +15175,27 @@ pub mod managed_instance {
         Suspending = 514206246,
         /// The instance has stopped (either by explicit action or underlying failure).
         Terminated = 250018339,
+    }
+    impl InstanceStatus {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                InstanceStatus::UndefinedInstanceStatus => "UNDEFINED_INSTANCE_STATUS",
+                InstanceStatus::Deprovisioning => "DEPROVISIONING",
+                InstanceStatus::Provisioning => "PROVISIONING",
+                InstanceStatus::Repairing => "REPAIRING",
+                InstanceStatus::Running => "RUNNING",
+                InstanceStatus::Staging => "STAGING",
+                InstanceStatus::Stopped => "STOPPED",
+                InstanceStatus::Stopping => "STOPPING",
+                InstanceStatus::Suspended => "SUSPENDED",
+                InstanceStatus::Suspending => "SUSPENDING",
+                InstanceStatus::Terminated => "TERMINATED",
+            }
+        }
     }
 }
 ///
@@ -13818,6 +15227,22 @@ pub mod managed_instance_instance_health {
         Unhealthy = 462118084,
         /// The health checking system is aware of the instance but its health is not known at the moment.
         Unknown = 433141802,
+    }
+    impl DetailedHealthState {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                DetailedHealthState::UndefinedDetailedHealthState => "UNDEFINED_DETAILED_HEALTH_STATE",
+                DetailedHealthState::Draining => "DRAINING",
+                DetailedHealthState::Healthy => "HEALTHY",
+                DetailedHealthState::Timeout => "TIMEOUT",
+                DetailedHealthState::Unhealthy => "UNHEALTHY",
+                DetailedHealthState::Unknown => "UNKNOWN",
+            }
+        }
     }
 }
 ///
@@ -13875,6 +15300,20 @@ pub mod metadata_filter {
         MatchAny = 180663346,
         /// Indicates that the match criteria was not set. A metadataFilter must never be created with this value.
         NotSet = 163646646,
+    }
+    impl FilterMatchCriteria {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                FilterMatchCriteria::UndefinedFilterMatchCriteria => "UNDEFINED_FILTER_MATCH_CRITERIA",
+                FilterMatchCriteria::MatchAll => "MATCH_ALL",
+                FilterMatchCriteria::MatchAny => "MATCH_ANY",
+                FilterMatchCriteria::NotSet => "NOT_SET",
+            }
+        }
     }
 }
 /// MetadataFilter label name value pairs that are expected to match corresponding labels presented as metadata to the loadbalancer.
@@ -14075,6 +15514,23 @@ pub mod network_endpoint_group {
         /// The network endpoint is handled by specified serverless infrastructure.
         Serverless = 270492508,
     }
+    impl NetworkEndpointType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                NetworkEndpointType::UndefinedNetworkEndpointType => "UNDEFINED_NETWORK_ENDPOINT_TYPE",
+                NetworkEndpointType::GceVmIp => "GCE_VM_IP",
+                NetworkEndpointType::GceVmIpPort => "GCE_VM_IP_PORT",
+                NetworkEndpointType::InternetFqdnPort => "INTERNET_FQDN_PORT",
+                NetworkEndpointType::InternetIpPort => "INTERNET_IP_PORT",
+                NetworkEndpointType::NonGcpPrivateIpPort => "NON_GCP_PRIVATE_IP_PORT",
+                NetworkEndpointType::Serverless => "SERVERLESS",
+            }
+        }
+    }
 }
 ///
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -14194,6 +15650,19 @@ pub mod network_endpoint_groups_list_endpoints_request {
         /// Health status for network endpoints will not be provided.
         Skip = 2547071,
     }
+    impl HealthStatus {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                HealthStatus::UndefinedHealthStatus => "UNDEFINED_HEALTH_STATUS",
+                HealthStatus::Show => "SHOW",
+                HealthStatus::Skip => "SKIP",
+            }
+        }
+    }
 }
 ///
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -14296,6 +15765,19 @@ pub mod network_interface {
         /// IPv6 access type not set. Means this network interface hasn't been turned on IPv6 yet.
         UnspecifiedIpv6AccessType = 313080613,
     }
+    impl Ipv6AccessType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Ipv6AccessType::UndefinedIpv6AccessType => "UNDEFINED_IPV6_ACCESS_TYPE",
+                Ipv6AccessType::External => "EXTERNAL",
+                Ipv6AccessType::UnspecifiedIpv6AccessType => "UNSPECIFIED_IPV6_ACCESS_TYPE",
+            }
+        }
+    }
     /// The type of vNIC to be used on this interface. This may be gVNIC or VirtioNet.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -14309,6 +15791,20 @@ pub mod network_interface {
         /// VIRTIO
         VirtioNet = 452123481,
     }
+    impl NicType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                NicType::UndefinedNicType => "UNDEFINED_NIC_TYPE",
+                NicType::Gvnic => "GVNIC",
+                NicType::UnspecifiedNicType => "UNSPECIFIED_NIC_TYPE",
+                NicType::VirtioNet => "VIRTIO_NET",
+            }
+        }
+    }
     /// The stack type for this network interface to identify whether the IPv6 feature is enabled or not. If not specified, IPV4_ONLY will be used. This field can be both set at instance creation and update network interface operations.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -14320,6 +15816,20 @@ pub mod network_interface {
         /// The network interface will be assigned IPv4 address.
         Ipv4Only = 22373798,
         UnspecifiedStackType = 298084569,
+    }
+    impl StackType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                StackType::UndefinedStackType => "UNDEFINED_STACK_TYPE",
+                StackType::Ipv4Ipv6 => "IPV4_IPV6",
+                StackType::Ipv4Only => "IPV4_ONLY",
+                StackType::UnspecifiedStackType => "UNSPECIFIED_STACK_TYPE",
+            }
+        }
     }
 }
 /// Contains a list of networks.
@@ -14395,6 +15905,19 @@ pub mod network_peering {
         /// There is no matching configuration on the peer, including the case when peer does not exist.
         Inactive = 270421099,
     }
+    impl State {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                State::UndefinedState => "UNDEFINED_STATE",
+                State::Active => "ACTIVE",
+                State::Inactive => "INACTIVE",
+            }
+        }
+    }
 }
 /// A routing configuration attached to a network resource. The message includes the list of routers associated with the network, and a flag indicating the type of routing behavior to enforce network-wide.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -14414,6 +15937,19 @@ pub mod network_routing_config {
         UndefinedRoutingMode = 0,
         Global = 494663587,
         Regional = 92288543,
+    }
+    impl RoutingMode {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                RoutingMode::UndefinedRoutingMode => "UNDEFINED_ROUTING_MODE",
+                RoutingMode::Global => "GLOBAL",
+                RoutingMode::Regional => "REGIONAL",
+            }
+        }
     }
 }
 ///
@@ -14473,6 +16009,20 @@ pub mod networks_get_effective_firewalls_response_effective_firewall_policy {
         Hierarchy = 69902869,
         Network = 413984270,
         Unspecified = 526786327,
+    }
+    impl Type {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Type::UndefinedType => "UNDEFINED_TYPE",
+                Type::Hierarchy => "HIERARCHY",
+                Type::Network => "NETWORK",
+                Type::Unspecified => "UNSPECIFIED",
+            }
+        }
     }
 }
 ///
@@ -14553,6 +16103,21 @@ pub mod node_group {
         /// Instances in this group will restart on the same node when maintenance has completed. Instances must have onHostMaintenance = TERMINATE, and they will only restart if automaticRestart = true.
         RestartInPlace = 228647325,
     }
+    impl MaintenancePolicy {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                MaintenancePolicy::UndefinedMaintenancePolicy => "UNDEFINED_MAINTENANCE_POLICY",
+                MaintenancePolicy::Default => "DEFAULT",
+                MaintenancePolicy::Unspecified => "MAINTENANCE_POLICY_UNSPECIFIED",
+                MaintenancePolicy::MigrateWithinNodeGroup => "MIGRATE_WITHIN_NODE_GROUP",
+                MaintenancePolicy::RestartInPlace => "RESTART_IN_PLACE",
+            }
+        }
+    }
     ///
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -14563,6 +16128,21 @@ pub mod node_group {
         Deleting = 528602024,
         Invalid = 530283991,
         Ready = 77848963,
+    }
+    impl Status {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Status::UndefinedStatus => "UNDEFINED_STATUS",
+                Status::Creating => "CREATING",
+                Status::Deleting => "DELETING",
+                Status::Invalid => "INVALID",
+                Status::Ready => "READY",
+            }
+        }
     }
 }
 ///
@@ -14619,6 +16199,21 @@ pub mod node_group_autoscaling_policy {
         On = 2527,
         /// Autoscaling will only scale out and will not remove nodes.
         OnlyScaleOut = 152713670,
+    }
+    impl Mode {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Mode::UndefinedMode => "UNDEFINED_MODE",
+                Mode::Unspecified => "MODE_UNSPECIFIED",
+                Mode::Off => "OFF",
+                Mode::On => "ON",
+                Mode::OnlyScaleOut => "ONLY_SCALE_OUT",
+            }
+        }
     }
 }
 /// Contains a list of nodeGroups.
@@ -14701,6 +16296,20 @@ pub mod node_group_node {
         Enabled = 182130465,
         None = 2402104,
     }
+    impl CpuOvercommitType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                CpuOvercommitType::UndefinedCpuOvercommitType => "UNDEFINED_CPU_OVERCOMMIT_TYPE",
+                CpuOvercommitType::Unspecified => "CPU_OVERCOMMIT_TYPE_UNSPECIFIED",
+                CpuOvercommitType::Enabled => "ENABLED",
+                CpuOvercommitType::None => "NONE",
+            }
+        }
+    }
     ///
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -14712,6 +16321,22 @@ pub mod node_group_node {
         Invalid = 530283991,
         Ready = 77848963,
         Repairing = 413483285,
+    }
+    impl Status {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Status::UndefinedStatus => "UNDEFINED_STATUS",
+                Status::Creating => "CREATING",
+                Status::Deleting => "DELETING",
+                Status::Invalid => "INVALID",
+                Status::Ready => "READY",
+                Status::Repairing => "REPAIRING",
+            }
+        }
     }
 }
 ///
@@ -14831,6 +16456,20 @@ pub mod node_template {
         Enabled = 182130465,
         None = 2402104,
     }
+    impl CpuOvercommitType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                CpuOvercommitType::UndefinedCpuOvercommitType => "UNDEFINED_CPU_OVERCOMMIT_TYPE",
+                CpuOvercommitType::Unspecified => "CPU_OVERCOMMIT_TYPE_UNSPECIFIED",
+                CpuOvercommitType::Enabled => "ENABLED",
+                CpuOvercommitType::None => "NONE",
+            }
+        }
+    }
     /// [Output Only] The status of the node template. One of the following values: CREATING, READY, and DELETING.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -14845,6 +16484,21 @@ pub mod node_template {
         Invalid = 530283991,
         /// The node template is ready.
         Ready = 77848963,
+    }
+    impl Status {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Status::UndefinedStatus => "UNDEFINED_STATUS",
+                Status::Creating => "CREATING",
+                Status::Deleting => "DELETING",
+                Status::Invalid => "INVALID",
+                Status::Ready => "READY",
+            }
+        }
     }
 }
 ///
@@ -15168,6 +16822,20 @@ pub mod operation {
         Pending = 35394935,
         Running = 121282975,
     }
+    impl Status {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Status::UndefinedStatus => "UNDEFINED_STATUS",
+                Status::Done => "DONE",
+                Status::Pending => "PENDING",
+                Status::Running => "RUNNING",
+            }
+        }
+    }
 }
 ///
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -15318,6 +16986,19 @@ pub mod packet_mirroring {
         False = 66658563,
         True = 2583950,
     }
+    impl Enable {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Enable::UndefinedEnable => "UNDEFINED_ENABLE",
+                Enable::False => "FALSE",
+                Enable::True => "TRUE",
+            }
+        }
+    }
 }
 /// Contains a list of packetMirrorings.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -15372,6 +17053,20 @@ pub mod packet_mirroring_filter {
         Egress = 432880501,
         /// Only ingress traffic is mirrored.
         Ingress = 516931221,
+    }
+    impl Direction {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Direction::UndefinedDirection => "UNDEFINED_DIRECTION",
+                Direction::Both => "BOTH",
+                Direction::Egress => "EGRESS",
+                Direction::Ingress => "INGRESS",
+            }
+        }
     }
 }
 ///
@@ -16187,6 +17882,23 @@ pub mod per_instance_config {
         /// The per-instance config has been deleted, but the deletion is not yet applied.
         UnappliedDeletion = 313956873,
     }
+    impl Status {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Status::UndefinedStatus => "UNDEFINED_STATUS",
+                Status::Applying => "APPLYING",
+                Status::Deleting => "DELETING",
+                Status::Effective => "EFFECTIVE",
+                Status::None => "NONE",
+                Status::Unapplied => "UNAPPLIED",
+                Status::UnappliedDeletion => "UNAPPLIED_DELETION",
+            }
+        }
+    }
 }
 /// An Identity and Access Management (IAM) policy, which specifies access controls for Google Cloud resources. A `Policy` is a collection of `bindings`. A `binding` binds one or more `members` to a single `role`. Members can be user accounts, service accounts, Google groups, and domains (such as G Suite). A `role` is a named list of permissions; each `role` can be an IAM predefined role or a user-created custom role. For some types of Google Cloud resources, a `binding` can also specify a `condition`, which is a logical expression that allows access to a resource only if the expression evaluates to `true`. A condition can add constraints based on attributes of the request, the resource, or both. To learn which resources support conditions in their IAM policies, see the [IAM documentation](<https://cloud.google.com/iam/help/conditions/resource-policies>). **JSON example:** { "bindings": [ { "role": "roles/resourcemanager.organizationAdmin", "members": [ "user:mike@example.com", "group:admins@example.com", "domain:google.com", "serviceAccount:my-project-id@appspot.gserviceaccount.com" ] }, { "role": "roles/resourcemanager.organizationViewer", "members": [ "user:eve@example.com" ], "condition": { "title": "expirable access", "description": "Does not grant access after Sep 2020", "expression": "request.time < timestamp('2020-10-01T00:00:00.000Z')", } } ], "etag": "BwWWja0YfJA=", "version": 3 } **YAML example:** bindings: - members: - user:mike@example.com - group:admins@example.com - domain:google.com - serviceAccount:my-project-id@appspot.gserviceaccount.com role: roles/resourcemanager.organizationAdmin - members: - user:eve@example.com role: roles/resourcemanager.organizationViewer condition: title: expirable access description: Does not grant access after Sep 2020 expression: request.time < timestamp('2020-10-01T00:00:00.000Z') etag: BwWWja0YfJA= version: 3 For a description of IAM and its features, see the [IAM documentation](<https://cloud.google.com/iam/docs/>).
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -16253,6 +17965,19 @@ pub mod preserved_state_preserved_disk {
         Never = 74175084,
         OnPermanentInstanceDeletion = 95727719,
     }
+    impl AutoDelete {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AutoDelete::UndefinedAutoDelete => "UNDEFINED_AUTO_DELETE",
+                AutoDelete::Never => "NEVER",
+                AutoDelete::OnPermanentInstanceDeletion => "ON_PERMANENT_INSTANCE_DELETION",
+            }
+        }
+    }
     /// The mode in which to attach this disk, either READ_WRITE or READ_ONLY. If not specified, the default is to attach the disk in READ_WRITE mode.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -16263,6 +17988,19 @@ pub mod preserved_state_preserved_disk {
         ReadOnly = 91950261,
         /// *\[Default\]* Attaches this disk in READ_WRITE mode. Only one VM instance at a time can be attached to a disk in READ_WRITE mode.
         ReadWrite = 173607894,
+    }
+    impl Mode {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Mode::UndefinedMode => "UNDEFINED_MODE",
+                Mode::ReadOnly => "READ_ONLY",
+                Mode::ReadWrite => "READ_WRITE",
+            }
+        }
     }
 }
 /// A request message for Routers.Preview. See the method description for details.
@@ -16339,6 +18077,19 @@ pub mod project {
         /// Public internet quality, only limited support for other networking products.
         Standard = 484642493,
     }
+    impl DefaultNetworkTier {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                DefaultNetworkTier::UndefinedDefaultNetworkTier => "UNDEFINED_DEFAULT_NETWORK_TIER",
+                DefaultNetworkTier::Premium => "PREMIUM",
+                DefaultNetworkTier::Standard => "STANDARD",
+            }
+        }
+    }
     /// [Output Only] The role this project has in a shared VPC configuration. Currently, only projects with the host role, which is specified by the value HOST, are differentiated.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -16347,6 +18098,19 @@ pub mod project {
         UndefinedXpnProjectStatus = 0,
         Host = 2223528,
         UnspecifiedXpnProjectStatus = 340393257,
+    }
+    impl XpnProjectStatus {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                XpnProjectStatus::UndefinedXpnProjectStatus => "UNDEFINED_XPN_PROJECT_STATUS",
+                XpnProjectStatus::Host => "HOST",
+                XpnProjectStatus::UnspecifiedXpnProjectStatus => "UNSPECIFIED_XPN_PROJECT_STATUS",
+            }
+        }
     }
 }
 ///
@@ -16403,6 +18167,19 @@ pub mod projects_set_default_network_tier_request {
         Premium = 399530551,
         /// Public internet quality, only limited support for other networking products.
         Standard = 484642493,
+    }
+    impl NetworkTier {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                NetworkTier::UndefinedNetworkTier => "UNDEFINED_NETWORK_TIER",
+                NetworkTier::Premium => "PREMIUM",
+                NetworkTier::Standard => "STANDARD",
+            }
+        }
     }
 }
 /// A public advertised prefix represents an aggregated IP prefix or netblock which customers bring to cloud. The IP prefix is a single unit of route advertisement and is announced globally to the internet.
@@ -16461,6 +18238,24 @@ pub mod public_advertised_prefix {
         PtrConfigured = 513497167,
         ReverseDnsLookupFailed = 295755183,
         Validated = 66197998,
+    }
+    impl Status {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Status::UndefinedStatus => "UNDEFINED_STATUS",
+                Status::Initial => "INITIAL",
+                Status::PrefixConfigurationComplete => "PREFIX_CONFIGURATION_COMPLETE",
+                Status::PrefixConfigurationInProgress => "PREFIX_CONFIGURATION_IN_PROGRESS",
+                Status::PrefixRemovalInProgress => "PREFIX_REMOVAL_IN_PROGRESS",
+                Status::PtrConfigured => "PTR_CONFIGURED",
+                Status::ReverseDnsLookupFailed => "REVERSE_DNS_LOOKUP_FAILED",
+                Status::Validated => "VALIDATED",
+            }
+        }
     }
 }
 ///
@@ -16561,6 +18356,21 @@ pub mod public_delegated_prefix {
         Initializing = 306588749,
         ReadyToAnnounce = 64641265,
     }
+    impl Status {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Status::UndefinedStatus => "UNDEFINED_STATUS",
+                Status::Announced => "ANNOUNCED",
+                Status::Deleting => "DELETING",
+                Status::Initializing => "INITIALIZING",
+                Status::ReadyToAnnounce => "READY_TO_ANNOUNCE",
+            }
+        }
+    }
 }
 ///
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -16645,6 +18455,19 @@ pub mod public_delegated_prefix_public_delegated_sub_prefix {
         UndefinedStatus = 0,
         Active = 314733318,
         Inactive = 270421099,
+    }
+    impl Status {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Status::UndefinedStatus => "UNDEFINED_STATUS",
+                Status::Active => "ACTIVE",
+                Status::Inactive => "INACTIVE",
+            }
+        }
     }
 }
 ///
@@ -16808,6 +18631,140 @@ pub mod quota {
         VpnTunnels = 104327296,
         XpnServiceProjects = 95191981,
     }
+    impl Metric {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Metric::UndefinedMetric => "UNDEFINED_METRIC",
+                Metric::A2Cpus => "A2_CPUS",
+                Metric::AffinityGroups => "AFFINITY_GROUPS",
+                Metric::Autoscalers => "AUTOSCALERS",
+                Metric::BackendBuckets => "BACKEND_BUCKETS",
+                Metric::BackendServices => "BACKEND_SERVICES",
+                Metric::C2dCpus => "C2D_CPUS",
+                Metric::C2Cpus => "C2_CPUS",
+                Metric::C3Cpus => "C3_CPUS",
+                Metric::Commitments => "COMMITMENTS",
+                Metric::CommittedA2Cpus => "COMMITTED_A2_CPUS",
+                Metric::CommittedC2dCpus => "COMMITTED_C2D_CPUS",
+                Metric::CommittedC2Cpus => "COMMITTED_C2_CPUS",
+                Metric::CommittedC3Cpus => "COMMITTED_C3_CPUS",
+                Metric::CommittedCpus => "COMMITTED_CPUS",
+                Metric::CommittedE2Cpus => "COMMITTED_E2_CPUS",
+                Metric::CommittedLicenses => "COMMITTED_LICENSES",
+                Metric::CommittedLocalSsdTotalGb => "COMMITTED_LOCAL_SSD_TOTAL_GB",
+                Metric::CommittedMemoryOptimizedCpus => "COMMITTED_MEMORY_OPTIMIZED_CPUS",
+                Metric::CommittedN2aCpus => "COMMITTED_N2A_CPUS",
+                Metric::CommittedN2dCpus => "COMMITTED_N2D_CPUS",
+                Metric::CommittedN2Cpus => "COMMITTED_N2_CPUS",
+                Metric::CommittedNvidiaA100Gpus => "COMMITTED_NVIDIA_A100_GPUS",
+                Metric::CommittedNvidiaK80Gpus => "COMMITTED_NVIDIA_K80_GPUS",
+                Metric::CommittedNvidiaP100Gpus => "COMMITTED_NVIDIA_P100_GPUS",
+                Metric::CommittedNvidiaP4Gpus => "COMMITTED_NVIDIA_P4_GPUS",
+                Metric::CommittedNvidiaT4Gpus => "COMMITTED_NVIDIA_T4_GPUS",
+                Metric::CommittedNvidiaV100Gpus => "COMMITTED_NVIDIA_V100_GPUS",
+                Metric::CommittedT2dCpus => "COMMITTED_T2D_CPUS",
+                Metric::Cpus => "CPUS",
+                Metric::CpusAllRegions => "CPUS_ALL_REGIONS",
+                Metric::DisksTotalGb => "DISKS_TOTAL_GB",
+                Metric::E2Cpus => "E2_CPUS",
+                Metric::ExternalNetworkLbForwardingRules => "EXTERNAL_NETWORK_LB_FORWARDING_RULES",
+                Metric::ExternalProtocolForwardingRules => "EXTERNAL_PROTOCOL_FORWARDING_RULES",
+                Metric::ExternalVpnGateways => "EXTERNAL_VPN_GATEWAYS",
+                Metric::Firewalls => "FIREWALLS",
+                Metric::ForwardingRules => "FORWARDING_RULES",
+                Metric::GlobalInternalAddresses => "GLOBAL_INTERNAL_ADDRESSES",
+                Metric::GpusAllRegions => "GPUS_ALL_REGIONS",
+                Metric::HealthChecks => "HEALTH_CHECKS",
+                Metric::Images => "IMAGES",
+                Metric::Instances => "INSTANCES",
+                Metric::InstanceGroups => "INSTANCE_GROUPS",
+                Metric::InstanceGroupManagers => "INSTANCE_GROUP_MANAGERS",
+                Metric::InstanceTemplates => "INSTANCE_TEMPLATES",
+                Metric::Interconnects => "INTERCONNECTS",
+                Metric::InterconnectAttachmentsPerRegion => "INTERCONNECT_ATTACHMENTS_PER_REGION",
+                Metric::InterconnectAttachmentsTotalMbps => "INTERCONNECT_ATTACHMENTS_TOTAL_MBPS",
+                Metric::InterconnectTotalGbps => "INTERCONNECT_TOTAL_GBPS",
+                Metric::InternalAddresses => "INTERNAL_ADDRESSES",
+                Metric::InternalTrafficDirectorForwardingRules => "INTERNAL_TRAFFIC_DIRECTOR_FORWARDING_RULES",
+                Metric::InPlaceSnapshots => "IN_PLACE_SNAPSHOTS",
+                Metric::InUseAddresses => "IN_USE_ADDRESSES",
+                Metric::InUseBackupSchedules => "IN_USE_BACKUP_SCHEDULES",
+                Metric::InUseSnapshotSchedules => "IN_USE_SNAPSHOT_SCHEDULES",
+                Metric::LocalSsdTotalGb => "LOCAL_SSD_TOTAL_GB",
+                Metric::M1Cpus => "M1_CPUS",
+                Metric::M2Cpus => "M2_CPUS",
+                Metric::MachineImages => "MACHINE_IMAGES",
+                Metric::N2aCpus => "N2A_CPUS",
+                Metric::N2dCpus => "N2D_CPUS",
+                Metric::N2Cpus => "N2_CPUS",
+                Metric::Networks => "NETWORKS",
+                Metric::NetworkEndpointGroups => "NETWORK_ENDPOINT_GROUPS",
+                Metric::NetworkFirewallPolicies => "NETWORK_FIREWALL_POLICIES",
+                Metric::NodeGroups => "NODE_GROUPS",
+                Metric::NodeTemplates => "NODE_TEMPLATES",
+                Metric::NvidiaA100Gpus => "NVIDIA_A100_GPUS",
+                Metric::NvidiaK80Gpus => "NVIDIA_K80_GPUS",
+                Metric::NvidiaP100Gpus => "NVIDIA_P100_GPUS",
+                Metric::NvidiaP100VwsGpus => "NVIDIA_P100_VWS_GPUS",
+                Metric::NvidiaP4Gpus => "NVIDIA_P4_GPUS",
+                Metric::NvidiaP4VwsGpus => "NVIDIA_P4_VWS_GPUS",
+                Metric::NvidiaT4Gpus => "NVIDIA_T4_GPUS",
+                Metric::NvidiaT4VwsGpus => "NVIDIA_T4_VWS_GPUS",
+                Metric::NvidiaV100Gpus => "NVIDIA_V100_GPUS",
+                Metric::PacketMirrorings => "PACKET_MIRRORINGS",
+                Metric::PdExtremeTotalProvisionedIops => "PD_EXTREME_TOTAL_PROVISIONED_IOPS",
+                Metric::PreemptibleCpus => "PREEMPTIBLE_CPUS",
+                Metric::PreemptibleLocalSsdGb => "PREEMPTIBLE_LOCAL_SSD_GB",
+                Metric::PreemptibleNvidiaA100Gpus => "PREEMPTIBLE_NVIDIA_A100_GPUS",
+                Metric::PreemptibleNvidiaK80Gpus => "PREEMPTIBLE_NVIDIA_K80_GPUS",
+                Metric::PreemptibleNvidiaP100Gpus => "PREEMPTIBLE_NVIDIA_P100_GPUS",
+                Metric::PreemptibleNvidiaP100VwsGpus => "PREEMPTIBLE_NVIDIA_P100_VWS_GPUS",
+                Metric::PreemptibleNvidiaP4Gpus => "PREEMPTIBLE_NVIDIA_P4_GPUS",
+                Metric::PreemptibleNvidiaP4VwsGpus => "PREEMPTIBLE_NVIDIA_P4_VWS_GPUS",
+                Metric::PreemptibleNvidiaT4Gpus => "PREEMPTIBLE_NVIDIA_T4_GPUS",
+                Metric::PreemptibleNvidiaT4VwsGpus => "PREEMPTIBLE_NVIDIA_T4_VWS_GPUS",
+                Metric::PreemptibleNvidiaV100Gpus => "PREEMPTIBLE_NVIDIA_V100_GPUS",
+                Metric::PscIlbConsumerForwardingRulesPerProducerNetwork => "PSC_ILB_CONSUMER_FORWARDING_RULES_PER_PRODUCER_NETWORK",
+                Metric::PscInternalLbForwardingRules => "PSC_INTERNAL_LB_FORWARDING_RULES",
+                Metric::PublicAdvertisedPrefixes => "PUBLIC_ADVERTISED_PREFIXES",
+                Metric::PublicDelegatedPrefixes => "PUBLIC_DELEGATED_PREFIXES",
+                Metric::RegionalAutoscalers => "REGIONAL_AUTOSCALERS",
+                Metric::RegionalInstanceGroupManagers => "REGIONAL_INSTANCE_GROUP_MANAGERS",
+                Metric::Reservations => "RESERVATIONS",
+                Metric::ResourcePolicies => "RESOURCE_POLICIES",
+                Metric::Routers => "ROUTERS",
+                Metric::Routes => "ROUTES",
+                Metric::SecurityPolicies => "SECURITY_POLICIES",
+                Metric::SecurityPoliciesPerRegion => "SECURITY_POLICIES_PER_REGION",
+                Metric::SecurityPolicyCevalRules => "SECURITY_POLICY_CEVAL_RULES",
+                Metric::SecurityPolicyRules => "SECURITY_POLICY_RULES",
+                Metric::SecurityPolicyRulesPerRegion => "SECURITY_POLICY_RULES_PER_REGION",
+                Metric::ServiceAttachments => "SERVICE_ATTACHMENTS",
+                Metric::Snapshots => "SNAPSHOTS",
+                Metric::SsdTotalGb => "SSD_TOTAL_GB",
+                Metric::SslCertificates => "SSL_CERTIFICATES",
+                Metric::StaticAddresses => "STATIC_ADDRESSES",
+                Metric::StaticByoipAddresses => "STATIC_BYOIP_ADDRESSES",
+                Metric::Subnetworks => "SUBNETWORKS",
+                Metric::T2dCpus => "T2D_CPUS",
+                Metric::TargetHttpsProxies => "TARGET_HTTPS_PROXIES",
+                Metric::TargetHttpProxies => "TARGET_HTTP_PROXIES",
+                Metric::TargetInstances => "TARGET_INSTANCES",
+                Metric::TargetPools => "TARGET_POOLS",
+                Metric::TargetSslProxies => "TARGET_SSL_PROXIES",
+                Metric::TargetTcpProxies => "TARGET_TCP_PROXIES",
+                Metric::TargetVpnGateways => "TARGET_VPN_GATEWAYS",
+                Metric::UrlMaps => "URL_MAPS",
+                Metric::VpnGateways => "VPN_GATEWAYS",
+                Metric::VpnTunnels => "VPN_TUNNELS",
+                Metric::XpnServiceProjects => "XPN_SERVICE_PROJECTS",
+            }
+        }
+    }
 }
 /// The parameters of the raw disk image.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -16832,6 +18789,18 @@ pub mod raw_disk {
         /// A value indicating that the enum field is not set.
         UndefinedContainerType = 0,
         Tar = 82821,
+    }
+    impl ContainerType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ContainerType::UndefinedContainerType => "UNDEFINED_CONTAINER_TYPE",
+                ContainerType::Tar => "TAR",
+            }
+        }
     }
 }
 /// A request message for InstanceGroupManagers.RecreateInstances. See the method description for details.
@@ -16936,6 +18905,19 @@ pub mod region {
         UndefinedStatus = 0,
         Down = 2104482,
         Up = 2715,
+    }
+    impl Status {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Status::UndefinedStatus => "UNDEFINED_STATUS",
+                Status::Down => "DOWN",
+                Status::Up => "UP",
+            }
+        }
     }
 }
 /// Contains a list of autoscalers.
@@ -17210,6 +19192,19 @@ pub mod region_instance_groups_list_instances_request {
         All = 64897,
         /// Instance is in RUNNING state if it is running.
         Running = 121282975,
+    }
+    impl InstanceState {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                InstanceState::UndefinedInstanceState => "UNDEFINED_INSTANCE_STATE",
+                InstanceState::All => "ALL",
+                InstanceState::Running => "RUNNING",
+            }
+        }
     }
 }
 ///
@@ -17516,6 +19511,22 @@ pub mod reservation {
         /// Reservation is currently being resized.
         Updating = 494614342,
     }
+    impl Status {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Status::UndefinedStatus => "UNDEFINED_STATUS",
+                Status::Creating => "CREATING",
+                Status::Deleting => "DELETING",
+                Status::Invalid => "INVALID",
+                Status::Ready => "READY",
+                Status::Updating => "UPDATING",
+            }
+        }
+    }
 }
 /// Specifies the reservations that this instance can consume from.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -17546,6 +19557,21 @@ pub mod reservation_affinity {
         /// Must consume from a specific reservation. Must specify key value fields for specifying the reservations.
         SpecificReservation = 229889055,
         Unspecified = 526786327,
+    }
+    impl ConsumeReservationType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ConsumeReservationType::UndefinedConsumeReservationType => "UNDEFINED_CONSUME_RESERVATION_TYPE",
+                ConsumeReservationType::AnyReservation => "ANY_RESERVATION",
+                ConsumeReservationType::NoReservation => "NO_RESERVATION",
+                ConsumeReservationType::SpecificReservation => "SPECIFIC_RESERVATION",
+                ConsumeReservationType::Unspecified => "UNSPECIFIED",
+            }
+        }
     }
 }
 /// Contains a list of reservations.
@@ -17751,6 +19777,22 @@ pub mod resource_commitment {
         Unspecified = 526786327,
         Vcpu = 2628978,
     }
+    impl Type {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Type::UndefinedType => "UNDEFINED_TYPE",
+                Type::Accelerator => "ACCELERATOR",
+                Type::LocalSsd => "LOCAL_SSD",
+                Type::Memory => "MEMORY",
+                Type::Unspecified => "UNSPECIFIED",
+                Type::Vcpu => "VCPU",
+            }
+        }
+    }
 }
 ///
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -17826,6 +19868,22 @@ pub mod resource_policy {
         /// Resource policy is ready to be used.
         Ready = 77848963,
     }
+    impl Status {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Status::UndefinedStatus => "UNDEFINED_STATUS",
+                Status::Creating => "CREATING",
+                Status::Deleting => "DELETING",
+                Status::Expired => "EXPIRED",
+                Status::Invalid => "INVALID",
+                Status::Ready => "READY",
+            }
+        }
+    }
 }
 /// Contains a list of resourcePolicies.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -17891,6 +19949,19 @@ pub mod resource_policy_group_placement_policy {
         UndefinedCollocation = 0,
         Collocated = 103257554,
         UnspecifiedCollocation = 464308205,
+    }
+    impl Collocation {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Collocation::UndefinedCollocation => "UNDEFINED_COLLOCATION",
+                Collocation::Collocated => "COLLOCATED",
+                Collocation::UnspecifiedCollocation => "UNSPECIFIED_COLLOCATION",
+            }
+        }
     }
 }
 /// Time window specified for hourly operations.
@@ -18009,6 +20080,20 @@ pub mod resource_policy_snapshot_schedule_policy_retention_policy {
         KeepAutoSnapshots = 258925689,
         UnspecifiedOnSourceDiskDelete = 239140769,
     }
+    impl OnSourceDiskDelete {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                OnSourceDiskDelete::UndefinedOnSourceDiskDelete => "UNDEFINED_ON_SOURCE_DISK_DELETE",
+                OnSourceDiskDelete::ApplyRetentionPolicy => "APPLY_RETENTION_POLICY",
+                OnSourceDiskDelete::KeepAutoSnapshots => "KEEP_AUTO_SNAPSHOTS",
+                OnSourceDiskDelete::UnspecifiedOnSourceDiskDelete => "UNSPECIFIED_ON_SOURCE_DISK_DELETE",
+            }
+        }
+    }
 }
 /// A schedule for disks where the schedueled operations are performed.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -18073,6 +20158,25 @@ pub mod resource_policy_weekly_cycle_day_of_week {
         Thursday = 207198682,
         Tuesday = 277509677,
         Wednesday = 422029110,
+    }
+    impl Day {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Day::UndefinedDay => "UNDEFINED_DAY",
+                Day::Friday => "FRIDAY",
+                Day::Invalid => "INVALID",
+                Day::Monday => "MONDAY",
+                Day::Saturday => "SATURDAY",
+                Day::Sunday => "SUNDAY",
+                Day::Thursday => "THURSDAY",
+                Day::Tuesday => "TUESDAY",
+                Day::Wednesday => "WEDNESDAY",
+            }
+        }
     }
 }
 /// Represents a Route resource. A route defines a path from VM instances in the VPC network to a specific destination. This destination can be inside or outside the VPC network. For more information, read the Routes overview.
@@ -18153,6 +20257,21 @@ pub mod route {
         Subnet = 309278557,
         Transit = 187793843,
     }
+    impl RouteType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                RouteType::UndefinedRouteType => "UNDEFINED_ROUTE_TYPE",
+                RouteType::Bgp => "BGP",
+                RouteType::Static => "STATIC",
+                RouteType::Subnet => "SUBNET",
+                RouteType::Transit => "TRANSIT",
+            }
+        }
+    }
 }
 ///
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -18177,6 +20296,21 @@ pub mod route_as_path {
         AsConfedSet = 374040307,
         AsSequence = 106735918,
         AsSet = 329846453,
+    }
+    impl PathSegmentType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                PathSegmentType::UndefinedPathSegmentType => "UNDEFINED_PATH_SEGMENT_TYPE",
+                PathSegmentType::AsConfedSequence => "AS_CONFED_SEQUENCE",
+                PathSegmentType::AsConfedSet => "AS_CONFED_SET",
+                PathSegmentType::AsSequence => "AS_SEQUENCE",
+                PathSegmentType::AsSet => "AS_SET",
+            }
+        }
     }
 }
 /// Contains a list of Route resources.
@@ -18311,6 +20445,19 @@ pub mod router_bgp {
         Custom = 388595569,
         Default = 115302945,
     }
+    impl AdvertiseMode {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AdvertiseMode::UndefinedAdvertiseMode => "UNDEFINED_ADVERTISE_MODE",
+                AdvertiseMode::Custom => "CUSTOM",
+                AdvertiseMode::Default => "DEFAULT",
+            }
+        }
+    }
     ///
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -18319,6 +20466,18 @@ pub mod router_bgp {
         UndefinedAdvertisedGroups = 0,
         /// Advertise all available subnets (including peer VPC subnets).
         AllSubnets = 3622872,
+    }
+    impl AdvertisedGroups {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AdvertisedGroups::UndefinedAdvertisedGroups => "UNDEFINED_ADVERTISED_GROUPS",
+                AdvertisedGroups::AllSubnets => "ALL_SUBNETS",
+            }
+        }
     }
 }
 ///
@@ -18379,6 +20538,19 @@ pub mod router_bgp_peer {
         Custom = 388595569,
         Default = 115302945,
     }
+    impl AdvertiseMode {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AdvertiseMode::UndefinedAdvertiseMode => "UNDEFINED_ADVERTISE_MODE",
+                AdvertiseMode::Custom => "CUSTOM",
+                AdvertiseMode::Default => "DEFAULT",
+            }
+        }
+    }
     ///
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -18388,6 +20560,18 @@ pub mod router_bgp_peer {
         /// Advertise all available subnets (including peer VPC subnets).
         AllSubnets = 3622872,
     }
+    impl AdvertisedGroups {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AdvertisedGroups::UndefinedAdvertisedGroups => "UNDEFINED_ADVERTISED_GROUPS",
+                AdvertisedGroups::AllSubnets => "ALL_SUBNETS",
+            }
+        }
+    }
     /// The status of the BGP peer connection. If set to FALSE, any active session with the peer is terminated and all associated routing information is removed. If set to TRUE, the peer connection can be established with routing information. The default is TRUE.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -18396,6 +20580,19 @@ pub mod router_bgp_peer {
         UndefinedEnable = 0,
         False = 66658563,
         True = 2583950,
+    }
+    impl Enable {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Enable::UndefinedEnable => "UNDEFINED_ENABLE",
+                Enable::False => "FALSE",
+                Enable::True => "TRUE",
+            }
+        }
     }
     /// [Output Only] The resource that configures and manages this BGP peer. - MANAGED_BY_USER is the default value and can be managed by you or other users - MANAGED_BY_ATTACHMENT is a BGP peer that is configured and managed by Cloud Interconnect, specifically by an InterconnectAttachment of type PARTNER. Google automatically creates, updates, and deletes this type of BGP peer when the PARTNER InterconnectAttachment is created, updated, or deleted. 
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -18407,6 +20604,19 @@ pub mod router_bgp_peer {
         ManagedByAttachment = 458926411,
         /// Default value, the BGP peer is manually created and managed by user.
         ManagedByUser = 317294067,
+    }
+    impl ManagementType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ManagementType::UndefinedManagementType => "UNDEFINED_MANAGEMENT_TYPE",
+                ManagementType::ManagedByAttachment => "MANAGED_BY_ATTACHMENT",
+                ManagementType::ManagedByUser => "MANAGED_BY_USER",
+            }
+        }
     }
 }
 ///
@@ -18437,6 +20647,20 @@ pub mod router_bgp_peer_bfd {
         Active = 314733318,
         Disabled = 516696700,
         Passive = 462813959,
+    }
+    impl SessionInitializationMode {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                SessionInitializationMode::UndefinedSessionInitializationMode => "UNDEFINED_SESSION_INITIALIZATION_MODE",
+                SessionInitializationMode::Active => "ACTIVE",
+                SessionInitializationMode::Disabled => "DISABLED",
+                SessionInitializationMode::Passive => "PASSIVE",
+            }
+        }
     }
 }
 ///
@@ -18480,6 +20704,19 @@ pub mod router_interface {
         ManagedByAttachment = 458926411,
         /// Default value, the interface is manually created and managed by user.
         ManagedByUser = 317294067,
+    }
+    impl ManagementType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ManagementType::UndefinedManagementType => "UNDEFINED_MANAGEMENT_TYPE",
+                ManagementType::ManagedByAttachment => "MANAGED_BY_ATTACHMENT",
+                ManagementType::ManagedByUser => "MANAGED_BY_USER",
+            }
+        }
     }
 }
 /// Contains a list of Router resources.
@@ -18567,6 +20804,19 @@ pub mod router_nat {
         /// Only use Nat IPs provided by customers. When specified Nat IPs are not enough then the Nat service fails for new VMs.
         ManualOnly = 261251205,
     }
+    impl NatIpAllocateOption {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                NatIpAllocateOption::UndefinedNatIpAllocateOption => "UNDEFINED_NAT_IP_ALLOCATE_OPTION",
+                NatIpAllocateOption::AutoOnly => "AUTO_ONLY",
+                NatIpAllocateOption::ManualOnly => "MANUAL_ONLY",
+            }
+        }
+    }
     /// Specify the Nat option, which can take one of the following values: - ALL_SUBNETWORKS_ALL_IP_RANGES: All of the IP ranges in every Subnetwork are allowed to Nat. - ALL_SUBNETWORKS_ALL_PRIMARY_IP_RANGES: All of the primary IP ranges in every Subnetwork are allowed to Nat. - LIST_OF_SUBNETWORKS: A list of Subnetworks are allowed to Nat (specified in the field subnetwork below) The default is SUBNETWORK_IP_RANGE_TO_NAT_OPTION_UNSPECIFIED. Note that if this field contains ALL_SUBNETWORKS_ALL_IP_RANGES or ALL_SUBNETWORKS_ALL_PRIMARY_IP_RANGES, then there should not be any other Router.Nat section in any Router for this network in this region.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -18579,6 +20829,20 @@ pub mod router_nat {
         AllSubnetworksAllPrimaryIpRanges = 185573819,
         /// A list of Subnetworks are allowed to Nat (specified in the field subnetwork below)
         ListOfSubnetworks = 517542270,
+    }
+    impl SourceSubnetworkIpRangesToNat {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                SourceSubnetworkIpRangesToNat::UndefinedSourceSubnetworkIpRangesToNat => "UNDEFINED_SOURCE_SUBNETWORK_IP_RANGES_TO_NAT",
+                SourceSubnetworkIpRangesToNat::AllSubnetworksAllIpRanges => "ALL_SUBNETWORKS_ALL_IP_RANGES",
+                SourceSubnetworkIpRangesToNat::AllSubnetworksAllPrimaryIpRanges => "ALL_SUBNETWORKS_ALL_PRIMARY_IP_RANGES",
+                SourceSubnetworkIpRangesToNat::ListOfSubnetworks => "LIST_OF_SUBNETWORKS",
+            }
+        }
     }
 }
 /// Configuration of logging on a NAT.
@@ -18606,6 +20870,20 @@ pub mod router_nat_log_config {
         ErrorsOnly = 307484672,
         /// Export logs for successful connections only.
         TranslationsOnly = 357212649,
+    }
+    impl Filter {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Filter::UndefinedFilter => "UNDEFINED_FILTER",
+                Filter::All => "ALL",
+                Filter::ErrorsOnly => "ERRORS_ONLY",
+                Filter::TranslationsOnly => "TRANSLATIONS_ONLY",
+            }
+        }
     }
 }
 ///
@@ -18662,6 +20940,20 @@ pub mod router_nat_subnetwork_to_nat {
         ListOfSecondaryIpRanges = 192289308,
         /// The primary range is allowed to Nat.
         PrimaryIpRange = 297109954,
+    }
+    impl SourceIpRangesToNat {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                SourceIpRangesToNat::UndefinedSourceIpRangesToNat => "UNDEFINED_SOURCE_IP_RANGES_TO_NAT",
+                SourceIpRangesToNat::AllIpRanges => "ALL_IP_RANGES",
+                SourceIpRangesToNat::ListOfSecondaryIpRanges => "LIST_OF_SECONDARY_IP_RANGES",
+                SourceIpRangesToNat::PrimaryIpRange => "PRIMARY_IP_RANGE",
+            }
+        }
     }
 }
 ///
@@ -18730,6 +21022,20 @@ pub mod router_status_bgp_peer_status {
         Down = 2104482,
         Unknown = 433141802,
         Up = 2715,
+    }
+    impl Status {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Status::UndefinedStatus => "UNDEFINED_STATUS",
+                Status::Down => "DOWN",
+                Status::Unknown => "UNKNOWN",
+                Status::Up => "UP",
+            }
+        }
     }
 }
 /// Status of a NAT contained in this router.
@@ -18855,6 +21161,23 @@ pub mod rule {
         /// This is deprecated and has no effect. Do not use.
         NoAction = 260643444,
     }
+    impl Action {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Action::UndefinedAction => "UNDEFINED_ACTION",
+                Action::Allow => "ALLOW",
+                Action::AllowWithLog => "ALLOW_WITH_LOG",
+                Action::Deny => "DENY",
+                Action::DenyWithLog => "DENY_WITH_LOG",
+                Action::Log => "LOG",
+                Action::NoAction => "NO_ACTION",
+            }
+        }
+    }
 }
 ///
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -18895,6 +21218,20 @@ pub mod ssl_health_check {
         /// For NetworkEndpointGroup, the port specified for each network endpoint is used for health checking. For other backends, the port or named port specified in the Backend Service is used for health checking.
         UseServingPort = 362637516,
     }
+    impl PortSpecification {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                PortSpecification::UndefinedPortSpecification => "UNDEFINED_PORT_SPECIFICATION",
+                PortSpecification::UseFixedPort => "USE_FIXED_PORT",
+                PortSpecification::UseNamedPort => "USE_NAMED_PORT",
+                PortSpecification::UseServingPort => "USE_SERVING_PORT",
+            }
+        }
+    }
     /// Specifies the type of proxy header to append before sending data to the backend, either NONE or PROXY_V1. The default is NONE.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -18903,6 +21240,19 @@ pub mod ssl_health_check {
         UndefinedProxyHeader = 0,
         None = 2402104,
         ProxyV1 = 334352940,
+    }
+    impl ProxyHeader {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ProxyHeader::UndefinedProxyHeader => "UNDEFINED_PROXY_HEADER",
+                ProxyHeader::None => "NONE",
+                ProxyHeader::ProxyV1 => "PROXY_V1",
+            }
+        }
     }
 }
 ///
@@ -18935,6 +21285,21 @@ pub mod scaling_schedule_status {
         Obsolete = 66532761,
         /// The current autoscaling recommendation is not influenced by this scaling schedule.
         Ready = 77848963,
+    }
+    impl State {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                State::UndefinedState => "UNDEFINED_STATE",
+                State::Active => "ACTIVE",
+                State::Disabled => "DISABLED",
+                State::Obsolete => "OBSOLETE",
+                State::Ready => "READY",
+            }
+        }
     }
 }
 /// Sets the scheduling options for an Instance. NextID: 21
@@ -18973,6 +21338,19 @@ pub mod scheduling {
         /// Tells Compute Engine to terminate and (optionally) restart the instance away from the maintenance activity. If you would like your instance to be restarted, set the automaticRestart flag to true. Your instance may be restarted more than once, and it may be restarted outside the window of maintenance events.
         Terminate = 527617601,
     }
+    impl OnHostMaintenance {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                OnHostMaintenance::UndefinedOnHostMaintenance => "UNDEFINED_ON_HOST_MAINTENANCE",
+                OnHostMaintenance::Migrate => "MIGRATE",
+                OnHostMaintenance::Terminate => "TERMINATE",
+            }
+        }
+    }
 }
 /// Node Affinity: the configuration of desired nodes onto which this Instance could be scheduled.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -19001,6 +21379,20 @@ pub mod scheduling_node_affinity {
         /// Requires Compute Engine to avoid certain nodes.
         NotIn = 161144369,
         Unspecified = 128892924,
+    }
+    impl Operator {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Operator::UndefinedOperator => "UNDEFINED_OPERATOR",
+                Operator::In => "IN",
+                Operator::NotIn => "NOT_IN",
+                Operator::Unspecified => "OPERATOR_UNSPECIFIED",
+            }
+        }
     }
 }
 ///
@@ -19093,6 +21485,19 @@ pub mod security_policy_adaptive_protection_config_layer7_ddos_defense_config {
         Premium = 399530551,
         Standard = 484642493,
     }
+    impl RuleVisibility {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                RuleVisibility::UndefinedRuleVisibility => "UNDEFINED_RULE_VISIBILITY",
+                RuleVisibility::Premium => "PREMIUM",
+                RuleVisibility::Standard => "STANDARD",
+            }
+        }
+    }
 }
 ///
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -19117,6 +21522,19 @@ pub mod security_policy_advanced_options_config {
         Disabled = 516696700,
         Standard = 484642493,
     }
+    impl JsonParsing {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                JsonParsing::UndefinedJsonParsing => "UNDEFINED_JSON_PARSING",
+                JsonParsing::Disabled => "DISABLED",
+                JsonParsing::Standard => "STANDARD",
+            }
+        }
+    }
     ///
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -19125,6 +21543,19 @@ pub mod security_policy_advanced_options_config {
         UndefinedLogLevel = 0,
         Normal = 161067239,
         Verbose = 532219234,
+    }
+    impl LogLevel {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                LogLevel::UndefinedLogLevel => "UNDEFINED_LOG_LEVEL",
+                LogLevel::Normal => "NORMAL",
+                LogLevel::Verbose => "VERBOSE",
+            }
+        }
     }
 }
 ///
@@ -19198,6 +21629,18 @@ pub mod security_policy_rule_matcher {
         UndefinedVersionedExpr = 0,
         /// Matches the source IP address of a request to the IP ranges supplied in config.
         SrcIpsV1 = 70925961,
+    }
+    impl VersionedExpr {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                VersionedExpr::UndefinedVersionedExpr => "UNDEFINED_VERSIONED_EXPR",
+                VersionedExpr::SrcIpsV1 => "SRC_IPS_V1",
+            }
+        }
     }
 }
 ///
@@ -19274,6 +21717,20 @@ pub mod server_binding {
         /// Node may associate with minimal physical servers over its lifetime.
         RestartNodeOnMinimalServers = 204166495,
         ServerBindingTypeUnspecified = 180825512,
+    }
+    impl Type {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Type::UndefinedType => "UNDEFINED_TYPE",
+                Type::RestartNodeOnAnyServer => "RESTART_NODE_ON_ANY_SERVER",
+                Type::RestartNodeOnMinimalServers => "RESTART_NODE_ON_MINIMAL_SERVERS",
+                Type::ServerBindingTypeUnspecified => "SERVER_BINDING_TYPE_UNSPECIFIED",
+            }
+        }
     }
 }
 /// A service account.
@@ -19354,6 +21811,20 @@ pub mod service_attachment {
         AcceptManual = 373061341,
         Unspecified = 34590772,
     }
+    impl ConnectionPreference {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ConnectionPreference::UndefinedConnectionPreference => "UNDEFINED_CONNECTION_PREFERENCE",
+                ConnectionPreference::AcceptAutomatic => "ACCEPT_AUTOMATIC",
+                ConnectionPreference::AcceptManual => "ACCEPT_MANUAL",
+                ConnectionPreference::Unspecified => "CONNECTION_PREFERENCE_UNSPECIFIED",
+            }
+        }
+    }
 }
 /// Contains a list of ServiceAttachmentsScopedList.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -19411,6 +21882,22 @@ pub mod service_attachment_connected_endpoint {
         /// The consumer is still connected but not using the connection.
         Rejected = 174130302,
         Unspecified = 42133066,
+    }
+    impl Status {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Status::UndefinedStatus => "UNDEFINED_STATUS",
+                Status::Accepted => "ACCEPTED",
+                Status::Closed => "CLOSED",
+                Status::Pending => "PENDING",
+                Status::Rejected => "REJECTED",
+                Status::Unspecified => "STATUS_UNSPECIFIED",
+            }
+        }
     }
 }
 ///
@@ -20661,6 +23148,22 @@ pub mod snapshot {
         /// Snapshot is being uploaded.
         Uploading = 267603489,
     }
+    impl Status {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Status::UndefinedStatus => "UNDEFINED_STATUS",
+                Status::Creating => "CREATING",
+                Status::Deleting => "DELETING",
+                Status::Failed => "FAILED",
+                Status::Ready => "READY",
+                Status::Uploading => "UPLOADING",
+            }
+        }
+    }
     /// [Output Only] An indicator whether storageBytes is in a stable state or it is being adjusted as a result of shared storage reallocation. This status can either be UPDATING, meaning the size of the snapshot is being updated, or UP_TO_DATE, meaning the size of the snapshot is up-to-date.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -20669,6 +23172,19 @@ pub mod snapshot {
         UndefinedStorageBytesStatus = 0,
         Updating = 494614342,
         UpToDate = 101306702,
+    }
+    impl StorageBytesStatus {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                StorageBytesStatus::UndefinedStorageBytesStatus => "UNDEFINED_STORAGE_BYTES_STATUS",
+                StorageBytesStatus::Updating => "UPDATING",
+                StorageBytesStatus::UpToDate => "UP_TO_DATE",
+            }
+        }
     }
 }
 /// Contains a list of Snapshot resources.
@@ -20761,6 +23277,20 @@ pub mod ssl_certificate {
         SelfManaged = 434437516,
         Unspecified = 437714322,
     }
+    impl Type {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Type::UndefinedType => "UNDEFINED_TYPE",
+                Type::Managed => "MANAGED",
+                Type::SelfManaged => "SELF_MANAGED",
+                Type::Unspecified => "TYPE_UNSPECIFIED",
+            }
+        }
+    }
 }
 ///
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -20842,6 +23372,23 @@ pub mod ssl_certificate_managed_ssl_certificate {
         ProvisioningFailedPermanently = 275036203,
         /// Renewal of the certificate has failed due to an issue with the DNS or load balancing configuration. The existing cert is still serving; however, it will expire shortly. To provision a renewed certificate, delete and create a new managed SslCertificate resource. For details on which domain failed, consult domain_status field.
         RenewalFailed = 434659076,
+    }
+    impl Status {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Status::UndefinedStatus => "UNDEFINED_STATUS",
+                Status::Active => "ACTIVE",
+                Status::ManagedCertificateStatusUnspecified => "MANAGED_CERTIFICATE_STATUS_UNSPECIFIED",
+                Status::Provisioning => "PROVISIONING",
+                Status::ProvisioningFailed => "PROVISIONING_FAILED",
+                Status::ProvisioningFailedPermanently => "PROVISIONING_FAILED_PERMANENTLY",
+                Status::RenewalFailed => "RENEWAL_FAILED",
+            }
+        }
     }
 }
 /// Configuration and status of a self-managed SSL certificate.
@@ -20949,6 +23496,20 @@ pub mod ssl_policy {
         /// TLS 1.2
         Tls12 = 33116736,
     }
+    impl MinTlsVersion {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                MinTlsVersion::UndefinedMinTlsVersion => "UNDEFINED_MIN_TLS_VERSION",
+                MinTlsVersion::Tls10 => "TLS_1_0",
+                MinTlsVersion::Tls11 => "TLS_1_1",
+                MinTlsVersion::Tls12 => "TLS_1_2",
+            }
+        }
+    }
     /// Profile specifies the set of SSL features that can be used by the load balancer when negotiating SSL with clients. This can be one of COMPATIBLE, MODERN, RESTRICTED, or CUSTOM. If using CUSTOM, the set of SSL features to enable must be specified in the customFeatures field.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -20963,6 +23524,21 @@ pub mod ssl_policy {
         Modern = 132013855,
         /// Restricted profile. Supports a reduced set of SSL features, intended to meet stricter compliance requirements.
         Restricted = 261551195,
+    }
+    impl Profile {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Profile::UndefinedProfile => "UNDEFINED_PROFILE",
+                Profile::Compatible => "COMPATIBLE",
+                Profile::Custom => "CUSTOM",
+                Profile::Modern => "MODERN",
+                Profile::Restricted => "RESTRICTED",
+            }
+        }
     }
 }
 ///
@@ -21038,6 +23614,19 @@ pub mod stateful_policy_preserved_state_disk_device {
         UndefinedAutoDelete = 0,
         Never = 74175084,
         OnPermanentInstanceDeletion = 95727719,
+    }
+    impl AutoDelete {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AutoDelete::UndefinedAutoDelete => "UNDEFINED_AUTO_DELETE",
+                AutoDelete::Never => "NEVER",
+                AutoDelete::OnPermanentInstanceDeletion => "ON_PERMANENT_INSTANCE_DELETION",
+            }
+        }
     }
 }
 /// A request message for Instances.Stop. See the method description for details.
@@ -21148,6 +23737,19 @@ pub mod subnetwork {
         /// IPv6 access type not set. Means this subnet hasn't been turned on IPv6 yet.
         UnspecifiedIpv6AccessType = 313080613,
     }
+    impl Ipv6AccessType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Ipv6AccessType::UndefinedIpv6AccessType => "UNDEFINED_IPV6_ACCESS_TYPE",
+                Ipv6AccessType::External => "EXTERNAL",
+                Ipv6AccessType::UnspecifiedIpv6AccessType => "UNSPECIFIED_IPV6_ACCESS_TYPE",
+            }
+        }
+    }
     /// The private IPv6 google access type for the VMs in this subnet. This is an expanded field of enablePrivateV6Access. If both fields are set, privateIpv6GoogleAccess will take priority. This field can be both set at resource creation time and updated using patch.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -21160,6 +23762,20 @@ pub mod subnetwork {
         EnableBidirectionalAccessToGoogle = 427975994,
         /// Outbound private IPv6 access from VMs in this subnet to Google services.
         EnableOutboundVmAccessToGoogle = 288210263,
+    }
+    impl PrivateIpv6GoogleAccess {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                PrivateIpv6GoogleAccess::UndefinedPrivateIpv6GoogleAccess => "UNDEFINED_PRIVATE_IPV6_GOOGLE_ACCESS",
+                PrivateIpv6GoogleAccess::DisableGoogleAccess => "DISABLE_GOOGLE_ACCESS",
+                PrivateIpv6GoogleAccess::EnableBidirectionalAccessToGoogle => "ENABLE_BIDIRECTIONAL_ACCESS_TO_GOOGLE",
+                PrivateIpv6GoogleAccess::EnableOutboundVmAccessToGoogle => "ENABLE_OUTBOUND_VM_ACCESS_TO_GOOGLE",
+            }
+        }
     }
     /// The purpose of the resource. This field can be either PRIVATE_RFC_1918 or INTERNAL_HTTPS_LOAD_BALANCER. A subnetwork with purpose set to INTERNAL_HTTPS_LOAD_BALANCER is a user-created subnetwork that is reserved for Internal HTTP(S) Load Balancing. If unspecified, the purpose defaults to PRIVATE_RFC_1918. The enableFlowLogs field isn't supported with the purpose field set to INTERNAL_HTTPS_LOAD_BALANCER.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -21176,6 +23792,21 @@ pub mod subnetwork {
         /// Subnetworks created for Private Service Connect in the producer network.
         PrivateServiceConnect = 48134724,
     }
+    impl Purpose {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Purpose::UndefinedPurpose => "UNDEFINED_PURPOSE",
+                Purpose::InternalHttpsLoadBalancer => "INTERNAL_HTTPS_LOAD_BALANCER",
+                Purpose::Private => "PRIVATE",
+                Purpose::PrivateRfc1918 => "PRIVATE_RFC_1918",
+                Purpose::PrivateServiceConnect => "PRIVATE_SERVICE_CONNECT",
+            }
+        }
+    }
     /// The role of subnetwork. Currently, this field is only used when purpose = INTERNAL_HTTPS_LOAD_BALANCER. The value can be set to ACTIVE or BACKUP. An ACTIVE subnetwork is one that is currently being used for Internal HTTP(S) Load Balancing. A BACKUP subnetwork is one that is ready to be promoted to ACTIVE or is currently draining. This field can be updated with a patch request.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -21186,6 +23817,19 @@ pub mod subnetwork {
         Active = 314733318,
         /// The BACKUP subnet that could be promoted to ACTIVE.
         Backup = 341010882,
+    }
+    impl Role {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Role::UndefinedRole => "UNDEFINED_ROLE",
+                Role::Active => "ACTIVE",
+                Role::Backup => "BACKUP",
+            }
+        }
     }
     /// The stack type for this subnet to identify whether the IPv6 feature is enabled or not. If not specified IPV4_ONLY will be used. This field can be both set at resource creation time and updated using patch.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -21199,6 +23843,20 @@ pub mod subnetwork {
         Ipv4Only = 22373798,
         UnspecifiedStackType = 298084569,
     }
+    impl StackType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                StackType::UndefinedStackType => "UNDEFINED_STACK_TYPE",
+                StackType::Ipv4Ipv6 => "IPV4_IPV6",
+                StackType::Ipv4Only => "IPV4_ONLY",
+                StackType::UnspecifiedStackType => "UNSPECIFIED_STACK_TYPE",
+            }
+        }
+    }
     /// [Output Only] The state of the subnetwork, which can be one of the following values: READY: Subnetwork is created and ready to use DRAINING: only applicable to subnetworks that have the purpose set to INTERNAL_HTTPS_LOAD_BALANCER and indicates that connections to the load balancer are being drained. A subnetwork that is draining cannot be used or modified until it reaches a status of READY
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -21209,6 +23867,19 @@ pub mod subnetwork {
         Draining = 480455402,
         /// Subnetwork is ready for use.
         Ready = 77848963,
+    }
+    impl State {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                State::UndefinedState => "UNDEFINED_STATE",
+                State::Draining => "DRAINING",
+                State::Ready => "READY",
+            }
+        }
     }
 }
 ///
@@ -21297,6 +23968,23 @@ pub mod subnetwork_log_config {
         Interval5Min = 72746798,
         Interval5Sec = 72752429,
     }
+    impl AggregationInterval {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                AggregationInterval::UndefinedAggregationInterval => "UNDEFINED_AGGREGATION_INTERVAL",
+                AggregationInterval::Interval10Min => "INTERVAL_10_MIN",
+                AggregationInterval::Interval15Min => "INTERVAL_15_MIN",
+                AggregationInterval::Interval1Min => "INTERVAL_1_MIN",
+                AggregationInterval::Interval30Sec => "INTERVAL_30_SEC",
+                AggregationInterval::Interval5Min => "INTERVAL_5_MIN",
+                AggregationInterval::Interval5Sec => "INTERVAL_5_SEC",
+            }
+        }
+    }
     /// Can only be specified if VPC flow logs for this subnetwork is enabled. Configures whether all, none or a subset of metadata fields should be added to the reported VPC flow logs. Default is EXCLUDE_ALL_METADATA.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -21306,6 +23994,20 @@ pub mod subnetwork_log_config {
         CustomMetadata = 62450749,
         ExcludeAllMetadata = 334519954,
         IncludeAllMetadata = 164619908,
+    }
+    impl Metadata {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Metadata::UndefinedMetadata => "UNDEFINED_METADATA",
+                Metadata::CustomMetadata => "CUSTOM_METADATA",
+                Metadata::ExcludeAllMetadata => "EXCLUDE_ALL_METADATA",
+                Metadata::IncludeAllMetadata => "INCLUDE_ALL_METADATA",
+            }
+        }
     }
 }
 /// Represents a secondary IP range of a subnetwork.
@@ -21362,6 +24064,19 @@ pub mod subsetting {
         /// No Subsetting. Clients may open connections and send traffic to all backends of this backend service. This can lead to performance issues if there is substantial imbalance in the count of clients and backends.
         None = 2402104,
     }
+    impl Policy {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Policy::UndefinedPolicy => "UNDEFINED_POLICY",
+                Policy::ConsistentHashSubsetting => "CONSISTENT_HASH_SUBSETTING",
+                Policy::None => "NONE",
+            }
+        }
+    }
 }
 /// A request message for Networks.SwitchToCustomMode. See the method description for details.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -21415,6 +24130,20 @@ pub mod tcp_health_check {
         /// For NetworkEndpointGroup, the port specified for each network endpoint is used for health checking. For other backends, the port or named port specified in the Backend Service is used for health checking.
         UseServingPort = 362637516,
     }
+    impl PortSpecification {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                PortSpecification::UndefinedPortSpecification => "UNDEFINED_PORT_SPECIFICATION",
+                PortSpecification::UseFixedPort => "USE_FIXED_PORT",
+                PortSpecification::UseNamedPort => "USE_NAMED_PORT",
+                PortSpecification::UseServingPort => "USE_SERVING_PORT",
+            }
+        }
+    }
     /// Specifies the type of proxy header to append before sending data to the backend, either NONE or PROXY_V1. The default is NONE.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -21423,6 +24152,19 @@ pub mod tcp_health_check {
         UndefinedProxyHeader = 0,
         None = 2402104,
         ProxyV1 = 334352940,
+    }
+    impl ProxyHeader {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ProxyHeader::UndefinedProxyHeader => "UNDEFINED_PROXY_HEADER",
+                ProxyHeader::None => "NONE",
+                ProxyHeader::ProxyV1 => "PROXY_V1",
+            }
+        }
     }
 }
 /// A set of instance tags.
@@ -21612,6 +24354,20 @@ pub mod target_https_proxies_set_quic_override_request {
         /// No overrides to the default QUIC policy. This option is implicit if no QUIC override has been specified in the request.
         None = 2402104,
     }
+    impl QuicOverride {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                QuicOverride::UndefinedQuicOverride => "UNDEFINED_QUIC_OVERRIDE",
+                QuicOverride::Disable => "DISABLE",
+                QuicOverride::Enable => "ENABLE",
+                QuicOverride::None => "NONE",
+            }
+        }
+    }
 }
 ///
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -21684,6 +24440,20 @@ pub mod target_https_proxy {
         Enable = 438835587,
         /// No overrides to the default QUIC policy. This option is implicit if no QUIC override has been specified in the request.
         None = 2402104,
+    }
+    impl QuicOverride {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                QuicOverride::UndefinedQuicOverride => "UNDEFINED_QUIC_OVERRIDE",
+                QuicOverride::Disable => "DISABLE",
+                QuicOverride::Enable => "ENABLE",
+                QuicOverride::None => "NONE",
+            }
+        }
     }
 }
 ///
@@ -21778,6 +24548,18 @@ pub mod target_instance {
         UndefinedNatPolicy = 0,
         /// No NAT performed.
         NoNat = 161455491,
+    }
+    impl NatPolicy {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                NatPolicy::UndefinedNatPolicy => "UNDEFINED_NAT_POLICY",
+                NatPolicy::NoNat => "NO_NAT",
+            }
+        }
     }
 }
 ///
@@ -21902,6 +24684,25 @@ pub mod target_pool {
         HttpCookie = 494981627,
         /// No session affinity. Connections from the same client IP may go to any instance in the pool.
         None = 2402104,
+    }
+    impl SessionAffinity {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                SessionAffinity::UndefinedSessionAffinity => "UNDEFINED_SESSION_AFFINITY",
+                SessionAffinity::ClientIp => "CLIENT_IP",
+                SessionAffinity::ClientIpNoDestination => "CLIENT_IP_NO_DESTINATION",
+                SessionAffinity::ClientIpPortProto => "CLIENT_IP_PORT_PROTO",
+                SessionAffinity::ClientIpProto => "CLIENT_IP_PROTO",
+                SessionAffinity::GeneratedCookie => "GENERATED_COOKIE",
+                SessionAffinity::HeaderField => "HEADER_FIELD",
+                SessionAffinity::HttpCookie => "HTTP_COOKIE",
+                SessionAffinity::None => "NONE",
+            }
+        }
     }
 }
 ///
@@ -22030,6 +24831,19 @@ pub mod target_ssl_proxies_set_proxy_header_request {
         None = 2402104,
         ProxyV1 = 334352940,
     }
+    impl ProxyHeader {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ProxyHeader::UndefinedProxyHeader => "UNDEFINED_PROXY_HEADER",
+                ProxyHeader::None => "NONE",
+                ProxyHeader::ProxyV1 => "PROXY_V1",
+            }
+        }
+    }
 }
 ///
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -22084,6 +24898,19 @@ pub mod target_ssl_proxy {
         None = 2402104,
         ProxyV1 = 334352940,
     }
+    impl ProxyHeader {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ProxyHeader::UndefinedProxyHeader => "UNDEFINED_PROXY_HEADER",
+                ProxyHeader::None => "NONE",
+                ProxyHeader::ProxyV1 => "PROXY_V1",
+            }
+        }
+    }
 }
 /// Contains a list of TargetSslProxy resources.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -22133,6 +24960,19 @@ pub mod target_tcp_proxies_set_proxy_header_request {
         None = 2402104,
         ProxyV1 = 334352940,
     }
+    impl ProxyHeader {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ProxyHeader::UndefinedProxyHeader => "UNDEFINED_PROXY_HEADER",
+                ProxyHeader::None => "NONE",
+                ProxyHeader::ProxyV1 => "PROXY_V1",
+            }
+        }
+    }
 }
 /// Represents a Target TCP Proxy resource. A target TCP proxy is a component of a TCP Proxy load balancer. Global forwarding rules reference target TCP proxy, and the target proxy then references an external backend service. For more information, read TCP Proxy Load Balancing overview.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -22176,6 +25016,19 @@ pub mod target_tcp_proxy {
         UndefinedProxyHeader = 0,
         None = 2402104,
         ProxyV1 = 334352940,
+    }
+    impl ProxyHeader {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ProxyHeader::UndefinedProxyHeader => "UNDEFINED_PROXY_HEADER",
+                ProxyHeader::None => "NONE",
+                ProxyHeader::ProxyV1 => "PROXY_V1",
+            }
+        }
     }
 }
 /// Contains a list of TargetTcpProxy resources.
@@ -22250,6 +25103,21 @@ pub mod target_vpn_gateway {
         Deleting = 528602024,
         Failed = 455706685,
         Ready = 77848963,
+    }
+    impl Status {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Status::UndefinedStatus => "UNDEFINED_STATUS",
+                Status::Creating => "CREATING",
+                Status::Deleting => "DELETING",
+                Status::Failed => "FAILED",
+                Status::Ready => "READY",
+            }
+        }
     }
 }
 ///
@@ -23437,6 +26305,19 @@ pub mod vpn_gateway_status_high_availability_requirement_state {
         /// VPN tunnels are not configured with adequate redundancy from the Cloud VPN gateway to the peer gateway
         ConnectionRedundancyNotMet = 511863311,
     }
+    impl State {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                State::UndefinedState => "UNDEFINED_STATE",
+                State::ConnectionRedundancyMet => "CONNECTION_REDUNDANCY_MET",
+                State::ConnectionRedundancyNotMet => "CONNECTION_REDUNDANCY_NOT_MET",
+            }
+        }
+    }
     /// Indicates the reason why the VPN connection does not meet the high availability redundancy criteria/requirement. Valid values is INCOMPLETE_TUNNELS_COVERAGE.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -23444,6 +26325,18 @@ pub mod vpn_gateway_status_high_availability_requirement_state {
         /// A value indicating that the enum field is not set.
         UndefinedUnsatisfiedReason = 0,
         IncompleteTunnelsCoverage = 55917437,
+    }
+    impl UnsatisfiedReason {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                UnsatisfiedReason::UndefinedUnsatisfiedReason => "UNDEFINED_UNSATISFIED_REASON",
+                UnsatisfiedReason::IncompleteTunnelsCoverage => "INCOMPLETE_TUNNELS_COVERAGE",
+            }
+        }
     }
 }
 /// Contains some information about a VPN tunnel.
@@ -23609,6 +26502,30 @@ pub mod vpn_tunnel {
         Stopped = 444276141,
         /// Waiting to receive all VPN-related configs from user. Network, TargetVpnGateway, VpnTunnel, ForwardingRule and Route resources are needed to setup VPN tunnel.
         WaitingForFullConfig = 41640522,
+    }
+    impl Status {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Status::UndefinedStatus => "UNDEFINED_STATUS",
+                Status::AllocatingResources => "ALLOCATING_RESOURCES",
+                Status::AuthorizationError => "AUTHORIZATION_ERROR",
+                Status::Deprovisioning => "DEPROVISIONING",
+                Status::Established => "ESTABLISHED",
+                Status::Failed => "FAILED",
+                Status::FirstHandshake => "FIRST_HANDSHAKE",
+                Status::NegotiationFailure => "NEGOTIATION_FAILURE",
+                Status::NetworkError => "NETWORK_ERROR",
+                Status::NoIncomingPackets => "NO_INCOMING_PACKETS",
+                Status::Provisioning => "PROVISIONING",
+                Status::Rejected => "REJECTED",
+                Status::Stopped => "STOPPED",
+                Status::WaitingForFullConfig => "WAITING_FOR_FULL_CONFIG",
+            }
+        }
     }
 }
 ///
@@ -23797,6 +26714,42 @@ pub mod warning {
         /// A given scope cannot be reached.
         Unreachable = 13328052,
     }
+    impl Code {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Code::UndefinedCode => "UNDEFINED_CODE",
+                Code::CleanupFailed => "CLEANUP_FAILED",
+                Code::DeprecatedResourceUsed => "DEPRECATED_RESOURCE_USED",
+                Code::DeprecatedTypeUsed => "DEPRECATED_TYPE_USED",
+                Code::DiskSizeLargerThanImageSize => "DISK_SIZE_LARGER_THAN_IMAGE_SIZE",
+                Code::ExperimentalTypeUsed => "EXPERIMENTAL_TYPE_USED",
+                Code::ExternalApiWarning => "EXTERNAL_API_WARNING",
+                Code::FieldValueOverriden => "FIELD_VALUE_OVERRIDEN",
+                Code::InjectedKernelsDeprecated => "INJECTED_KERNELS_DEPRECATED",
+                Code::LargeDeploymentWarning => "LARGE_DEPLOYMENT_WARNING",
+                Code::MissingTypeDependency => "MISSING_TYPE_DEPENDENCY",
+                Code::NextHopAddressNotAssigned => "NEXT_HOP_ADDRESS_NOT_ASSIGNED",
+                Code::NextHopCannotIpForward => "NEXT_HOP_CANNOT_IP_FORWARD",
+                Code::NextHopInstanceNotFound => "NEXT_HOP_INSTANCE_NOT_FOUND",
+                Code::NextHopInstanceNotOnNetwork => "NEXT_HOP_INSTANCE_NOT_ON_NETWORK",
+                Code::NextHopNotRunning => "NEXT_HOP_NOT_RUNNING",
+                Code::NotCriticalError => "NOT_CRITICAL_ERROR",
+                Code::NoResultsOnPage => "NO_RESULTS_ON_PAGE",
+                Code::PartialSuccess => "PARTIAL_SUCCESS",
+                Code::RequiredTosAgreement => "REQUIRED_TOS_AGREEMENT",
+                Code::ResourceInUseByOtherResourceWarning => "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING",
+                Code::ResourceNotDeleted => "RESOURCE_NOT_DELETED",
+                Code::SchemaValidationIgnored => "SCHEMA_VALIDATION_IGNORED",
+                Code::SingleInstancePropertyTemplate => "SINGLE_INSTANCE_PROPERTY_TEMPLATE",
+                Code::UndeclaredProperties => "UNDECLARED_PROPERTIES",
+                Code::Unreachable => "UNREACHABLE",
+            }
+        }
+    }
 }
 ///
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -23871,6 +26824,42 @@ pub mod warnings {
         /// A given scope cannot be reached.
         Unreachable = 13328052,
     }
+    impl Code {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Code::UndefinedCode => "UNDEFINED_CODE",
+                Code::CleanupFailed => "CLEANUP_FAILED",
+                Code::DeprecatedResourceUsed => "DEPRECATED_RESOURCE_USED",
+                Code::DeprecatedTypeUsed => "DEPRECATED_TYPE_USED",
+                Code::DiskSizeLargerThanImageSize => "DISK_SIZE_LARGER_THAN_IMAGE_SIZE",
+                Code::ExperimentalTypeUsed => "EXPERIMENTAL_TYPE_USED",
+                Code::ExternalApiWarning => "EXTERNAL_API_WARNING",
+                Code::FieldValueOverriden => "FIELD_VALUE_OVERRIDEN",
+                Code::InjectedKernelsDeprecated => "INJECTED_KERNELS_DEPRECATED",
+                Code::LargeDeploymentWarning => "LARGE_DEPLOYMENT_WARNING",
+                Code::MissingTypeDependency => "MISSING_TYPE_DEPENDENCY",
+                Code::NextHopAddressNotAssigned => "NEXT_HOP_ADDRESS_NOT_ASSIGNED",
+                Code::NextHopCannotIpForward => "NEXT_HOP_CANNOT_IP_FORWARD",
+                Code::NextHopInstanceNotFound => "NEXT_HOP_INSTANCE_NOT_FOUND",
+                Code::NextHopInstanceNotOnNetwork => "NEXT_HOP_INSTANCE_NOT_ON_NETWORK",
+                Code::NextHopNotRunning => "NEXT_HOP_NOT_RUNNING",
+                Code::NotCriticalError => "NOT_CRITICAL_ERROR",
+                Code::NoResultsOnPage => "NO_RESULTS_ON_PAGE",
+                Code::PartialSuccess => "PARTIAL_SUCCESS",
+                Code::RequiredTosAgreement => "REQUIRED_TOS_AGREEMENT",
+                Code::ResourceInUseByOtherResourceWarning => "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING",
+                Code::ResourceNotDeleted => "RESOURCE_NOT_DELETED",
+                Code::SchemaValidationIgnored => "SCHEMA_VALIDATION_IGNORED",
+                Code::SingleInstancePropertyTemplate => "SINGLE_INSTANCE_PROPERTY_TEMPLATE",
+                Code::UndeclaredProperties => "UNDECLARED_PROPERTIES",
+                Code::Unreachable => "UNREACHABLE",
+            }
+        }
+    }
 }
 /// In contrast to a single BackendService in HttpRouteAction to which all matching traffic is directed to, WeightedBackendService allows traffic to be split across multiple BackendServices. The volume of traffic for each BackendService is proportional to the weight specified in each WeightedBackendService
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -23929,6 +26918,19 @@ pub mod xpn_resource_id {
         Project = 408671993,
         XpnResourceTypeUnspecified = 151607034,
     }
+    impl Type {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Type::UndefinedType => "UNDEFINED_TYPE",
+                Type::Project => "PROJECT",
+                Type::XpnResourceTypeUnspecified => "XPN_RESOURCE_TYPE_UNSPECIFIED",
+            }
+        }
+    }
 }
 /// Represents a Zone resource. A zone is a deployment area. These deployment areas are subsets of a region. For example the zone us-east1-a is located in the us-east1 region. For more information, read Regions and Zones.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -23978,6 +26980,19 @@ pub mod zone {
         UndefinedStatus = 0,
         Down = 2104482,
         Up = 2715,
+    }
+    impl Status {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Status::UndefinedStatus => "UNDEFINED_STATUS",
+                Status::Down => "DOWN",
+                Status::Up => "UP",
+            }
+        }
     }
 }
 /// Contains a list of zone resources.
@@ -24029,6 +27044,7 @@ pub struct ZoneSetPolicyRequest {
 pub mod accelerator_types_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     ///
     /// Services
     ///
@@ -24046,6 +27062,10 @@ pub mod accelerator_types_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -24067,19 +27087,19 @@ pub mod accelerator_types_client {
         {
             AcceleratorTypesClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Retrieves an aggregated list of accelerator types.
@@ -24153,6 +27173,7 @@ pub mod accelerator_types_client {
 pub mod addresses_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The Addresses API.
     #[derive(Debug, Clone)]
     pub struct AddressesClient<T> {
@@ -24167,6 +27188,10 @@ pub mod addresses_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -24188,19 +27213,19 @@ pub mod addresses_client {
         {
             AddressesClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Retrieves an aggregated list of addresses.
@@ -24309,6 +27334,7 @@ pub mod addresses_client {
 pub mod autoscalers_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The Autoscalers API.
     #[derive(Debug, Clone)]
     pub struct AutoscalersClient<T> {
@@ -24323,6 +27349,10 @@ pub mod autoscalers_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -24344,19 +27374,19 @@ pub mod autoscalers_client {
         {
             AutoscalersClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Retrieves an aggregated list of autoscalers.
@@ -24505,6 +27535,7 @@ pub mod autoscalers_client {
 pub mod backend_buckets_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The BackendBuckets API.
     #[derive(Debug, Clone)]
     pub struct BackendBucketsClient<T> {
@@ -24519,6 +27550,10 @@ pub mod backend_buckets_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -24540,19 +27575,19 @@ pub mod backend_buckets_client {
         {
             BackendBucketsClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Adds a key for validating requests with signed URLs for this backend bucket.
@@ -24723,6 +27758,7 @@ pub mod backend_buckets_client {
 pub mod backend_services_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The BackendServices API.
     #[derive(Debug, Clone)]
     pub struct BackendServicesClient<T> {
@@ -24737,6 +27773,10 @@ pub mod backend_services_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -24758,19 +27798,19 @@ pub mod backend_services_client {
         {
             BackendServicesClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Adds a key for validating requests with signed URLs for this backend service.
@@ -25006,6 +28046,7 @@ pub mod backend_services_client {
 pub mod disk_types_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The DiskTypes API.
     #[derive(Debug, Clone)]
     pub struct DiskTypesClient<T> {
@@ -25020,6 +28061,10 @@ pub mod disk_types_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -25041,19 +28086,19 @@ pub mod disk_types_client {
         {
             DiskTypesClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Retrieves an aggregated list of disk types.
@@ -25122,6 +28167,7 @@ pub mod disk_types_client {
 pub mod disks_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The Disks API.
     #[derive(Debug, Clone)]
     pub struct DisksClient<T> {
@@ -25136,6 +28182,10 @@ pub mod disks_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -25157,19 +28207,19 @@ pub mod disks_client {
         {
             DisksClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Adds existing resource policies to a disk. You can only add one policy which will be applied to this disk for scheduling snapshot creation.
@@ -25438,6 +28488,7 @@ pub mod disks_client {
 pub mod external_vpn_gateways_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The ExternalVpnGateways API.
     #[derive(Debug, Clone)]
     pub struct ExternalVpnGatewaysClient<T> {
@@ -25452,6 +28503,10 @@ pub mod external_vpn_gateways_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -25473,19 +28528,19 @@ pub mod external_vpn_gateways_client {
         {
             ExternalVpnGatewaysClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Deletes the specified externalVpnGateway.
@@ -25616,6 +28671,7 @@ pub mod external_vpn_gateways_client {
 pub mod firewall_policies_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The FirewallPolicies API.
     #[derive(Debug, Clone)]
     pub struct FirewallPoliciesClient<T> {
@@ -25630,6 +28686,10 @@ pub mod firewall_policies_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -25651,19 +28711,19 @@ pub mod firewall_policies_client {
         {
             FirewallPoliciesClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Inserts an association for the specified firewall policy.
@@ -26041,6 +29101,7 @@ pub mod firewall_policies_client {
 pub mod firewalls_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The Firewalls API.
     #[derive(Debug, Clone)]
     pub struct FirewallsClient<T> {
@@ -26055,6 +29116,10 @@ pub mod firewalls_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -26076,19 +29141,19 @@ pub mod firewalls_client {
         {
             FirewallsClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Deletes the specified firewall.
@@ -26217,6 +29282,7 @@ pub mod firewalls_client {
 pub mod forwarding_rules_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The ForwardingRules API.
     #[derive(Debug, Clone)]
     pub struct ForwardingRulesClient<T> {
@@ -26231,6 +29297,10 @@ pub mod forwarding_rules_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -26252,19 +29322,19 @@ pub mod forwarding_rules_client {
         {
             ForwardingRulesClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Retrieves an aggregated list of forwarding rules.
@@ -26436,6 +29506,7 @@ pub mod forwarding_rules_client {
 pub mod global_addresses_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The GlobalAddresses API.
     #[derive(Debug, Clone)]
     pub struct GlobalAddressesClient<T> {
@@ -26450,6 +29521,10 @@ pub mod global_addresses_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -26471,19 +29546,19 @@ pub mod global_addresses_client {
         {
             GlobalAddressesClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Deletes the specified address resource.
@@ -26572,6 +29647,7 @@ pub mod global_addresses_client {
 pub mod global_forwarding_rules_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The GlobalForwardingRules API.
     #[derive(Debug, Clone)]
     pub struct GlobalForwardingRulesClient<T> {
@@ -26586,6 +29662,10 @@ pub mod global_forwarding_rules_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -26607,19 +29687,19 @@ pub mod global_forwarding_rules_client {
         {
             GlobalForwardingRulesClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Deletes the specified GlobalForwardingRule resource.
@@ -26768,6 +29848,7 @@ pub mod global_forwarding_rules_client {
 pub mod global_network_endpoint_groups_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The GlobalNetworkEndpointGroups API.
     #[derive(Debug, Clone)]
     pub struct GlobalNetworkEndpointGroupsClient<T> {
@@ -26782,6 +29863,10 @@ pub mod global_network_endpoint_groups_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -26805,19 +29890,19 @@ pub mod global_network_endpoint_groups_client {
                 InterceptedService::new(inner, interceptor),
             )
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Attach a network endpoint to the specified network endpoint group.
@@ -26981,6 +30066,7 @@ pub mod global_network_endpoint_groups_client {
 pub mod global_operations_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The GlobalOperations API.
     #[derive(Debug, Clone)]
     pub struct GlobalOperationsClient<T> {
@@ -26995,6 +30081,10 @@ pub mod global_operations_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -27016,19 +30106,19 @@ pub mod global_operations_client {
         {
             GlobalOperationsClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Retrieves an aggregated list of all operations.
@@ -27142,6 +30232,7 @@ pub mod global_operations_client {
 pub mod global_organization_operations_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The GlobalOrganizationOperations API.
     #[derive(Debug, Clone)]
     pub struct GlobalOrganizationOperationsClient<T> {
@@ -27156,6 +30247,10 @@ pub mod global_organization_operations_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -27179,19 +30274,19 @@ pub mod global_organization_operations_client {
                 InterceptedService::new(inner, interceptor),
             )
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Deletes the specified Operations resource.
@@ -27269,6 +30364,7 @@ pub mod global_organization_operations_client {
 pub mod global_public_delegated_prefixes_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The GlobalPublicDelegatedPrefixes API.
     #[derive(Debug, Clone)]
     pub struct GlobalPublicDelegatedPrefixesClient<T> {
@@ -27283,6 +30379,10 @@ pub mod global_public_delegated_prefixes_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -27306,19 +30406,19 @@ pub mod global_public_delegated_prefixes_client {
                 InterceptedService::new(inner, interceptor),
             )
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Deletes the specified global PublicDelegatedPrefix.
@@ -27437,6 +30537,7 @@ pub mod global_public_delegated_prefixes_client {
 pub mod health_checks_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The HealthChecks API.
     #[derive(Debug, Clone)]
     pub struct HealthChecksClient<T> {
@@ -27451,6 +30552,10 @@ pub mod health_checks_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -27472,19 +30577,19 @@ pub mod health_checks_client {
         {
             HealthChecksClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Retrieves the list of all HealthCheck resources, regional and global, available to the specified project.
@@ -27633,6 +30738,7 @@ pub mod health_checks_client {
 pub mod image_family_views_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The ImageFamilyViews API.
     #[derive(Debug, Clone)]
     pub struct ImageFamilyViewsClient<T> {
@@ -27647,6 +30753,10 @@ pub mod image_family_views_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -27668,19 +30778,19 @@ pub mod image_family_views_client {
         {
             ImageFamilyViewsClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Returns the latest image that is part of an image family, is not deprecated and is rolled out in the specified zone.
@@ -27709,6 +30819,7 @@ pub mod image_family_views_client {
 pub mod images_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The Images API.
     #[derive(Debug, Clone)]
     pub struct ImagesClient<T> {
@@ -27723,6 +30834,10 @@ pub mod images_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -27744,19 +30859,19 @@ pub mod images_client {
         {
             ImagesClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Deletes the specified image.
@@ -27985,6 +31100,7 @@ pub mod images_client {
 pub mod instance_group_managers_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The InstanceGroupManagers API.
     #[derive(Debug, Clone)]
     pub struct InstanceGroupManagersClient<T> {
@@ -27999,6 +31115,10 @@ pub mod instance_group_managers_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -28020,19 +31140,19 @@ pub mod instance_group_managers_client {
         {
             InstanceGroupManagersClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Flags the specified instances to be removed from the managed instance group. Abandoning an instance does not delete the instance, but it does remove the instance from any target pools that are applied by the managed instance group. This method reduces the targetSize of the managed instance group by the number of instances that you abandon. This operation is marked as DONE when the action is scheduled even if the instances have not yet been removed from the group. You must separately verify the status of the abandoning action with the listmanagedinstances method. If the group is part of a backend service that has enabled connection draining, it can take up to 60 seconds after the connection draining duration has elapsed before the VM instance is removed or deleted. You can specify a maximum of 1000 instances with this method per request.
@@ -28481,6 +31601,7 @@ pub mod instance_group_managers_client {
 pub mod instance_groups_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The InstanceGroups API.
     #[derive(Debug, Clone)]
     pub struct InstanceGroupsClient<T> {
@@ -28495,6 +31616,10 @@ pub mod instance_groups_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -28516,19 +31641,19 @@ pub mod instance_groups_client {
         {
             InstanceGroupsClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Adds a list of instances to the specified instance group. All of the instances in the instance group must be in the same network/subnetwork. Read Adding instances for more information.
@@ -28717,6 +31842,7 @@ pub mod instance_groups_client {
 pub mod instance_templates_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The InstanceTemplates API.
     #[derive(Debug, Clone)]
     pub struct InstanceTemplatesClient<T> {
@@ -28731,6 +31857,10 @@ pub mod instance_templates_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -28752,19 +31882,19 @@ pub mod instance_templates_client {
         {
             InstanceTemplatesClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Deletes the specified instance template. Deleting an instance template is permanent and cannot be undone. It is not possible to delete templates that are already in use by a managed instance group.
@@ -28915,6 +32045,7 @@ pub mod instance_templates_client {
 pub mod instances_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The Instances API.
     #[derive(Debug, Clone)]
     pub struct InstancesClient<T> {
@@ -28929,6 +32060,10 @@ pub mod instances_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -28950,19 +32085,19 @@ pub mod instances_client {
         {
             InstancesClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Adds an access config to an instance's network interface.
@@ -29853,6 +32988,7 @@ pub mod instances_client {
 pub mod interconnect_attachments_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The InterconnectAttachments API.
     #[derive(Debug, Clone)]
     pub struct InterconnectAttachmentsClient<T> {
@@ -29867,6 +33003,10 @@ pub mod interconnect_attachments_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -29890,19 +33030,19 @@ pub mod interconnect_attachments_client {
                 InterceptedService::new(inner, interceptor),
             )
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Retrieves an aggregated list of interconnect attachments.
@@ -30036,6 +33176,7 @@ pub mod interconnect_attachments_client {
 pub mod interconnect_locations_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The InterconnectLocations API.
     #[derive(Debug, Clone)]
     pub struct InterconnectLocationsClient<T> {
@@ -30050,6 +33191,10 @@ pub mod interconnect_locations_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -30071,19 +33216,19 @@ pub mod interconnect_locations_client {
         {
             InterconnectLocationsClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Returns the details for the specified interconnect location. Gets a list of available interconnect locations by making a list() request.
@@ -30132,6 +33277,7 @@ pub mod interconnect_locations_client {
 pub mod interconnects_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The Interconnects API.
     #[derive(Debug, Clone)]
     pub struct InterconnectsClient<T> {
@@ -30146,6 +33292,10 @@ pub mod interconnects_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -30167,19 +33317,19 @@ pub mod interconnects_client {
         {
             InterconnectsClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Deletes the specified interconnect.
@@ -30311,6 +33461,7 @@ pub mod interconnects_client {
 pub mod license_codes_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The LicenseCodes API.
     #[derive(Debug, Clone)]
     pub struct LicenseCodesClient<T> {
@@ -30325,6 +33476,10 @@ pub mod license_codes_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -30346,19 +33501,19 @@ pub mod license_codes_client {
         {
             LicenseCodesClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Return a specified license code. License codes are mirrored across all projects that have permissions to read the License Code. *Caution* This resource is intended for use only by third-party partners who are creating Cloud Marketplace images.
@@ -30407,6 +33562,7 @@ pub mod license_codes_client {
 pub mod licenses_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The Licenses API.
     #[derive(Debug, Clone)]
     pub struct LicensesClient<T> {
@@ -30421,6 +33577,10 @@ pub mod licenses_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -30442,19 +33602,19 @@ pub mod licenses_client {
         {
             LicensesClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Deletes the specified license. *Caution* This resource is intended for use only by third-party partners who are creating Cloud Marketplace images.
@@ -30603,6 +33763,7 @@ pub mod licenses_client {
 pub mod machine_types_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The MachineTypes API.
     #[derive(Debug, Clone)]
     pub struct MachineTypesClient<T> {
@@ -30617,6 +33778,10 @@ pub mod machine_types_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -30638,19 +33803,19 @@ pub mod machine_types_client {
         {
             MachineTypesClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Retrieves an aggregated list of machine types.
@@ -30719,6 +33884,7 @@ pub mod machine_types_client {
 pub mod network_endpoint_groups_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The NetworkEndpointGroups API.
     #[derive(Debug, Clone)]
     pub struct NetworkEndpointGroupsClient<T> {
@@ -30733,6 +33899,10 @@ pub mod network_endpoint_groups_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -30754,19 +33924,19 @@ pub mod network_endpoint_groups_client {
         {
             NetworkEndpointGroupsClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Retrieves the list of network endpoint groups and sorts them by zone.
@@ -30971,6 +34141,7 @@ pub mod network_endpoint_groups_client {
 pub mod networks_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The Networks API.
     #[derive(Debug, Clone)]
     pub struct NetworksClient<T> {
@@ -30985,6 +34156,10 @@ pub mod networks_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -31006,19 +34181,19 @@ pub mod networks_client {
         {
             NetworksClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Adds a peering to the specified network.
@@ -31250,6 +34425,7 @@ pub mod networks_client {
 pub mod node_groups_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The NodeGroups API.
     #[derive(Debug, Clone)]
     pub struct NodeGroupsClient<T> {
@@ -31264,6 +34440,10 @@ pub mod node_groups_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -31285,19 +34465,19 @@ pub mod node_groups_client {
         {
             NodeGroupsClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Adds specified number of nodes to the node group.
@@ -31566,6 +34746,7 @@ pub mod node_groups_client {
 pub mod node_templates_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The NodeTemplates API.
     #[derive(Debug, Clone)]
     pub struct NodeTemplatesClient<T> {
@@ -31580,6 +34761,10 @@ pub mod node_templates_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -31601,19 +34786,19 @@ pub mod node_templates_client {
         {
             NodeTemplatesClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Retrieves an aggregated list of node templates.
@@ -31784,6 +34969,7 @@ pub mod node_templates_client {
 pub mod node_types_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The NodeTypes API.
     #[derive(Debug, Clone)]
     pub struct NodeTypesClient<T> {
@@ -31798,6 +34984,10 @@ pub mod node_types_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -31819,19 +35009,19 @@ pub mod node_types_client {
         {
             NodeTypesClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Retrieves an aggregated list of node types.
@@ -31900,6 +35090,7 @@ pub mod node_types_client {
 pub mod packet_mirrorings_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The PacketMirrorings API.
     #[derive(Debug, Clone)]
     pub struct PacketMirroringsClient<T> {
@@ -31914,6 +35105,10 @@ pub mod packet_mirrorings_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -31935,19 +35130,19 @@ pub mod packet_mirrorings_client {
         {
             PacketMirroringsClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Retrieves an aggregated list of packetMirrorings.
@@ -32103,6 +35298,7 @@ pub mod packet_mirrorings_client {
 pub mod projects_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The Projects API.
     #[derive(Debug, Clone)]
     pub struct ProjectsClient<T> {
@@ -32117,6 +35313,10 @@ pub mod projects_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -32138,19 +35338,19 @@ pub mod projects_client {
         {
             ProjectsClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Disable this project as a shared VPC host project.
@@ -32421,6 +35621,7 @@ pub mod projects_client {
 pub mod public_advertised_prefixes_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The PublicAdvertisedPrefixes API.
     #[derive(Debug, Clone)]
     pub struct PublicAdvertisedPrefixesClient<T> {
@@ -32435,6 +35636,10 @@ pub mod public_advertised_prefixes_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -32458,19 +35663,19 @@ pub mod public_advertised_prefixes_client {
                 InterceptedService::new(inner, interceptor),
             )
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Deletes the specified PublicAdvertisedPrefix
@@ -32579,6 +35784,7 @@ pub mod public_advertised_prefixes_client {
 pub mod public_delegated_prefixes_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The PublicDelegatedPrefixes API.
     #[derive(Debug, Clone)]
     pub struct PublicDelegatedPrefixesClient<T> {
@@ -32593,6 +35799,10 @@ pub mod public_delegated_prefixes_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -32616,19 +35826,19 @@ pub mod public_delegated_prefixes_client {
                 InterceptedService::new(inner, interceptor),
             )
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Lists all PublicDelegatedPrefix resources owned by the specific project across all scopes.
@@ -32762,6 +35972,7 @@ pub mod public_delegated_prefixes_client {
 pub mod region_autoscalers_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The RegionAutoscalers API.
     #[derive(Debug, Clone)]
     pub struct RegionAutoscalersClient<T> {
@@ -32776,6 +35987,10 @@ pub mod region_autoscalers_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -32797,19 +36012,19 @@ pub mod region_autoscalers_client {
         {
             RegionAutoscalersClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Deletes the specified autoscaler.
@@ -32938,6 +36153,7 @@ pub mod region_autoscalers_client {
 pub mod region_backend_services_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The RegionBackendServices API.
     #[derive(Debug, Clone)]
     pub struct RegionBackendServicesClient<T> {
@@ -32952,6 +36168,10 @@ pub mod region_backend_services_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -32973,19 +36193,19 @@ pub mod region_backend_services_client {
         {
             RegionBackendServicesClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Deletes the specified regional BackendService resource.
@@ -33134,6 +36354,7 @@ pub mod region_backend_services_client {
 pub mod region_commitments_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The RegionCommitments API.
     #[derive(Debug, Clone)]
     pub struct RegionCommitmentsClient<T> {
@@ -33148,6 +36369,10 @@ pub mod region_commitments_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -33169,19 +36394,19 @@ pub mod region_commitments_client {
         {
             RegionCommitmentsClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Retrieves an aggregated list of commitments by region.
@@ -33272,6 +36497,7 @@ pub mod region_commitments_client {
 pub mod region_disk_types_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The RegionDiskTypes API.
     #[derive(Debug, Clone)]
     pub struct RegionDiskTypesClient<T> {
@@ -33286,6 +36512,10 @@ pub mod region_disk_types_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -33307,19 +36537,19 @@ pub mod region_disk_types_client {
         {
             RegionDiskTypesClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Returns the specified regional disk type. Gets a list of available disk types by making a list() request.
@@ -33368,6 +36598,7 @@ pub mod region_disk_types_client {
 pub mod region_disks_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The RegionDisks API.
     #[derive(Debug, Clone)]
     pub struct RegionDisksClient<T> {
@@ -33382,6 +36613,10 @@ pub mod region_disks_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -33403,19 +36638,19 @@ pub mod region_disks_client {
         {
             RegionDisksClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Adds existing resource policies to a regional disk. You can only add one policy which will be applied to this disk for scheduling snapshot creation.
@@ -33666,6 +36901,7 @@ pub mod region_disks_client {
 pub mod region_health_check_services_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The RegionHealthCheckServices API.
     #[derive(Debug, Clone)]
     pub struct RegionHealthCheckServicesClient<T> {
@@ -33680,6 +36916,10 @@ pub mod region_health_check_services_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -33703,19 +36943,19 @@ pub mod region_health_check_services_client {
                 InterceptedService::new(inner, interceptor),
             )
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Deletes the specified regional HealthCheckService.
@@ -33828,6 +37068,7 @@ pub mod region_health_check_services_client {
 pub mod region_health_checks_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The RegionHealthChecks API.
     #[derive(Debug, Clone)]
     pub struct RegionHealthChecksClient<T> {
@@ -33842,6 +37083,10 @@ pub mod region_health_checks_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -33863,19 +37108,19 @@ pub mod region_health_checks_client {
         {
             RegionHealthChecksClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Deletes the specified HealthCheck resource.
@@ -34004,6 +37249,7 @@ pub mod region_health_checks_client {
 pub mod region_instance_group_managers_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The RegionInstanceGroupManagers API.
     #[derive(Debug, Clone)]
     pub struct RegionInstanceGroupManagersClient<T> {
@@ -34018,6 +37264,10 @@ pub mod region_instance_group_managers_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -34041,19 +37291,19 @@ pub mod region_instance_group_managers_client {
                 InterceptedService::new(inner, interceptor),
             )
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Flags the specified instances to be immediately removed from the managed instance group. Abandoning an instance does not delete the instance, but it does remove the instance from any target pools that are applied by the managed instance group. This method reduces the targetSize of the managed instance group by the number of instances that you abandon. This operation is marked as DONE when the action is scheduled even if the instances have not yet been removed from the group. You must separately verify the status of the abandoning action with the listmanagedinstances method. If the group is part of a backend service that has enabled connection draining, it can take up to 60 seconds after the connection draining duration has elapsed before the VM instance is removed or deleted. You can specify a maximum of 1000 instances with this method per request.
@@ -34490,6 +37740,7 @@ pub mod region_instance_group_managers_client {
 pub mod region_instance_groups_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The RegionInstanceGroups API.
     #[derive(Debug, Clone)]
     pub struct RegionInstanceGroupsClient<T> {
@@ -34504,6 +37755,10 @@ pub mod region_instance_groups_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -34525,19 +37780,19 @@ pub mod region_instance_groups_client {
         {
             RegionInstanceGroupsClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Returns the specified instance group resource.
@@ -34633,6 +37888,7 @@ pub mod region_instance_groups_client {
 pub mod region_instances_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The RegionInstances API.
     #[derive(Debug, Clone)]
     pub struct RegionInstancesClient<T> {
@@ -34647,6 +37903,10 @@ pub mod region_instances_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -34668,19 +37928,19 @@ pub mod region_instances_client {
         {
             RegionInstancesClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Creates multiple instances in a given region. Count specifies the number of instances to create.
@@ -34709,6 +37969,7 @@ pub mod region_instances_client {
 pub mod region_network_endpoint_groups_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The RegionNetworkEndpointGroups API.
     #[derive(Debug, Clone)]
     pub struct RegionNetworkEndpointGroupsClient<T> {
@@ -34723,6 +37984,10 @@ pub mod region_network_endpoint_groups_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -34746,19 +38011,19 @@ pub mod region_network_endpoint_groups_client {
                 InterceptedService::new(inner, interceptor),
             )
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Deletes the specified network endpoint group. Note that the NEG cannot be deleted if it is configured as a backend of a backend service.
@@ -34853,6 +38118,7 @@ pub mod region_network_endpoint_groups_client {
 pub mod region_notification_endpoints_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The RegionNotificationEndpoints API.
     #[derive(Debug, Clone)]
     pub struct RegionNotificationEndpointsClient<T> {
@@ -34867,6 +38133,10 @@ pub mod region_notification_endpoints_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -34890,19 +38160,19 @@ pub mod region_notification_endpoints_client {
                 InterceptedService::new(inner, interceptor),
             )
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Deletes the specified NotificationEndpoint in the given region
@@ -34997,6 +38267,7 @@ pub mod region_notification_endpoints_client {
 pub mod region_operations_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The RegionOperations API.
     #[derive(Debug, Clone)]
     pub struct RegionOperationsClient<T> {
@@ -35011,6 +38282,10 @@ pub mod region_operations_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -35032,19 +38307,19 @@ pub mod region_operations_client {
         {
             RegionOperationsClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Deletes the specified region-specific Operations resource.
@@ -35136,6 +38411,7 @@ pub mod region_operations_client {
 pub mod region_ssl_certificates_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The RegionSslCertificates API.
     #[derive(Debug, Clone)]
     pub struct RegionSslCertificatesClient<T> {
@@ -35150,6 +38426,10 @@ pub mod region_ssl_certificates_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -35171,19 +38451,19 @@ pub mod region_ssl_certificates_client {
         {
             RegionSslCertificatesClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Deletes the specified SslCertificate resource in the region.
@@ -35272,6 +38552,7 @@ pub mod region_ssl_certificates_client {
 pub mod region_target_http_proxies_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The RegionTargetHttpProxies API.
     #[derive(Debug, Clone)]
     pub struct RegionTargetHttpProxiesClient<T> {
@@ -35286,6 +38567,10 @@ pub mod region_target_http_proxies_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -35309,19 +38594,19 @@ pub mod region_target_http_proxies_client {
                 InterceptedService::new(inner, interceptor),
             )
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Deletes the specified TargetHttpProxy resource.
@@ -35432,6 +38717,7 @@ pub mod region_target_http_proxies_client {
 pub mod region_target_https_proxies_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The RegionTargetHttpsProxies API.
     #[derive(Debug, Clone)]
     pub struct RegionTargetHttpsProxiesClient<T> {
@@ -35446,6 +38732,10 @@ pub mod region_target_https_proxies_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -35469,19 +38759,19 @@ pub mod region_target_https_proxies_client {
                 InterceptedService::new(inner, interceptor),
             )
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Deletes the specified TargetHttpsProxy resource.
@@ -35614,6 +38904,7 @@ pub mod region_target_https_proxies_client {
 pub mod region_url_maps_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The RegionUrlMaps API.
     #[derive(Debug, Clone)]
     pub struct RegionUrlMapsClient<T> {
@@ -35628,6 +38919,10 @@ pub mod region_url_maps_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -35649,19 +38944,19 @@ pub mod region_url_maps_client {
         {
             RegionUrlMapsClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Deletes the specified UrlMap resource.
@@ -35810,6 +39105,7 @@ pub mod region_url_maps_client {
 pub mod regions_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The Regions API.
     #[derive(Debug, Clone)]
     pub struct RegionsClient<T> {
@@ -35824,6 +39120,10 @@ pub mod regions_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -35845,19 +39145,19 @@ pub mod regions_client {
         {
             RegionsClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Returns the specified Region resource. Gets a list of available regions by making a list() request.
@@ -35906,6 +39206,7 @@ pub mod regions_client {
 pub mod reservations_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The Reservations API.
     #[derive(Debug, Clone)]
     pub struct ReservationsClient<T> {
@@ -35920,6 +39221,10 @@ pub mod reservations_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -35941,19 +39246,19 @@ pub mod reservations_client {
         {
             ReservationsClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Retrieves an aggregated list of reservations.
@@ -36142,6 +39447,7 @@ pub mod reservations_client {
 pub mod resource_policies_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The ResourcePolicies API.
     #[derive(Debug, Clone)]
     pub struct ResourcePoliciesClient<T> {
@@ -36156,6 +39462,10 @@ pub mod resource_policies_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -36177,19 +39487,19 @@ pub mod resource_policies_client {
         {
             ResourcePoliciesClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Retrieves an aggregated list of resource policies.
@@ -36365,6 +39675,7 @@ pub mod resource_policies_client {
 pub mod routers_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The Routers API.
     #[derive(Debug, Clone)]
     pub struct RoutersClient<T> {
@@ -36379,6 +39690,10 @@ pub mod routers_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -36400,19 +39715,19 @@ pub mod routers_client {
         {
             RoutersClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Retrieves an aggregated list of routers.
@@ -36621,6 +39936,7 @@ pub mod routers_client {
 pub mod routes_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The Routes API.
     #[derive(Debug, Clone)]
     pub struct RoutesClient<T> {
@@ -36635,6 +39951,10 @@ pub mod routes_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -36656,19 +39976,19 @@ pub mod routes_client {
         {
             RoutesClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Deletes the specified Route resource.
@@ -36757,6 +40077,7 @@ pub mod routes_client {
 pub mod security_policies_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The SecurityPolicies API.
     #[derive(Debug, Clone)]
     pub struct SecurityPoliciesClient<T> {
@@ -36771,6 +40092,10 @@ pub mod security_policies_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -36792,19 +40117,19 @@ pub mod security_policies_client {
         {
             SecurityPoliciesClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Inserts a rule into a security policy.
@@ -37020,6 +40345,7 @@ pub mod security_policies_client {
 pub mod service_attachments_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The ServiceAttachments API.
     #[derive(Debug, Clone)]
     pub struct ServiceAttachmentsClient<T> {
@@ -37034,6 +40360,10 @@ pub mod service_attachments_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -37055,19 +40385,19 @@ pub mod service_attachments_client {
         {
             ServiceAttachmentsClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Retrieves the list of all ServiceAttachment resources, regional and global, available to the specified project.
@@ -37263,6 +40593,7 @@ pub mod service_attachments_client {
 pub mod snapshots_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The Snapshots API.
     #[derive(Debug, Clone)]
     pub struct SnapshotsClient<T> {
@@ -37277,6 +40608,10 @@ pub mod snapshots_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -37298,19 +40633,19 @@ pub mod snapshots_client {
         {
             SnapshotsClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Deletes the specified Snapshot resource. Keep in mind that deleting a single snapshot might not necessarily delete all the data on that snapshot. If any data on the snapshot that is marked for deletion is needed for subsequent snapshots, the data will be moved to the next corresponding snapshot. For more information, see Deleting snapshots.
@@ -37459,6 +40794,7 @@ pub mod snapshots_client {
 pub mod ssl_certificates_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The SslCertificates API.
     #[derive(Debug, Clone)]
     pub struct SslCertificatesClient<T> {
@@ -37473,6 +40809,10 @@ pub mod ssl_certificates_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -37494,19 +40834,19 @@ pub mod ssl_certificates_client {
         {
             SslCertificatesClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Retrieves the list of all SslCertificate resources, regional and global, available to the specified project.
@@ -37618,6 +40958,7 @@ pub mod ssl_certificates_client {
 pub mod ssl_policies_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The SslPolicies API.
     #[derive(Debug, Clone)]
     pub struct SslPoliciesClient<T> {
@@ -37632,6 +40973,10 @@ pub mod ssl_policies_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -37653,19 +40998,19 @@ pub mod ssl_policies_client {
         {
             SslPoliciesClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Deletes the specified SSL policy. The SSL policy resource can be deleted only if it is not in use by any TargetHttpsProxy or TargetSslProxy resources.
@@ -37799,6 +41144,7 @@ pub mod ssl_policies_client {
 pub mod subnetworks_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The Subnetworks API.
     #[derive(Debug, Clone)]
     pub struct SubnetworksClient<T> {
@@ -37813,6 +41159,10 @@ pub mod subnetworks_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -37834,19 +41184,19 @@ pub mod subnetworks_client {
         {
             SubnetworksClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Retrieves an aggregated list of subnetworks.
@@ -38100,6 +41450,7 @@ pub mod subnetworks_client {
 pub mod target_grpc_proxies_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The TargetGrpcProxies API.
     #[derive(Debug, Clone)]
     pub struct TargetGrpcProxiesClient<T> {
@@ -38114,6 +41465,10 @@ pub mod target_grpc_proxies_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -38135,19 +41490,19 @@ pub mod target_grpc_proxies_client {
         {
             TargetGrpcProxiesClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Deletes the specified TargetGrpcProxy in the given scope
@@ -38256,6 +41611,7 @@ pub mod target_grpc_proxies_client {
 pub mod target_http_proxies_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The TargetHttpProxies API.
     #[derive(Debug, Clone)]
     pub struct TargetHttpProxiesClient<T> {
@@ -38270,6 +41626,10 @@ pub mod target_http_proxies_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -38291,19 +41651,19 @@ pub mod target_http_proxies_client {
         {
             TargetHttpProxiesClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Retrieves the list of all TargetHttpProxy resources, regional and global, available to the specified project.
@@ -38457,6 +41817,7 @@ pub mod target_http_proxies_client {
 pub mod target_https_proxies_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The TargetHttpsProxies API.
     #[derive(Debug, Clone)]
     pub struct TargetHttpsProxiesClient<T> {
@@ -38471,6 +41832,10 @@ pub mod target_https_proxies_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -38492,19 +41857,19 @@ pub mod target_https_proxies_client {
         {
             TargetHttpsProxiesClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Retrieves the list of all TargetHttpsProxy resources, regional and global, available to the specified project.
@@ -38722,6 +42087,7 @@ pub mod target_https_proxies_client {
 pub mod target_instances_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The TargetInstances API.
     #[derive(Debug, Clone)]
     pub struct TargetInstancesClient<T> {
@@ -38736,6 +42102,10 @@ pub mod target_instances_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -38757,19 +42127,19 @@ pub mod target_instances_client {
         {
             TargetInstancesClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Retrieves an aggregated list of target instances.
@@ -38881,6 +42251,7 @@ pub mod target_instances_client {
 pub mod target_pools_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The TargetPools API.
     #[derive(Debug, Clone)]
     pub struct TargetPoolsClient<T> {
@@ -38895,6 +42266,10 @@ pub mod target_pools_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -38916,19 +42291,19 @@ pub mod target_pools_client {
         {
             TargetPoolsClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Adds health check URLs to a target pool.
@@ -39157,6 +42532,7 @@ pub mod target_pools_client {
 pub mod target_ssl_proxies_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The TargetSslProxies API.
     #[derive(Debug, Clone)]
     pub struct TargetSslProxiesClient<T> {
@@ -39171,6 +42547,10 @@ pub mod target_ssl_proxies_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -39192,19 +42572,19 @@ pub mod target_ssl_proxies_client {
         {
             TargetSslProxiesClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Deletes the specified TargetSslProxy resource.
@@ -39377,6 +42757,7 @@ pub mod target_ssl_proxies_client {
 pub mod target_tcp_proxies_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The TargetTcpProxies API.
     #[derive(Debug, Clone)]
     pub struct TargetTcpProxiesClient<T> {
@@ -39391,6 +42772,10 @@ pub mod target_tcp_proxies_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -39412,19 +42797,19 @@ pub mod target_tcp_proxies_client {
         {
             TargetTcpProxiesClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Deletes the specified TargetTcpProxy resource.
@@ -39555,6 +42940,7 @@ pub mod target_tcp_proxies_client {
 pub mod target_vpn_gateways_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The TargetVpnGateways API.
     #[derive(Debug, Clone)]
     pub struct TargetVpnGatewaysClient<T> {
@@ -39569,6 +42955,10 @@ pub mod target_vpn_gateways_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -39590,19 +42980,19 @@ pub mod target_vpn_gateways_client {
         {
             TargetVpnGatewaysClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Retrieves an aggregated list of target VPN gateways.
@@ -39716,6 +43106,7 @@ pub mod target_vpn_gateways_client {
 pub mod url_maps_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The UrlMaps API.
     #[derive(Debug, Clone)]
     pub struct UrlMapsClient<T> {
@@ -39730,6 +43121,10 @@ pub mod url_maps_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -39751,19 +43146,19 @@ pub mod url_maps_client {
         {
             UrlMapsClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Retrieves the list of all UrlMap resources, regional and global, available to the specified project.
@@ -39952,6 +43347,7 @@ pub mod url_maps_client {
 pub mod vpn_gateways_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The VpnGateways API.
     #[derive(Debug, Clone)]
     pub struct VpnGatewaysClient<T> {
@@ -39966,6 +43362,10 @@ pub mod vpn_gateways_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -39987,19 +43387,19 @@ pub mod vpn_gateways_client {
         {
             VpnGatewaysClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Retrieves an aggregated list of VPN gateways.
@@ -40171,6 +43571,7 @@ pub mod vpn_gateways_client {
 pub mod vpn_tunnels_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The VpnTunnels API.
     #[derive(Debug, Clone)]
     pub struct VpnTunnelsClient<T> {
@@ -40185,6 +43586,10 @@ pub mod vpn_tunnels_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -40206,19 +43611,19 @@ pub mod vpn_tunnels_client {
         {
             VpnTunnelsClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Retrieves an aggregated list of VPN tunnels.
@@ -40327,6 +43732,7 @@ pub mod vpn_tunnels_client {
 pub mod zone_operations_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The ZoneOperations API.
     #[derive(Debug, Clone)]
     pub struct ZoneOperationsClient<T> {
@@ -40341,6 +43747,10 @@ pub mod zone_operations_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -40362,19 +43772,19 @@ pub mod zone_operations_client {
         {
             ZoneOperationsClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Deletes the specified zone-specific Operations resource.
@@ -40463,6 +43873,7 @@ pub mod zone_operations_client {
 pub mod zones_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     /// The Zones API.
     #[derive(Debug, Clone)]
     pub struct ZonesClient<T> {
@@ -40477,6 +43888,10 @@ pub mod zones_client {
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -40498,19 +43913,19 @@ pub mod zones_client {
         {
             ZonesClient::new(InterceptedService::new(inner, interceptor))
         }
-        /// Compress requests with `gzip`.
+        /// Compress requests with the given encoding.
         ///
         /// This requires the server to support it otherwise it might respond with an
         /// error.
         #[must_use]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        /// Enable decompressing responses with `gzip`.
+        /// Enable decompressing responses.
         #[must_use]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
         /// Returns the specified Zone resource. Gets a list of available zones by making a list() request.
