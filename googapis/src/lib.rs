@@ -82,10 +82,31 @@
 pub const CERTIFICATES: &[u8] = include_bytes!("../data/roots.pem");
 
 #[allow(unused_macros)]
-macro_rules! include_proto {
+macro_rules! include_proto_client {
     ($package: tt) => {
-        include!(concat!("../genproto", concat!("/", $package, ".rs")));
+        include!(concat!(
+            "../genproto",
+            concat!("/clients/", $package, ".rs")
+        ));
     };
 }
 
-include!("googapis.rs");
+#[allow(unused_macros)]
+macro_rules! include_proto_server {
+    ($package: tt) => {
+        include!(concat!(
+            "../genproto",
+            concat!("/servers/", $package, ".rs")
+        ));
+    };
+}
+
+#[cfg(feature = "clients")]
+pub mod clients {
+    include!("googapis_clients.rs");
+}
+
+#[cfg(feature = "servers")]
+pub mod servers {
+    include!("googapis_servers.rs");
+}

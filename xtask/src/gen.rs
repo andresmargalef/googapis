@@ -4,6 +4,8 @@ use std::{
     path::{Path, PathBuf},
 };
 
+use crate::Mode;
+
 #[derive(Clone, Hash, PartialEq, Eq)]
 pub struct Package {
     raw: String,
@@ -86,7 +88,7 @@ impl Module {
 }
 
 impl Module {
-    fn gen_code(&self) -> String {
+    fn gen_code(&self, mode:Mode) -> String {
         let include = if self.include {
             let mut attr = self
                 .imported_by
@@ -99,8 +101,9 @@ impl Module {
                 .map(|f| format!(r#"feature = "{}","#, f))
                 .collect::<String>();
             let attr = format!("#[cfg(any({}))]", attr);
+            let include = mode.include_proto();
             format!(
-                "{attr}\ninclude_proto!(\"{package}\");\n",
+                "{attr}\n{include}!(\"{package}\");\n",
                 attr = attr,
                 package = self.package.escaped,
             )
@@ -116,7 +119,7 @@ impl Module {
                 format!(
                     "pub mod {name} {{ {children} }}\n",
                     name = k,
-                    children = v.gen_code(),
+                    children = v.gen_code(mode),
                 )
             })
             .collect::<String>();
@@ -133,7 +136,7 @@ impl Module {
 pub struct RootModule(HashMap<String, Module>);
 
 impl RootModule {
-    pub fn gen_code(&self) -> String {
+    pub fn gen_code(&self, mode:Mode) -> String {
         let mut vec = self.0.iter().collect::<Vec<_>>();
         vec.sort_by_key(|v| v.0);
         vec.into_iter()
@@ -141,7 +144,7 @@ impl RootModule {
                 format!(
                     "pub mod {name} {{ {children} }}\n",
                     name = k,
-                    children = v.gen_code(),
+                    children = v.gen_code(mode),
                 )
             })
             .collect()
@@ -363,11 +366,12 @@ pub fn proto_path(protos: &[Proto]) -> Vec<PathBuf> {
     ret
 }
 
-pub fn from_protos(protos: Vec<Proto>) -> RootModule {
+pub fn from_protos(protos: &Vec<Proto>) -> RootModule {
     let mut map = HashMap::new();
     let resolver = deps_resolver(&protos);
 
     for proto in protos {
+        // let proto = proto.clone();
         let mut iter = proto.package.escaped_vec.clone().into_iter();
 
         let mut package = Vec::new();
@@ -400,6 +404,8 @@ pub fn from_protos(protos: Vec<Proto>) -> RootModule {
 
 #[cfg(test)]
 mod tests {
+    use crate::Mode;
+
     use super::*;
 
     #[test]
@@ -575,7 +581,7 @@ mod tests {
     fn test_from_protos() {
         let protos = protos();
 
-        assert_eq!(from_protos(protos), {
+        assert_eq!(from_protos(&protos), {
             let mut map = HashMap::new();
             map.insert(
                 "a".into(),
@@ -640,20 +646,20 @@ mod tests {
 
     #[test]
     fn test_root_module_gen_code() {
-        let root = from_protos(protos());
+        let root = from_protos(&protos());
         assert_eq!(
-            root.gen_code(),
+            root.gen_code(Mode::Client),
             r###"pub mod a { #[cfg(any(feature = "a",))]
-include_proto!("a");
+include_proto_client!("a");
   }
 pub mod b { #[cfg(any(feature = "a",feature = "b",))]
-include_proto!("b");
+include_proto_client!("b");
   }
 pub mod c { #[cfg(any(feature = "a",feature = "b",feature = "c",))]
-include_proto!("c");
+include_proto_client!("c");
   }
 pub mod d { #[cfg(any(feature = "a",feature = "c",feature = "d",))]
-include_proto!("d");
+include_proto_client!("d");
   }
 "###
         );
@@ -672,9 +678,9 @@ include_proto!("d");
             children: HashMap::new(),
         };
         assert_eq!(
-            module.gen_code(),
+            module.gen_code(Mode::Client),
             r###"#[cfg(any(feature = "mechiru-type",))]
-include_proto!("mechiru.r#type");
+include_proto_client!("mechiru.r#type");
  "###
         );
     }

@@ -19,7 +19,9 @@ doctest = false
 all-features = true
 
 [features]
-default = []
+default = ["clients", "servers"]
+clients = []
+servers = []
 ccc-hosted-marketplace-v2 = []
 google-actions-sdk-v2 = []
 google-actions-sdk-v2-conversation = []

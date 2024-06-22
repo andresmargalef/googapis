@@ -376,7 +376,14 @@ features=(
   maps-fleetengine-v1
 )
 
+# bulild client features
 for f in "${features[@]}"; do
-  echo "feature: $f"
-  cargo build -p googapis --features $f
+  echo "client feature: $f"
+  cargo build -p googapis --features $f,clients
+done
+
+# bulild server features
+for f in "${features[@]}"; do
+  echo "server feature: $f"
+  cargo build -p googapis --features $f,servers
 done
