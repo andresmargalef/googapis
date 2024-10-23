@@ -3,7 +3,6 @@
 /// should authorize incoming connections. This resource in itself does
 /// not change the configuration unless it's attached to a target https
 /// proxy or endpoint config selector resource.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AuthorizationPolicy {
     /// Required. Name of the AuthorizationPolicy resource. It matches pattern
@@ -41,7 +40,6 @@ pub struct AuthorizationPolicy {
 /// Nested message and enum types in `AuthorizationPolicy`.
 pub mod authorization_policy {
     /// Specification of rules.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Rule {
         /// Optional. List of attributes for the traffic source. All of the sources
@@ -61,7 +59,6 @@ pub mod authorization_policy {
     /// Nested message and enum types in `Rule`.
     pub mod rule {
         /// Specification of traffic source attributes.
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct Source {
             /// Optional. List of peer identities to match for authorization. At least
@@ -81,7 +78,6 @@ pub mod authorization_policy {
             pub ip_blocks: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
         }
         /// Specification of traffic destination attributes.
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct Destination {
             /// Required. List of host names to match. Matched against the ":authority"
@@ -109,7 +105,6 @@ pub mod authorization_policy {
         /// Nested message and enum types in `Destination`.
         pub mod destination {
             /// Specification of HTTP header match attributes.
-            #[allow(clippy::derive_partial_eq_without_eq)]
             #[derive(Clone, PartialEq, ::prost::Message)]
             pub struct HttpHeaderMatch {
                 /// Required. The name of the HTTP header to match. For matching
@@ -123,7 +118,6 @@ pub mod authorization_policy {
             }
             /// Nested message and enum types in `HttpHeaderMatch`.
             pub mod http_header_match {
-                #[allow(clippy::derive_partial_eq_without_eq)]
                 #[derive(Clone, PartialEq, ::prost::Oneof)]
                 pub enum Type {
                     /// Required. The value of the header must match the regular expression
@@ -169,9 +163,9 @@ pub mod authorization_policy {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Action::Unspecified => "ACTION_UNSPECIFIED",
-                Action::Allow => "ALLOW",
-                Action::Deny => "DENY",
+                Self::Unspecified => "ACTION_UNSPECIFIED",
+                Self::Allow => "ALLOW",
+                Self::Deny => "DENY",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -186,7 +180,6 @@ pub mod authorization_policy {
     }
 }
 /// Request used with the ListAuthorizationPolicies method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAuthorizationPoliciesRequest {
     /// Required. The project and location from which the AuthorizationPolicies
@@ -205,7 +198,6 @@ pub struct ListAuthorizationPoliciesRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response returned by the ListAuthorizationPolicies method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAuthorizationPoliciesResponse {
     /// List of AuthorizationPolicies resources.
@@ -218,7 +210,6 @@ pub struct ListAuthorizationPoliciesResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request used by the GetAuthorizationPolicy method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetAuthorizationPolicyRequest {
     /// Required. A name of the AuthorizationPolicy to get. Must be in the format
@@ -227,7 +218,6 @@ pub struct GetAuthorizationPolicyRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request used by the CreateAuthorizationPolicy method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateAuthorizationPolicyRequest {
     /// Required. The parent resource of the AuthorizationPolicy. Must be in the
@@ -245,7 +235,6 @@ pub struct CreateAuthorizationPolicyRequest {
     pub authorization_policy: ::core::option::Option<AuthorizationPolicy>,
 }
 /// Request used by the UpdateAuthorizationPolicy method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateAuthorizationPolicyRequest {
     /// Optional. Field mask is used to specify the fields to be overwritten in the
@@ -260,7 +249,6 @@ pub struct UpdateAuthorizationPolicyRequest {
     pub authorization_policy: ::core::option::Option<AuthorizationPolicy>,
 }
 /// Request used by the DeleteAuthorizationPolicy method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteAuthorizationPolicyRequest {
     /// Required. A name of the AuthorizationPolicy to delete. Must be in the
@@ -269,7 +257,6 @@ pub struct DeleteAuthorizationPolicyRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Specification of the GRPC Endpoint.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GrpcEndpoint {
     /// Required. The target URI of the gRPC endpoint. Only UDS path is supported,
@@ -279,7 +266,6 @@ pub struct GrpcEndpoint {
 }
 /// Specification of ValidationCA. Defines the mechanism to obtain the
 /// Certificate Authority certificate to validate the peer certificate.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ValidationCa {
     /// The type of certificate provider which provides the CA certificate.
@@ -289,7 +275,6 @@ pub struct ValidationCa {
 /// Nested message and enum types in `ValidationCA`.
 pub mod validation_ca {
     /// The type of certificate provider which provides the CA certificate.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Type {
         /// gRPC specific configuration to access the gRPC server to
@@ -307,7 +292,6 @@ pub mod validation_ca {
 /// or more CertificateProvider instances (plugins) and one of them is enabled
 /// and configured by specifying this message. Workloads use the values from this
 /// message to locate and load the CertificateProvider instance configuration.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CertificateProviderInstance {
     /// Required. Plugin instance name, used to locate and load CertificateProvider
@@ -318,7 +302,6 @@ pub struct CertificateProviderInstance {
 }
 /// Specification of certificate provider. Defines the mechanism to obtain the
 /// certificate and private key for peer to peer authentication.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CertificateProvider {
     /// The type of certificate provider which provides the certificates and
@@ -330,7 +313,6 @@ pub struct CertificateProvider {
 pub mod certificate_provider {
     /// The type of certificate provider which provides the certificates and
     /// private keys.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Type {
         /// gRPC specific configuration to access the gRPC server to
@@ -347,7 +329,6 @@ pub mod certificate_provider {
 /// ClientTlsPolicy is a resource that specifies how a client should authenticate
 /// connections to backends of a service. This resource itself does not affect
 /// configuration unless it is attached to a backend service resource.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ClientTlsPolicy {
     /// Required. Name of the ClientTlsPolicy resource. It matches the pattern
@@ -385,7 +366,6 @@ pub struct ClientTlsPolicy {
     pub server_validation_ca: ::prost::alloc::vec::Vec<ValidationCa>,
 }
 /// Request used by the ListClientTlsPolicies method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListClientTlsPoliciesRequest {
     /// Required. The project and location from which the ClientTlsPolicies should
@@ -403,7 +383,6 @@ pub struct ListClientTlsPoliciesRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response returned by the ListClientTlsPolicies method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListClientTlsPoliciesResponse {
     /// List of ClientTlsPolicy resources.
@@ -416,7 +395,6 @@ pub struct ListClientTlsPoliciesResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request used by the GetClientTlsPolicy method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetClientTlsPolicyRequest {
     /// Required. A name of the ClientTlsPolicy to get. Must be in the format
@@ -425,7 +403,6 @@ pub struct GetClientTlsPolicyRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request used by the CreateClientTlsPolicy method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateClientTlsPolicyRequest {
     /// Required. The parent resource of the ClientTlsPolicy. Must be in
@@ -443,7 +420,6 @@ pub struct CreateClientTlsPolicyRequest {
     pub client_tls_policy: ::core::option::Option<ClientTlsPolicy>,
 }
 /// Request used by UpdateClientTlsPolicy method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateClientTlsPolicyRequest {
     /// Optional. Field mask is used to specify the fields to be overwritten in the
@@ -459,7 +435,6 @@ pub struct UpdateClientTlsPolicyRequest {
     pub client_tls_policy: ::core::option::Option<ClientTlsPolicy>,
 }
 /// Request used by the DeleteClientTlsPolicy method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteClientTlsPolicyRequest {
     /// Required. A name of the ClientTlsPolicy to delete. Must be in
@@ -468,7 +443,6 @@ pub struct DeleteClientTlsPolicyRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Represents the metadata of the long-running operation.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OperationMetadata {
     /// Output only. The time the operation was created.
@@ -500,7 +474,6 @@ pub struct OperationMetadata {
 /// ServerTlsPolicy is a resource that specifies how a server should authenticate
 /// incoming requests. This resource itself does not affect configuration unless
 /// it is attached to a target https proxy or endpoint config selector resource.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ServerTlsPolicy {
     /// Required. Name of the ServerTlsPolicy resource. It matches the pattern
@@ -552,7 +525,6 @@ pub struct ServerTlsPolicy {
 /// Nested message and enum types in `ServerTlsPolicy`.
 pub mod server_tls_policy {
     /// Specification of the MTLSPolicy.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct MtlsPolicy {
         ///
@@ -563,7 +535,6 @@ pub mod server_tls_policy {
     }
 }
 /// Request used by the ListServerTlsPolicies method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListServerTlsPoliciesRequest {
     /// Required. The project and location from which the ServerTlsPolicies should
@@ -581,7 +552,6 @@ pub struct ListServerTlsPoliciesRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response returned by the ListServerTlsPolicies method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListServerTlsPoliciesResponse {
     /// List of ServerTlsPolicy resources.
@@ -594,7 +564,6 @@ pub struct ListServerTlsPoliciesResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request used by the GetServerTlsPolicy method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetServerTlsPolicyRequest {
     /// Required. A name of the ServerTlsPolicy to get. Must be in the format
@@ -603,7 +572,6 @@ pub struct GetServerTlsPolicyRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request used by the CreateServerTlsPolicy method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateServerTlsPolicyRequest {
     /// Required. The parent resource of the ServerTlsPolicy. Must be in
@@ -621,7 +589,6 @@ pub struct CreateServerTlsPolicyRequest {
     pub server_tls_policy: ::core::option::Option<ServerTlsPolicy>,
 }
 /// Request used by UpdateServerTlsPolicy method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateServerTlsPolicyRequest {
     /// Optional. Field mask is used to specify the fields to be overwritten in the
@@ -637,7 +604,6 @@ pub struct UpdateServerTlsPolicyRequest {
     pub server_tls_policy: ::core::option::Option<ServerTlsPolicy>,
 }
 /// Request used by the DeleteServerTlsPolicy method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteServerTlsPolicyRequest {
     /// Required. A name of the ServerTlsPolicy to delete. Must be in
@@ -647,11 +613,17 @@ pub struct DeleteServerTlsPolicyRequest {
 }
 /// Generated server implementations.
 pub mod network_security_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with NetworkSecurityServer.
     #[async_trait]
-    pub trait NetworkSecurity: Send + Sync + 'static {
+    pub trait NetworkSecurity: std::marker::Send + std::marker::Sync + 'static {
         /// Lists AuthorizationPolicies in a given project and location.
         async fn list_authorization_policies(
             &self,
@@ -771,20 +743,18 @@ pub mod network_security_server {
     /// authorization policies. Refer to per API resource documentation for more
     /// information.
     #[derive(Debug)]
-    pub struct NetworkSecurityServer<T: NetworkSecurity> {
-        inner: _Inner<T>,
+    pub struct NetworkSecurityServer<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: NetworkSecurity> NetworkSecurityServer<T> {
+    impl<T> NetworkSecurityServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -834,8 +804,8 @@ pub mod network_security_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for NetworkSecurityServer<T>
     where
         T: NetworkSecurity,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -847,7 +817,6 @@ pub mod network_security_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.cloud.networksecurity.v1beta1.NetworkSecurity/ListAuthorizationPolicies" => {
                     #[allow(non_camel_case_types)]
@@ -885,7 +854,6 @@ pub mod network_security_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListAuthorizationPoliciesSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -935,7 +903,6 @@ pub mod network_security_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetAuthorizationPolicySvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -988,7 +955,6 @@ pub mod network_security_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = CreateAuthorizationPolicySvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1041,7 +1007,6 @@ pub mod network_security_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = UpdateAuthorizationPolicySvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1094,7 +1059,6 @@ pub mod network_security_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = DeleteAuthorizationPolicySvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1144,7 +1108,6 @@ pub mod network_security_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListServerTlsPoliciesSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1194,7 +1157,6 @@ pub mod network_security_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetServerTlsPolicySvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1244,7 +1206,6 @@ pub mod network_security_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = CreateServerTlsPolicySvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1294,7 +1255,6 @@ pub mod network_security_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = UpdateServerTlsPolicySvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1344,7 +1304,6 @@ pub mod network_security_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = DeleteServerTlsPolicySvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1394,7 +1353,6 @@ pub mod network_security_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListClientTlsPoliciesSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1444,7 +1402,6 @@ pub mod network_security_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetClientTlsPolicySvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1494,7 +1451,6 @@ pub mod network_security_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = CreateClientTlsPolicySvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1544,7 +1500,6 @@ pub mod network_security_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = UpdateClientTlsPolicySvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1594,7 +1549,6 @@ pub mod network_security_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = DeleteClientTlsPolicySvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1613,20 +1567,25 @@ pub mod network_security_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: NetworkSecurity> Clone for NetworkSecurityServer<T> {
+    impl<T> Clone for NetworkSecurityServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -1638,17 +1597,9 @@ pub mod network_security_server {
             }
         }
     }
-    impl<T: NetworkSecurity> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: NetworkSecurity> tonic::server::NamedService for NetworkSecurityServer<T> {
-        const NAME: &'static str = "google.cloud.networksecurity.v1beta1.NetworkSecurity";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.cloud.networksecurity.v1beta1.NetworkSecurity";
+    impl<T> tonic::server::NamedService for NetworkSecurityServer<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }

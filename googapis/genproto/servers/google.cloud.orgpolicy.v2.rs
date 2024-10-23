@@ -13,7 +13,6 @@
 /// Constraints have a default behavior determined by the `constraint_default`
 /// field, which is the enforcement behavior that is used in the absence of a
 /// policy being defined or inherited for the resource in question.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Constraint {
     /// Immutable. The resource name of the constraint. Must be in one of
@@ -53,8 +52,7 @@ pub struct Constraint {
 pub mod constraint {
     /// A constraint that allows or disallows a list of string values, which are
     /// configured by an Organization Policy administrator with a policy.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct ListConstraint {
         /// Indicates whether values grouped into categories can be used in
         /// `Policy.allowed_values` and `Policy.denied_values`. For example,
@@ -73,8 +71,7 @@ pub mod constraint {
     /// For example, a constraint `constraints/compute.disableSerialPortAccess`.
     /// If it is enforced on a VM instance, serial port connections will not be
     /// opened to that instance.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct BooleanConstraint {}
     /// Specifies the default behavior in the absence of any policy for the
     /// constraint. This must not be `CONSTRAINT_DEFAULT_UNSPECIFIED`.
@@ -110,9 +107,9 @@ pub mod constraint {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                ConstraintDefault::Unspecified => "CONSTRAINT_DEFAULT_UNSPECIFIED",
-                ConstraintDefault::Allow => "ALLOW",
-                ConstraintDefault::Deny => "DENY",
+                Self::Unspecified => "CONSTRAINT_DEFAULT_UNSPECIFIED",
+                Self::Allow => "ALLOW",
+                Self::Deny => "DENY",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -128,8 +125,7 @@ pub mod constraint {
     /// The type of restrictions for this `Constraint`.
     ///
     /// Immutable after creation.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
     pub enum ConstraintType {
         /// Defines this constraint as being a ListConstraint.
         #[prost(message, tag = "5")]
@@ -145,7 +141,6 @@ pub mod constraint {
 /// By creating a custom constraint, customers can apply policies of this
 /// custom constraint. *Creating a custom constraint itself does NOT apply any
 /// policy enforcement*.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CustomConstraint {
     /// Immutable. Name of the constraint. This is unique within the organization.
@@ -231,10 +226,10 @@ pub mod custom_constraint {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                MethodType::Unspecified => "METHOD_TYPE_UNSPECIFIED",
-                MethodType::Create => "CREATE",
-                MethodType::Update => "UPDATE",
-                MethodType::Delete => "DELETE",
+                Self::Unspecified => "METHOD_TYPE_UNSPECIFIED",
+                Self::Create => "CREATE",
+                Self::Update => "UPDATE",
+                Self::Delete => "DELETE",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -276,9 +271,9 @@ pub mod custom_constraint {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                ActionType::Unspecified => "ACTION_TYPE_UNSPECIFIED",
-                ActionType::Allow => "ALLOW",
-                ActionType::Deny => "DENY",
+                Self::Unspecified => "ACTION_TYPE_UNSPECIFIED",
+                Self::Allow => "ALLOW",
+                Self::Deny => "DENY",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -294,7 +289,6 @@ pub mod custom_constraint {
 }
 /// Defines an organization policy which is used to specify constraints
 /// for configurations of Google Cloud resources.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Policy {
     /// Immutable. The resource name of the policy. Must be one of the following
@@ -333,7 +327,6 @@ pub struct Policy {
 }
 /// Similar to PolicySpec but with an extra 'launch' field for launch reference.
 /// The PolicySpec here is specific for dry-run/darklaunch.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AlternatePolicySpec {
     /// Reference to the launch that will be used while audit logging and to
@@ -347,7 +340,6 @@ pub struct AlternatePolicySpec {
 }
 /// Defines a Google Cloud policy specification which is used to specify
 /// constraints for configurations of Google Cloud resources.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PolicySpec {
     /// An opaque tag indicating the current version of the policySpec, used for
@@ -398,7 +390,6 @@ pub struct PolicySpec {
 /// Nested message and enum types in `PolicySpec`.
 pub mod policy_spec {
     /// A rule used to express this policy.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct PolicyRule {
         /// A condition which determines whether this rule is used
@@ -437,7 +428,6 @@ pub mod policy_spec {
         ///
         /// The `supports_under` field of the associated `Constraint`  defines
         /// whether ancestry prefixes can be used.
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct StringValues {
             /// List of values allowed at this resource.
@@ -447,7 +437,6 @@ pub mod policy_spec {
             #[prost(string, repeated, tag = "2")]
             pub denied_values: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
         }
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Oneof)]
         pub enum Kind {
             /// List of values to be used for this policy rule. This field can be set
@@ -472,7 +461,6 @@ pub mod policy_spec {
 }
 /// The request sent to the \[ListConstraints\]
 /// \[google.cloud.orgpolicy.v2.OrgPolicy.ListConstraints\] method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListConstraintsRequest {
     /// Required. The Google Cloud resource that parents the constraint. Must be in
@@ -496,7 +484,6 @@ pub struct ListConstraintsRequest {
 }
 /// The response returned from the \[ListConstraints\]
 /// \[google.cloud.orgpolicy.v2.OrgPolicy.ListConstraints\] method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListConstraintsResponse {
     /// The collection of constraints that are available on the targeted resource.
@@ -508,7 +495,6 @@ pub struct ListConstraintsResponse {
 }
 /// The request sent to the \[ListPolicies\]
 /// \[google.cloud.orgpolicy.v2.OrgPolicy.ListPolicies\] method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListPoliciesRequest {
     /// Required. The target Google Cloud resource that parents the set of
@@ -534,7 +520,6 @@ pub struct ListPoliciesRequest {
 /// The response returned from the \[ListPolicies\]
 /// \[google.cloud.orgpolicy.v2.OrgPolicy.ListPolicies\] method. It will be empty
 /// if no policies are set on the resource.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListPoliciesResponse {
     /// All policies that exist on the resource. It will be empty if no
@@ -548,7 +533,6 @@ pub struct ListPoliciesResponse {
 }
 /// The request sent to the \[GetPolicy\]
 /// \[google.cloud.orgpolicy.v2.OrgPolicy.GetPolicy\] method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetPolicyRequest {
     /// Required. Resource name of the policy. See
@@ -558,7 +542,6 @@ pub struct GetPolicyRequest {
 }
 /// The request sent to the \[GetEffectivePolicy\]
 /// \[google.cloud.orgpolicy.v2.OrgPolicy.GetEffectivePolicy\] method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetEffectivePolicyRequest {
     /// Required. The effective policy to compute. See
@@ -568,7 +551,6 @@ pub struct GetEffectivePolicyRequest {
 }
 /// The request sent to the \[CreatePolicyRequest\]
 /// \[google.cloud.orgpolicy.v2.OrgPolicy.CreatePolicy\] method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreatePolicyRequest {
     /// Required. The Google Cloud resource that will parent the new policy. Must
@@ -586,7 +568,6 @@ pub struct CreatePolicyRequest {
 }
 /// The request sent to the \[UpdatePolicyRequest\]
 /// \[google.cloud.orgpolicy.v2.OrgPolicy.UpdatePolicy\] method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdatePolicyRequest {
     /// Required. Policy to update.
@@ -600,7 +581,6 @@ pub struct UpdatePolicyRequest {
 }
 /// The request sent to the \[DeletePolicy\]
 /// \[google.cloud.orgpolicy.v2.OrgPolicy.DeletePolicy\] method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeletePolicyRequest {
     /// Required. Name of the policy to delete.
@@ -615,7 +595,6 @@ pub struct DeletePolicyRequest {
 }
 /// The request sent to the \[CreateCustomConstraintRequest\]
 /// \[google.cloud.orgpolicy.v2.OrgPolicy.CreateCustomConstraint\] method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateCustomConstraintRequest {
     /// Required. Must be in the following form:
@@ -629,7 +608,6 @@ pub struct CreateCustomConstraintRequest {
 }
 /// The request sent to the \[GetCustomConstraint\]
 /// \[google.cloud.orgpolicy.v2.OrgPolicy.GetCustomConstraint\] method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetCustomConstraintRequest {
     /// Required. Resource name of the custom constraint. See the custom constraint
@@ -639,7 +617,6 @@ pub struct GetCustomConstraintRequest {
 }
 /// The request sent to the \[ListCustomConstraints\]
 /// \[google.cloud.orgpolicy.v2.OrgPolicy.ListCustomConstraints\] method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCustomConstraintsRequest {
     /// Required. The target Google Cloud resource that parents the set of custom
@@ -662,7 +639,6 @@ pub struct ListCustomConstraintsRequest {
 /// The response returned from the \[ListCustomConstraints\]
 /// \[google.cloud.orgpolicy.v2.OrgPolicy.ListCustomConstraints\] method. It will
 /// be empty if no custom constraints are set on the organization resource.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCustomConstraintsResponse {
     /// All custom constraints that exist on the organization resource. It will be
@@ -676,7 +652,6 @@ pub struct ListCustomConstraintsResponse {
 }
 /// The request sent to the \[UpdateCustomConstraintRequest\]
 /// \[google.cloud.orgpolicy.v2.OrgPolicy.UpdateCustomConstraint\] method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateCustomConstraintRequest {
     /// Required. `CustomConstraint` to update.
@@ -685,7 +660,6 @@ pub struct UpdateCustomConstraintRequest {
 }
 /// The request sent to the \[DeleteCustomConstraint\]
 /// \[google.cloud.orgpolicy.v2.OrgPolicy.DeleteCustomConstraint\] method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteCustomConstraintRequest {
     /// Required. Name of the custom constraint to delete.
@@ -695,11 +669,17 @@ pub struct DeleteCustomConstraintRequest {
 }
 /// Generated server implementations.
 pub mod org_policy_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with OrgPolicyServer.
     #[async_trait]
-    pub trait OrgPolicy: Send + Sync + 'static {
+    pub trait OrgPolicy: std::marker::Send + std::marker::Sync + 'static {
         /// Lists constraints that could be applied on the specified resource.
         async fn list_constraints(
             &self,
@@ -843,20 +823,18 @@ pub mod org_policy_server {
     /// collection of constraints that defines their allowable configuration on a
     /// particular resource and its child resources.
     #[derive(Debug)]
-    pub struct OrgPolicyServer<T: OrgPolicy> {
-        inner: _Inner<T>,
+    pub struct OrgPolicyServer<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: OrgPolicy> OrgPolicyServer<T> {
+    impl<T> OrgPolicyServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -906,8 +884,8 @@ pub mod org_policy_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for OrgPolicyServer<T>
     where
         T: OrgPolicy,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -919,7 +897,6 @@ pub mod org_policy_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.cloud.orgpolicy.v2.OrgPolicy/ListConstraints" => {
                     #[allow(non_camel_case_types)]
@@ -950,7 +927,6 @@ pub mod org_policy_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListConstraintsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -996,7 +972,6 @@ pub mod org_policy_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListPoliciesSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1042,7 +1017,6 @@ pub mod org_policy_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetPolicySvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1089,7 +1063,6 @@ pub mod org_policy_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetEffectivePolicySvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1135,7 +1108,6 @@ pub mod org_policy_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = CreatePolicySvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1181,7 +1153,6 @@ pub mod org_policy_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = UpdatePolicySvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1227,7 +1198,6 @@ pub mod org_policy_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = DeletePolicySvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1274,7 +1244,6 @@ pub mod org_policy_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = CreateCustomConstraintSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1321,7 +1290,6 @@ pub mod org_policy_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = UpdateCustomConstraintSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1368,7 +1336,6 @@ pub mod org_policy_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetCustomConstraintSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1415,7 +1382,6 @@ pub mod org_policy_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListCustomConstraintsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1462,7 +1428,6 @@ pub mod org_policy_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = DeleteCustomConstraintSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1481,20 +1446,25 @@ pub mod org_policy_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: OrgPolicy> Clone for OrgPolicyServer<T> {
+    impl<T> Clone for OrgPolicyServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -1506,17 +1476,9 @@ pub mod org_policy_server {
             }
         }
     }
-    impl<T: OrgPolicy> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: OrgPolicy> tonic::server::NamedService for OrgPolicyServer<T> {
-        const NAME: &'static str = "google.cloud.orgpolicy.v2.OrgPolicy";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.cloud.orgpolicy.v2.OrgPolicy";
+    impl<T> tonic::server::NamedService for OrgPolicyServer<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }

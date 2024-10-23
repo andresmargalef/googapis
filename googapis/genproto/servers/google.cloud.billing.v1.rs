@@ -2,7 +2,6 @@
 /// A billing account in the
 /// [Google Cloud Console](<https://console.cloud.google.com/>). You can assign a
 /// billing account to one or more projects.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BillingAccount {
     /// Output only. The resource name of the billing account. The resource name
@@ -42,7 +41,6 @@ pub struct BillingAccount {
 /// Encapsulation of billing information for a Google Cloud Console project. A
 /// project has at most one associated billing account at a time (but a billing
 /// account can be assigned to multiple projects).
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ProjectBillingInfo {
     /// Output only. The resource name for the `ProjectBillingInfo`; has the form
@@ -68,7 +66,6 @@ pub struct ProjectBillingInfo {
     pub billing_enabled: bool,
 }
 /// Request message for `GetBillingAccount`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetBillingAccountRequest {
     /// Required. The resource name of the billing account to retrieve. For
@@ -77,7 +74,6 @@ pub struct GetBillingAccountRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for `ListBillingAccounts`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListBillingAccountsRequest {
     /// Requested page size. The maximum page size is 100; this is also the
@@ -108,7 +104,6 @@ pub struct ListBillingAccountsRequest {
     pub parent: ::prost::alloc::string::String,
 }
 /// Response message for `ListBillingAccounts`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListBillingAccountsResponse {
     /// A list of billing accounts.
@@ -121,7 +116,6 @@ pub struct ListBillingAccountsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for `CreateBillingAccount`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateBillingAccountRequest {
     /// Required. The billing account resource to create.
@@ -138,7 +132,6 @@ pub struct CreateBillingAccountRequest {
     pub parent: ::prost::alloc::string::String,
 }
 /// Request message for `UpdateBillingAccount`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateBillingAccountRequest {
     /// Required. The name of the billing account resource to be updated.
@@ -154,7 +147,6 @@ pub struct UpdateBillingAccountRequest {
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
 /// Request message for `ListProjectBillingInfo`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListProjectBillingInfoRequest {
     /// Required. The resource name of the billing account associated with the
@@ -173,7 +165,6 @@ pub struct ListProjectBillingInfoRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Request message for `ListProjectBillingInfoResponse`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListProjectBillingInfoResponse {
     /// A list of `ProjectBillingInfo` resources representing the projects
@@ -187,7 +178,6 @@ pub struct ListProjectBillingInfoResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for `GetProjectBillingInfo`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetProjectBillingInfoRequest {
     /// Required. The resource name of the project for which billing information is
@@ -196,7 +186,6 @@ pub struct GetProjectBillingInfoRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for `UpdateProjectBillingInfo`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateProjectBillingInfoRequest {
     /// Required. The resource name of the project associated with the billing
@@ -211,7 +200,6 @@ pub struct UpdateProjectBillingInfoRequest {
     pub project_billing_info: ::core::option::Option<ProjectBillingInfo>,
 }
 /// Request message for `MoveBillingAccount` RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MoveBillingAccountRequest {
     /// Required. The resource name of the billing account to move.
@@ -228,11 +216,17 @@ pub struct MoveBillingAccountRequest {
 }
 /// Generated server implementations.
 pub mod cloud_billing_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with CloudBillingServer.
     #[async_trait]
-    pub trait CloudBilling: Send + Sync + 'static {
+    pub trait CloudBilling: std::marker::Send + std::marker::Sync + 'static {
         /// Gets information about a billing account. The current authenticated user
         /// must be a [viewer of the billing
         /// account](https://cloud.google.com/billing/docs/how-to/billing-access).
@@ -391,20 +385,18 @@ pub mod cloud_billing_server {
     /// Retrieves the Google Cloud Console billing accounts and associates them with
     /// projects.
     #[derive(Debug)]
-    pub struct CloudBillingServer<T: CloudBilling> {
-        inner: _Inner<T>,
+    pub struct CloudBillingServer<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: CloudBilling> CloudBillingServer<T> {
+    impl<T> CloudBillingServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -454,8 +446,8 @@ pub mod cloud_billing_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for CloudBillingServer<T>
     where
         T: CloudBilling,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -467,7 +459,6 @@ pub mod cloud_billing_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.cloud.billing.v1.CloudBilling/GetBillingAccount" => {
                     #[allow(non_camel_case_types)]
@@ -499,7 +490,6 @@ pub mod cloud_billing_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetBillingAccountSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -546,7 +536,6 @@ pub mod cloud_billing_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListBillingAccountsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -593,7 +582,6 @@ pub mod cloud_billing_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = UpdateBillingAccountSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -640,7 +628,6 @@ pub mod cloud_billing_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = CreateBillingAccountSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -690,7 +677,6 @@ pub mod cloud_billing_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListProjectBillingInfoSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -740,7 +726,6 @@ pub mod cloud_billing_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetProjectBillingInfoSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -792,7 +777,6 @@ pub mod cloud_billing_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = UpdateProjectBillingInfoSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -841,7 +825,6 @@ pub mod cloud_billing_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetIamPolicySvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -890,7 +873,6 @@ pub mod cloud_billing_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = SetIamPolicySvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -940,7 +922,6 @@ pub mod cloud_billing_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = TestIamPermissionsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -987,7 +968,6 @@ pub mod cloud_billing_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = MoveBillingAccountSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1006,20 +986,25 @@ pub mod cloud_billing_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: CloudBilling> Clone for CloudBillingServer<T> {
+    impl<T> Clone for CloudBillingServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -1031,22 +1016,13 @@ pub mod cloud_billing_server {
             }
         }
     }
-    impl<T: CloudBilling> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: CloudBilling> tonic::server::NamedService for CloudBillingServer<T> {
-        const NAME: &'static str = "google.cloud.billing.v1.CloudBilling";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.cloud.billing.v1.CloudBilling";
+    impl<T> tonic::server::NamedService for CloudBillingServer<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }
 /// Encapsulates a single service in Google Cloud Platform.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Service {
     /// The resource name for the service.
@@ -1066,7 +1042,6 @@ pub struct Service {
     pub business_entity_name: ::prost::alloc::string::String,
 }
 /// Encapsulates a single SKU in Google Cloud
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Sku {
     /// The resource name for the SKU.
@@ -1101,7 +1076,6 @@ pub struct Sku {
     pub geo_taxonomy: ::core::option::Option<GeoTaxonomy>,
 }
 /// Represents the category hierarchy of a SKU.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Category {
     /// The display name of the service this SKU belongs to.
@@ -1121,7 +1095,6 @@ pub struct Category {
     pub usage_type: ::prost::alloc::string::String,
 }
 /// Represents the pricing information for a SKU at a single point of time.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PricingInfo {
     /// The timestamp from which this pricing was effective within the requested
@@ -1161,7 +1134,6 @@ pub struct PricingInfo {
 /// The above expresses a pricing formula where the first 20GB is free, the
 /// next 80GB is priced at $10 per GB followed by $5 per GB for additional
 /// usage.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PricingExpression {
     /// The short hand for unit of usage this pricing is specified in.
@@ -1206,7 +1178,6 @@ pub struct PricingExpression {
 /// Nested message and enum types in `PricingExpression`.
 pub mod pricing_expression {
     /// The price rate indicating starting usage and its corresponding price.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct TierRate {
         /// Usage is priced at this rate only after this amount.
@@ -1223,8 +1194,7 @@ pub mod pricing_expression {
     }
 }
 /// Represents the aggregation level and interval for pricing of a single SKU.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct AggregationInfo {
     #[prost(enumeration = "aggregation_info::AggregationLevel", tag = "1")]
     pub aggregation_level: i32,
@@ -1265,9 +1235,9 @@ pub mod aggregation_info {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                AggregationLevel::Unspecified => "AGGREGATION_LEVEL_UNSPECIFIED",
-                AggregationLevel::Account => "ACCOUNT",
-                AggregationLevel::Project => "PROJECT",
+                Self::Unspecified => "AGGREGATION_LEVEL_UNSPECIFIED",
+                Self::Account => "ACCOUNT",
+                Self::Project => "PROJECT",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1307,9 +1277,9 @@ pub mod aggregation_info {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                AggregationInterval::Unspecified => "AGGREGATION_INTERVAL_UNSPECIFIED",
-                AggregationInterval::Daily => "DAILY",
-                AggregationInterval::Monthly => "MONTHLY",
+                Self::Unspecified => "AGGREGATION_INTERVAL_UNSPECIFIED",
+                Self::Daily => "DAILY",
+                Self::Monthly => "MONTHLY",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1324,7 +1294,6 @@ pub mod aggregation_info {
     }
 }
 /// Encapsulates the geographic taxonomy data for a sku.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GeoTaxonomy {
     /// The type of Geo Taxonomy: GLOBAL, REGIONAL, or MULTI_REGIONAL.
@@ -1369,10 +1338,10 @@ pub mod geo_taxonomy {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Type::Unspecified => "TYPE_UNSPECIFIED",
-                Type::Global => "GLOBAL",
-                Type::Regional => "REGIONAL",
-                Type::MultiRegional => "MULTI_REGIONAL",
+                Self::Unspecified => "TYPE_UNSPECIFIED",
+                Self::Global => "GLOBAL",
+                Self::Regional => "REGIONAL",
+                Self::MultiRegional => "MULTI_REGIONAL",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1388,7 +1357,6 @@ pub mod geo_taxonomy {
     }
 }
 /// Request message for `ListServices`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListServicesRequest {
     /// Requested page size. Defaults to 5000.
@@ -1401,7 +1369,6 @@ pub struct ListServicesRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for `ListServices`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListServicesResponse {
     /// A list of services.
@@ -1414,7 +1381,6 @@ pub struct ListServicesResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for `ListSkus`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListSkusRequest {
     /// Required. The name of the service.
@@ -1452,7 +1418,6 @@ pub struct ListSkusRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for `ListSkus`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListSkusResponse {
     /// The list of public SKUs of the given service.
@@ -1466,11 +1431,17 @@ pub struct ListSkusResponse {
 }
 /// Generated server implementations.
 pub mod cloud_catalog_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with CloudCatalogServer.
     #[async_trait]
-    pub trait CloudCatalog: Send + Sync + 'static {
+    pub trait CloudCatalog: std::marker::Send + std::marker::Sync + 'static {
         /// Lists all public cloud services.
         async fn list_services(
             &self,
@@ -1492,20 +1463,18 @@ pub mod cloud_catalog_server {
     /// Provides pricing information and metadata on Google Cloud Platform services
     /// and SKUs.
     #[derive(Debug)]
-    pub struct CloudCatalogServer<T: CloudCatalog> {
-        inner: _Inner<T>,
+    pub struct CloudCatalogServer<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: CloudCatalog> CloudCatalogServer<T> {
+    impl<T> CloudCatalogServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -1555,8 +1524,8 @@ pub mod cloud_catalog_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for CloudCatalogServer<T>
     where
         T: CloudCatalog,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -1568,7 +1537,6 @@ pub mod cloud_catalog_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.cloud.billing.v1.CloudCatalog/ListServices" => {
                     #[allow(non_camel_case_types)]
@@ -1599,7 +1567,6 @@ pub mod cloud_catalog_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListServicesSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1645,7 +1612,6 @@ pub mod cloud_catalog_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListSkusSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1664,20 +1630,25 @@ pub mod cloud_catalog_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: CloudCatalog> Clone for CloudCatalogServer<T> {
+    impl<T> Clone for CloudCatalogServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -1689,17 +1660,9 @@ pub mod cloud_catalog_server {
             }
         }
     }
-    impl<T: CloudCatalog> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: CloudCatalog> tonic::server::NamedService for CloudCatalogServer<T> {
-        const NAME: &'static str = "google.cloud.billing.v1.CloudCatalog";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.cloud.billing.v1.CloudCatalog";
+    impl<T> tonic::server::NamedService for CloudCatalogServer<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }

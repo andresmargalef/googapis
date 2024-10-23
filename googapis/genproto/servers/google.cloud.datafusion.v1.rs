@@ -5,7 +5,6 @@
 /// these configurations allows several benefits, such as reduced network latency
 /// while accessing the customer resources from managed Data Fusion instance
 /// nodes, as well as access to the customer on-prem resources.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NetworkConfig {
     /// Name of the network in the customer project with which the Tenant Project
@@ -22,7 +21,6 @@ pub struct NetworkConfig {
 }
 /// The Data Fusion version. This proto message stores information about certain
 /// Data Fusion version, which is used for Data Fusion version upgrade.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Version {
     /// The version number of the Data Fusion instance, such as '6.0.1.0'.
@@ -68,9 +66,9 @@ pub mod version {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Type::Unspecified => "TYPE_UNSPECIFIED",
-                Type::Preview => "TYPE_PREVIEW",
-                Type::GeneralAvailability => "TYPE_GENERAL_AVAILABILITY",
+                Self::Unspecified => "TYPE_UNSPECIFIED",
+                Self::Preview => "TYPE_PREVIEW",
+                Self::GeneralAvailability => "TYPE_GENERAL_AVAILABILITY",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -85,8 +83,7 @@ pub mod version {
     }
 }
 /// Identifies Data Fusion accelerators for an instance.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct Accelerator {
     /// The type of an accelator for a CDF instance.
     #[prost(enumeration = "accelerator::AcceleratorType", tag = "1")]
@@ -131,10 +128,10 @@ pub mod accelerator {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                AcceleratorType::Unspecified => "ACCELERATOR_TYPE_UNSPECIFIED",
-                AcceleratorType::Cdc => "CDC",
-                AcceleratorType::Healthcare => "HEALTHCARE",
-                AcceleratorType::CcaiInsights => "CCAI_INSIGHTS",
+                Self::Unspecified => "ACCELERATOR_TYPE_UNSPECIFIED",
+                Self::Cdc => "CDC",
+                Self::Healthcare => "HEALTHCARE",
+                Self::CcaiInsights => "CCAI_INSIGHTS",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -179,10 +176,10 @@ pub mod accelerator {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                State::Unspecified => "STATE_UNSPECIFIED",
-                State::Enabled => "ENABLED",
-                State::Disabled => "DISABLED",
-                State::Unknown => "UNKNOWN",
+                Self::Unspecified => "STATE_UNSPECIFIED",
+                Self::Enabled => "ENABLED",
+                Self::Disabled => "DISABLED",
+                Self::Unknown => "UNKNOWN",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -199,7 +196,6 @@ pub mod accelerator {
 }
 /// The crypto key configuration. This field is used by the Customer-managed
 /// encryption keys (CMEK) feature.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CryptoKeyConfig {
     /// The name of the key which is used to encrypt/decrypt customer data. For key
@@ -209,7 +205,6 @@ pub struct CryptoKeyConfig {
     pub key_reference: ::prost::alloc::string::String,
 }
 /// Represents a Data Fusion instance.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Instance {
     /// Output only. The name of this instance is in the form of
@@ -365,10 +360,10 @@ pub mod instance {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Type::Unspecified => "TYPE_UNSPECIFIED",
-                Type::Basic => "BASIC",
-                Type::Enterprise => "ENTERPRISE",
-                Type::Developer => "DEVELOPER",
+                Self::Unspecified => "TYPE_UNSPECIFIED",
+                Self::Basic => "BASIC",
+                Self::Enterprise => "ENTERPRISE",
+                Self::Developer => "DEVELOPER",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -427,17 +422,17 @@ pub mod instance {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                State::Unspecified => "STATE_UNSPECIFIED",
-                State::Creating => "CREATING",
-                State::Active => "ACTIVE",
-                State::Failed => "FAILED",
-                State::Deleting => "DELETING",
-                State::Upgrading => "UPGRADING",
-                State::Restarting => "RESTARTING",
-                State::Updating => "UPDATING",
-                State::AutoUpdating => "AUTO_UPDATING",
-                State::AutoUpgrading => "AUTO_UPGRADING",
-                State::Disabled => "DISABLED",
+                Self::Unspecified => "STATE_UNSPECIFIED",
+                Self::Creating => "CREATING",
+                Self::Active => "ACTIVE",
+                Self::Failed => "FAILED",
+                Self::Deleting => "DELETING",
+                Self::Upgrading => "UPGRADING",
+                Self::Restarting => "RESTARTING",
+                Self::Updating => "UPDATING",
+                Self::AutoUpdating => "AUTO_UPDATING",
+                Self::AutoUpgrading => "AUTO_UPGRADING",
+                Self::Disabled => "DISABLED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -484,8 +479,8 @@ pub mod instance {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                DisabledReason::Unspecified => "DISABLED_REASON_UNSPECIFIED",
-                DisabledReason::KmsKeyIssue => "KMS_KEY_ISSUE",
+                Self::Unspecified => "DISABLED_REASON_UNSPECIFIED",
+                Self::KmsKeyIssue => "KMS_KEY_ISSUE",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -499,7 +494,6 @@ pub mod instance {
     }
 }
 /// Request message for listing Data Fusion instances.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListInstancesRequest {
     /// Required. The project and location for which to retrieve instance information
@@ -523,7 +517,6 @@ pub struct ListInstancesRequest {
     pub order_by: ::prost::alloc::string::String,
 }
 /// Response message for the list instance request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListInstancesResponse {
     /// Represents a list of Data Fusion instances.
@@ -538,7 +531,6 @@ pub struct ListInstancesResponse {
     pub unreachable: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Request message for the list available versions request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAvailableVersionsRequest {
     /// Required. The project and location for which to retrieve instance information
@@ -559,7 +551,6 @@ pub struct ListAvailableVersionsRequest {
     pub latest_patch_only: bool,
 }
 /// Response message for the list available versions request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAvailableVersionsResponse {
     /// Represents a list of versions that are supported.
@@ -571,7 +562,6 @@ pub struct ListAvailableVersionsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for getting details about a Data Fusion instance.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetInstanceRequest {
     /// Required. The instance resource name in the format
@@ -580,7 +570,6 @@ pub struct GetInstanceRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for creating a Data Fusion instance.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateInstanceRequest {
     /// Required. The instance's project and location in the format
@@ -595,7 +584,6 @@ pub struct CreateInstanceRequest {
     pub instance: ::core::option::Option<Instance>,
 }
 /// Request message for deleting a Data Fusion instance.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteInstanceRequest {
     /// Required. The instance resource name in the format
@@ -606,7 +594,6 @@ pub struct DeleteInstanceRequest {
 /// Request message for updating a Data Fusion instance.
 /// Data Fusion allows updating the labels, options, and stack driver settings.
 /// This is also used for CDF version upgrade.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateInstanceRequest {
     /// Required. The instance resource that replaces the resource on the server. Currently,
@@ -624,7 +611,6 @@ pub struct UpdateInstanceRequest {
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
 /// Request message for restarting a Data Fusion instance.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RestartInstanceRequest {
     /// Required. Name of the Data Fusion instance which need to be restarted in the form of
@@ -633,7 +619,6 @@ pub struct RestartInstanceRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Represents the metadata of a long-running operation.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OperationMetadata {
     /// The time the operation was created.
@@ -672,11 +657,17 @@ pub struct OperationMetadata {
 }
 /// Generated server implementations.
 pub mod data_fusion_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with DataFusionServer.
     #[async_trait]
-    pub trait DataFusion: Send + Sync + 'static {
+    pub trait DataFusion: std::marker::Send + std::marker::Sync + 'static {
         /// Lists possible versions for Data Fusion instances in the specified project
         /// and location.
         async fn list_available_versions(
@@ -737,20 +728,18 @@ pub mod data_fusion_server {
     /// Data Fusion enables ETL developers to build code-free, data integration
     /// pipelines via a point-and-click UI.
     #[derive(Debug)]
-    pub struct DataFusionServer<T: DataFusion> {
-        inner: _Inner<T>,
+    pub struct DataFusionServer<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: DataFusion> DataFusionServer<T> {
+    impl<T> DataFusionServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -800,8 +789,8 @@ pub mod data_fusion_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for DataFusionServer<T>
     where
         T: DataFusion,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -813,7 +802,6 @@ pub mod data_fusion_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.cloud.datafusion.v1.DataFusion/ListAvailableVersions" => {
                     #[allow(non_camel_case_types)]
@@ -845,7 +833,6 @@ pub mod data_fusion_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListAvailableVersionsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -891,7 +878,6 @@ pub mod data_fusion_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListInstancesSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -937,7 +923,6 @@ pub mod data_fusion_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetInstanceSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -983,7 +968,6 @@ pub mod data_fusion_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = CreateInstanceSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1029,7 +1013,6 @@ pub mod data_fusion_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = DeleteInstanceSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1075,7 +1058,6 @@ pub mod data_fusion_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = UpdateInstanceSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1121,7 +1103,6 @@ pub mod data_fusion_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = RestartInstanceSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1140,20 +1121,25 @@ pub mod data_fusion_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: DataFusion> Clone for DataFusionServer<T> {
+    impl<T> Clone for DataFusionServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -1165,17 +1151,9 @@ pub mod data_fusion_server {
             }
         }
     }
-    impl<T: DataFusion> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: DataFusion> tonic::server::NamedService for DataFusionServer<T> {
-        const NAME: &'static str = "google.cloud.datafusion.v1.DataFusion";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.cloud.datafusion.v1.DataFusion";
+    impl<T> tonic::server::NamedService for DataFusionServer<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }

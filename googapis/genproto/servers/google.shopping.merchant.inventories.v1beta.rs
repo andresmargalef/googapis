@@ -4,7 +4,6 @@
 /// [`storeCode`][google.shopping.merchant.inventories.v1beta.LocalInventory.store_code].
 /// For a list of all accepted attribute values, see the [local product inventory
 /// data specification](<https://support.google.com/merchants/answer/3061342>).
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LocalInventory {
     /// Output only. The name of the `LocalInventory` resource.
@@ -72,7 +71,6 @@ pub struct LocalInventory {
     >,
 }
 /// Request message for the `ListLocalInventories` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListLocalInventoriesRequest {
     /// Required. The `name` of the parent product to list local inventories for.
@@ -98,7 +96,6 @@ pub struct ListLocalInventoriesRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for the `ListLocalInventories` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListLocalInventoriesResponse {
     /// The `LocalInventory` resources for the given product from the specified
@@ -111,7 +108,6 @@ pub struct ListLocalInventoriesResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for the `InsertLocalInventory` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct InsertLocalInventoryRequest {
     /// Required. The account and product where this inventory will be inserted.
@@ -125,7 +121,6 @@ pub struct InsertLocalInventoryRequest {
     pub local_inventory: ::core::option::Option<LocalInventory>,
 }
 /// Request message for the `DeleteLocalInventory` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteLocalInventoryRequest {
     /// Required. The name of the local inventory for the given product to delete.
@@ -136,11 +131,17 @@ pub struct DeleteLocalInventoryRequest {
 }
 /// Generated server implementations.
 pub mod local_inventory_service_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with LocalInventoryServiceServer.
     #[async_trait]
-    pub trait LocalInventoryService: Send + Sync + 'static {
+    pub trait LocalInventoryService: std::marker::Send + std::marker::Sync + 'static {
         /// Lists the `LocalInventory` resources for the given product in your merchant
         /// account. The response might contain fewer items than specified by
         /// `pageSize`. If `pageToken` was returned in previous request, it can be used
@@ -179,20 +180,18 @@ pub mod local_inventory_service_server {
     }
     /// Service to manage local inventory for products
     #[derive(Debug)]
-    pub struct LocalInventoryServiceServer<T: LocalInventoryService> {
-        inner: _Inner<T>,
+    pub struct LocalInventoryServiceServer<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: LocalInventoryService> LocalInventoryServiceServer<T> {
+    impl<T> LocalInventoryServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -243,8 +242,8 @@ pub mod local_inventory_service_server {
     for LocalInventoryServiceServer<T>
     where
         T: LocalInventoryService,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -256,7 +255,6 @@ pub mod local_inventory_service_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.shopping.merchant.inventories.v1beta.LocalInventoryService/ListLocalInventories" => {
                     #[allow(non_camel_case_types)]
@@ -291,7 +289,6 @@ pub mod local_inventory_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListLocalInventoriesSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -341,7 +338,6 @@ pub mod local_inventory_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = InsertLocalInventorySvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -391,7 +387,6 @@ pub mod local_inventory_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = DeleteLocalInventorySvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -410,20 +405,25 @@ pub mod local_inventory_service_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: LocalInventoryService> Clone for LocalInventoryServiceServer<T> {
+    impl<T> Clone for LocalInventoryServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -435,19 +435,10 @@ pub mod local_inventory_service_server {
             }
         }
     }
-    impl<T: LocalInventoryService> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: LocalInventoryService> tonic::server::NamedService
-    for LocalInventoryServiceServer<T> {
-        const NAME: &'static str = "google.shopping.merchant.inventories.v1beta.LocalInventoryService";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.shopping.merchant.inventories.v1beta.LocalInventoryService";
+    impl<T> tonic::server::NamedService for LocalInventoryServiceServer<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }
 /// Regional inventory information for the product. Represents specific
@@ -456,7 +447,6 @@ pub mod local_inventory_service_server {
 /// For a list of all accepted attribute values, see the [regional product
 /// inventory data
 /// specification](<https://support.google.com/merchants/answer/9698880>).
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RegionalInventory {
     /// Output only. The name of the `RegionalInventory` resource.
@@ -502,7 +492,6 @@ pub struct RegionalInventory {
     >,
 }
 /// Request message for the `ListRegionalInventories` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListRegionalInventoriesRequest {
     /// Required. The `name` of the parent product to list `RegionalInventory`
@@ -527,7 +516,6 @@ pub struct ListRegionalInventoriesRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for the `ListRegionalInventories` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListRegionalInventoriesResponse {
     /// The `RegionalInventory` resources for the given product from the specified
@@ -540,7 +528,6 @@ pub struct ListRegionalInventoriesResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for the `InsertRegionalInventory` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct InsertRegionalInventoryRequest {
     /// Required. The account and product where this inventory will be inserted.
@@ -554,7 +541,6 @@ pub struct InsertRegionalInventoryRequest {
     pub regional_inventory: ::core::option::Option<RegionalInventory>,
 }
 /// Request message for the `DeleteRegionalInventory` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteRegionalInventoryRequest {
     /// Required. The name of the `RegionalInventory` resource to delete.
@@ -565,11 +551,17 @@ pub struct DeleteRegionalInventoryRequest {
 }
 /// Generated server implementations.
 pub mod regional_inventory_service_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with RegionalInventoryServiceServer.
     #[async_trait]
-    pub trait RegionalInventoryService: Send + Sync + 'static {
+    pub trait RegionalInventoryService: std::marker::Send + std::marker::Sync + 'static {
         /// Lists the `RegionalInventory` resources for the given product in your
         /// merchant account. The response might contain fewer items than specified by
         /// `pageSize`.  If `pageToken` was returned in previous request, it can be
@@ -612,20 +604,18 @@ pub mod regional_inventory_service_server {
     /// Service to manage regional inventory for products. There is also separate
     /// `regions` resource and API to manage regions definitions.
     #[derive(Debug)]
-    pub struct RegionalInventoryServiceServer<T: RegionalInventoryService> {
-        inner: _Inner<T>,
+    pub struct RegionalInventoryServiceServer<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: RegionalInventoryService> RegionalInventoryServiceServer<T> {
+    impl<T> RegionalInventoryServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -676,8 +666,8 @@ pub mod regional_inventory_service_server {
     for RegionalInventoryServiceServer<T>
     where
         T: RegionalInventoryService,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -689,7 +679,6 @@ pub mod regional_inventory_service_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.shopping.merchant.inventories.v1beta.RegionalInventoryService/ListRegionalInventories" => {
                     #[allow(non_camel_case_types)]
@@ -728,7 +717,6 @@ pub mod regional_inventory_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListRegionalInventoriesSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -782,7 +770,6 @@ pub mod regional_inventory_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = InsertRegionalInventorySvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -836,7 +823,6 @@ pub mod regional_inventory_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = DeleteRegionalInventorySvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -855,20 +841,25 @@ pub mod regional_inventory_service_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: RegionalInventoryService> Clone for RegionalInventoryServiceServer<T> {
+    impl<T> Clone for RegionalInventoryServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -880,18 +871,9 @@ pub mod regional_inventory_service_server {
             }
         }
     }
-    impl<T: RegionalInventoryService> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: RegionalInventoryService> tonic::server::NamedService
-    for RegionalInventoryServiceServer<T> {
-        const NAME: &'static str = "google.shopping.merchant.inventories.v1beta.RegionalInventoryService";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.shopping.merchant.inventories.v1beta.RegionalInventoryService";
+    impl<T> tonic::server::NamedService for RegionalInventoryServiceServer<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }

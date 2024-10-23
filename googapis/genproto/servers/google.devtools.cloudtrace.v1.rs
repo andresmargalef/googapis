@@ -2,7 +2,6 @@
 /// A trace describes how long it takes for an application to perform an
 /// operation. It consists of a set of spans, each of which represent a single
 /// timed event within the operation.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Trace {
     /// Project ID of the Cloud project where the trace data is stored.
@@ -18,7 +17,6 @@ pub struct Trace {
     pub spans: ::prost::alloc::vec::Vec<TraceSpan>,
 }
 /// List of new or updated traces.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Traces {
     /// List of traces.
@@ -30,7 +28,6 @@ pub struct Traces {
 /// end-to-end latency of an operation and, optionally, one or more subspans for
 /// its suboperations. Spans do not need to be contiguous. There may be gaps
 /// between spans in a trace.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TraceSpan {
     /// Identifier for the span. Must be a 64-bit integer other than 0 and
@@ -134,9 +131,9 @@ pub mod trace_span {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                SpanKind::Unspecified => "SPAN_KIND_UNSPECIFIED",
-                SpanKind::RpcServer => "RPC_SERVER",
-                SpanKind::RpcClient => "RPC_CLIENT",
+                Self::Unspecified => "SPAN_KIND_UNSPECIFIED",
+                Self::RpcServer => "RPC_SERVER",
+                Self::RpcClient => "RPC_CLIENT",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -152,7 +149,6 @@ pub mod trace_span {
 }
 /// The request message for the `ListTraces` method. All fields are required
 /// unless specified.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListTracesRequest {
     /// Required. ID of the Cloud project where the trace data is stored.
@@ -263,10 +259,10 @@ pub mod list_traces_request {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                ViewType::Unspecified => "VIEW_TYPE_UNSPECIFIED",
-                ViewType::Minimal => "MINIMAL",
-                ViewType::Rootspan => "ROOTSPAN",
-                ViewType::Complete => "COMPLETE",
+                Self::Unspecified => "VIEW_TYPE_UNSPECIFIED",
+                Self::Minimal => "MINIMAL",
+                Self::Rootspan => "ROOTSPAN",
+                Self::Complete => "COMPLETE",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -282,7 +278,6 @@ pub mod list_traces_request {
     }
 }
 /// The response message for the `ListTraces` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListTracesResponse {
     /// List of trace records as specified by the view parameter.
@@ -295,7 +290,6 @@ pub struct ListTracesResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// The request message for the `GetTrace` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetTraceRequest {
     /// Required. ID of the Cloud project where the trace data is stored.
@@ -306,7 +300,6 @@ pub struct GetTraceRequest {
     pub trace_id: ::prost::alloc::string::String,
 }
 /// The request message for the `PatchTraces` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PatchTracesRequest {
     /// Required. ID of the Cloud project where the trace data is stored.
@@ -318,11 +311,17 @@ pub struct PatchTracesRequest {
 }
 /// Generated server implementations.
 pub mod trace_service_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with TraceServiceServer.
     #[async_trait]
-    pub trait TraceService: Send + Sync + 'static {
+    pub trait TraceService: std::marker::Send + std::marker::Sync + 'static {
         /// Returns of a list of traces that match the specified filter conditions.
         async fn list_traces(
             &self,
@@ -352,20 +351,18 @@ pub mod trace_service_server {
     /// timed event which forms a node of the trace tree. Spans for a single trace
     /// may span multiple services.
     #[derive(Debug)]
-    pub struct TraceServiceServer<T: TraceService> {
-        inner: _Inner<T>,
+    pub struct TraceServiceServer<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: TraceService> TraceServiceServer<T> {
+    impl<T> TraceServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -415,8 +412,8 @@ pub mod trace_service_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for TraceServiceServer<T>
     where
         T: TraceService,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -428,7 +425,6 @@ pub mod trace_service_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.devtools.cloudtrace.v1.TraceService/ListTraces" => {
                     #[allow(non_camel_case_types)]
@@ -459,7 +455,6 @@ pub mod trace_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListTracesSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -505,7 +500,6 @@ pub mod trace_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetTraceSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -551,7 +545,6 @@ pub mod trace_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = PatchTracesSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -570,20 +563,25 @@ pub mod trace_service_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: TraceService> Clone for TraceServiceServer<T> {
+    impl<T> Clone for TraceServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -595,17 +593,9 @@ pub mod trace_service_server {
             }
         }
     }
-    impl<T: TraceService> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: TraceService> tonic::server::NamedService for TraceServiceServer<T> {
-        const NAME: &'static str = "google.devtools.cloudtrace.v1.TraceService";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.devtools.cloudtrace.v1.TraceService";
+    impl<T> tonic::server::NamedService for TraceServiceServer<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }

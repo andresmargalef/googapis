@@ -2,7 +2,6 @@
 /// An annotation set is a logical grouping of annotations that share consistent
 /// type information and provenance. Examples of annotation sets include 'all
 /// genes from refseq', and 'all variant annotations from ClinVar'.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AnnotationSet {
     /// The server-generated annotation set ID, unique across all annotation sets.
@@ -39,7 +38,6 @@ pub struct AnnotationSet {
 /// sample or individual (though a client could choose to use annotations in
 /// this way). Example canonical annotation types are `GENE` and
 /// `VARIANT`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Annotation {
     /// The server-generated annotation ID, unique across all annotations.
@@ -85,7 +83,6 @@ pub struct Annotation {
 }
 /// Nested message and enum types in `Annotation`.
 pub mod annotation {
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Value {
         /// A variant annotation, which describes the effect of a variant on the
@@ -102,7 +99,6 @@ pub mod annotation {
         Transcript(super::Transcript),
     }
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VariantAnnotation {
     /// Type has been adapted from ClinVar's list of variant types.
@@ -137,7 +133,6 @@ pub struct VariantAnnotation {
 }
 /// Nested message and enum types in `VariantAnnotation`.
 pub mod variant_annotation {
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ClinicalCondition {
         /// A set of names for the condition.
@@ -195,14 +190,14 @@ pub mod variant_annotation {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Type::Unspecified => "TYPE_UNSPECIFIED",
-                Type::Other => "TYPE_OTHER",
-                Type::Insertion => "INSERTION",
-                Type::Deletion => "DELETION",
-                Type::Substitution => "SUBSTITUTION",
-                Type::Snp => "SNP",
-                Type::Structural => "STRUCTURAL",
-                Type::Cnv => "CNV",
+                Self::Unspecified => "TYPE_UNSPECIFIED",
+                Self::Other => "TYPE_OTHER",
+                Self::Insertion => "INSERTION",
+                Self::Deletion => "DELETION",
+                Self::Substitution => "SUBSTITUTION",
+                Self::Snp => "SNP",
+                Self::Structural => "STRUCTURAL",
+                Self::Cnv => "CNV",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -269,15 +264,15 @@ pub mod variant_annotation {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Effect::Unspecified => "EFFECT_UNSPECIFIED",
-                Effect::Other => "EFFECT_OTHER",
-                Effect::Frameshift => "FRAMESHIFT",
-                Effect::FramePreservingIndel => "FRAME_PRESERVING_INDEL",
-                Effect::SynonymousSnp => "SYNONYMOUS_SNP",
-                Effect::NonsynonymousSnp => "NONSYNONYMOUS_SNP",
-                Effect::StopGain => "STOP_GAIN",
-                Effect::StopLoss => "STOP_LOSS",
-                Effect::SpliceSiteDisruption => "SPLICE_SITE_DISRUPTION",
+                Self::Unspecified => "EFFECT_UNSPECIFIED",
+                Self::Other => "EFFECT_OTHER",
+                Self::Frameshift => "FRAMESHIFT",
+                Self::FramePreservingIndel => "FRAME_PRESERVING_INDEL",
+                Self::SynonymousSnp => "SYNONYMOUS_SNP",
+                Self::NonsynonymousSnp => "NONSYNONYMOUS_SNP",
+                Self::StopGain => "STOP_GAIN",
+                Self::StopLoss => "STOP_LOSS",
+                Self::SpliceSiteDisruption => "SPLICE_SITE_DISRUPTION",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -336,20 +331,20 @@ pub mod variant_annotation {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                ClinicalSignificance::Unspecified => "CLINICAL_SIGNIFICANCE_UNSPECIFIED",
-                ClinicalSignificance::Other => "CLINICAL_SIGNIFICANCE_OTHER",
-                ClinicalSignificance::Uncertain => "UNCERTAIN",
-                ClinicalSignificance::Benign => "BENIGN",
-                ClinicalSignificance::LikelyBenign => "LIKELY_BENIGN",
-                ClinicalSignificance::LikelyPathogenic => "LIKELY_PATHOGENIC",
-                ClinicalSignificance::Pathogenic => "PATHOGENIC",
-                ClinicalSignificance::DrugResponse => "DRUG_RESPONSE",
-                ClinicalSignificance::Histocompatibility => "HISTOCOMPATIBILITY",
-                ClinicalSignificance::ConfersSensitivity => "CONFERS_SENSITIVITY",
-                ClinicalSignificance::RiskFactor => "RISK_FACTOR",
-                ClinicalSignificance::Association => "ASSOCIATION",
-                ClinicalSignificance::Protective => "PROTECTIVE",
-                ClinicalSignificance::MultipleReported => "MULTIPLE_REPORTED",
+                Self::Unspecified => "CLINICAL_SIGNIFICANCE_UNSPECIFIED",
+                Self::Other => "CLINICAL_SIGNIFICANCE_OTHER",
+                Self::Uncertain => "UNCERTAIN",
+                Self::Benign => "BENIGN",
+                Self::LikelyBenign => "LIKELY_BENIGN",
+                Self::LikelyPathogenic => "LIKELY_PATHOGENIC",
+                Self::Pathogenic => "PATHOGENIC",
+                Self::DrugResponse => "DRUG_RESPONSE",
+                Self::Histocompatibility => "HISTOCOMPATIBILITY",
+                Self::ConfersSensitivity => "CONFERS_SENSITIVITY",
+                Self::RiskFactor => "RISK_FACTOR",
+                Self::Association => "ASSOCIATION",
+                Self::Protective => "PROTECTIVE",
+                Self::MultipleReported => "MULTIPLE_REPORTED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -376,7 +371,6 @@ pub mod variant_annotation {
 }
 /// A transcript represents the assertion that a particular region of the
 /// reference genome may be transcribed as RNA.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Transcript {
     /// The annotation ID of the gene from which this transcript is transcribed.
@@ -416,8 +410,7 @@ pub struct Transcript {
 }
 /// Nested message and enum types in `Transcript`.
 pub mod transcript {
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct Exon {
         /// The start position of the exon on this annotation's reference sequence,
         /// 0-based inclusive. Note that this is relative to the reference start, and
@@ -445,8 +438,7 @@ pub mod transcript {
         #[prost(message, optional, tag = "3")]
         pub frame: ::core::option::Option<i32>,
     }
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct CodingSequence {
         /// The start of the coding sequence on this annotation's reference sequence,
         /// 0-based inclusive. Note that this position is relative to the reference
@@ -460,7 +452,6 @@ pub mod transcript {
         pub end: i64,
     }
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExternalId {
     /// The name of the source of this data.
@@ -470,21 +461,18 @@ pub struct ExternalId {
     #[prost(string, tag = "2")]
     pub id: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateAnnotationSetRequest {
     /// The annotation set to create.
     #[prost(message, optional, tag = "1")]
     pub annotation_set: ::core::option::Option<AnnotationSet>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetAnnotationSetRequest {
     /// The ID of the annotation set to be retrieved.
     #[prost(string, tag = "1")]
     pub annotation_set_id: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateAnnotationSetRequest {
     /// The ID of the annotation set to be updated.
@@ -501,14 +489,12 @@ pub struct UpdateAnnotationSetRequest {
     #[prost(message, optional, tag = "3")]
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteAnnotationSetRequest {
     /// The ID of the annotation set to be deleted.
     #[prost(string, tag = "1")]
     pub annotation_set_id: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchAnnotationSetsRequest {
     /// Required. The dataset IDs to search within. Caller must have `READ` access
@@ -537,7 +523,6 @@ pub struct SearchAnnotationSetsRequest {
     #[prost(int32, tag = "6")]
     pub page_size: i32,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchAnnotationSetsResponse {
     /// The matching annotation sets.
@@ -549,14 +534,12 @@ pub struct SearchAnnotationSetsResponse {
     #[prost(string, tag = "2")]
     pub next_page_token: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateAnnotationRequest {
     /// The annotation to be created.
     #[prost(message, optional, tag = "1")]
     pub annotation: ::core::option::Option<Annotation>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BatchCreateAnnotationsRequest {
     /// The annotations to be created. At most 4096 can be specified in a single
@@ -573,7 +556,6 @@ pub struct BatchCreateAnnotationsRequest {
     #[prost(string, tag = "2")]
     pub request_id: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BatchCreateAnnotationsResponse {
     /// The resulting per-annotation entries, ordered consistently with the
@@ -583,7 +565,6 @@ pub struct BatchCreateAnnotationsResponse {
 }
 /// Nested message and enum types in `BatchCreateAnnotationsResponse`.
 pub mod batch_create_annotations_response {
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Entry {
         /// The creation status.
@@ -594,14 +575,12 @@ pub mod batch_create_annotations_response {
         pub annotation: ::core::option::Option<super::Annotation>,
     }
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetAnnotationRequest {
     /// The ID of the annotation to be retrieved.
     #[prost(string, tag = "1")]
     pub annotation_id: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateAnnotationRequest {
     /// The ID of the annotation to be updated.
@@ -619,14 +598,12 @@ pub struct UpdateAnnotationRequest {
     #[prost(message, optional, tag = "3")]
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteAnnotationRequest {
     /// The ID of the annotation to be deleted.
     #[prost(string, tag = "1")]
     pub annotation_id: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchAnnotationsRequest {
     /// Required. The annotation sets to search within. The caller must have
@@ -663,7 +640,6 @@ pub struct SearchAnnotationsRequest {
 /// Nested message and enum types in `SearchAnnotationsRequest`.
 pub mod search_annotations_request {
     /// Required. `reference_id` or `reference_name` must be set.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Reference {
         /// The ID of the reference to query.
@@ -675,7 +651,6 @@ pub mod search_annotations_request {
         ReferenceName(::prost::alloc::string::String),
     }
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchAnnotationsResponse {
     /// The matching annotations.
@@ -716,11 +691,11 @@ impl AnnotationType {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            AnnotationType::Unspecified => "ANNOTATION_TYPE_UNSPECIFIED",
-            AnnotationType::Generic => "GENERIC",
-            AnnotationType::Variant => "VARIANT",
-            AnnotationType::Gene => "GENE",
-            AnnotationType::Transcript => "TRANSCRIPT",
+            Self::Unspecified => "ANNOTATION_TYPE_UNSPECIFIED",
+            Self::Generic => "GENERIC",
+            Self::Variant => "VARIANT",
+            Self::Gene => "GENE",
+            Self::Transcript => "TRANSCRIPT",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -737,11 +712,17 @@ impl AnnotationType {
 }
 /// Generated server implementations.
 pub mod annotation_service_v1_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with AnnotationServiceV1Server.
     #[async_trait]
-    pub trait AnnotationServiceV1: Send + Sync + 'static {
+    pub trait AnnotationServiceV1: std::marker::Send + std::marker::Sync + 'static {
         /// Creates a new annotation set. Caller must have WRITE permission for the
         /// associated dataset.
         ///
@@ -870,20 +851,18 @@ pub mod annotation_service_v1_server {
     /// This service provides storage and positional retrieval of genomic
     /// reference annotations, including variant annotations.
     #[derive(Debug)]
-    pub struct AnnotationServiceV1Server<T: AnnotationServiceV1> {
-        inner: _Inner<T>,
+    pub struct AnnotationServiceV1Server<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: AnnotationServiceV1> AnnotationServiceV1Server<T> {
+    impl<T> AnnotationServiceV1Server<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -933,8 +912,8 @@ pub mod annotation_service_v1_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for AnnotationServiceV1Server<T>
     where
         T: AnnotationServiceV1,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -946,7 +925,6 @@ pub mod annotation_service_v1_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.genomics.v1.AnnotationServiceV1/CreateAnnotationSet" => {
                     #[allow(non_camel_case_types)]
@@ -981,7 +959,6 @@ pub mod annotation_service_v1_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = CreateAnnotationSetSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1031,7 +1008,6 @@ pub mod annotation_service_v1_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetAnnotationSetSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1081,7 +1057,6 @@ pub mod annotation_service_v1_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = UpdateAnnotationSetSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1131,7 +1106,6 @@ pub mod annotation_service_v1_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = DeleteAnnotationSetSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1181,7 +1155,6 @@ pub mod annotation_service_v1_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = SearchAnnotationSetsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1231,7 +1204,6 @@ pub mod annotation_service_v1_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = CreateAnnotationSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1281,7 +1253,6 @@ pub mod annotation_service_v1_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = BatchCreateAnnotationsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1328,7 +1299,6 @@ pub mod annotation_service_v1_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetAnnotationSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1378,7 +1348,6 @@ pub mod annotation_service_v1_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = UpdateAnnotationSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1428,7 +1397,6 @@ pub mod annotation_service_v1_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = DeleteAnnotationSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1478,7 +1446,6 @@ pub mod annotation_service_v1_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = SearchAnnotationsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1497,20 +1464,25 @@ pub mod annotation_service_v1_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: AnnotationServiceV1> Clone for AnnotationServiceV1Server<T> {
+    impl<T> Clone for AnnotationServiceV1Server<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -1522,23 +1494,13 @@ pub mod annotation_service_v1_server {
             }
         }
     }
-    impl<T: AnnotationServiceV1> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: AnnotationServiceV1> tonic::server::NamedService
-    for AnnotationServiceV1Server<T> {
-        const NAME: &'static str = "google.genomics.v1.AnnotationServiceV1";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.genomics.v1.AnnotationServiceV1";
+    impl<T> tonic::server::NamedService for AnnotationServiceV1Server<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }
 /// A single CIGAR operation.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CigarUnit {
     #[prost(enumeration = "cigar_unit::Operation", tag = "1")]
@@ -1623,16 +1585,16 @@ pub mod cigar_unit {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Operation::Unspecified => "OPERATION_UNSPECIFIED",
-                Operation::AlignmentMatch => "ALIGNMENT_MATCH",
-                Operation::Insert => "INSERT",
-                Operation::Delete => "DELETE",
-                Operation::Skip => "SKIP",
-                Operation::ClipSoft => "CLIP_SOFT",
-                Operation::ClipHard => "CLIP_HARD",
-                Operation::Pad => "PAD",
-                Operation::SequenceMatch => "SEQUENCE_MATCH",
-                Operation::SequenceMismatch => "SEQUENCE_MISMATCH",
+                Self::Unspecified => "OPERATION_UNSPECIFIED",
+                Self::AlignmentMatch => "ALIGNMENT_MATCH",
+                Self::Insert => "INSERT",
+                Self::Delete => "DELETE",
+                Self::Skip => "SKIP",
+                Self::ClipSoft => "CLIP_SOFT",
+                Self::ClipHard => "CLIP_HARD",
+                Self::Pad => "PAD",
+                Self::SequenceMatch => "SEQUENCE_MATCH",
+                Self::SequenceMismatch => "SEQUENCE_MISMATCH",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1657,7 +1619,6 @@ pub mod cigar_unit {
 ///
 /// For more genomics resource definitions, see [Fundamentals of Google
 /// Genomics](<https://cloud.google.com/genomics/fundamentals-of-google-genomics>)
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Dataset {
     /// The server-generated dataset ID, unique across all datasets.
@@ -1674,7 +1635,6 @@ pub struct Dataset {
     pub create_time: ::core::option::Option<::prost_types::Timestamp>,
 }
 /// The dataset list request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListDatasetsRequest {
     /// Required. The Google Cloud project ID to list datasets for.
@@ -1691,7 +1651,6 @@ pub struct ListDatasetsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// The dataset list response.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListDatasetsResponse {
     /// The list of matching Datasets.
@@ -1703,14 +1662,12 @@ pub struct ListDatasetsResponse {
     #[prost(string, tag = "2")]
     pub next_page_token: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateDatasetRequest {
     /// The dataset to be created. Must contain projectId and name.
     #[prost(message, optional, tag = "1")]
     pub dataset: ::core::option::Option<Dataset>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateDatasetRequest {
     /// The ID of the dataset to be updated.
@@ -1726,21 +1683,18 @@ pub struct UpdateDatasetRequest {
     #[prost(message, optional, tag = "3")]
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteDatasetRequest {
     /// The ID of the dataset to be deleted.
     #[prost(string, tag = "1")]
     pub dataset_id: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UndeleteDatasetRequest {
     /// The ID of the dataset to be undeleted.
     #[prost(string, tag = "1")]
     pub dataset_id: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetDatasetRequest {
     /// The ID of the dataset.
@@ -1749,11 +1703,17 @@ pub struct GetDatasetRequest {
 }
 /// Generated server implementations.
 pub mod dataset_service_v1_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with DatasetServiceV1Server.
     #[async_trait]
-    pub trait DatasetServiceV1: Send + Sync + 'static {
+    pub trait DatasetServiceV1: std::marker::Send + std::marker::Sync + 'static {
         /// Lists datasets within a project.
         ///
         /// For the definitions of datasets and other genomics resources, see
@@ -1871,20 +1831,18 @@ pub mod dataset_service_v1_server {
     }
     /// This service manages datasets, which are collections of genomic data.
     #[derive(Debug)]
-    pub struct DatasetServiceV1Server<T: DatasetServiceV1> {
-        inner: _Inner<T>,
+    pub struct DatasetServiceV1Server<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: DatasetServiceV1> DatasetServiceV1Server<T> {
+    impl<T> DatasetServiceV1Server<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -1934,8 +1892,8 @@ pub mod dataset_service_v1_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for DatasetServiceV1Server<T>
     where
         T: DatasetServiceV1,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -1947,7 +1905,6 @@ pub mod dataset_service_v1_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.genomics.v1.DatasetServiceV1/ListDatasets" => {
                     #[allow(non_camel_case_types)]
@@ -1979,7 +1936,6 @@ pub mod dataset_service_v1_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListDatasetsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -2026,7 +1982,6 @@ pub mod dataset_service_v1_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = CreateDatasetSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -2072,7 +2027,6 @@ pub mod dataset_service_v1_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetDatasetSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -2119,7 +2073,6 @@ pub mod dataset_service_v1_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = UpdateDatasetSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -2166,7 +2119,6 @@ pub mod dataset_service_v1_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = DeleteDatasetSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -2213,7 +2165,6 @@ pub mod dataset_service_v1_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = UndeleteDatasetSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -2263,7 +2214,6 @@ pub mod dataset_service_v1_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = SetIamPolicySvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -2313,7 +2263,6 @@ pub mod dataset_service_v1_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetIamPolicySvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -2366,7 +2315,6 @@ pub mod dataset_service_v1_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = TestIamPermissionsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -2385,20 +2333,25 @@ pub mod dataset_service_v1_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: DatasetServiceV1> Clone for DatasetServiceV1Server<T> {
+    impl<T> Clone for DatasetServiceV1Server<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -2410,22 +2363,13 @@ pub mod dataset_service_v1_server {
             }
         }
     }
-    impl<T: DatasetServiceV1> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: DatasetServiceV1> tonic::server::NamedService for DatasetServiceV1Server<T> {
-        const NAME: &'static str = "google.genomics.v1.DatasetServiceV1";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.genomics.v1.DatasetServiceV1";
+    impl<T> tonic::server::NamedService for DatasetServiceV1Server<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }
 /// Metadata describing an [Operation][google.longrunning.Operation].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OperationMetadata {
     /// The Google Cloud Project in which the job is scoped.
@@ -2466,7 +2410,6 @@ pub struct OperationMetadata {
     >,
 }
 /// An event that occurred during an [Operation][google.longrunning.Operation].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OperationEvent {
     /// Optional time of when event started.
@@ -2484,7 +2427,6 @@ pub struct OperationEvent {
 /// already known reference. For now, represents a genomic position as a
 /// reference name, a base number on that reference (0-based), and a
 /// determination of forward or reverse strand.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Position {
     /// The name of the reference in whatever reference set is being used.
@@ -2499,7 +2441,6 @@ pub struct Position {
     pub reverse_strand: bool,
 }
 /// A 0-based half-open genomic coordinate range for search requests.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Range {
     /// The reference sequence name, for example `chr1`,
@@ -2515,7 +2456,6 @@ pub struct Range {
 }
 /// A linear alignment can be represented by one CIGAR string. Describes the
 /// mapped position and local alignment of the read to the reference.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LinearAlignment {
     /// The position of this alignment.
@@ -2615,7 +2555,6 @@ pub struct LinearAlignment {
 ///        cigarStr += c.operationLength + cigarMap\[c.operation\]
 ///      }
 ///      return cigarStr
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Read {
     /// The server-generated read ID, unique across all reads. This is different
@@ -2713,7 +2652,6 @@ pub struct Read {
     >,
 }
 /// A read group is all the data that's processed the same way by the sequencer.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ReadGroup {
     /// The server-generated read group ID, unique for all read groups.
@@ -2759,7 +2697,6 @@ pub struct ReadGroup {
 }
 /// Nested message and enum types in `ReadGroup`.
 pub mod read_group {
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Experiment {
         /// A client-supplied library identifier; a library is a collection of DNA
@@ -2781,7 +2718,6 @@ pub mod read_group {
         #[prost(string, tag = "4")]
         pub instrument_model: ::prost::alloc::string::String,
     }
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Program {
         /// The command line used to run this program.
@@ -2814,7 +2750,6 @@ pub mod read_group {
 ///
 /// For more genomics resource definitions, see [Fundamentals of Google
 /// Genomics](<https://cloud.google.com/genomics/fundamentals-of-google-genomics>)
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ReadGroupSet {
     /// The server-generated read group set ID, unique for all read group sets.
@@ -2845,7 +2780,6 @@ pub struct ReadGroupSet {
     >,
 }
 /// The read group set search request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchReadGroupSetsRequest {
     /// Restricts this query to read group sets within the given datasets. At least
@@ -2867,7 +2801,6 @@ pub struct SearchReadGroupSetsRequest {
     pub page_size: i32,
 }
 /// The read group set search response.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchReadGroupSetsResponse {
     /// The list of matching read group sets.
@@ -2880,7 +2813,6 @@ pub struct SearchReadGroupSetsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// The read group set import request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ImportReadGroupSetsRequest {
     /// Required. The ID of the dataset these read group sets will belong to. The
@@ -2950,9 +2882,9 @@ pub mod import_read_group_sets_request {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                PartitionStrategy::Unspecified => "PARTITION_STRATEGY_UNSPECIFIED",
-                PartitionStrategy::PerFilePerSample => "PER_FILE_PER_SAMPLE",
-                PartitionStrategy::MergeAll => "MERGE_ALL",
+                Self::Unspecified => "PARTITION_STRATEGY_UNSPECIFIED",
+                Self::PerFilePerSample => "PER_FILE_PER_SAMPLE",
+                Self::MergeAll => "MERGE_ALL",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -2967,7 +2899,6 @@ pub mod import_read_group_sets_request {
     }
 }
 /// The read group set import response.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ImportReadGroupSetsResponse {
     /// IDs of the read group sets that were created.
@@ -2975,7 +2906,6 @@ pub struct ImportReadGroupSetsResponse {
     pub read_group_set_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// The read group set export request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExportReadGroupSetRequest {
     /// Required. The Google Cloud project ID that owns this
@@ -2997,7 +2927,6 @@ pub struct ExportReadGroupSetRequest {
     #[prost(string, repeated, tag = "4")]
     pub reference_names: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateReadGroupSetRequest {
     /// The ID of the read group set to be updated. The caller must have WRITE
@@ -3018,7 +2947,6 @@ pub struct UpdateReadGroupSetRequest {
     #[prost(message, optional, tag = "3")]
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteReadGroupSetRequest {
     /// The ID of the read group set to be deleted. The caller must have WRITE
@@ -3026,14 +2954,12 @@ pub struct DeleteReadGroupSetRequest {
     #[prost(string, tag = "1")]
     pub read_group_set_id: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetReadGroupSetRequest {
     /// The ID of the read group set.
     #[prost(string, tag = "1")]
     pub read_group_set_id: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCoverageBucketsRequest {
     /// Required. The ID of the read group set over which coverage is requested.
@@ -3073,7 +2999,6 @@ pub struct ListCoverageBucketsRequest {
 }
 /// A bucket over which read coverage has been precomputed. A bucket corresponds
 /// to a specific range of the reference sequence.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CoverageBucket {
     /// The genomic coordinate range spanned by this bucket.
@@ -3084,7 +3009,6 @@ pub struct CoverageBucket {
     #[prost(float, tag = "2")]
     pub mean_coverage: f32,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCoverageBucketsResponse {
     /// The length of each coverage bucket in base pairs. Note that buckets at the
@@ -3106,7 +3030,6 @@ pub struct ListCoverageBucketsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// The read search request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchReadsRequest {
     /// The IDs of the read groups sets within which to search for reads. All
@@ -3144,7 +3067,6 @@ pub struct SearchReadsRequest {
     pub page_size: i32,
 }
 /// The read search response.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchReadsResponse {
     /// The list of matching alignments sorted by mapped genomic coordinate,
@@ -3160,7 +3082,6 @@ pub struct SearchReadsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// The stream reads request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StreamReadsRequest {
     /// The Google Cloud project ID which will be billed
@@ -3208,7 +3129,6 @@ pub struct StreamReadsRequest {
     #[prost(int32, tag = "7")]
     pub total_shards: i32,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StreamReadsResponse {
     #[prost(message, repeated, tag = "1")]
@@ -3216,16 +3136,22 @@ pub struct StreamReadsResponse {
 }
 /// Generated server implementations.
 pub mod streaming_read_service_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with StreamingReadServiceServer.
     #[async_trait]
-    pub trait StreamingReadService: Send + Sync + 'static {
+    pub trait StreamingReadService: std::marker::Send + std::marker::Sync + 'static {
         /// Server streaming response type for the StreamReads method.
         type StreamReadsStream: tonic::codegen::tokio_stream::Stream<
                 Item = std::result::Result<super::StreamReadsResponse, tonic::Status>,
             >
-            + Send
+            + std::marker::Send
             + 'static;
         /// Returns a stream of all the reads matching the search request, ordered
         /// by reference name, position, and ID.
@@ -3238,20 +3164,18 @@ pub mod streaming_read_service_server {
         >;
     }
     #[derive(Debug)]
-    pub struct StreamingReadServiceServer<T: StreamingReadService> {
-        inner: _Inner<T>,
+    pub struct StreamingReadServiceServer<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: StreamingReadService> StreamingReadServiceServer<T> {
+    impl<T> StreamingReadServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -3302,8 +3226,8 @@ pub mod streaming_read_service_server {
     for StreamingReadServiceServer<T>
     where
         T: StreamingReadService,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -3315,7 +3239,6 @@ pub mod streaming_read_service_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.genomics.v1.StreamingReadService/StreamReads" => {
                     #[allow(non_camel_case_types)]
@@ -3348,7 +3271,6 @@ pub mod streaming_read_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = StreamReadsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -3367,20 +3289,25 @@ pub mod streaming_read_service_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: StreamingReadService> Clone for StreamingReadServiceServer<T> {
+    impl<T> Clone for StreamingReadServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -3392,28 +3319,25 @@ pub mod streaming_read_service_server {
             }
         }
     }
-    impl<T: StreamingReadService> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: StreamingReadService> tonic::server::NamedService
-    for StreamingReadServiceServer<T> {
-        const NAME: &'static str = "google.genomics.v1.StreamingReadService";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.genomics.v1.StreamingReadService";
+    impl<T> tonic::server::NamedService for StreamingReadServiceServer<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }
 /// Generated server implementations.
 pub mod read_service_v1_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with ReadServiceV1Server.
     #[async_trait]
-    pub trait ReadServiceV1: Send + Sync + 'static {
+    pub trait ReadServiceV1: std::marker::Send + std::marker::Sync + 'static {
         /// Creates read group sets by asynchronously importing the provided
         /// information.
         ///
@@ -3554,20 +3478,18 @@ pub mod read_service_v1_server {
     }
     /// The Readstore. A data store for DNA sequencing Reads.
     #[derive(Debug)]
-    pub struct ReadServiceV1Server<T: ReadServiceV1> {
-        inner: _Inner<T>,
+    pub struct ReadServiceV1Server<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: ReadServiceV1> ReadServiceV1Server<T> {
+    impl<T> ReadServiceV1Server<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -3617,8 +3539,8 @@ pub mod read_service_v1_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for ReadServiceV1Server<T>
     where
         T: ReadServiceV1,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -3630,7 +3552,6 @@ pub mod read_service_v1_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.genomics.v1.ReadServiceV1/ImportReadGroupSets" => {
                     #[allow(non_camel_case_types)]
@@ -3665,7 +3586,6 @@ pub mod read_service_v1_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ImportReadGroupSetsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -3712,7 +3632,6 @@ pub mod read_service_v1_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ExportReadGroupSetSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -3762,7 +3681,6 @@ pub mod read_service_v1_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = SearchReadGroupSetsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -3809,7 +3727,6 @@ pub mod read_service_v1_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = UpdateReadGroupSetSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -3856,7 +3773,6 @@ pub mod read_service_v1_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = DeleteReadGroupSetSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -3903,7 +3819,6 @@ pub mod read_service_v1_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetReadGroupSetSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -3950,7 +3865,6 @@ pub mod read_service_v1_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListCoverageBucketsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -3996,7 +3910,6 @@ pub mod read_service_v1_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = SearchReadsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -4015,20 +3928,25 @@ pub mod read_service_v1_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: ReadServiceV1> Clone for ReadServiceV1Server<T> {
+    impl<T> Clone for ReadServiceV1Server<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -4040,18 +3958,10 @@ pub mod read_service_v1_server {
             }
         }
     }
-    impl<T: ReadServiceV1> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: ReadServiceV1> tonic::server::NamedService for ReadServiceV1Server<T> {
-        const NAME: &'static str = "google.genomics.v1.ReadServiceV1";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.genomics.v1.ReadServiceV1";
+    impl<T> tonic::server::NamedService for ReadServiceV1Server<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }
 /// A reference is a canonical assembled DNA sequence, intended to act as a
@@ -4061,7 +3971,6 @@ pub mod read_service_v1_server {
 ///
 /// For more genomics resource definitions, see [Fundamentals of Google
 /// Genomics](<https://cloud.google.com/genomics/fundamentals-of-google-genomics>)
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Reference {
     /// The server-generated reference ID, unique across all references.
@@ -4098,7 +4007,6 @@ pub struct Reference {
 ///
 /// For more genomics resource definitions, see [Fundamentals of Google
 /// Genomics](<https://cloud.google.com/genomics/fundamentals-of-google-genomics>)
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ReferenceSet {
     /// The server-generated reference set ID, unique across all reference sets.
@@ -4136,7 +4044,6 @@ pub struct ReferenceSet {
     #[prost(string, repeated, tag = "8")]
     pub source_accessions: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchReferenceSetsRequest {
     /// If present, return reference sets for which the
@@ -4163,7 +4070,6 @@ pub struct SearchReferenceSetsRequest {
     #[prost(int32, tag = "5")]
     pub page_size: i32,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchReferenceSetsResponse {
     /// The matching references sets.
@@ -4175,14 +4081,12 @@ pub struct SearchReferenceSetsResponse {
     #[prost(string, tag = "2")]
     pub next_page_token: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetReferenceSetRequest {
     /// The ID of the reference set.
     #[prost(string, tag = "1")]
     pub reference_set_id: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchReferencesRequest {
     /// If present, return references for which the
@@ -4208,7 +4112,6 @@ pub struct SearchReferencesRequest {
     #[prost(int32, tag = "5")]
     pub page_size: i32,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchReferencesResponse {
     /// The matching references.
@@ -4220,14 +4123,12 @@ pub struct SearchReferencesResponse {
     #[prost(string, tag = "2")]
     pub next_page_token: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetReferenceRequest {
     /// The ID of the reference.
     #[prost(string, tag = "1")]
     pub reference_id: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListBasesRequest {
     /// The ID of the reference.
@@ -4251,7 +4152,6 @@ pub struct ListBasesRequest {
     #[prost(int32, tag = "5")]
     pub page_size: i32,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListBasesResponse {
     /// The offset position (0-based) of the given `sequence` from the
@@ -4270,11 +4170,17 @@ pub struct ListBasesResponse {
 }
 /// Generated server implementations.
 pub mod reference_service_v1_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with ReferenceServiceV1Server.
     #[async_trait]
-    pub trait ReferenceServiceV1: Send + Sync + 'static {
+    pub trait ReferenceServiceV1: std::marker::Send + std::marker::Sync + 'static {
         /// Searches for reference sets which match the given criteria.
         ///
         /// For the definitions of references and other genomics resources, see
@@ -4346,20 +4252,18 @@ pub mod reference_service_v1_server {
         >;
     }
     #[derive(Debug)]
-    pub struct ReferenceServiceV1Server<T: ReferenceServiceV1> {
-        inner: _Inner<T>,
+    pub struct ReferenceServiceV1Server<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: ReferenceServiceV1> ReferenceServiceV1Server<T> {
+    impl<T> ReferenceServiceV1Server<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -4409,8 +4313,8 @@ pub mod reference_service_v1_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for ReferenceServiceV1Server<T>
     where
         T: ReferenceServiceV1,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -4422,7 +4326,6 @@ pub mod reference_service_v1_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.genomics.v1.ReferenceServiceV1/SearchReferenceSets" => {
                     #[allow(non_camel_case_types)]
@@ -4457,7 +4360,6 @@ pub mod reference_service_v1_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = SearchReferenceSetsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -4507,7 +4409,6 @@ pub mod reference_service_v1_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetReferenceSetSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -4557,7 +4458,6 @@ pub mod reference_service_v1_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = SearchReferencesSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -4604,7 +4504,6 @@ pub mod reference_service_v1_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetReferenceSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -4650,7 +4549,6 @@ pub mod reference_service_v1_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListBasesSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -4669,20 +4567,25 @@ pub mod reference_service_v1_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: ReferenceServiceV1> Clone for ReferenceServiceV1Server<T> {
+    impl<T> Clone for ReferenceServiceV1Server<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -4694,26 +4597,16 @@ pub mod reference_service_v1_server {
             }
         }
     }
-    impl<T: ReferenceServiceV1> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: ReferenceServiceV1> tonic::server::NamedService
-    for ReferenceServiceV1Server<T> {
-        const NAME: &'static str = "google.genomics.v1.ReferenceServiceV1";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.genomics.v1.ReferenceServiceV1";
+    impl<T> tonic::server::NamedService for ReferenceServiceV1Server<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }
 /// Metadata describes a single piece of variant call metadata.
 /// These data include a top level key and either a single value string (value)
 /// or a list of key-value pairs (info.)
 /// Value and info are mutually exclusive.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VariantSetMetadata {
     /// The top-level key.
@@ -4775,12 +4668,12 @@ pub mod variant_set_metadata {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Type::Unspecified => "TYPE_UNSPECIFIED",
-                Type::Integer => "INTEGER",
-                Type::Float => "FLOAT",
-                Type::Flag => "FLAG",
-                Type::Character => "CHARACTER",
-                Type::String => "STRING",
+                Self::Unspecified => "TYPE_UNSPECIFIED",
+                Self::Integer => "INTEGER",
+                Self::Float => "FLOAT",
+                Self::Flag => "FLAG",
+                Self::Character => "CHARACTER",
+                Self::String => "STRING",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -4802,7 +4695,6 @@ pub mod variant_set_metadata {
 ///
 /// For more genomics resource definitions, see [Fundamentals of Google
 /// Genomics](<https://cloud.google.com/genomics/fundamentals-of-google-genomics>)
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VariantSet {
     /// The dataset to which this variant set belongs.
@@ -4849,7 +4741,6 @@ pub struct VariantSet {
 /// to the occurrence of a SNP named rs1234 in a sample named NA12345. A call
 /// belongs to a call set, which contains related calls typically from one
 /// sample.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Variant {
     /// The ID of the variant set this variant belongs to.
@@ -4909,7 +4800,6 @@ pub struct Variant {
 /// variant. It may include associated information such as quality and phasing.
 /// For example, a call might assign a probability of 0.32 to the occurrence of
 /// a SNP named rs1234 in a call set with the name NA12345.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VariantCall {
     /// The ID of the call set this variant call belongs to.
@@ -4960,7 +4850,6 @@ pub struct VariantCall {
 ///
 /// For more genomics resource definitions, see [Fundamentals of Google
 /// Genomics](<https://cloud.google.com/genomics/fundamentals-of-google-genomics>)
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CallSet {
     /// The server-generated call set ID, unique across all call sets.
@@ -4992,7 +4881,6 @@ pub struct CallSet {
 }
 /// ReferenceBound records an upper bound for the starting coordinate of
 /// variants in a particular reference.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ReferenceBound {
     /// The name of the reference associated with this reference bound.
@@ -5004,7 +4892,6 @@ pub struct ReferenceBound {
     pub upper_bound: i64,
 }
 /// The variant data import request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ImportVariantsRequest {
     /// Required. The variant set to which variant data should be imported.
@@ -5069,9 +4956,9 @@ pub mod import_variants_request {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Format::Unspecified => "FORMAT_UNSPECIFIED",
-                Format::Vcf => "FORMAT_VCF",
-                Format::CompleteGenomics => "FORMAT_COMPLETE_GENOMICS",
+                Self::Unspecified => "FORMAT_UNSPECIFIED",
+                Self::Vcf => "FORMAT_VCF",
+                Self::CompleteGenomics => "FORMAT_COMPLETE_GENOMICS",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -5086,7 +4973,6 @@ pub mod import_variants_request {
     }
 }
 /// The variant data import response.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ImportVariantsResponse {
     /// IDs of the call sets created during the import.
@@ -5094,7 +4980,6 @@ pub struct ImportVariantsResponse {
     pub call_set_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// The CreateVariantSet request
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateVariantSetRequest {
     /// Required. The variant set to be created. Must have a valid `datasetId`.
@@ -5102,7 +4987,6 @@ pub struct CreateVariantSetRequest {
     pub variant_set: ::core::option::Option<VariantSet>,
 }
 /// The variant data export request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExportVariantSetRequest {
     /// Required. The ID of the variant set that contains variant data which
@@ -5157,8 +5041,8 @@ pub mod export_variant_set_request {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Format::Unspecified => "FORMAT_UNSPECIFIED",
-                Format::Bigquery => "FORMAT_BIGQUERY",
+                Self::Unspecified => "FORMAT_UNSPECIFIED",
+                Self::Bigquery => "FORMAT_BIGQUERY",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -5172,7 +5056,6 @@ pub mod export_variant_set_request {
     }
 }
 /// The variant set request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetVariantSetRequest {
     /// Required. The ID of the variant set.
@@ -5180,7 +5063,6 @@ pub struct GetVariantSetRequest {
     pub variant_set_id: ::prost::alloc::string::String,
 }
 /// The search variant sets request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchVariantSetsRequest {
     /// Exactly one dataset ID must be provided here. Only variant sets which
@@ -5198,7 +5080,6 @@ pub struct SearchVariantSetsRequest {
     pub page_size: i32,
 }
 /// The search variant sets response.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchVariantSetsResponse {
     /// The variant sets belonging to the requested dataset.
@@ -5211,14 +5092,12 @@ pub struct SearchVariantSetsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// The delete variant set request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteVariantSetRequest {
     /// The ID of the variant set to be deleted.
     #[prost(string, tag = "1")]
     pub variant_set_id: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateVariantSetRequest {
     /// The ID of the variant to be updated (must already exist).
@@ -5240,7 +5119,6 @@ pub struct UpdateVariantSetRequest {
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
 /// The variant search request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchVariantsRequest {
     /// At most one variant set ID must be provided. Only variants from this
@@ -5284,7 +5162,6 @@ pub struct SearchVariantsRequest {
     pub max_calls: i32,
 }
 /// The variant search response.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchVariantsResponse {
     /// The list of matching Variants.
@@ -5296,14 +5173,12 @@ pub struct SearchVariantsResponse {
     #[prost(string, tag = "2")]
     pub next_page_token: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateVariantRequest {
     /// The variant to be created.
     #[prost(message, optional, tag = "1")]
     pub variant: ::core::option::Option<Variant>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateVariantRequest {
     /// The ID of the variant to be updated.
@@ -5319,21 +5194,18 @@ pub struct UpdateVariantRequest {
     #[prost(message, optional, tag = "3")]
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteVariantRequest {
     /// The ID of the variant to be deleted.
     #[prost(string, tag = "1")]
     pub variant_id: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetVariantRequest {
     /// The ID of the variant.
     #[prost(string, tag = "1")]
     pub variant_id: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MergeVariantsRequest {
     /// The destination variant set.
@@ -5351,7 +5223,6 @@ pub struct MergeVariantsRequest {
     >,
 }
 /// The call set search request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchCallSetsRequest {
     /// Restrict the query to call sets within the given variant sets. At least one
@@ -5373,7 +5244,6 @@ pub struct SearchCallSetsRequest {
     pub page_size: i32,
 }
 /// The call set search response.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchCallSetsResponse {
     /// The list of matching call sets.
@@ -5385,14 +5255,12 @@ pub struct SearchCallSetsResponse {
     #[prost(string, tag = "2")]
     pub next_page_token: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateCallSetRequest {
     /// The call set to be created.
     #[prost(message, optional, tag = "1")]
     pub call_set: ::core::option::Option<CallSet>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateCallSetRequest {
     /// The ID of the call set to be updated.
@@ -5408,14 +5276,12 @@ pub struct UpdateCallSetRequest {
     #[prost(message, optional, tag = "3")]
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteCallSetRequest {
     /// The ID of the call set to be deleted.
     #[prost(string, tag = "1")]
     pub call_set_id: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetCallSetRequest {
     /// The ID of the call set.
@@ -5423,7 +5289,6 @@ pub struct GetCallSetRequest {
     pub call_set_id: ::prost::alloc::string::String,
 }
 /// The stream variants request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StreamVariantsRequest {
     /// The Google Cloud project ID which will be billed
@@ -5450,7 +5315,6 @@ pub struct StreamVariantsRequest {
     #[prost(int64, tag = "6")]
     pub end: i64,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StreamVariantsResponse {
     #[prost(message, repeated, tag = "1")]
@@ -5480,9 +5344,9 @@ impl InfoMergeOperation {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            InfoMergeOperation::Unspecified => "INFO_MERGE_OPERATION_UNSPECIFIED",
-            InfoMergeOperation::IgnoreNew => "IGNORE_NEW",
-            InfoMergeOperation::MoveToCalls => "MOVE_TO_CALLS",
+            Self::Unspecified => "INFO_MERGE_OPERATION_UNSPECIFIED",
+            Self::IgnoreNew => "IGNORE_NEW",
+            Self::MoveToCalls => "MOVE_TO_CALLS",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -5497,16 +5361,22 @@ impl InfoMergeOperation {
 }
 /// Generated server implementations.
 pub mod streaming_variant_service_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with StreamingVariantServiceServer.
     #[async_trait]
-    pub trait StreamingVariantService: Send + Sync + 'static {
+    pub trait StreamingVariantService: std::marker::Send + std::marker::Sync + 'static {
         /// Server streaming response type for the StreamVariants method.
         type StreamVariantsStream: tonic::codegen::tokio_stream::Stream<
                 Item = std::result::Result<super::StreamVariantsResponse, tonic::Status>,
             >
-            + Send
+            + std::marker::Send
             + 'static;
         /// Returns a stream of all the variants matching the search request, ordered
         /// by reference name, position, and ID.
@@ -5519,20 +5389,18 @@ pub mod streaming_variant_service_server {
         >;
     }
     #[derive(Debug)]
-    pub struct StreamingVariantServiceServer<T: StreamingVariantService> {
-        inner: _Inner<T>,
+    pub struct StreamingVariantServiceServer<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: StreamingVariantService> StreamingVariantServiceServer<T> {
+    impl<T> StreamingVariantServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -5583,8 +5451,8 @@ pub mod streaming_variant_service_server {
     for StreamingVariantServiceServer<T>
     where
         T: StreamingVariantService,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -5596,7 +5464,6 @@ pub mod streaming_variant_service_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.genomics.v1.StreamingVariantService/StreamVariants" => {
                     #[allow(non_camel_case_types)]
@@ -5632,7 +5499,6 @@ pub mod streaming_variant_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = StreamVariantsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -5651,20 +5517,25 @@ pub mod streaming_variant_service_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: StreamingVariantService> Clone for StreamingVariantServiceServer<T> {
+    impl<T> Clone for StreamingVariantServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -5676,28 +5547,25 @@ pub mod streaming_variant_service_server {
             }
         }
     }
-    impl<T: StreamingVariantService> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: StreamingVariantService> tonic::server::NamedService
-    for StreamingVariantServiceServer<T> {
-        const NAME: &'static str = "google.genomics.v1.StreamingVariantService";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.genomics.v1.StreamingVariantService";
+    impl<T> tonic::server::NamedService for StreamingVariantServiceServer<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }
 /// Generated server implementations.
 pub mod variant_service_v1_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with VariantServiceV1Server.
     #[async_trait]
-    pub trait VariantServiceV1: Send + Sync + 'static {
+    pub trait VariantServiceV1: std::marker::Send + std::marker::Sync + 'static {
         /// Creates variant data by asynchronously importing the provided information.
         ///
         /// For the definitions of variant sets and other genomics resources, see
@@ -5995,20 +5863,18 @@ pub mod variant_service_v1_server {
         ) -> std::result::Result<tonic::Response<super::CallSet>, tonic::Status>;
     }
     #[derive(Debug)]
-    pub struct VariantServiceV1Server<T: VariantServiceV1> {
-        inner: _Inner<T>,
+    pub struct VariantServiceV1Server<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: VariantServiceV1> VariantServiceV1Server<T> {
+    impl<T> VariantServiceV1Server<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -6058,8 +5924,8 @@ pub mod variant_service_v1_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for VariantServiceV1Server<T>
     where
         T: VariantServiceV1,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -6071,7 +5937,6 @@ pub mod variant_service_v1_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.genomics.v1.VariantServiceV1/ImportVariants" => {
                     #[allow(non_camel_case_types)]
@@ -6103,7 +5968,6 @@ pub mod variant_service_v1_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ImportVariantsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -6150,7 +6014,6 @@ pub mod variant_service_v1_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = CreateVariantSetSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -6197,7 +6060,6 @@ pub mod variant_service_v1_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ExportVariantSetSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -6244,7 +6106,6 @@ pub mod variant_service_v1_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetVariantSetSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -6294,7 +6155,6 @@ pub mod variant_service_v1_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = SearchVariantSetsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -6341,7 +6201,6 @@ pub mod variant_service_v1_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = DeleteVariantSetSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -6388,7 +6247,6 @@ pub mod variant_service_v1_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = UpdateVariantSetSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -6435,7 +6293,6 @@ pub mod variant_service_v1_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = SearchVariantsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -6482,7 +6339,6 @@ pub mod variant_service_v1_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = CreateVariantSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -6529,7 +6385,6 @@ pub mod variant_service_v1_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = UpdateVariantSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -6576,7 +6431,6 @@ pub mod variant_service_v1_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = DeleteVariantSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -6622,7 +6476,6 @@ pub mod variant_service_v1_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetVariantSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -6669,7 +6522,6 @@ pub mod variant_service_v1_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = MergeVariantsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -6716,7 +6568,6 @@ pub mod variant_service_v1_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = SearchCallSetsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -6763,7 +6614,6 @@ pub mod variant_service_v1_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = CreateCallSetSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -6810,7 +6660,6 @@ pub mod variant_service_v1_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = UpdateCallSetSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -6857,7 +6706,6 @@ pub mod variant_service_v1_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = DeleteCallSetSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -6903,7 +6751,6 @@ pub mod variant_service_v1_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetCallSetSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -6922,20 +6769,25 @@ pub mod variant_service_v1_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: VariantServiceV1> Clone for VariantServiceV1Server<T> {
+    impl<T> Clone for VariantServiceV1Server<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -6947,17 +6799,9 @@ pub mod variant_service_v1_server {
             }
         }
     }
-    impl<T: VariantServiceV1> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: VariantServiceV1> tonic::server::NamedService for VariantServiceV1Server<T> {
-        const NAME: &'static str = "google.genomics.v1.VariantServiceV1";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.genomics.v1.VariantServiceV1";
+    impl<T> tonic::server::NamedService for VariantServiceV1Server<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }

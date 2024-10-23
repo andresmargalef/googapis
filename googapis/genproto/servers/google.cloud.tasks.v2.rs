@@ -30,7 +30,6 @@
 ///      if large numbers of tasks suddenly become available to dispatch (due to
 ///      spikes in create task rates, the queue being unpaused, or many tasks
 ///      that are scheduled at the same time).
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct HttpRequest {
     /// Required. The full url path that the request will be sent to.
@@ -103,7 +102,6 @@ pub mod http_request {
     /// If specified, all `Authorization` headers in the
     /// [HttpRequest.headers][google.cloud.tasks.v2.HttpRequest.headers] field will
     /// be overridden.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum AuthorizationHeader {
         /// If specified, an
@@ -191,7 +189,6 @@ pub mod http_request {
 /// temporarily throttle the queue's dispatches. Unlike other types of task
 /// targets, a `429` (Too Many Requests) response from an app handler does not
 /// cause traffic congestion control to throttle the queue.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AppEngineHttpRequest {
     /// The HTTP method to use for the request. The default is POST.
@@ -298,7 +295,6 @@ pub struct AppEngineHttpRequest {
 /// and the following scope:
 ///
 /// `<https://www.googleapis.com/auth/cloud-platform`>
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AppEngineRouting {
     /// App service.
@@ -373,7 +369,6 @@ pub struct AppEngineRouting {
 /// [OAuth token](<https://developers.google.com/identity/protocols/OAuth2>).
 /// This type of authorization should generally only be used when calling Google
 /// APIs hosted on *.googleapis.com.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OAuthToken {
     /// [Service account email](<https://cloud.google.com/iam/docs/service-accounts>)
@@ -395,7 +390,6 @@ pub struct OAuthToken {
 /// This type of authorization can be used for many scenarios, including
 /// calling Cloud Run, or endpoints where you intend to validate the token
 /// yourself.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OidcToken {
     /// [Service account email](<https://cloud.google.com/iam/docs/service-accounts>)
@@ -438,14 +432,14 @@ impl HttpMethod {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            HttpMethod::Unspecified => "HTTP_METHOD_UNSPECIFIED",
-            HttpMethod::Post => "POST",
-            HttpMethod::Get => "GET",
-            HttpMethod::Head => "HEAD",
-            HttpMethod::Put => "PUT",
-            HttpMethod::Delete => "DELETE",
-            HttpMethod::Patch => "PATCH",
-            HttpMethod::Options => "OPTIONS",
+            Self::Unspecified => "HTTP_METHOD_UNSPECIFIED",
+            Self::Post => "POST",
+            Self::Get => "GET",
+            Self::Head => "HEAD",
+            Self::Put => "PUT",
+            Self::Delete => "DELETE",
+            Self::Patch => "PATCH",
+            Self::Options => "OPTIONS",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -466,7 +460,6 @@ impl HttpMethod {
 /// A queue is a container of related tasks. Queues are configured to manage
 /// how those tasks are dispatched. Configurable properties include rate limits,
 /// retry options, queue types, and others.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Queue {
     /// Caller-specified and required in
@@ -630,10 +623,10 @@ pub mod queue {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                State::Unspecified => "STATE_UNSPECIFIED",
-                State::Running => "RUNNING",
-                State::Paused => "PAUSED",
-                State::Disabled => "DISABLED",
+                Self::Unspecified => "STATE_UNSPECIFIED",
+                Self::Running => "RUNNING",
+                Self::Paused => "PAUSED",
+                Self::Disabled => "DISABLED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -656,8 +649,7 @@ pub mod queue {
 /// Note: The debugging command,
 /// [RunTask][google.cloud.tasks.v2.CloudTasks.RunTask], will run a task even if
 /// the queue has reached its [RateLimits][google.cloud.tasks.v2.RateLimits].
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct RateLimits {
     /// The maximum rate at which tasks are dispatched from this queue.
     ///
@@ -728,8 +720,7 @@ pub struct RateLimits {
 /// Retry config.
 ///
 /// These settings determine when a failed task attempt is retried.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct RetryConfig {
     /// Number of attempts per task.
     ///
@@ -835,8 +826,7 @@ pub struct RetryConfig {
 }
 /// Configuration options for writing logs to
 /// [Stackdriver Logging](<https://cloud.google.com/logging/docs/>).
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct StackdriverLoggingConfig {
     /// Specifies the fraction of operations to write to
     /// [Stackdriver Logging](<https://cloud.google.com/logging/docs/>).
@@ -846,7 +836,6 @@ pub struct StackdriverLoggingConfig {
     pub sampling_ratio: f64,
 }
 /// A unit of scheduled work.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Task {
     /// Optionally caller-specified in
@@ -992,9 +981,9 @@ pub mod task {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                View::Unspecified => "VIEW_UNSPECIFIED",
-                View::Basic => "BASIC",
-                View::Full => "FULL",
+                Self::Unspecified => "VIEW_UNSPECIFIED",
+                Self::Basic => "BASIC",
+                Self::Full => "FULL",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1008,7 +997,6 @@ pub mod task {
         }
     }
     /// Required. The message to send to the worker.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum MessageType {
         /// HTTP request that is sent to the App Engine app handler.
@@ -1026,7 +1014,6 @@ pub mod task {
     }
 }
 /// The status of a task attempt.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Attempt {
     /// Output only. The time that this attempt was scheduled.
@@ -1053,7 +1040,6 @@ pub struct Attempt {
 }
 /// Request message for
 /// [ListQueues][google.cloud.tasks.v2.CloudTasks.ListQueues].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListQueuesRequest {
     /// Required. The location name.
@@ -1096,7 +1082,6 @@ pub struct ListQueuesRequest {
 }
 /// Response message for
 /// [ListQueues][google.cloud.tasks.v2.CloudTasks.ListQueues].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListQueuesResponse {
     /// The list of queues.
@@ -1115,7 +1100,6 @@ pub struct ListQueuesResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for [GetQueue][google.cloud.tasks.v2.CloudTasks.GetQueue].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetQueueRequest {
     /// Required. The resource name of the queue. For example:
@@ -1125,7 +1109,6 @@ pub struct GetQueueRequest {
 }
 /// Request message for
 /// [CreateQueue][google.cloud.tasks.v2.CloudTasks.CreateQueue].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateQueueRequest {
     /// Required. The location name in which the queue will be created.
@@ -1145,7 +1128,6 @@ pub struct CreateQueueRequest {
 }
 /// Request message for
 /// [UpdateQueue][google.cloud.tasks.v2.CloudTasks.UpdateQueue].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateQueueRequest {
     /// Required. The queue to create or update.
@@ -1165,7 +1147,6 @@ pub struct UpdateQueueRequest {
 }
 /// Request message for
 /// [DeleteQueue][google.cloud.tasks.v2.CloudTasks.DeleteQueue].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteQueueRequest {
     /// Required. The queue name. For example:
@@ -1175,7 +1156,6 @@ pub struct DeleteQueueRequest {
 }
 /// Request message for
 /// [PurgeQueue][google.cloud.tasks.v2.CloudTasks.PurgeQueue].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PurgeQueueRequest {
     /// Required. The queue name. For example:
@@ -1185,7 +1165,6 @@ pub struct PurgeQueueRequest {
 }
 /// Request message for
 /// [PauseQueue][google.cloud.tasks.v2.CloudTasks.PauseQueue].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PauseQueueRequest {
     /// Required. The queue name. For example:
@@ -1195,7 +1174,6 @@ pub struct PauseQueueRequest {
 }
 /// Request message for
 /// [ResumeQueue][google.cloud.tasks.v2.CloudTasks.ResumeQueue].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ResumeQueueRequest {
     /// Required. The queue name. For example:
@@ -1205,7 +1183,6 @@ pub struct ResumeQueueRequest {
 }
 /// Request message for listing tasks using
 /// [ListTasks][google.cloud.tasks.v2.CloudTasks.ListTasks].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListTasksRequest {
     /// Required. The queue name. For example:
@@ -1250,7 +1227,6 @@ pub struct ListTasksRequest {
 }
 /// Response message for listing tasks using
 /// [ListTasks][google.cloud.tasks.v2.CloudTasks.ListTasks].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListTasksResponse {
     /// The list of tasks.
@@ -1268,7 +1244,6 @@ pub struct ListTasksResponse {
 }
 /// Request message for getting a task using
 /// [GetTask][google.cloud.tasks.v2.CloudTasks.GetTask].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetTaskRequest {
     /// Required. The task name. For example:
@@ -1292,7 +1267,6 @@ pub struct GetTaskRequest {
 }
 /// Request message for
 /// [CreateTask][google.cloud.tasks.v2.CloudTasks.CreateTask].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateTaskRequest {
     /// Required. The queue name. For example:
@@ -1353,7 +1327,6 @@ pub struct CreateTaskRequest {
 }
 /// Request message for deleting a task using
 /// [DeleteTask][google.cloud.tasks.v2.CloudTasks.DeleteTask].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteTaskRequest {
     /// Required. The task name. For example:
@@ -1363,7 +1336,6 @@ pub struct DeleteTaskRequest {
 }
 /// Request message for forcing a task to run now using
 /// [RunTask][google.cloud.tasks.v2.CloudTasks.RunTask].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RunTaskRequest {
     /// Required. The task name. For example:
@@ -1387,11 +1359,17 @@ pub struct RunTaskRequest {
 }
 /// Generated server implementations.
 pub mod cloud_tasks_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with CloudTasksServer.
     #[async_trait]
-    pub trait CloudTasks: Send + Sync + 'static {
+    pub trait CloudTasks: std::marker::Send + std::marker::Sync + 'static {
         /// Lists queues.
         ///
         /// Queues are returned in lexicographical order.
@@ -1629,20 +1607,18 @@ pub mod cloud_tasks_server {
     /// Cloud Tasks allows developers to manage the execution of background
     /// work in their applications.
     #[derive(Debug)]
-    pub struct CloudTasksServer<T: CloudTasks> {
-        inner: _Inner<T>,
+    pub struct CloudTasksServer<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: CloudTasks> CloudTasksServer<T> {
+    impl<T> CloudTasksServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -1692,8 +1668,8 @@ pub mod cloud_tasks_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for CloudTasksServer<T>
     where
         T: CloudTasks,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -1705,7 +1681,6 @@ pub mod cloud_tasks_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.cloud.tasks.v2.CloudTasks/ListQueues" => {
                     #[allow(non_camel_case_types)]
@@ -1736,7 +1711,6 @@ pub mod cloud_tasks_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListQueuesSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1782,7 +1756,6 @@ pub mod cloud_tasks_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetQueueSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1828,7 +1801,6 @@ pub mod cloud_tasks_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = CreateQueueSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1874,7 +1846,6 @@ pub mod cloud_tasks_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = UpdateQueueSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1920,7 +1891,6 @@ pub mod cloud_tasks_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = DeleteQueueSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1966,7 +1936,6 @@ pub mod cloud_tasks_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = PurgeQueueSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -2012,7 +1981,6 @@ pub mod cloud_tasks_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = PauseQueueSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -2058,7 +2026,6 @@ pub mod cloud_tasks_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ResumeQueueSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -2107,7 +2074,6 @@ pub mod cloud_tasks_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetIamPolicySvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -2156,7 +2122,6 @@ pub mod cloud_tasks_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = SetIamPolicySvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -2206,7 +2171,6 @@ pub mod cloud_tasks_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = TestIamPermissionsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -2252,7 +2216,6 @@ pub mod cloud_tasks_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListTasksSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -2298,7 +2261,6 @@ pub mod cloud_tasks_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetTaskSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -2344,7 +2306,6 @@ pub mod cloud_tasks_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = CreateTaskSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -2390,7 +2351,6 @@ pub mod cloud_tasks_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = DeleteTaskSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -2436,7 +2396,6 @@ pub mod cloud_tasks_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = RunTaskSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -2455,20 +2414,25 @@ pub mod cloud_tasks_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: CloudTasks> Clone for CloudTasksServer<T> {
+    impl<T> Clone for CloudTasksServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -2480,17 +2444,9 @@ pub mod cloud_tasks_server {
             }
         }
     }
-    impl<T: CloudTasks> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: CloudTasks> tonic::server::NamedService for CloudTasksServer<T> {
-        const NAME: &'static str = "google.cloud.tasks.v2.CloudTasks";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.cloud.tasks.v2.CloudTasks";
+    impl<T> tonic::server::NamedService for CloudTasksServer<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }

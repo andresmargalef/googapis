@@ -2,7 +2,6 @@
 /// A CrawledUrl resource represents a URL that was crawled during a ScanRun. Web
 /// Security Scanner Service crawls the web applications, following all links
 /// within the scope of sites, to find the URLs to test against.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CrawledUrl {
     /// Output only. The http method of the request that was used to visit the URL, in
@@ -17,7 +16,6 @@ pub struct CrawledUrl {
     pub body: ::prost::alloc::string::String,
 }
 /// Information reported for an outdated library.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OutdatedLibrary {
     /// The name of the outdated library.
@@ -32,7 +30,6 @@ pub struct OutdatedLibrary {
 }
 /// Information regarding any resource causing the vulnerability such
 /// as JavaScript sources, image, audio files, etc.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ViolatingResource {
     /// The MIME type of this resource.
@@ -43,7 +40,6 @@ pub struct ViolatingResource {
     pub resource_url: ::prost::alloc::string::String,
 }
 /// Information about vulnerable request parameters.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VulnerableParameters {
     /// The vulnerable parameter names.
@@ -51,7 +47,6 @@ pub struct VulnerableParameters {
     pub parameter_names: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Information about vulnerable or missing HTTP Headers.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VulnerableHeaders {
     /// List of vulnerable headers.
@@ -64,7 +59,6 @@ pub struct VulnerableHeaders {
 /// Nested message and enum types in `VulnerableHeaders`.
 pub mod vulnerable_headers {
     /// Describes a HTTP Header.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Header {
         /// Header name.
@@ -76,7 +70,6 @@ pub mod vulnerable_headers {
     }
 }
 /// Information reported for an XSS.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Xss {
     /// Stack traces leading to the point where the XSS occurred.
@@ -88,7 +81,6 @@ pub struct Xss {
 }
 /// A Finding resource represents a vulnerability instance identified during a
 /// ScanRun.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Finding {
     /// The resource name of the Finding. The name follows the format of
@@ -218,20 +210,18 @@ pub mod finding {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                FindingType::Unspecified => "FINDING_TYPE_UNSPECIFIED",
-                FindingType::MixedContent => "MIXED_CONTENT",
-                FindingType::OutdatedLibrary => "OUTDATED_LIBRARY",
-                FindingType::RosettaFlash => "ROSETTA_FLASH",
-                FindingType::XssCallback => "XSS_CALLBACK",
-                FindingType::XssError => "XSS_ERROR",
-                FindingType::ClearTextPassword => "CLEAR_TEXT_PASSWORD",
-                FindingType::InvalidContentType => "INVALID_CONTENT_TYPE",
-                FindingType::XssAngularCallback => "XSS_ANGULAR_CALLBACK",
-                FindingType::InvalidHeader => "INVALID_HEADER",
-                FindingType::MisspelledSecurityHeaderName => {
-                    "MISSPELLED_SECURITY_HEADER_NAME"
-                }
-                FindingType::MismatchingSecurityHeaderValues => {
+                Self::Unspecified => "FINDING_TYPE_UNSPECIFIED",
+                Self::MixedContent => "MIXED_CONTENT",
+                Self::OutdatedLibrary => "OUTDATED_LIBRARY",
+                Self::RosettaFlash => "ROSETTA_FLASH",
+                Self::XssCallback => "XSS_CALLBACK",
+                Self::XssError => "XSS_ERROR",
+                Self::ClearTextPassword => "CLEAR_TEXT_PASSWORD",
+                Self::InvalidContentType => "INVALID_CONTENT_TYPE",
+                Self::XssAngularCallback => "XSS_ANGULAR_CALLBACK",
+                Self::InvalidHeader => "INVALID_HEADER",
+                Self::MisspelledSecurityHeaderName => "MISSPELLED_SECURITY_HEADER_NAME",
+                Self::MismatchingSecurityHeaderValues => {
                     "MISMATCHING_SECURITY_HEADER_VALUES"
                 }
             }
@@ -262,8 +252,7 @@ pub mod finding {
 }
 /// A FindingTypeStats resource represents stats regarding a specific FindingType
 /// of Findings under a given ScanRun.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct FindingTypeStats {
     /// The finding type associated with the stats.
     #[prost(enumeration = "finding::FindingType", tag = "1")]
@@ -273,7 +262,6 @@ pub struct FindingTypeStats {
     pub finding_count: i32,
 }
 /// A ScanRun is a output-only resource representing an actual run of the scan.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ScanRun {
     /// The resource name of the ScanRun. The name follows the format of
@@ -348,10 +336,10 @@ pub mod scan_run {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                ExecutionState::Unspecified => "EXECUTION_STATE_UNSPECIFIED",
-                ExecutionState::Queued => "QUEUED",
-                ExecutionState::Scanning => "SCANNING",
-                ExecutionState::Finished => "FINISHED",
+                Self::Unspecified => "EXECUTION_STATE_UNSPECIFIED",
+                Self::Queued => "QUEUED",
+                Self::Scanning => "SCANNING",
+                Self::Finished => "FINISHED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -396,10 +384,10 @@ pub mod scan_run {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                ResultState::Unspecified => "RESULT_STATE_UNSPECIFIED",
-                ResultState::Success => "SUCCESS",
-                ResultState::Error => "ERROR",
-                ResultState::Killed => "KILLED",
+                Self::Unspecified => "RESULT_STATE_UNSPECIFIED",
+                Self::Success => "SUCCESS",
+                Self::Error => "ERROR",
+                Self::Killed => "KILLED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -416,7 +404,6 @@ pub mod scan_run {
 }
 /// A ScanConfig resource contains the configurations to launch a scan.
 /// next id: 12
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ScanConfig {
     /// The resource name of the ScanConfig. The name follows the format of
@@ -461,7 +448,6 @@ pub struct ScanConfig {
 /// Nested message and enum types in `ScanConfig`.
 pub mod scan_config {
     /// Scan authentication configuration.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Authentication {
         /// Required.
@@ -472,7 +458,6 @@ pub mod scan_config {
     /// Nested message and enum types in `Authentication`.
     pub mod authentication {
         /// Describes authentication configuration that uses a Google account.
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct GoogleAccount {
             /// Required. The user name of the Google account.
@@ -484,7 +469,6 @@ pub mod scan_config {
             pub password: ::prost::alloc::string::String,
         }
         /// Describes authentication configuration that uses a custom account.
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct CustomAccount {
             /// Required. The user name of the custom account.
@@ -500,7 +484,6 @@ pub mod scan_config {
         }
         /// Required.
         /// Authentication configuration
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Oneof)]
         pub enum Authentication {
             /// Authentication using a Google account.
@@ -512,8 +495,7 @@ pub mod scan_config {
         }
     }
     /// Scan schedule configuration.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct Schedule {
         /// A timestamp indicates when the next run will be scheduled. The value is
         /// refreshed by the server after each run. If unspecified, it will default
@@ -555,10 +537,10 @@ pub mod scan_config {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                UserAgent::Unspecified => "USER_AGENT_UNSPECIFIED",
-                UserAgent::ChromeLinux => "CHROME_LINUX",
-                UserAgent::ChromeAndroid => "CHROME_ANDROID",
-                UserAgent::SafariIphone => "SAFARI_IPHONE",
+                Self::Unspecified => "USER_AGENT_UNSPECIFIED",
+                Self::ChromeLinux => "CHROME_LINUX",
+                Self::ChromeAndroid => "CHROME_ANDROID",
+                Self::SafariIphone => "SAFARI_IPHONE",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -601,9 +583,9 @@ pub mod scan_config {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                TargetPlatform::Unspecified => "TARGET_PLATFORM_UNSPECIFIED",
-                TargetPlatform::AppEngine => "APP_ENGINE",
-                TargetPlatform::Compute => "COMPUTE",
+                Self::Unspecified => "TARGET_PLATFORM_UNSPECIFIED",
+                Self::AppEngine => "APP_ENGINE",
+                Self::Compute => "COMPUTE",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -618,7 +600,6 @@ pub mod scan_config {
     }
 }
 /// Request for the `CreateScanConfig` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateScanConfigRequest {
     /// Required. The parent resource name where the scan is created, which should be a
@@ -630,7 +611,6 @@ pub struct CreateScanConfigRequest {
     pub scan_config: ::core::option::Option<ScanConfig>,
 }
 /// Request for the `DeleteScanConfig` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteScanConfigRequest {
     /// Required. The resource name of the ScanConfig to be deleted. The name follows the
@@ -639,7 +619,6 @@ pub struct DeleteScanConfigRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request for the `GetScanConfig` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetScanConfigRequest {
     /// Required. The resource name of the ScanConfig to be returned. The name follows the
@@ -648,7 +627,6 @@ pub struct GetScanConfigRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request for the `ListScanConfigs` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListScanConfigsRequest {
     /// Required. The parent resource name, which should be a project resource name in the
@@ -667,7 +645,6 @@ pub struct ListScanConfigsRequest {
     pub page_size: i32,
 }
 /// Request for the `UpdateScanConfigRequest` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateScanConfigRequest {
     /// Required. The ScanConfig to be updated. The name field must be set to identify the
@@ -682,7 +659,6 @@ pub struct UpdateScanConfigRequest {
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
 /// Response for the `ListScanConfigs` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListScanConfigsResponse {
     /// The list of ScanConfigs returned.
@@ -694,7 +670,6 @@ pub struct ListScanConfigsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request for the `StartScanRun` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StartScanRunRequest {
     /// Required. The resource name of the ScanConfig to be used. The name follows the
@@ -703,7 +678,6 @@ pub struct StartScanRunRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request for the `GetScanRun` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetScanRunRequest {
     /// Required. The resource name of the ScanRun to be returned. The name follows the
@@ -713,7 +687,6 @@ pub struct GetScanRunRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request for the `ListScanRuns` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListScanRunsRequest {
     /// Required. The parent resource name, which should be a scan resource name in the
@@ -732,7 +705,6 @@ pub struct ListScanRunsRequest {
     pub page_size: i32,
 }
 /// Response for the `ListScanRuns` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListScanRunsResponse {
     /// The list of ScanRuns returned.
@@ -744,7 +716,6 @@ pub struct ListScanRunsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request for the `StopScanRun` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StopScanRunRequest {
     /// Required. The resource name of the ScanRun to be stopped. The name follows the
@@ -754,7 +725,6 @@ pub struct StopScanRunRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request for the `ListCrawledUrls` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCrawledUrlsRequest {
     /// Required. The parent resource name, which should be a scan run resource name in the
@@ -774,7 +744,6 @@ pub struct ListCrawledUrlsRequest {
     pub page_size: i32,
 }
 /// Response for the `ListCrawledUrls` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCrawledUrlsResponse {
     /// The list of CrawledUrls returned.
@@ -786,7 +755,6 @@ pub struct ListCrawledUrlsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request for the `GetFinding` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetFindingRequest {
     /// Required. The resource name of the Finding to be returned. The name follows the
@@ -796,7 +764,6 @@ pub struct GetFindingRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request for the `ListFindings` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListFindingsRequest {
     /// Required. The parent resource name, which should be a scan run resource name in the
@@ -822,7 +789,6 @@ pub struct ListFindingsRequest {
     pub page_size: i32,
 }
 /// Response for the `ListFindings` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListFindingsResponse {
     /// The list of Findings returned.
@@ -834,7 +800,6 @@ pub struct ListFindingsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request for the `ListFindingTypeStats` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListFindingTypeStatsRequest {
     /// Required. The parent resource name, which should be a scan run resource name in the
@@ -844,7 +809,6 @@ pub struct ListFindingTypeStatsRequest {
     pub parent: ::prost::alloc::string::String,
 }
 /// Response for the `ListFindingTypeStats` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListFindingTypeStatsResponse {
     /// The list of FindingTypeStats returned.
@@ -853,11 +817,17 @@ pub struct ListFindingTypeStatsResponse {
 }
 /// Generated server implementations.
 pub mod web_security_scanner_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with WebSecurityScannerServer.
     #[async_trait]
-    pub trait WebSecurityScanner: Send + Sync + 'static {
+    pub trait WebSecurityScanner: std::marker::Send + std::marker::Sync + 'static {
         /// Creates a new ScanConfig.
         async fn create_scan_config(
             &self,
@@ -944,20 +914,18 @@ pub mod web_security_scanner_server {
     /// applications hosted on Google Cloud Platform. It crawls your application, and
     /// attempts to exercise as many user inputs and event handlers as possible.
     #[derive(Debug)]
-    pub struct WebSecurityScannerServer<T: WebSecurityScanner> {
-        inner: _Inner<T>,
+    pub struct WebSecurityScannerServer<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: WebSecurityScanner> WebSecurityScannerServer<T> {
+    impl<T> WebSecurityScannerServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -1007,8 +975,8 @@ pub mod web_security_scanner_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for WebSecurityScannerServer<T>
     where
         T: WebSecurityScanner,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -1020,7 +988,6 @@ pub mod web_security_scanner_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.cloud.websecurityscanner.v1alpha.WebSecurityScanner/CreateScanConfig" => {
                     #[allow(non_camel_case_types)]
@@ -1055,7 +1022,6 @@ pub mod web_security_scanner_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = CreateScanConfigSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1105,7 +1071,6 @@ pub mod web_security_scanner_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = DeleteScanConfigSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1152,7 +1117,6 @@ pub mod web_security_scanner_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetScanConfigSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1202,7 +1166,6 @@ pub mod web_security_scanner_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListScanConfigsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1252,7 +1215,6 @@ pub mod web_security_scanner_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = UpdateScanConfigSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1299,7 +1261,6 @@ pub mod web_security_scanner_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = StartScanRunSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1346,7 +1307,6 @@ pub mod web_security_scanner_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetScanRunSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1393,7 +1353,6 @@ pub mod web_security_scanner_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListScanRunsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1440,7 +1399,6 @@ pub mod web_security_scanner_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = StopScanRunSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1490,7 +1448,6 @@ pub mod web_security_scanner_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListCrawledUrlsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1537,7 +1494,6 @@ pub mod web_security_scanner_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetFindingSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1584,7 +1540,6 @@ pub mod web_security_scanner_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListFindingsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1634,7 +1589,6 @@ pub mod web_security_scanner_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListFindingTypeStatsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1653,20 +1607,25 @@ pub mod web_security_scanner_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: WebSecurityScanner> Clone for WebSecurityScannerServer<T> {
+    impl<T> Clone for WebSecurityScannerServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -1678,18 +1637,9 @@ pub mod web_security_scanner_server {
             }
         }
     }
-    impl<T: WebSecurityScanner> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: WebSecurityScanner> tonic::server::NamedService
-    for WebSecurityScannerServer<T> {
-        const NAME: &'static str = "google.cloud.websecurityscanner.v1alpha.WebSecurityScanner";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.cloud.websecurityscanner.v1alpha.WebSecurityScanner";
+    impl<T> tonic::server::NamedService for WebSecurityScannerServer<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }

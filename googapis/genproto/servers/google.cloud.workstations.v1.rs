@@ -3,7 +3,6 @@
 ///
 /// Defines a group of workstations in a particular region and the
 /// VPC network they're attached to.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct WorkstationCluster {
     /// Full name of this workstation cluster.
@@ -83,7 +82,6 @@ pub struct WorkstationCluster {
 /// Nested message and enum types in `WorkstationCluster`.
 pub mod workstation_cluster {
     /// Configuration options for private workstation clusters.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct PrivateClusterConfig {
         /// Immutable. Whether Workstations endpoint is private.
@@ -119,7 +117,6 @@ pub mod workstation_cluster {
 /// can also use [Identity and Access Management
 /// (IAM)](<https://cloud.google.com/iam/docs/overview>) rules to grant access to
 /// teams or to individual developers.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct WorkstationConfig {
     /// Full name of this workstation configuration.
@@ -262,7 +259,6 @@ pub struct WorkstationConfig {
 /// Nested message and enum types in `WorkstationConfig`.
 pub mod workstation_config {
     /// Runtime host for a workstation.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Host {
         /// Type of host that will be used for the workstation's runtime.
@@ -272,7 +268,6 @@ pub mod workstation_config {
     /// Nested message and enum types in `Host`.
     pub mod host {
         /// A runtime using a Compute Engine instance.
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct GceInstance {
             /// Optional. The type of machine to use for VM instances—for example,
@@ -391,8 +386,7 @@ pub mod workstation_config {
         /// Nested message and enum types in `GceInstance`.
         pub mod gce_instance {
             /// A set of Compute Engine Shielded instance options.
-            #[allow(clippy::derive_partial_eq_without_eq)]
-            #[derive(Clone, PartialEq, ::prost::Message)]
+            #[derive(Clone, Copy, PartialEq, ::prost::Message)]
             pub struct GceShieldedInstanceConfig {
                 /// Optional. Whether the instance has Secure Boot enabled.
                 #[prost(bool, tag = "1")]
@@ -405,8 +399,7 @@ pub mod workstation_config {
                 pub enable_integrity_monitoring: bool,
             }
             /// A set of Compute Engine Confidential VM instance options.
-            #[allow(clippy::derive_partial_eq_without_eq)]
-            #[derive(Clone, PartialEq, ::prost::Message)]
+            #[derive(Clone, Copy, PartialEq, ::prost::Message)]
             pub struct GceConfidentialInstanceConfig {
                 /// Optional. Whether the instance has confidential compute enabled.
                 #[prost(bool, tag = "1")]
@@ -414,7 +407,6 @@ pub mod workstation_config {
             }
         }
         /// Type of host that will be used for the workstation's runtime.
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Oneof)]
         pub enum Config {
             /// Specifies a Compute Engine instance as the host.
@@ -423,7 +415,6 @@ pub mod workstation_config {
         }
     }
     /// A directory to persist across workstation sessions.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct PersistentDirectory {
         /// Optional. Location of this directory in the running workstation.
@@ -445,7 +436,6 @@ pub mod workstation_config {
         /// detaches when the session ends. If this field is empty, workstations
         /// created with this configuration do not have a persistent home
         /// directory.
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct GceRegionalPersistentDisk {
             /// Optional. The GB capacity of a persistent home directory for each
@@ -521,9 +511,9 @@ pub mod workstation_config {
                 /// (if the ProtoBuf definition does not change) and safe for programmatic use.
                 pub fn as_str_name(&self) -> &'static str {
                     match self {
-                        ReclaimPolicy::Unspecified => "RECLAIM_POLICY_UNSPECIFIED",
-                        ReclaimPolicy::Delete => "DELETE",
-                        ReclaimPolicy::Retain => "RETAIN",
+                        Self::Unspecified => "RECLAIM_POLICY_UNSPECIFIED",
+                        Self::Delete => "DELETE",
+                        Self::Retain => "RETAIN",
                     }
                 }
                 /// Creates an enum from field names used in the ProtoBuf definition.
@@ -538,7 +528,6 @@ pub mod workstation_config {
             }
         }
         /// How a persistent directory should be implemented.
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Oneof)]
         pub enum DirectoryType {
             /// A PersistentDirectory backed by a Compute Engine persistent disk.
@@ -547,7 +536,6 @@ pub mod workstation_config {
         }
     }
     /// A Docker container.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Container {
         /// Optional. A Docker container image that defines a custom environment.
@@ -591,7 +579,6 @@ pub mod workstation_config {
     /// We recommend that you use a separate service account and follow
     /// [Cloud KMS best
     /// practices](<https://cloud.google.com/kms/docs/separation-of-duties>).
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct CustomerEncryptionKey {
         /// Immutable. The name of the Google Cloud KMS encryption key. For example,
@@ -610,7 +597,6 @@ pub mod workstation_config {
         pub kms_key_service_account: ::prost::alloc::string::String,
     }
     /// A readiness check to be performed on a workstation.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ReadinessCheck {
         /// Optional. Path to which the request should be sent.
@@ -622,7 +608,6 @@ pub mod workstation_config {
     }
 }
 /// A single instance of a developer workstation with its own persistent storage.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Workstation {
     /// Full name of this workstation.
@@ -718,11 +703,11 @@ pub mod workstation {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                State::Unspecified => "STATE_UNSPECIFIED",
-                State::Starting => "STATE_STARTING",
-                State::Running => "STATE_RUNNING",
-                State::Stopping => "STATE_STOPPING",
-                State::Stopped => "STATE_STOPPED",
+                Self::Unspecified => "STATE_UNSPECIFIED",
+                Self::Starting => "STATE_STARTING",
+                Self::Running => "STATE_RUNNING",
+                Self::Stopping => "STATE_STOPPING",
+                Self::Stopped => "STATE_STOPPED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -739,7 +724,6 @@ pub mod workstation {
     }
 }
 /// Request message for GetWorkstationCluster.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetWorkstationClusterRequest {
     /// Required. Name of the requested resource.
@@ -747,7 +731,6 @@ pub struct GetWorkstationClusterRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for ListWorkstationClusters.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListWorkstationClustersRequest {
     /// Required. Parent resource name.
@@ -762,7 +745,6 @@ pub struct ListWorkstationClustersRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for ListWorkstationClusters.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListWorkstationClustersResponse {
     /// The requested workstation clusters.
@@ -777,7 +759,6 @@ pub struct ListWorkstationClustersResponse {
     pub unreachable: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Message for creating a CreateWorkstationCluster.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateWorkstationClusterRequest {
     /// Required. Parent resource name.
@@ -795,7 +776,6 @@ pub struct CreateWorkstationClusterRequest {
     pub validate_only: bool,
 }
 /// Request message for UpdateWorkstationCluster.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateWorkstationClusterRequest {
     /// Required. Workstation cluster to update.
@@ -816,7 +796,6 @@ pub struct UpdateWorkstationClusterRequest {
     pub allow_missing: bool,
 }
 /// Message for deleting a workstation cluster.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteWorkstationClusterRequest {
     /// Required. Name of the workstation cluster to delete.
@@ -837,7 +816,6 @@ pub struct DeleteWorkstationClusterRequest {
     pub force: bool,
 }
 /// Request message for GetWorkstationConfig.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetWorkstationConfigRequest {
     /// Required. Name of the requested resource.
@@ -845,7 +823,6 @@ pub struct GetWorkstationConfigRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for ListWorkstationConfigs.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListWorkstationConfigsRequest {
     /// Required. Parent resource name.
@@ -860,7 +837,6 @@ pub struct ListWorkstationConfigsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for ListWorkstationConfigs.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListWorkstationConfigsResponse {
     /// The requested configs.
@@ -875,7 +851,6 @@ pub struct ListWorkstationConfigsResponse {
     pub unreachable: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Request message for ListUsableWorkstationConfigs.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListUsableWorkstationConfigsRequest {
     /// Required. Parent resource name.
@@ -890,7 +865,6 @@ pub struct ListUsableWorkstationConfigsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for ListUsableWorkstationConfigs.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListUsableWorkstationConfigsResponse {
     /// The requested configs.
@@ -905,7 +879,6 @@ pub struct ListUsableWorkstationConfigsResponse {
     pub unreachable: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Message for creating a CreateWorkstationConfig.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateWorkstationConfigRequest {
     /// Required. Parent resource name.
@@ -923,7 +896,6 @@ pub struct CreateWorkstationConfigRequest {
     pub validate_only: bool,
 }
 /// Request message for UpdateWorkstationConfig.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateWorkstationConfigRequest {
     /// Required. Config to update.
@@ -944,7 +916,6 @@ pub struct UpdateWorkstationConfigRequest {
     pub allow_missing: bool,
 }
 /// Message for deleting a workstation configuration.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteWorkstationConfigRequest {
     /// Required. Name of the workstation configuration to delete.
@@ -965,7 +936,6 @@ pub struct DeleteWorkstationConfigRequest {
     pub force: bool,
 }
 /// Request message for GetWorkstation.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetWorkstationRequest {
     /// Required. Name of the requested resource.
@@ -973,7 +943,6 @@ pub struct GetWorkstationRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for ListWorkstations.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListWorkstationsRequest {
     /// Required. Parent resource name.
@@ -988,7 +957,6 @@ pub struct ListWorkstationsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for ListWorkstations.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListWorkstationsResponse {
     /// The requested workstations.
@@ -1003,7 +971,6 @@ pub struct ListWorkstationsResponse {
     pub unreachable: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Request message for ListUsableWorkstations.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListUsableWorkstationsRequest {
     /// Required. Parent resource name.
@@ -1018,7 +985,6 @@ pub struct ListUsableWorkstationsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for ListUsableWorkstations.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListUsableWorkstationsResponse {
     /// The requested workstations.
@@ -1033,7 +999,6 @@ pub struct ListUsableWorkstationsResponse {
     pub unreachable: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Message for creating a CreateWorkstation.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateWorkstationRequest {
     /// Required. Parent resource name.
@@ -1051,7 +1016,6 @@ pub struct CreateWorkstationRequest {
     pub validate_only: bool,
 }
 /// Request message for UpdateWorkstation.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateWorkstationRequest {
     /// Required. Workstation to update.
@@ -1072,7 +1036,6 @@ pub struct UpdateWorkstationRequest {
     pub allow_missing: bool,
 }
 /// Request message for DeleteWorkstation.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteWorkstationRequest {
     /// Required. Name of the workstation to delete.
@@ -1088,7 +1051,6 @@ pub struct DeleteWorkstationRequest {
     pub etag: ::prost::alloc::string::String,
 }
 /// Request message for StartWorkstation.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StartWorkstationRequest {
     /// Required. Name of the workstation to start.
@@ -1104,7 +1066,6 @@ pub struct StartWorkstationRequest {
     pub etag: ::prost::alloc::string::String,
 }
 /// Request message for StopWorkstation.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StopWorkstationRequest {
     /// Required. Name of the workstation to stop.
@@ -1120,7 +1081,6 @@ pub struct StopWorkstationRequest {
     pub etag: ::prost::alloc::string::String,
 }
 /// Request message for GenerateAccessToken.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GenerateAccessTokenRequest {
     /// Required. Name of the workstation for which the access token should be
@@ -1134,8 +1094,7 @@ pub struct GenerateAccessTokenRequest {
 /// Nested message and enum types in `GenerateAccessTokenRequest`.
 pub mod generate_access_token_request {
     /// Desired expiration or lifetime of the access token.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
     pub enum Expiration {
         /// Desired expiration time of the access token. This value must
         /// be at most 24 hours in the future. If a value is not specified, the
@@ -1151,7 +1110,6 @@ pub mod generate_access_token_request {
     }
 }
 /// Response message for GenerateAccessToken.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GenerateAccessTokenResponse {
     /// The generated bearer access token. To use this token, include it in an
@@ -1165,7 +1123,6 @@ pub struct GenerateAccessTokenResponse {
     pub expire_time: ::core::option::Option<::prost_types::Timestamp>,
 }
 /// Metadata for long-running operations.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OperationMetadata {
     /// Output only. Time that the operation was created.
@@ -1193,11 +1150,17 @@ pub struct OperationMetadata {
 }
 /// Generated server implementations.
 pub mod workstations_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with WorkstationsServer.
     #[async_trait]
-    pub trait Workstations: Send + Sync + 'static {
+    pub trait Workstations: std::marker::Send + std::marker::Sync + 'static {
         /// Returns the requested workstation cluster.
         async fn get_workstation_cluster(
             &self,
@@ -1361,20 +1324,18 @@ pub mod workstations_server {
     }
     /// Service for interacting with Cloud Workstations.
     #[derive(Debug)]
-    pub struct WorkstationsServer<T: Workstations> {
-        inner: _Inner<T>,
+    pub struct WorkstationsServer<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: Workstations> WorkstationsServer<T> {
+    impl<T> WorkstationsServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -1424,8 +1385,8 @@ pub mod workstations_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for WorkstationsServer<T>
     where
         T: Workstations,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -1437,7 +1398,6 @@ pub mod workstations_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.cloud.workstations.v1.Workstations/GetWorkstationCluster" => {
                     #[allow(non_camel_case_types)]
@@ -1472,7 +1432,6 @@ pub mod workstations_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetWorkstationClusterSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1524,7 +1483,6 @@ pub mod workstations_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListWorkstationClustersSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1576,7 +1534,6 @@ pub mod workstations_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = CreateWorkstationClusterSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1628,7 +1585,6 @@ pub mod workstations_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = UpdateWorkstationClusterSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1680,7 +1636,6 @@ pub mod workstations_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = DeleteWorkstationClusterSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1727,7 +1682,6 @@ pub mod workstations_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetWorkstationConfigSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1777,7 +1731,6 @@ pub mod workstations_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListWorkstationConfigsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1830,7 +1783,6 @@ pub mod workstations_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListUsableWorkstationConfigsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1882,7 +1834,6 @@ pub mod workstations_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = CreateWorkstationConfigSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1934,7 +1885,6 @@ pub mod workstations_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = UpdateWorkstationConfigSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1986,7 +1936,6 @@ pub mod workstations_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = DeleteWorkstationConfigSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -2032,7 +1981,6 @@ pub mod workstations_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetWorkstationSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -2079,7 +2027,6 @@ pub mod workstations_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListWorkstationsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -2129,7 +2076,6 @@ pub mod workstations_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListUsableWorkstationsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -2176,7 +2122,6 @@ pub mod workstations_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = CreateWorkstationSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -2223,7 +2168,6 @@ pub mod workstations_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = UpdateWorkstationSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -2270,7 +2214,6 @@ pub mod workstations_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = DeleteWorkstationSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -2317,7 +2260,6 @@ pub mod workstations_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = StartWorkstationSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -2363,7 +2305,6 @@ pub mod workstations_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = StopWorkstationSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -2410,7 +2351,6 @@ pub mod workstations_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GenerateAccessTokenSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -2429,20 +2369,25 @@ pub mod workstations_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: Workstations> Clone for WorkstationsServer<T> {
+    impl<T> Clone for WorkstationsServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -2454,17 +2399,9 @@ pub mod workstations_server {
             }
         }
     }
-    impl<T: Workstations> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: Workstations> tonic::server::NamedService for WorkstationsServer<T> {
-        const NAME: &'static str = "google.cloud.workstations.v1.Workstations";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.cloud.workstations.v1.Workstations";
+    impl<T> tonic::server::NamedService for WorkstationsServer<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }

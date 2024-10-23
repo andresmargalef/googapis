@@ -9,7 +9,6 @@
 ///
 /// Customers typically choose a price plan for each Product purchased when
 /// they create an order and can change their plan later, if the product allows.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Order {
     /// Output only. The resource name of the order.
@@ -37,7 +36,6 @@ pub struct Order {
     pub etag: ::prost::alloc::string::String,
 }
 /// A single item within an order.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LineItem {
     /// Output only. Line item ID.
@@ -60,7 +58,6 @@ pub struct LineItem {
     pub change_history: ::prost::alloc::vec::Vec<LineItemChange>,
 }
 /// A change made on a line item.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LineItemChange {
     /// Output only. Change ID.
@@ -105,7 +102,6 @@ pub struct LineItemChange {
     pub update_time: ::core::option::Option<::prost_types::Timestamp>,
 }
 /// Line item information.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LineItemInfo {
     /// Optional. The name of the offer can have either of these formats:
@@ -121,7 +117,6 @@ pub struct LineItemInfo {
     pub subscription: ::core::option::Option<Subscription>,
 }
 /// User-provided Parameters.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Parameter {
     /// Name of the parameter.
@@ -133,7 +128,6 @@ pub struct Parameter {
 }
 /// Nested message and enum types in `Parameter`.
 pub mod parameter {
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Value {
         /// The kind of value.
@@ -143,7 +137,6 @@ pub mod parameter {
     /// Nested message and enum types in `Value`.
     pub mod value {
         /// The kind of value.
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Oneof)]
         pub enum Kind {
             /// Represents an int64 value.
@@ -159,8 +152,7 @@ pub mod parameter {
     }
 }
 /// Subscription information.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct Subscription {
     /// The timestamp when the subscription begins, if applicable.
     #[prost(message, optional, tag = "3")]
@@ -196,13 +188,11 @@ impl LineItemChangeType {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            LineItemChangeType::Unspecified => "LINE_ITEM_CHANGE_TYPE_UNSPECIFIED",
-            LineItemChangeType::Create => "LINE_ITEM_CHANGE_TYPE_CREATE",
-            LineItemChangeType::Update => "LINE_ITEM_CHANGE_TYPE_UPDATE",
-            LineItemChangeType::Cancel => "LINE_ITEM_CHANGE_TYPE_CANCEL",
-            LineItemChangeType::RevertCancellation => {
-                "LINE_ITEM_CHANGE_TYPE_REVERT_CANCELLATION"
-            }
+            Self::Unspecified => "LINE_ITEM_CHANGE_TYPE_UNSPECIFIED",
+            Self::Create => "LINE_ITEM_CHANGE_TYPE_CREATE",
+            Self::Update => "LINE_ITEM_CHANGE_TYPE_UPDATE",
+            Self::Cancel => "LINE_ITEM_CHANGE_TYPE_CANCEL",
+            Self::RevertCancellation => "LINE_ITEM_CHANGE_TYPE_REVERT_CANCELLATION",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -249,15 +239,13 @@ impl LineItemChangeState {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            LineItemChangeState::Unspecified => "LINE_ITEM_CHANGE_STATE_UNSPECIFIED",
-            LineItemChangeState::PendingApproval => {
-                "LINE_ITEM_CHANGE_STATE_PENDING_APPROVAL"
-            }
-            LineItemChangeState::Approved => "LINE_ITEM_CHANGE_STATE_APPROVED",
-            LineItemChangeState::Completed => "LINE_ITEM_CHANGE_STATE_COMPLETED",
-            LineItemChangeState::Rejected => "LINE_ITEM_CHANGE_STATE_REJECTED",
-            LineItemChangeState::Abandoned => "LINE_ITEM_CHANGE_STATE_ABANDONED",
-            LineItemChangeState::Activating => "LINE_ITEM_CHANGE_STATE_ACTIVATING",
+            Self::Unspecified => "LINE_ITEM_CHANGE_STATE_UNSPECIFIED",
+            Self::PendingApproval => "LINE_ITEM_CHANGE_STATE_PENDING_APPROVAL",
+            Self::Approved => "LINE_ITEM_CHANGE_STATE_APPROVED",
+            Self::Completed => "LINE_ITEM_CHANGE_STATE_COMPLETED",
+            Self::Rejected => "LINE_ITEM_CHANGE_STATE_REJECTED",
+            Self::Abandoned => "LINE_ITEM_CHANGE_STATE_ABANDONED",
+            Self::Activating => "LINE_ITEM_CHANGE_STATE_ACTIVATING",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -295,16 +283,10 @@ impl LineItemChangeStateReasonType {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            LineItemChangeStateReasonType::Unspecified => {
-                "LINE_ITEM_CHANGE_STATE_REASON_TYPE_UNSPECIFIED"
-            }
-            LineItemChangeStateReasonType::Expired => {
-                "LINE_ITEM_CHANGE_STATE_REASON_TYPE_EXPIRED"
-            }
-            LineItemChangeStateReasonType::UserCancelled => {
-                "LINE_ITEM_CHANGE_STATE_REASON_TYPE_USER_CANCELLED"
-            }
-            LineItemChangeStateReasonType::SystemCancelled => {
+            Self::Unspecified => "LINE_ITEM_CHANGE_STATE_REASON_TYPE_UNSPECIFIED",
+            Self::Expired => "LINE_ITEM_CHANGE_STATE_REASON_TYPE_EXPIRED",
+            Self::UserCancelled => "LINE_ITEM_CHANGE_STATE_REASON_TYPE_USER_CANCELLED",
+            Self::SystemCancelled => {
                 "LINE_ITEM_CHANGE_STATE_REASON_TYPE_SYSTEM_CANCELLED"
             }
         }
@@ -326,7 +308,6 @@ impl LineItemChangeStateReasonType {
 }
 /// Request message for
 /// [ConsumerProcurementService.PlaceOrder][google.cloud.commerce.consumer.procurement.v1alpha1.ConsumerProcurementService.PlaceOrder].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PlaceOrderRequest {
     /// Required. The resource name of the parent resource.
@@ -351,12 +332,10 @@ pub struct PlaceOrderRequest {
 }
 /// Message stored in the metadata field of the Operation returned by
 /// [ConsumerProcurementService.PlaceOrder][google.cloud.commerce.consumer.procurement.v1alpha1.ConsumerProcurementService.PlaceOrder].
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct PlaceOrderMetadata {}
 /// Request message for
 /// [ConsumerProcurementService.GetOrder][google.cloud.commerce.consumer.procurement.v1alpha1.ConsumerProcurementService.GetOrder]
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetOrderRequest {
     /// Required. The name of the order to retrieve.
@@ -365,7 +344,6 @@ pub struct GetOrderRequest {
 }
 /// Request message for
 /// [ConsumerProcurementService.ListOrders][google.cloud.commerce.consumer.procurement.v1alpha1.ConsumerProcurementService.ListOrders].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListOrdersRequest {
     /// Required. The parent resource to query for orders.
@@ -400,7 +378,6 @@ pub struct ListOrdersRequest {
 }
 /// Response message for
 /// [ConsumerProcurementService.ListOrders][google.cloud.commerce.consumer.procurement.v1alpha1.ConsumerProcurementService.ListOrders].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListOrdersResponse {
     /// The list of orders in this response.
@@ -412,11 +389,17 @@ pub struct ListOrdersResponse {
 }
 /// Generated server implementations.
 pub mod consumer_procurement_service_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with ConsumerProcurementServiceServer.
     #[async_trait]
-    pub trait ConsumerProcurementService: Send + Sync + 'static {
+    pub trait ConsumerProcurementService: std::marker::Send + std::marker::Sync + 'static {
         /// Creates a new
         /// [Order][google.cloud.commerce.consumer.procurement.v1alpha1.Order].
         ///
@@ -466,20 +449,18 @@ pub mod consumer_procurement_service_server {
     /// for charging for the procured item.
     ///
     #[derive(Debug)]
-    pub struct ConsumerProcurementServiceServer<T: ConsumerProcurementService> {
-        inner: _Inner<T>,
+    pub struct ConsumerProcurementServiceServer<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: ConsumerProcurementService> ConsumerProcurementServiceServer<T> {
+    impl<T> ConsumerProcurementServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -530,8 +511,8 @@ pub mod consumer_procurement_service_server {
     for ConsumerProcurementServiceServer<T>
     where
         T: ConsumerProcurementService,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -543,7 +524,6 @@ pub mod consumer_procurement_service_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.cloud.commerce.consumer.procurement.v1alpha1.ConsumerProcurementService/PlaceOrder" => {
                     #[allow(non_camel_case_types)]
@@ -578,7 +558,6 @@ pub mod consumer_procurement_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = PlaceOrderSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -628,7 +607,6 @@ pub mod consumer_procurement_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetOrderSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -678,7 +656,6 @@ pub mod consumer_procurement_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListOrdersSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -697,20 +674,25 @@ pub mod consumer_procurement_service_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: ConsumerProcurementService> Clone for ConsumerProcurementServiceServer<T> {
+    impl<T> Clone for ConsumerProcurementServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -722,18 +704,9 @@ pub mod consumer_procurement_service_server {
             }
         }
     }
-    impl<T: ConsumerProcurementService> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: ConsumerProcurementService> tonic::server::NamedService
-    for ConsumerProcurementServiceServer<T> {
-        const NAME: &'static str = "google.cloud.commerce.consumer.procurement.v1alpha1.ConsumerProcurementService";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.cloud.commerce.consumer.procurement.v1alpha1.ConsumerProcurementService";
+    impl<T> tonic::server::NamedService for ConsumerProcurementServiceServer<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }

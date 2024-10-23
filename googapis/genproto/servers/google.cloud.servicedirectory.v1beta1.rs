@@ -2,7 +2,6 @@
 /// An individual endpoint that provides a
 /// [service][google.cloud.servicedirectory.v1beta1.Service]. The service must
 /// already exist to create an endpoint.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Endpoint {
     /// Immutable. The resource name for the endpoint in the format
@@ -73,7 +72,6 @@ pub struct Endpoint {
 /// A service must exist before
 /// [endpoints][google.cloud.servicedirectory.v1beta1.Endpoint] can be
 /// added to it.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Service {
     /// Immutable. The resource name for the service in the format
@@ -127,7 +125,6 @@ pub struct Service {
 /// The request message for
 /// [LookupService.ResolveService][google.cloud.servicedirectory.v1beta1.LookupService.ResolveService].
 /// Looks up a service by its name, returns the service and its endpoints.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ResolveServiceRequest {
     /// Required. The name of the service to resolve.
@@ -179,7 +176,6 @@ pub struct ResolveServiceRequest {
 }
 /// The response message for
 /// [LookupService.ResolveService][google.cloud.servicedirectory.v1beta1.LookupService.ResolveService].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ResolveServiceResponse {
     #[prost(message, optional, tag = "1")]
@@ -187,11 +183,17 @@ pub struct ResolveServiceResponse {
 }
 /// Generated server implementations.
 pub mod lookup_service_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with LookupServiceServer.
     #[async_trait]
-    pub trait LookupService: Send + Sync + 'static {
+    pub trait LookupService: std::marker::Send + std::marker::Sync + 'static {
         /// Returns a [service][google.cloud.servicedirectory.v1beta1.Service] and its
         /// associated endpoints.
         /// Resolving a service is not considered an active developer method.
@@ -205,20 +207,18 @@ pub mod lookup_service_server {
     }
     /// Service Directory API for looking up service data at runtime.
     #[derive(Debug)]
-    pub struct LookupServiceServer<T: LookupService> {
-        inner: _Inner<T>,
+    pub struct LookupServiceServer<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: LookupService> LookupServiceServer<T> {
+    impl<T> LookupServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -268,8 +268,8 @@ pub mod lookup_service_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for LookupServiceServer<T>
     where
         T: LookupService,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -281,7 +281,6 @@ pub mod lookup_service_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.cloud.servicedirectory.v1beta1.LookupService/ResolveService" => {
                     #[allow(non_camel_case_types)]
@@ -312,7 +311,6 @@ pub mod lookup_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ResolveServiceSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -331,20 +329,25 @@ pub mod lookup_service_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: LookupService> Clone for LookupServiceServer<T> {
+    impl<T> Clone for LookupServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -356,24 +359,15 @@ pub mod lookup_service_server {
             }
         }
     }
-    impl<T: LookupService> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: LookupService> tonic::server::NamedService for LookupServiceServer<T> {
-        const NAME: &'static str = "google.cloud.servicedirectory.v1beta1.LookupService";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.cloud.servicedirectory.v1beta1.LookupService";
+    impl<T> tonic::server::NamedService for LookupServiceServer<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }
 /// A container for [services][google.cloud.servicedirectory.v1beta1.Service].
 /// Namespaces allow administrators to group services together and define
 /// permissions for a collection of services.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Namespace {
     /// Immutable. The resource name for the namespace in the format
@@ -401,7 +395,6 @@ pub struct Namespace {
 }
 /// The request message for
 /// [RegistrationService.CreateNamespace][google.cloud.servicedirectory.v1beta1.RegistrationService.CreateNamespace].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateNamespaceRequest {
     /// Required. The resource name of the project and location the namespace
@@ -423,7 +416,6 @@ pub struct CreateNamespaceRequest {
 }
 /// The request message for
 /// [RegistrationService.ListNamespaces][google.cloud.servicedirectory.v1beta1.RegistrationService.ListNamespaces].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListNamespacesRequest {
     /// Required. The resource name of the project and location whose namespaces
@@ -484,7 +476,6 @@ pub struct ListNamespacesRequest {
 }
 /// The response message for
 /// [RegistrationService.ListNamespaces][google.cloud.servicedirectory.v1beta1.RegistrationService.ListNamespaces].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListNamespacesResponse {
     /// The list of namespaces.
@@ -497,7 +488,6 @@ pub struct ListNamespacesResponse {
 }
 /// The request message for
 /// [RegistrationService.GetNamespace][google.cloud.servicedirectory.v1beta1.RegistrationService.GetNamespace].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetNamespaceRequest {
     /// Required. The name of the namespace to retrieve.
@@ -506,7 +496,6 @@ pub struct GetNamespaceRequest {
 }
 /// The request message for
 /// [RegistrationService.UpdateNamespace][google.cloud.servicedirectory.v1beta1.RegistrationService.UpdateNamespace].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateNamespaceRequest {
     /// Required. The updated namespace.
@@ -518,7 +507,6 @@ pub struct UpdateNamespaceRequest {
 }
 /// The request message for
 /// [RegistrationService.DeleteNamespace][google.cloud.servicedirectory.v1beta1.RegistrationService.DeleteNamespace].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteNamespaceRequest {
     /// Required. The name of the namespace to delete.
@@ -527,7 +515,6 @@ pub struct DeleteNamespaceRequest {
 }
 /// The request message for
 /// [RegistrationService.CreateService][google.cloud.servicedirectory.v1beta1.RegistrationService.CreateService].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateServiceRequest {
     /// Required. The resource name of the namespace this service will belong to.
@@ -548,7 +535,6 @@ pub struct CreateServiceRequest {
 }
 /// The request message for
 /// [RegistrationService.ListServices][google.cloud.servicedirectory.v1beta1.RegistrationService.ListServices].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListServicesRequest {
     /// Required. The resource name of the namespace whose services you'd
@@ -612,7 +598,6 @@ pub struct ListServicesRequest {
 }
 /// The response message for
 /// [RegistrationService.ListServices][google.cloud.servicedirectory.v1beta1.RegistrationService.ListServices].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListServicesResponse {
     /// The list of services.
@@ -627,7 +612,6 @@ pub struct ListServicesResponse {
 /// [RegistrationService.GetService][google.cloud.servicedirectory.v1beta1.RegistrationService.GetService].
 /// This should not be used for looking up a service. Instead, use the `resolve`
 /// method as it contains all endpoints and associated metadata.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetServiceRequest {
     /// Required. The name of the service to get.
@@ -636,7 +620,6 @@ pub struct GetServiceRequest {
 }
 /// The request message for
 /// [RegistrationService.UpdateService][google.cloud.servicedirectory.v1beta1.RegistrationService.UpdateService].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateServiceRequest {
     /// Required. The updated service.
@@ -648,7 +631,6 @@ pub struct UpdateServiceRequest {
 }
 /// The request message for
 /// [RegistrationService.DeleteService][google.cloud.servicedirectory.v1beta1.RegistrationService.DeleteService].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteServiceRequest {
     /// Required. The name of the service to delete.
@@ -657,7 +639,6 @@ pub struct DeleteServiceRequest {
 }
 /// The request message for
 /// [RegistrationService.CreateEndpoint][google.cloud.servicedirectory.v1beta1.RegistrationService.CreateEndpoint].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateEndpointRequest {
     /// Required. The resource name of the service that this endpoint provides.
@@ -678,7 +659,6 @@ pub struct CreateEndpointRequest {
 }
 /// The request message for
 /// [RegistrationService.ListEndpoints][google.cloud.servicedirectory.v1beta1.RegistrationService.ListEndpoints].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListEndpointsRequest {
     /// Required. The resource name of the service whose endpoints you'd like to
@@ -744,7 +724,6 @@ pub struct ListEndpointsRequest {
 }
 /// The response message for
 /// [RegistrationService.ListEndpoints][google.cloud.servicedirectory.v1beta1.RegistrationService.ListEndpoints].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListEndpointsResponse {
     /// The list of endpoints.
@@ -759,7 +738,6 @@ pub struct ListEndpointsResponse {
 /// [RegistrationService.GetEndpoint][google.cloud.servicedirectory.v1beta1.RegistrationService.GetEndpoint].
 /// This should not be used to lookup endpoints at runtime. Instead, use
 /// the `resolve` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetEndpointRequest {
     /// Required. The name of the endpoint to get.
@@ -768,7 +746,6 @@ pub struct GetEndpointRequest {
 }
 /// The request message for
 /// [RegistrationService.UpdateEndpoint][google.cloud.servicedirectory.v1beta1.RegistrationService.UpdateEndpoint].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateEndpointRequest {
     /// Required. The updated endpoint.
@@ -780,7 +757,6 @@ pub struct UpdateEndpointRequest {
 }
 /// The request message for
 /// [RegistrationService.DeleteEndpoint][google.cloud.servicedirectory.v1beta1.RegistrationService.DeleteEndpoint].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteEndpointRequest {
     /// Required. The name of the endpoint to delete.
@@ -789,11 +765,17 @@ pub struct DeleteEndpointRequest {
 }
 /// Generated server implementations.
 pub mod registration_service_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with RegistrationServiceServer.
     #[async_trait]
-    pub trait RegistrationService: Send + Sync + 'static {
+    pub trait RegistrationService: std::marker::Send + std::marker::Sync + 'static {
         /// Creates a namespace, and returns the new namespace.
         async fn create_namespace(
             &self,
@@ -930,20 +912,18 @@ pub mod registration_service_server {
     /// resources, named
     /// `projects/*/locations/*/namespaces/*/services/*/endpoints/*`.
     #[derive(Debug)]
-    pub struct RegistrationServiceServer<T: RegistrationService> {
-        inner: _Inner<T>,
+    pub struct RegistrationServiceServer<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: RegistrationService> RegistrationServiceServer<T> {
+    impl<T> RegistrationServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -993,8 +973,8 @@ pub mod registration_service_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for RegistrationServiceServer<T>
     where
         T: RegistrationService,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -1006,7 +986,6 @@ pub mod registration_service_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.cloud.servicedirectory.v1beta1.RegistrationService/CreateNamespace" => {
                     #[allow(non_camel_case_types)]
@@ -1041,7 +1020,6 @@ pub mod registration_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = CreateNamespaceSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1088,7 +1066,6 @@ pub mod registration_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListNamespacesSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1135,7 +1112,6 @@ pub mod registration_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetNamespaceSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1185,7 +1161,6 @@ pub mod registration_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = UpdateNamespaceSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1235,7 +1210,6 @@ pub mod registration_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = DeleteNamespaceSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1282,7 +1256,6 @@ pub mod registration_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = CreateServiceSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1329,7 +1302,6 @@ pub mod registration_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListServicesSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1376,7 +1348,6 @@ pub mod registration_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetServiceSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1423,7 +1394,6 @@ pub mod registration_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = UpdateServiceSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1470,7 +1440,6 @@ pub mod registration_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = DeleteServiceSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1517,7 +1486,6 @@ pub mod registration_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = CreateEndpointSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1564,7 +1532,6 @@ pub mod registration_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListEndpointsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1611,7 +1578,6 @@ pub mod registration_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetEndpointSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1658,7 +1624,6 @@ pub mod registration_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = UpdateEndpointSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1705,7 +1670,6 @@ pub mod registration_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = DeleteEndpointSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1755,7 +1719,6 @@ pub mod registration_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetIamPolicySvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1805,7 +1768,6 @@ pub mod registration_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = SetIamPolicySvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1858,7 +1820,6 @@ pub mod registration_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = TestIamPermissionsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1877,20 +1838,25 @@ pub mod registration_service_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: RegistrationService> Clone for RegistrationServiceServer<T> {
+    impl<T> Clone for RegistrationServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -1902,18 +1868,9 @@ pub mod registration_service_server {
             }
         }
     }
-    impl<T: RegistrationService> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: RegistrationService> tonic::server::NamedService
-    for RegistrationServiceServer<T> {
-        const NAME: &'static str = "google.cloud.servicedirectory.v1beta1.RegistrationService";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.cloud.servicedirectory.v1beta1.RegistrationService";
+    impl<T> tonic::server::NamedService for RegistrationServiceServer<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }

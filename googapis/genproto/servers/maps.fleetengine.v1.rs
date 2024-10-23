@@ -2,8 +2,7 @@
 /// Traffic density indicator on a contiguous segment of a path. Given a path
 /// with points P_0, P_1, ... , P_N (zero-based index), the SpeedReadingInterval
 /// defines an interval and describes its traffic using the following categories.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct SpeedReadingInterval {
     /// The starting index of this interval in the path.
     /// In JSON, when the index is 0, the field will appear to be unpopulated.
@@ -49,10 +48,10 @@ pub mod speed_reading_interval {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Speed::Unspecified => "SPEED_UNSPECIFIED",
-                Speed::Normal => "NORMAL",
-                Speed::Slow => "SLOW",
-                Speed::TrafficJam => "TRAFFIC_JAM",
+                Self::Unspecified => "SPEED_UNSPECIFIED",
+                Self::Normal => "NORMAL",
+                Self::Slow => "SLOW",
+                Self::TrafficJam => "TRAFFIC_JAM",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -68,7 +67,6 @@ pub mod speed_reading_interval {
     }
 }
 /// Traffic density along a Vehicle's path.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ConsumableTrafficPolyline {
     /// Traffic speed along the path from the previous waypoint to the current
@@ -84,7 +82,6 @@ pub struct ConsumableTrafficPolyline {
 }
 /// Deprecated: TerminalPoints are no longer supported in Fleet Engine. Use
 /// `TerminalLocation.point` instead.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TerminalPointId {
     /// Deprecated.
@@ -98,7 +95,6 @@ pub struct TerminalPointId {
 /// Nested message and enum types in `TerminalPointId`.
 pub mod terminal_point_id {
     /// Deprecated.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Id {
         /// Deprecated.
@@ -110,7 +106,6 @@ pub mod terminal_point_id {
     }
 }
 /// Describes the location of a waypoint.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TerminalLocation {
     /// Required. Denotes the location of a trip waypoint.
@@ -135,7 +130,6 @@ pub struct TerminalLocation {
 }
 /// Describes a stopping point on a vehicle's route or an ending point on a
 /// vehicle's trip.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TripWaypoint {
     /// The location of this waypoint.
@@ -179,7 +173,6 @@ pub struct TripWaypoint {
 }
 /// Describes a vehicle attribute as a key-value pair. The "key:value" string
 /// length cannot exceed 256 characters.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VehicleAttribute {
     /// The attribute's key. Keys may not contain the colon character (:).
@@ -197,7 +190,6 @@ pub struct VehicleAttribute {
 /// Nested message and enum types in `VehicleAttribute`.
 pub mod vehicle_attribute {
     /// The attribute's value, can be in string, bool, or double type.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum VehicleAttributeValue {
         /// String typed attribute value.
@@ -218,8 +210,7 @@ pub mod vehicle_attribute {
     }
 }
 /// The location, speed, and heading of a vehicle at a point in time.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct VehicleLocation {
     /// The location of the vehicle.
     /// When it is sent to Fleet Engine, the vehicle's location is a GPS location.
@@ -346,9 +337,9 @@ impl TripType {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            TripType::UnknownTripType => "UNKNOWN_TRIP_TYPE",
-            TripType::Shared => "SHARED",
-            TripType::Exclusive => "EXCLUSIVE",
+            Self::UnknownTripType => "UNKNOWN_TRIP_TYPE",
+            Self::Shared => "SHARED",
+            Self::Exclusive => "EXCLUSIVE",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -381,10 +372,10 @@ impl WaypointType {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            WaypointType::UnknownWaypointType => "UNKNOWN_WAYPOINT_TYPE",
-            WaypointType::PickupWaypointType => "PICKUP_WAYPOINT_TYPE",
-            WaypointType::DropOffWaypointType => "DROP_OFF_WAYPOINT_TYPE",
-            WaypointType::IntermediateDestinationWaypointType => {
+            Self::UnknownWaypointType => "UNKNOWN_WAYPOINT_TYPE",
+            Self::PickupWaypointType => "PICKUP_WAYPOINT_TYPE",
+            Self::DropOffWaypointType => "DROP_OFF_WAYPOINT_TYPE",
+            Self::IntermediateDestinationWaypointType => {
                 "INTERMEDIATE_DESTINATION_WAYPOINT_TYPE"
             }
         }
@@ -421,9 +412,9 @@ impl PolylineFormatType {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            PolylineFormatType::UnknownFormatType => "UNKNOWN_FORMAT_TYPE",
-            PolylineFormatType::LatLngListType => "LAT_LNG_LIST_TYPE",
-            PolylineFormatType::EncodedPolylineType => "ENCODED_POLYLINE_TYPE",
+            Self::UnknownFormatType => "UNKNOWN_FORMAT_TYPE",
+            Self::LatLngListType => "LAT_LNG_LIST_TYPE",
+            Self::EncodedPolylineType => "ENCODED_POLYLINE_TYPE",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -459,11 +450,11 @@ impl NavigationStatus {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            NavigationStatus::UnknownNavigationStatus => "UNKNOWN_NAVIGATION_STATUS",
-            NavigationStatus::NoGuidance => "NO_GUIDANCE",
-            NavigationStatus::EnrouteToDestination => "ENROUTE_TO_DESTINATION",
-            NavigationStatus::OffRoute => "OFF_ROUTE",
-            NavigationStatus::ArrivedAtDestination => "ARRIVED_AT_DESTINATION",
+            Self::UnknownNavigationStatus => "UNKNOWN_NAVIGATION_STATUS",
+            Self::NoGuidance => "NO_GUIDANCE",
+            Self::EnrouteToDestination => "ENROUTE_TO_DESTINATION",
+            Self::OffRoute => "OFF_ROUTE",
+            Self::ArrivedAtDestination => "ARRIVED_AT_DESTINATION",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -515,17 +506,15 @@ impl LocationSensor {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            LocationSensor::UnknownSensor => "UNKNOWN_SENSOR",
-            LocationSensor::Gps => "GPS",
-            LocationSensor::Network => "NETWORK",
-            LocationSensor::Passive => "PASSIVE",
-            LocationSensor::RoadSnappedLocationProvider => {
-                "ROAD_SNAPPED_LOCATION_PROVIDER"
-            }
-            LocationSensor::CustomerSuppliedLocation => "CUSTOMER_SUPPLIED_LOCATION",
-            LocationSensor::FleetEngineLocation => "FLEET_ENGINE_LOCATION",
-            LocationSensor::FusedLocationProvider => "FUSED_LOCATION_PROVIDER",
-            LocationSensor::CoreLocation => "CORE_LOCATION",
+            Self::UnknownSensor => "UNKNOWN_SENSOR",
+            Self::Gps => "GPS",
+            Self::Network => "NETWORK",
+            Self::Passive => "PASSIVE",
+            Self::RoadSnappedLocationProvider => "ROAD_SNAPPED_LOCATION_PROVIDER",
+            Self::CustomerSuppliedLocation => "CUSTOMER_SUPPLIED_LOCATION",
+            Self::FleetEngineLocation => "FLEET_ENGINE_LOCATION",
+            Self::FusedLocationProvider => "FUSED_LOCATION_PROVIDER",
+            Self::CoreLocation => "CORE_LOCATION",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -545,7 +534,6 @@ impl LocationSensor {
     }
 }
 /// A RequestHeader contains fields common to all Fleet Engine RPC requests.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RequestHeader {
     /// The BCP-47 language code, such as en-US or sr-Latn. For more information,
@@ -630,10 +618,10 @@ pub mod request_header {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                SdkType::Unspecified => "SDK_TYPE_UNSPECIFIED",
-                SdkType::Consumer => "CONSUMER",
-                SdkType::Driver => "DRIVER",
-                SdkType::Javascript => "JAVASCRIPT",
+                Self::Unspecified => "SDK_TYPE_UNSPECIFIED",
+                Self::Consumer => "CONSUMER",
+                Self::Driver => "DRIVER",
+                Self::Javascript => "JAVASCRIPT",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -677,10 +665,10 @@ pub mod request_header {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Platform::Unspecified => "PLATFORM_UNSPECIFIED",
-                Platform::Android => "ANDROID",
-                Platform::Ios => "IOS",
-                Platform::Web => "WEB",
+                Self::Unspecified => "PLATFORM_UNSPECIFIED",
+                Self::Android => "ANDROID",
+                Self::Ios => "IOS",
+                Self::Web => "WEB",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -696,7 +684,6 @@ pub mod request_header {
     }
 }
 /// Trip metadata.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Trip {
     /// Output only. In the format "providers/{provider}/trips/{trip}"
@@ -876,8 +863,7 @@ pub struct Trip {
     pub view: i32,
 }
 /// The actual location where a stop (pickup/dropoff) happened.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct StopLocation {
     /// Required. Denotes the actual location.
     #[prost(message, optional, tag = "1")]
@@ -924,19 +910,19 @@ impl TripStatus {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            TripStatus::UnknownTripStatus => "UNKNOWN_TRIP_STATUS",
-            TripStatus::New => "NEW",
-            TripStatus::EnrouteToPickup => "ENROUTE_TO_PICKUP",
-            TripStatus::ArrivedAtPickup => "ARRIVED_AT_PICKUP",
-            TripStatus::ArrivedAtIntermediateDestination => {
+            Self::UnknownTripStatus => "UNKNOWN_TRIP_STATUS",
+            Self::New => "NEW",
+            Self::EnrouteToPickup => "ENROUTE_TO_PICKUP",
+            Self::ArrivedAtPickup => "ARRIVED_AT_PICKUP",
+            Self::ArrivedAtIntermediateDestination => {
                 "ARRIVED_AT_INTERMEDIATE_DESTINATION"
             }
-            TripStatus::EnrouteToIntermediateDestination => {
+            Self::EnrouteToIntermediateDestination => {
                 "ENROUTE_TO_INTERMEDIATE_DESTINATION"
             }
-            TripStatus::EnrouteToDropoff => "ENROUTE_TO_DROPOFF",
-            TripStatus::Complete => "COMPLETE",
-            TripStatus::Canceled => "CANCELED",
+            Self::EnrouteToDropoff => "ENROUTE_TO_DROPOFF",
+            Self::Complete => "COMPLETE",
+            Self::Canceled => "CANCELED",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -983,14 +969,12 @@ impl BillingPlatformIdentifier {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            BillingPlatformIdentifier::Unspecified => {
-                "BILLING_PLATFORM_IDENTIFIER_UNSPECIFIED"
-            }
-            BillingPlatformIdentifier::Server => "SERVER",
-            BillingPlatformIdentifier::Web => "WEB",
-            BillingPlatformIdentifier::Android => "ANDROID",
-            BillingPlatformIdentifier::Ios => "IOS",
-            BillingPlatformIdentifier::Others => "OTHERS",
+            Self::Unspecified => "BILLING_PLATFORM_IDENTIFIER_UNSPECIFIED",
+            Self::Server => "SERVER",
+            Self::Web => "WEB",
+            Self::Android => "ANDROID",
+            Self::Ios => "IOS",
+            Self::Others => "OTHERS",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1030,9 +1014,9 @@ impl TripView {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            TripView::Unspecified => "TRIP_VIEW_UNSPECIFIED",
-            TripView::Sdk => "SDK",
-            TripView::JourneySharingV1s => "JOURNEY_SHARING_V1S",
+            Self::Unspecified => "TRIP_VIEW_UNSPECIFIED",
+            Self::Sdk => "SDK",
+            Self::JourneySharingV1s => "JOURNEY_SHARING_V1S",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1046,7 +1030,6 @@ impl TripView {
     }
 }
 /// CreateTrip request message.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateTripRequest {
     /// The standard Fleet Engine request header.
@@ -1108,7 +1091,6 @@ pub struct CreateTripRequest {
     pub trip: ::core::option::Option<Trip>,
 }
 /// GetTrip request message.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetTripRequest {
     /// The standard Fleet Engine request header.
@@ -1162,7 +1144,6 @@ pub struct GetTripRequest {
     >,
 }
 /// ReportBillableTrip request message.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ReportBillableTripRequest {
     /// Required. Must be in the format
@@ -1220,8 +1201,8 @@ pub mod report_billable_trip_request {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                SolutionType::Unspecified => "SOLUTION_TYPE_UNSPECIFIED",
-                SolutionType::OnDemandRidesharingAndDeliveries => {
+                Self::Unspecified => "SOLUTION_TYPE_UNSPECIFIED",
+                Self::OnDemandRidesharingAndDeliveries => {
                     "ON_DEMAND_RIDESHARING_AND_DELIVERIES"
                 }
             }
@@ -1239,7 +1220,6 @@ pub mod report_billable_trip_request {
     }
 }
 /// UpdateTrip request message.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateTripRequest {
     /// The standard Fleet Engine request header.
@@ -1300,7 +1280,6 @@ pub struct UpdateTripRequest {
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
 /// SearchTrips request message.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchTripsRequest {
     /// The standard Fleet Engine request header.
@@ -1338,7 +1317,6 @@ pub struct SearchTripsRequest {
     pub minimum_staleness: ::core::option::Option<::prost_types::Duration>,
 }
 /// SearchTrips response message.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchTripsResponse {
     /// The list of trips for the requested vehicle.
@@ -1352,11 +1330,17 @@ pub struct SearchTripsResponse {
 }
 /// Generated server implementations.
 pub mod trip_service_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with TripServiceServer.
     #[async_trait]
-    pub trait TripService: Send + Sync + 'static {
+    pub trait TripService: std::marker::Send + std::marker::Sync + 'static {
         /// Creates a trip in the Fleet Engine and returns the new trip.
         async fn create_trip(
             &self,
@@ -1388,20 +1372,18 @@ pub mod trip_service_server {
     }
     /// Trip management service.
     #[derive(Debug)]
-    pub struct TripServiceServer<T: TripService> {
-        inner: _Inner<T>,
+    pub struct TripServiceServer<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: TripService> TripServiceServer<T> {
+    impl<T> TripServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -1451,8 +1433,8 @@ pub mod trip_service_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for TripServiceServer<T>
     where
         T: TripService,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -1464,7 +1446,6 @@ pub mod trip_service_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/maps.fleetengine.v1.TripService/CreateTrip" => {
                     #[allow(non_camel_case_types)]
@@ -1495,7 +1476,6 @@ pub mod trip_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = CreateTripSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1541,7 +1521,6 @@ pub mod trip_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetTripSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1588,7 +1567,6 @@ pub mod trip_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ReportBillableTripSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1634,7 +1612,6 @@ pub mod trip_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = SearchTripsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1680,7 +1657,6 @@ pub mod trip_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = UpdateTripSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1699,20 +1675,25 @@ pub mod trip_service_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: TripService> Clone for TripServiceServer<T> {
+    impl<T> Clone for TripServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -1724,22 +1705,13 @@ pub mod trip_service_server {
             }
         }
     }
-    impl<T: TripService> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: TripService> tonic::server::NamedService for TripServiceServer<T> {
-        const NAME: &'static str = "maps.fleetengine.v1.TripService";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "maps.fleetengine.v1.TripService";
+    impl<T> tonic::server::NamedService for TripServiceServer<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }
 /// Vehicle metadata.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Vehicle {
     /// Output only. The unique name for this vehicle.
@@ -1851,8 +1823,7 @@ pub struct Vehicle {
 /// Nested message and enum types in `Vehicle`.
 pub mod vehicle {
     /// The type of vehicle.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct VehicleType {
         /// Vehicle type category
         #[prost(enumeration = "vehicle_type::Category", tag = "1")]
@@ -1897,13 +1868,13 @@ pub mod vehicle {
             /// (if the ProtoBuf definition does not change) and safe for programmatic use.
             pub fn as_str_name(&self) -> &'static str {
                 match self {
-                    Category::Unknown => "UNKNOWN",
-                    Category::Auto => "AUTO",
-                    Category::Taxi => "TAXI",
-                    Category::Truck => "TRUCK",
-                    Category::TwoWheeler => "TWO_WHEELER",
-                    Category::Bicycle => "BICYCLE",
-                    Category::Pedestrian => "PEDESTRIAN",
+                    Self::Unknown => "UNKNOWN",
+                    Self::Auto => "AUTO",
+                    Self::Taxi => "TAXI",
+                    Self::Truck => "TRUCK",
+                    Self::TwoWheeler => "TWO_WHEELER",
+                    Self::Bicycle => "BICYCLE",
+                    Self::Pedestrian => "PEDESTRIAN",
                 }
             }
             /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1923,8 +1894,7 @@ pub mod vehicle {
     }
 }
 /// Information about the device's battery.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct BatteryInfo {
     /// Status of the battery, whether full or charging etc.
     #[prost(enumeration = "BatteryStatus", tag = "1")]
@@ -1937,8 +1907,7 @@ pub struct BatteryInfo {
     pub battery_percentage: f32,
 }
 /// Information about various settings on the mobile device.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct DeviceSettings {
     /// How location features are set to behave on the device when battery saver is
     /// on.
@@ -1957,7 +1926,6 @@ pub struct DeviceSettings {
 /// The license plate information of the Vehicle.  To avoid storing
 /// personally-identifiable information, only the minimum information
 /// about the license plate is stored as part of the entity.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LicensePlate {
     /// Required. CLDR Country/Region Code.  For example, `US` for United States,
@@ -1975,7 +1943,6 @@ pub struct LicensePlate {
 }
 /// Describes how clients should color one portion of the polyline along the
 /// route.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VisualTrafficReportPolylineRendering {
     /// Optional. Road stretches that should be rendered along the polyline.
@@ -1992,8 +1959,7 @@ pub struct VisualTrafficReportPolylineRendering {
 /// Nested message and enum types in `VisualTrafficReportPolylineRendering`.
 pub mod visual_traffic_report_polyline_rendering {
     /// One road stretch that should be rendered.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct RoadStretch {
         /// Required. The style to apply.
         #[prost(enumeration = "road_stretch::Style", tag = "1")]
@@ -2036,9 +2002,9 @@ pub mod visual_traffic_report_polyline_rendering {
             /// (if the ProtoBuf definition does not change) and safe for programmatic use.
             pub fn as_str_name(&self) -> &'static str {
                 match self {
-                    Style::Unspecified => "STYLE_UNSPECIFIED",
-                    Style::SlowerTraffic => "SLOWER_TRAFFIC",
-                    Style::TrafficJam => "TRAFFIC_JAM",
+                    Self::Unspecified => "STYLE_UNSPECIFIED",
+                    Self::SlowerTraffic => "SLOWER_TRAFFIC",
+                    Self::TrafficJam => "TRAFFIC_JAM",
                 }
             }
             /// Creates an enum from field names used in the ProtoBuf definition.
@@ -2054,7 +2020,6 @@ pub mod visual_traffic_report_polyline_rendering {
     }
 }
 /// Traffic conditions along the expected vehicle route.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TrafficPolylineData {
     /// A polyline rendering of how fast traffic is for all regions along
@@ -2081,9 +2046,9 @@ impl VehicleState {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            VehicleState::UnknownVehicleState => "UNKNOWN_VEHICLE_STATE",
-            VehicleState::Offline => "OFFLINE",
-            VehicleState::Online => "ONLINE",
+            Self::UnknownVehicleState => "UNKNOWN_VEHICLE_STATE",
+            Self::Offline => "OFFLINE",
+            Self::Online => "ONLINE",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -2127,20 +2092,16 @@ impl LocationPowerSaveMode {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            LocationPowerSaveMode::UnknownLocationPowerSaveMode => {
-                "UNKNOWN_LOCATION_POWER_SAVE_MODE"
-            }
-            LocationPowerSaveMode::LocationModeNoChange => "LOCATION_MODE_NO_CHANGE",
-            LocationPowerSaveMode::LocationModeGpsDisabledWhenScreenOff => {
+            Self::UnknownLocationPowerSaveMode => "UNKNOWN_LOCATION_POWER_SAVE_MODE",
+            Self::LocationModeNoChange => "LOCATION_MODE_NO_CHANGE",
+            Self::LocationModeGpsDisabledWhenScreenOff => {
                 "LOCATION_MODE_GPS_DISABLED_WHEN_SCREEN_OFF"
             }
-            LocationPowerSaveMode::LocationModeAllDisabledWhenScreenOff => {
+            Self::LocationModeAllDisabledWhenScreenOff => {
                 "LOCATION_MODE_ALL_DISABLED_WHEN_SCREEN_OFF"
             }
-            LocationPowerSaveMode::LocationModeForegroundOnly => {
-                "LOCATION_MODE_FOREGROUND_ONLY"
-            }
-            LocationPowerSaveMode::LocationModeThrottleRequestsWhenScreenOff => {
+            Self::LocationModeForegroundOnly => "LOCATION_MODE_FOREGROUND_ONLY",
+            Self::LocationModeThrottleRequestsWhenScreenOff => {
                 "LOCATION_MODE_THROTTLE_REQUESTS_WHEN_SCREEN_OFF"
             }
         }
@@ -2190,12 +2151,12 @@ impl BatteryStatus {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            BatteryStatus::UnknownBatteryStatus => "UNKNOWN_BATTERY_STATUS",
-            BatteryStatus::Charging => "BATTERY_STATUS_CHARGING",
-            BatteryStatus::Discharging => "BATTERY_STATUS_DISCHARGING",
-            BatteryStatus::Full => "BATTERY_STATUS_FULL",
-            BatteryStatus::NotCharging => "BATTERY_STATUS_NOT_CHARGING",
-            BatteryStatus::PowerLow => "BATTERY_STATUS_POWER_LOW",
+            Self::UnknownBatteryStatus => "UNKNOWN_BATTERY_STATUS",
+            Self::Charging => "BATTERY_STATUS_CHARGING",
+            Self::Discharging => "BATTERY_STATUS_DISCHARGING",
+            Self::Full => "BATTERY_STATUS_FULL",
+            Self::NotCharging => "BATTERY_STATUS_NOT_CHARGING",
+            Self::PowerLow => "BATTERY_STATUS_POWER_LOW",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -2233,11 +2194,11 @@ impl PowerSource {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            PowerSource::UnknownPowerSource => "UNKNOWN_POWER_SOURCE",
-            PowerSource::Ac => "POWER_SOURCE_AC",
-            PowerSource::Usb => "POWER_SOURCE_USB",
-            PowerSource::Wireless => "POWER_SOURCE_WIRELESS",
-            PowerSource::Unplugged => "POWER_SOURCE_UNPLUGGED",
+            Self::UnknownPowerSource => "UNKNOWN_POWER_SOURCE",
+            Self::Ac => "POWER_SOURCE_AC",
+            Self::Usb => "POWER_SOURCE_USB",
+            Self::Wireless => "POWER_SOURCE_WIRELESS",
+            Self::Unplugged => "POWER_SOURCE_UNPLUGGED",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -2253,7 +2214,6 @@ impl PowerSource {
     }
 }
 /// `CreateVehicle` request message.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateVehicleRequest {
     /// The standard Fleet Engine request header.
@@ -2306,7 +2266,6 @@ pub struct CreateVehicleRequest {
     pub vehicle: ::core::option::Option<Vehicle>,
 }
 /// `GetVehicle` request message.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetVehicleRequest {
     /// The standard Fleet Engine request header.
@@ -2334,7 +2293,6 @@ pub struct GetVehicleRequest {
     pub waypoints_version: ::core::option::Option<::prost_types::Timestamp>,
 }
 /// `UpdateVehicle request message.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateVehicleRequest {
     /// The standard Fleet Engine request header.
@@ -2371,7 +2329,6 @@ pub struct UpdateVehicleRequest {
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
 /// `UpdateVehicleAttributes` request message.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateVehicleAttributesRequest {
     /// The standard Fleet Engine request header.
@@ -2389,7 +2346,6 @@ pub struct UpdateVehicleAttributesRequest {
     pub attributes: ::prost::alloc::vec::Vec<VehicleAttribute>,
 }
 /// `UpdateVehicleAttributes` response message.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateVehicleAttributesResponse {
     /// Required. The updated full list of vehicle attributes, including new,
@@ -2398,7 +2354,6 @@ pub struct UpdateVehicleAttributesResponse {
     pub attributes: ::prost::alloc::vec::Vec<VehicleAttribute>,
 }
 /// `SearchVehicles` request message.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchVehiclesRequest {
     /// The standard Fleet Engine request header.
@@ -2594,16 +2549,12 @@ pub mod search_vehicles_request {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                VehicleMatchOrder::UnknownVehicleMatchOrder => {
-                    "UNKNOWN_VEHICLE_MATCH_ORDER"
-                }
-                VehicleMatchOrder::PickupPointEta => "PICKUP_POINT_ETA",
-                VehicleMatchOrder::PickupPointDistance => "PICKUP_POINT_DISTANCE",
-                VehicleMatchOrder::DropoffPointEta => "DROPOFF_POINT_ETA",
-                VehicleMatchOrder::PickupPointStraightDistance => {
-                    "PICKUP_POINT_STRAIGHT_DISTANCE"
-                }
-                VehicleMatchOrder::Cost => "COST",
+                Self::UnknownVehicleMatchOrder => "UNKNOWN_VEHICLE_MATCH_ORDER",
+                Self::PickupPointEta => "PICKUP_POINT_ETA",
+                Self::PickupPointDistance => "PICKUP_POINT_DISTANCE",
+                Self::DropoffPointEta => "DROPOFF_POINT_ETA",
+                Self::PickupPointStraightDistance => "PICKUP_POINT_STRAIGHT_DISTANCE",
+                Self::Cost => "COST",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -2653,9 +2604,9 @@ pub mod search_vehicles_request {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                CurrentTripsPresent::Unspecified => "CURRENT_TRIPS_PRESENT_UNSPECIFIED",
-                CurrentTripsPresent::None => "NONE",
-                CurrentTripsPresent::Any => "ANY",
+                Self::Unspecified => "CURRENT_TRIPS_PRESENT_UNSPECIFIED",
+                Self::None => "NONE",
+                Self::Any => "ANY",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -2670,7 +2621,6 @@ pub mod search_vehicles_request {
     }
 }
 /// `SearchVehicles` response message.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchVehiclesResponse {
     /// List of vehicles that match the `SearchVehiclesRequest` criteria, ordered
@@ -2679,7 +2629,6 @@ pub struct SearchVehiclesResponse {
     pub matches: ::prost::alloc::vec::Vec<VehicleMatch>,
 }
 /// `ListVehicles` request message.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListVehiclesRequest {
     /// The standard Fleet Engine request header.
@@ -2828,7 +2777,6 @@ pub struct ListVehiclesRequest {
     >,
 }
 /// `ListVehicles` response message.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListVehiclesResponse {
     /// Vehicles matching the criteria in the request.
@@ -2848,8 +2796,7 @@ pub struct ListVehiclesResponse {
 /// Describes intermediate points along a route for a `VehicleMatch` in a
 /// `SearchVehiclesResponse`. This concept is represented as a `TripWaypoint` in
 /// all other endpoints.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct Waypoint {
     /// The location of this waypoint.
     #[prost(message, optional, tag = "1")]
@@ -2860,7 +2807,6 @@ pub struct Waypoint {
 }
 /// Contains the vehicle and related estimates for a vehicle that match the
 /// points of active trips for the vehicle `SearchVehiclesRequest`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VehicleMatch {
     /// Required. A vehicle that matches the request.
@@ -2966,11 +2912,11 @@ pub mod vehicle_match {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                VehicleMatchType::Unknown => "UNKNOWN",
-                VehicleMatchType::Exclusive => "EXCLUSIVE",
-                VehicleMatchType::BackToBack => "BACK_TO_BACK",
-                VehicleMatchType::Carpool => "CARPOOL",
-                VehicleMatchType::CarpoolBackToBack => "CARPOOL_BACK_TO_BACK",
+                Self::Unknown => "UNKNOWN",
+                Self::Exclusive => "EXCLUSIVE",
+                Self::BackToBack => "BACK_TO_BACK",
+                Self::Carpool => "CARPOOL",
+                Self::CarpoolBackToBack => "CARPOOL_BACK_TO_BACK",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -2987,7 +2933,6 @@ pub mod vehicle_match {
     }
 }
 /// A list-of-lists datatype for vehicle attributes.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VehicleAttributeList {
     /// A list of attributes in this collection.
@@ -2996,11 +2941,17 @@ pub struct VehicleAttributeList {
 }
 /// Generated server implementations.
 pub mod vehicle_service_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with VehicleServiceServer.
     #[async_trait]
-    pub trait VehicleService: Send + Sync + 'static {
+    pub trait VehicleService: std::marker::Send + std::marker::Sync + 'static {
         /// Instantiates a new vehicle associated with an on-demand rideshare or
         /// deliveries provider. Each `Vehicle` must have a unique vehicle ID.
         ///
@@ -3091,20 +3042,18 @@ pub mod vehicle_service_server {
     }
     /// Vehicle management service.
     #[derive(Debug)]
-    pub struct VehicleServiceServer<T: VehicleService> {
-        inner: _Inner<T>,
+    pub struct VehicleServiceServer<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: VehicleService> VehicleServiceServer<T> {
+    impl<T> VehicleServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -3154,8 +3103,8 @@ pub mod vehicle_service_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for VehicleServiceServer<T>
     where
         T: VehicleService,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -3167,7 +3116,6 @@ pub mod vehicle_service_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/maps.fleetengine.v1.VehicleService/CreateVehicle" => {
                     #[allow(non_camel_case_types)]
@@ -3198,7 +3146,6 @@ pub mod vehicle_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = CreateVehicleSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -3244,7 +3191,6 @@ pub mod vehicle_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetVehicleSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -3290,7 +3236,6 @@ pub mod vehicle_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = UpdateVehicleSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -3342,7 +3287,6 @@ pub mod vehicle_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = UpdateVehicleAttributesSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -3388,7 +3332,6 @@ pub mod vehicle_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListVehiclesSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -3435,7 +3378,6 @@ pub mod vehicle_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = SearchVehiclesSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -3454,20 +3396,25 @@ pub mod vehicle_service_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: VehicleService> Clone for VehicleServiceServer<T> {
+    impl<T> Clone for VehicleServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -3479,17 +3426,9 @@ pub mod vehicle_service_server {
             }
         }
     }
-    impl<T: VehicleService> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: VehicleService> tonic::server::NamedService for VehicleServiceServer<T> {
-        const NAME: &'static str = "maps.fleetengine.v1.VehicleService";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "maps.fleetengine.v1.VehicleService";
+    impl<T> tonic::server::NamedService for VehicleServiceServer<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }

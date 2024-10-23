@@ -10,7 +10,6 @@
 ///    |---------------------Trace----------------------|
 ///    Step1(State) Step2(State) ---  StepN(State(final))
 /// ```
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Trace {
     /// Derived from the source and destination endpoints definition specified by
@@ -35,7 +34,6 @@ pub struct Trace {
 }
 /// A simulated forwarding path is composed of multiple steps.
 /// Each step has a well-defined state and an associated configuration.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Step {
     /// A description of the step. Usually this is a summary of the state.
@@ -170,37 +168,37 @@ pub mod step {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                State::Unspecified => "STATE_UNSPECIFIED",
-                State::StartFromInstance => "START_FROM_INSTANCE",
-                State::StartFromInternet => "START_FROM_INTERNET",
-                State::StartFromGoogleService => "START_FROM_GOOGLE_SERVICE",
-                State::StartFromPrivateNetwork => "START_FROM_PRIVATE_NETWORK",
-                State::StartFromGkeMaster => "START_FROM_GKE_MASTER",
-                State::StartFromCloudSqlInstance => "START_FROM_CLOUD_SQL_INSTANCE",
-                State::StartFromCloudFunction => "START_FROM_CLOUD_FUNCTION",
-                State::StartFromAppEngineVersion => "START_FROM_APP_ENGINE_VERSION",
-                State::StartFromCloudRunRevision => "START_FROM_CLOUD_RUN_REVISION",
-                State::StartFromStorageBucket => "START_FROM_STORAGE_BUCKET",
-                State::StartFromPscPublishedService => "START_FROM_PSC_PUBLISHED_SERVICE",
-                State::ApplyIngressFirewallRule => "APPLY_INGRESS_FIREWALL_RULE",
-                State::ApplyEgressFirewallRule => "APPLY_EGRESS_FIREWALL_RULE",
-                State::ApplyRoute => "APPLY_ROUTE",
-                State::ApplyForwardingRule => "APPLY_FORWARDING_RULE",
-                State::AnalyzeLoadBalancerBackend => "ANALYZE_LOAD_BALANCER_BACKEND",
-                State::SpoofingApproved => "SPOOFING_APPROVED",
-                State::ArriveAtInstance => "ARRIVE_AT_INSTANCE",
-                State::ArriveAtInternalLoadBalancer => "ARRIVE_AT_INTERNAL_LOAD_BALANCER",
-                State::ArriveAtExternalLoadBalancer => "ARRIVE_AT_EXTERNAL_LOAD_BALANCER",
-                State::ArriveAtVpnGateway => "ARRIVE_AT_VPN_GATEWAY",
-                State::ArriveAtVpnTunnel => "ARRIVE_AT_VPN_TUNNEL",
-                State::ArriveAtVpcConnector => "ARRIVE_AT_VPC_CONNECTOR",
-                State::Nat => "NAT",
-                State::ProxyConnection => "PROXY_CONNECTION",
-                State::Deliver => "DELIVER",
-                State::Drop => "DROP",
-                State::Forward => "FORWARD",
-                State::Abort => "ABORT",
-                State::ViewerPermissionMissing => "VIEWER_PERMISSION_MISSING",
+                Self::Unspecified => "STATE_UNSPECIFIED",
+                Self::StartFromInstance => "START_FROM_INSTANCE",
+                Self::StartFromInternet => "START_FROM_INTERNET",
+                Self::StartFromGoogleService => "START_FROM_GOOGLE_SERVICE",
+                Self::StartFromPrivateNetwork => "START_FROM_PRIVATE_NETWORK",
+                Self::StartFromGkeMaster => "START_FROM_GKE_MASTER",
+                Self::StartFromCloudSqlInstance => "START_FROM_CLOUD_SQL_INSTANCE",
+                Self::StartFromCloudFunction => "START_FROM_CLOUD_FUNCTION",
+                Self::StartFromAppEngineVersion => "START_FROM_APP_ENGINE_VERSION",
+                Self::StartFromCloudRunRevision => "START_FROM_CLOUD_RUN_REVISION",
+                Self::StartFromStorageBucket => "START_FROM_STORAGE_BUCKET",
+                Self::StartFromPscPublishedService => "START_FROM_PSC_PUBLISHED_SERVICE",
+                Self::ApplyIngressFirewallRule => "APPLY_INGRESS_FIREWALL_RULE",
+                Self::ApplyEgressFirewallRule => "APPLY_EGRESS_FIREWALL_RULE",
+                Self::ApplyRoute => "APPLY_ROUTE",
+                Self::ApplyForwardingRule => "APPLY_FORWARDING_RULE",
+                Self::AnalyzeLoadBalancerBackend => "ANALYZE_LOAD_BALANCER_BACKEND",
+                Self::SpoofingApproved => "SPOOFING_APPROVED",
+                Self::ArriveAtInstance => "ARRIVE_AT_INSTANCE",
+                Self::ArriveAtInternalLoadBalancer => "ARRIVE_AT_INTERNAL_LOAD_BALANCER",
+                Self::ArriveAtExternalLoadBalancer => "ARRIVE_AT_EXTERNAL_LOAD_BALANCER",
+                Self::ArriveAtVpnGateway => "ARRIVE_AT_VPN_GATEWAY",
+                Self::ArriveAtVpnTunnel => "ARRIVE_AT_VPN_TUNNEL",
+                Self::ArriveAtVpcConnector => "ARRIVE_AT_VPC_CONNECTOR",
+                Self::Nat => "NAT",
+                Self::ProxyConnection => "PROXY_CONNECTION",
+                Self::Deliver => "DELIVER",
+                Self::Drop => "DROP",
+                Self::Forward => "FORWARD",
+                Self::Abort => "ABORT",
+                Self::ViewerPermissionMissing => "VIEWER_PERMISSION_MISSING",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -252,7 +250,6 @@ pub mod step {
     /// has no permission to view the configuration in this step, for non-final
     /// states a special state is populated (VIEWER_PERMISSION_MISSING), and for
     /// final state the configuration is cleared.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum StepInfo {
         /// Display information of a Compute Engine instance.
@@ -334,7 +331,6 @@ pub mod step {
     }
 }
 /// For display only. Metadata associated with a Compute Engine instance.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct InstanceInfo {
     /// Name of a Compute Engine instance.
@@ -364,7 +360,6 @@ pub struct InstanceInfo {
     pub service_account: ::prost::alloc::string::String,
 }
 /// For display only. Metadata associated with a Compute Engine network.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NetworkInfo {
     /// Name of a Compute Engine network.
@@ -379,7 +374,6 @@ pub struct NetworkInfo {
 }
 /// For display only. Metadata associated with a VPC firewall rule, an implied
 /// VPC firewall rule, or a hierarchical firewall policy rule.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FirewallInfo {
     /// The display name of the VPC firewall rule. This field is not applicable
@@ -481,25 +475,21 @@ pub mod firewall_info {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                FirewallRuleType::Unspecified => "FIREWALL_RULE_TYPE_UNSPECIFIED",
-                FirewallRuleType::HierarchicalFirewallPolicyRule => {
+                Self::Unspecified => "FIREWALL_RULE_TYPE_UNSPECIFIED",
+                Self::HierarchicalFirewallPolicyRule => {
                     "HIERARCHICAL_FIREWALL_POLICY_RULE"
                 }
-                FirewallRuleType::VpcFirewallRule => "VPC_FIREWALL_RULE",
-                FirewallRuleType::ImpliedVpcFirewallRule => "IMPLIED_VPC_FIREWALL_RULE",
-                FirewallRuleType::ServerlessVpcAccessManagedFirewallRule => {
+                Self::VpcFirewallRule => "VPC_FIREWALL_RULE",
+                Self::ImpliedVpcFirewallRule => "IMPLIED_VPC_FIREWALL_RULE",
+                Self::ServerlessVpcAccessManagedFirewallRule => {
                     "SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE"
                 }
-                FirewallRuleType::NetworkFirewallPolicyRule => {
-                    "NETWORK_FIREWALL_POLICY_RULE"
-                }
-                FirewallRuleType::NetworkRegionalFirewallPolicyRule => {
+                Self::NetworkFirewallPolicyRule => "NETWORK_FIREWALL_POLICY_RULE",
+                Self::NetworkRegionalFirewallPolicyRule => {
                     "NETWORK_REGIONAL_FIREWALL_POLICY_RULE"
                 }
-                FirewallRuleType::UnsupportedFirewallPolicyRule => {
-                    "UNSUPPORTED_FIREWALL_POLICY_RULE"
-                }
-                FirewallRuleType::TrackingState => "TRACKING_STATE",
+                Self::UnsupportedFirewallPolicyRule => "UNSUPPORTED_FIREWALL_POLICY_RULE",
+                Self::TrackingState => "TRACKING_STATE",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -528,7 +518,6 @@ pub mod firewall_info {
     }
 }
 /// For display only. Metadata associated with a Compute Engine route.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RouteInfo {
     /// Type of route.
@@ -624,14 +613,14 @@ pub mod route_info {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                RouteType::Unspecified => "ROUTE_TYPE_UNSPECIFIED",
-                RouteType::Subnet => "SUBNET",
-                RouteType::Static => "STATIC",
-                RouteType::Dynamic => "DYNAMIC",
-                RouteType::PeeringSubnet => "PEERING_SUBNET",
-                RouteType::PeeringStatic => "PEERING_STATIC",
-                RouteType::PeeringDynamic => "PEERING_DYNAMIC",
-                RouteType::PolicyBased => "POLICY_BASED",
+                Self::Unspecified => "ROUTE_TYPE_UNSPECIFIED",
+                Self::Subnet => "SUBNET",
+                Self::Static => "STATIC",
+                Self::Dynamic => "DYNAMIC",
+                Self::PeeringSubnet => "PEERING_SUBNET",
+                Self::PeeringStatic => "PEERING_STATIC",
+                Self::PeeringDynamic => "PEERING_DYNAMIC",
+                Self::PolicyBased => "POLICY_BASED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -703,19 +692,19 @@ pub mod route_info {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                NextHopType::Unspecified => "NEXT_HOP_TYPE_UNSPECIFIED",
-                NextHopType::NextHopIp => "NEXT_HOP_IP",
-                NextHopType::NextHopInstance => "NEXT_HOP_INSTANCE",
-                NextHopType::NextHopNetwork => "NEXT_HOP_NETWORK",
-                NextHopType::NextHopPeering => "NEXT_HOP_PEERING",
-                NextHopType::NextHopInterconnect => "NEXT_HOP_INTERCONNECT",
-                NextHopType::NextHopVpnTunnel => "NEXT_HOP_VPN_TUNNEL",
-                NextHopType::NextHopVpnGateway => "NEXT_HOP_VPN_GATEWAY",
-                NextHopType::NextHopInternetGateway => "NEXT_HOP_INTERNET_GATEWAY",
-                NextHopType::NextHopBlackhole => "NEXT_HOP_BLACKHOLE",
-                NextHopType::NextHopIlb => "NEXT_HOP_ILB",
-                NextHopType::NextHopRouterAppliance => "NEXT_HOP_ROUTER_APPLIANCE",
-                NextHopType::NextHopNccHub => "NEXT_HOP_NCC_HUB",
+                Self::Unspecified => "NEXT_HOP_TYPE_UNSPECIFIED",
+                Self::NextHopIp => "NEXT_HOP_IP",
+                Self::NextHopInstance => "NEXT_HOP_INSTANCE",
+                Self::NextHopNetwork => "NEXT_HOP_NETWORK",
+                Self::NextHopPeering => "NEXT_HOP_PEERING",
+                Self::NextHopInterconnect => "NEXT_HOP_INTERCONNECT",
+                Self::NextHopVpnTunnel => "NEXT_HOP_VPN_TUNNEL",
+                Self::NextHopVpnGateway => "NEXT_HOP_VPN_GATEWAY",
+                Self::NextHopInternetGateway => "NEXT_HOP_INTERNET_GATEWAY",
+                Self::NextHopBlackhole => "NEXT_HOP_BLACKHOLE",
+                Self::NextHopIlb => "NEXT_HOP_ILB",
+                Self::NextHopRouterAppliance => "NEXT_HOP_ROUTER_APPLIANCE",
+                Self::NextHopNccHub => "NEXT_HOP_NCC_HUB",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -766,9 +755,9 @@ pub mod route_info {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                RouteScope::Unspecified => "ROUTE_SCOPE_UNSPECIFIED",
-                RouteScope::Network => "NETWORK",
-                RouteScope::NccHub => "NCC_HUB",
+                Self::Unspecified => "ROUTE_SCOPE_UNSPECIFIED",
+                Self::Network => "NETWORK",
+                Self::NccHub => "NCC_HUB",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -787,7 +776,6 @@ pub mod route_info {
 /// some Google Services use special routes within Google production
 /// infrastructure to reach Compute Engine Instances.
 /// <https://cloud.google.com/vpc/docs/routes#special_return_paths>
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GoogleServiceInfo {
     /// Source IP address.
@@ -844,15 +832,13 @@ pub mod google_service_info {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                GoogleServiceType::Unspecified => "GOOGLE_SERVICE_TYPE_UNSPECIFIED",
-                GoogleServiceType::Iap => "IAP",
-                GoogleServiceType::GfeProxyOrHealthCheckProber => {
-                    "GFE_PROXY_OR_HEALTH_CHECK_PROBER"
-                }
-                GoogleServiceType::CloudDns => "CLOUD_DNS",
-                GoogleServiceType::GoogleApi => "GOOGLE_API",
-                GoogleServiceType::GoogleApiPsc => "GOOGLE_API_PSC",
-                GoogleServiceType::GoogleApiVpcSc => "GOOGLE_API_VPC_SC",
+                Self::Unspecified => "GOOGLE_SERVICE_TYPE_UNSPECIFIED",
+                Self::Iap => "IAP",
+                Self::GfeProxyOrHealthCheckProber => "GFE_PROXY_OR_HEALTH_CHECK_PROBER",
+                Self::CloudDns => "CLOUD_DNS",
+                Self::GoogleApi => "GOOGLE_API",
+                Self::GoogleApiPsc => "GOOGLE_API_PSC",
+                Self::GoogleApiVpcSc => "GOOGLE_API_VPC_SC",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -873,7 +859,6 @@ pub mod google_service_info {
     }
 }
 /// For display only. Metadata associated with a Compute Engine forwarding rule.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ForwardingRuleInfo {
     /// Name of a Compute Engine forwarding rule.
@@ -899,7 +884,6 @@ pub struct ForwardingRuleInfo {
     pub network_uri: ::prost::alloc::string::String,
 }
 /// For display only. Metadata associated with a load balancer.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LoadBalancerInfo {
     /// Type of the load balancer.
@@ -957,12 +941,12 @@ pub mod load_balancer_info {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                LoadBalancerType::Unspecified => "LOAD_BALANCER_TYPE_UNSPECIFIED",
-                LoadBalancerType::InternalTcpUdp => "INTERNAL_TCP_UDP",
-                LoadBalancerType::NetworkTcpUdp => "NETWORK_TCP_UDP",
-                LoadBalancerType::HttpProxy => "HTTP_PROXY",
-                LoadBalancerType::TcpProxy => "TCP_PROXY",
-                LoadBalancerType::SslProxy => "SSL_PROXY",
+                Self::Unspecified => "LOAD_BALANCER_TYPE_UNSPECIFIED",
+                Self::InternalTcpUdp => "INTERNAL_TCP_UDP",
+                Self::NetworkTcpUdp => "NETWORK_TCP_UDP",
+                Self::HttpProxy => "HTTP_PROXY",
+                Self::TcpProxy => "TCP_PROXY",
+                Self::SslProxy => "SSL_PROXY",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1008,10 +992,10 @@ pub mod load_balancer_info {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                BackendType::Unspecified => "BACKEND_TYPE_UNSPECIFIED",
-                BackendType::BackendService => "BACKEND_SERVICE",
-                BackendType::TargetPool => "TARGET_POOL",
-                BackendType::TargetInstance => "TARGET_INSTANCE",
+                Self::Unspecified => "BACKEND_TYPE_UNSPECIFIED",
+                Self::BackendService => "BACKEND_SERVICE",
+                Self::TargetPool => "TARGET_POOL",
+                Self::TargetInstance => "TARGET_INSTANCE",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1027,7 +1011,6 @@ pub mod load_balancer_info {
     }
 }
 /// For display only. Metadata associated with a specific load balancer backend.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LoadBalancerBackend {
     /// Name of a Compute Engine instance or network endpoint.
@@ -1085,11 +1068,9 @@ pub mod load_balancer_backend {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                HealthCheckFirewallState::Unspecified => {
-                    "HEALTH_CHECK_FIREWALL_STATE_UNSPECIFIED"
-                }
-                HealthCheckFirewallState::Configured => "CONFIGURED",
-                HealthCheckFirewallState::Misconfigured => "MISCONFIGURED",
+                Self::Unspecified => "HEALTH_CHECK_FIREWALL_STATE_UNSPECIFIED",
+                Self::Configured => "CONFIGURED",
+                Self::Misconfigured => "MISCONFIGURED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1104,7 +1085,6 @@ pub mod load_balancer_backend {
     }
 }
 /// For display only. Metadata associated with a Compute Engine VPN gateway.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VpnGatewayInfo {
     /// Name of a VPN gateway.
@@ -1129,7 +1109,6 @@ pub struct VpnGatewayInfo {
     pub region: ::prost::alloc::string::String,
 }
 /// For display only. Metadata associated with a Compute Engine VPN tunnel.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VpnTunnelInfo {
     /// Name of a VPN tunnel.
@@ -1193,10 +1172,10 @@ pub mod vpn_tunnel_info {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                RoutingType::Unspecified => "ROUTING_TYPE_UNSPECIFIED",
-                RoutingType::RouteBased => "ROUTE_BASED",
-                RoutingType::PolicyBased => "POLICY_BASED",
-                RoutingType::Dynamic => "DYNAMIC",
+                Self::Unspecified => "ROUTING_TYPE_UNSPECIFIED",
+                Self::RouteBased => "ROUTE_BASED",
+                Self::PolicyBased => "POLICY_BASED",
+                Self::Dynamic => "DYNAMIC",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1214,7 +1193,6 @@ pub mod vpn_tunnel_info {
 /// For display only. The specification of the endpoints for the test.
 /// EndpointInfo is derived from source and destination Endpoint and validated
 /// by the backend data plane model.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EndpointInfo {
     /// Source IP address.
@@ -1243,7 +1221,6 @@ pub struct EndpointInfo {
     pub source_agent_uri: ::prost::alloc::string::String,
 }
 /// Details of the final state "deliver" and associated resource.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeliverInfo {
     /// Target type where the packet is delivered to.
@@ -1313,21 +1290,21 @@ pub mod deliver_info {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Target::Unspecified => "TARGET_UNSPECIFIED",
-                Target::Instance => "INSTANCE",
-                Target::Internet => "INTERNET",
-                Target::GoogleApi => "GOOGLE_API",
-                Target::GkeMaster => "GKE_MASTER",
-                Target::CloudSqlInstance => "CLOUD_SQL_INSTANCE",
-                Target::PscPublishedService => "PSC_PUBLISHED_SERVICE",
-                Target::PscGoogleApi => "PSC_GOOGLE_API",
-                Target::PscVpcSc => "PSC_VPC_SC",
-                Target::ServerlessNeg => "SERVERLESS_NEG",
-                Target::StorageBucket => "STORAGE_BUCKET",
-                Target::PrivateNetwork => "PRIVATE_NETWORK",
-                Target::CloudFunction => "CLOUD_FUNCTION",
-                Target::AppEngineVersion => "APP_ENGINE_VERSION",
-                Target::CloudRunRevision => "CLOUD_RUN_REVISION",
+                Self::Unspecified => "TARGET_UNSPECIFIED",
+                Self::Instance => "INSTANCE",
+                Self::Internet => "INTERNET",
+                Self::GoogleApi => "GOOGLE_API",
+                Self::GkeMaster => "GKE_MASTER",
+                Self::CloudSqlInstance => "CLOUD_SQL_INSTANCE",
+                Self::PscPublishedService => "PSC_PUBLISHED_SERVICE",
+                Self::PscGoogleApi => "PSC_GOOGLE_API",
+                Self::PscVpcSc => "PSC_VPC_SC",
+                Self::ServerlessNeg => "SERVERLESS_NEG",
+                Self::StorageBucket => "STORAGE_BUCKET",
+                Self::PrivateNetwork => "PRIVATE_NETWORK",
+                Self::CloudFunction => "CLOUD_FUNCTION",
+                Self::AppEngineVersion => "APP_ENGINE_VERSION",
+                Self::CloudRunRevision => "CLOUD_RUN_REVISION",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1354,7 +1331,6 @@ pub mod deliver_info {
     }
 }
 /// Details of the final state "forward" and associated resource.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ForwardInfo {
     /// Target type where this packet is forwarded to.
@@ -1411,16 +1387,16 @@ pub mod forward_info {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Target::Unspecified => "TARGET_UNSPECIFIED",
-                Target::PeeringVpc => "PEERING_VPC",
-                Target::VpnGateway => "VPN_GATEWAY",
-                Target::Interconnect => "INTERCONNECT",
-                Target::GkeMaster => "GKE_MASTER",
-                Target::ImportedCustomRouteNextHop => "IMPORTED_CUSTOM_ROUTE_NEXT_HOP",
-                Target::CloudSqlInstance => "CLOUD_SQL_INSTANCE",
-                Target::AnotherProject => "ANOTHER_PROJECT",
-                Target::NccHub => "NCC_HUB",
-                Target::RouterAppliance => "ROUTER_APPLIANCE",
+                Self::Unspecified => "TARGET_UNSPECIFIED",
+                Self::PeeringVpc => "PEERING_VPC",
+                Self::VpnGateway => "VPN_GATEWAY",
+                Self::Interconnect => "INTERCONNECT",
+                Self::GkeMaster => "GKE_MASTER",
+                Self::ImportedCustomRouteNextHop => "IMPORTED_CUSTOM_ROUTE_NEXT_HOP",
+                Self::CloudSqlInstance => "CLOUD_SQL_INSTANCE",
+                Self::AnotherProject => "ANOTHER_PROJECT",
+                Self::NccHub => "NCC_HUB",
+                Self::RouterAppliance => "ROUTER_APPLIANCE",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1444,7 +1420,6 @@ pub mod forward_info {
     }
 }
 /// Details of the final state "abort" and associated resource.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AbortInfo {
     /// Causes that the analysis is aborted.
@@ -1580,52 +1555,52 @@ pub mod abort_info {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Cause::Unspecified => "CAUSE_UNSPECIFIED",
-                Cause::UnknownNetwork => "UNKNOWN_NETWORK",
-                Cause::UnknownProject => "UNKNOWN_PROJECT",
-                Cause::NoExternalIp => "NO_EXTERNAL_IP",
-                Cause::UnintendedDestination => "UNINTENDED_DESTINATION",
-                Cause::SourceEndpointNotFound => "SOURCE_ENDPOINT_NOT_FOUND",
-                Cause::MismatchedSourceNetwork => "MISMATCHED_SOURCE_NETWORK",
-                Cause::DestinationEndpointNotFound => "DESTINATION_ENDPOINT_NOT_FOUND",
-                Cause::MismatchedDestinationNetwork => "MISMATCHED_DESTINATION_NETWORK",
-                Cause::UnknownIp => "UNKNOWN_IP",
-                Cause::SourceIpAddressNotInSourceNetwork => {
+                Self::Unspecified => "CAUSE_UNSPECIFIED",
+                Self::UnknownNetwork => "UNKNOWN_NETWORK",
+                Self::UnknownProject => "UNKNOWN_PROJECT",
+                Self::NoExternalIp => "NO_EXTERNAL_IP",
+                Self::UnintendedDestination => "UNINTENDED_DESTINATION",
+                Self::SourceEndpointNotFound => "SOURCE_ENDPOINT_NOT_FOUND",
+                Self::MismatchedSourceNetwork => "MISMATCHED_SOURCE_NETWORK",
+                Self::DestinationEndpointNotFound => "DESTINATION_ENDPOINT_NOT_FOUND",
+                Self::MismatchedDestinationNetwork => "MISMATCHED_DESTINATION_NETWORK",
+                Self::UnknownIp => "UNKNOWN_IP",
+                Self::SourceIpAddressNotInSourceNetwork => {
                     "SOURCE_IP_ADDRESS_NOT_IN_SOURCE_NETWORK"
                 }
-                Cause::PermissionDenied => "PERMISSION_DENIED",
-                Cause::PermissionDeniedNoCloudNatConfigs => {
+                Self::PermissionDenied => "PERMISSION_DENIED",
+                Self::PermissionDeniedNoCloudNatConfigs => {
                     "PERMISSION_DENIED_NO_CLOUD_NAT_CONFIGS"
                 }
-                Cause::PermissionDeniedNoNegEndpointConfigs => {
+                Self::PermissionDeniedNoNegEndpointConfigs => {
                     "PERMISSION_DENIED_NO_NEG_ENDPOINT_CONFIGS"
                 }
-                Cause::NoSourceLocation => "NO_SOURCE_LOCATION",
-                Cause::InvalidArgument => "INVALID_ARGUMENT",
-                Cause::TraceTooLong => "TRACE_TOO_LONG",
-                Cause::InternalError => "INTERNAL_ERROR",
-                Cause::Unsupported => "UNSUPPORTED",
-                Cause::MismatchedIpVersion => "MISMATCHED_IP_VERSION",
-                Cause::GkeKonnectivityProxyUnsupported => {
+                Self::NoSourceLocation => "NO_SOURCE_LOCATION",
+                Self::InvalidArgument => "INVALID_ARGUMENT",
+                Self::TraceTooLong => "TRACE_TOO_LONG",
+                Self::InternalError => "INTERNAL_ERROR",
+                Self::Unsupported => "UNSUPPORTED",
+                Self::MismatchedIpVersion => "MISMATCHED_IP_VERSION",
+                Self::GkeKonnectivityProxyUnsupported => {
                     "GKE_KONNECTIVITY_PROXY_UNSUPPORTED"
                 }
-                Cause::ResourceConfigNotFound => "RESOURCE_CONFIG_NOT_FOUND",
-                Cause::VmInstanceConfigNotFound => "VM_INSTANCE_CONFIG_NOT_FOUND",
-                Cause::NetworkConfigNotFound => "NETWORK_CONFIG_NOT_FOUND",
-                Cause::FirewallConfigNotFound => "FIREWALL_CONFIG_NOT_FOUND",
-                Cause::RouteConfigNotFound => "ROUTE_CONFIG_NOT_FOUND",
-                Cause::GoogleManagedServiceAmbiguousPscEndpoint => {
+                Self::ResourceConfigNotFound => "RESOURCE_CONFIG_NOT_FOUND",
+                Self::VmInstanceConfigNotFound => "VM_INSTANCE_CONFIG_NOT_FOUND",
+                Self::NetworkConfigNotFound => "NETWORK_CONFIG_NOT_FOUND",
+                Self::FirewallConfigNotFound => "FIREWALL_CONFIG_NOT_FOUND",
+                Self::RouteConfigNotFound => "ROUTE_CONFIG_NOT_FOUND",
+                Self::GoogleManagedServiceAmbiguousPscEndpoint => {
                     "GOOGLE_MANAGED_SERVICE_AMBIGUOUS_PSC_ENDPOINT"
                 }
-                Cause::SourcePscCloudSqlUnsupported => "SOURCE_PSC_CLOUD_SQL_UNSUPPORTED",
-                Cause::SourceForwardingRuleUnsupported => {
+                Self::SourcePscCloudSqlUnsupported => "SOURCE_PSC_CLOUD_SQL_UNSUPPORTED",
+                Self::SourceForwardingRuleUnsupported => {
                     "SOURCE_FORWARDING_RULE_UNSUPPORTED"
                 }
-                Cause::NonRoutableIpAddress => "NON_ROUTABLE_IP_ADDRESS",
-                Cause::UnknownIssueInGoogleManagedProject => {
+                Self::NonRoutableIpAddress => "NON_ROUTABLE_IP_ADDRESS",
+                Self::UnknownIssueInGoogleManagedProject => {
                     "UNKNOWN_ISSUE_IN_GOOGLE_MANAGED_PROJECT"
                 }
-                Cause::UnsupportedGoogleManagedProjectConfig => {
+                Self::UnsupportedGoogleManagedProjectConfig => {
                     "UNSUPPORTED_GOOGLE_MANAGED_PROJECT_CONFIG"
                 }
             }
@@ -1693,7 +1668,6 @@ pub mod abort_info {
     }
 }
 /// Details of the final state "drop" and associated resource.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DropInfo {
     /// Cause that the packet is dropped.
@@ -1912,122 +1886,116 @@ pub mod drop_info {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Cause::Unspecified => "CAUSE_UNSPECIFIED",
-                Cause::UnknownExternalAddress => "UNKNOWN_EXTERNAL_ADDRESS",
-                Cause::ForeignIpDisallowed => "FOREIGN_IP_DISALLOWED",
-                Cause::FirewallRule => "FIREWALL_RULE",
-                Cause::NoRoute => "NO_ROUTE",
-                Cause::RouteBlackhole => "ROUTE_BLACKHOLE",
-                Cause::RouteWrongNetwork => "ROUTE_WRONG_NETWORK",
-                Cause::RouteNextHopIpAddressNotResolved => {
+                Self::Unspecified => "CAUSE_UNSPECIFIED",
+                Self::UnknownExternalAddress => "UNKNOWN_EXTERNAL_ADDRESS",
+                Self::ForeignIpDisallowed => "FOREIGN_IP_DISALLOWED",
+                Self::FirewallRule => "FIREWALL_RULE",
+                Self::NoRoute => "NO_ROUTE",
+                Self::RouteBlackhole => "ROUTE_BLACKHOLE",
+                Self::RouteWrongNetwork => "ROUTE_WRONG_NETWORK",
+                Self::RouteNextHopIpAddressNotResolved => {
                     "ROUTE_NEXT_HOP_IP_ADDRESS_NOT_RESOLVED"
                 }
-                Cause::RouteNextHopResourceNotFound => {
-                    "ROUTE_NEXT_HOP_RESOURCE_NOT_FOUND"
-                }
-                Cause::RouteNextHopInstanceWrongNetwork => {
+                Self::RouteNextHopResourceNotFound => "ROUTE_NEXT_HOP_RESOURCE_NOT_FOUND",
+                Self::RouteNextHopInstanceWrongNetwork => {
                     "ROUTE_NEXT_HOP_INSTANCE_WRONG_NETWORK"
                 }
-                Cause::RouteNextHopInstanceNonPrimaryIp => {
+                Self::RouteNextHopInstanceNonPrimaryIp => {
                     "ROUTE_NEXT_HOP_INSTANCE_NON_PRIMARY_IP"
                 }
-                Cause::RouteNextHopForwardingRuleIpMismatch => {
+                Self::RouteNextHopForwardingRuleIpMismatch => {
                     "ROUTE_NEXT_HOP_FORWARDING_RULE_IP_MISMATCH"
                 }
-                Cause::RouteNextHopVpnTunnelNotEstablished => {
+                Self::RouteNextHopVpnTunnelNotEstablished => {
                     "ROUTE_NEXT_HOP_VPN_TUNNEL_NOT_ESTABLISHED"
                 }
-                Cause::RouteNextHopForwardingRuleTypeInvalid => {
+                Self::RouteNextHopForwardingRuleTypeInvalid => {
                     "ROUTE_NEXT_HOP_FORWARDING_RULE_TYPE_INVALID"
                 }
-                Cause::NoRouteFromInternetToPrivateIpv6Address => {
+                Self::NoRouteFromInternetToPrivateIpv6Address => {
                     "NO_ROUTE_FROM_INTERNET_TO_PRIVATE_IPV6_ADDRESS"
                 }
-                Cause::VpnTunnelLocalSelectorMismatch => {
+                Self::VpnTunnelLocalSelectorMismatch => {
                     "VPN_TUNNEL_LOCAL_SELECTOR_MISMATCH"
                 }
-                Cause::VpnTunnelRemoteSelectorMismatch => {
+                Self::VpnTunnelRemoteSelectorMismatch => {
                     "VPN_TUNNEL_REMOTE_SELECTOR_MISMATCH"
                 }
-                Cause::PrivateTrafficToInternet => "PRIVATE_TRAFFIC_TO_INTERNET",
-                Cause::PrivateGoogleAccessDisallowed => {
-                    "PRIVATE_GOOGLE_ACCESS_DISALLOWED"
-                }
-                Cause::PrivateGoogleAccessViaVpnTunnelUnsupported => {
+                Self::PrivateTrafficToInternet => "PRIVATE_TRAFFIC_TO_INTERNET",
+                Self::PrivateGoogleAccessDisallowed => "PRIVATE_GOOGLE_ACCESS_DISALLOWED",
+                Self::PrivateGoogleAccessViaVpnTunnelUnsupported => {
                     "PRIVATE_GOOGLE_ACCESS_VIA_VPN_TUNNEL_UNSUPPORTED"
                 }
-                Cause::NoExternalAddress => "NO_EXTERNAL_ADDRESS",
-                Cause::UnknownInternalAddress => "UNKNOWN_INTERNAL_ADDRESS",
-                Cause::ForwardingRuleMismatch => "FORWARDING_RULE_MISMATCH",
-                Cause::ForwardingRuleNoInstances => "FORWARDING_RULE_NO_INSTANCES",
-                Cause::FirewallBlockingLoadBalancerBackendHealthCheck => {
+                Self::NoExternalAddress => "NO_EXTERNAL_ADDRESS",
+                Self::UnknownInternalAddress => "UNKNOWN_INTERNAL_ADDRESS",
+                Self::ForwardingRuleMismatch => "FORWARDING_RULE_MISMATCH",
+                Self::ForwardingRuleNoInstances => "FORWARDING_RULE_NO_INSTANCES",
+                Self::FirewallBlockingLoadBalancerBackendHealthCheck => {
                     "FIREWALL_BLOCKING_LOAD_BALANCER_BACKEND_HEALTH_CHECK"
                 }
-                Cause::InstanceNotRunning => "INSTANCE_NOT_RUNNING",
-                Cause::GkeClusterNotRunning => "GKE_CLUSTER_NOT_RUNNING",
-                Cause::CloudSqlInstanceNotRunning => "CLOUD_SQL_INSTANCE_NOT_RUNNING",
-                Cause::TrafficTypeBlocked => "TRAFFIC_TYPE_BLOCKED",
-                Cause::GkeMasterUnauthorizedAccess => "GKE_MASTER_UNAUTHORIZED_ACCESS",
-                Cause::CloudSqlInstanceUnauthorizedAccess => {
+                Self::InstanceNotRunning => "INSTANCE_NOT_RUNNING",
+                Self::GkeClusterNotRunning => "GKE_CLUSTER_NOT_RUNNING",
+                Self::CloudSqlInstanceNotRunning => "CLOUD_SQL_INSTANCE_NOT_RUNNING",
+                Self::TrafficTypeBlocked => "TRAFFIC_TYPE_BLOCKED",
+                Self::GkeMasterUnauthorizedAccess => "GKE_MASTER_UNAUTHORIZED_ACCESS",
+                Self::CloudSqlInstanceUnauthorizedAccess => {
                     "CLOUD_SQL_INSTANCE_UNAUTHORIZED_ACCESS"
                 }
-                Cause::DroppedInsideGkeService => "DROPPED_INSIDE_GKE_SERVICE",
-                Cause::DroppedInsideCloudSqlService => "DROPPED_INSIDE_CLOUD_SQL_SERVICE",
-                Cause::GoogleManagedServiceNoPeering => {
+                Self::DroppedInsideGkeService => "DROPPED_INSIDE_GKE_SERVICE",
+                Self::DroppedInsideCloudSqlService => "DROPPED_INSIDE_CLOUD_SQL_SERVICE",
+                Self::GoogleManagedServiceNoPeering => {
                     "GOOGLE_MANAGED_SERVICE_NO_PEERING"
                 }
-                Cause::GoogleManagedServiceNoPscEndpoint => {
+                Self::GoogleManagedServiceNoPscEndpoint => {
                     "GOOGLE_MANAGED_SERVICE_NO_PSC_ENDPOINT"
                 }
-                Cause::GkePscEndpointMissing => "GKE_PSC_ENDPOINT_MISSING",
-                Cause::CloudSqlInstanceNoIpAddress => "CLOUD_SQL_INSTANCE_NO_IP_ADDRESS",
-                Cause::GkeControlPlaneRegionMismatch => {
+                Self::GkePscEndpointMissing => "GKE_PSC_ENDPOINT_MISSING",
+                Self::CloudSqlInstanceNoIpAddress => "CLOUD_SQL_INSTANCE_NO_IP_ADDRESS",
+                Self::GkeControlPlaneRegionMismatch => {
                     "GKE_CONTROL_PLANE_REGION_MISMATCH"
                 }
-                Cause::PublicGkeControlPlaneToPrivateDestination => {
+                Self::PublicGkeControlPlaneToPrivateDestination => {
                     "PUBLIC_GKE_CONTROL_PLANE_TO_PRIVATE_DESTINATION"
                 }
-                Cause::GkeControlPlaneNoRoute => "GKE_CONTROL_PLANE_NO_ROUTE",
-                Cause::CloudSqlInstanceNotConfiguredForExternalTraffic => {
+                Self::GkeControlPlaneNoRoute => "GKE_CONTROL_PLANE_NO_ROUTE",
+                Self::CloudSqlInstanceNotConfiguredForExternalTraffic => {
                     "CLOUD_SQL_INSTANCE_NOT_CONFIGURED_FOR_EXTERNAL_TRAFFIC"
                 }
-                Cause::PublicCloudSqlInstanceToPrivateDestination => {
+                Self::PublicCloudSqlInstanceToPrivateDestination => {
                     "PUBLIC_CLOUD_SQL_INSTANCE_TO_PRIVATE_DESTINATION"
                 }
-                Cause::CloudSqlInstanceNoRoute => "CLOUD_SQL_INSTANCE_NO_ROUTE",
-                Cause::CloudFunctionNotActive => "CLOUD_FUNCTION_NOT_ACTIVE",
-                Cause::VpcConnectorNotSet => "VPC_CONNECTOR_NOT_SET",
-                Cause::VpcConnectorNotRunning => "VPC_CONNECTOR_NOT_RUNNING",
-                Cause::ForwardingRuleRegionMismatch => "FORWARDING_RULE_REGION_MISMATCH",
-                Cause::PscConnectionNotAccepted => "PSC_CONNECTION_NOT_ACCEPTED",
-                Cause::PscEndpointAccessedFromPeeredNetwork => {
+                Self::CloudSqlInstanceNoRoute => "CLOUD_SQL_INSTANCE_NO_ROUTE",
+                Self::CloudFunctionNotActive => "CLOUD_FUNCTION_NOT_ACTIVE",
+                Self::VpcConnectorNotSet => "VPC_CONNECTOR_NOT_SET",
+                Self::VpcConnectorNotRunning => "VPC_CONNECTOR_NOT_RUNNING",
+                Self::ForwardingRuleRegionMismatch => "FORWARDING_RULE_REGION_MISMATCH",
+                Self::PscConnectionNotAccepted => "PSC_CONNECTION_NOT_ACCEPTED",
+                Self::PscEndpointAccessedFromPeeredNetwork => {
                     "PSC_ENDPOINT_ACCESSED_FROM_PEERED_NETWORK"
                 }
-                Cause::PscNegProducerEndpointNoGlobalAccess => {
+                Self::PscNegProducerEndpointNoGlobalAccess => {
                     "PSC_NEG_PRODUCER_ENDPOINT_NO_GLOBAL_ACCESS"
                 }
-                Cause::PscNegProducerForwardingRuleMultiplePorts => {
+                Self::PscNegProducerForwardingRuleMultiplePorts => {
                     "PSC_NEG_PRODUCER_FORWARDING_RULE_MULTIPLE_PORTS"
                 }
-                Cause::CloudSqlPscNegUnsupported => "CLOUD_SQL_PSC_NEG_UNSUPPORTED",
-                Cause::NoNatSubnetsForPscServiceAttachment => {
+                Self::CloudSqlPscNegUnsupported => "CLOUD_SQL_PSC_NEG_UNSUPPORTED",
+                Self::NoNatSubnetsForPscServiceAttachment => {
                     "NO_NAT_SUBNETS_FOR_PSC_SERVICE_ATTACHMENT"
                 }
-                Cause::HybridNegNonDynamicRouteMatched => {
+                Self::HybridNegNonDynamicRouteMatched => {
                     "HYBRID_NEG_NON_DYNAMIC_ROUTE_MATCHED"
                 }
-                Cause::HybridNegNonLocalDynamicRouteMatched => {
+                Self::HybridNegNonLocalDynamicRouteMatched => {
                     "HYBRID_NEG_NON_LOCAL_DYNAMIC_ROUTE_MATCHED"
                 }
-                Cause::CloudRunRevisionNotReady => "CLOUD_RUN_REVISION_NOT_READY",
-                Cause::DroppedInsidePscServiceProducer => {
+                Self::CloudRunRevisionNotReady => "CLOUD_RUN_REVISION_NOT_READY",
+                Self::DroppedInsidePscServiceProducer => {
                     "DROPPED_INSIDE_PSC_SERVICE_PRODUCER"
                 }
-                Cause::LoadBalancerHasNoProxySubnet => {
-                    "LOAD_BALANCER_HAS_NO_PROXY_SUBNET"
-                }
-                Cause::CloudNatNoAddresses => "CLOUD_NAT_NO_ADDRESSES",
-                Cause::RoutingLoop => "ROUTING_LOOP",
+                Self::LoadBalancerHasNoProxySubnet => "LOAD_BALANCER_HAS_NO_PROXY_SUBNET",
+                Self::CloudNatNoAddresses => "CLOUD_NAT_NO_ADDRESSES",
+                Self::RoutingLoop => "ROUTING_LOOP",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -2166,7 +2134,6 @@ pub mod drop_info {
 }
 /// For display only. Metadata associated with a Google Kubernetes Engine (GKE)
 /// cluster master.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GkeMasterInfo {
     /// URI of a GKE cluster.
@@ -2183,7 +2150,6 @@ pub struct GkeMasterInfo {
     pub external_ip: ::prost::alloc::string::String,
 }
 /// For display only. Metadata associated with a Cloud SQL instance.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CloudSqlInstanceInfo {
     /// Name of a Cloud SQL instance.
@@ -2207,7 +2173,6 @@ pub struct CloudSqlInstanceInfo {
     pub region: ::prost::alloc::string::String,
 }
 /// For display only. Metadata associated with a Cloud Function.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CloudFunctionInfo {
     /// Name of a Cloud Function.
@@ -2224,7 +2189,6 @@ pub struct CloudFunctionInfo {
     pub version_id: i64,
 }
 /// For display only. Metadata associated with a Cloud Run revision.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CloudRunRevisionInfo {
     /// Name of a Cloud Run revision.
@@ -2241,7 +2205,6 @@ pub struct CloudRunRevisionInfo {
     pub service_uri: ::prost::alloc::string::String,
 }
 /// For display only. Metadata associated with an App Engine version.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AppEngineVersionInfo {
     /// Name of an App Engine version.
@@ -2258,7 +2221,6 @@ pub struct AppEngineVersionInfo {
     pub environment: ::prost::alloc::string::String,
 }
 /// For display only. Metadata associated with a VPC connector.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VpcConnectorInfo {
     /// Name of a VPC connector.
@@ -2272,7 +2234,6 @@ pub struct VpcConnectorInfo {
     pub location: ::prost::alloc::string::String,
 }
 /// For display only. Metadata associated with NAT.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NatInfo {
     /// Type of NAT.
@@ -2351,11 +2312,11 @@ pub mod nat_info {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Type::Unspecified => "TYPE_UNSPECIFIED",
-                Type::InternalToExternal => "INTERNAL_TO_EXTERNAL",
-                Type::ExternalToInternal => "EXTERNAL_TO_INTERNAL",
-                Type::CloudNat => "CLOUD_NAT",
-                Type::PrivateServiceConnect => "PRIVATE_SERVICE_CONNECT",
+                Self::Unspecified => "TYPE_UNSPECIFIED",
+                Self::InternalToExternal => "INTERNAL_TO_EXTERNAL",
+                Self::ExternalToInternal => "EXTERNAL_TO_INTERNAL",
+                Self::CloudNat => "CLOUD_NAT",
+                Self::PrivateServiceConnect => "PRIVATE_SERVICE_CONNECT",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -2372,7 +2333,6 @@ pub mod nat_info {
     }
 }
 /// For display only. Metadata associated with ProxyConnection.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ProxyConnectionInfo {
     /// IP protocol in string format, for example: "TCP", "UDP", "ICMP".
@@ -2413,7 +2373,6 @@ pub struct ProxyConnectionInfo {
     pub network_uri: ::prost::alloc::string::String,
 }
 /// For display only. Metadata associated with the load balancer backend.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LoadBalancerBackendInfo {
     /// Display name of the backend. For example, it might be an instance name for
@@ -2501,21 +2460,11 @@ pub mod load_balancer_backend_info {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                HealthCheckFirewallsConfigState::Unspecified => {
-                    "HEALTH_CHECK_FIREWALLS_CONFIG_STATE_UNSPECIFIED"
-                }
-                HealthCheckFirewallsConfigState::FirewallsConfigured => {
-                    "FIREWALLS_CONFIGURED"
-                }
-                HealthCheckFirewallsConfigState::FirewallsPartiallyConfigured => {
-                    "FIREWALLS_PARTIALLY_CONFIGURED"
-                }
-                HealthCheckFirewallsConfigState::FirewallsNotConfigured => {
-                    "FIREWALLS_NOT_CONFIGURED"
-                }
-                HealthCheckFirewallsConfigState::FirewallsUnsupported => {
-                    "FIREWALLS_UNSUPPORTED"
-                }
+                Self::Unspecified => "HEALTH_CHECK_FIREWALLS_CONFIG_STATE_UNSPECIFIED",
+                Self::FirewallsConfigured => "FIREWALLS_CONFIGURED",
+                Self::FirewallsPartiallyConfigured => "FIREWALLS_PARTIALLY_CONFIGURED",
+                Self::FirewallsNotConfigured => "FIREWALLS_NOT_CONFIGURED",
+                Self::FirewallsUnsupported => "FIREWALLS_UNSUPPORTED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -2536,7 +2485,6 @@ pub mod load_balancer_backend_info {
     }
 }
 /// For display only. Metadata associated with Storage Bucket.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StorageBucketInfo {
     /// Cloud Storage Bucket name.
@@ -2580,21 +2528,17 @@ impl LoadBalancerType {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            LoadBalancerType::Unspecified => "LOAD_BALANCER_TYPE_UNSPECIFIED",
-            LoadBalancerType::HttpsAdvancedLoadBalancer => "HTTPS_ADVANCED_LOAD_BALANCER",
-            LoadBalancerType::HttpsLoadBalancer => "HTTPS_LOAD_BALANCER",
-            LoadBalancerType::RegionalHttpsLoadBalancer => "REGIONAL_HTTPS_LOAD_BALANCER",
-            LoadBalancerType::InternalHttpsLoadBalancer => "INTERNAL_HTTPS_LOAD_BALANCER",
-            LoadBalancerType::SslProxyLoadBalancer => "SSL_PROXY_LOAD_BALANCER",
-            LoadBalancerType::TcpProxyLoadBalancer => "TCP_PROXY_LOAD_BALANCER",
-            LoadBalancerType::InternalTcpProxyLoadBalancer => {
-                "INTERNAL_TCP_PROXY_LOAD_BALANCER"
-            }
-            LoadBalancerType::NetworkLoadBalancer => "NETWORK_LOAD_BALANCER",
-            LoadBalancerType::LegacyNetworkLoadBalancer => "LEGACY_NETWORK_LOAD_BALANCER",
-            LoadBalancerType::TcpUdpInternalLoadBalancer => {
-                "TCP_UDP_INTERNAL_LOAD_BALANCER"
-            }
+            Self::Unspecified => "LOAD_BALANCER_TYPE_UNSPECIFIED",
+            Self::HttpsAdvancedLoadBalancer => "HTTPS_ADVANCED_LOAD_BALANCER",
+            Self::HttpsLoadBalancer => "HTTPS_LOAD_BALANCER",
+            Self::RegionalHttpsLoadBalancer => "REGIONAL_HTTPS_LOAD_BALANCER",
+            Self::InternalHttpsLoadBalancer => "INTERNAL_HTTPS_LOAD_BALANCER",
+            Self::SslProxyLoadBalancer => "SSL_PROXY_LOAD_BALANCER",
+            Self::TcpProxyLoadBalancer => "TCP_PROXY_LOAD_BALANCER",
+            Self::InternalTcpProxyLoadBalancer => "INTERNAL_TCP_PROXY_LOAD_BALANCER",
+            Self::NetworkLoadBalancer => "NETWORK_LOAD_BALANCER",
+            Self::LegacyNetworkLoadBalancer => "LEGACY_NETWORK_LOAD_BALANCER",
+            Self::TcpUdpInternalLoadBalancer => "TCP_UDP_INTERNAL_LOAD_BALANCER",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -2618,7 +2562,6 @@ impl LoadBalancerType {
     }
 }
 /// A Connectivity Test for a network reachability analysis.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ConnectivityTest {
     /// Required. Unique name of the resource using the form:
@@ -2712,7 +2655,6 @@ pub struct ConnectivityTest {
     pub bypass_firewall_checks: bool,
 }
 /// Source or destination of the Connectivity Test.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Endpoint {
     /// The IP address of the endpoint, which can be an external or internal IP.
@@ -2784,7 +2726,6 @@ pub struct Endpoint {
 /// Nested message and enum types in `Endpoint`.
 pub mod endpoint {
     /// Wrapper for Cloud Function attributes.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct CloudFunctionEndpoint {
         /// A [Cloud Function](<https://cloud.google.com/functions>) name.
@@ -2792,7 +2733,6 @@ pub mod endpoint {
         pub uri: ::prost::alloc::string::String,
     }
     /// Wrapper for the App Engine service version attributes.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct AppEngineVersionEndpoint {
         /// An [App Engine](<https://cloud.google.com/appengine>) [service
@@ -2802,7 +2742,6 @@ pub mod endpoint {
         pub uri: ::prost::alloc::string::String,
     }
     /// Wrapper for Cloud Run revision attributes.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct CloudRunRevisionEndpoint {
         /// A [Cloud Run](<https://cloud.google.com/run>)
@@ -2845,9 +2784,9 @@ pub mod endpoint {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                NetworkType::Unspecified => "NETWORK_TYPE_UNSPECIFIED",
-                NetworkType::GcpNetwork => "GCP_NETWORK",
-                NetworkType::NonGcpNetwork => "NON_GCP_NETWORK",
+                Self::Unspecified => "NETWORK_TYPE_UNSPECIFIED",
+                Self::GcpNetwork => "GCP_NETWORK",
+                Self::NonGcpNetwork => "NON_GCP_NETWORK",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -2893,11 +2832,11 @@ pub mod endpoint {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                ForwardingRuleTarget::Unspecified => "FORWARDING_RULE_TARGET_UNSPECIFIED",
-                ForwardingRuleTarget::Instance => "INSTANCE",
-                ForwardingRuleTarget::LoadBalancer => "LOAD_BALANCER",
-                ForwardingRuleTarget::VpnGateway => "VPN_GATEWAY",
-                ForwardingRuleTarget::Psc => "PSC",
+                Self::Unspecified => "FORWARDING_RULE_TARGET_UNSPECIFIED",
+                Self::Instance => "INSTANCE",
+                Self::LoadBalancer => "LOAD_BALANCER",
+                Self::VpnGateway => "VPN_GATEWAY",
+                Self::Psc => "PSC",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -2914,7 +2853,6 @@ pub mod endpoint {
     }
 }
 /// Results of the configuration analysis from the last run of the test.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ReachabilityDetails {
     /// The overall result of the test's configuration analysis.
@@ -2984,11 +2922,11 @@ pub mod reachability_details {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Result::Unspecified => "RESULT_UNSPECIFIED",
-                Result::Reachable => "REACHABLE",
-                Result::Unreachable => "UNREACHABLE",
-                Result::Ambiguous => "AMBIGUOUS",
-                Result::Undetermined => "UNDETERMINED",
+                Self::Unspecified => "RESULT_UNSPECIFIED",
+                Self::Reachable => "REACHABLE",
+                Self::Unreachable => "UNREACHABLE",
+                Self::Ambiguous => "AMBIGUOUS",
+                Self::Undetermined => "UNDETERMINED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -3005,8 +2943,7 @@ pub mod reachability_details {
     }
 }
 /// Latency percentile rank and value.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct LatencyPercentile {
     /// Percentage of samples this data point applies to.
     #[prost(int32, tag = "1")]
@@ -3018,7 +2955,6 @@ pub struct LatencyPercentile {
     pub latency_micros: i64,
 }
 /// Describes measured latency distribution.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LatencyDistribution {
     /// Representative latency percentiles.
@@ -3026,7 +2962,6 @@ pub struct LatencyDistribution {
     pub latency_percentiles: ::prost::alloc::vec::Vec<LatencyPercentile>,
 }
 /// Results of active probing from the last run of the test.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ProbingDetails {
     /// The overall result of active probing.
@@ -3070,7 +3005,6 @@ pub struct ProbingDetails {
 pub mod probing_details {
     /// Representation of a network edge location as per
     /// <https://cloud.google.com/vpc/docs/edge-locations.>
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct EdgeLocation {
         /// Name of the metropolitan area.
@@ -3113,11 +3047,11 @@ pub mod probing_details {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                ProbingResult::Unspecified => "PROBING_RESULT_UNSPECIFIED",
-                ProbingResult::Reachable => "REACHABLE",
-                ProbingResult::Unreachable => "UNREACHABLE",
-                ProbingResult::ReachabilityInconsistent => "REACHABILITY_INCONSISTENT",
-                ProbingResult::Undetermined => "UNDETERMINED",
+                Self::Unspecified => "PROBING_RESULT_UNSPECIFIED",
+                Self::Reachable => "REACHABLE",
+                Self::Unreachable => "UNREACHABLE",
+                Self::ReachabilityInconsistent => "REACHABILITY_INCONSISTENT",
+                Self::Undetermined => "UNDETERMINED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -3161,9 +3095,9 @@ pub mod probing_details {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                ProbingAbortCause::Unspecified => "PROBING_ABORT_CAUSE_UNSPECIFIED",
-                ProbingAbortCause::PermissionDenied => "PERMISSION_DENIED",
-                ProbingAbortCause::NoSourceLocation => "NO_SOURCE_LOCATION",
+                Self::Unspecified => "PROBING_ABORT_CAUSE_UNSPECIFIED",
+                Self::PermissionDenied => "PERMISSION_DENIED",
+                Self::NoSourceLocation => "NO_SOURCE_LOCATION",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -3178,7 +3112,6 @@ pub mod probing_details {
     }
 }
 /// Request for the `ListConnectivityTests` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListConnectivityTestsRequest {
     /// Required. The parent resource of the Connectivity Tests:
@@ -3216,7 +3149,6 @@ pub struct ListConnectivityTestsRequest {
     pub order_by: ::prost::alloc::string::String,
 }
 /// Response for the `ListConnectivityTests` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListConnectivityTestsResponse {
     /// List of Connectivity Tests.
@@ -3230,7 +3162,6 @@ pub struct ListConnectivityTestsResponse {
     pub unreachable: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Request for the `GetConnectivityTest` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetConnectivityTestRequest {
     /// Required. `ConnectivityTest` resource name using the form:
@@ -3239,7 +3170,6 @@ pub struct GetConnectivityTestRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request for the `CreateConnectivityTest` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateConnectivityTestRequest {
     /// Required. The parent resource of the Connectivity Test to create:
@@ -3261,7 +3191,6 @@ pub struct CreateConnectivityTestRequest {
     pub resource: ::core::option::Option<ConnectivityTest>,
 }
 /// Request for the `UpdateConnectivityTest` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateConnectivityTestRequest {
     /// Required. Mask of fields to update. At least one path must be supplied in
@@ -3273,7 +3202,6 @@ pub struct UpdateConnectivityTestRequest {
     pub resource: ::core::option::Option<ConnectivityTest>,
 }
 /// Request for the `DeleteConnectivityTest` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteConnectivityTestRequest {
     /// Required. Connectivity Test resource name using the form:
@@ -3282,7 +3210,6 @@ pub struct DeleteConnectivityTestRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request for the `RerunConnectivityTest` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RerunConnectivityTestRequest {
     /// Required. Connectivity Test resource name using the form:
@@ -3291,7 +3218,6 @@ pub struct RerunConnectivityTestRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Metadata describing an [Operation][google.longrunning.Operation]
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OperationMetadata {
     /// The time the operation was created.
@@ -3319,11 +3245,17 @@ pub struct OperationMetadata {
 }
 /// Generated server implementations.
 pub mod reachability_service_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with ReachabilityServiceServer.
     #[async_trait]
-    pub trait ReachabilityService: Send + Sync + 'static {
+    pub trait ReachabilityService: std::marker::Send + std::marker::Sync + 'static {
         /// Lists all Connectivity Tests owned by a project.
         async fn list_connectivity_tests(
             &self,
@@ -3418,20 +3350,18 @@ pub mod reachability_service_server {
     /// You can use the analysis results to verify these configurations and
     /// to troubleshoot connectivity issues.
     #[derive(Debug)]
-    pub struct ReachabilityServiceServer<T: ReachabilityService> {
-        inner: _Inner<T>,
+    pub struct ReachabilityServiceServer<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: ReachabilityService> ReachabilityServiceServer<T> {
+    impl<T> ReachabilityServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -3481,8 +3411,8 @@ pub mod reachability_service_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for ReachabilityServiceServer<T>
     where
         T: ReachabilityService,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -3494,7 +3424,6 @@ pub mod reachability_service_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.cloud.networkmanagement.v1beta1.ReachabilityService/ListConnectivityTests" => {
                     #[allow(non_camel_case_types)]
@@ -3529,7 +3458,6 @@ pub mod reachability_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListConnectivityTestsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -3579,7 +3507,6 @@ pub mod reachability_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetConnectivityTestSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -3629,7 +3556,6 @@ pub mod reachability_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = CreateConnectivityTestSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -3679,7 +3605,6 @@ pub mod reachability_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = UpdateConnectivityTestSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -3729,7 +3654,6 @@ pub mod reachability_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = RerunConnectivityTestSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -3779,7 +3703,6 @@ pub mod reachability_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = DeleteConnectivityTestSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -3798,20 +3721,25 @@ pub mod reachability_service_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: ReachabilityService> Clone for ReachabilityServiceServer<T> {
+    impl<T> Clone for ReachabilityServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -3823,18 +3751,9 @@ pub mod reachability_service_server {
             }
         }
     }
-    impl<T: ReachabilityService> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: ReachabilityService> tonic::server::NamedService
-    for ReachabilityServiceServer<T> {
-        const NAME: &'static str = "google.cloud.networkmanagement.v1beta1.ReachabilityService";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.cloud.networkmanagement.v1beta1.ReachabilityService";
+    impl<T> tonic::server::NamedService for ReachabilityServiceServer<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }

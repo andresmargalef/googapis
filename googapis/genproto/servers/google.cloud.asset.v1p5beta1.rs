@@ -7,7 +7,6 @@
 /// See [Supported asset
 /// types](<https://cloud.google.com/asset-inventory/docs/supported-asset-types>)
 /// for more information.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Asset {
     /// The full name of the asset. Example:
@@ -64,7 +63,6 @@ pub struct Asset {
 pub mod asset {
     /// A representation of an [access
     /// policy](<https://cloud.google.com/access-context-manager/docs/overview#access-policies>).
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum AccessContextPolicy {
         /// Please also refer to the [access policy user
@@ -88,7 +86,6 @@ pub mod asset {
     }
 }
 /// A representation of a Google Cloud resource.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Resource {
     /// The API version. Example: "v1".
@@ -136,7 +133,6 @@ pub struct Resource {
     pub data: ::core::option::Option<::prost_types::Struct>,
 }
 /// ListAssets request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAssetsRequest {
     /// Required. Name of the organization or project the assets belong to. Format:
@@ -187,7 +183,6 @@ pub struct ListAssetsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// ListAssets response.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAssetsResponse {
     /// Time the snapshot was taken.
@@ -224,11 +219,11 @@ impl ContentType {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            ContentType::Unspecified => "CONTENT_TYPE_UNSPECIFIED",
-            ContentType::Resource => "RESOURCE",
-            ContentType::IamPolicy => "IAM_POLICY",
-            ContentType::OrgPolicy => "ORG_POLICY",
-            ContentType::AccessPolicy => "ACCESS_POLICY",
+            Self::Unspecified => "CONTENT_TYPE_UNSPECIFIED",
+            Self::Resource => "RESOURCE",
+            Self::IamPolicy => "IAM_POLICY",
+            Self::OrgPolicy => "ORG_POLICY",
+            Self::AccessPolicy => "ACCESS_POLICY",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -245,11 +240,17 @@ impl ContentType {
 }
 /// Generated server implementations.
 pub mod asset_service_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with AssetServiceServer.
     #[async_trait]
-    pub trait AssetService: Send + Sync + 'static {
+    pub trait AssetService: std::marker::Send + std::marker::Sync + 'static {
         /// Lists assets with time and resource types and returns paged results in
         /// response.
         async fn list_assets(
@@ -262,20 +263,18 @@ pub mod asset_service_server {
     }
     /// Asset service definition.
     #[derive(Debug)]
-    pub struct AssetServiceServer<T: AssetService> {
-        inner: _Inner<T>,
+    pub struct AssetServiceServer<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: AssetService> AssetServiceServer<T> {
+    impl<T> AssetServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -325,8 +324,8 @@ pub mod asset_service_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for AssetServiceServer<T>
     where
         T: AssetService,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -338,7 +337,6 @@ pub mod asset_service_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.cloud.asset.v1p5beta1.AssetService/ListAssets" => {
                     #[allow(non_camel_case_types)]
@@ -369,7 +367,6 @@ pub mod asset_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListAssetsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -388,20 +385,25 @@ pub mod asset_service_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: AssetService> Clone for AssetServiceServer<T> {
+    impl<T> Clone for AssetServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -413,17 +415,9 @@ pub mod asset_service_server {
             }
         }
     }
-    impl<T: AssetService> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: AssetService> tonic::server::NamedService for AssetServiceServer<T> {
-        const NAME: &'static str = "google.cloud.asset.v1p5beta1.AssetService";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.cloud.asset.v1p5beta1.AssetService";
+    impl<T> tonic::server::NamedService for AssetServiceServer<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }

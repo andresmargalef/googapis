@@ -19,10 +19,10 @@ impl AccessRight {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            AccessRight::Unspecified => "ACCESS_RIGHT_UNSPECIFIED",
-            AccessRight::Standard => "STANDARD",
-            AccessRight::Admin => "ADMIN",
-            AccessRight::PerformanceReporting => "PERFORMANCE_REPORTING",
+            Self::Unspecified => "ACCESS_RIGHT_UNSPECIFIED",
+            Self::Standard => "STANDARD",
+            Self::Admin => "ADMIN",
+            Self::PerformanceReporting => "PERFORMANCE_REPORTING",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -48,7 +48,6 @@ impl AccessRight {
 /// state, merchant needs to pay tax to all tax authorities associated with
 /// the shipping destination.
 /// Next Id : 8
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TaxRule {
     /// Region code in which this rule is applicable
@@ -77,7 +76,6 @@ pub struct TaxRule {
 /// Nested message and enum types in `TaxRule`.
 pub mod tax_rule {
     /// A range of postal codes that defines the area.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct TaxPostalCodeRange {
         /// Required. The start of the postal code range, which is also the smallest
@@ -90,7 +88,6 @@ pub mod tax_rule {
         pub end: ::prost::alloc::string::String,
     }
     /// Describe the location through either postal code range or a criteria id.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Location {
         /// The admin_id or criteria_id of the region in which this rule is
@@ -103,8 +100,7 @@ pub mod tax_rule {
     }
     /// What is the way to calculate tax rate for deliveries to this admin's area.
     /// Can only be set on US states.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
     pub enum RateCalculation {
         /// Rate that depends on delivery location: if merchant has a nexus in
         /// corresponding US state, rates from authorities with jurisdiction over
@@ -118,7 +114,6 @@ pub mod tax_rule {
     }
 }
 /// The tax settings of a merchant account. All methods require the admin role.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AccountTax {
     /// Identifier. The name of the tax setting.
@@ -136,7 +131,6 @@ pub struct AccountTax {
     pub tax_rules: ::prost::alloc::vec::Vec<TaxRule>,
 }
 /// Request to get tax settings
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetAccountTaxRequest {
     /// Required. The name from which tax settings will be retrieved
@@ -144,7 +138,6 @@ pub struct GetAccountTaxRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request to update the tax settings
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateAccountTaxRequest {
     /// Required. The tax setting that will be updated
@@ -157,7 +150,6 @@ pub struct UpdateAccountTaxRequest {
 /// Request to list all sub-account tax settings only for the requesting merchant
 /// This method can only be called on a multi-client account, otherwise it'll
 /// return an error.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAccountTaxRequest {
     /// Required. The parent, which owns this collection of account tax.
@@ -175,7 +167,6 @@ pub struct ListAccountTaxRequest {
 /// Response to account tax list request
 /// This method can only be called on a multi-client account, otherwise it'll
 /// return an error.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAccountTaxResponse {
     /// Page of accounttax settings
@@ -187,11 +178,17 @@ pub struct ListAccountTaxResponse {
 }
 /// Generated server implementations.
 pub mod account_tax_service_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with AccountTaxServiceServer.
     #[async_trait]
-    pub trait AccountTaxService: Send + Sync + 'static {
+    pub trait AccountTaxService: std::marker::Send + std::marker::Sync + 'static {
         /// Returns the tax rules that match the conditions of GetAccountTaxRequest
         async fn get_account_tax(
             &self,
@@ -220,20 +217,18 @@ pub mod account_tax_service_server {
     ///
     /// - [AccountTax][google.shopping.merchant.accounts.v1main.AccountTax]
     #[derive(Debug)]
-    pub struct AccountTaxServiceServer<T: AccountTaxService> {
-        inner: _Inner<T>,
+    pub struct AccountTaxServiceServer<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: AccountTaxService> AccountTaxServiceServer<T> {
+    impl<T> AccountTaxServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -283,8 +278,8 @@ pub mod account_tax_service_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for AccountTaxServiceServer<T>
     where
         T: AccountTaxService,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -296,7 +291,6 @@ pub mod account_tax_service_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.shopping.merchant.accounts.v1beta.AccountTaxService/GetAccountTax" => {
                     #[allow(non_camel_case_types)]
@@ -328,7 +322,6 @@ pub mod account_tax_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetAccountTaxSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -375,7 +368,6 @@ pub mod account_tax_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListAccountTaxSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -425,7 +417,6 @@ pub mod account_tax_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = UpdateAccountTaxSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -444,20 +435,25 @@ pub mod account_tax_service_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: AccountTaxService> Clone for AccountTaxServiceServer<T> {
+    impl<T> Clone for AccountTaxServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -469,24 +465,14 @@ pub mod account_tax_service_server {
             }
         }
     }
-    impl<T: AccountTaxService> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: AccountTaxService> tonic::server::NamedService
-    for AccountTaxServiceServer<T> {
-        const NAME: &'static str = "google.shopping.merchant.accounts.v1beta.AccountTaxService";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.shopping.merchant.accounts.v1beta.AccountTaxService";
+    impl<T> tonic::server::NamedService for AccountTaxServiceServer<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }
 /// An
 /// [`AccountIssue`](<https://support.google.com/merchants/answer/12153802?sjid=17798438912526418908-EU#account>).
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AccountIssue {
     /// Identifier. The resource name of the account issue.
@@ -515,7 +501,6 @@ pub struct AccountIssue {
 /// Nested message and enum types in `AccountIssue`.
 pub mod account_issue {
     /// The impact of the issue on a destination.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ImpactedDestination {
         /// The impacted reporting context.
@@ -532,7 +517,6 @@ pub mod account_issue {
     /// Nested message and enum types in `ImpactedDestination`.
     pub mod impacted_destination {
         /// The impact of the issue on a region.
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct Impact {
             /// The [CLDR region code](<https://cldr.unicode.org/>) where this issue
@@ -575,10 +559,10 @@ pub mod account_issue {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Severity::Unspecified => "SEVERITY_UNSPECIFIED",
-                Severity::Critical => "CRITICAL",
-                Severity::Error => "ERROR",
-                Severity::Suggestion => "SUGGESTION",
+                Self::Unspecified => "SEVERITY_UNSPECIFIED",
+                Self::Critical => "CRITICAL",
+                Self::Error => "ERROR",
+                Self::Suggestion => "SUGGESTION",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -594,7 +578,6 @@ pub mod account_issue {
     }
 }
 /// Request message for the `ListAccountIssues` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAccountIssuesRequest {
     /// Required. The parent, which owns this collection of issues.
@@ -626,7 +609,6 @@ pub struct ListAccountIssuesRequest {
     pub time_zone: ::core::option::Option<super::super::super::super::r#type::TimeZone>,
 }
 /// Response message for the `ListAccountIssues` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAccountIssuesResponse {
     /// The issues from the specified account.
@@ -639,11 +621,17 @@ pub struct ListAccountIssuesResponse {
 }
 /// Generated server implementations.
 pub mod account_issue_service_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with AccountIssueServiceServer.
     #[async_trait]
-    pub trait AccountIssueService: Send + Sync + 'static {
+    pub trait AccountIssueService: std::marker::Send + std::marker::Sync + 'static {
         /// Lists all account issues of a Merchant Center account.
         async fn list_account_issues(
             &self,
@@ -655,20 +643,18 @@ pub mod account_issue_service_server {
     }
     /// Service to support `AccountIssueService` API.
     #[derive(Debug)]
-    pub struct AccountIssueServiceServer<T: AccountIssueService> {
-        inner: _Inner<T>,
+    pub struct AccountIssueServiceServer<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: AccountIssueService> AccountIssueServiceServer<T> {
+    impl<T> AccountIssueServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -718,8 +704,8 @@ pub mod account_issue_service_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for AccountIssueServiceServer<T>
     where
         T: AccountIssueService,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -731,7 +717,6 @@ pub mod account_issue_service_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.shopping.merchant.accounts.v1beta.AccountIssueService/ListAccountIssues" => {
                     #[allow(non_camel_case_types)]
@@ -766,7 +751,6 @@ pub mod account_issue_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListAccountIssuesSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -785,20 +769,25 @@ pub mod account_issue_service_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: AccountIssueService> Clone for AccountIssueServiceServer<T> {
+    impl<T> Clone for AccountIssueServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -810,23 +799,13 @@ pub mod account_issue_service_server {
             }
         }
     }
-    impl<T: AccountIssueService> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: AccountIssueService> tonic::server::NamedService
-    for AccountIssueServiceServer<T> {
-        const NAME: &'static str = "google.shopping.merchant.accounts.v1beta.AccountIssueService";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.shopping.merchant.accounts.v1beta.AccountIssueService";
+    impl<T> tonic::server::NamedService for AccountIssueServiceServer<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }
 /// A [user](<https://support.google.com/merchants/answer/12160472>).
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct User {
     /// Identifier. The resource name of the user.
@@ -876,9 +855,9 @@ pub mod user {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                State::Unspecified => "STATE_UNSPECIFIED",
-                State::Pending => "PENDING",
-                State::Verified => "VERIFIED",
+                Self::Unspecified => "STATE_UNSPECIFIED",
+                Self::Pending => "PENDING",
+                Self::Verified => "VERIFIED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -893,7 +872,6 @@ pub mod user {
     }
 }
 /// Request message for the `GetUser` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetUserRequest {
     /// Required. The name of the user to retrieve.
@@ -906,7 +884,6 @@ pub struct GetUserRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for the `CreateUser` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateUserRequest {
     /// Required. The resource name of the account for which a user will be
@@ -922,7 +899,6 @@ pub struct CreateUserRequest {
     pub user: ::core::option::Option<User>,
 }
 /// Request message for the `DeleteUser` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteUserRequest {
     /// Required. The name of the user to delete.
@@ -934,7 +910,6 @@ pub struct DeleteUserRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for the `UpdateUser` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateUserRequest {
     /// Required. The new version of the user.
@@ -948,7 +923,6 @@ pub struct UpdateUserRequest {
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
 /// Request message for the `ListUsers` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListUsersRequest {
     /// Required. The parent, which owns this collection of users.
@@ -969,7 +943,6 @@ pub struct ListUsersRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for the `ListUsers` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListUsersResponse {
     /// The users from the specified account.
@@ -982,11 +955,17 @@ pub struct ListUsersResponse {
 }
 /// Generated server implementations.
 pub mod user_service_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with UserServiceServer.
     #[async_trait]
-    pub trait UserService: Send + Sync + 'static {
+    pub trait UserService: std::marker::Send + std::marker::Sync + 'static {
         /// Retrieves a Merchant Center account user.
         async fn get_user(
             &self,
@@ -1021,20 +1000,18 @@ pub mod user_service_server {
     }
     /// Service to support user API.
     #[derive(Debug)]
-    pub struct UserServiceServer<T: UserService> {
-        inner: _Inner<T>,
+    pub struct UserServiceServer<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: UserService> UserServiceServer<T> {
+    impl<T> UserServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -1084,8 +1061,8 @@ pub mod user_service_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for UserServiceServer<T>
     where
         T: UserService,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -1097,7 +1074,6 @@ pub mod user_service_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.shopping.merchant.accounts.v1beta.UserService/GetUser" => {
                     #[allow(non_camel_case_types)]
@@ -1128,7 +1104,6 @@ pub mod user_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetUserSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1174,7 +1149,6 @@ pub mod user_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = CreateUserSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1220,7 +1194,6 @@ pub mod user_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = DeleteUserSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1266,7 +1239,6 @@ pub mod user_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = UpdateUserSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1312,7 +1284,6 @@ pub mod user_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListUsersSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1331,20 +1302,25 @@ pub mod user_service_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: UserService> Clone for UserServiceServer<T> {
+    impl<T> Clone for UserServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -1356,22 +1332,13 @@ pub mod user_service_server {
             }
         }
     }
-    impl<T: UserService> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: UserService> tonic::server::NamedService for UserServiceServer<T> {
-        const NAME: &'static str = "google.shopping.merchant.accounts.v1beta.UserService";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.shopping.merchant.accounts.v1beta.UserService";
+    impl<T> tonic::server::NamedService for UserServiceServer<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }
 /// An account.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Account {
     /// Identifier. The resource name of the account.
@@ -1408,7 +1375,6 @@ pub struct Account {
     pub language_code: ::prost::alloc::string::String,
 }
 /// Request message for the `GetAccount` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetAccountRequest {
     /// Required. The name of the account to retrieve.
@@ -1417,7 +1383,6 @@ pub struct GetAccountRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for the `CreateAndConfigureAccount` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateAndConfigureAccountRequest {
     /// Required. The account to be created.
@@ -1443,7 +1408,6 @@ pub struct CreateAndConfigureAccountRequest {
 /// Nested message and enum types in `CreateAndConfigureAccountRequest`.
 pub mod create_and_configure_account_request {
     /// Reference to a Terms of Service resource.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct AcceptTermsOfService {
         /// Required. The resource name of the terms of service version.
@@ -1457,7 +1421,6 @@ pub mod create_and_configure_account_request {
     }
     /// Additional instructions to add account services during creation of the
     /// account.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct AddAccountService {
         /// Optional. The provider of the service.
@@ -1475,8 +1438,7 @@ pub mod create_and_configure_account_request {
         /// Currently only supports
         /// [Multi-client](<https://support.google.com/merchants/answer/188487>)
         /// parent account type.
-        #[allow(clippy::derive_partial_eq_without_eq)]
-        #[derive(Clone, PartialEq, ::prost::Oneof)]
+        #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
         pub enum ServiceType {
             /// The provider is an aggregator for the account.
             #[prost(message, tag = "2")]
@@ -1485,7 +1447,6 @@ pub mod create_and_configure_account_request {
     }
 }
 /// Request message for the `DeleteAccount` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteAccountRequest {
     /// Required. The name of the account to delete.
@@ -1494,7 +1455,6 @@ pub struct DeleteAccountRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for the `UpdateAccount` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateAccountRequest {
     /// Required. The new version of the account.
@@ -1505,7 +1465,6 @@ pub struct UpdateAccountRequest {
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
 /// Request message for the `ListAccounts` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAccountsRequest {
     /// Optional. The maximum number of accounts to return. The service may return
@@ -1528,7 +1487,6 @@ pub struct ListAccountsRequest {
     pub filter: ::prost::alloc::string::String,
 }
 /// Response message for the `ListAccounts` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAccountsResponse {
     /// The accounts matching the `ListAccountsRequest`.
@@ -1540,7 +1498,6 @@ pub struct ListAccountsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for the `ListSubAccounts` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListSubAccountsRequest {
     /// Required. The parent account.
@@ -1561,7 +1518,6 @@ pub struct ListSubAccountsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for the `ListSubAccounts` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListSubAccountsResponse {
     /// The accounts for which the given parent account is an aggregator.
@@ -1574,11 +1530,17 @@ pub struct ListSubAccountsResponse {
 }
 /// Generated server implementations.
 pub mod accounts_service_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with AccountsServiceServer.
     #[async_trait]
-    pub trait AccountsService: Send + Sync + 'static {
+    pub trait AccountsService: std::marker::Send + std::marker::Sync + 'static {
         /// Retrieves an account from your Merchant Center account.
         /// After inserting, updating, or deleting an account, it may take several
         /// minutes before changes take effect.
@@ -1632,20 +1594,18 @@ pub mod accounts_service_server {
     }
     /// Service to support Accounts API.
     #[derive(Debug)]
-    pub struct AccountsServiceServer<T: AccountsService> {
-        inner: _Inner<T>,
+    pub struct AccountsServiceServer<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: AccountsService> AccountsServiceServer<T> {
+    impl<T> AccountsServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -1695,8 +1655,8 @@ pub mod accounts_service_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for AccountsServiceServer<T>
     where
         T: AccountsService,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -1708,7 +1668,6 @@ pub mod accounts_service_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.shopping.merchant.accounts.v1beta.AccountsService/GetAccount" => {
                     #[allow(non_camel_case_types)]
@@ -1739,7 +1698,6 @@ pub mod accounts_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetAccountSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1792,7 +1750,6 @@ pub mod accounts_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = CreateAndConfigureAccountSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1839,7 +1796,6 @@ pub mod accounts_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = DeleteAccountSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1886,7 +1842,6 @@ pub mod accounts_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = UpdateAccountSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1932,7 +1887,6 @@ pub mod accounts_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListAccountsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1979,7 +1933,6 @@ pub mod accounts_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListSubAccountsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1998,20 +1951,25 @@ pub mod accounts_service_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: AccountsService> Clone for AccountsServiceServer<T> {
+    impl<T> Clone for AccountsServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -2023,23 +1981,14 @@ pub mod accounts_service_server {
             }
         }
     }
-    impl<T: AccountsService> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: AccountsService> tonic::server::NamedService for AccountsServiceServer<T> {
-        const NAME: &'static str = "google.shopping.merchant.accounts.v1beta.AccountsService";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.shopping.merchant.accounts.v1beta.AccountsService";
+    impl<T> tonic::server::NamedService for AccountsServiceServer<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }
 /// Collection of information related to the [identity of a
 /// business](<https://support.google.com/merchants/answer/12564247>).
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BusinessIdentity {
     /// Identifier. The resource name of the business identity.
@@ -2082,8 +2031,7 @@ pub struct BusinessIdentity {
 /// Nested message and enum types in `BusinessIdentity`.
 pub mod business_identity {
     /// All information related to an identity attribute.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct IdentityAttribute {
         /// Required. The declaration of identity for this attribute.
         #[prost(enumeration = "identity_attribute::IdentityDeclaration", tag = "1")]
@@ -2119,13 +2067,9 @@ pub mod business_identity {
             /// (if the ProtoBuf definition does not change) and safe for programmatic use.
             pub fn as_str_name(&self) -> &'static str {
                 match self {
-                    IdentityDeclaration::Unspecified => {
-                        "IDENTITY_DECLARATION_UNSPECIFIED"
-                    }
-                    IdentityDeclaration::SelfIdentifiesAs => "SELF_IDENTIFIES_AS",
-                    IdentityDeclaration::DoesNotSelfIdentifyAs => {
-                        "DOES_NOT_SELF_IDENTIFY_AS"
-                    }
+                    Self::Unspecified => "IDENTITY_DECLARATION_UNSPECIFIED",
+                    Self::SelfIdentifiesAs => "SELF_IDENTIFIES_AS",
+                    Self::DoesNotSelfIdentifyAs => "DOES_NOT_SELF_IDENTIFY_AS",
                 }
             }
             /// Creates an enum from field names used in the ProtoBuf definition.
@@ -2170,9 +2114,9 @@ pub mod business_identity {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                PromotionsConsent::Unspecified => "PROMOTIONS_CONSENT_UNSPECIFIED",
-                PromotionsConsent::Given => "PROMOTIONS_CONSENT_GIVEN",
-                PromotionsConsent::Denied => "PROMOTIONS_CONSENT_DENIED",
+                Self::Unspecified => "PROMOTIONS_CONSENT_UNSPECIFIED",
+                Self::Given => "PROMOTIONS_CONSENT_GIVEN",
+                Self::Denied => "PROMOTIONS_CONSENT_DENIED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -2187,7 +2131,6 @@ pub mod business_identity {
     }
 }
 /// Request message for the `GetBusinessIdentity` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetBusinessIdentityRequest {
     /// Required. The resource name of the business identity.
@@ -2196,7 +2139,6 @@ pub struct GetBusinessIdentityRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for the `UpdateBusinessIdentity` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateBusinessIdentityRequest {
     /// Required. The new version of the business identity.
@@ -2208,11 +2150,17 @@ pub struct UpdateBusinessIdentityRequest {
 }
 /// Generated server implementations.
 pub mod business_identity_service_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with BusinessIdentityServiceServer.
     #[async_trait]
-    pub trait BusinessIdentityService: Send + Sync + 'static {
+    pub trait BusinessIdentityService: std::marker::Send + std::marker::Sync + 'static {
         /// Retrieves the business identity of an account.
         async fn get_business_identity(
             &self,
@@ -2234,20 +2182,18 @@ pub mod business_identity_service_server {
     /// Service to support [business
     /// identity](https://support.google.com/merchants/answer/12564247) API.
     #[derive(Debug)]
-    pub struct BusinessIdentityServiceServer<T: BusinessIdentityService> {
-        inner: _Inner<T>,
+    pub struct BusinessIdentityServiceServer<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: BusinessIdentityService> BusinessIdentityServiceServer<T> {
+    impl<T> BusinessIdentityServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -2298,8 +2244,8 @@ pub mod business_identity_service_server {
     for BusinessIdentityServiceServer<T>
     where
         T: BusinessIdentityService,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -2311,7 +2257,6 @@ pub mod business_identity_service_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.shopping.merchant.accounts.v1beta.BusinessIdentityService/GetBusinessIdentity" => {
                     #[allow(non_camel_case_types)]
@@ -2348,7 +2293,6 @@ pub mod business_identity_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetBusinessIdentitySvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -2400,7 +2344,6 @@ pub mod business_identity_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = UpdateBusinessIdentitySvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -2419,20 +2362,25 @@ pub mod business_identity_service_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: BusinessIdentityService> Clone for BusinessIdentityServiceServer<T> {
+    impl<T> Clone for BusinessIdentityServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -2444,23 +2392,13 @@ pub mod business_identity_service_server {
             }
         }
     }
-    impl<T: BusinessIdentityService> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: BusinessIdentityService> tonic::server::NamedService
-    for BusinessIdentityServiceServer<T> {
-        const NAME: &'static str = "google.shopping.merchant.accounts.v1beta.BusinessIdentityService";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.shopping.merchant.accounts.v1beta.BusinessIdentityService";
+    impl<T> tonic::server::NamedService for BusinessIdentityServiceServer<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }
 /// Customer service information.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CustomerService {
     /// Optional. The URI where customer service may be found.
@@ -2491,9 +2429,9 @@ impl PhoneVerificationState {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            PhoneVerificationState::Unspecified => "PHONE_VERIFICATION_STATE_UNSPECIFIED",
-            PhoneVerificationState::Verified => "PHONE_VERIFICATION_STATE_VERIFIED",
-            PhoneVerificationState::Unverified => "PHONE_VERIFICATION_STATE_UNVERIFIED",
+            Self::Unspecified => "PHONE_VERIFICATION_STATE_UNSPECIFIED",
+            Self::Verified => "PHONE_VERIFICATION_STATE_VERIFIED",
+            Self::Unverified => "PHONE_VERIFICATION_STATE_UNVERIFIED",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -2507,7 +2445,6 @@ impl PhoneVerificationState {
     }
 }
 /// Collection of information related to a business.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BusinessInfo {
     /// Identifier. The resource name of the business info.
@@ -2530,7 +2467,6 @@ pub struct BusinessInfo {
     pub customer_service: ::core::option::Option<CustomerService>,
 }
 /// Request message for the `GetBusinessInfo` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetBusinessInfoRequest {
     /// Required. The resource name of the business info.
@@ -2539,7 +2475,6 @@ pub struct GetBusinessInfoRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for the `UpdateBusinessInfo` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateBusinessInfoRequest {
     /// Required. The new version of the business info.
@@ -2551,11 +2486,17 @@ pub struct UpdateBusinessInfoRequest {
 }
 /// Generated server implementations.
 pub mod business_info_service_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with BusinessInfoServiceServer.
     #[async_trait]
-    pub trait BusinessInfoService: Send + Sync + 'static {
+    pub trait BusinessInfoService: std::marker::Send + std::marker::Sync + 'static {
         /// Retrieves the business info of an account.
         async fn get_business_info(
             &self,
@@ -2570,20 +2511,18 @@ pub mod business_info_service_server {
     }
     /// Service to support business info API.
     #[derive(Debug)]
-    pub struct BusinessInfoServiceServer<T: BusinessInfoService> {
-        inner: _Inner<T>,
+    pub struct BusinessInfoServiceServer<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: BusinessInfoService> BusinessInfoServiceServer<T> {
+    impl<T> BusinessInfoServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -2633,8 +2572,8 @@ pub mod business_info_service_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for BusinessInfoServiceServer<T>
     where
         T: BusinessInfoService,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -2646,7 +2585,6 @@ pub mod business_info_service_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.shopping.merchant.accounts.v1beta.BusinessInfoService/GetBusinessInfo" => {
                     #[allow(non_camel_case_types)]
@@ -2681,7 +2619,6 @@ pub mod business_info_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetBusinessInfoSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -2731,7 +2668,6 @@ pub mod business_info_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = UpdateBusinessInfoSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -2750,20 +2686,25 @@ pub mod business_info_service_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: BusinessInfoService> Clone for BusinessInfoServiceServer<T> {
+    impl<T> Clone for BusinessInfoServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -2775,25 +2716,15 @@ pub mod business_info_service_server {
             }
         }
     }
-    impl<T: BusinessInfoService> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: BusinessInfoService> tonic::server::NamedService
-    for BusinessInfoServiceServer<T> {
-        const NAME: &'static str = "google.shopping.merchant.accounts.v1beta.BusinessInfoService";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.shopping.merchant.accounts.v1beta.BusinessInfoService";
+    impl<T> tonic::server::NamedService for BusinessInfoServiceServer<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }
 /// The categories of notifications the user opted into / opted out of. The email
 /// preferences do not include mandatory announcements as users can't opt out of
 /// them.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EmailPreferences {
     /// Identifier. The name of the EmailPreferences. The endpoint is only
@@ -2838,10 +2769,10 @@ pub mod email_preferences {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                OptInState::Unspecified => "OPT_IN_STATE_UNSPECIFIED",
-                OptInState::OptedOut => "OPTED_OUT",
-                OptInState::OptedIn => "OPTED_IN",
-                OptInState::Unconfirmed => "UNCONFIRMED",
+                Self::Unspecified => "OPT_IN_STATE_UNSPECIFIED",
+                Self::OptedOut => "OPTED_OUT",
+                Self::OptedIn => "OPTED_IN",
+                Self::Unconfirmed => "UNCONFIRMED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -2857,7 +2788,6 @@ pub mod email_preferences {
     }
 }
 /// Request message for GetEmailPreferences method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetEmailPreferencesRequest {
     /// Required. The name of the `EmailPreferences` resource.
@@ -2866,7 +2796,6 @@ pub struct GetEmailPreferencesRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for UpdateEmailPreferences method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateEmailPreferencesRequest {
     /// Required. Email Preferences to be updated.
@@ -2878,11 +2807,17 @@ pub struct UpdateEmailPreferencesRequest {
 }
 /// Generated server implementations.
 pub mod email_preferences_service_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with EmailPreferencesServiceServer.
     #[async_trait]
-    pub trait EmailPreferencesService: Send + Sync + 'static {
+    pub trait EmailPreferencesService: std::marker::Send + std::marker::Sync + 'static {
         /// Returns the email preferences for a Merchant Center account user.
         ///
         /// Use the name=accounts/*/users/me/emailPreferences alias to get preferences
@@ -2918,20 +2853,18 @@ pub mod email_preferences_service_server {
     /// This service only permits retrieving and updating email preferences for the
     /// authenticated user.
     #[derive(Debug)]
-    pub struct EmailPreferencesServiceServer<T: EmailPreferencesService> {
-        inner: _Inner<T>,
+    pub struct EmailPreferencesServiceServer<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: EmailPreferencesService> EmailPreferencesServiceServer<T> {
+    impl<T> EmailPreferencesServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -2982,8 +2915,8 @@ pub mod email_preferences_service_server {
     for EmailPreferencesServiceServer<T>
     where
         T: EmailPreferencesService,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -2995,7 +2928,6 @@ pub mod email_preferences_service_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.shopping.merchant.accounts.v1beta.EmailPreferencesService/GetEmailPreferences" => {
                     #[allow(non_camel_case_types)]
@@ -3032,7 +2964,6 @@ pub mod email_preferences_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetEmailPreferencesSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -3084,7 +3015,6 @@ pub mod email_preferences_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = UpdateEmailPreferencesSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -3103,20 +3033,25 @@ pub mod email_preferences_service_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: EmailPreferencesService> Clone for EmailPreferencesServiceServer<T> {
+    impl<T> Clone for EmailPreferencesServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -3128,23 +3063,13 @@ pub mod email_preferences_service_server {
             }
         }
     }
-    impl<T: EmailPreferencesService> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: EmailPreferencesService> tonic::server::NamedService
-    for EmailPreferencesServiceServer<T> {
-        const NAME: &'static str = "google.shopping.merchant.accounts.v1beta.EmailPreferencesService";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.shopping.merchant.accounts.v1beta.EmailPreferencesService";
+    impl<T> tonic::server::NamedService for EmailPreferencesServiceServer<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }
 /// A store's homepage.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Homepage {
     /// Identifier. The resource name of the store's homepage.
@@ -3160,7 +3085,6 @@ pub struct Homepage {
     pub claimed: bool,
 }
 /// Request message for the `GetHomepage` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetHomepageRequest {
     /// Required. The name of the homepage to retrieve.
@@ -3169,7 +3093,6 @@ pub struct GetHomepageRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for the `UpdateHomepage` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateHomepageRequest {
     /// Required. The new version of the homepage.
@@ -3180,7 +3103,6 @@ pub struct UpdateHomepageRequest {
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
 /// Request message for the `ClaimHomepage` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ClaimHomepageRequest {
     /// Required. The name of the homepage to claim.
@@ -3189,7 +3111,6 @@ pub struct ClaimHomepageRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for the `UnclaimHomepage` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UnclaimHomepageRequest {
     /// Required. The name of the homepage to unclaim.
@@ -3199,11 +3120,17 @@ pub struct UnclaimHomepageRequest {
 }
 /// Generated server implementations.
 pub mod homepage_service_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with HomepageServiceServer.
     #[async_trait]
-    pub trait HomepageService: Send + Sync + 'static {
+    pub trait HomepageService: std::marker::Send + std::marker::Sync + 'static {
         /// Retrieves a store's homepage.
         async fn get_homepage(
             &self,
@@ -3240,20 +3167,18 @@ pub mod homepage_service_server {
     }
     /// Service to support an API for a store's homepage.
     #[derive(Debug)]
-    pub struct HomepageServiceServer<T: HomepageService> {
-        inner: _Inner<T>,
+    pub struct HomepageServiceServer<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: HomepageService> HomepageServiceServer<T> {
+    impl<T> HomepageServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -3303,8 +3228,8 @@ pub mod homepage_service_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for HomepageServiceServer<T>
     where
         T: HomepageService,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -3316,7 +3241,6 @@ pub mod homepage_service_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.shopping.merchant.accounts.v1beta.HomepageService/GetHomepage" => {
                     #[allow(non_camel_case_types)]
@@ -3347,7 +3271,6 @@ pub mod homepage_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetHomepageSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -3394,7 +3317,6 @@ pub mod homepage_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = UpdateHomepageSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -3441,7 +3363,6 @@ pub mod homepage_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ClaimHomepageSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -3488,7 +3409,6 @@ pub mod homepage_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = UnclaimHomepageSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -3507,20 +3427,25 @@ pub mod homepage_service_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: HomepageService> Clone for HomepageServiceServer<T> {
+    impl<T> Clone for HomepageServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -3532,22 +3457,13 @@ pub mod homepage_service_server {
             }
         }
     }
-    impl<T: HomepageService> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: HomepageService> tonic::server::NamedService for HomepageServiceServer<T> {
-        const NAME: &'static str = "google.shopping.merchant.accounts.v1beta.HomepageService";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.shopping.merchant.accounts.v1beta.HomepageService";
+    impl<T> tonic::server::NamedService for HomepageServiceServer<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }
 /// Request message for the `GetOnlineReturnPolicy` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetOnlineReturnPolicyRequest {
     /// Required. The name of the return policy to retrieve.
@@ -3556,7 +3472,6 @@ pub struct GetOnlineReturnPolicyRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for the `ListOnlineReturnPolicies` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListOnlineReturnPoliciesRequest {
     /// Required. The merchant account for which to list return policies.
@@ -3582,7 +3497,6 @@ pub struct ListOnlineReturnPoliciesRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for the `ListOnlineReturnPolicies` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListOnlineReturnPoliciesResponse {
     /// The retrieved return policies.
@@ -3596,7 +3510,6 @@ pub struct ListOnlineReturnPoliciesResponse {
 /// [Online return policy](<https://support.google.com/merchants/answer/10220642>)
 /// object. This is currently used to represent return policies for ads and free
 /// listings programs.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OnlineReturnPolicy {
     /// Identifier. The name of the `OnlineReturnPolicy` resource.
@@ -3662,7 +3575,6 @@ pub struct OnlineReturnPolicy {
 pub mod online_return_policy {
     /// The return shipping fee. This can either be a fixed fee or a boolean to
     /// indicate that the customer pays the actual shipping cost.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ReturnShippingFee {
         /// Type of return shipping fee.
@@ -3704,9 +3616,9 @@ pub mod online_return_policy {
             /// (if the ProtoBuf definition does not change) and safe for programmatic use.
             pub fn as_str_name(&self) -> &'static str {
                 match self {
-                    Type::Unspecified => "TYPE_UNSPECIFIED",
-                    Type::Fixed => "FIXED",
-                    Type::CustomerPayingActualFee => "CUSTOMER_PAYING_ACTUAL_FEE",
+                    Self::Unspecified => "TYPE_UNSPECIFIED",
+                    Self::Fixed => "FIXED",
+                    Self::CustomerPayingActualFee => "CUSTOMER_PAYING_ACTUAL_FEE",
                 }
             }
             /// Creates an enum from field names used in the ProtoBuf definition.
@@ -3721,7 +3633,6 @@ pub mod online_return_policy {
         }
     }
     /// The restocking fee. This can be a flat fee or a micro percent.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct RestockingFee {
         #[prost(oneof = "restocking_fee::Type", tags = "1, 2")]
@@ -3729,7 +3640,6 @@ pub mod online_return_policy {
     }
     /// Nested message and enum types in `RestockingFee`.
     pub mod restocking_fee {
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Oneof)]
         pub enum Type {
             /// Fixed restocking fee.
@@ -3742,8 +3652,7 @@ pub mod online_return_policy {
         }
     }
     /// The available policies.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct Policy {
         /// Policy type.
         #[prost(enumeration = "policy::Type", tag = "1")]
@@ -3786,10 +3695,10 @@ pub mod online_return_policy {
             /// (if the ProtoBuf definition does not change) and safe for programmatic use.
             pub fn as_str_name(&self) -> &'static str {
                 match self {
-                    Type::Unspecified => "TYPE_UNSPECIFIED",
-                    Type::NumberOfDaysAfterDelivery => "NUMBER_OF_DAYS_AFTER_DELIVERY",
-                    Type::NoReturns => "NO_RETURNS",
-                    Type::LifetimeReturns => "LIFETIME_RETURNS",
+                    Self::Unspecified => "TYPE_UNSPECIFIED",
+                    Self::NumberOfDaysAfterDelivery => "NUMBER_OF_DAYS_AFTER_DELIVERY",
+                    Self::NoReturns => "NO_RETURNS",
+                    Self::LifetimeReturns => "LIFETIME_RETURNS",
                 }
             }
             /// Creates an enum from field names used in the ProtoBuf definition.
@@ -3836,10 +3745,10 @@ pub mod online_return_policy {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                ReturnMethod::Unspecified => "RETURN_METHOD_UNSPECIFIED",
-                ReturnMethod::ByMail => "BY_MAIL",
-                ReturnMethod::InStore => "IN_STORE",
-                ReturnMethod::AtAKiosk => "AT_A_KIOSK",
+                Self::Unspecified => "RETURN_METHOD_UNSPECIFIED",
+                Self::ByMail => "BY_MAIL",
+                Self::InStore => "IN_STORE",
+                Self::AtAKiosk => "AT_A_KIOSK",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -3881,9 +3790,9 @@ pub mod online_return_policy {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                ItemCondition::Unspecified => "ITEM_CONDITION_UNSPECIFIED",
-                ItemCondition::New => "NEW",
-                ItemCondition::Used => "USED",
+                Self::Unspecified => "ITEM_CONDITION_UNSPECIFIED",
+                Self::New => "NEW",
+                Self::Used => "USED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -3899,11 +3808,17 @@ pub mod online_return_policy {
 }
 /// Generated server implementations.
 pub mod online_return_policy_service_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with OnlineReturnPolicyServiceServer.
     #[async_trait]
-    pub trait OnlineReturnPolicyService: Send + Sync + 'static {
+    pub trait OnlineReturnPolicyService: std::marker::Send + std::marker::Sync + 'static {
         /// Gets an existing return policy.
         async fn get_online_return_policy(
             &self,
@@ -3927,20 +3842,18 @@ pub mod online_return_policy_service_server {
     ///
     /// [OnlineReturnPolicy][google.shopping.merchant.accounts.v1.OnlineReturnPolicy]
     #[derive(Debug)]
-    pub struct OnlineReturnPolicyServiceServer<T: OnlineReturnPolicyService> {
-        inner: _Inner<T>,
+    pub struct OnlineReturnPolicyServiceServer<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: OnlineReturnPolicyService> OnlineReturnPolicyServiceServer<T> {
+    impl<T> OnlineReturnPolicyServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -3991,8 +3904,8 @@ pub mod online_return_policy_service_server {
     for OnlineReturnPolicyServiceServer<T>
     where
         T: OnlineReturnPolicyService,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -4004,7 +3917,6 @@ pub mod online_return_policy_service_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.shopping.merchant.accounts.v1beta.OnlineReturnPolicyService/GetOnlineReturnPolicy" => {
                     #[allow(non_camel_case_types)]
@@ -4041,7 +3953,6 @@ pub mod online_return_policy_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetOnlineReturnPolicySvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -4095,7 +4006,6 @@ pub mod online_return_policy_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListOnlineReturnPoliciesSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -4114,20 +4024,25 @@ pub mod online_return_policy_service_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: OnlineReturnPolicyService> Clone for OnlineReturnPolicyServiceServer<T> {
+    impl<T> Clone for OnlineReturnPolicyServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -4139,19 +4054,10 @@ pub mod online_return_policy_service_server {
             }
         }
     }
-    impl<T: OnlineReturnPolicyService> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: OnlineReturnPolicyService> tonic::server::NamedService
-    for OnlineReturnPolicyServiceServer<T> {
-        const NAME: &'static str = "google.shopping.merchant.accounts.v1beta.OnlineReturnPolicyService";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.shopping.merchant.accounts.v1beta.OnlineReturnPolicyService";
+    impl<T> tonic::server::NamedService for OnlineReturnPolicyServiceServer<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }
 /// Defines participation in a given program for the specified account.
@@ -4161,7 +4067,6 @@ pub mod online_return_policy_service_server {
 /// listings](<https://support.google.com/merchants/topic/9240261?ref_topic=7257954,7259405,&sjid=796648681813264022-EU>)
 /// program, which enables products from a merchant's store to be shown across
 /// Google for free.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Program {
     /// Identifier. The resource name of the program.
@@ -4191,7 +4096,6 @@ pub struct Program {
 /// Nested message and enum types in `Program`.
 pub mod program {
     /// Defines a requirement specified for participation in the program.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Requirement {
         /// Output only. Name of the requirement.
@@ -4241,10 +4145,10 @@ pub mod program {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                State::Unspecified => "STATE_UNSPECIFIED",
-                State::NotEligible => "NOT_ELIGIBLE",
-                State::Eligible => "ELIGIBLE",
-                State::Enabled => "ENABLED",
+                Self::Unspecified => "STATE_UNSPECIFIED",
+                Self::NotEligible => "NOT_ELIGIBLE",
+                Self::Eligible => "ELIGIBLE",
+                Self::Enabled => "ENABLED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -4260,7 +4164,6 @@ pub mod program {
     }
 }
 /// Request message for the GetProgram method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetProgramRequest {
     /// Required. The name of the program to retrieve.
@@ -4269,7 +4172,6 @@ pub struct GetProgramRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for the ListPrograms method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListProgramsRequest {
     /// Required. The name of the account for which to retrieve all programs.
@@ -4287,7 +4189,6 @@ pub struct ListProgramsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for the ListPrograms method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListProgramsResponse {
     /// The programs for the given account.
@@ -4299,7 +4200,6 @@ pub struct ListProgramsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for the EnableProgram method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EnableProgramRequest {
     /// Required. The name of the program for which to enable participation for the
@@ -4308,7 +4208,6 @@ pub struct EnableProgramRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for the DisableProgram method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DisableProgramRequest {
     /// Required. The name of the program for which to disable participation for
@@ -4318,11 +4217,17 @@ pub struct DisableProgramRequest {
 }
 /// Generated server implementations.
 pub mod programs_service_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with ProgramsServiceServer.
     #[async_trait]
-    pub trait ProgramsService: Send + Sync + 'static {
+    pub trait ProgramsService: std::marker::Send + std::marker::Sync + 'static {
         /// Retrieves the specified program for the account.
         async fn get_program(
             &self,
@@ -4361,20 +4266,18 @@ pub mod programs_service_server {
     /// participation in all available programs, in addition to methods for
     /// explicitly enabling or disabling participation in each program.
     #[derive(Debug)]
-    pub struct ProgramsServiceServer<T: ProgramsService> {
-        inner: _Inner<T>,
+    pub struct ProgramsServiceServer<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: ProgramsService> ProgramsServiceServer<T> {
+    impl<T> ProgramsServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -4424,8 +4327,8 @@ pub mod programs_service_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for ProgramsServiceServer<T>
     where
         T: ProgramsService,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -4437,7 +4340,6 @@ pub mod programs_service_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.shopping.merchant.accounts.v1beta.ProgramsService/GetProgram" => {
                     #[allow(non_camel_case_types)]
@@ -4468,7 +4370,6 @@ pub mod programs_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetProgramSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -4514,7 +4415,6 @@ pub mod programs_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListProgramsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -4561,7 +4461,6 @@ pub mod programs_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = EnableProgramSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -4608,7 +4507,6 @@ pub mod programs_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = DisableProgramSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -4627,20 +4525,25 @@ pub mod programs_service_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: ProgramsService> Clone for ProgramsServiceServer<T> {
+    impl<T> Clone for ProgramsServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -4652,22 +4555,13 @@ pub mod programs_service_server {
             }
         }
     }
-    impl<T: ProgramsService> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: ProgramsService> tonic::server::NamedService for ProgramsServiceServer<T> {
-        const NAME: &'static str = "google.shopping.merchant.accounts.v1beta.ProgramsService";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.shopping.merchant.accounts.v1beta.ProgramsService";
+    impl<T> tonic::server::NamedService for ProgramsServiceServer<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }
 /// Request message for the `GetRegion` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetRegionRequest {
     /// Required. The name of the region to retrieve.
@@ -4676,7 +4570,6 @@ pub struct GetRegionRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for the `CreateRegion` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateRegionRequest {
     /// Required. The account to create a region for.
@@ -4692,7 +4585,6 @@ pub struct CreateRegionRequest {
     pub region: ::core::option::Option<Region>,
 }
 /// Request message for the `UpdateRegion` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateRegionRequest {
     /// Required. The updated region.
@@ -4705,7 +4597,6 @@ pub struct UpdateRegionRequest {
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
 /// Request message for the `DeleteRegion` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteRegionRequest {
     /// Required. The name of the region to delete.
@@ -4714,7 +4605,6 @@ pub struct DeleteRegionRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for the `ListRegions` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListRegionsRequest {
     /// Required. The account to list regions for.
@@ -4736,7 +4626,6 @@ pub struct ListRegionsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for the `ListRegions` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListRegionsResponse {
     /// The regions from the specified merchant.
@@ -4753,7 +4642,6 @@ pub struct ListRegionsResponse {
 /// geotargets. For more information, see [Set up regions
 /// ](<https://support.google.com/merchants/answer/7410946#zippy=%2Ccreate-a-new-region>)
 /// for more information.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Region {
     /// Identifier. The resource name of the region.
@@ -4783,7 +4671,6 @@ pub mod region {
     /// A list of postal codes that defines the region area.
     /// Note: All regions defined using postal codes are accessible through the
     /// account's `ShippingSettings.postalCodeGroups` resource.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct PostalCodeArea {
         /// Required. [CLDR territory
@@ -4798,7 +4685,6 @@ pub mod region {
     /// Nested message and enum types in `PostalCodeArea`.
     pub mod postal_code_area {
         /// A range of postal codes that defines the region area.
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct PostalCodeRange {
             /// Required. A postal code or a pattern of the form prefix* denoting the
@@ -4819,7 +4705,6 @@ pub mod region {
         }
     }
     /// A list of geotargets that defines the region area.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct GeoTargetArea {
         /// Required. A non-empty list of [location
@@ -4831,11 +4716,17 @@ pub mod region {
 }
 /// Generated server implementations.
 pub mod regions_service_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with RegionsServiceServer.
     #[async_trait]
-    pub trait RegionsService: Send + Sync + 'static {
+    pub trait RegionsService: std::marker::Send + std::marker::Sync + 'static {
         /// Retrieves a region defined in your Merchant Center account.
         async fn get_region(
             &self,
@@ -4874,20 +4765,18 @@ pub mod regions_service_server {
     ///
     /// - [Region][google.shopping.merchant.accounts.v1main.Region]
     #[derive(Debug)]
-    pub struct RegionsServiceServer<T: RegionsService> {
-        inner: _Inner<T>,
+    pub struct RegionsServiceServer<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: RegionsService> RegionsServiceServer<T> {
+    impl<T> RegionsServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -4937,8 +4826,8 @@ pub mod regions_service_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for RegionsServiceServer<T>
     where
         T: RegionsService,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -4950,7 +4839,6 @@ pub mod regions_service_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.shopping.merchant.accounts.v1beta.RegionsService/GetRegion" => {
                     #[allow(non_camel_case_types)]
@@ -4981,7 +4869,6 @@ pub mod regions_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetRegionSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -5027,7 +4914,6 @@ pub mod regions_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = CreateRegionSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -5073,7 +4959,6 @@ pub mod regions_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = UpdateRegionSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -5119,7 +5004,6 @@ pub mod regions_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = DeleteRegionSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -5165,7 +5049,6 @@ pub mod regions_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListRegionsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -5184,20 +5067,25 @@ pub mod regions_service_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: RegionsService> Clone for RegionsServiceServer<T> {
+    impl<T> Clone for RegionsServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -5209,23 +5097,14 @@ pub mod regions_service_server {
             }
         }
     }
-    impl<T: RegionsService> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: RegionsService> tonic::server::NamedService for RegionsServiceServer<T> {
-        const NAME: &'static str = "google.shopping.merchant.accounts.v1beta.RegionsService";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.shopping.merchant.accounts.v1beta.RegionsService";
+    impl<T> tonic::server::NamedService for RegionsServiceServer<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }
 /// The merchant account's [shipping
 /// setting]((<https://support.google.com/merchants/answer/6069284>).
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ShippingSettings {
     /// Identifier. The resource name of the shipping setting.
@@ -5260,7 +5139,6 @@ pub struct ShippingSettings {
     pub etag: ::prost::alloc::string::String,
 }
 /// Shipping service.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Service {
     /// Required. Free-form name of the service. Must be unique within target
@@ -5312,7 +5190,6 @@ pub struct Service {
 pub mod service {
     /// A list of stores your products are delivered from.
     /// This is only valid for the local delivery shipment type.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct StoreConfig {
         /// Indicates whether all stores, or selected stores, listed by this
@@ -5334,8 +5211,7 @@ pub mod service {
     /// Nested message and enum types in `StoreConfig`.
     pub mod store_config {
         /// Configs related to local delivery ends for the day.
-        #[allow(clippy::derive_partial_eq_without_eq)]
-        #[derive(Clone, PartialEq, ::prost::Message)]
+        #[derive(Clone, Copy, PartialEq, ::prost::Message)]
         pub struct CutoffConfig {
             /// Time that local delivery ends for the day.
             #[prost(message, optional, tag = "1")]
@@ -5360,8 +5236,7 @@ pub mod service {
         /// Nested message and enum types in `CutoffConfig`.
         pub mod cutoff_config {
             /// Time that local delivery ends for the day.
-            #[allow(clippy::derive_partial_eq_without_eq)]
-            #[derive(Clone, PartialEq, ::prost::Message)]
+            #[derive(Clone, Copy, PartialEq, ::prost::Message)]
             pub struct LocalCutoffTime {
                 /// Hour local delivery orders must be placed by to process the same
                 /// day.
@@ -5404,9 +5279,9 @@ pub mod service {
             /// (if the ProtoBuf definition does not change) and safe for programmatic use.
             pub fn as_str_name(&self) -> &'static str {
                 match self {
-                    StoreServiceType::Unspecified => "STORE_SERVICE_TYPE_UNSPECIFIED",
-                    StoreServiceType::AllStores => "ALL_STORES",
-                    StoreServiceType::SelectedStores => "SELECTED_STORES",
+                    Self::Unspecified => "STORE_SERVICE_TYPE_UNSPECIFIED",
+                    Self::AllStores => "ALL_STORES",
+                    Self::SelectedStores => "SELECTED_STORES",
                 }
             }
             /// Creates an enum from field names used in the ProtoBuf definition.
@@ -5422,7 +5297,6 @@ pub mod service {
     }
     /// [Loyalty program](<https://support.google.com/merchants/answer/12922446>)
     /// provided by a merchant.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct LoyaltyProgram {
         /// This is the loyalty program label set in your loyalty program settings in
@@ -5439,7 +5313,6 @@ pub mod service {
     /// Nested message and enum types in `LoyaltyProgram`.
     pub mod loyalty_program {
         /// Subset of a merchants loyalty program.
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct LoyaltyProgramTiers {
             /// The tier label \[tier_label\] sub-attribute differentiates offer level
@@ -5482,10 +5355,10 @@ pub mod service {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                ShipmentType::Unspecified => "SHIPMENT_TYPE_UNSPECIFIED",
-                ShipmentType::Delivery => "DELIVERY",
-                ShipmentType::LocalDelivery => "LOCAL_DELIVERY",
-                ShipmentType::CollectionPoint => "COLLECTION_POINT",
+                Self::Unspecified => "SHIPMENT_TYPE_UNSPECIFIED",
+                Self::Delivery => "DELIVERY",
+                Self::LocalDelivery => "LOCAL_DELIVERY",
+                Self::CollectionPoint => "COLLECTION_POINT",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -5502,8 +5375,7 @@ pub mod service {
 }
 /// Maximum delivery radius.
 /// This is only required for the local delivery shipment type.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct Distance {
     /// Integer value of distance.
     #[prost(int64, optional, tag = "1")]
@@ -5544,9 +5416,9 @@ pub mod distance {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Unit::Unspecified => "UNIT_UNSPECIFIED",
-                Unit::Miles => "MILES",
-                Unit::Kilometers => "KILOMETERS",
+                Self::Unspecified => "UNIT_UNSPECIFIED",
+                Self::Miles => "MILES",
+                Self::Kilometers => "KILOMETERS",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -5562,7 +5434,6 @@ pub mod distance {
 }
 /// A fulfillment warehouse, which stores and handles inventory.
 /// Next tag: 7
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Warehouse {
     /// Required. The name of the warehouse. Must be unique within account.
@@ -5589,8 +5460,7 @@ pub struct Warehouse {
 /// The latest time of day that an order can be accepted and begin processing.
 /// Later orders will be processed in the next day. The time is based on the
 /// warehouse postal code.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct WarehouseCutoffTime {
     /// Required. Hour of the cutoff time until which an order has to be placed to
     /// be processed in the same day by the warehouse. Hour is based on the
@@ -5604,7 +5474,6 @@ pub struct WarehouseCutoffTime {
     pub minute: ::core::option::Option<i32>,
 }
 /// Shipping address of the warehouse.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Address {
     /// Street-level part of the address. For example: `111w 31st Street`.
@@ -5628,7 +5497,6 @@ pub struct Address {
     pub region_code: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// Time spent in various aspects from order to the delivery of the product.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeliveryTime {
     /// Minimum number of business days that is spent in transit. 0 means same
@@ -5679,7 +5547,6 @@ pub struct DeliveryTime {
     >,
 }
 /// Business days cutoff time definition.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CutoffTime {
     /// Required. Hour of the cutoff time until which an order has to be placed to
@@ -5697,7 +5564,6 @@ pub struct CutoffTime {
     pub time_zone: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// Business days of the warehouse.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BusinessDayConfig {
     /// Required. Regular business days.
@@ -5741,14 +5607,14 @@ pub mod business_day_config {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Weekday::Unspecified => "WEEKDAY_UNSPECIFIED",
-                Weekday::Monday => "MONDAY",
-                Weekday::Tuesday => "TUESDAY",
-                Weekday::Wednesday => "WEDNESDAY",
-                Weekday::Thursday => "THURSDAY",
-                Weekday::Friday => "FRIDAY",
-                Weekday::Saturday => "SATURDAY",
-                Weekday::Sunday => "SUNDAY",
+                Self::Unspecified => "WEEKDAY_UNSPECIFIED",
+                Self::Monday => "MONDAY",
+                Self::Tuesday => "TUESDAY",
+                Self::Wednesday => "WEDNESDAY",
+                Self::Thursday => "THURSDAY",
+                Self::Friday => "FRIDAY",
+                Self::Saturday => "SATURDAY",
+                Self::Sunday => "SUNDAY",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -5771,7 +5637,6 @@ pub mod business_day_config {
 /// (shipping origin location) based on the settings of the selected carrier.
 /// When set, no other transit time related field in `delivery_time` should be
 /// set.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct WarehouseBasedDeliveryTime {
     /// Required. Carrier, such as `"UPS"` or `"Fedex"`.
@@ -5790,7 +5655,6 @@ pub struct WarehouseBasedDeliveryTime {
 /// empty `applicable_shipping_labels`, which means
 /// "everything else". The other `applicable_shipping_labels` must
 /// not overlap.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RateGroup {
     /// Required. A list of [shipping
@@ -5826,7 +5690,6 @@ pub struct RateGroup {
 }
 /// A table defining the rate group, when `single_value` is not
 /// expressive enough.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Table {
     /// Name of the table. Required for subtables, ignored for the main table.
@@ -5847,7 +5710,6 @@ pub struct Table {
 /// Transit time table, number of business days spent in transit based on row
 /// and column dimensions. Either `min_transit_days`, `max_transit_days` or
 /// `transit_time_table` can be set, but not both.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TransitTable {
     /// Required. A list of region names
@@ -5880,7 +5742,6 @@ pub mod transit_table {
     /// for that dimension. If there are two dimensions, each row corresponds to a
     /// `postal_code_group_names`, and columns (values) to a
     /// `transit_time_labels`.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct TransitTimeRow {
         /// Required. Transit time range (min-max) in business days.
@@ -5890,8 +5751,7 @@ pub mod transit_table {
     /// Nested message and enum types in `TransitTimeRow`.
     pub mod transit_time_row {
         /// Transit time range (min-max) in business days.
-        #[allow(clippy::derive_partial_eq_without_eq)]
-        #[derive(Clone, PartialEq, ::prost::Message)]
+        #[derive(Clone, Copy, PartialEq, ::prost::Message)]
         pub struct TransitTimeValue {
             /// Minimum transit time range in business days. 0 means same
             /// day delivery, 1 means next day delivery.
@@ -5904,7 +5764,6 @@ pub mod transit_table {
     }
 }
 /// Table of per store minimum order values for the pickup fulfillment type.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MinimumOrderValueTable {
     /// Required. A list of store code sets sharing the same minimum order value
@@ -5924,7 +5783,6 @@ pub mod minimum_order_value_table {
     /// 'MOV for all other stores'.
     /// Each store code can only appear once across all the sets.
     /// All prices within a service must have the same currency.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct StoreCodeSetWithMov {
         /// Optional. A list of unique store codes or empty for the catch all.
@@ -5939,7 +5797,6 @@ pub mod minimum_order_value_table {
 /// Exactly one of `prices`, `weights`,
 /// `num_items`, `postal_code_group_names`, or
 /// `location` must be set.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Headers {
     /// Required. A list of inclusive order price upper bounds. The last price's
@@ -5986,7 +5843,6 @@ pub struct Headers {
 }
 /// A list of location ID sets. Must be non-empty. Can only be set if all
 /// other fields are not set.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LocationIdSet {
     /// Required. A non-empty list of
@@ -5998,7 +5854,6 @@ pub struct LocationIdSet {
     pub location_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Include a list of cells.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Row {
     /// Required. The list of cells that constitute the row. Must have the same
@@ -6011,7 +5866,6 @@ pub struct Row {
 /// Exactly one of `no_shipping`, `flat_rate`,
 /// `price_percentage`, `carrier_rateName`,
 /// `subtable_name` must be set.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Value {
     /// If true, then the product can't be shipped. Must be true when set, can only
@@ -6037,7 +5891,6 @@ pub struct Value {
 }
 /// A list of carrier rates that can be referred to by
 /// `main_table` or `single_value`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CarrierRate {
     /// Required. Name of the carrier rate. Must be unique per rate group.
@@ -6065,7 +5918,6 @@ pub struct CarrierRate {
     pub flat_adjustment: ::core::option::Option<super::super::super::r#type::Price>,
 }
 /// Request message for the `GetShippingSetting` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetShippingSettingsRequest {
     /// Required. The name of the shipping setting to retrieve.
@@ -6074,7 +5926,6 @@ pub struct GetShippingSettingsRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for the `InsertShippingSetting` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct InsertShippingSettingsRequest {
     /// Required. The account where this product will be inserted.
@@ -6087,11 +5938,17 @@ pub struct InsertShippingSettingsRequest {
 }
 /// Generated server implementations.
 pub mod shipping_settings_service_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with ShippingSettingsServiceServer.
     #[async_trait]
-    pub trait ShippingSettingsService: Send + Sync + 'static {
+    pub trait ShippingSettingsService: std::marker::Send + std::marker::Sync + 'static {
         /// Retrieve shipping setting information.
         async fn get_shipping_settings(
             &self,
@@ -6113,20 +5970,18 @@ pub mod shipping_settings_service_server {
     /// Service to get method call shipping setting information per Merchant API
     /// method.
     #[derive(Debug)]
-    pub struct ShippingSettingsServiceServer<T: ShippingSettingsService> {
-        inner: _Inner<T>,
+    pub struct ShippingSettingsServiceServer<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: ShippingSettingsService> ShippingSettingsServiceServer<T> {
+    impl<T> ShippingSettingsServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -6177,8 +6032,8 @@ pub mod shipping_settings_service_server {
     for ShippingSettingsServiceServer<T>
     where
         T: ShippingSettingsService,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -6190,7 +6045,6 @@ pub mod shipping_settings_service_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.shopping.merchant.accounts.v1beta.ShippingSettingsService/GetShippingSettings" => {
                     #[allow(non_camel_case_types)]
@@ -6227,7 +6081,6 @@ pub mod shipping_settings_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetShippingSettingsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -6279,7 +6132,6 @@ pub mod shipping_settings_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = InsertShippingSettingsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -6298,20 +6150,25 @@ pub mod shipping_settings_service_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: ShippingSettingsService> Clone for ShippingSettingsServiceServer<T> {
+    impl<T> Clone for ShippingSettingsServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -6323,19 +6180,10 @@ pub mod shipping_settings_service_server {
             }
         }
     }
-    impl<T: ShippingSettingsService> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: ShippingSettingsService> tonic::server::NamedService
-    for ShippingSettingsServiceServer<T> {
-        const NAME: &'static str = "google.shopping.merchant.accounts.v1beta.ShippingSettingsService";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.shopping.merchant.accounts.v1beta.ShippingSettingsService";
+    impl<T> tonic::server::NamedService for ShippingSettingsServiceServer<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }
 /// The TermsOfService Kind.
@@ -6354,8 +6202,8 @@ impl TermsOfServiceKind {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            TermsOfServiceKind::Unspecified => "TERMS_OF_SERVICE_KIND_UNSPECIFIED",
-            TermsOfServiceKind::MerchantCenter => "MERCHANT_CENTER",
+            Self::Unspecified => "TERMS_OF_SERVICE_KIND_UNSPECIFIED",
+            Self::MerchantCenter => "MERCHANT_CENTER",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -6368,7 +6216,6 @@ impl TermsOfServiceKind {
     }
 }
 /// A `TermsOfService`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TermsOfService {
     /// Identifier. The resource name of the terms of service version.
@@ -6396,7 +6243,6 @@ pub struct TermsOfService {
     pub external: bool,
 }
 /// Request message for the `GetTermsOfService` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetTermsOfServiceRequest {
     /// Required. The resource name of the terms of service version.
@@ -6405,7 +6251,6 @@ pub struct GetTermsOfServiceRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for the `RetrieveLatestTermsOfService` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RetrieveLatestTermsOfServiceRequest {
     /// Region code as defined by [CLDR](<https://cldr.unicode.org/>). This is either
@@ -6418,7 +6263,6 @@ pub struct RetrieveLatestTermsOfServiceRequest {
     pub kind: i32,
 }
 /// Request message for the `AcceptTermsOfService` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AcceptTermsOfServiceRequest {
     /// Required. The resource name of the terms of service version.
@@ -6436,11 +6280,17 @@ pub struct AcceptTermsOfServiceRequest {
 }
 /// Generated server implementations.
 pub mod terms_of_service_service_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with TermsOfServiceServiceServer.
     #[async_trait]
-    pub trait TermsOfServiceService: Send + Sync + 'static {
+    pub trait TermsOfServiceService: std::marker::Send + std::marker::Sync + 'static {
         /// Retrieves the `TermsOfService` associated with the provided version.
         async fn get_terms_of_service(
             &self,
@@ -6460,20 +6310,18 @@ pub mod terms_of_service_service_server {
     }
     /// Service to support `TermsOfService` API.
     #[derive(Debug)]
-    pub struct TermsOfServiceServiceServer<T: TermsOfServiceService> {
-        inner: _Inner<T>,
+    pub struct TermsOfServiceServiceServer<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: TermsOfServiceService> TermsOfServiceServiceServer<T> {
+    impl<T> TermsOfServiceServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -6524,8 +6372,8 @@ pub mod terms_of_service_service_server {
     for TermsOfServiceServiceServer<T>
     where
         T: TermsOfServiceService,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -6537,7 +6385,6 @@ pub mod terms_of_service_service_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.shopping.merchant.accounts.v1beta.TermsOfServiceService/GetTermsOfService" => {
                     #[allow(non_camel_case_types)]
@@ -6572,7 +6419,6 @@ pub mod terms_of_service_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetTermsOfServiceSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -6627,7 +6473,6 @@ pub mod terms_of_service_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = RetrieveLatestTermsOfServiceSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -6677,7 +6522,6 @@ pub mod terms_of_service_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = AcceptTermsOfServiceSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -6696,20 +6540,25 @@ pub mod terms_of_service_service_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: TermsOfServiceService> Clone for TermsOfServiceServiceServer<T> {
+    impl<T> Clone for TermsOfServiceServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -6721,19 +6570,10 @@ pub mod terms_of_service_service_server {
             }
         }
     }
-    impl<T: TermsOfServiceService> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: TermsOfServiceService> tonic::server::NamedService
-    for TermsOfServiceServiceServer<T> {
-        const NAME: &'static str = "google.shopping.merchant.accounts.v1beta.TermsOfServiceService";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.shopping.merchant.accounts.v1beta.TermsOfServiceService";
+    impl<T> tonic::server::NamedService for TermsOfServiceServiceServer<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }
 /// This resource represents the agreement state for a given account and terms of
@@ -6758,7 +6598,6 @@ pub mod terms_of_service_service_server {
 /// [tos_file_uri](Accepted.tos_file_uri). The actual acceptance of the terms of
 /// service is done by calling accept on the [TermsOfService](TermsOfService)
 /// resource.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TermsOfServiceAgreementState {
     /// Identifier. The resource name of the terms of service version.
@@ -6781,7 +6620,6 @@ pub struct TermsOfServiceAgreementState {
     pub required: ::core::option::Option<Required>,
 }
 /// Describes the accepted terms of service.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Accepted {
     /// The accepted
@@ -6802,7 +6640,6 @@ pub struct Accepted {
     pub valid_until: ::core::option::Option<super::super::super::super::r#type::Date>,
 }
 /// Describes the terms of service which are required to be accepted.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Required {
     /// The
@@ -6817,7 +6654,6 @@ pub struct Required {
     pub tos_file_uri: ::prost::alloc::string::String,
 }
 /// Request message for the `GetTermsOfServiceAgreementState` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetTermsOfServiceAgreementStateRequest {
     /// Required. The resource name of the terms of service version.
@@ -6827,7 +6663,6 @@ pub struct GetTermsOfServiceAgreementStateRequest {
 }
 /// Request message for the `RetrieveForApplicationTermsOfServiceAgreementState`
 /// method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RetrieveForApplicationTermsOfServiceAgreementStateRequest {
     /// Required. The account for which to get a TermsOfServiceAgreementState
@@ -6837,11 +6672,17 @@ pub struct RetrieveForApplicationTermsOfServiceAgreementStateRequest {
 }
 /// Generated server implementations.
 pub mod terms_of_service_agreement_state_service_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with TermsOfServiceAgreementStateServiceServer.
     #[async_trait]
-    pub trait TermsOfServiceAgreementStateService: Send + Sync + 'static {
+    pub trait TermsOfServiceAgreementStateService: std::marker::Send + std::marker::Sync + 'static {
         /// Returns the state of a terms of service agreement.
         async fn get_terms_of_service_agreement_state(
             &self,
@@ -6863,24 +6704,18 @@ pub mod terms_of_service_agreement_state_service_server {
     }
     /// Service to support `TermsOfServiceAgreementState` API.
     #[derive(Debug)]
-    pub struct TermsOfServiceAgreementStateServiceServer<
-        T: TermsOfServiceAgreementStateService,
-    > {
-        inner: _Inner<T>,
+    pub struct TermsOfServiceAgreementStateServiceServer<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<
-        T: TermsOfServiceAgreementStateService,
-    > TermsOfServiceAgreementStateServiceServer<T> {
+    impl<T> TermsOfServiceAgreementStateServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -6931,8 +6766,8 @@ pub mod terms_of_service_agreement_state_service_server {
     for TermsOfServiceAgreementStateServiceServer<T>
     where
         T: TermsOfServiceAgreementStateService,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -6944,7 +6779,6 @@ pub mod terms_of_service_agreement_state_service_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.shopping.merchant.accounts.v1beta.TermsOfServiceAgreementStateService/GetTermsOfServiceAgreementState" => {
                     #[allow(non_camel_case_types)]
@@ -6986,7 +6820,6 @@ pub mod terms_of_service_agreement_state_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetTermsOfServiceAgreementStateSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -7043,7 +6876,6 @@ pub mod terms_of_service_agreement_state_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = RetrieveForApplicationTermsOfServiceAgreementStateSvc(
                             inner,
                         );
@@ -7064,21 +6896,25 @@ pub mod terms_of_service_agreement_state_service_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: TermsOfServiceAgreementStateService> Clone
-    for TermsOfServiceAgreementStateServiceServer<T> {
+    impl<T> Clone for TermsOfServiceAgreementStateServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -7090,18 +6926,10 @@ pub mod terms_of_service_agreement_state_service_server {
             }
         }
     }
-    impl<T: TermsOfServiceAgreementStateService> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: TermsOfServiceAgreementStateService> tonic::server::NamedService
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.shopping.merchant.accounts.v1beta.TermsOfServiceAgreementStateService";
+    impl<T> tonic::server::NamedService
     for TermsOfServiceAgreementStateServiceServer<T> {
-        const NAME: &'static str = "google.shopping.merchant.accounts.v1beta.TermsOfServiceAgreementStateService";
+        const NAME: &'static str = SERVICE_NAME;
     }
 }

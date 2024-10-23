@@ -31,16 +31,16 @@ impl JobState {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            JobState::Unspecified => "JOB_STATE_UNSPECIFIED",
-            JobState::Pending => "JOB_STATE_PENDING",
-            JobState::Running => "JOB_STATE_RUNNING",
-            JobState::Succeeded => "JOB_STATE_SUCCEEDED",
-            JobState::Failed => "JOB_STATE_FAILED",
-            JobState::Cancelled => "JOB_STATE_CANCELLED",
-            JobState::KnowledgeExtraction => "JOB_STATE_KNOWLEDGE_EXTRACTION",
-            JobState::ReconPreprocessing => "JOB_STATE_RECON_PREPROCESSING",
-            JobState::Clustering => "JOB_STATE_CLUSTERING",
-            JobState::ExportingClusters => "JOB_STATE_EXPORTING_CLUSTERS",
+            Self::Unspecified => "JOB_STATE_UNSPECIFIED",
+            Self::Pending => "JOB_STATE_PENDING",
+            Self::Running => "JOB_STATE_RUNNING",
+            Self::Succeeded => "JOB_STATE_SUCCEEDED",
+            Self::Failed => "JOB_STATE_FAILED",
+            Self::Cancelled => "JOB_STATE_CANCELLED",
+            Self::KnowledgeExtraction => "JOB_STATE_KNOWLEDGE_EXTRACTION",
+            Self::ReconPreprocessing => "JOB_STATE_RECON_PREPROCESSING",
+            Self::Clustering => "JOB_STATE_CLUSTERING",
+            Self::ExportingClusters => "JOB_STATE_EXPORTING_CLUSTERS",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -61,8 +61,7 @@ impl JobState {
     }
 }
 /// The common metadata for long running operations.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct CommonOperationMetadata {
     /// The state of the operation.
     #[prost(enumeration = "common_operation_metadata::State", tag = "1")]
@@ -112,13 +111,13 @@ pub mod common_operation_metadata {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                State::Unspecified => "STATE_UNSPECIFIED",
-                State::Running => "RUNNING",
-                State::Cancelling => "CANCELLING",
-                State::Succeeded => "SUCCEEDED",
-                State::Failed => "FAILED",
-                State::Cancelled => "CANCELLED",
-                State::Pending => "PENDING",
+                Self::Unspecified => "STATE_UNSPECIFIED",
+                Self::Running => "RUNNING",
+                Self::Cancelling => "CANCELLING",
+                Self::Succeeded => "SUCCEEDED",
+                Self::Failed => "FAILED",
+                Self::Cancelled => "CANCELLED",
+                Self::Pending => "PENDING",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -137,7 +136,6 @@ pub mod common_operation_metadata {
     }
 }
 /// The desired input location and metadata.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct InputConfig {
     /// Set of input BigQuery tables.
@@ -194,14 +192,14 @@ pub mod input_config {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                EntityType::Unspecified => "ENTITY_TYPE_UNSPECIFIED",
-                EntityType::People => "PEOPLE",
-                EntityType::Establishment => "ESTABLISHMENT",
-                EntityType::Property => "PROPERTY",
-                EntityType::Product => "PRODUCT",
-                EntityType::Organization => "ORGANIZATION",
-                EntityType::LocalBusiness => "LOCAL_BUSINESS",
-                EntityType::Person => "PERSON",
+                Self::Unspecified => "ENTITY_TYPE_UNSPECIFIED",
+                Self::People => "PEOPLE",
+                Self::Establishment => "ESTABLISHMENT",
+                Self::Property => "PROPERTY",
+                Self::Product => "PRODUCT",
+                Self::Organization => "ORGANIZATION",
+                Self::LocalBusiness => "LOCAL_BUSINESS",
+                Self::Person => "PERSON",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -221,7 +219,6 @@ pub mod input_config {
     }
 }
 /// The input config for BigQuery tables.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BigQueryInputConfig {
     /// Required. Format is `projects/*/datasets/*/tables/*`.
@@ -232,7 +229,6 @@ pub struct BigQueryInputConfig {
     pub gcs_uri: ::prost::alloc::string::String,
 }
 /// The desired output location and metadata.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OutputConfig {
     /// Format is “projects/*/datasets/*”.
@@ -240,7 +236,6 @@ pub struct OutputConfig {
     pub bigquery_dataset: ::prost::alloc::string::String,
 }
 /// Recon configs
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ReconConfig {
     /// Extra options that affect entity clustering behavior.
@@ -256,8 +251,7 @@ pub struct ReconConfig {
 /// Nested message and enum types in `ReconConfig`.
 pub mod recon_config {
     /// Options for experimental changes on entity clustering behavior.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct Options {
         /// If true, separate clusters by their geographic region (from geocoding).
         /// Uses the following entity features:
@@ -270,7 +264,6 @@ pub mod recon_config {
         pub enable_geocoding_separation: bool,
     }
     /// Model Configs
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ModelConfig {
         /// Model name. Refer to external documentation for valid names.
@@ -283,8 +276,7 @@ pub mod recon_config {
         pub version_tag: ::prost::alloc::string::String,
     }
     /// Choice of clustering algorithm. Default is ConnectedComponentsConfig.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
     pub enum ClusteringConfig {
         /// Configs for connected components.
         #[prost(message, tag = "1")]
@@ -295,31 +287,27 @@ pub mod recon_config {
     }
 }
 /// Options for connected components.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct ConnectedComponentsConfig {
     /// Threshold used for connected components. Default value is 0.85.
     #[prost(float, tag = "1")]
     pub weight_threshold: f32,
 }
 /// Options for affinity clustering.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct AffinityClusteringConfig {
     /// Number of iterations to perform. Default value is 1.
     #[prost(int64, tag = "1")]
     pub compression_round_count: i64,
 }
 /// Details of operations that perform deletes of any entities.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct DeleteOperationMetadata {
     /// The common part of the operation metadata.
     #[prost(message, optional, tag = "1")]
     pub common_metadata: ::core::option::Option<CommonOperationMetadata>,
 }
 /// Request message for CreateEntityReconciliationJob.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateEntityReconciliationJobRequest {
     /// Required. The resource name of the Location to create the
@@ -332,7 +320,6 @@ pub struct CreateEntityReconciliationJobRequest {
     pub entity_reconciliation_job: ::core::option::Option<EntityReconciliationJob>,
 }
 /// Request message for GetEntityReconciliationJob.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetEntityReconciliationJobRequest {
     /// Required. The name of the EntityReconciliationJob resource.
@@ -343,7 +330,6 @@ pub struct GetEntityReconciliationJobRequest {
 }
 /// Request message for
 /// [EnterpriseKnowledgeGraphService.ListEntityReconciliationJobs][google.cloud.enterpriseknowledgegraph.v1.EnterpriseKnowledgeGraphService.ListEntityReconciliationJobs].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListEntityReconciliationJobsRequest {
     /// Required. The name of the EntityReconciliationJob's parent resource.
@@ -363,7 +349,6 @@ pub struct ListEntityReconciliationJobsRequest {
 }
 /// Response message for
 /// [EnterpriseKnowledgeGraphService.ListEntityReconciliationJobs][google.cloud.enterpriseknowledgegraph.v1.EnterpriseKnowledgeGraphService.ListEntityReconciliationJobs].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListEntityReconciliationJobsResponse {
     /// A list of EntityReconciliationJobs that matches the specified filter in the
@@ -375,7 +360,6 @@ pub struct ListEntityReconciliationJobsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for CancelEntityReconciliationJob.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CancelEntityReconciliationJobRequest {
     /// Required. The name of the EntityReconciliationJob resource.
@@ -385,7 +369,6 @@ pub struct CancelEntityReconciliationJobRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for DeleteEntityReconciliationJob.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteEntityReconciliationJobRequest {
     /// Required. The name of the EntityReconciliationJob resource.
@@ -395,7 +378,6 @@ pub struct DeleteEntityReconciliationJobRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Entity reconciliation job message.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EntityReconciliationJob {
     /// Output only. Resource name of the EntityReconciliationJob.
@@ -432,7 +414,6 @@ pub struct EntityReconciliationJob {
 }
 /// Request message for
 /// [EnterpriseKnowledgeGraphService.Lookup][google.cloud.enterpriseknowledgegraph.v1.EnterpriseKnowledgeGraphService.Lookup].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LookupRequest {
     /// Required. The name of the Entity's parent resource.
@@ -450,7 +431,6 @@ pub struct LookupRequest {
 }
 /// Response message for
 /// [EnterpriseKnowledgeGraphService.Lookup][google.cloud.enterpriseknowledgegraph.v1.EnterpriseKnowledgeGraphService.Lookup].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LookupResponse {
     /// The local context applicable for the response. See more details at
@@ -466,7 +446,6 @@ pub struct LookupResponse {
 }
 /// Request message for
 /// [EnterpriseKnowledgeGraphService.Search][google.cloud.enterpriseknowledgegraph.v1.EnterpriseKnowledgeGraphService.Search].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchRequest {
     /// Required. The name of the Entity's parent resource.
@@ -492,7 +471,6 @@ pub struct SearchRequest {
 }
 /// Response message for
 /// [EnterpriseKnowledgeGraphService.Search][google.cloud.enterpriseknowledgegraph.v1.EnterpriseKnowledgeGraphService.Search].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchResponse {
     /// The local context applicable for the response. See more details at
@@ -508,7 +486,6 @@ pub struct SearchResponse {
 }
 /// Request message for
 /// [EnterpriseKnowledgeGraphService.LookupPublicKg][google.cloud.enterpriseknowledgegraph.v1.EnterpriseKnowledgeGraphService.LookupPublicKg].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LookupPublicKgRequest {
     /// Required. The name of the Entity's parent resource.
@@ -526,7 +503,6 @@ pub struct LookupPublicKgRequest {
 }
 /// Response message for
 /// [EnterpriseKnowledgeGraphService.LookupPublicKg][google.cloud.enterpriseknowledgegraph.v1.EnterpriseKnowledgeGraphService.LookupPublicKg].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LookupPublicKgResponse {
     /// The local context applicable for the response. See more details at
@@ -542,7 +518,6 @@ pub struct LookupPublicKgResponse {
 }
 /// Request message for
 /// [EnterpriseKnowledgeGraphService.Search][google.cloud.enterpriseknowledgegraph.v1.EnterpriseKnowledgeGraphService.Search].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchPublicKgRequest {
     /// Required. The name of the Entity's parent resource.
@@ -568,7 +543,6 @@ pub struct SearchPublicKgRequest {
 }
 /// Response message for
 /// [EnterpriseKnowledgeGraphService.Search][google.cloud.enterpriseknowledgegraph.v1.EnterpriseKnowledgeGraphService.Search].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchPublicKgResponse {
     /// The local context applicable for the response. See more details at
@@ -584,11 +558,17 @@ pub struct SearchPublicKgResponse {
 }
 /// Generated server implementations.
 pub mod enterprise_knowledge_graph_service_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with EnterpriseKnowledgeGraphServiceServer.
     #[async_trait]
-    pub trait EnterpriseKnowledgeGraphService: Send + Sync + 'static {
+    pub trait EnterpriseKnowledgeGraphService: std::marker::Send + std::marker::Sync + 'static {
         /// Creates a EntityReconciliationJob. A EntityReconciliationJob once created
         /// will right away be attempted to start.
         async fn create_entity_reconciliation_job(
@@ -656,22 +636,18 @@ pub mod enterprise_knowledge_graph_service_server {
     }
     /// APIs for enterprise knowledge graph product.
     #[derive(Debug)]
-    pub struct EnterpriseKnowledgeGraphServiceServer<
-        T: EnterpriseKnowledgeGraphService,
-    > {
-        inner: _Inner<T>,
+    pub struct EnterpriseKnowledgeGraphServiceServer<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: EnterpriseKnowledgeGraphService> EnterpriseKnowledgeGraphServiceServer<T> {
+    impl<T> EnterpriseKnowledgeGraphServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -722,8 +698,8 @@ pub mod enterprise_knowledge_graph_service_server {
     for EnterpriseKnowledgeGraphServiceServer<T>
     where
         T: EnterpriseKnowledgeGraphService,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -735,7 +711,6 @@ pub mod enterprise_knowledge_graph_service_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.cloud.enterpriseknowledgegraph.v1.EnterpriseKnowledgeGraphService/CreateEntityReconciliationJob" => {
                     #[allow(non_camel_case_types)]
@@ -777,7 +752,6 @@ pub mod enterprise_knowledge_graph_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = CreateEntityReconciliationJobSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -834,7 +808,6 @@ pub mod enterprise_knowledge_graph_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetEntityReconciliationJobSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -891,7 +864,6 @@ pub mod enterprise_knowledge_graph_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListEntityReconciliationJobsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -948,7 +920,6 @@ pub mod enterprise_knowledge_graph_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = CancelEntityReconciliationJobSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1005,7 +976,6 @@ pub mod enterprise_knowledge_graph_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = DeleteEntityReconciliationJobSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1055,7 +1025,6 @@ pub mod enterprise_knowledge_graph_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = LookupSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1105,7 +1074,6 @@ pub mod enterprise_knowledge_graph_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = SearchSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1157,7 +1125,6 @@ pub mod enterprise_knowledge_graph_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = LookupPublicKgSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1209,7 +1176,6 @@ pub mod enterprise_knowledge_graph_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = SearchPublicKgSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1228,21 +1194,25 @@ pub mod enterprise_knowledge_graph_service_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: EnterpriseKnowledgeGraphService> Clone
-    for EnterpriseKnowledgeGraphServiceServer<T> {
+    impl<T> Clone for EnterpriseKnowledgeGraphServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -1254,18 +1224,9 @@ pub mod enterprise_knowledge_graph_service_server {
             }
         }
     }
-    impl<T: EnterpriseKnowledgeGraphService> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: EnterpriseKnowledgeGraphService> tonic::server::NamedService
-    for EnterpriseKnowledgeGraphServiceServer<T> {
-        const NAME: &'static str = "google.cloud.enterpriseknowledgegraph.v1.EnterpriseKnowledgeGraphService";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.cloud.enterpriseknowledgegraph.v1.EnterpriseKnowledgeGraphService";
+    impl<T> tonic::server::NamedService for EnterpriseKnowledgeGraphServiceServer<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }

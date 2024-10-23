@@ -4,7 +4,6 @@
 /// module settings. Service settings can be configured at the organization,
 /// folder, or project level. Service settings at the organization or folder
 /// level are inherited by those in child folders and projects.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SecurityCenterService {
     /// Identifier. The name of the service.
@@ -57,8 +56,7 @@ pub struct SecurityCenterService {
 /// Nested message and enum types in `SecurityCenterService`.
 pub mod security_center_service {
     /// The settings for individual modules.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct ModuleSettings {
         /// Optional. The intended state of enablement for the module at its level of
         /// the resource hierarchy.
@@ -109,11 +107,11 @@ pub mod security_center_service {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                EnablementState::Unspecified => "ENABLEMENT_STATE_UNSPECIFIED",
-                EnablementState::Inherited => "INHERITED",
-                EnablementState::Enabled => "ENABLED",
-                EnablementState::Disabled => "DISABLED",
-                EnablementState::IngestOnly => "INGEST_ONLY",
+                Self::Unspecified => "ENABLEMENT_STATE_UNSPECIFIED",
+                Self::Inherited => "INHERITED",
+                Self::Enabled => "ENABLED",
+                Self::Disabled => "DISABLED",
+                Self::IngestOnly => "INGEST_ONLY",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -138,7 +136,6 @@ pub mod security_center_service {
 /// For example, if the module is enabled in a parent organization or folder, the
 /// effective enablement_state for the module in all child folders or projects is
 /// also `enabled`. EffectiveSecurityHealthAnalyticsCustomModule is read-only.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EffectiveSecurityHealthAnalyticsCustomModule {
     /// Identifier. The full resource name of the custom module, specified in one
@@ -195,9 +192,9 @@ pub mod effective_security_health_analytics_custom_module {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                EnablementState::Unspecified => "ENABLEMENT_STATE_UNSPECIFIED",
-                EnablementState::Enabled => "ENABLED",
-                EnablementState::Disabled => "DISABLED",
+                Self::Unspecified => "ENABLEMENT_STATE_UNSPECIFIED",
+                Self::Enabled => "ENABLED",
+                Self::Disabled => "DISABLED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -213,7 +210,6 @@ pub mod effective_security_health_analytics_custom_module {
 }
 /// Request message for listing effective Security Health Analytics custom
 /// modules.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListEffectiveSecurityHealthAnalyticsCustomModulesRequest {
     /// Required. Name of parent to list effective custom modules. specified in one
@@ -234,7 +230,6 @@ pub struct ListEffectiveSecurityHealthAnalyticsCustomModulesRequest {
 }
 /// Response message for listing effective Security Health Analytics custom
 /// modules.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListEffectiveSecurityHealthAnalyticsCustomModulesResponse {
     /// The list of EffectiveSecurityHealthAnalyticsCustomModule
@@ -247,7 +242,6 @@ pub struct ListEffectiveSecurityHealthAnalyticsCustomModulesResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Message for getting a EffectiveSecurityHealthAnalyticsCustomModule
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetEffectiveSecurityHealthAnalyticsCustomModuleRequest {
     /// Required. The full resource name of the custom module, specified in one of
@@ -264,7 +258,6 @@ pub struct GetEffectiveSecurityHealthAnalyticsCustomModuleRequest {
 /// updated time. You can create a custom module at the organization, folder, or
 /// project level. Custom modules that you create at the organization or folder
 /// level are inherited by the child folders and projects.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SecurityHealthAnalyticsCustomModule {
     /// Identifier. The full resource name of the custom module, specified in one
@@ -339,10 +332,10 @@ pub mod security_health_analytics_custom_module {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                EnablementState::Unspecified => "ENABLEMENT_STATE_UNSPECIFIED",
-                EnablementState::Enabled => "ENABLED",
-                EnablementState::Disabled => "DISABLED",
-                EnablementState::Inherited => "INHERITED",
+                Self::Unspecified => "ENABLEMENT_STATE_UNSPECIFIED",
+                Self::Enabled => "ENABLED",
+                Self::Disabled => "DISABLED",
+                Self::Inherited => "INHERITED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -360,7 +353,6 @@ pub mod security_health_analytics_custom_module {
 /// Defines the properties in a custom module configuration for Security
 /// Health Analytics. Use the custom module configuration to create custom
 /// detectors that generate custom findings for resources that you specify.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CustomConfig {
     /// Optional. The CEL expression to evaluate to produce findings. When the
@@ -398,7 +390,6 @@ pub mod custom_config {
     /// return with each finding that is generated by the custom module. The custom
     /// source properties that are defined here are included in the finding JSON
     /// under `sourceProperties`.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct CustomOutputSpec {
         /// Optional. A list of custom output properties to add to the finding.
@@ -408,7 +399,6 @@ pub mod custom_config {
     /// Nested message and enum types in `CustomOutputSpec`.
     pub mod custom_output_spec {
         /// An individual name-value pair that defines a custom source property.
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct Property {
             /// Optional. Name of the property for the custom output.
@@ -424,7 +414,6 @@ pub mod custom_config {
         }
     }
     /// Resource for selecting resource type.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ResourceSelector {
         /// Optional. The resource types to run the detector on.
@@ -463,11 +452,11 @@ pub mod custom_config {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Severity::Unspecified => "SEVERITY_UNSPECIFIED",
-                Severity::Critical => "CRITICAL",
-                Severity::High => "HIGH",
-                Severity::Medium => "MEDIUM",
-                Severity::Low => "LOW",
+                Self::Unspecified => "SEVERITY_UNSPECIFIED",
+                Self::Critical => "CRITICAL",
+                Self::High => "HIGH",
+                Self::Medium => "MEDIUM",
+                Self::Low => "LOW",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -484,7 +473,6 @@ pub mod custom_config {
     }
 }
 /// Request message for listing Security Health Analytics custom modules.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListSecurityHealthAnalyticsCustomModulesRequest {
     /// Required. Name of parent organization, folder, or project in which to list
@@ -504,7 +492,6 @@ pub struct ListSecurityHealthAnalyticsCustomModulesRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for listing Security Health Analytics custom modules.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListSecurityHealthAnalyticsCustomModulesResponse {
     /// The list of SecurityHealthAnalyticsCustomModules
@@ -518,7 +505,6 @@ pub struct ListSecurityHealthAnalyticsCustomModulesResponse {
 }
 /// Request message for listing descendant Security Health Analytics custom
 /// modules.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListDescendantSecurityHealthAnalyticsCustomModulesRequest {
     /// Required. Name of the parent organization, folder, or project in which to
@@ -539,7 +525,6 @@ pub struct ListDescendantSecurityHealthAnalyticsCustomModulesRequest {
 }
 /// Response message for listing descendant Security Health Analytics custom
 /// modules.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListDescendantSecurityHealthAnalyticsCustomModulesResponse {
     /// The list of SecurityHealthAnalyticsCustomModules
@@ -552,7 +537,6 @@ pub struct ListDescendantSecurityHealthAnalyticsCustomModulesResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Message for getting a SecurityHealthAnalyticsCustomModule
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetSecurityHealthAnalyticsCustomModuleRequest {
     /// Required. Name of the resource
@@ -560,7 +544,6 @@ pub struct GetSecurityHealthAnalyticsCustomModuleRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Message for creating a SecurityHealthAnalyticsCustomModule
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateSecurityHealthAnalyticsCustomModuleRequest {
     /// Required. Name of the parent organization, folder, or project of the
@@ -588,7 +571,6 @@ pub struct CreateSecurityHealthAnalyticsCustomModuleRequest {
     pub validate_only: bool,
 }
 /// Message for updating a SecurityHealthAnalyticsCustomModule
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateSecurityHealthAnalyticsCustomModuleRequest {
     /// Required. The list of fields to be updated. The only fields that can be
@@ -613,7 +595,6 @@ pub struct UpdateSecurityHealthAnalyticsCustomModuleRequest {
     pub validate_only: bool,
 }
 /// Message for deleting a SecurityHealthAnalyticsCustomModule
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteSecurityHealthAnalyticsCustomModuleRequest {
     /// Required. The resource name of the SHA custom module.
@@ -637,7 +618,6 @@ pub struct DeleteSecurityHealthAnalyticsCustomModuleRequest {
 }
 /// Request message to simulate a CustomConfig against a given test resource.
 /// Maximum size of the request is 4 MB by default.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SimulateSecurityHealthAnalyticsCustomModuleRequest {
     /// Required. The relative resource name of the organization, project, or
@@ -661,7 +641,6 @@ pub mod simulate_security_health_analytics_custom_module_request {
     /// Manually constructed resource name. If the custom module evaluates against
     /// only the resource data, you can omit the `iam_policy_data` field. If it
     /// evaluates only the `iam_policy_data` field, you can omit the resource data.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct SimulatedResource {
         /// Required. The type of the resource, for example,
@@ -681,7 +660,6 @@ pub mod simulate_security_health_analytics_custom_module_request {
 }
 /// A subset of the fields of the Security Center Finding proto. The minimum set
 /// of fields needed to represent a simulated finding from a SHA custom module.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SimulatedFinding {
     /// Identifier. The [relative resource
@@ -772,9 +750,9 @@ pub mod simulated_finding {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                State::Unspecified => "STATE_UNSPECIFIED",
-                State::Active => "ACTIVE",
-                State::Inactive => "INACTIVE",
+                Self::Unspecified => "STATE_UNSPECIFIED",
+                Self::Active => "ACTIVE",
+                Self::Inactive => "INACTIVE",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -861,11 +839,11 @@ pub mod simulated_finding {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Severity::Unspecified => "SEVERITY_UNSPECIFIED",
-                Severity::Critical => "CRITICAL",
-                Severity::High => "HIGH",
-                Severity::Medium => "MEDIUM",
-                Severity::Low => "LOW",
+                Self::Unspecified => "SEVERITY_UNSPECIFIED",
+                Self::Critical => "CRITICAL",
+                Self::High => "HIGH",
+                Self::Medium => "MEDIUM",
+                Self::Low => "LOW",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -919,13 +897,13 @@ pub mod simulated_finding {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                FindingClass::Unspecified => "FINDING_CLASS_UNSPECIFIED",
-                FindingClass::Threat => "THREAT",
-                FindingClass::Vulnerability => "VULNERABILITY",
-                FindingClass::Misconfiguration => "MISCONFIGURATION",
-                FindingClass::Observation => "OBSERVATION",
-                FindingClass::SccError => "SCC_ERROR",
-                FindingClass::PostureViolation => "POSTURE_VIOLATION",
+                Self::Unspecified => "FINDING_CLASS_UNSPECIFIED",
+                Self::Threat => "THREAT",
+                Self::Vulnerability => "VULNERABILITY",
+                Self::Misconfiguration => "MISCONFIGURATION",
+                Self::Observation => "OBSERVATION",
+                Self::SccError => "SCC_ERROR",
+                Self::PostureViolation => "POSTURE_VIOLATION",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -945,7 +923,6 @@ pub mod simulated_finding {
 }
 /// Response message for simulating a `SecurityHealthAnalyticsCustomModule`
 /// against a given resource.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SimulateSecurityHealthAnalyticsCustomModuleResponse {
     /// Result for test case in the corresponding request.
@@ -957,7 +934,6 @@ pub struct SimulateSecurityHealthAnalyticsCustomModuleResponse {
 /// Nested message and enum types in `SimulateSecurityHealthAnalyticsCustomModuleResponse`.
 pub mod simulate_security_health_analytics_custom_module_response {
     /// Possible test result.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct SimulatedResult {
         #[prost(oneof = "simulated_result::Result", tags = "1, 2, 3")]
@@ -965,7 +941,6 @@ pub mod simulate_security_health_analytics_custom_module_response {
     }
     /// Nested message and enum types in `SimulatedResult`.
     pub mod simulated_result {
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Oneof)]
         pub enum Result {
             /// Finding that would be published for the test case,
@@ -988,7 +963,6 @@ pub mod simulate_security_health_analytics_custom_module_response {
 /// will have enablement_state set to ENABLED. Similarly, if module.inherited is
 /// set, then effective module's config will contain the ancestor's config
 /// details. EffectiveEventThreatDetectionCustomModule is read-only.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EffectiveEventThreatDetectionCustomModule {
     /// Identifier. The resource name of the ETD custom module.
@@ -1050,9 +1024,9 @@ pub mod effective_event_threat_detection_custom_module {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                EnablementState::Unspecified => "ENABLEMENT_STATE_UNSPECIFIED",
-                EnablementState::Enabled => "ENABLED",
-                EnablementState::Disabled => "DISABLED",
+                Self::Unspecified => "ENABLEMENT_STATE_UNSPECIFIED",
+                Self::Enabled => "ENABLED",
+                Self::Disabled => "DISABLED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1068,7 +1042,6 @@ pub mod effective_event_threat_detection_custom_module {
 }
 /// Request message for listing effective Event Threat Detection custom
 /// modules.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListEffectiveEventThreatDetectionCustomModulesRequest {
     /// Required. Name of parent to list effective custom modules. Its format is
@@ -1088,7 +1061,6 @@ pub struct ListEffectiveEventThreatDetectionCustomModulesRequest {
 }
 /// Response message for listing effective Event Threat Detection custom
 /// modules.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListEffectiveEventThreatDetectionCustomModulesResponse {
     /// The list of EffectiveEventThreatDetectionCustomModules
@@ -1101,7 +1073,6 @@ pub struct ListEffectiveEventThreatDetectionCustomModulesResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Message for getting a EffectiveEventThreatDetectionCustomModule
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetEffectiveEventThreatDetectionCustomModuleRequest {
     /// Required. The resource name of the ETD custom module.
@@ -1117,7 +1088,6 @@ pub struct GetEffectiveEventThreatDetectionCustomModuleRequest {
 /// An event threat detection custom module is a Cloud SCC resource that contains
 /// the configuration and enablement state of a custom module, which enables ETD
 /// to write certain findings to Cloud SCC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EventThreatDetectionCustomModule {
     /// Identifier. The resource name of the ETD custom module.
@@ -1199,10 +1169,10 @@ pub mod event_threat_detection_custom_module {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                EnablementState::Unspecified => "ENABLEMENT_STATE_UNSPECIFIED",
-                EnablementState::Enabled => "ENABLED",
-                EnablementState::Disabled => "DISABLED",
-                EnablementState::Inherited => "INHERITED",
+                Self::Unspecified => "ENABLEMENT_STATE_UNSPECIFIED",
+                Self::Enabled => "ENABLED",
+                Self::Disabled => "DISABLED",
+                Self::Inherited => "INHERITED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1218,7 +1188,6 @@ pub mod event_threat_detection_custom_module {
     }
 }
 /// Request message for listing Event Threat Detection custom modules.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListEventThreatDetectionCustomModulesRequest {
     /// Required. Name of parent to list custom modules. Its format is
@@ -1244,7 +1213,6 @@ pub struct ListEventThreatDetectionCustomModulesRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for listing Event Threat Detection custom modules.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListEventThreatDetectionCustomModulesResponse {
     /// The list of EventThreatDetectionCustomModules
@@ -1258,7 +1226,6 @@ pub struct ListEventThreatDetectionCustomModulesResponse {
 }
 /// Request message for listing descendant Event Threat Detection custom
 /// modules.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListDescendantEventThreatDetectionCustomModulesRequest {
     /// Required. Name of parent to list custom modules. Its format is
@@ -1279,7 +1246,6 @@ pub struct ListDescendantEventThreatDetectionCustomModulesRequest {
 }
 /// Response message for listing descendant Event Threat Detection custom
 /// modules.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListDescendantEventThreatDetectionCustomModulesResponse {
     /// The list of EventThreatDetectionCustomModules
@@ -1292,7 +1258,6 @@ pub struct ListDescendantEventThreatDetectionCustomModulesResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Message for getting a EventThreatDetectionCustomModule
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetEventThreatDetectionCustomModuleRequest {
     /// Required. The resource name of the ETD custom module.
@@ -1306,7 +1271,6 @@ pub struct GetEventThreatDetectionCustomModuleRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Message for creating a EventThreatDetectionCustomModule
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateEventThreatDetectionCustomModuleRequest {
     /// Required. Name of parent for the module. Its format is
@@ -1334,7 +1298,6 @@ pub struct CreateEventThreatDetectionCustomModuleRequest {
     pub validate_only: bool,
 }
 /// Message for updating a EventThreatDetectionCustomModule
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateEventThreatDetectionCustomModuleRequest {
     /// Required. Field mask is used to specify the fields to be overwritten in the
@@ -1360,7 +1323,6 @@ pub struct UpdateEventThreatDetectionCustomModuleRequest {
     pub validate_only: bool,
 }
 /// Message for deleting a EventThreatDetectionCustomModule
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteEventThreatDetectionCustomModuleRequest {
     /// Required. The resource name of the ETD custom module.
@@ -1383,7 +1345,6 @@ pub struct DeleteEventThreatDetectionCustomModuleRequest {
     pub validate_only: bool,
 }
 /// Request to validate an Event Threat Detection custom module.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ValidateEventThreatDetectionCustomModuleRequest {
     /// Required. Resource name of the parent to validate the Custom Module under.
@@ -1402,7 +1363,6 @@ pub struct ValidateEventThreatDetectionCustomModuleRequest {
     pub r#type: ::prost::alloc::string::String,
 }
 /// Response to validating an Event Threat Detection custom module.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ValidateEventThreatDetectionCustomModuleResponse {
     /// A list of errors returned by the validator. If the list is empty, there
@@ -1416,7 +1376,6 @@ pub struct ValidateEventThreatDetectionCustomModuleResponse {
 pub mod validate_event_threat_detection_custom_module_response {
     /// An error encountered while validating the uploaded configuration of an
     /// Event Threat Detection Custom Module.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct CustomModuleValidationError {
         /// A description of the error, suitable for human consumption. Required.
@@ -1438,8 +1397,7 @@ pub mod validate_event_threat_detection_custom_module_response {
         pub end: ::core::option::Option<Position>,
     }
     /// A position in the uploaded text version of a module.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct Position {
         /// The line position in the text
         #[prost(int32, tag = "1")]
@@ -1450,7 +1408,6 @@ pub mod validate_event_threat_detection_custom_module_response {
     }
 }
 /// Request message for getting a Security Command Center service.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetSecurityCenterServiceRequest {
     /// Required. The Security Command Center service to retrieve.
@@ -1472,7 +1429,6 @@ pub struct GetSecurityCenterServiceRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for listing Security Command Center services.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListSecurityCenterServicesRequest {
     /// Required. The name of the parent to list Security Command Center services.
@@ -1493,7 +1449,6 @@ pub struct ListSecurityCenterServicesRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for listing Security Command Center services.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListSecurityCenterServicesResponse {
     /// The list of services.
@@ -1504,7 +1459,6 @@ pub struct ListSecurityCenterServicesResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for updating a Security Command Center service.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateSecurityCenterServiceRequest {
     /// Required. The updated service.
@@ -1528,7 +1482,13 @@ pub struct UpdateSecurityCenterServiceRequest {
 }
 /// Generated client implementations.
 pub mod security_center_management_client {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     use tonic::codegen::http::Uri;
     /// Service describing handlers for resources
@@ -1540,8 +1500,8 @@ pub mod security_center_management_client {
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
-        T::ResponseBody: Body<Data = Bytes> + Send + 'static,
-        <T::ResponseBody as Body>::Error: Into<StdError> + Send,
+        T::ResponseBody: Body<Data = Bytes> + std::marker::Send + 'static,
+        <T::ResponseBody as Body>::Error: Into<StdError> + std::marker::Send,
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
@@ -1566,7 +1526,7 @@ pub mod security_center_management_client {
             >,
             <T as tonic::codegen::Service<
                 http::Request<tonic::body::BoxBody>,
-            >>::Error: Into<StdError> + Send + Sync,
+            >>::Error: Into<StdError> + std::marker::Send + std::marker::Sync,
         {
             SecurityCenterManagementClient::new(
                 InterceptedService::new(inner, interceptor),
@@ -1622,8 +1582,7 @@ pub mod security_center_management_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1655,8 +1614,7 @@ pub mod security_center_management_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1690,8 +1648,7 @@ pub mod security_center_management_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1726,8 +1683,7 @@ pub mod security_center_management_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1759,8 +1715,7 @@ pub mod security_center_management_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1795,8 +1750,7 @@ pub mod security_center_management_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1832,8 +1786,7 @@ pub mod security_center_management_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1864,8 +1817,7 @@ pub mod security_center_management_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1897,8 +1849,7 @@ pub mod security_center_management_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1934,8 +1885,7 @@ pub mod security_center_management_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1973,8 +1923,7 @@ pub mod security_center_management_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -2008,8 +1957,7 @@ pub mod security_center_management_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -2044,8 +1992,7 @@ pub mod security_center_management_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -2077,8 +2024,7 @@ pub mod security_center_management_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -2113,8 +2059,7 @@ pub mod security_center_management_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -2151,8 +2096,7 @@ pub mod security_center_management_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -2183,8 +2127,7 @@ pub mod security_center_management_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -2216,8 +2159,7 @@ pub mod security_center_management_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -2247,8 +2189,7 @@ pub mod security_center_management_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -2279,8 +2220,7 @@ pub mod security_center_management_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -2310,8 +2250,7 @@ pub mod security_center_management_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;

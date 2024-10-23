@@ -2,7 +2,6 @@
 /// A subscription to receive events about a Google Workspace resource. To learn
 /// more about subscriptions, see the [Google Workspace Events API
 /// overview](<https://developers.google.com/workspace/events>).
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Subscription {
     /// Optional. Immutable. Identifier. Resource name of the subscription.
@@ -149,10 +148,10 @@ pub mod subscription {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                State::Unspecified => "STATE_UNSPECIFIED",
-                State::Active => "ACTIVE",
-                State::Suspended => "SUSPENDED",
-                State::Deleted => "DELETED",
+                Self::Unspecified => "STATE_UNSPECIFIED",
+                Self::Active => "ACTIVE",
+                Self::Suspended => "SUSPENDED",
+                Self::Deleted => "DELETED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -212,14 +211,14 @@ pub mod subscription {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                ErrorType::Unspecified => "ERROR_TYPE_UNSPECIFIED",
-                ErrorType::UserScopeRevoked => "USER_SCOPE_REVOKED",
-                ErrorType::ResourceDeleted => "RESOURCE_DELETED",
-                ErrorType::UserAuthorizationFailure => "USER_AUTHORIZATION_FAILURE",
-                ErrorType::EndpointPermissionDenied => "ENDPOINT_PERMISSION_DENIED",
-                ErrorType::EndpointNotFound => "ENDPOINT_NOT_FOUND",
-                ErrorType::EndpointResourceExhausted => "ENDPOINT_RESOURCE_EXHAUSTED",
-                ErrorType::Other => "OTHER",
+                Self::Unspecified => "ERROR_TYPE_UNSPECIFIED",
+                Self::UserScopeRevoked => "USER_SCOPE_REVOKED",
+                Self::ResourceDeleted => "RESOURCE_DELETED",
+                Self::UserAuthorizationFailure => "USER_AUTHORIZATION_FAILURE",
+                Self::EndpointPermissionDenied => "ENDPOINT_PERMISSION_DENIED",
+                Self::EndpointNotFound => "ENDPOINT_NOT_FOUND",
+                Self::EndpointResourceExhausted => "ENDPOINT_RESOURCE_EXHAUSTED",
+                Self::Other => "OTHER",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -261,8 +260,7 @@ pub mod subscription {
     /// [`UpdateSubscription`][google.apps.events.subscriptions.v1.SubscriptionsService.UpdateSubscription]
     /// method to extend its expiration date. For details, see [Update or renew a
     /// subscription](<https://developers.google.com/workspace/events/guides/update-subscription>).
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
     pub enum Expiration {
         /// Non-empty default. The timestamp in UTC when the subscription expires.
         /// Always displayed on output, regardless of what was used on input.
@@ -276,7 +274,6 @@ pub mod subscription {
 }
 /// Options about what data to include in the event payload. Only supported for
 /// Google Chat events.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PayloadOptions {
     /// Optional. Whether the event payload includes data about the resource that
@@ -299,7 +296,6 @@ pub struct PayloadOptions {
     pub field_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
 /// The endpoint where the subscription delivers events.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NotificationEndpoint {
     #[prost(oneof = "notification_endpoint::Endpoint", tags = "1")]
@@ -307,7 +303,6 @@ pub struct NotificationEndpoint {
 }
 /// Nested message and enum types in `NotificationEndpoint`.
 pub mod notification_endpoint {
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Endpoint {
         /// Immutable. The Cloud Pub/Sub topic that receives events for the
@@ -328,7 +323,6 @@ pub mod notification_endpoint {
 }
 /// The request message for
 /// [SubscriptionsService.CreateSubscription][google.apps.events.subscriptions.v1.SubscriptionsService.CreateSubscription].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateSubscriptionRequest {
     /// Required. The subscription resource to create.
@@ -341,7 +335,6 @@ pub struct CreateSubscriptionRequest {
 }
 /// The request message for
 /// [SubscriptionsService.DeleteSubscription][google.apps.events.subscriptions.v1.SubscriptionsService.DeleteSubscription].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteSubscriptionRequest {
     /// Required. Resource name of the subscription to delete.
@@ -366,7 +359,6 @@ pub struct DeleteSubscriptionRequest {
 }
 /// The request message for
 /// [SubscriptionsService.GetSubscription][google.apps.events.subscriptions.v1.SubscriptionsService.GetSubscription].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetSubscriptionRequest {
     /// Required. Resource name of the subscription.
@@ -377,7 +369,6 @@ pub struct GetSubscriptionRequest {
 }
 /// The request message for
 /// [SubscriptionsService.UpdateSubscription][google.apps.events.subscriptions.v1.SubscriptionsService.UpdateSubscription].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateSubscriptionRequest {
     /// Required. The subscription to update.
@@ -404,7 +395,6 @@ pub struct UpdateSubscriptionRequest {
 }
 /// The request message for
 /// [SubscriptionsService.ReactivateSubscription][google.apps.events.subscriptions.v1.SubscriptionsService.ReactivateSubscription].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ReactivateSubscriptionRequest {
     /// Required. Resource name of the subscription.
@@ -415,7 +405,6 @@ pub struct ReactivateSubscriptionRequest {
 }
 /// The request message for
 /// [SubscriptionsService.ListSubscriptions][google.apps.events.subscriptions.v1.SubscriptionsService.ListSubscriptions].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListSubscriptionsRequest {
     /// Optional. The maximum number of subscriptions to return. The service might
@@ -467,7 +456,6 @@ pub struct ListSubscriptionsRequest {
 }
 /// The response message for
 /// [SubscriptionsService.ListSubscriptions][google.apps.events.subscriptions.v1.SubscriptionsService.ListSubscriptions].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListSubscriptionsResponse {
     /// List of subscriptions.
@@ -479,28 +467,30 @@ pub struct ListSubscriptionsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Metadata for UpdateSubscription LRO.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct UpdateSubscriptionMetadata {}
 /// Metadata for CreateSubscription LRO.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct CreateSubscriptionMetadata {}
 /// Metadata for DeleteSubscription LRO.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct DeleteSubscriptionMetadata {}
 /// Metadata for ReactivateSubscription LRO.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct ReactivateSubscriptionMetadata {}
 /// Generated server implementations.
 pub mod subscriptions_service_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with SubscriptionsServiceServer.
     #[async_trait]
-    pub trait SubscriptionsService: Send + Sync + 'static {
+    pub trait SubscriptionsService: std::marker::Send + std::marker::Sync + 'static {
         /// Creates a Google Workspace subscription. To learn how to use this
         /// method, see [Create a Google Workspace
         /// subscription](https://developers.google.com/workspace/events/guides/create-subscription).
@@ -565,20 +555,18 @@ pub mod subscriptions_service_server {
     }
     /// A service that manages subscriptions to Google Workspace events.
     #[derive(Debug)]
-    pub struct SubscriptionsServiceServer<T: SubscriptionsService> {
-        inner: _Inner<T>,
+    pub struct SubscriptionsServiceServer<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: SubscriptionsService> SubscriptionsServiceServer<T> {
+    impl<T> SubscriptionsServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -629,8 +617,8 @@ pub mod subscriptions_service_server {
     for SubscriptionsServiceServer<T>
     where
         T: SubscriptionsService,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -642,7 +630,6 @@ pub mod subscriptions_service_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.apps.events.subscriptions.v1.SubscriptionsService/CreateSubscription" => {
                     #[allow(non_camel_case_types)]
@@ -677,7 +664,6 @@ pub mod subscriptions_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = CreateSubscriptionSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -727,7 +713,6 @@ pub mod subscriptions_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = DeleteSubscriptionSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -777,7 +762,6 @@ pub mod subscriptions_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetSubscriptionSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -827,7 +811,6 @@ pub mod subscriptions_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListSubscriptionsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -877,7 +860,6 @@ pub mod subscriptions_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = UpdateSubscriptionSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -929,7 +911,6 @@ pub mod subscriptions_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ReactivateSubscriptionSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -948,20 +929,25 @@ pub mod subscriptions_service_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: SubscriptionsService> Clone for SubscriptionsServiceServer<T> {
+    impl<T> Clone for SubscriptionsServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -973,18 +959,9 @@ pub mod subscriptions_service_server {
             }
         }
     }
-    impl<T: SubscriptionsService> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: SubscriptionsService> tonic::server::NamedService
-    for SubscriptionsServiceServer<T> {
-        const NAME: &'static str = "google.apps.events.subscriptions.v1.SubscriptionsService";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.apps.events.subscriptions.v1.SubscriptionsService";
+    impl<T> tonic::server::NamedService for SubscriptionsServiceServer<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }

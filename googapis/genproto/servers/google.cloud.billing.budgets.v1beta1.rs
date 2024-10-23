@@ -4,7 +4,6 @@
 /// (for example, send an alert when 90% of the target spend is met).
 /// The budget time period is configurable, with options such as month (default),
 /// quarter, year, or custom time period.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Budget {
     /// Output only. Resource name of the budget.
@@ -43,7 +42,6 @@ pub struct Budget {
     pub etag: ::prost::alloc::string::String,
 }
 /// The budgeted amount for each usage period.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BudgetAmount {
     /// Specification for what amount to use as the budget.
@@ -53,7 +51,6 @@ pub struct BudgetAmount {
 /// Nested message and enum types in `BudgetAmount`.
 pub mod budget_amount {
     /// Specification for what amount to use as the budget.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum BudgetAmount {
         /// A specified amount to use as the budget.
@@ -81,8 +78,7 @@ pub mod budget_amount {
 /// LastPeriodAmount cannot be set for a budget configured with
 /// a
 /// [Filter.custom_period][google.cloud.billing.budgets.v1beta1.Filter.custom_period].
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct LastPeriodAmount {}
 /// ThresholdRule contains the definition of a threshold. Threshold rules define
 /// the triggering events used to generate a budget notification email. When a
@@ -106,8 +102,7 @@ pub struct LastPeriodAmount {}
 /// For more information, see
 /// [set budget threshold rules and
 /// actions](<https://cloud.google.com/billing/docs/how-to/budgets#budget-actions>).
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct ThresholdRule {
     /// Required. Send an alert when this threshold is exceeded.
     /// This is a 1.0-based percentage, so 0.5 = 50%.
@@ -154,9 +149,9 @@ pub mod threshold_rule {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Basis::Unspecified => "BASIS_UNSPECIFIED",
-                Basis::CurrentSpend => "CURRENT_SPEND",
-                Basis::ForecastedSpend => "FORECASTED_SPEND",
+                Self::Unspecified => "BASIS_UNSPECIFIED",
+                Self::CurrentSpend => "CURRENT_SPEND",
+                Self::ForecastedSpend => "FORECASTED_SPEND",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -172,7 +167,6 @@ pub mod threshold_rule {
 }
 /// AllUpdatesRule defines notifications that are sent based on budget spend
 /// and thresholds.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AllUpdatesRule {
     /// Optional. The name of the Pub/Sub topic where budget related messages will
@@ -225,7 +219,6 @@ pub struct AllUpdatesRule {
     pub enable_project_level_recipients: bool,
 }
 /// A filter for a budget, limiting the scope of the cost to calculate.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Filter {
     /// Optional. A set of projects of the form `projects/{project}`,
@@ -334,12 +327,10 @@ pub mod filter {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                CreditTypesTreatment::Unspecified => "CREDIT_TYPES_TREATMENT_UNSPECIFIED",
-                CreditTypesTreatment::IncludeAllCredits => "INCLUDE_ALL_CREDITS",
-                CreditTypesTreatment::ExcludeAllCredits => "EXCLUDE_ALL_CREDITS",
-                CreditTypesTreatment::IncludeSpecifiedCredits => {
-                    "INCLUDE_SPECIFIED_CREDITS"
-                }
+                Self::Unspecified => "CREDIT_TYPES_TREATMENT_UNSPECIFIED",
+                Self::IncludeAllCredits => "INCLUDE_ALL_CREDITS",
+                Self::ExcludeAllCredits => "EXCLUDE_ALL_CREDITS",
+                Self::IncludeSpecifiedCredits => "INCLUDE_SPECIFIED_CREDITS",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -356,8 +347,7 @@ pub mod filter {
     /// Multiple options to choose the budget's time period, specifying that only
     /// usage that occurs during this time period should be included in the budget.
     /// If not set, the <code>usage_period</code> defaults to CalendarPeriod.MONTH.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
     pub enum UsagePeriod {
         /// Optional. Specifies to track usage for recurring calendar period.
         /// For example, assume that CalendarPeriod.QUARTER is set. The budget will
@@ -374,8 +364,7 @@ pub mod filter {
     }
 }
 /// All date times begin at 12 AM US and Canadian Pacific Time (UTC-8).
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct CustomPeriod {
     /// Required. The start date must be after January 1, 2017.
     #[prost(message, optional, tag = "1")]
@@ -412,10 +401,10 @@ impl CalendarPeriod {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            CalendarPeriod::Unspecified => "CALENDAR_PERIOD_UNSPECIFIED",
-            CalendarPeriod::Month => "MONTH",
-            CalendarPeriod::Quarter => "QUARTER",
-            CalendarPeriod::Year => "YEAR",
+            Self::Unspecified => "CALENDAR_PERIOD_UNSPECIFIED",
+            Self::Month => "MONTH",
+            Self::Quarter => "QUARTER",
+            Self::Year => "YEAR",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -430,7 +419,6 @@ impl CalendarPeriod {
     }
 }
 /// Request for CreateBudget
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateBudgetRequest {
     /// Required. The name of the billing account to create the budget in. Values
@@ -442,7 +430,6 @@ pub struct CreateBudgetRequest {
     pub budget: ::core::option::Option<Budget>,
 }
 /// Request for UpdateBudget
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateBudgetRequest {
     /// Required. The updated budget object.
@@ -459,7 +446,6 @@ pub struct UpdateBudgetRequest {
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
 /// Request for GetBudget
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetBudgetRequest {
     /// Required. Name of budget to get. Values are of the form
@@ -468,7 +454,6 @@ pub struct GetBudgetRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request for ListBudgets
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListBudgetsRequest {
     /// Required. Name of billing account to list budgets under. Values
@@ -494,7 +479,6 @@ pub struct ListBudgetsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response for ListBudgets
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListBudgetsResponse {
     /// List of the budgets owned by the requested billing account.
@@ -506,7 +490,6 @@ pub struct ListBudgetsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request for DeleteBudget
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteBudgetRequest {
     /// Required. Name of the budget to delete. Values are of the form
@@ -516,11 +499,17 @@ pub struct DeleteBudgetRequest {
 }
 /// Generated server implementations.
 pub mod budget_service_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with BudgetServiceServer.
     #[async_trait]
-    pub trait BudgetService: Send + Sync + 'static {
+    pub trait BudgetService: std::marker::Send + std::marker::Sync + 'static {
         /// Creates a new budget. See
         /// [Quotas and limits](https://cloud.google.com/billing/quotas)
         /// for more information on the limits of the number of budgets you can create.
@@ -569,20 +558,18 @@ pub mod budget_service_server {
     /// BudgetService stores Cloud Billing budgets, which define a
     /// budget plan and rules to execute as we track spend against that plan.
     #[derive(Debug)]
-    pub struct BudgetServiceServer<T: BudgetService> {
-        inner: _Inner<T>,
+    pub struct BudgetServiceServer<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: BudgetService> BudgetServiceServer<T> {
+    impl<T> BudgetServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -632,8 +619,8 @@ pub mod budget_service_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for BudgetServiceServer<T>
     where
         T: BudgetService,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -645,7 +632,6 @@ pub mod budget_service_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.cloud.billing.budgets.v1beta1.BudgetService/CreateBudget" => {
                     #[allow(non_camel_case_types)]
@@ -676,7 +662,6 @@ pub mod budget_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = CreateBudgetSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -722,7 +707,6 @@ pub mod budget_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = UpdateBudgetSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -768,7 +752,6 @@ pub mod budget_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetBudgetSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -814,7 +797,6 @@ pub mod budget_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListBudgetsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -860,7 +842,6 @@ pub mod budget_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = DeleteBudgetSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -879,20 +860,25 @@ pub mod budget_service_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: BudgetService> Clone for BudgetServiceServer<T> {
+    impl<T> Clone for BudgetServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -904,17 +890,9 @@ pub mod budget_service_server {
             }
         }
     }
-    impl<T: BudgetService> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: BudgetService> tonic::server::NamedService for BudgetServiceServer<T> {
-        const NAME: &'static str = "google.cloud.billing.budgets.v1beta1.BudgetService";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.cloud.billing.budgets.v1beta1.BudgetService";
+    impl<T> tonic::server::NamedService for BudgetServiceServer<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }

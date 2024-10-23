@@ -2,7 +2,6 @@
 /// Dimensions are attributes of your data. For example, the dimension
 /// `userEmail` indicates the email of the user that accessed reporting data.
 /// Dimension values in report responses are strings.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AccessDimension {
     /// The API name of the dimension. See [Data Access
@@ -15,7 +14,6 @@ pub struct AccessDimension {
 }
 /// The quantitative measurements of a report. For example, the metric
 /// `accessCount` is the total number of data access records.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AccessMetric {
     /// The API name of the metric. See [Data Access
@@ -27,7 +25,6 @@ pub struct AccessMetric {
     pub metric_name: ::prost::alloc::string::String,
 }
 /// A contiguous range of days: startDate, startDate + 1, ..., endDate.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AccessDateRange {
     /// The inclusive start date for the query in the format `YYYY-MM-DD`. Cannot
@@ -45,7 +42,6 @@ pub struct AccessDateRange {
 }
 /// Expresses dimension or metric filters. The fields in the same expression need
 /// to be either all dimensions or all metrics.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AccessFilterExpression {
     /// Specify one type of filter expression for `FilterExpression`.
@@ -55,7 +51,6 @@ pub struct AccessFilterExpression {
 /// Nested message and enum types in `AccessFilterExpression`.
 pub mod access_filter_expression {
     /// Specify one type of filter expression for `FilterExpression`.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum OneExpression {
         /// Each of the FilterExpressions in the and_group has an AND relationship.
@@ -74,7 +69,6 @@ pub mod access_filter_expression {
     }
 }
 /// A list of filter expressions.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AccessFilterExpressionList {
     /// A list of filter expressions.
@@ -82,7 +76,6 @@ pub struct AccessFilterExpressionList {
     pub expressions: ::prost::alloc::vec::Vec<AccessFilterExpression>,
 }
 /// An expression to filter dimension or metric values.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AccessFilter {
     /// The dimension name or metric name.
@@ -95,7 +88,6 @@ pub struct AccessFilter {
 /// Nested message and enum types in `AccessFilter`.
 pub mod access_filter {
     /// Specify one type of filter for `Filter`.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum OneFilter {
         /// Strings related filter.
@@ -113,7 +105,6 @@ pub mod access_filter {
     }
 }
 /// The filter for strings.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AccessStringFilter {
     /// The match type for this filter.
@@ -164,13 +155,13 @@ pub mod access_string_filter {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                MatchType::Unspecified => "MATCH_TYPE_UNSPECIFIED",
-                MatchType::Exact => "EXACT",
-                MatchType::BeginsWith => "BEGINS_WITH",
-                MatchType::EndsWith => "ENDS_WITH",
-                MatchType::Contains => "CONTAINS",
-                MatchType::FullRegexp => "FULL_REGEXP",
-                MatchType::PartialRegexp => "PARTIAL_REGEXP",
+                Self::Unspecified => "MATCH_TYPE_UNSPECIFIED",
+                Self::Exact => "EXACT",
+                Self::BeginsWith => "BEGINS_WITH",
+                Self::EndsWith => "ENDS_WITH",
+                Self::Contains => "CONTAINS",
+                Self::FullRegexp => "FULL_REGEXP",
+                Self::PartialRegexp => "PARTIAL_REGEXP",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -189,7 +180,6 @@ pub mod access_string_filter {
     }
 }
 /// The result needs to be in a list of string values.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AccessInListFilter {
     /// The list of string values. Must be non-empty.
@@ -200,8 +190,7 @@ pub struct AccessInListFilter {
     pub case_sensitive: bool,
 }
 /// Filters for numeric or date values.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct AccessNumericFilter {
     /// The operation type for this filter.
     #[prost(enumeration = "access_numeric_filter::Operation", tag = "1")]
@@ -246,12 +235,12 @@ pub mod access_numeric_filter {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Operation::Unspecified => "OPERATION_UNSPECIFIED",
-                Operation::Equal => "EQUAL",
-                Operation::LessThan => "LESS_THAN",
-                Operation::LessThanOrEqual => "LESS_THAN_OR_EQUAL",
-                Operation::GreaterThan => "GREATER_THAN",
-                Operation::GreaterThanOrEqual => "GREATER_THAN_OR_EQUAL",
+                Self::Unspecified => "OPERATION_UNSPECIFIED",
+                Self::Equal => "EQUAL",
+                Self::LessThan => "LESS_THAN",
+                Self::LessThanOrEqual => "LESS_THAN_OR_EQUAL",
+                Self::GreaterThan => "GREATER_THAN",
+                Self::GreaterThanOrEqual => "GREATER_THAN_OR_EQUAL",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -269,8 +258,7 @@ pub mod access_numeric_filter {
     }
 }
 /// To express that the result needs to be between two numbers (inclusive).
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct AccessBetweenFilter {
     /// Begins with this number.
     #[prost(message, optional, tag = "1")]
@@ -280,8 +268,7 @@ pub struct AccessBetweenFilter {
     pub to_value: ::core::option::Option<NumericValue>,
 }
 /// To represent a number.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct NumericValue {
     /// One of a numeric value
     #[prost(oneof = "numeric_value::OneValue", tags = "1, 2")]
@@ -290,8 +277,7 @@ pub struct NumericValue {
 /// Nested message and enum types in `NumericValue`.
 pub mod numeric_value {
     /// One of a numeric value
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
     pub enum OneValue {
         /// Integer value
         #[prost(int64, tag = "1")]
@@ -304,7 +290,6 @@ pub mod numeric_value {
 /// Order bys define how rows will be sorted in the response. For example,
 /// ordering rows by descending access count is one ordering, and ordering rows
 /// by the country string is a different ordering.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AccessOrderBy {
     /// If true, sorts by descending order. If false or unspecified, sorts in
@@ -318,7 +303,6 @@ pub struct AccessOrderBy {
 /// Nested message and enum types in `AccessOrderBy`.
 pub mod access_order_by {
     /// Sorts by metric values.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct MetricOrderBy {
         /// A metric name in the request to order by.
@@ -326,7 +310,6 @@ pub mod access_order_by {
         pub metric_name: ::prost::alloc::string::String,
     }
     /// Sorts by dimension values.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct DimensionOrderBy {
         /// A dimension name in the request to order by.
@@ -373,12 +356,10 @@ pub mod access_order_by {
             /// (if the ProtoBuf definition does not change) and safe for programmatic use.
             pub fn as_str_name(&self) -> &'static str {
                 match self {
-                    OrderType::Unspecified => "ORDER_TYPE_UNSPECIFIED",
-                    OrderType::Alphanumeric => "ALPHANUMERIC",
-                    OrderType::CaseInsensitiveAlphanumeric => {
-                        "CASE_INSENSITIVE_ALPHANUMERIC"
-                    }
-                    OrderType::Numeric => "NUMERIC",
+                    Self::Unspecified => "ORDER_TYPE_UNSPECIFIED",
+                    Self::Alphanumeric => "ALPHANUMERIC",
+                    Self::CaseInsensitiveAlphanumeric => "CASE_INSENSITIVE_ALPHANUMERIC",
+                    Self::Numeric => "NUMERIC",
                 }
             }
             /// Creates an enum from field names used in the ProtoBuf definition.
@@ -396,7 +377,6 @@ pub mod access_order_by {
         }
     }
     /// Specify one type of order by for `OrderBy`.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum OneOrderBy {
         /// Sorts results by a metric's values.
@@ -411,7 +391,6 @@ pub mod access_order_by {
 /// produce column entries within rows and DimensionHeaders. However, dimensions
 /// used exclusively within filters or expressions do not produce columns in a
 /// report; correspondingly, those dimensions do not produce headers.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AccessDimensionHeader {
     /// The dimension's name; for example 'userEmail'.
@@ -422,7 +401,6 @@ pub struct AccessDimensionHeader {
 /// report produce column entries within rows and MetricHeaders. However,
 /// metrics used exclusively within filters or expressions do not produce columns
 /// in a report; correspondingly, those metrics do not produce headers.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AccessMetricHeader {
     /// The metric's name; for example 'accessCount'.
@@ -430,7 +408,6 @@ pub struct AccessMetricHeader {
     pub metric_name: ::prost::alloc::string::String,
 }
 /// Access report data for each row.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AccessRow {
     /// List of dimension values. These values are in the same order as specified
@@ -443,7 +420,6 @@ pub struct AccessRow {
     pub metric_values: ::prost::alloc::vec::Vec<AccessMetricValue>,
 }
 /// The value of a dimension.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AccessDimensionValue {
     /// The dimension value. For example, this value may be 'France' for the
@@ -452,7 +428,6 @@ pub struct AccessDimensionValue {
     pub value: ::prost::alloc::string::String,
 }
 /// The value of a metric.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AccessMetricValue {
     /// The measurement value. For example, this value may be '13'.
@@ -462,8 +437,7 @@ pub struct AccessMetricValue {
 /// Current state of all quotas for this Analytics property. If any quota for a
 /// property is exhausted, all requests to that property will return Resource
 /// Exhausted errors.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct AccessQuota {
     /// Properties can use 250,000 tokens per day. Most requests consume fewer than
     /// 10 tokens.
@@ -489,8 +463,7 @@ pub struct AccessQuota {
     pub tokens_per_project_per_hour: ::core::option::Option<AccessQuotaStatus>,
 }
 /// Current state for a particular quota group.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct AccessQuotaStatus {
     /// Quota consumed by this request.
     #[prost(int32, tag = "1")]
@@ -500,7 +473,6 @@ pub struct AccessQuotaStatus {
     pub remaining: i32,
 }
 /// A resource message representing a Google Analytics account.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Account {
     /// Output only. Resource name of this account.
@@ -526,7 +498,6 @@ pub struct Account {
     pub deleted: bool,
 }
 /// A resource message representing a Google Analytics GA4 property.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Property {
     /// Output only. Resource name of this property.
@@ -600,7 +571,6 @@ pub struct Property {
     pub account: ::prost::alloc::string::String,
 }
 /// A resource message representing a data stream.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DataStream {
     /// Output only. Resource name of this Data Stream.
@@ -632,7 +602,6 @@ pub struct DataStream {
 /// Nested message and enum types in `DataStream`.
 pub mod data_stream {
     /// Data specific to web streams.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct WebStreamData {
         /// Output only. Analytics Measurement ID.
@@ -650,7 +619,6 @@ pub mod data_stream {
         pub default_uri: ::prost::alloc::string::String,
     }
     /// Data specific to Android app streams.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct AndroidAppStreamData {
         /// Output only. ID of the corresponding Android app in Firebase, if any.
@@ -663,7 +631,6 @@ pub mod data_stream {
         pub package_name: ::prost::alloc::string::String,
     }
     /// Data specific to iOS app streams.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct IosAppStreamData {
         /// Output only. ID of the corresponding iOS app in Firebase, if any.
@@ -705,10 +672,10 @@ pub mod data_stream {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                DataStreamType::Unspecified => "DATA_STREAM_TYPE_UNSPECIFIED",
-                DataStreamType::WebDataStream => "WEB_DATA_STREAM",
-                DataStreamType::AndroidAppDataStream => "ANDROID_APP_DATA_STREAM",
-                DataStreamType::IosAppDataStream => "IOS_APP_DATA_STREAM",
+                Self::Unspecified => "DATA_STREAM_TYPE_UNSPECIFIED",
+                Self::WebDataStream => "WEB_DATA_STREAM",
+                Self::AndroidAppDataStream => "ANDROID_APP_DATA_STREAM",
+                Self::IosAppDataStream => "IOS_APP_DATA_STREAM",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -724,7 +691,6 @@ pub mod data_stream {
     }
     /// Data for specific data stream types. The message that will be
     /// set corresponds to the type of this stream.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum StreamData {
         /// Data specific to web streams. Must be populated if type is
@@ -742,7 +708,6 @@ pub mod data_stream {
     }
 }
 /// A link between a GA4 property and a Firebase project.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FirebaseLink {
     /// Output only. Example format: properties/1234/firebaseLinks/5678
@@ -762,7 +727,6 @@ pub struct FirebaseLink {
     pub create_time: ::core::option::Option<::prost_types::Timestamp>,
 }
 /// A link between a GA4 property and a Google Ads account.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GoogleAdsLink {
     /// Output only. Format:
@@ -796,7 +760,6 @@ pub struct GoogleAdsLink {
 }
 /// A resource message representing data sharing settings of a Google Analytics
 /// account.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DataSharingSettings {
     /// Output only. Resource name.
@@ -826,7 +789,6 @@ pub struct DataSharingSettings {
 }
 /// A virtual resource representing an overview of an account and
 /// all its child GA4 properties.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AccountSummary {
     /// Resource name for this account summary.
@@ -847,7 +809,6 @@ pub struct AccountSummary {
     pub property_summaries: ::prost::alloc::vec::Vec<PropertySummary>,
 }
 /// A virtual resource representing metadata for a GA4 property.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PropertySummary {
     /// Resource name of property referred to by this property summary
@@ -870,7 +831,6 @@ pub struct PropertySummary {
     pub parent: ::prost::alloc::string::String,
 }
 /// A secret value used for sending hits to Measurement Protocol.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MeasurementProtocolSecret {
     /// Output only. Resource name of this secret. This secret may be a child of
@@ -891,7 +851,6 @@ pub struct MeasurementProtocolSecret {
 /// that resulted from the same cause. Common causes would be updates made in the
 /// Google Analytics UI, changes from customer support, or automatic Google
 /// Analytics system changes.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ChangeHistoryEvent {
     /// ID of this change history event. This ID is unique across Google Analytics.
@@ -918,7 +877,6 @@ pub struct ChangeHistoryEvent {
     pub changes: ::prost::alloc::vec::Vec<ChangeHistoryChange>,
 }
 /// A description of a change to a single Google Analytics resource.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ChangeHistoryChange {
     /// Resource name of the resource whose changes are described by this entry.
@@ -944,7 +902,6 @@ pub struct ChangeHistoryChange {
 pub mod change_history_change {
     /// A snapshot of a resource as before or after the result of a change in
     /// change history.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ChangeHistoryResource {
         #[prost(
@@ -955,7 +912,6 @@ pub mod change_history_change {
     }
     /// Nested message and enum types in `ChangeHistoryResource`.
     pub mod change_history_resource {
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Oneof)]
         pub enum Resource {
             /// A snapshot of an Account resource in change history.
@@ -986,7 +942,6 @@ pub mod change_history_change {
     }
 }
 /// A conversion event in a Google Analytics property.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ConversionEvent {
     /// Output only. Resource name of this conversion event.
@@ -1050,11 +1005,9 @@ pub mod conversion_event {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                ConversionCountingMethod::Unspecified => {
-                    "CONVERSION_COUNTING_METHOD_UNSPECIFIED"
-                }
-                ConversionCountingMethod::OncePerEvent => "ONCE_PER_EVENT",
-                ConversionCountingMethod::OncePerSession => "ONCE_PER_SESSION",
+                Self::Unspecified => "CONVERSION_COUNTING_METHOD_UNSPECIFIED",
+                Self::OncePerEvent => "ONCE_PER_EVENT",
+                Self::OncePerSession => "ONCE_PER_SESSION",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1069,7 +1022,6 @@ pub mod conversion_event {
     }
 }
 /// A definition for a CustomDimension.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CustomDimension {
     /// Output only. Resource name for this CustomDimension resource.
@@ -1143,10 +1095,10 @@ pub mod custom_dimension {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                DimensionScope::Unspecified => "DIMENSION_SCOPE_UNSPECIFIED",
-                DimensionScope::Event => "EVENT",
-                DimensionScope::User => "USER",
-                DimensionScope::Item => "ITEM",
+                Self::Unspecified => "DIMENSION_SCOPE_UNSPECIFIED",
+                Self::Event => "EVENT",
+                Self::User => "USER",
+                Self::Item => "ITEM",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1162,7 +1114,6 @@ pub mod custom_dimension {
     }
 }
 /// A definition for a custom metric.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CustomMetric {
     /// Output only. Resource name for this CustomMetric resource.
@@ -1255,17 +1206,17 @@ pub mod custom_metric {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                MeasurementUnit::Unspecified => "MEASUREMENT_UNIT_UNSPECIFIED",
-                MeasurementUnit::Standard => "STANDARD",
-                MeasurementUnit::Currency => "CURRENCY",
-                MeasurementUnit::Feet => "FEET",
-                MeasurementUnit::Meters => "METERS",
-                MeasurementUnit::Kilometers => "KILOMETERS",
-                MeasurementUnit::Miles => "MILES",
-                MeasurementUnit::Milliseconds => "MILLISECONDS",
-                MeasurementUnit::Seconds => "SECONDS",
-                MeasurementUnit::Minutes => "MINUTES",
-                MeasurementUnit::Hours => "HOURS",
+                Self::Unspecified => "MEASUREMENT_UNIT_UNSPECIFIED",
+                Self::Standard => "STANDARD",
+                Self::Currency => "CURRENCY",
+                Self::Feet => "FEET",
+                Self::Meters => "METERS",
+                Self::Kilometers => "KILOMETERS",
+                Self::Miles => "MILES",
+                Self::Milliseconds => "MILLISECONDS",
+                Self::Seconds => "SECONDS",
+                Self::Minutes => "MINUTES",
+                Self::Hours => "HOURS",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1312,8 +1263,8 @@ pub mod custom_metric {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                MetricScope::Unspecified => "METRIC_SCOPE_UNSPECIFIED",
-                MetricScope::Event => "EVENT",
+                Self::Unspecified => "METRIC_SCOPE_UNSPECIFIED",
+                Self::Event => "EVENT",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1354,9 +1305,9 @@ pub mod custom_metric {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                RestrictedMetricType::Unspecified => "RESTRICTED_METRIC_TYPE_UNSPECIFIED",
-                RestrictedMetricType::CostData => "COST_DATA",
-                RestrictedMetricType::RevenueData => "REVENUE_DATA",
+                Self::Unspecified => "RESTRICTED_METRIC_TYPE_UNSPECIFIED",
+                Self::CostData => "COST_DATA",
+                Self::RevenueData => "REVENUE_DATA",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1371,7 +1322,6 @@ pub mod custom_metric {
     }
 }
 /// Settings values for data retention. This is a singleton resource.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DataRetentionSettings {
     /// Output only. Resource name for this DataRetentionSetting resource.
@@ -1425,12 +1375,12 @@ pub mod data_retention_settings {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                RetentionDuration::Unspecified => "RETENTION_DURATION_UNSPECIFIED",
-                RetentionDuration::TwoMonths => "TWO_MONTHS",
-                RetentionDuration::FourteenMonths => "FOURTEEN_MONTHS",
-                RetentionDuration::TwentySixMonths => "TWENTY_SIX_MONTHS",
-                RetentionDuration::ThirtyEightMonths => "THIRTY_EIGHT_MONTHS",
-                RetentionDuration::FiftyMonths => "FIFTY_MONTHS",
+                Self::Unspecified => "RETENTION_DURATION_UNSPECIFIED",
+                Self::TwoMonths => "TWO_MONTHS",
+                Self::FourteenMonths => "FOURTEEN_MONTHS",
+                Self::TwentySixMonths => "TWENTY_SIX_MONTHS",
+                Self::ThirtyEightMonths => "THIRTY_EIGHT_MONTHS",
+                Self::FiftyMonths => "FIFTY_MONTHS",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1513,35 +1463,33 @@ impl IndustryCategory {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            IndustryCategory::Unspecified => "INDUSTRY_CATEGORY_UNSPECIFIED",
-            IndustryCategory::Automotive => "AUTOMOTIVE",
-            IndustryCategory::BusinessAndIndustrialMarkets => {
-                "BUSINESS_AND_INDUSTRIAL_MARKETS"
-            }
-            IndustryCategory::Finance => "FINANCE",
-            IndustryCategory::Healthcare => "HEALTHCARE",
-            IndustryCategory::Technology => "TECHNOLOGY",
-            IndustryCategory::Travel => "TRAVEL",
-            IndustryCategory::Other => "OTHER",
-            IndustryCategory::ArtsAndEntertainment => "ARTS_AND_ENTERTAINMENT",
-            IndustryCategory::BeautyAndFitness => "BEAUTY_AND_FITNESS",
-            IndustryCategory::BooksAndLiterature => "BOOKS_AND_LITERATURE",
-            IndustryCategory::FoodAndDrink => "FOOD_AND_DRINK",
-            IndustryCategory::Games => "GAMES",
-            IndustryCategory::HobbiesAndLeisure => "HOBBIES_AND_LEISURE",
-            IndustryCategory::HomeAndGarden => "HOME_AND_GARDEN",
-            IndustryCategory::InternetAndTelecom => "INTERNET_AND_TELECOM",
-            IndustryCategory::LawAndGovernment => "LAW_AND_GOVERNMENT",
-            IndustryCategory::News => "NEWS",
-            IndustryCategory::OnlineCommunities => "ONLINE_COMMUNITIES",
-            IndustryCategory::PeopleAndSociety => "PEOPLE_AND_SOCIETY",
-            IndustryCategory::PetsAndAnimals => "PETS_AND_ANIMALS",
-            IndustryCategory::RealEstate => "REAL_ESTATE",
-            IndustryCategory::Reference => "REFERENCE",
-            IndustryCategory::Science => "SCIENCE",
-            IndustryCategory::Sports => "SPORTS",
-            IndustryCategory::JobsAndEducation => "JOBS_AND_EDUCATION",
-            IndustryCategory::Shopping => "SHOPPING",
+            Self::Unspecified => "INDUSTRY_CATEGORY_UNSPECIFIED",
+            Self::Automotive => "AUTOMOTIVE",
+            Self::BusinessAndIndustrialMarkets => "BUSINESS_AND_INDUSTRIAL_MARKETS",
+            Self::Finance => "FINANCE",
+            Self::Healthcare => "HEALTHCARE",
+            Self::Technology => "TECHNOLOGY",
+            Self::Travel => "TRAVEL",
+            Self::Other => "OTHER",
+            Self::ArtsAndEntertainment => "ARTS_AND_ENTERTAINMENT",
+            Self::BeautyAndFitness => "BEAUTY_AND_FITNESS",
+            Self::BooksAndLiterature => "BOOKS_AND_LITERATURE",
+            Self::FoodAndDrink => "FOOD_AND_DRINK",
+            Self::Games => "GAMES",
+            Self::HobbiesAndLeisure => "HOBBIES_AND_LEISURE",
+            Self::HomeAndGarden => "HOME_AND_GARDEN",
+            Self::InternetAndTelecom => "INTERNET_AND_TELECOM",
+            Self::LawAndGovernment => "LAW_AND_GOVERNMENT",
+            Self::News => "NEWS",
+            Self::OnlineCommunities => "ONLINE_COMMUNITIES",
+            Self::PeopleAndSociety => "PEOPLE_AND_SOCIETY",
+            Self::PetsAndAnimals => "PETS_AND_ANIMALS",
+            Self::RealEstate => "REAL_ESTATE",
+            Self::Reference => "REFERENCE",
+            Self::Science => "SCIENCE",
+            Self::Sports => "SPORTS",
+            Self::JobsAndEducation => "JOBS_AND_EDUCATION",
+            Self::Shopping => "SHOPPING",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1596,9 +1544,9 @@ impl ServiceLevel {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            ServiceLevel::Unspecified => "SERVICE_LEVEL_UNSPECIFIED",
-            ServiceLevel::GoogleAnalyticsStandard => "GOOGLE_ANALYTICS_STANDARD",
-            ServiceLevel::GoogleAnalytics360 => "GOOGLE_ANALYTICS_360",
+            Self::Unspecified => "SERVICE_LEVEL_UNSPECIFIED",
+            Self::GoogleAnalyticsStandard => "GOOGLE_ANALYTICS_STANDARD",
+            Self::GoogleAnalytics360 => "GOOGLE_ANALYTICS_360",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1632,10 +1580,10 @@ impl ActorType {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            ActorType::Unspecified => "ACTOR_TYPE_UNSPECIFIED",
-            ActorType::User => "USER",
-            ActorType::System => "SYSTEM",
-            ActorType::Support => "SUPPORT",
+            Self::Unspecified => "ACTOR_TYPE_UNSPECIFIED",
+            Self::User => "USER",
+            Self::System => "SYSTEM",
+            Self::Support => "SUPPORT",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1669,10 +1617,10 @@ impl ActionType {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            ActionType::Unspecified => "ACTION_TYPE_UNSPECIFIED",
-            ActionType::Created => "CREATED",
-            ActionType::Updated => "UPDATED",
-            ActionType::Deleted => "DELETED",
+            Self::Unspecified => "ACTION_TYPE_UNSPECIFIED",
+            Self::Created => "CREATED",
+            Self::Updated => "UPDATED",
+            Self::Deleted => "DELETED",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1724,27 +1672,21 @@ impl ChangeHistoryResourceType {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            ChangeHistoryResourceType::Unspecified => {
-                "CHANGE_HISTORY_RESOURCE_TYPE_UNSPECIFIED"
-            }
-            ChangeHistoryResourceType::Account => "ACCOUNT",
-            ChangeHistoryResourceType::Property => "PROPERTY",
-            ChangeHistoryResourceType::FirebaseLink => "FIREBASE_LINK",
-            ChangeHistoryResourceType::GoogleAdsLink => "GOOGLE_ADS_LINK",
-            ChangeHistoryResourceType::GoogleSignalsSettings => "GOOGLE_SIGNALS_SETTINGS",
-            ChangeHistoryResourceType::ConversionEvent => "CONVERSION_EVENT",
-            ChangeHistoryResourceType::MeasurementProtocolSecret => {
-                "MEASUREMENT_PROTOCOL_SECRET"
-            }
-            ChangeHistoryResourceType::DataRetentionSettings => "DATA_RETENTION_SETTINGS",
-            ChangeHistoryResourceType::DisplayVideo360AdvertiserLink => {
-                "DISPLAY_VIDEO_360_ADVERTISER_LINK"
-            }
-            ChangeHistoryResourceType::DisplayVideo360AdvertiserLinkProposal => {
+            Self::Unspecified => "CHANGE_HISTORY_RESOURCE_TYPE_UNSPECIFIED",
+            Self::Account => "ACCOUNT",
+            Self::Property => "PROPERTY",
+            Self::FirebaseLink => "FIREBASE_LINK",
+            Self::GoogleAdsLink => "GOOGLE_ADS_LINK",
+            Self::GoogleSignalsSettings => "GOOGLE_SIGNALS_SETTINGS",
+            Self::ConversionEvent => "CONVERSION_EVENT",
+            Self::MeasurementProtocolSecret => "MEASUREMENT_PROTOCOL_SECRET",
+            Self::DataRetentionSettings => "DATA_RETENTION_SETTINGS",
+            Self::DisplayVideo360AdvertiserLink => "DISPLAY_VIDEO_360_ADVERTISER_LINK",
+            Self::DisplayVideo360AdvertiserLinkProposal => {
                 "DISPLAY_VIDEO_360_ADVERTISER_LINK_PROPOSAL"
             }
-            ChangeHistoryResourceType::DataStream => "DATA_STREAM",
-            ChangeHistoryResourceType::AttributionSettings => "ATTRIBUTION_SETTINGS",
+            Self::DataStream => "DATA_STREAM",
+            Self::AttributionSettings => "ATTRIBUTION_SETTINGS",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1791,10 +1733,10 @@ impl PropertyType {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            PropertyType::Unspecified => "PROPERTY_TYPE_UNSPECIFIED",
-            PropertyType::Ordinary => "PROPERTY_TYPE_ORDINARY",
-            PropertyType::Subproperty => "PROPERTY_TYPE_SUBPROPERTY",
-            PropertyType::Rollup => "PROPERTY_TYPE_ROLLUP",
+            Self::Unspecified => "PROPERTY_TYPE_UNSPECIFIED",
+            Self::Ordinary => "PROPERTY_TYPE_ORDINARY",
+            Self::Subproperty => "PROPERTY_TYPE_SUBPROPERTY",
+            Self::Rollup => "PROPERTY_TYPE_ROLLUP",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1809,7 +1751,6 @@ impl PropertyType {
     }
 }
 /// The request for a Data Access Record Report.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RunAccessReportRequest {
     /// The Data Access Report supports requesting at the property level or account
@@ -1891,7 +1832,6 @@ pub struct RunAccessReportRequest {
     pub return_entity_quota: bool,
 }
 /// The customized Data Access Record Report response.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RunAccessReportResponse {
     /// The header for a column in the report that corresponds to a specific
@@ -1923,7 +1863,6 @@ pub struct RunAccessReportResponse {
     pub quota: ::core::option::Option<AccessQuota>,
 }
 /// Request message for GetAccount RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetAccountRequest {
     /// Required. The name of the account to lookup.
@@ -1933,7 +1872,6 @@ pub struct GetAccountRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for ListAccounts RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAccountsRequest {
     /// The maximum number of resources to return. The service may return
@@ -1955,7 +1893,6 @@ pub struct ListAccountsRequest {
     pub show_deleted: bool,
 }
 /// Request message for ListAccounts RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAccountsResponse {
     /// Results that were accessible to the caller.
@@ -1967,7 +1904,6 @@ pub struct ListAccountsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for DeleteAccount RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteAccountRequest {
     /// Required. The name of the Account to soft-delete.
@@ -1977,7 +1913,6 @@ pub struct DeleteAccountRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for UpdateAccount RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateAccountRequest {
     /// Required. The account to update.
@@ -1992,7 +1927,6 @@ pub struct UpdateAccountRequest {
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
 /// Request message for ProvisionAccountTicket RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ProvisionAccountTicketRequest {
     /// The account to create.
@@ -2004,7 +1938,6 @@ pub struct ProvisionAccountTicketRequest {
     pub redirect_uri: ::prost::alloc::string::String,
 }
 /// Response message for ProvisionAccountTicket RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ProvisionAccountTicketResponse {
     /// The param to be passed in the ToS link.
@@ -2012,7 +1945,6 @@ pub struct ProvisionAccountTicketResponse {
     pub account_ticket_id: ::prost::alloc::string::String,
 }
 /// Request message for GetProperty RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetPropertyRequest {
     /// Required. The name of the property to lookup.
@@ -2022,7 +1954,6 @@ pub struct GetPropertyRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for ListProperties RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListPropertiesRequest {
     /// Required. An expression for filtering the results of the request.
@@ -2062,7 +1993,6 @@ pub struct ListPropertiesRequest {
     pub show_deleted: bool,
 }
 /// Response message for ListProperties RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListPropertiesResponse {
     /// Results that matched the filter criteria and were accessible to the caller.
@@ -2074,7 +2004,6 @@ pub struct ListPropertiesResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for UpdateProperty RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdatePropertyRequest {
     /// Required. The property to update.
@@ -2090,7 +2019,6 @@ pub struct UpdatePropertyRequest {
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
 /// Request message for CreateProperty RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreatePropertyRequest {
     /// Required. The property to create.
@@ -2099,7 +2027,6 @@ pub struct CreatePropertyRequest {
     pub property: ::core::option::Option<Property>,
 }
 /// Request message for DeleteProperty RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeletePropertyRequest {
     /// Required. The name of the Property to soft-delete.
@@ -2109,7 +2036,6 @@ pub struct DeletePropertyRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for CreateFirebaseLink RPC
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateFirebaseLinkRequest {
     /// Required. Format: properties/{property_id}
@@ -2121,7 +2047,6 @@ pub struct CreateFirebaseLinkRequest {
     pub firebase_link: ::core::option::Option<FirebaseLink>,
 }
 /// Request message for DeleteFirebaseLink RPC
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteFirebaseLinkRequest {
     /// Required. Format: properties/{property_id}/firebaseLinks/{firebase_link_id}
@@ -2130,7 +2055,6 @@ pub struct DeleteFirebaseLinkRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for ListFirebaseLinks RPC
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListFirebaseLinksRequest {
     /// Required. Format: properties/{property_id}
@@ -2151,7 +2075,6 @@ pub struct ListFirebaseLinksRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for ListFirebaseLinks RPC
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListFirebaseLinksResponse {
     /// List of FirebaseLinks. This will have at most one value.
@@ -2165,7 +2088,6 @@ pub struct ListFirebaseLinksResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for CreateGoogleAdsLink RPC
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateGoogleAdsLinkRequest {
     /// Required. Example format: properties/1234
@@ -2176,7 +2098,6 @@ pub struct CreateGoogleAdsLinkRequest {
     pub google_ads_link: ::core::option::Option<GoogleAdsLink>,
 }
 /// Request message for UpdateGoogleAdsLink RPC
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateGoogleAdsLinkRequest {
     /// The GoogleAdsLink to update
@@ -2190,7 +2111,6 @@ pub struct UpdateGoogleAdsLinkRequest {
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
 /// Request message for DeleteGoogleAdsLink RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteGoogleAdsLinkRequest {
     /// Required. Example format: properties/1234/googleAdsLinks/5678
@@ -2198,7 +2118,6 @@ pub struct DeleteGoogleAdsLinkRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for ListGoogleAdsLinks RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListGoogleAdsLinksRequest {
     /// Required. Example format: properties/1234
@@ -2218,7 +2137,6 @@ pub struct ListGoogleAdsLinksRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for ListGoogleAdsLinks RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListGoogleAdsLinksResponse {
     /// List of GoogleAdsLinks.
@@ -2230,7 +2148,6 @@ pub struct ListGoogleAdsLinksResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for GetDataSharingSettings RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetDataSharingSettingsRequest {
     /// Required. The name of the settings to lookup.
@@ -2240,7 +2157,6 @@ pub struct GetDataSharingSettingsRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for ListAccountSummaries RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAccountSummariesRequest {
     /// The maximum number of AccountSummary resources to return. The service may
@@ -2257,7 +2173,6 @@ pub struct ListAccountSummariesRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for ListAccountSummaries RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAccountSummariesResponse {
     /// Account summaries of all accounts the caller has access to.
@@ -2269,7 +2184,6 @@ pub struct ListAccountSummariesResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for AcknowledgeUserDataCollection RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AcknowledgeUserDataCollectionRequest {
     /// Required. The property for which to acknowledge user data collection.
@@ -2287,11 +2201,9 @@ pub struct AcknowledgeUserDataCollectionRequest {
     pub acknowledgement: ::prost::alloc::string::String,
 }
 /// Response message for AcknowledgeUserDataCollection RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct AcknowledgeUserDataCollectionResponse {}
 /// Request message for SearchChangeHistoryEvents RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchChangeHistoryEventsRequest {
     /// Required. The account resource for which to return change history
@@ -2340,7 +2252,6 @@ pub struct SearchChangeHistoryEventsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for SearchAccounts RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchChangeHistoryEventsResponse {
     /// Results that were accessible to the caller.
@@ -2352,7 +2263,6 @@ pub struct SearchChangeHistoryEventsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for GetMeasurementProtocolSecret RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetMeasurementProtocolSecretRequest {
     /// Required. The name of the measurement protocol secret to lookup.
@@ -2362,7 +2272,6 @@ pub struct GetMeasurementProtocolSecretRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for CreateMeasurementProtocolSecret RPC
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateMeasurementProtocolSecretRequest {
     /// Required. The parent resource where this secret will be created.
@@ -2374,7 +2283,6 @@ pub struct CreateMeasurementProtocolSecretRequest {
     pub measurement_protocol_secret: ::core::option::Option<MeasurementProtocolSecret>,
 }
 /// Request message for DeleteMeasurementProtocolSecret RPC
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteMeasurementProtocolSecretRequest {
     /// Required. The name of the MeasurementProtocolSecret to delete.
@@ -2384,7 +2292,6 @@ pub struct DeleteMeasurementProtocolSecretRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for UpdateMeasurementProtocolSecret RPC
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateMeasurementProtocolSecretRequest {
     /// Required. The measurement protocol secret to update.
@@ -2396,7 +2303,6 @@ pub struct UpdateMeasurementProtocolSecretRequest {
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
 /// Request message for ListMeasurementProtocolSecret RPC
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListMeasurementProtocolSecretsRequest {
     /// Required. The resource name of the parent stream.
@@ -2417,7 +2323,6 @@ pub struct ListMeasurementProtocolSecretsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for ListMeasurementProtocolSecret RPC
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListMeasurementProtocolSecretsResponse {
     /// A list of secrets for the parent stream specified in the request.
@@ -2431,7 +2336,6 @@ pub struct ListMeasurementProtocolSecretsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for CreateConversionEvent RPC
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateConversionEventRequest {
     /// Required. The conversion event to create.
@@ -2443,7 +2347,6 @@ pub struct CreateConversionEventRequest {
     pub parent: ::prost::alloc::string::String,
 }
 /// Request message for UpdateConversionEvent RPC
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateConversionEventRequest {
     /// Required. The conversion event to update.
@@ -2458,7 +2361,6 @@ pub struct UpdateConversionEventRequest {
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
 /// Request message for GetConversionEvent RPC
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetConversionEventRequest {
     /// Required. The resource name of the conversion event to retrieve.
@@ -2468,7 +2370,6 @@ pub struct GetConversionEventRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for DeleteConversionEvent RPC
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteConversionEventRequest {
     /// Required. The resource name of the conversion event to delete.
@@ -2478,7 +2379,6 @@ pub struct DeleteConversionEventRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for ListConversionEvents RPC
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListConversionEventsRequest {
     /// Required. The resource name of the parent property.
@@ -2498,7 +2398,6 @@ pub struct ListConversionEventsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for ListConversionEvents RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListConversionEventsResponse {
     /// The requested conversion events
@@ -2510,7 +2409,6 @@ pub struct ListConversionEventsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for CreateCustomDimension RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateCustomDimensionRequest {
     /// Required. Example format: properties/1234
@@ -2521,7 +2419,6 @@ pub struct CreateCustomDimensionRequest {
     pub custom_dimension: ::core::option::Option<CustomDimension>,
 }
 /// Request message for UpdateCustomDimension RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateCustomDimensionRequest {
     /// The CustomDimension to update
@@ -2534,7 +2431,6 @@ pub struct UpdateCustomDimensionRequest {
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
 /// Request message for ListCustomDimensions RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCustomDimensionsRequest {
     /// Required. Example format: properties/1234
@@ -2554,7 +2450,6 @@ pub struct ListCustomDimensionsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for ListCustomDimensions RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCustomDimensionsResponse {
     /// List of CustomDimensions.
@@ -2566,7 +2461,6 @@ pub struct ListCustomDimensionsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for ArchiveCustomDimension RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ArchiveCustomDimensionRequest {
     /// Required. The name of the CustomDimension to archive.
@@ -2575,7 +2469,6 @@ pub struct ArchiveCustomDimensionRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for GetCustomDimension RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetCustomDimensionRequest {
     /// Required. The name of the CustomDimension to get.
@@ -2584,7 +2477,6 @@ pub struct GetCustomDimensionRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for CreateCustomMetric RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateCustomMetricRequest {
     /// Required. Example format: properties/1234
@@ -2595,7 +2487,6 @@ pub struct CreateCustomMetricRequest {
     pub custom_metric: ::core::option::Option<CustomMetric>,
 }
 /// Request message for UpdateCustomMetric RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateCustomMetricRequest {
     /// The CustomMetric to update
@@ -2608,7 +2499,6 @@ pub struct UpdateCustomMetricRequest {
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
 /// Request message for ListCustomMetrics RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCustomMetricsRequest {
     /// Required. Example format: properties/1234
@@ -2628,7 +2518,6 @@ pub struct ListCustomMetricsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for ListCustomMetrics RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCustomMetricsResponse {
     /// List of CustomMetrics.
@@ -2640,7 +2529,6 @@ pub struct ListCustomMetricsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for ArchiveCustomMetric RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ArchiveCustomMetricRequest {
     /// Required. The name of the CustomMetric to archive.
@@ -2649,7 +2537,6 @@ pub struct ArchiveCustomMetricRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for GetCustomMetric RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetCustomMetricRequest {
     /// Required. The name of the CustomMetric to get.
@@ -2658,7 +2545,6 @@ pub struct GetCustomMetricRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for GetDataRetentionSettings RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetDataRetentionSettingsRequest {
     /// Required. The name of the settings to lookup.
@@ -2669,7 +2555,6 @@ pub struct GetDataRetentionSettingsRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for UpdateDataRetentionSettings RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateDataRetentionSettingsRequest {
     /// Required. The settings to update.
@@ -2684,7 +2569,6 @@ pub struct UpdateDataRetentionSettingsRequest {
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
 /// Request message for CreateDataStream RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateDataStreamRequest {
     /// Required. Example format: properties/1234
@@ -2695,7 +2579,6 @@ pub struct CreateDataStreamRequest {
     pub data_stream: ::core::option::Option<DataStream>,
 }
 /// Request message for DeleteDataStream RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteDataStreamRequest {
     /// Required. The name of the DataStream to delete.
@@ -2704,7 +2587,6 @@ pub struct DeleteDataStreamRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for UpdateDataStream RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateDataStreamRequest {
     /// The DataStream to update
@@ -2717,7 +2599,6 @@ pub struct UpdateDataStreamRequest {
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
 /// Request message for ListDataStreams RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListDataStreamsRequest {
     /// Required. Example format: properties/1234
@@ -2737,7 +2618,6 @@ pub struct ListDataStreamsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for ListDataStreams RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListDataStreamsResponse {
     /// List of DataStreams.
@@ -2749,7 +2629,6 @@ pub struct ListDataStreamsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for GetDataStream RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetDataStreamRequest {
     /// Required. The name of the DataStream to get.
@@ -2759,11 +2638,17 @@ pub struct GetDataStreamRequest {
 }
 /// Generated server implementations.
 pub mod analytics_admin_service_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with AnalyticsAdminServiceServer.
     #[async_trait]
-    pub trait AnalyticsAdminService: Send + Sync + 'static {
+    pub trait AnalyticsAdminService: std::marker::Send + std::marker::Sync + 'static {
         /// Lookup for a single Account.
         async fn get_account(
             &self,
@@ -3125,20 +3010,18 @@ pub mod analytics_admin_service_server {
     }
     /// Service Interface for the Analytics Admin API (GA4).
     #[derive(Debug)]
-    pub struct AnalyticsAdminServiceServer<T: AnalyticsAdminService> {
-        inner: _Inner<T>,
+    pub struct AnalyticsAdminServiceServer<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: AnalyticsAdminService> AnalyticsAdminServiceServer<T> {
+    impl<T> AnalyticsAdminServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -3189,8 +3072,8 @@ pub mod analytics_admin_service_server {
     for AnalyticsAdminServiceServer<T>
     where
         T: AnalyticsAdminService,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -3202,7 +3085,6 @@ pub mod analytics_admin_service_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.analytics.admin.v1beta.AnalyticsAdminService/GetAccount" => {
                     #[allow(non_camel_case_types)]
@@ -3234,7 +3116,6 @@ pub mod analytics_admin_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetAccountSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -3281,7 +3162,6 @@ pub mod analytics_admin_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListAccountsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -3331,7 +3211,6 @@ pub mod analytics_admin_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = DeleteAccountSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -3381,7 +3260,6 @@ pub mod analytics_admin_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = UpdateAccountSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -3433,7 +3311,6 @@ pub mod analytics_admin_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ProvisionAccountTicketSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -3483,7 +3360,6 @@ pub mod analytics_admin_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListAccountSummariesSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -3530,7 +3406,6 @@ pub mod analytics_admin_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetPropertySvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -3580,7 +3455,6 @@ pub mod analytics_admin_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListPropertiesSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -3630,7 +3504,6 @@ pub mod analytics_admin_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = CreatePropertySvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -3680,7 +3553,6 @@ pub mod analytics_admin_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = DeletePropertySvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -3730,7 +3602,6 @@ pub mod analytics_admin_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = UpdatePropertySvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -3780,7 +3651,6 @@ pub mod analytics_admin_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = CreateFirebaseLinkSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -3830,7 +3700,6 @@ pub mod analytics_admin_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = DeleteFirebaseLinkSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -3880,7 +3749,6 @@ pub mod analytics_admin_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListFirebaseLinksSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -3930,7 +3798,6 @@ pub mod analytics_admin_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = CreateGoogleAdsLinkSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -3980,7 +3847,6 @@ pub mod analytics_admin_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = UpdateGoogleAdsLinkSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -4030,7 +3896,6 @@ pub mod analytics_admin_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = DeleteGoogleAdsLinkSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -4080,7 +3945,6 @@ pub mod analytics_admin_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListGoogleAdsLinksSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -4132,7 +3996,6 @@ pub mod analytics_admin_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetDataSharingSettingsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -4187,7 +4050,6 @@ pub mod analytics_admin_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetMeasurementProtocolSecretSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -4242,7 +4104,6 @@ pub mod analytics_admin_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListMeasurementProtocolSecretsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -4297,7 +4158,6 @@ pub mod analytics_admin_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = CreateMeasurementProtocolSecretSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -4352,7 +4212,6 @@ pub mod analytics_admin_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = DeleteMeasurementProtocolSecretSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -4407,7 +4266,6 @@ pub mod analytics_admin_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = UpdateMeasurementProtocolSecretSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -4462,7 +4320,6 @@ pub mod analytics_admin_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = AcknowledgeUserDataCollectionSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -4517,7 +4374,6 @@ pub mod analytics_admin_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = SearchChangeHistoryEventsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -4569,7 +4425,6 @@ pub mod analytics_admin_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = CreateConversionEventSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -4621,7 +4476,6 @@ pub mod analytics_admin_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = UpdateConversionEventSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -4671,7 +4525,6 @@ pub mod analytics_admin_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetConversionEventSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -4723,7 +4576,6 @@ pub mod analytics_admin_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = DeleteConversionEventSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -4773,7 +4625,6 @@ pub mod analytics_admin_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListConversionEventsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -4825,7 +4676,6 @@ pub mod analytics_admin_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = CreateCustomDimensionSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -4877,7 +4727,6 @@ pub mod analytics_admin_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = UpdateCustomDimensionSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -4927,7 +4776,6 @@ pub mod analytics_admin_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListCustomDimensionsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -4979,7 +4827,6 @@ pub mod analytics_admin_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ArchiveCustomDimensionSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -5029,7 +4876,6 @@ pub mod analytics_admin_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetCustomDimensionSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -5079,7 +4925,6 @@ pub mod analytics_admin_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = CreateCustomMetricSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -5129,7 +4974,6 @@ pub mod analytics_admin_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = UpdateCustomMetricSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -5179,7 +5023,6 @@ pub mod analytics_admin_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListCustomMetricsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -5229,7 +5072,6 @@ pub mod analytics_admin_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ArchiveCustomMetricSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -5279,7 +5121,6 @@ pub mod analytics_admin_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetCustomMetricSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -5333,7 +5174,6 @@ pub mod analytics_admin_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetDataRetentionSettingsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -5388,7 +5228,6 @@ pub mod analytics_admin_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = UpdateDataRetentionSettingsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -5438,7 +5277,6 @@ pub mod analytics_admin_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = CreateDataStreamSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -5488,7 +5326,6 @@ pub mod analytics_admin_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = DeleteDataStreamSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -5538,7 +5375,6 @@ pub mod analytics_admin_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = UpdateDataStreamSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -5588,7 +5424,6 @@ pub mod analytics_admin_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListDataStreamsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -5638,7 +5473,6 @@ pub mod analytics_admin_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetDataStreamSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -5688,7 +5522,6 @@ pub mod analytics_admin_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = RunAccessReportSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -5707,20 +5540,25 @@ pub mod analytics_admin_service_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: AnalyticsAdminService> Clone for AnalyticsAdminServiceServer<T> {
+    impl<T> Clone for AnalyticsAdminServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -5732,18 +5570,9 @@ pub mod analytics_admin_service_server {
             }
         }
     }
-    impl<T: AnalyticsAdminService> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: AnalyticsAdminService> tonic::server::NamedService
-    for AnalyticsAdminServiceServer<T> {
-        const NAME: &'static str = "google.analytics.admin.v1beta.AnalyticsAdminService";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.analytics.admin.v1beta.AnalyticsAdminService";
+    impl<T> tonic::server::NamedService for AnalyticsAdminServiceServer<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }

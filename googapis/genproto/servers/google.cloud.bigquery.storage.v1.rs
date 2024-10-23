@@ -5,7 +5,6 @@
 /// <https://arrow.apache.org/docs/format/Columnar.html#serialization-and-interprocess-communication-ipc>
 ///
 /// See code samples on how this message can be deserialized.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ArrowSchema {
     /// IPC serialized Arrow schema.
@@ -13,7 +12,6 @@ pub struct ArrowSchema {
     pub serialized_schema: ::prost::alloc::vec::Vec<u8>,
 }
 /// Arrow RecordBatch.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ArrowRecordBatch {
     /// IPC-serialized Arrow RecordBatch.
@@ -26,8 +24,7 @@ pub struct ArrowRecordBatch {
     pub row_count: i64,
 }
 /// Contains options specific to Arrow Serialization.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct ArrowSerializationOptions {
     /// The compression codec to use for Arrow buffers in serialized record
     /// batches.
@@ -64,9 +61,9 @@ pub mod arrow_serialization_options {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                CompressionCodec::CompressionUnspecified => "COMPRESSION_UNSPECIFIED",
-                CompressionCodec::Lz4Frame => "LZ4_FRAME",
-                CompressionCodec::Zstd => "ZSTD",
+                Self::CompressionUnspecified => "COMPRESSION_UNSPECIFIED",
+                Self::Lz4Frame => "LZ4_FRAME",
+                Self::Zstd => "ZSTD",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -81,7 +78,6 @@ pub mod arrow_serialization_options {
     }
 }
 /// Avro schema.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AvroSchema {
     /// Json serialized schema, as described at
@@ -90,7 +86,6 @@ pub struct AvroSchema {
     pub schema: ::prost::alloc::string::String,
 }
 /// Avro rows.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AvroRows {
     /// Binary serialized rows in a block.
@@ -103,8 +98,7 @@ pub struct AvroRows {
     pub row_count: i64,
 }
 /// Contains options specific to Avro Serialization.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct AvroSerializationOptions {
     /// Enable displayName attribute in Avro schema.
     ///
@@ -120,7 +114,6 @@ pub struct AvroSerializationOptions {
     pub enable_display_name_attribute: bool,
 }
 /// ProtoSchema describes the schema of the serialized protocol buffer data rows.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ProtoSchema {
     /// Descriptor for input message.  The provided descriptor must be self
@@ -135,7 +128,6 @@ pub struct ProtoSchema {
     #[prost(message, optional, tag = "1")]
     pub proto_descriptor: ::core::option::Option<::prost_types::DescriptorProto>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ProtoRows {
     /// A sequence of rows serialized as a Protocol Buffer.
@@ -148,7 +140,6 @@ pub struct ProtoRows {
 /// Schema of a table. This schema is a subset of
 /// google.cloud.bigquery.v2.TableSchema containing information necessary to
 /// generate valid message to write to BigQuery.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TableSchema {
     /// Describes the fields in a table.
@@ -156,7 +147,6 @@ pub struct TableSchema {
     pub fields: ::prost::alloc::vec::Vec<TableFieldSchema>,
 }
 /// TableFieldSchema defines a single field/column within a table schema.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TableFieldSchema {
     /// Required. The field name. The name must contain only letters (a-z, A-Z),
@@ -244,8 +234,7 @@ pub struct TableFieldSchema {
 /// Nested message and enum types in `TableFieldSchema`.
 pub mod table_field_schema {
     /// Represents the type of a field element.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct FieldElementType {
         /// Required. The type of a field element.
         #[prost(enumeration = "Type", tag = "1")]
@@ -306,23 +295,23 @@ pub mod table_field_schema {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Type::Unspecified => "TYPE_UNSPECIFIED",
-                Type::String => "STRING",
-                Type::Int64 => "INT64",
-                Type::Double => "DOUBLE",
-                Type::Struct => "STRUCT",
-                Type::Bytes => "BYTES",
-                Type::Bool => "BOOL",
-                Type::Timestamp => "TIMESTAMP",
-                Type::Date => "DATE",
-                Type::Time => "TIME",
-                Type::Datetime => "DATETIME",
-                Type::Geography => "GEOGRAPHY",
-                Type::Numeric => "NUMERIC",
-                Type::Bignumeric => "BIGNUMERIC",
-                Type::Interval => "INTERVAL",
-                Type::Json => "JSON",
-                Type::Range => "RANGE",
+                Self::Unspecified => "TYPE_UNSPECIFIED",
+                Self::String => "STRING",
+                Self::Int64 => "INT64",
+                Self::Double => "DOUBLE",
+                Self::Struct => "STRUCT",
+                Self::Bytes => "BYTES",
+                Self::Bool => "BOOL",
+                Self::Timestamp => "TIMESTAMP",
+                Self::Date => "DATE",
+                Self::Time => "TIME",
+                Self::Datetime => "DATETIME",
+                Self::Geography => "GEOGRAPHY",
+                Self::Numeric => "NUMERIC",
+                Self::Bignumeric => "BIGNUMERIC",
+                Self::Interval => "INTERVAL",
+                Self::Json => "JSON",
+                Self::Range => "RANGE",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -375,10 +364,10 @@ pub mod table_field_schema {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Mode::Unspecified => "MODE_UNSPECIFIED",
-                Mode::Nullable => "NULLABLE",
-                Mode::Required => "REQUIRED",
-                Mode::Repeated => "REPEATED",
+                Self::Unspecified => "MODE_UNSPECIFIED",
+                Self::Nullable => "NULLABLE",
+                Self::Required => "REQUIRED",
+                Self::Repeated => "REPEATED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -394,7 +383,6 @@ pub mod table_field_schema {
     }
 }
 /// Information about the ReadSession.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ReadSession {
     /// Output only. Unique identifier for the session, in the form
@@ -464,15 +452,13 @@ pub struct ReadSession {
 /// Nested message and enum types in `ReadSession`.
 pub mod read_session {
     /// Additional attributes when reading a table.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct TableModifiers {
         /// The snapshot time of the table. If not set, interpreted as now.
         #[prost(message, optional, tag = "1")]
         pub snapshot_time: ::core::option::Option<::prost_types::Timestamp>,
     }
     /// Options dictating how we read a table.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct TableReadOptions {
         /// Optional. The names of the fields in the table to be returned. If no
@@ -594,10 +580,8 @@ pub mod read_session {
             /// (if the ProtoBuf definition does not change) and safe for programmatic use.
             pub fn as_str_name(&self) -> &'static str {
                 match self {
-                    ResponseCompressionCodec::Unspecified => {
-                        "RESPONSE_COMPRESSION_CODEC_UNSPECIFIED"
-                    }
-                    ResponseCompressionCodec::Lz4 => "RESPONSE_COMPRESSION_CODEC_LZ4",
+                    Self::Unspecified => "RESPONSE_COMPRESSION_CODEC_UNSPECIFIED",
+                    Self::Lz4 => "RESPONSE_COMPRESSION_CODEC_LZ4",
                 }
             }
             /// Creates an enum from field names used in the ProtoBuf definition.
@@ -609,8 +593,7 @@ pub mod read_session {
                 }
             }
         }
-        #[allow(clippy::derive_partial_eq_without_eq)]
-        #[derive(Clone, PartialEq, ::prost::Oneof)]
+        #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
         pub enum OutputFormatSerializationOptions {
             /// Optional. Options specific to the Apache Arrow output format.
             #[prost(message, tag = "3")]
@@ -623,7 +606,6 @@ pub mod read_session {
     /// The schema for the read. If read_options.selected_fields is set, the
     /// schema may be different from the table schema as it will only contain
     /// the selected fields.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Schema {
         /// Output only. Avro schema.
@@ -637,7 +619,6 @@ pub mod read_session {
 /// Information about a single stream that gets data out of the storage system.
 /// Most of the information about `ReadStream` instances is aggregated, making
 /// `ReadStream` lightweight.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ReadStream {
     /// Output only. Name of the stream, in the form
@@ -646,7 +627,6 @@ pub struct ReadStream {
     pub name: ::prost::alloc::string::String,
 }
 /// Information about a single stream that gets data inside the storage system.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct WriteStream {
     /// Output only. Name of the stream, in the form
@@ -714,10 +694,10 @@ pub mod write_stream {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Type::Unspecified => "TYPE_UNSPECIFIED",
-                Type::Committed => "COMMITTED",
-                Type::Pending => "PENDING",
-                Type::Buffered => "BUFFERED",
+                Self::Unspecified => "TYPE_UNSPECIFIED",
+                Self::Committed => "COMMITTED",
+                Self::Pending => "PENDING",
+                Self::Buffered => "BUFFERED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -758,8 +738,8 @@ pub mod write_stream {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                WriteMode::Unspecified => "WRITE_MODE_UNSPECIFIED",
-                WriteMode::Insert => "INSERT",
+                Self::Unspecified => "WRITE_MODE_UNSPECIFIED",
+                Self::Insert => "INSERT",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -792,9 +772,9 @@ impl DataFormat {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            DataFormat::Unspecified => "DATA_FORMAT_UNSPECIFIED",
-            DataFormat::Avro => "AVRO",
-            DataFormat::Arrow => "ARROW",
+            Self::Unspecified => "DATA_FORMAT_UNSPECIFIED",
+            Self::Avro => "AVRO",
+            Self::Arrow => "ARROW",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -830,9 +810,9 @@ impl WriteStreamView {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            WriteStreamView::Unspecified => "WRITE_STREAM_VIEW_UNSPECIFIED",
-            WriteStreamView::Basic => "BASIC",
-            WriteStreamView::Full => "FULL",
+            Self::Unspecified => "WRITE_STREAM_VIEW_UNSPECIFIED",
+            Self::Basic => "BASIC",
+            Self::Full => "FULL",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -846,7 +826,6 @@ impl WriteStreamView {
     }
 }
 /// Request message for `CreateReadSession`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateReadSessionRequest {
     /// Required. The request project that owns the session, in the form of
@@ -880,7 +859,6 @@ pub struct CreateReadSessionRequest {
     pub preferred_min_stream_count: i32,
 }
 /// Request message for `ReadRows`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ReadRowsRequest {
     /// Required. Stream to read rows from.
@@ -893,8 +871,7 @@ pub struct ReadRowsRequest {
     pub offset: i64,
 }
 /// Information on if the current connection is being throttled.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct ThrottleState {
     /// How much this connection is being throttled. Zero means no throttling,
     /// 100 means fully throttled.
@@ -902,8 +879,7 @@ pub struct ThrottleState {
     pub throttle_percent: i32,
 }
 /// Estimated stream statistics for a given read Stream.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct StreamStats {
     /// Represents the progress of the current stream.
     #[prost(message, optional, tag = "2")]
@@ -911,8 +887,7 @@ pub struct StreamStats {
 }
 /// Nested message and enum types in `StreamStats`.
 pub mod stream_stats {
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct Progress {
         /// The fraction of rows assigned to the stream that have been processed by
         /// the server so far, not including the rows in the current response
@@ -936,7 +911,6 @@ pub mod stream_stats {
 }
 /// Response from calling `ReadRows` may include row data, progress and
 /// throttling information.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ReadRowsResponse {
     /// Number of serialized rows in the rows block.
@@ -979,7 +953,6 @@ pub struct ReadRowsResponse {
 /// Nested message and enum types in `ReadRowsResponse`.
 pub mod read_rows_response {
     /// Row data is returned in format specified during session creation.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Rows {
         /// Serialized row data in AVRO format.
@@ -994,7 +967,6 @@ pub mod read_rows_response {
     /// the selected fields. This schema is equivalent to the one returned by
     /// CreateSession. This field is only populated in the first ReadRowsResponse
     /// RPC.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Schema {
         /// Output only. Avro schema.
@@ -1006,7 +978,6 @@ pub mod read_rows_response {
     }
 }
 /// Request message for `SplitReadStream`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SplitReadStreamRequest {
     /// Required. Name of the stream to split.
@@ -1023,7 +994,6 @@ pub struct SplitReadStreamRequest {
     pub fraction: f64,
 }
 /// Response message for `SplitReadStream`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SplitReadStreamResponse {
     /// Primary stream, which contains the beginning portion of
@@ -1037,7 +1007,6 @@ pub struct SplitReadStreamResponse {
     pub remainder_stream: ::core::option::Option<ReadStream>,
 }
 /// Request message for `CreateWriteStream`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateWriteStreamRequest {
     /// Required. Reference to the table to which the stream belongs, in the format
@@ -1057,7 +1026,6 @@ pub struct CreateWriteStreamRequest {
 ///
 /// The size of a single AppendRowsRequest must be less than 10 MB in size.
 /// Requests larger than this return an error, typically `INVALID_ARGUMENT`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AppendRowsRequest {
     /// Required. The write_stream identifies the append operation. It must be
@@ -1152,7 +1120,6 @@ pub struct AppendRowsRequest {
 pub mod append_rows_request {
     /// ProtoData contains the data rows and schema when constructing append
     /// requests.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ProtoData {
         /// The protocol buffer schema used to serialize the data. Provide this value
@@ -1204,11 +1171,9 @@ pub mod append_rows_request {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                MissingValueInterpretation::Unspecified => {
-                    "MISSING_VALUE_INTERPRETATION_UNSPECIFIED"
-                }
-                MissingValueInterpretation::NullValue => "NULL_VALUE",
-                MissingValueInterpretation::DefaultValue => "DEFAULT_VALUE",
+                Self::Unspecified => "MISSING_VALUE_INTERPRETATION_UNSPECIFIED",
+                Self::NullValue => "NULL_VALUE",
+                Self::DefaultValue => "DEFAULT_VALUE",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1225,7 +1190,6 @@ pub mod append_rows_request {
     /// request and currently, it will be ignored if specified in following
     /// requests. Following requests must have data in the same format as the
     /// initial request.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Rows {
         /// Rows in proto format.
@@ -1234,7 +1198,6 @@ pub mod append_rows_request {
     }
 }
 /// Response message for `AppendRows`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AppendRowsResponse {
     /// If backend detects a schema update, pass it to user so that user can
@@ -1257,15 +1220,13 @@ pub struct AppendRowsResponse {
 /// Nested message and enum types in `AppendRowsResponse`.
 pub mod append_rows_response {
     /// AppendResult is returned for successful append requests.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct AppendResult {
         /// The row offset at which the last append occurred. The offset will not be
         /// set if appending using default streams.
         #[prost(message, optional, tag = "1")]
         pub offset: ::core::option::Option<i64>,
     }
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Response {
         /// Result if the append is successful.
@@ -1296,7 +1257,6 @@ pub mod append_rows_response {
     }
 }
 /// Request message for `GetWriteStreamRequest`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetWriteStreamRequest {
     /// Required. Name of the stream to get, in the form of
@@ -1309,7 +1269,6 @@ pub struct GetWriteStreamRequest {
     pub view: i32,
 }
 /// Request message for `BatchCommitWriteStreams`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BatchCommitWriteStreamsRequest {
     /// Required. Parent table that all the streams should belong to, in the form
@@ -1321,7 +1280,6 @@ pub struct BatchCommitWriteStreamsRequest {
     pub write_streams: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Response message for `BatchCommitWriteStreams`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BatchCommitWriteStreamsResponse {
     /// The time at which streams were committed in microseconds granularity.
@@ -1338,7 +1296,6 @@ pub struct BatchCommitWriteStreamsResponse {
     pub stream_errors: ::prost::alloc::vec::Vec<StorageError>,
 }
 /// Request message for invoking `FinalizeWriteStream`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FinalizeWriteStreamRequest {
     /// Required. Name of the stream to finalize, in the form of
@@ -1347,15 +1304,13 @@ pub struct FinalizeWriteStreamRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Response message for `FinalizeWriteStream`.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct FinalizeWriteStreamResponse {
     /// Number of rows in the finalized stream.
     #[prost(int64, tag = "1")]
     pub row_count: i64,
 }
 /// Request message for `FlushRows`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FlushRowsRequest {
     /// Required. The stream that is the target of the flush operation.
@@ -1367,8 +1322,7 @@ pub struct FlushRowsRequest {
     pub offset: ::core::option::Option<i64>,
 }
 /// Respond message for `FlushRows`.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct FlushRowsResponse {
     /// The rows before this offset (including this offset) are flushed.
     #[prost(int64, tag = "1")]
@@ -1378,7 +1332,6 @@ pub struct FlushRowsResponse {
 /// as error details in the returned rpc Status. In particular, the use of error
 /// codes allows more structured error handling, and reduces the need to evaluate
 /// unstructured error text strings.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StorageError {
     /// BigQuery Storage specific error code.
@@ -1451,23 +1404,21 @@ pub mod storage_error {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                StorageErrorCode::Unspecified => "STORAGE_ERROR_CODE_UNSPECIFIED",
-                StorageErrorCode::TableNotFound => "TABLE_NOT_FOUND",
-                StorageErrorCode::StreamAlreadyCommitted => "STREAM_ALREADY_COMMITTED",
-                StorageErrorCode::StreamNotFound => "STREAM_NOT_FOUND",
-                StorageErrorCode::InvalidStreamType => "INVALID_STREAM_TYPE",
-                StorageErrorCode::InvalidStreamState => "INVALID_STREAM_STATE",
-                StorageErrorCode::StreamFinalized => "STREAM_FINALIZED",
-                StorageErrorCode::SchemaMismatchExtraFields => {
-                    "SCHEMA_MISMATCH_EXTRA_FIELDS"
-                }
-                StorageErrorCode::OffsetAlreadyExists => "OFFSET_ALREADY_EXISTS",
-                StorageErrorCode::OffsetOutOfRange => "OFFSET_OUT_OF_RANGE",
-                StorageErrorCode::CmekNotProvided => "CMEK_NOT_PROVIDED",
-                StorageErrorCode::InvalidCmekProvided => "INVALID_CMEK_PROVIDED",
-                StorageErrorCode::CmekEncryptionError => "CMEK_ENCRYPTION_ERROR",
-                StorageErrorCode::KmsServiceError => "KMS_SERVICE_ERROR",
-                StorageErrorCode::KmsPermissionDenied => "KMS_PERMISSION_DENIED",
+                Self::Unspecified => "STORAGE_ERROR_CODE_UNSPECIFIED",
+                Self::TableNotFound => "TABLE_NOT_FOUND",
+                Self::StreamAlreadyCommitted => "STREAM_ALREADY_COMMITTED",
+                Self::StreamNotFound => "STREAM_NOT_FOUND",
+                Self::InvalidStreamType => "INVALID_STREAM_TYPE",
+                Self::InvalidStreamState => "INVALID_STREAM_STATE",
+                Self::StreamFinalized => "STREAM_FINALIZED",
+                Self::SchemaMismatchExtraFields => "SCHEMA_MISMATCH_EXTRA_FIELDS",
+                Self::OffsetAlreadyExists => "OFFSET_ALREADY_EXISTS",
+                Self::OffsetOutOfRange => "OFFSET_OUT_OF_RANGE",
+                Self::CmekNotProvided => "CMEK_NOT_PROVIDED",
+                Self::InvalidCmekProvided => "INVALID_CMEK_PROVIDED",
+                Self::CmekEncryptionError => "CMEK_ENCRYPTION_ERROR",
+                Self::KmsServiceError => "KMS_SERVICE_ERROR",
+                Self::KmsPermissionDenied => "KMS_PERMISSION_DENIED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1494,7 +1445,6 @@ pub mod storage_error {
     }
 }
 /// The message that presents row level error info in a request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RowError {
     /// Index of the malformed row in the request.
@@ -1535,8 +1485,8 @@ pub mod row_error {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                RowErrorCode::Unspecified => "ROW_ERROR_CODE_UNSPECIFIED",
-                RowErrorCode::FieldsError => "FIELDS_ERROR",
+                Self::Unspecified => "ROW_ERROR_CODE_UNSPECIFIED",
+                Self::FieldsError => "FIELDS_ERROR",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1551,11 +1501,17 @@ pub mod row_error {
 }
 /// Generated server implementations.
 pub mod big_query_read_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with BigQueryReadServer.
     #[async_trait]
-    pub trait BigQueryRead: Send + Sync + 'static {
+    pub trait BigQueryRead: std::marker::Send + std::marker::Sync + 'static {
         /// Creates a new read session. A read session divides the contents of a
         /// BigQuery table into one or more streams, which can then be used to read
         /// data from the table. The read session also specifies properties of the
@@ -1583,7 +1539,7 @@ pub mod big_query_read_server {
         type ReadRowsStream: tonic::codegen::tokio_stream::Stream<
                 Item = std::result::Result<super::ReadRowsResponse, tonic::Status>,
             >
-            + Send
+            + std::marker::Send
             + 'static;
         /// Reads rows from the stream in the format prescribed by the ReadSession.
         /// Each response contains one or more table rows, up to a maximum of 100 MiB
@@ -1620,20 +1576,18 @@ pub mod big_query_read_server {
     ///
     /// The Read API can be used to read data from BigQuery.
     #[derive(Debug)]
-    pub struct BigQueryReadServer<T: BigQueryRead> {
-        inner: _Inner<T>,
+    pub struct BigQueryReadServer<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: BigQueryRead> BigQueryReadServer<T> {
+    impl<T> BigQueryReadServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -1683,8 +1637,8 @@ pub mod big_query_read_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for BigQueryReadServer<T>
     where
         T: BigQueryRead,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -1696,7 +1650,6 @@ pub mod big_query_read_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.cloud.bigquery.storage.v1.BigQueryRead/CreateReadSession" => {
                     #[allow(non_camel_case_types)]
@@ -1728,7 +1681,6 @@ pub mod big_query_read_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = CreateReadSessionSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1775,7 +1727,6 @@ pub mod big_query_read_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ReadRowsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1822,7 +1773,6 @@ pub mod big_query_read_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = SplitReadStreamSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1841,20 +1791,25 @@ pub mod big_query_read_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: BigQueryRead> Clone for BigQueryReadServer<T> {
+    impl<T> Clone for BigQueryReadServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -1866,27 +1821,25 @@ pub mod big_query_read_server {
             }
         }
     }
-    impl<T: BigQueryRead> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: BigQueryRead> tonic::server::NamedService for BigQueryReadServer<T> {
-        const NAME: &'static str = "google.cloud.bigquery.storage.v1.BigQueryRead";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.cloud.bigquery.storage.v1.BigQueryRead";
+    impl<T> tonic::server::NamedService for BigQueryReadServer<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }
 /// Generated server implementations.
 pub mod big_query_write_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with BigQueryWriteServer.
     #[async_trait]
-    pub trait BigQueryWrite: Send + Sync + 'static {
+    pub trait BigQueryWrite: std::marker::Send + std::marker::Sync + 'static {
         /// Creates a write stream to the given table.
         /// Additionally, every table has a special stream named '_default'
         /// to which data can be written. This stream doesn't need to be created using
@@ -1901,7 +1854,7 @@ pub mod big_query_write_server {
         type AppendRowsStream: tonic::codegen::tokio_stream::Stream<
                 Item = std::result::Result<super::AppendRowsResponse, tonic::Status>,
             >
-            + Send
+            + std::marker::Send
             + 'static;
         /// Appends data to the given stream.
         ///
@@ -1988,20 +1941,18 @@ pub mod big_query_write_server {
     /// For supplementary information about the Write API, see:
     /// https://cloud.google.com/bigquery/docs/write-api
     #[derive(Debug)]
-    pub struct BigQueryWriteServer<T: BigQueryWrite> {
-        inner: _Inner<T>,
+    pub struct BigQueryWriteServer<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: BigQueryWrite> BigQueryWriteServer<T> {
+    impl<T> BigQueryWriteServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -2051,8 +2002,8 @@ pub mod big_query_write_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for BigQueryWriteServer<T>
     where
         T: BigQueryWrite,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -2064,7 +2015,6 @@ pub mod big_query_write_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.cloud.bigquery.storage.v1.BigQueryWrite/CreateWriteStream" => {
                     #[allow(non_camel_case_types)]
@@ -2096,7 +2046,6 @@ pub mod big_query_write_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = CreateWriteStreamSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -2145,7 +2094,6 @@ pub mod big_query_write_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = AppendRowsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -2192,7 +2140,6 @@ pub mod big_query_write_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetWriteStreamSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -2239,7 +2186,6 @@ pub mod big_query_write_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = FinalizeWriteStreamSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -2291,7 +2237,6 @@ pub mod big_query_write_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = BatchCommitWriteStreamsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -2337,7 +2282,6 @@ pub mod big_query_write_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = FlushRowsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -2356,20 +2300,25 @@ pub mod big_query_write_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: BigQueryWrite> Clone for BigQueryWriteServer<T> {
+    impl<T> Clone for BigQueryWriteServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -2381,17 +2330,9 @@ pub mod big_query_write_server {
             }
         }
     }
-    impl<T: BigQueryWrite> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: BigQueryWrite> tonic::server::NamedService for BigQueryWriteServer<T> {
-        const NAME: &'static str = "google.cloud.bigquery.storage.v1.BigQueryWrite";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.cloud.bigquery.storage.v1.BigQueryWrite";
+    impl<T> tonic::server::NamedService for BigQueryWriteServer<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }

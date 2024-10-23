@@ -34,7 +34,6 @@
 /// Keys are not context sensitive.
 ///
 /// See <http://goo.gl/NurY8g> for more information on the Worker message.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Worker {
     /// A list of devices; the first device is the primary device. See the `Device`
@@ -72,7 +71,6 @@ pub struct Worker {
 /// Nested message and enum types in `Worker`.
 pub mod worker {
     /// A global property; see the `properties` field for more information.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Property {
         /// For general information on keys, see the documentation to `Worker`.
@@ -93,7 +91,6 @@ pub mod worker {
     }
     /// A configuration request or report; see the `configs` field for more
     /// information.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Config {
         /// For general information on keys, see the documentation to `Worker`.
@@ -114,7 +111,6 @@ pub mod worker {
 }
 /// Any device, including computers, phones, accelerators (e.g. GPUs), etc. All
 /// names must be unique.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Device {
     /// The handle can be thought of as the "name" of the device, and must be
@@ -144,7 +140,6 @@ pub struct Device {
 /// Nested message and enum types in `Device`.
 pub mod device {
     /// A device property; see `properties` for more information.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Property {
         /// For general information on keys, see the documentation to `Worker`.
@@ -172,7 +167,6 @@ pub mod device {
 /// hardware), which is the reverse of real life, but more natural from the point
 /// of the view of this API, which communicates solely with the bot and not
 /// directly with the underlying worker.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BotSession {
     /// The bot session name, as selected by the server. Output only during a call
@@ -240,7 +234,6 @@ pub struct BotSession {
 /// The server will remove COMPLETED leases from time to time, after which the
 /// bot shouldn't report on them any more (the server will ignore superfluous
 /// COMPLETED records).
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Lease {
     /// A short string uniquely identifing the lease within this bot session.
@@ -302,7 +295,6 @@ pub struct Lease {
 ///
 /// This message is heavily based on Swarming administration tasks from the LUCI
 /// project (<http://github.com/luci/luci-py/appengine/swarming>).
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AdminTemp {
     /// The admin action; see `Command` for legal values.
@@ -350,11 +342,11 @@ pub mod admin_temp {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Command::Unspecified => "UNSPECIFIED",
-                Command::BotUpdate => "BOT_UPDATE",
-                Command::BotRestart => "BOT_RESTART",
-                Command::BotTerminate => "BOT_TERMINATE",
-                Command::HostRestart => "HOST_RESTART",
+                Self::Unspecified => "UNSPECIFIED",
+                Self::BotUpdate => "BOT_UPDATE",
+                Self::BotRestart => "BOT_RESTART",
+                Self::BotTerminate => "BOT_TERMINATE",
+                Self::HostRestart => "HOST_RESTART",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -371,7 +363,6 @@ pub mod admin_temp {
     }
 }
 /// Request message for CreateBotSession.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateBotSessionRequest {
     /// Required. The farm resource.
@@ -383,7 +374,6 @@ pub struct CreateBotSessionRequest {
     pub bot_session: ::core::option::Option<BotSession>,
 }
 /// Request message for UpdateBotSession.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateBotSessionRequest {
     /// Required. The bot session name. Must match bot_session.name.
@@ -432,12 +422,12 @@ impl BotStatus {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            BotStatus::Unspecified => "BOT_STATUS_UNSPECIFIED",
-            BotStatus::Ok => "OK",
-            BotStatus::Unhealthy => "UNHEALTHY",
-            BotStatus::HostRebooting => "HOST_REBOOTING",
-            BotStatus::BotTerminating => "BOT_TERMINATING",
-            BotStatus::Initializing => "INITIALIZING",
+            Self::Unspecified => "BOT_STATUS_UNSPECIFIED",
+            Self::Ok => "OK",
+            Self::Unhealthy => "UNHEALTHY",
+            Self::HostRebooting => "HOST_REBOOTING",
+            Self::BotTerminating => "BOT_TERMINATING",
+            Self::Initializing => "INITIALIZING",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -482,11 +472,11 @@ impl LeaseState {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            LeaseState::Unspecified => "LEASE_STATE_UNSPECIFIED",
-            LeaseState::Pending => "PENDING",
-            LeaseState::Active => "ACTIVE",
-            LeaseState::Completed => "COMPLETED",
-            LeaseState::Cancelled => "CANCELLED",
+            Self::Unspecified => "LEASE_STATE_UNSPECIFIED",
+            Self::Pending => "PENDING",
+            Self::Active => "ACTIVE",
+            Self::Completed => "COMPLETED",
+            Self::Cancelled => "CANCELLED",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -503,11 +493,17 @@ impl LeaseState {
 }
 /// Generated server implementations.
 pub mod bots_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with BotsServer.
     #[async_trait]
-    pub trait Bots: Send + Sync + 'static {
+    pub trait Bots: std::marker::Send + std::marker::Sync + 'static {
         /// CreateBotSession is called when the bot first joins the farm, and
         /// establishes a session ID to ensure that multiple machines do not register
         /// using the same name accidentally.
@@ -551,20 +547,18 @@ pub mod bots_server {
     /// take the form "projects/{project_id}". This is referred to below as "the farm
     /// resource."
     #[derive(Debug)]
-    pub struct BotsServer<T: Bots> {
-        inner: _Inner<T>,
+    pub struct BotsServer<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: Bots> BotsServer<T> {
+    impl<T> BotsServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -614,8 +608,8 @@ pub mod bots_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for BotsServer<T>
     where
         T: Bots,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -627,7 +621,6 @@ pub mod bots_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.devtools.remoteworkers.v1test2.Bots/CreateBotSession" => {
                     #[allow(non_camel_case_types)]
@@ -658,7 +651,6 @@ pub mod bots_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = CreateBotSessionSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -704,7 +696,6 @@ pub mod bots_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = UpdateBotSessionSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -723,20 +714,25 @@ pub mod bots_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: Bots> Clone for BotsServer<T> {
+    impl<T> Clone for BotsServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -748,23 +744,14 @@ pub mod bots_server {
             }
         }
     }
-    impl<T: Bots> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: Bots> tonic::server::NamedService for BotsServer<T> {
-        const NAME: &'static str = "google.devtools.remoteworkers.v1test2.Bots";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.devtools.remoteworkers.v1test2.Bots";
+    impl<T> tonic::server::NamedService for BotsServer<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }
 /// Describes a shell-style task to execute, suitable for providing as the Bots
 /// interface's `Lease.payload` field.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CommandTask {
     /// The inputs to the task.
@@ -780,7 +767,6 @@ pub struct CommandTask {
 /// Nested message and enum types in `CommandTask`.
 pub mod command_task {
     /// Describes the inputs to a shell-style task.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Inputs {
         /// The command itself to run (e.g., argv).
@@ -827,7 +813,6 @@ pub mod command_task {
     /// Nested message and enum types in `Inputs`.
     pub mod inputs {
         /// An environment variable required by this task.
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct EnvironmentVariable {
             /// The envvar name.
@@ -839,7 +824,6 @@ pub mod command_task {
         }
     }
     /// Describes the expected outputs of the command.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Outputs {
         /// A list of expected files, relative to the execution root. All paths
@@ -866,8 +850,7 @@ pub mod command_task {
         pub stderr_destination: ::prost::alloc::string::String,
     }
     /// Describes the timeouts associated with this task.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct Timeouts {
         /// This specifies the maximum time that the task can run, excluding the
         /// time required to download inputs or upload outputs. That is, the worker
@@ -892,7 +875,6 @@ pub mod command_task {
 }
 /// DEPRECATED - use CommandResult instead.
 /// Describes the actual outputs from the task.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CommandOutputs {
     /// exit_code is only fully reliable if the status' code is OK. If the task
@@ -911,8 +893,7 @@ pub struct CommandOutputs {
 /// DEPRECATED - use CommandResult instead.
 /// Can be used as part of CompleteRequest.metadata, or are part of a more
 /// sophisticated message.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct CommandOverhead {
     /// The elapsed time between calling Accept and Complete. The server will also
     /// have its own idea of what this should be, but this excludes the overhead of
@@ -926,7 +907,6 @@ pub struct CommandOverhead {
 }
 /// All information about the execution of a command, suitable for providing as
 /// the Bots interface's `Lease.result` field.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CommandResult {
     /// An overall status for the command. For example, if the command timed out,
@@ -966,7 +946,6 @@ pub struct CommandResult {
 }
 /// The metadata for a file. Similar to the equivalent message in the Remote
 /// Execution API.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FileMetadata {
     /// The path of this file. If this message is part of the
@@ -990,7 +969,6 @@ pub struct FileMetadata {
 }
 /// The metadata for a directory. Similar to the equivalent message in the Remote
 /// Execution API.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DirectoryMetadata {
     /// The path of the directory, as in
@@ -1011,7 +989,6 @@ pub struct DirectoryMetadata {
 /// In the context of the RWAPI, a Digest will virtually always refer to the
 /// contents of a file or a directory. The latter is represented by the
 /// byte-encoded Directory message.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Digest {
     /// A string-encoded hash (eg "1a2b3c", not the byte array \[0x1a, 0x2b, 0x3c\])
@@ -1026,7 +1003,6 @@ pub struct Digest {
     pub size_bytes: i64,
 }
 /// Describes a blob of binary content with its digest.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Blob {
     /// The digest of the blob. This should be verified by the receiver.
@@ -1038,7 +1014,6 @@ pub struct Blob {
 }
 /// The contents of a directory. Similar to the equivalent message in the Remote
 /// Execution API.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Directory {
     /// The files in this directory

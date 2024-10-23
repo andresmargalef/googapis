@@ -2,7 +2,6 @@
 /// Details of the post-processed address. Post-processing includes
 /// correcting misspelled parts of the address, replacing incorrect parts, and
 /// inferring missing parts.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Address {
     /// The post-processed address, formatted as a single-line address following
@@ -57,7 +56,6 @@ pub struct Address {
     pub unresolved_tokens: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Represents an address component, such as a street, city, or state.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AddressComponent {
     /// The name for this component.
@@ -133,12 +131,10 @@ pub mod address_component {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                ConfirmationLevel::Unspecified => "CONFIRMATION_LEVEL_UNSPECIFIED",
-                ConfirmationLevel::Confirmed => "CONFIRMED",
-                ConfirmationLevel::UnconfirmedButPlausible => "UNCONFIRMED_BUT_PLAUSIBLE",
-                ConfirmationLevel::UnconfirmedAndSuspicious => {
-                    "UNCONFIRMED_AND_SUSPICIOUS"
-                }
+                Self::Unspecified => "CONFIRMATION_LEVEL_UNSPECIFIED",
+                Self::Confirmed => "CONFIRMED",
+                Self::UnconfirmedButPlausible => "UNCONFIRMED_BUT_PLAUSIBLE",
+                Self::UnconfirmedAndSuspicious => "UNCONFIRMED_AND_SUSPICIOUS",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -154,7 +150,6 @@ pub mod address_component {
     }
 }
 /// A wrapper for the name of the component.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ComponentName {
     /// The name text. For example, "5th Avenue" for a street name or "1253" for a
@@ -167,7 +162,6 @@ pub struct ComponentName {
     pub language_code: ::prost::alloc::string::String,
 }
 /// Contains information about the place the input was geocoded to.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Geocode {
     /// The geocoded location of the input.
@@ -208,7 +202,6 @@ pub struct Geocode {
 /// Plus code (<http://plus.codes>) is a location reference with two formats:
 /// global code defining a 14mx14m (1/8000th of a degree) or smaller rectangle,
 /// and compound code, replacing the prefix with a reference location.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PlusCode {
     /// Place's global (full) code, such as "9FWM33GV+HQ", representing an
@@ -223,8 +216,7 @@ pub struct PlusCode {
 }
 /// The metadata for the address. `metadata` is not guaranteed to be fully
 /// populated for every address sent to the Address Validation API.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct AddressMetadata {
     /// Indicates that this is the address of a business.
     /// If unset, indicates that the value is unknown.
@@ -240,7 +232,6 @@ pub struct AddressMetadata {
     pub residential: ::core::option::Option<bool>,
 }
 /// USPS representation of a US address.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UspsAddress {
     /// First address line.
@@ -275,7 +266,6 @@ pub struct UspsAddress {
 /// populated for every US or PR address sent to the Address Validation API. It's
 /// recommended to integrate the backup address fields in the response if you
 /// utilize uspsData as the primary part of the response.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UspsData {
     /// USPS standardized address.
@@ -531,7 +521,6 @@ pub struct UspsData {
     pub cass_processed: bool,
 }
 /// The request for validating an address.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ValidateAddressRequest {
     /// Required. The address being validated. Unformatted addresses should be
@@ -601,7 +590,6 @@ pub struct ValidateAddressRequest {
     pub session_token: ::prost::alloc::string::String,
 }
 /// The response to an address validation request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ValidateAddressResponse {
     /// The result of the address validation.
@@ -613,7 +601,6 @@ pub struct ValidateAddressResponse {
     pub response_id: ::prost::alloc::string::String,
 }
 /// The request for sending validation feedback.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ProvideValidationFeedbackRequest {
     /// Required. The outcome of the sequence of validation attempts.
@@ -673,13 +660,11 @@ pub mod provide_validation_feedback_request {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                ValidationConclusion::Unspecified => "VALIDATION_CONCLUSION_UNSPECIFIED",
-                ValidationConclusion::ValidatedVersionUsed => "VALIDATED_VERSION_USED",
-                ValidationConclusion::UserVersionUsed => "USER_VERSION_USED",
-                ValidationConclusion::UnvalidatedVersionUsed => {
-                    "UNVALIDATED_VERSION_USED"
-                }
-                ValidationConclusion::Unused => "UNUSED",
+                Self::Unspecified => "VALIDATION_CONCLUSION_UNSPECIFIED",
+                Self::ValidatedVersionUsed => "VALIDATED_VERSION_USED",
+                Self::UserVersionUsed => "USER_VERSION_USED",
+                Self::UnvalidatedVersionUsed => "UNVALIDATED_VERSION_USED",
+                Self::Unused => "UNUSED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -698,11 +683,9 @@ pub mod provide_validation_feedback_request {
 /// The response for validation feedback.
 ///
 /// The response is empty if the feedback is sent successfully.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct ProvideValidationFeedbackResponse {}
 /// The result of validating an address.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ValidationResult {
     /// Overall verdict flags
@@ -724,8 +707,7 @@ pub struct ValidationResult {
     pub usps_data: ::core::option::Option<UspsData>,
 }
 /// High level overview of the address validation result and geocode.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct Verdict {
     /// The granularity of the **input** address. This is the result of parsing the
     /// input address and does not give any validation signals. For validation
@@ -831,13 +813,13 @@ pub mod verdict {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Granularity::Unspecified => "GRANULARITY_UNSPECIFIED",
-                Granularity::SubPremise => "SUB_PREMISE",
-                Granularity::Premise => "PREMISE",
-                Granularity::PremiseProximity => "PREMISE_PROXIMITY",
-                Granularity::Block => "BLOCK",
-                Granularity::Route => "ROUTE",
-                Granularity::Other => "OTHER",
+                Self::Unspecified => "GRANULARITY_UNSPECIFIED",
+                Self::SubPremise => "SUB_PREMISE",
+                Self::Premise => "PREMISE",
+                Self::PremiseProximity => "PREMISE_PROXIMITY",
+                Self::Block => "BLOCK",
+                Self::Route => "ROUTE",
+                Self::Other => "OTHER",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -857,11 +839,17 @@ pub mod verdict {
 }
 /// Generated server implementations.
 pub mod address_validation_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with AddressValidationServer.
     #[async_trait]
-    pub trait AddressValidation: Send + Sync + 'static {
+    pub trait AddressValidation: std::marker::Send + std::marker::Sync + 'static {
         /// Validates an address.
         async fn validate_address(
             &self,
@@ -885,20 +873,18 @@ pub mod address_validation_server {
     }
     /// The service for validating addresses.
     #[derive(Debug)]
-    pub struct AddressValidationServer<T: AddressValidation> {
-        inner: _Inner<T>,
+    pub struct AddressValidationServer<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: AddressValidation> AddressValidationServer<T> {
+    impl<T> AddressValidationServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -948,8 +934,8 @@ pub mod address_validation_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for AddressValidationServer<T>
     where
         T: AddressValidation,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -961,7 +947,6 @@ pub mod address_validation_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.maps.addressvalidation.v1.AddressValidation/ValidateAddress" => {
                     #[allow(non_camel_case_types)]
@@ -993,7 +978,6 @@ pub mod address_validation_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ValidateAddressSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1048,7 +1032,6 @@ pub mod address_validation_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ProvideValidationFeedbackSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1067,20 +1050,25 @@ pub mod address_validation_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: AddressValidation> Clone for AddressValidationServer<T> {
+    impl<T> Clone for AddressValidationServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -1092,18 +1080,9 @@ pub mod address_validation_server {
             }
         }
     }
-    impl<T: AddressValidation> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: AddressValidation> tonic::server::NamedService
-    for AddressValidationServer<T> {
-        const NAME: &'static str = "google.maps.addressvalidation.v1.AddressValidation";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.maps.addressvalidation.v1.AddressValidation";
+    impl<T> tonic::server::NamedService for AddressValidationServer<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }

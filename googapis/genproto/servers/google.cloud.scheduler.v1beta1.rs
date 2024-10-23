@@ -6,7 +6,6 @@
 /// response code in the range \[200 - 299\]. A failure to receive a response
 /// constitutes a failed execution. For a redirected request, the response
 /// returned by the redirected request is considered.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct HttpTarget {
     /// Required. The full URI path that the request will be sent to. This string
@@ -65,7 +64,6 @@ pub mod http_target {
     /// If specified, all `Authorization` headers in the
     /// [HttpTarget.headers][google.cloud.scheduler.v1beta1.HttpTarget.headers]
     /// field will be overridden.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum AuthorizationHeader {
         /// If specified, an
@@ -98,7 +96,6 @@ pub mod http_target {
 /// will be retried regardless of retry configuration and not counted against
 /// retry counts. Any other response code, or a failure to receive a response
 /// before the deadline, constitutes a failed attempt.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AppEngineHttpTarget {
     /// The HTTP method to use for the request. PATCH and OPTIONS are not
@@ -169,7 +166,6 @@ pub struct AppEngineHttpTarget {
 }
 /// Pub/Sub target. The job will be delivered by publishing a message to
 /// the given Pub/Sub topic.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PubsubTarget {
     /// Required. The name of the Cloud Pub/Sub topic to which messages will
@@ -208,7 +204,6 @@ pub struct PubsubTarget {
 /// routing](<https://cloud.google.com/appengine/docs/standard/python/how-requests-are-routed>),
 /// and [App Engine Flex request
 /// routing](<https://cloud.google.com/appengine/docs/flexible/python/how-requests-are-routed>).
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AppEngineRouting {
     /// App service.
@@ -311,7 +306,6 @@ pub struct AppEngineRouting {
 /// [OAuth token](<https://developers.google.com/identity/protocols/OAuth2>).
 /// This type of authorization should generally only be used when calling Google
 /// APIs hosted on *.googleapis.com.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OAuthToken {
     /// [Service account email](<https://cloud.google.com/iam/docs/service-accounts>)
@@ -332,7 +326,6 @@ pub struct OAuthToken {
 /// This type of authorization can be used for many scenarios, including
 /// calling Cloud Run, or endpoints where you intend to validate the token
 /// yourself.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OidcToken {
     /// [Service account email](<https://cloud.google.com/iam/docs/service-accounts>)
@@ -374,14 +367,14 @@ impl HttpMethod {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            HttpMethod::Unspecified => "HTTP_METHOD_UNSPECIFIED",
-            HttpMethod::Post => "POST",
-            HttpMethod::Get => "GET",
-            HttpMethod::Head => "HEAD",
-            HttpMethod::Put => "PUT",
-            HttpMethod::Delete => "DELETE",
-            HttpMethod::Patch => "PATCH",
-            HttpMethod::Options => "OPTIONS",
+            Self::Unspecified => "HTTP_METHOD_UNSPECIFIED",
+            Self::Post => "POST",
+            Self::Get => "GET",
+            Self::Head => "HEAD",
+            Self::Put => "PUT",
+            Self::Delete => "DELETE",
+            Self::Patch => "PATCH",
+            Self::Options => "OPTIONS",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -401,7 +394,6 @@ impl HttpMethod {
 }
 /// Configuration for a job.
 /// The maximum allowed size for a job is 1MB.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Job {
     /// Optionally caller-specified in
@@ -569,11 +561,11 @@ pub mod job {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                State::Unspecified => "STATE_UNSPECIFIED",
-                State::Enabled => "ENABLED",
-                State::Paused => "PAUSED",
-                State::Disabled => "DISABLED",
-                State::UpdateFailed => "UPDATE_FAILED",
+                Self::Unspecified => "STATE_UNSPECIFIED",
+                Self::Enabled => "ENABLED",
+                Self::Paused => "PAUSED",
+                Self::Disabled => "DISABLED",
+                Self::UpdateFailed => "UPDATE_FAILED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -591,7 +583,6 @@ pub mod job {
     /// Required.
     ///
     /// Delivery settings containing destination and parameters.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Target {
         /// Pub/Sub target.
@@ -611,8 +602,7 @@ pub mod job {
 /// an acknowledgement is not received from the handler, then it will be retried
 /// with exponential backoff according to the settings in
 /// [RetryConfig][google.cloud.scheduler.v1beta1.RetryConfig].
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct RetryConfig {
     /// The number of attempts that the system will make to run a job using the
     /// exponential backoff procedure described by
@@ -682,7 +672,6 @@ pub struct RetryConfig {
 }
 /// Request message for listing jobs using
 /// [ListJobs][google.cloud.scheduler.v1beta1.CloudScheduler.ListJobs].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListJobsRequest {
     /// Required. The location name. For example:
@@ -727,7 +716,6 @@ pub struct ListJobsRequest {
 }
 /// Response message for listing jobs using
 /// [ListJobs][google.cloud.scheduler.v1beta1.CloudScheduler.ListJobs].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListJobsResponse {
     /// The list of jobs.
@@ -746,7 +734,6 @@ pub struct ListJobsResponse {
 }
 /// Request message for
 /// [GetJob][google.cloud.scheduler.v1beta1.CloudScheduler.GetJob].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetJobRequest {
     /// Required. The job name. For example:
@@ -756,7 +743,6 @@ pub struct GetJobRequest {
 }
 /// Request message for
 /// [CreateJob][google.cloud.scheduler.v1beta1.CloudScheduler.CreateJob].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateJobRequest {
     /// Required. The location name. For example:
@@ -774,7 +760,6 @@ pub struct CreateJobRequest {
 }
 /// Request message for
 /// [UpdateJob][google.cloud.scheduler.v1beta1.CloudScheduler.UpdateJob].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateJobRequest {
     /// Required. The new job properties.
@@ -790,7 +775,6 @@ pub struct UpdateJobRequest {
 }
 /// Request message for deleting a job using
 /// [DeleteJob][google.cloud.scheduler.v1beta1.CloudScheduler.DeleteJob].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteJobRequest {
     /// Required. The job name. For example:
@@ -805,7 +789,6 @@ pub struct DeleteJobRequest {
 }
 /// Request message for
 /// [PauseJob][google.cloud.scheduler.v1beta1.CloudScheduler.PauseJob].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PauseJobRequest {
     /// Required. The job name. For example:
@@ -815,7 +798,6 @@ pub struct PauseJobRequest {
 }
 /// Request message for
 /// [ResumeJob][google.cloud.scheduler.v1beta1.CloudScheduler.ResumeJob].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ResumeJobRequest {
     /// Required. The job name. For example:
@@ -825,7 +807,6 @@ pub struct ResumeJobRequest {
 }
 /// Request message for forcing a job to run now using
 /// [RunJob][google.cloud.scheduler.v1beta1.CloudScheduler.RunJob].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RunJobRequest {
     /// Required. The job name. For example:
@@ -840,11 +821,17 @@ pub struct RunJobRequest {
 }
 /// Generated server implementations.
 pub mod cloud_scheduler_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with CloudSchedulerServer.
     #[async_trait]
-    pub trait CloudScheduler: Send + Sync + 'static {
+    pub trait CloudScheduler: std::marker::Send + std::marker::Sync + 'static {
         /// Lists jobs.
         async fn list_jobs(
             &self,
@@ -924,20 +911,18 @@ pub mod cloud_scheduler_server {
     /// The Cloud Scheduler API allows external entities to reliably
     /// schedule asynchronous jobs.
     #[derive(Debug)]
-    pub struct CloudSchedulerServer<T: CloudScheduler> {
-        inner: _Inner<T>,
+    pub struct CloudSchedulerServer<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: CloudScheduler> CloudSchedulerServer<T> {
+    impl<T> CloudSchedulerServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -987,8 +972,8 @@ pub mod cloud_scheduler_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for CloudSchedulerServer<T>
     where
         T: CloudScheduler,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -1000,7 +985,6 @@ pub mod cloud_scheduler_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.cloud.scheduler.v1beta1.CloudScheduler/ListJobs" => {
                     #[allow(non_camel_case_types)]
@@ -1031,7 +1015,6 @@ pub mod cloud_scheduler_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListJobsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1077,7 +1060,6 @@ pub mod cloud_scheduler_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetJobSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1123,7 +1105,6 @@ pub mod cloud_scheduler_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = CreateJobSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1169,7 +1150,6 @@ pub mod cloud_scheduler_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = UpdateJobSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1215,7 +1195,6 @@ pub mod cloud_scheduler_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = DeleteJobSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1261,7 +1240,6 @@ pub mod cloud_scheduler_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = PauseJobSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1307,7 +1285,6 @@ pub mod cloud_scheduler_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ResumeJobSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1353,7 +1330,6 @@ pub mod cloud_scheduler_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = RunJobSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1372,20 +1348,25 @@ pub mod cloud_scheduler_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: CloudScheduler> Clone for CloudSchedulerServer<T> {
+    impl<T> Clone for CloudSchedulerServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -1397,17 +1378,9 @@ pub mod cloud_scheduler_server {
             }
         }
     }
-    impl<T: CloudScheduler> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: CloudScheduler> tonic::server::NamedService for CloudSchedulerServer<T> {
-        const NAME: &'static str = "google.cloud.scheduler.v1beta1.CloudScheduler";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.cloud.scheduler.v1beta1.CloudScheduler";
+    impl<T> tonic::server::NamedService for CloudSchedulerServer<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }

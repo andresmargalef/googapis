@@ -7,7 +7,6 @@
 /// admins with tools to organize, secure and manage their data at scale, and
 /// provides data scientists and data engineers an integrated experience to
 /// easily search, discover, analyze and transform data and associated metadata.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Lake {
     /// Output only. The relative resource name of the lake, of the form:
@@ -58,7 +57,6 @@ pub struct Lake {
 /// Nested message and enum types in `Lake`.
 pub mod lake {
     /// Settings to manage association of Dataproc Metastore with a lake.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Metastore {
         /// Optional. A relative reference to the Dataproc Metastore
@@ -69,7 +67,6 @@ pub mod lake {
         pub service: ::prost::alloc::string::String,
     }
     /// Status of Lake and Dataproc Metastore service instance association.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct MetastoreStatus {
         /// Current state of association.
@@ -119,11 +116,11 @@ pub mod lake {
             /// (if the ProtoBuf definition does not change) and safe for programmatic use.
             pub fn as_str_name(&self) -> &'static str {
                 match self {
-                    State::Unspecified => "STATE_UNSPECIFIED",
-                    State::None => "NONE",
-                    State::Ready => "READY",
-                    State::Updating => "UPDATING",
-                    State::Error => "ERROR",
+                    Self::Unspecified => "STATE_UNSPECIFIED",
+                    Self::None => "NONE",
+                    Self::Ready => "READY",
+                    Self::Updating => "UPDATING",
+                    Self::Error => "ERROR",
                 }
             }
             /// Creates an enum from field names used in the ProtoBuf definition.
@@ -141,8 +138,7 @@ pub mod lake {
     }
 }
 /// Aggregated status of the underlying assets of a lake or zone.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct AssetStatus {
     /// Last update time of the status.
     #[prost(message, optional, tag = "1")]
@@ -159,7 +155,6 @@ pub struct AssetStatus {
 /// be used to map to organizational structure or represent stages of data
 /// readiness from raw to curated. It provides managing behavior that is shared
 /// or inherited by all contained assets.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Zone {
     /// Output only. The relative resource name of the zone, of the form:
@@ -209,8 +204,7 @@ pub struct Zone {
 /// Nested message and enum types in `Zone`.
 pub mod zone {
     /// Settings for resources attached as assets within a zone.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct ResourceSpec {
         /// Required. Immutable. The location type of the resources that are allowed
         /// to be attached to the assets within this zone.
@@ -247,9 +241,9 @@ pub mod zone {
             /// (if the ProtoBuf definition does not change) and safe for programmatic use.
             pub fn as_str_name(&self) -> &'static str {
                 match self {
-                    LocationType::Unspecified => "LOCATION_TYPE_UNSPECIFIED",
-                    LocationType::SingleRegion => "SINGLE_REGION",
-                    LocationType::MultiRegion => "MULTI_REGION",
+                    Self::Unspecified => "LOCATION_TYPE_UNSPECIFIED",
+                    Self::SingleRegion => "SINGLE_REGION",
+                    Self::MultiRegion => "MULTI_REGION",
                 }
             }
             /// Creates an enum from field names used in the ProtoBuf definition.
@@ -264,7 +258,6 @@ pub mod zone {
         }
     }
     /// Settings to manage the metadata discovery and publishing in a zone.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct DiscoverySpec {
         /// Required. Whether discovery is enabled.
@@ -296,7 +289,6 @@ pub mod zone {
     /// Nested message and enum types in `DiscoverySpec`.
     pub mod discovery_spec {
         /// Describe CSV and similar semi-structured data formats.
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct CsvOptions {
             /// Optional. The number of rows to interpret as header rows that should be
@@ -316,7 +308,6 @@ pub mod zone {
             pub disable_type_inference: bool,
         }
         /// Describe JSON data format.
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct JsonOptions {
             /// Optional. The character encoding of the data. The default is UTF-8.
@@ -329,7 +320,6 @@ pub mod zone {
             pub disable_type_inference: bool,
         }
         /// Determines when discovery is triggered.
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Oneof)]
         pub enum Trigger {
             /// Optional. Cron schedule (<https://en.wikipedia.org/wiki/Cron>) for
@@ -376,9 +366,9 @@ pub mod zone {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Type::Unspecified => "TYPE_UNSPECIFIED",
-                Type::Raw => "RAW",
-                Type::Curated => "CURATED",
+                Self::Unspecified => "TYPE_UNSPECIFIED",
+                Self::Raw => "RAW",
+                Self::Curated => "CURATED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -393,7 +383,6 @@ pub mod zone {
     }
 }
 /// Action represents an issue requiring administrator action for resolution.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Action {
     /// The category of issue associated with the action.
@@ -437,20 +426,17 @@ pub struct Action {
 /// Nested message and enum types in `Action`.
 pub mod action {
     /// Action details for resource references in assets that cannot be located.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct MissingResource {}
     /// Action details for unauthorized resource issues raised to indicate that the
     /// service account associated with the lake instance is not authorized to
     /// access or manage the resource associated with an asset.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct UnauthorizedResource {}
     /// Failed to apply security policy to the managed resource(s) under a
     /// lake, zone or an asset. For a lake or zone resource, one or more underlying
     /// assets has a failure applying security policy to the associated managed
     /// resource.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct FailedSecurityPolicyApply {
         /// Resource name of one of the assets with failing security policy
@@ -459,7 +445,6 @@ pub mod action {
         pub asset: ::prost::alloc::string::String,
     }
     /// Action details for invalid or unsupported data files detected by discovery.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct InvalidDataFormat {
         /// The list of data locations sampled and used for format/schema
@@ -476,7 +461,6 @@ pub mod action {
         pub new_format: ::prost::alloc::string::String,
     }
     /// Action details for incompatible schemas detected by discovery.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct IncompatibleDataSchema {
         /// The name of the table containing invalid data.
@@ -531,9 +515,9 @@ pub mod action {
             /// (if the ProtoBuf definition does not change) and safe for programmatic use.
             pub fn as_str_name(&self) -> &'static str {
                 match self {
-                    SchemaChange::Unspecified => "SCHEMA_CHANGE_UNSPECIFIED",
-                    SchemaChange::Incompatible => "INCOMPATIBLE",
-                    SchemaChange::Modified => "MODIFIED",
+                    Self::Unspecified => "SCHEMA_CHANGE_UNSPECIFIED",
+                    Self::Incompatible => "INCOMPATIBLE",
+                    Self::Modified => "MODIFIED",
                 }
             }
             /// Creates an enum from field names used in the ProtoBuf definition.
@@ -548,8 +532,7 @@ pub mod action {
         }
     }
     /// Action details for invalid or unsupported partitions detected by discovery.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct InvalidDataPartition {
         /// The issue type of InvalidDataPartition.
         #[prost(enumeration = "invalid_data_partition::PartitionStructure", tag = "1")]
@@ -585,9 +568,9 @@ pub mod action {
             /// (if the ProtoBuf definition does not change) and safe for programmatic use.
             pub fn as_str_name(&self) -> &'static str {
                 match self {
-                    PartitionStructure::Unspecified => "PARTITION_STRUCTURE_UNSPECIFIED",
-                    PartitionStructure::ConsistentKeys => "CONSISTENT_KEYS",
-                    PartitionStructure::HiveStyleKeys => "HIVE_STYLE_KEYS",
+                    Self::Unspecified => "PARTITION_STRUCTURE_UNSPECIFIED",
+                    Self::ConsistentKeys => "CONSISTENT_KEYS",
+                    Self::HiveStyleKeys => "HIVE_STYLE_KEYS",
                 }
             }
             /// Creates an enum from field names used in the ProtoBuf definition.
@@ -602,12 +585,10 @@ pub mod action {
         }
     }
     /// Action details for absence of data detected by discovery.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct MissingData {}
     /// Action details for invalid data arrangement.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct InvalidDataOrganization {}
     /// The category of issues.
     #[derive(
@@ -639,10 +620,10 @@ pub mod action {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Category::Unspecified => "CATEGORY_UNSPECIFIED",
-                Category::ResourceManagement => "RESOURCE_MANAGEMENT",
-                Category::SecurityPolicy => "SECURITY_POLICY",
-                Category::DataDiscovery => "DATA_DISCOVERY",
+                Self::Unspecified => "CATEGORY_UNSPECIFIED",
+                Self::ResourceManagement => "RESOURCE_MANAGEMENT",
+                Self::SecurityPolicy => "SECURITY_POLICY",
+                Self::DataDiscovery => "DATA_DISCOVERY",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -657,7 +638,6 @@ pub mod action {
         }
     }
     /// Additional details about the action based on the action category.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Details {
         /// Details for issues related to invalid or unsupported data formats.
@@ -690,7 +670,6 @@ pub mod action {
 }
 /// An asset represents a cloud resource that is being managed within a lake as a
 /// member of a zone.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Asset {
     /// Output only. The relative resource name of the asset, of the form:
@@ -747,7 +726,6 @@ pub struct Asset {
 pub mod asset {
     /// Security policy status of the asset. Data security policy, i.e., readers,
     /// writers & owners, should be specified in the lake/zone/asset IAM policy.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct SecurityStatus {
         /// The current state of the security policy applied to the attached
@@ -795,10 +773,10 @@ pub mod asset {
             /// (if the ProtoBuf definition does not change) and safe for programmatic use.
             pub fn as_str_name(&self) -> &'static str {
                 match self {
-                    State::Unspecified => "STATE_UNSPECIFIED",
-                    State::Ready => "READY",
-                    State::Applying => "APPLYING",
-                    State::Error => "ERROR",
+                    Self::Unspecified => "STATE_UNSPECIFIED",
+                    Self::Ready => "READY",
+                    Self::Applying => "APPLYING",
+                    Self::Error => "ERROR",
                 }
             }
             /// Creates an enum from field names used in the ProtoBuf definition.
@@ -814,7 +792,6 @@ pub mod asset {
         }
     }
     /// Settings to manage the metadata discovery and publishing for an asset.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct DiscoverySpec {
         /// Optional. Whether discovery is enabled.
@@ -846,7 +823,6 @@ pub mod asset {
     /// Nested message and enum types in `DiscoverySpec`.
     pub mod discovery_spec {
         /// Describe CSV and similar semi-structured data formats.
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct CsvOptions {
             /// Optional. The number of rows to interpret as header rows that should be
@@ -866,7 +842,6 @@ pub mod asset {
             pub disable_type_inference: bool,
         }
         /// Describe JSON data format.
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct JsonOptions {
             /// Optional. The character encoding of the data. The default is UTF-8.
@@ -879,7 +854,6 @@ pub mod asset {
             pub disable_type_inference: bool,
         }
         /// Determines when discovery is triggered.
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Oneof)]
         pub enum Trigger {
             /// Optional. Cron schedule (<https://en.wikipedia.org/wiki/Cron>) for
@@ -895,7 +869,6 @@ pub mod asset {
         }
     }
     /// Identifies the cloud resource that is referenced by this asset.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ResourceSpec {
         /// Immutable. Relative name of the cloud resource that contains the data
@@ -942,9 +915,9 @@ pub mod asset {
             /// (if the ProtoBuf definition does not change) and safe for programmatic use.
             pub fn as_str_name(&self) -> &'static str {
                 match self {
-                    Type::Unspecified => "TYPE_UNSPECIFIED",
-                    Type::StorageBucket => "STORAGE_BUCKET",
-                    Type::BigqueryDataset => "BIGQUERY_DATASET",
+                    Self::Unspecified => "TYPE_UNSPECIFIED",
+                    Self::StorageBucket => "STORAGE_BUCKET",
+                    Self::BigqueryDataset => "BIGQUERY_DATASET",
                 }
             }
             /// Creates an enum from field names used in the ProtoBuf definition.
@@ -986,9 +959,9 @@ pub mod asset {
             /// (if the ProtoBuf definition does not change) and safe for programmatic use.
             pub fn as_str_name(&self) -> &'static str {
                 match self {
-                    AccessMode::Unspecified => "ACCESS_MODE_UNSPECIFIED",
-                    AccessMode::Direct => "DIRECT",
-                    AccessMode::Managed => "MANAGED",
+                    Self::Unspecified => "ACCESS_MODE_UNSPECIFIED",
+                    Self::Direct => "DIRECT",
+                    Self::Managed => "MANAGED",
                 }
             }
             /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1003,7 +976,6 @@ pub mod asset {
         }
     }
     /// Status of the resource referenced by an asset.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ResourceStatus {
         /// The current state of the managed resource.
@@ -1049,9 +1021,9 @@ pub mod asset {
             /// (if the ProtoBuf definition does not change) and safe for programmatic use.
             pub fn as_str_name(&self) -> &'static str {
                 match self {
-                    State::Unspecified => "STATE_UNSPECIFIED",
-                    State::Ready => "READY",
-                    State::Error => "ERROR",
+                    Self::Unspecified => "STATE_UNSPECIFIED",
+                    Self::Ready => "READY",
+                    Self::Error => "ERROR",
                 }
             }
             /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1066,7 +1038,6 @@ pub mod asset {
         }
     }
     /// Status of discovery for an asset.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct DiscoveryStatus {
         /// The current status of the discovery feature.
@@ -1091,8 +1062,7 @@ pub mod asset {
     /// Nested message and enum types in `DiscoveryStatus`.
     pub mod discovery_status {
         /// The aggregated data statistics for the asset reported by discovery.
-        #[allow(clippy::derive_partial_eq_without_eq)]
-        #[derive(Clone, PartialEq, ::prost::Message)]
+        #[derive(Clone, Copy, PartialEq, ::prost::Message)]
         pub struct Stats {
             /// The count of data items within the referenced resource.
             #[prost(int64, tag = "1")]
@@ -1140,11 +1110,11 @@ pub mod asset {
             /// (if the ProtoBuf definition does not change) and safe for programmatic use.
             pub fn as_str_name(&self) -> &'static str {
                 match self {
-                    State::Unspecified => "STATE_UNSPECIFIED",
-                    State::Scheduled => "SCHEDULED",
-                    State::InProgress => "IN_PROGRESS",
-                    State::Paused => "PAUSED",
-                    State::Disabled => "DISABLED",
+                    Self::Unspecified => "STATE_UNSPECIFIED",
+                    Self::Scheduled => "SCHEDULED",
+                    Self::InProgress => "IN_PROGRESS",
+                    Self::Paused => "PAUSED",
+                    Self::Disabled => "DISABLED",
                 }
             }
             /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1183,11 +1153,11 @@ impl State {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            State::Unspecified => "STATE_UNSPECIFIED",
-            State::Active => "ACTIVE",
-            State::Creating => "CREATING",
-            State::Deleting => "DELETING",
-            State::ActionRequired => "ACTION_REQUIRED",
+            Self::Unspecified => "STATE_UNSPECIFIED",
+            Self::Active => "ACTIVE",
+            Self::Creating => "CREATING",
+            Self::Deleting => "DELETING",
+            Self::ActionRequired => "ACTION_REQUIRED",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1204,7 +1174,6 @@ impl State {
 }
 /// Environment represents a user-visible compute infrastructure for analytics
 /// within a lake.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Environment {
     /// Output only. The relative resource name of the environment, of the form:
@@ -1254,7 +1223,6 @@ pub struct Environment {
 /// Nested message and enum types in `Environment`.
 pub mod environment {
     /// Configuration for the underlying infrastructure used to run workloads.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct InfrastructureSpec {
         /// Hardware config
@@ -1267,8 +1235,7 @@ pub mod environment {
     /// Nested message and enum types in `InfrastructureSpec`.
     pub mod infrastructure_spec {
         /// Compute resources associated with the analyze interactive workloads.
-        #[allow(clippy::derive_partial_eq_without_eq)]
-        #[derive(Clone, PartialEq, ::prost::Message)]
+        #[derive(Clone, Copy, PartialEq, ::prost::Message)]
         pub struct ComputeResources {
             /// Optional. Size in GB of the disk. Default is 100 GB.
             #[prost(int32, tag = "1")]
@@ -1283,7 +1250,6 @@ pub mod environment {
             pub max_node_count: i32,
         }
         /// Software Runtime Configuration to run Analyze.
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct OsImageRuntime {
             /// Required. Dataplex Image version.
@@ -1312,15 +1278,13 @@ pub mod environment {
             >,
         }
         /// Hardware config
-        #[allow(clippy::derive_partial_eq_without_eq)]
-        #[derive(Clone, PartialEq, ::prost::Oneof)]
+        #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
         pub enum Resources {
             /// Optional. Compute resources needed for analyze interactive workloads.
             #[prost(message, tag = "50")]
             Compute(ComputeResources),
         }
         /// Software config
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Oneof)]
         pub enum Runtime {
             /// Required. Software Runtime Configuration for analyze interactive
@@ -1330,8 +1294,7 @@ pub mod environment {
         }
     }
     /// Configuration for sessions created for this environment.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct SessionSpec {
         /// Optional. The idle time configuration of the session. The session will be
         /// auto-terminated at the end of this period.
@@ -1346,8 +1309,7 @@ pub mod environment {
         pub enable_fast_startup: bool,
     }
     /// Status of sessions created for this environment.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct SessionStatus {
         /// Output only. Queries over sessions to mark whether the environment is
         /// currently active or not
@@ -1355,7 +1317,6 @@ pub mod environment {
         pub active: bool,
     }
     /// URI Endpoints to access sessions associated with the Environment.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Endpoints {
         /// Output only. URI to serve notebook APIs
@@ -1367,7 +1328,6 @@ pub mod environment {
     }
 }
 /// Content represents a user-visible notebook or a sql script
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Content {
     /// Output only. The relative resource name of the content, of the form:
@@ -1409,8 +1369,7 @@ pub struct Content {
 /// Nested message and enum types in `Content`.
 pub mod content {
     /// Configuration for the Sql Script content.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct SqlScript {
         /// Required. Query Engine to be used for the Sql Query.
         #[prost(enumeration = "sql_script::QueryEngine", tag = "1")]
@@ -1444,8 +1403,8 @@ pub mod content {
             /// (if the ProtoBuf definition does not change) and safe for programmatic use.
             pub fn as_str_name(&self) -> &'static str {
                 match self {
-                    QueryEngine::Unspecified => "QUERY_ENGINE_UNSPECIFIED",
-                    QueryEngine::Spark => "SPARK",
+                    Self::Unspecified => "QUERY_ENGINE_UNSPECIFIED",
+                    Self::Spark => "SPARK",
                 }
             }
             /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1459,8 +1418,7 @@ pub mod content {
         }
     }
     /// Configuration for Notebook content.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct Notebook {
         /// Required. Kernel Type of the notebook.
         #[prost(enumeration = "notebook::KernelType", tag = "1")]
@@ -1494,8 +1452,8 @@ pub mod content {
             /// (if the ProtoBuf definition does not change) and safe for programmatic use.
             pub fn as_str_name(&self) -> &'static str {
                 match self {
-                    KernelType::Unspecified => "KERNEL_TYPE_UNSPECIFIED",
-                    KernelType::Python3 => "PYTHON3",
+                    Self::Unspecified => "KERNEL_TYPE_UNSPECIFIED",
+                    Self::Python3 => "PYTHON3",
                 }
             }
             /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1509,7 +1467,6 @@ pub mod content {
         }
     }
     /// Only returned in `GetContent` requests and not in `ListContent` request.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Data {
         /// Required. Content data in string format.
@@ -1517,8 +1474,7 @@ pub mod content {
         DataText(::prost::alloc::string::String),
     }
     /// Types of content
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
     pub enum Content {
         /// Sql Script related configurations.
         #[prost(message, tag = "100")]
@@ -1529,7 +1485,6 @@ pub mod content {
     }
 }
 /// Represents an active analyze session running for a user.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Session {
     /// Output only. The relative resource name of the content, of the form:
@@ -1547,7 +1502,6 @@ pub struct Session {
     pub state: i32,
 }
 /// A task represents a user-visible job.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Task {
     /// Output only. The relative resource name of the task, of the form:
@@ -1596,7 +1550,6 @@ pub struct Task {
 /// Nested message and enum types in `Task`.
 pub mod task {
     /// Configuration for the underlying infrastructure used to run workloads.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct InfrastructureSpec {
         /// Hardware config.
@@ -1612,8 +1565,7 @@ pub mod task {
     /// Nested message and enum types in `InfrastructureSpec`.
     pub mod infrastructure_spec {
         /// Batch compute resources associated with the task.
-        #[allow(clippy::derive_partial_eq_without_eq)]
-        #[derive(Clone, PartialEq, ::prost::Message)]
+        #[derive(Clone, Copy, PartialEq, ::prost::Message)]
         pub struct BatchComputeResources {
             /// Optional. Total number of job executors.
             /// Executor Count should be between 2 and 100. \[Default=2\]
@@ -1626,7 +1578,6 @@ pub mod task {
             pub max_executors_count: i32,
         }
         /// Container Image Runtime Configuration used with Batch execution.
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct ContainerImageRuntime {
             /// Optional. Container image to use.
@@ -1656,7 +1607,6 @@ pub mod task {
             >,
         }
         /// Cloud VPC Network used to run the infrastructure.
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct VpcNetwork {
             /// Optional. List of network tags to apply to the job.
@@ -1669,7 +1619,6 @@ pub mod task {
         /// Nested message and enum types in `VpcNetwork`.
         pub mod vpc_network {
             /// The Cloud VPC network identifier.
-            #[allow(clippy::derive_partial_eq_without_eq)]
             #[derive(Clone, PartialEq, ::prost::Oneof)]
             pub enum NetworkName {
                 /// Optional. The Cloud VPC network in which the job is run. By default,
@@ -1682,15 +1631,13 @@ pub mod task {
             }
         }
         /// Hardware config.
-        #[allow(clippy::derive_partial_eq_without_eq)]
-        #[derive(Clone, PartialEq, ::prost::Oneof)]
+        #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
         pub enum Resources {
             /// Compute resources needed for a Task when using Dataproc Serverless.
             #[prost(message, tag = "52")]
             Batch(BatchComputeResources),
         }
         /// Software config.
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Oneof)]
         pub enum Runtime {
             /// Container Image Runtime Configuration.
@@ -1698,7 +1645,6 @@ pub mod task {
             ContainerImage(ContainerImageRuntime),
         }
         /// Networking config.
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Oneof)]
         pub enum Network {
             /// Vpc network.
@@ -1707,7 +1653,6 @@ pub mod task {
         }
     }
     /// Task scheduling and trigger settings.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct TriggerSpec {
         /// Required. Immutable. Trigger type of the user-specified Task.
@@ -1761,9 +1706,9 @@ pub mod task {
             /// (if the ProtoBuf definition does not change) and safe for programmatic use.
             pub fn as_str_name(&self) -> &'static str {
                 match self {
-                    Type::Unspecified => "TYPE_UNSPECIFIED",
-                    Type::OnDemand => "ON_DEMAND",
-                    Type::Recurring => "RECURRING",
+                    Self::Unspecified => "TYPE_UNSPECIFIED",
+                    Self::OnDemand => "ON_DEMAND",
+                    Self::Recurring => "RECURRING",
                 }
             }
             /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1777,7 +1722,6 @@ pub mod task {
             }
         }
         /// Trigger only applies for RECURRING tasks.
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Oneof)]
         pub enum Trigger {
             /// Optional. Cron schedule (<https://en.wikipedia.org/wiki/Cron>) for
@@ -1792,7 +1736,6 @@ pub mod task {
         }
     }
     /// Execution related settings, like retry and service_account.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ExecutionSpec {
         /// Optional. The arguments to pass to the task.
@@ -1832,7 +1775,6 @@ pub mod task {
         pub kms_key: ::prost::alloc::string::String,
     }
     /// User-specified config for running a Spark task.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct SparkTaskConfig {
         /// Optional. Cloud Storage URIs of files to be placed in the working
@@ -1858,7 +1800,6 @@ pub mod task {
         /// Required. The specification of the main method to call to drive the
         /// job. Specify either the jar file that contains the main class or the
         /// main class name.
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Oneof)]
         pub enum Driver {
             /// The Cloud Storage URI of the jar file that contains the main class.
@@ -1892,7 +1833,6 @@ pub mod task {
         }
     }
     /// Config for running scheduled notebooks.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct NotebookTaskConfig {
         /// Required. Path to input notebook. This can be the Cloud Storage URI of
@@ -1915,7 +1855,6 @@ pub mod task {
         pub archive_uris: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     }
     /// Status of the task execution (e.g. Jobs).
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ExecutionStatus {
         /// Output only. Last update time of the status.
@@ -1926,7 +1865,6 @@ pub mod task {
         pub latest_job: ::core::option::Option<super::Job>,
     }
     /// Task template specific user-specified config.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Config {
         /// Config related to running custom Spark tasks.
@@ -1938,7 +1876,6 @@ pub mod task {
     }
 }
 /// A job represents an instance of a task.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Job {
     /// Output only. The relative resource name of the job, of the form:
@@ -2011,8 +1948,8 @@ pub mod job {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Service::Unspecified => "SERVICE_UNSPECIFIED",
-                Service::Dataproc => "DATAPROC",
+                Self::Unspecified => "SERVICE_UNSPECIFIED",
+                Self::Dataproc => "DATAPROC",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -2059,13 +1996,13 @@ pub mod job {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                State::Unspecified => "STATE_UNSPECIFIED",
-                State::Running => "RUNNING",
-                State::Cancelling => "CANCELLING",
-                State::Cancelled => "CANCELLED",
-                State::Succeeded => "SUCCEEDED",
-                State::Failed => "FAILED",
-                State::Aborted => "ABORTED",
+                Self::Unspecified => "STATE_UNSPECIFIED",
+                Self::Running => "RUNNING",
+                Self::Cancelling => "CANCELLING",
+                Self::Cancelled => "CANCELLED",
+                Self::Succeeded => "SUCCEEDED",
+                Self::Failed => "FAILED",
+                Self::Aborted => "ABORTED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -2111,9 +2048,9 @@ pub mod job {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Trigger::Unspecified => "TRIGGER_UNSPECIFIED",
-                Trigger::TaskConfig => "TASK_CONFIG",
-                Trigger::RunRequest => "RUN_REQUEST",
+                Self::Unspecified => "TRIGGER_UNSPECIFIED",
+                Self::TaskConfig => "TASK_CONFIG",
+                Self::RunRequest => "RUN_REQUEST",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -2128,7 +2065,6 @@ pub mod job {
     }
 }
 /// Create lake request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateLakeRequest {
     /// Required. The resource name of the lake location, of the form:
@@ -2155,7 +2091,6 @@ pub struct CreateLakeRequest {
     pub validate_only: bool,
 }
 /// Update lake request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateLakeRequest {
     /// Required. Mask of fields to update.
@@ -2171,7 +2106,6 @@ pub struct UpdateLakeRequest {
     pub validate_only: bool,
 }
 /// Delete lake request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteLakeRequest {
     /// Required. The resource name of the lake:
@@ -2180,7 +2114,6 @@ pub struct DeleteLakeRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// List lakes request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListLakesRequest {
     /// Required. The resource name of the lake location, of the form:
@@ -2206,7 +2139,6 @@ pub struct ListLakesRequest {
     pub order_by: ::prost::alloc::string::String,
 }
 /// List lakes response.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListLakesResponse {
     /// Lakes under the given parent location.
@@ -2221,7 +2153,6 @@ pub struct ListLakesResponse {
     pub unreachable_locations: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// List lake actions request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListLakeActionsRequest {
     /// Required. The resource name of the parent lake:
@@ -2241,7 +2172,6 @@ pub struct ListLakeActionsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// List actions response.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListActionsResponse {
     /// Actions under the given parent lake/zone/asset.
@@ -2253,7 +2183,6 @@ pub struct ListActionsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Get lake request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetLakeRequest {
     /// Required. The resource name of the lake:
@@ -2262,7 +2191,6 @@ pub struct GetLakeRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Create zone request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateZoneRequest {
     /// Required. The resource name of the parent lake:
@@ -2289,7 +2217,6 @@ pub struct CreateZoneRequest {
     pub validate_only: bool,
 }
 /// Update zone request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateZoneRequest {
     /// Required. Mask of fields to update.
@@ -2305,7 +2232,6 @@ pub struct UpdateZoneRequest {
     pub validate_only: bool,
 }
 /// Delete zone request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteZoneRequest {
     /// Required. The resource name of the zone:
@@ -2314,7 +2240,6 @@ pub struct DeleteZoneRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// List zones request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListZonesRequest {
     /// Required. The resource name of the parent lake:
@@ -2339,7 +2264,6 @@ pub struct ListZonesRequest {
     pub order_by: ::prost::alloc::string::String,
 }
 /// List zones response.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListZonesResponse {
     /// Zones under the given parent lake.
@@ -2351,7 +2275,6 @@ pub struct ListZonesResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// List zone actions request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListZoneActionsRequest {
     /// Required. The resource name of the parent zone:
@@ -2371,7 +2294,6 @@ pub struct ListZoneActionsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Get zone request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetZoneRequest {
     /// Required. The resource name of the zone:
@@ -2380,7 +2302,6 @@ pub struct GetZoneRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Create asset request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateAssetRequest {
     /// Required. The resource name of the parent zone:
@@ -2406,7 +2327,6 @@ pub struct CreateAssetRequest {
     pub validate_only: bool,
 }
 /// Update asset request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateAssetRequest {
     /// Required. Mask of fields to update.
@@ -2422,7 +2342,6 @@ pub struct UpdateAssetRequest {
     pub validate_only: bool,
 }
 /// Delete asset request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteAssetRequest {
     /// Required. The resource name of the asset:
@@ -2431,7 +2350,6 @@ pub struct DeleteAssetRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// List assets request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAssetsRequest {
     /// Required. The resource name of the parent zone:
@@ -2457,7 +2375,6 @@ pub struct ListAssetsRequest {
     pub order_by: ::prost::alloc::string::String,
 }
 /// List assets response.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAssetsResponse {
     /// Asset under the given parent zone.
@@ -2469,7 +2386,6 @@ pub struct ListAssetsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// List asset actions request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAssetActionsRequest {
     /// Required. The resource name of the parent asset:
@@ -2489,7 +2405,6 @@ pub struct ListAssetActionsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Get asset request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetAssetRequest {
     /// Required. The resource name of the asset:
@@ -2498,7 +2413,6 @@ pub struct GetAssetRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Represents the metadata of a long-running operation.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OperationMetadata {
     /// Output only. The time the operation was created.
@@ -2528,7 +2442,6 @@ pub struct OperationMetadata {
     pub api_version: ::prost::alloc::string::String,
 }
 /// Create task request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateTaskRequest {
     /// Required. The resource name of the parent lake:
@@ -2547,7 +2460,6 @@ pub struct CreateTaskRequest {
     pub validate_only: bool,
 }
 /// Update task request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateTaskRequest {
     /// Required. Mask of fields to update.
@@ -2563,7 +2475,6 @@ pub struct UpdateTaskRequest {
     pub validate_only: bool,
 }
 /// Delete task request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteTaskRequest {
     /// Required. The resource name of the task:
@@ -2572,7 +2483,6 @@ pub struct DeleteTaskRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// List tasks request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListTasksRequest {
     /// Required. The resource name of the parent lake:
@@ -2597,7 +2507,6 @@ pub struct ListTasksRequest {
     pub order_by: ::prost::alloc::string::String,
 }
 /// List tasks response.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListTasksResponse {
     /// Tasks under the given parent lake.
@@ -2612,7 +2521,6 @@ pub struct ListTasksResponse {
     pub unreachable_locations: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Get task request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetTaskRequest {
     /// Required. The resource name of the task:
@@ -2621,7 +2529,6 @@ pub struct GetTaskRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Get job request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetJobRequest {
     /// Required. The resource name of the job:
@@ -2629,7 +2536,6 @@ pub struct GetJobRequest {
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RunTaskRequest {
     /// Required. The resource name of the task:
@@ -2661,7 +2567,6 @@ pub struct RunTaskRequest {
         ::prost::alloc::string::String,
     >,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RunTaskResponse {
     /// Jobs created by RunTask API.
@@ -2669,7 +2574,6 @@ pub struct RunTaskResponse {
     pub job: ::core::option::Option<Job>,
 }
 /// List jobs request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListJobsRequest {
     /// Required. The resource name of the parent environment:
@@ -2689,7 +2593,6 @@ pub struct ListJobsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// List jobs response.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListJobsResponse {
     /// Jobs under a given task.
@@ -2701,7 +2604,6 @@ pub struct ListJobsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Cancel task jobs.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CancelJobRequest {
     /// Required. The resource name of the job:
@@ -2710,7 +2612,6 @@ pub struct CancelJobRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Create environment request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateEnvironmentRequest {
     /// Required. The resource name of the parent lake:
@@ -2734,7 +2635,6 @@ pub struct CreateEnvironmentRequest {
     pub validate_only: bool,
 }
 /// Update environment request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateEnvironmentRequest {
     /// Required. Mask of fields to update.
@@ -2750,7 +2650,6 @@ pub struct UpdateEnvironmentRequest {
     pub validate_only: bool,
 }
 /// Delete environment request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteEnvironmentRequest {
     /// Required. The resource name of the environment:
@@ -2759,7 +2658,6 @@ pub struct DeleteEnvironmentRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// List environments request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListEnvironmentsRequest {
     /// Required. The resource name of the parent lake:
@@ -2786,7 +2684,6 @@ pub struct ListEnvironmentsRequest {
     pub order_by: ::prost::alloc::string::String,
 }
 /// List environments response.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListEnvironmentsResponse {
     /// Environments under the given parent lake.
@@ -2798,7 +2695,6 @@ pub struct ListEnvironmentsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Get environment request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetEnvironmentRequest {
     /// Required. The resource name of the environment:
@@ -2807,7 +2703,6 @@ pub struct GetEnvironmentRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// List sessions request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListSessionsRequest {
     /// Required. The resource name of the parent environment:
@@ -2838,7 +2733,6 @@ pub struct ListSessionsRequest {
     pub filter: ::prost::alloc::string::String,
 }
 /// List sessions response.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListSessionsResponse {
     /// Sessions under a given environment.
@@ -2851,7 +2745,13 @@ pub struct ListSessionsResponse {
 }
 /// Generated client implementations.
 pub mod dataplex_service_client {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     use tonic::codegen::http::Uri;
     /// Dataplex service provides data lakes as a service. The primary resources
@@ -2867,8 +2767,8 @@ pub mod dataplex_service_client {
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
-        T::ResponseBody: Body<Data = Bytes> + Send + 'static,
-        <T::ResponseBody as Body>::Error: Into<StdError> + Send,
+        T::ResponseBody: Body<Data = Bytes> + std::marker::Send + 'static,
+        <T::ResponseBody as Body>::Error: Into<StdError> + std::marker::Send,
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
@@ -2893,7 +2793,7 @@ pub mod dataplex_service_client {
             >,
             <T as tonic::codegen::Service<
                 http::Request<tonic::body::BoxBody>,
-            >>::Error: Into<StdError> + Send + Sync,
+            >>::Error: Into<StdError> + std::marker::Send + std::marker::Sync,
         {
             DataplexServiceClient::new(InterceptedService::new(inner, interceptor))
         }
@@ -2940,8 +2840,7 @@ pub mod dataplex_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -2971,8 +2870,7 @@ pub mod dataplex_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3003,8 +2901,7 @@ pub mod dataplex_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3034,8 +2931,7 @@ pub mod dataplex_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3062,8 +2958,7 @@ pub mod dataplex_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3093,8 +2988,7 @@ pub mod dataplex_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3124,8 +3018,7 @@ pub mod dataplex_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3155,8 +3048,7 @@ pub mod dataplex_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3187,8 +3079,7 @@ pub mod dataplex_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3218,8 +3109,7 @@ pub mod dataplex_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3246,8 +3136,7 @@ pub mod dataplex_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3277,8 +3166,7 @@ pub mod dataplex_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3308,8 +3196,7 @@ pub mod dataplex_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3339,8 +3226,7 @@ pub mod dataplex_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3371,8 +3257,7 @@ pub mod dataplex_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3402,8 +3287,7 @@ pub mod dataplex_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3430,8 +3314,7 @@ pub mod dataplex_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3461,8 +3344,7 @@ pub mod dataplex_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3492,8 +3374,7 @@ pub mod dataplex_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3523,8 +3404,7 @@ pub mod dataplex_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3554,8 +3434,7 @@ pub mod dataplex_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3585,8 +3464,7 @@ pub mod dataplex_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3613,8 +3491,7 @@ pub mod dataplex_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3644,8 +3521,7 @@ pub mod dataplex_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3675,8 +3551,7 @@ pub mod dataplex_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3703,8 +3578,7 @@ pub mod dataplex_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3728,8 +3602,7 @@ pub mod dataplex_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3759,8 +3632,7 @@ pub mod dataplex_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3790,8 +3662,7 @@ pub mod dataplex_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3822,8 +3693,7 @@ pub mod dataplex_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3853,8 +3723,7 @@ pub mod dataplex_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3881,8 +3750,7 @@ pub mod dataplex_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3912,8 +3780,7 @@ pub mod dataplex_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3935,7 +3802,6 @@ pub mod dataplex_service_client {
 }
 /// Aspect Type is a template for creating Aspects, and represents the
 /// JSON-schema for a given Entry, e.g., BigQuery Table Schema.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AspectType {
     /// Output only. The relative resource name of the AspectType, of the form:
@@ -3984,7 +3850,6 @@ pub struct AspectType {
 /// Nested message and enum types in `AspectType`.
 pub mod aspect_type {
     /// Autorization for an Aspect Type.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Authorization {
         /// Immutable. The IAM permission grantable on the Entry Group to allow
@@ -3994,7 +3859,6 @@ pub mod aspect_type {
         pub alternate_use_permission: ::prost::alloc::string::String,
     }
     /// MetadataTemplate definition for AspectType
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct MetadataTemplate {
         /// Optional. Index is used to encode Template messages. The value of index
@@ -4062,7 +3926,6 @@ pub mod aspect_type {
     /// Nested message and enum types in `MetadataTemplate`.
     pub mod metadata_template {
         /// Definition of Enumvalue (to be used by enum fields)
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct EnumValue {
             /// Required. Index for the enum. Cannot be modified.
@@ -4078,15 +3941,13 @@ pub mod aspect_type {
             pub deprecated: ::prost::alloc::string::String,
         }
         /// Definition of the constraints of a field
-        #[allow(clippy::derive_partial_eq_without_eq)]
-        #[derive(Clone, PartialEq, ::prost::Message)]
+        #[derive(Clone, Copy, PartialEq, ::prost::Message)]
         pub struct Constraints {
             /// Optional. Marks this as an optional/required field.
             #[prost(bool, tag = "1")]
             pub required: bool,
         }
         /// Definition of the annotations of a field
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct Annotations {
             /// Optional. Marks a field as deprecated, a deprecation message can be
@@ -4117,7 +3978,6 @@ pub mod aspect_type {
     }
 }
 /// An Entry Group represents a logical grouping of one or more Entries.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EntryGroup {
     /// Output only. The relative resource name of the EntryGroup, of the form:
@@ -4158,7 +4018,6 @@ pub struct EntryGroup {
     pub transfer_status: i32,
 }
 /// Entry Type is a template for creating Entries.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EntryType {
     /// Output only. The relative resource name of the EntryType, of the form:
@@ -4213,7 +4072,6 @@ pub struct EntryType {
 }
 /// Nested message and enum types in `EntryType`.
 pub mod entry_type {
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct AspectInfo {
         /// Required aspect type for the entry type.
@@ -4221,7 +4079,6 @@ pub mod entry_type {
         pub r#type: ::prost::alloc::string::String,
     }
     /// Authorization for an Entry Type.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Authorization {
         /// Immutable. The IAM permission grantable on the Entry Group to allow
@@ -4232,7 +4089,6 @@ pub mod entry_type {
     }
 }
 /// An aspect is a single piece of metadata describing an entry.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Aspect {
     /// Output only. The resource name of the type used to create this Aspect.
@@ -4257,8 +4113,7 @@ pub struct Aspect {
 }
 /// AspectSource contains source system related information for the
 /// aspect.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct AspectSource {
     /// The create time of the aspect in the source system.
     #[prost(message, optional, tag = "10")]
@@ -4269,7 +4124,6 @@ pub struct AspectSource {
 }
 /// An entry is a representation of a data asset which can be described by
 /// various metadata.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Entry {
     /// Identifier. The relative resource name of the Entry, of the form:
@@ -4307,7 +4161,6 @@ pub struct Entry {
 }
 /// EntrySource contains source system related information for the
 /// entry.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EntrySource {
     /// The name of the resource in the source system.
@@ -4357,7 +4210,6 @@ pub struct EntrySource {
 pub mod entry_source {
     /// Ancestor contains information about individual items in the hierarchy of
     /// an Entry.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Ancestor {
         /// Optional. The name of the ancestor resource.
@@ -4369,7 +4221,6 @@ pub mod entry_source {
     }
 }
 /// Create EntryGroup Request
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateEntryGroupRequest {
     /// Required. The resource name of the entryGroup, of the form:
@@ -4389,7 +4240,6 @@ pub struct CreateEntryGroupRequest {
     pub validate_only: bool,
 }
 /// Update EntryGroup Request
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateEntryGroupRequest {
     /// Required. EntryGroup Resource
@@ -4404,7 +4254,6 @@ pub struct UpdateEntryGroupRequest {
     pub validate_only: bool,
 }
 /// Delele EntryGroup Request
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteEntryGroupRequest {
     /// Required. The resource name of the EntryGroup:
@@ -4417,7 +4266,6 @@ pub struct DeleteEntryGroupRequest {
     pub etag: ::prost::alloc::string::String,
 }
 /// List entryGroups request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListEntryGroupsRequest {
     /// Required. The resource name of the entryGroup location, of the form:
@@ -4445,7 +4293,6 @@ pub struct ListEntryGroupsRequest {
     pub order_by: ::prost::alloc::string::String,
 }
 /// List ListEntryGroups response.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListEntryGroupsResponse {
     /// ListEntryGroups under the given parent location.
@@ -4460,7 +4307,6 @@ pub struct ListEntryGroupsResponse {
     pub unreachable_locations: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Get EntryGroup request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetEntryGroupRequest {
     /// Required. The resource name of the EntryGroup:
@@ -4469,7 +4315,6 @@ pub struct GetEntryGroupRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Create EntryType Request
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateEntryTypeRequest {
     /// Required. The resource name of the EntryType, of the form:
@@ -4489,7 +4334,6 @@ pub struct CreateEntryTypeRequest {
     pub validate_only: bool,
 }
 /// Update EntryType Request
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateEntryTypeRequest {
     /// Required. EntryType Resource
@@ -4504,7 +4348,6 @@ pub struct UpdateEntryTypeRequest {
     pub validate_only: bool,
 }
 /// Delele EntryType Request
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteEntryTypeRequest {
     /// Required. The resource name of the EntryType:
@@ -4517,7 +4360,6 @@ pub struct DeleteEntryTypeRequest {
     pub etag: ::prost::alloc::string::String,
 }
 /// List EntryTypes request
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListEntryTypesRequest {
     /// Required. The resource name of the EntryType location, of the form:
@@ -4552,7 +4394,6 @@ pub struct ListEntryTypesRequest {
     pub order_by: ::prost::alloc::string::String,
 }
 /// List EntryTypes response
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListEntryTypesResponse {
     /// ListEntryTypes under the given parent location.
@@ -4567,7 +4408,6 @@ pub struct ListEntryTypesResponse {
     pub unreachable_locations: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Get EntryType request
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetEntryTypeRequest {
     /// Required. The resource name of the EntryType:
@@ -4576,7 +4416,6 @@ pub struct GetEntryTypeRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Create AspectType Request
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateAspectTypeRequest {
     /// Required. The resource name of the AspectType, of the form:
@@ -4596,7 +4435,6 @@ pub struct CreateAspectTypeRequest {
     pub validate_only: bool,
 }
 /// Update AspectType Request
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateAspectTypeRequest {
     /// Required. AspectType Resource
@@ -4611,7 +4449,6 @@ pub struct UpdateAspectTypeRequest {
     pub validate_only: bool,
 }
 /// Delele AspectType Request
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteAspectTypeRequest {
     /// Required. The resource name of the AspectType:
@@ -4624,7 +4461,6 @@ pub struct DeleteAspectTypeRequest {
     pub etag: ::prost::alloc::string::String,
 }
 /// List AspectTypes request
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAspectTypesRequest {
     /// Required. The resource name of the AspectType location, of the form:
@@ -4659,7 +4495,6 @@ pub struct ListAspectTypesRequest {
     pub order_by: ::prost::alloc::string::String,
 }
 /// List AspectTypes response
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAspectTypesResponse {
     /// ListAspectTypes under the given parent location.
@@ -4674,7 +4509,6 @@ pub struct ListAspectTypesResponse {
     pub unreachable_locations: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Get AspectType request
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetAspectTypeRequest {
     /// Required. The resource name of the AspectType:
@@ -4682,7 +4516,6 @@ pub struct GetAspectTypeRequest {
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateEntryRequest {
     /// Required. The resource name of the parent Entry Group:
@@ -4714,7 +4547,6 @@ pub struct CreateEntryRequest {
     #[prost(message, optional, tag = "3")]
     pub entry: ::core::option::Option<Entry>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateEntryRequest {
     /// Required. Entry resource.
@@ -4751,7 +4583,6 @@ pub struct UpdateEntryRequest {
     #[prost(string, repeated, tag = "5")]
     pub aspect_keys: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteEntryRequest {
     /// Required. The resource name of the Entry:
@@ -4759,7 +4590,6 @@ pub struct DeleteEntryRequest {
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListEntriesRequest {
     /// Required. The resource name of the parent Entry Group:
@@ -4788,7 +4618,6 @@ pub struct ListEntriesRequest {
     #[prost(string, tag = "4")]
     pub filter: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListEntriesResponse {
     /// The list of entries.
@@ -4798,7 +4627,6 @@ pub struct ListEntriesResponse {
     #[prost(string, tag = "2")]
     pub next_page_token: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetEntryRequest {
     /// Required. The resource name of the Entry:
@@ -4817,7 +4645,6 @@ pub struct GetEntryRequest {
     #[prost(string, repeated, tag = "4")]
     pub paths: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LookupEntryRequest {
     /// Required. The project to which the request should be attributed in the
@@ -4840,7 +4667,6 @@ pub struct LookupEntryRequest {
     #[prost(string, tag = "5")]
     pub entry: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchEntriesRequest {
     /// Required. The project to which the request should be attributed in the
@@ -4866,7 +4692,6 @@ pub struct SearchEntriesRequest {
     pub scope: ::prost::alloc::string::String,
 }
 /// A single result of a SearchEntries request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchEntriesResult {
     /// Linked resource name.
@@ -4884,7 +4709,6 @@ pub struct SearchEntriesResult {
 pub mod search_entries_result {
     /// Snippets for the entry, contains HTML-style highlighting for
     /// matched tokens, will be used in UI.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Snippets {
         /// Entry
@@ -4893,7 +4717,6 @@ pub mod search_entries_result {
         pub dataplex_entry: ::core::option::Option<super::Entry>,
     }
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchEntriesResponse {
     /// The results matching the search query.
@@ -4936,11 +4759,11 @@ impl EntryView {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            EntryView::Unspecified => "ENTRY_VIEW_UNSPECIFIED",
-            EntryView::Basic => "BASIC",
-            EntryView::Full => "FULL",
-            EntryView::Custom => "CUSTOM",
-            EntryView::All => "ALL",
+            Self::Unspecified => "ENTRY_VIEW_UNSPECIFIED",
+            Self::Basic => "BASIC",
+            Self::Full => "FULL",
+            Self::Custom => "CUSTOM",
+            Self::All => "ALL",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -4978,9 +4801,9 @@ impl TransferStatus {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            TransferStatus::Unspecified => "TRANSFER_STATUS_UNSPECIFIED",
-            TransferStatus::Migrated => "TRANSFER_STATUS_MIGRATED",
-            TransferStatus::Transferred => "TRANSFER_STATUS_TRANSFERRED",
+            Self::Unspecified => "TRANSFER_STATUS_UNSPECIFIED",
+            Self::Migrated => "TRANSFER_STATUS_MIGRATED",
+            Self::Transferred => "TRANSFER_STATUS_TRANSFERRED",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -4995,7 +4818,13 @@ impl TransferStatus {
 }
 /// Generated client implementations.
 pub mod catalog_service_client {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     use tonic::codegen::http::Uri;
     /// The primary resources offered by this service are EntryGroups, EntryTypes,
@@ -5011,8 +4840,8 @@ pub mod catalog_service_client {
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
-        T::ResponseBody: Body<Data = Bytes> + Send + 'static,
-        <T::ResponseBody as Body>::Error: Into<StdError> + Send,
+        T::ResponseBody: Body<Data = Bytes> + std::marker::Send + 'static,
+        <T::ResponseBody as Body>::Error: Into<StdError> + std::marker::Send,
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
@@ -5037,7 +4866,7 @@ pub mod catalog_service_client {
             >,
             <T as tonic::codegen::Service<
                 http::Request<tonic::body::BoxBody>,
-            >>::Error: Into<StdError> + Send + Sync,
+            >>::Error: Into<StdError> + std::marker::Send + std::marker::Sync,
         {
             CatalogServiceClient::new(InterceptedService::new(inner, interceptor))
         }
@@ -5084,8 +4913,7 @@ pub mod catalog_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -5115,8 +4943,7 @@ pub mod catalog_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -5146,8 +4973,7 @@ pub mod catalog_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -5177,8 +5003,7 @@ pub mod catalog_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -5205,8 +5030,7 @@ pub mod catalog_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -5236,8 +5060,7 @@ pub mod catalog_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -5267,8 +5090,7 @@ pub mod catalog_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -5298,8 +5120,7 @@ pub mod catalog_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -5329,8 +5150,7 @@ pub mod catalog_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -5357,8 +5177,7 @@ pub mod catalog_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -5388,8 +5207,7 @@ pub mod catalog_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -5419,8 +5237,7 @@ pub mod catalog_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -5450,8 +5267,7 @@ pub mod catalog_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -5481,8 +5297,7 @@ pub mod catalog_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -5509,8 +5324,7 @@ pub mod catalog_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -5537,8 +5351,7 @@ pub mod catalog_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -5565,8 +5378,7 @@ pub mod catalog_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -5593,8 +5405,7 @@ pub mod catalog_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -5624,8 +5435,7 @@ pub mod catalog_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -5652,8 +5462,7 @@ pub mod catalog_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -5680,8 +5489,7 @@ pub mod catalog_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -5711,8 +5519,7 @@ pub mod catalog_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -5733,7 +5540,6 @@ pub mod catalog_service_client {
     }
 }
 /// Create content request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateContentRequest {
     /// Required. The resource name of the parent lake:
@@ -5749,7 +5555,6 @@ pub struct CreateContentRequest {
     pub validate_only: bool,
 }
 /// Update content request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateContentRequest {
     /// Required. Mask of fields to update.
@@ -5765,7 +5570,6 @@ pub struct UpdateContentRequest {
     pub validate_only: bool,
 }
 /// Delete content request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteContentRequest {
     /// Required. The resource name of the content:
@@ -5774,7 +5578,6 @@ pub struct DeleteContentRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// List content request. Returns the BASIC Content view.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListContentRequest {
     /// Required. The resource name of the parent lake:
@@ -5805,7 +5608,6 @@ pub struct ListContentRequest {
     pub filter: ::prost::alloc::string::String,
 }
 /// List content response.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListContentResponse {
     /// Content under the given parent lake.
@@ -5817,7 +5619,6 @@ pub struct ListContentResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Get content request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetContentRequest {
     /// Required. The resource name of the content:
@@ -5860,9 +5661,9 @@ pub mod get_content_request {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                ContentView::Unspecified => "CONTENT_VIEW_UNSPECIFIED",
-                ContentView::Basic => "BASIC",
-                ContentView::Full => "FULL",
+                Self::Unspecified => "CONTENT_VIEW_UNSPECIFIED",
+                Self::Basic => "BASIC",
+                Self::Full => "FULL",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -5878,7 +5679,13 @@ pub mod get_content_request {
 }
 /// Generated client implementations.
 pub mod content_service_client {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     use tonic::codegen::http::Uri;
     /// ContentService manages Notebook and SQL Scripts for Dataplex.
@@ -5890,8 +5697,8 @@ pub mod content_service_client {
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
-        T::ResponseBody: Body<Data = Bytes> + Send + 'static,
-        <T::ResponseBody as Body>::Error: Into<StdError> + Send,
+        T::ResponseBody: Body<Data = Bytes> + std::marker::Send + 'static,
+        <T::ResponseBody as Body>::Error: Into<StdError> + std::marker::Send,
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
@@ -5916,7 +5723,7 @@ pub mod content_service_client {
             >,
             <T as tonic::codegen::Service<
                 http::Request<tonic::body::BoxBody>,
-            >>::Error: Into<StdError> + Send + Sync,
+            >>::Error: Into<StdError> + std::marker::Send + std::marker::Sync,
         {
             ContentServiceClient::new(InterceptedService::new(inner, interceptor))
         }
@@ -5960,8 +5767,7 @@ pub mod content_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -5988,8 +5794,7 @@ pub mod content_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -6016,8 +5821,7 @@ pub mod content_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -6044,8 +5848,7 @@ pub mod content_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -6082,8 +5885,7 @@ pub mod content_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -6119,8 +5921,7 @@ pub mod content_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -6163,8 +5964,7 @@ pub mod content_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -6194,8 +5994,7 @@ pub mod content_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -6216,7 +6015,6 @@ pub mod content_service_client {
     }
 }
 /// DataScan scheduling and trigger settings.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Trigger {
     /// DataScan scheduling and trigger settings.
@@ -6228,11 +6026,9 @@ pub struct Trigger {
 /// Nested message and enum types in `Trigger`.
 pub mod trigger {
     /// The scan runs once via `RunDataScan` API.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct OnDemand {}
     /// The scan is scheduled to run periodically.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Schedule {
         /// Required. [Cron](<https://en.wikipedia.org/wiki/Cron>) schedule for running
@@ -6253,7 +6049,6 @@ pub mod trigger {
     /// DataScan scheduling and trigger settings.
     ///
     /// If not specified, the default is `onDemand`.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Mode {
         /// The scan runs once via `RunDataScan` API.
@@ -6265,7 +6060,6 @@ pub mod trigger {
     }
 }
 /// The data source for DataScan.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DataSource {
     /// The source is required and immutable. Once it is set, it cannot be change
@@ -6277,7 +6071,6 @@ pub struct DataSource {
 pub mod data_source {
     /// The source is required and immutable. Once it is set, it cannot be change
     /// to others.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Source {
         /// Immutable. The Dataplex entity that represents the data source (e.g.
@@ -6294,7 +6087,6 @@ pub mod data_source {
     }
 }
 /// The data scanned during processing (e.g. in incremental DataScan)
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ScannedData {
     /// The range of scanned data
@@ -6304,7 +6096,6 @@ pub struct ScannedData {
 /// Nested message and enum types in `ScannedData`.
 pub mod scanned_data {
     /// A data range denoted by a pair of start/end values of a field.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct IncrementalField {
         /// The field that contains values which monotonically increases over time
@@ -6319,7 +6110,6 @@ pub mod scanned_data {
         pub end: ::prost::alloc::string::String,
     }
     /// The range of scanned data
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum DataRange {
         /// The range denoted by values of an incremental field
@@ -6328,7 +6118,6 @@ pub mod scanned_data {
     }
 }
 /// DataProfileScan related setting.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DataProfileSpec {
     /// Optional. The percentage of the records to be selected from the dataset for
@@ -6365,7 +6154,6 @@ pub struct DataProfileSpec {
 /// Nested message and enum types in `DataProfileSpec`.
 pub mod data_profile_spec {
     /// The configuration of post scan actions of DataProfileScan job.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct PostScanActions {
         /// Optional. If set, results will be exported to the provided BigQuery
@@ -6376,7 +6164,6 @@ pub mod data_profile_spec {
     /// Nested message and enum types in `PostScanActions`.
     pub mod post_scan_actions {
         /// The configuration of BigQuery export post scan action.
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct BigQueryExport {
             /// Optional. The BigQuery table to export DataProfileScan results to.
@@ -6387,7 +6174,6 @@ pub mod data_profile_spec {
         }
     }
     /// The specification for fields to include or exclude in data profile scan.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct SelectedFields {
         /// Optional. Expected input is a list of fully qualified names of fields as
@@ -6403,7 +6189,6 @@ pub mod data_profile_spec {
 }
 /// DataProfileResult defines the output of DataProfileScan. Each field of the
 /// table will have field type specific profile result.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DataProfileResult {
     /// The count of rows scanned.
@@ -6424,7 +6209,6 @@ pub struct DataProfileResult {
 /// Nested message and enum types in `DataProfileResult`.
 pub mod data_profile_result {
     /// Contains name, type, mode and field type specific profile information.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Profile {
         /// List of fields with structural and profile information for each field.
@@ -6434,7 +6218,6 @@ pub mod data_profile_result {
     /// Nested message and enum types in `Profile`.
     pub mod profile {
         /// A field within a table.
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct Field {
             /// The name of the field.
@@ -6461,7 +6244,6 @@ pub mod data_profile_result {
         /// Nested message and enum types in `Field`.
         pub mod field {
             /// The profile information for each field type.
-            #[allow(clippy::derive_partial_eq_without_eq)]
             #[derive(Clone, PartialEq, ::prost::Message)]
             pub struct ProfileInfo {
                 /// Ratio of rows with null value against total scanned rows.
@@ -6487,8 +6269,7 @@ pub mod data_profile_result {
             /// Nested message and enum types in `ProfileInfo`.
             pub mod profile_info {
                 /// The profile information for a string type field.
-                #[allow(clippy::derive_partial_eq_without_eq)]
-                #[derive(Clone, PartialEq, ::prost::Message)]
+                #[derive(Clone, Copy, PartialEq, ::prost::Message)]
                 pub struct StringFieldInfo {
                     /// Minimum length of non-null values in the scanned data.
                     #[prost(int64, tag = "1")]
@@ -6501,7 +6282,6 @@ pub mod data_profile_result {
                     pub average_length: f64,
                 }
                 /// The profile information for an integer type field.
-                #[allow(clippy::derive_partial_eq_without_eq)]
                 #[derive(Clone, PartialEq, ::prost::Message)]
                 pub struct IntegerFieldInfo {
                     /// Average of non-null values in the scanned data. NaN, if the field
@@ -6536,7 +6316,6 @@ pub mod data_profile_result {
                     pub max: i64,
                 }
                 /// The profile information for a double type field.
-                #[allow(clippy::derive_partial_eq_without_eq)]
                 #[derive(Clone, PartialEq, ::prost::Message)]
                 pub struct DoubleFieldInfo {
                     /// Average of non-null values in the scanned data. NaN, if the field
@@ -6570,7 +6349,6 @@ pub mod data_profile_result {
                     pub max: f64,
                 }
                 /// Top N non-null values in the scanned data.
-                #[allow(clippy::derive_partial_eq_without_eq)]
                 #[derive(Clone, PartialEq, ::prost::Message)]
                 pub struct TopNValue {
                     /// String value of a top N non-null value.
@@ -6586,7 +6364,6 @@ pub mod data_profile_result {
                 }
                 /// Structural and profile information for specific field type. Not
                 /// available, if mode is REPEATABLE.
-                #[allow(clippy::derive_partial_eq_without_eq)]
                 #[derive(Clone, PartialEq, ::prost::Oneof)]
                 pub enum FieldInfo {
                     /// String type field information.
@@ -6603,7 +6380,6 @@ pub mod data_profile_result {
         }
     }
     /// The result of post scan actions of DataProfileScan job.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct PostScanActionsResult {
         /// Output only. The result of BigQuery export post scan action.
@@ -6615,7 +6391,6 @@ pub mod data_profile_result {
     /// Nested message and enum types in `PostScanActionsResult`.
     pub mod post_scan_actions_result {
         /// The result of BigQuery export post scan action.
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct BigQueryExportResult {
             /// Output only. Execution state for the BigQuery exporting.
@@ -6658,10 +6433,10 @@ pub mod data_profile_result {
                 /// (if the ProtoBuf definition does not change) and safe for programmatic use.
                 pub fn as_str_name(&self) -> &'static str {
                     match self {
-                        State::Unspecified => "STATE_UNSPECIFIED",
-                        State::Succeeded => "SUCCEEDED",
-                        State::Failed => "FAILED",
-                        State::Skipped => "SKIPPED",
+                        Self::Unspecified => "STATE_UNSPECIFIED",
+                        Self::Succeeded => "SUCCEEDED",
+                        Self::Failed => "FAILED",
+                        Self::Skipped => "SKIPPED",
                     }
                 }
                 /// Creates an enum from field names used in the ProtoBuf definition.
@@ -6679,7 +6454,6 @@ pub mod data_profile_result {
     }
 }
 /// DataQualityScan related setting.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DataQualitySpec {
     /// Required. The list of rules to evaluate against a data source. At least one
@@ -6708,7 +6482,6 @@ pub struct DataQualitySpec {
 /// Nested message and enum types in `DataQualitySpec`.
 pub mod data_quality_spec {
     /// The configuration of post scan actions of DataQualityScan.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct PostScanActions {
         /// Optional. If set, results will be exported to the provided BigQuery
@@ -6725,7 +6498,6 @@ pub mod data_quality_spec {
     /// Nested message and enum types in `PostScanActions`.
     pub mod post_scan_actions {
         /// The configuration of BigQuery export post scan action.
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct BigQueryExport {
             /// Optional. The BigQuery table to export DataQualityScan results to.
@@ -6736,7 +6508,6 @@ pub mod data_quality_spec {
         }
         /// The individuals or groups who are designated to receive notifications
         /// upon triggers.
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct Recipients {
             /// Optional. The email recipients who will receive the DataQualityScan
@@ -6746,8 +6517,7 @@ pub mod data_quality_spec {
         }
         /// This trigger is triggered when the DQ score in the job result is less
         /// than a specified input score.
-        #[allow(clippy::derive_partial_eq_without_eq)]
-        #[derive(Clone, PartialEq, ::prost::Message)]
+        #[derive(Clone, Copy, PartialEq, ::prost::Message)]
         pub struct ScoreThresholdTrigger {
             /// Optional. The score range is in \[0,100\].
             #[prost(float, tag = "2")]
@@ -6755,16 +6525,13 @@ pub mod data_quality_spec {
         }
         /// This trigger is triggered when the scan job itself fails, regardless of
         /// the result.
-        #[allow(clippy::derive_partial_eq_without_eq)]
-        #[derive(Clone, PartialEq, ::prost::Message)]
+        #[derive(Clone, Copy, PartialEq, ::prost::Message)]
         pub struct JobFailureTrigger {}
         /// This trigger is triggered whenever a scan job run ends, regardless
         /// of the result.
-        #[allow(clippy::derive_partial_eq_without_eq)]
-        #[derive(Clone, PartialEq, ::prost::Message)]
+        #[derive(Clone, Copy, PartialEq, ::prost::Message)]
         pub struct JobEndTrigger {}
         /// The configuration of notification report post scan action.
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct NotificationReport {
             /// Required. The recipients who will receive the notification report.
@@ -6783,7 +6550,6 @@ pub mod data_quality_spec {
     }
 }
 /// The output of a DataQualityScan.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DataQualityResult {
     /// Overall data quality result -- `true` if all rules passed.
@@ -6824,7 +6590,6 @@ pub struct DataQualityResult {
 /// Nested message and enum types in `DataQualityResult`.
 pub mod data_quality_result {
     /// The result of post scan actions of DataQualityScan job.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct PostScanActionsResult {
         /// Output only. The result of BigQuery export post scan action.
@@ -6836,7 +6601,6 @@ pub mod data_quality_result {
     /// Nested message and enum types in `PostScanActionsResult`.
     pub mod post_scan_actions_result {
         /// The result of BigQuery export post scan action.
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct BigQueryExportResult {
             /// Output only. Execution state for the BigQuery exporting.
@@ -6879,10 +6643,10 @@ pub mod data_quality_result {
                 /// (if the ProtoBuf definition does not change) and safe for programmatic use.
                 pub fn as_str_name(&self) -> &'static str {
                     match self {
-                        State::Unspecified => "STATE_UNSPECIFIED",
-                        State::Succeeded => "SUCCEEDED",
-                        State::Failed => "FAILED",
-                        State::Skipped => "SKIPPED",
+                        Self::Unspecified => "STATE_UNSPECIFIED",
+                        Self::Succeeded => "SUCCEEDED",
+                        Self::Failed => "FAILED",
+                        Self::Skipped => "SKIPPED",
                     }
                 }
                 /// Creates an enum from field names used in the ProtoBuf definition.
@@ -6900,7 +6664,6 @@ pub mod data_quality_result {
     }
 }
 /// DataQualityRuleResult provides a more detailed, per-rule view of the results.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DataQualityRuleResult {
     /// The rule specified in the DataQualitySpec, as is.
@@ -6948,7 +6711,6 @@ pub struct DataQualityRuleResult {
 }
 /// DataQualityDimensionResult provides a more detailed, per-dimension view of
 /// the results.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DataQualityDimensionResult {
     /// Output only. The dimension config specified in the DataQualitySpec, as is.
@@ -6967,7 +6729,6 @@ pub struct DataQualityDimensionResult {
 }
 /// A dimension captures data quality intent about a defined subset of the rules
 /// specified.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DataQualityDimension {
     /// The dimension name a rule belongs to. Supported dimensions are
@@ -6977,7 +6738,6 @@ pub struct DataQualityDimension {
     pub name: ::prost::alloc::string::String,
 }
 /// A rule captures data quality intent about a data source.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DataQualityRule {
     /// Optional. The unnested column which this rule is evaluated against.
@@ -7032,7 +6792,6 @@ pub struct DataQualityRule {
 /// Nested message and enum types in `DataQualityRule`.
 pub mod data_quality_rule {
     /// Evaluates whether each column value lies between a specified range.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct RangeExpectation {
         /// Optional. The minimum column value allowed for a row to pass this
@@ -7059,11 +6818,9 @@ pub mod data_quality_rule {
         pub strict_max_enabled: bool,
     }
     /// Evaluates whether each column value is null.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct NonNullExpectation {}
     /// Evaluates whether each column value is contained by a specified set.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct SetExpectation {
         /// Optional. Expected values for the column value.
@@ -7071,7 +6828,6 @@ pub mod data_quality_rule {
         pub values: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     }
     /// Evaluates whether each column value matches a specified regex.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct RegexExpectation {
         /// Optional. A regular expression the column value is expected to match.
@@ -7079,12 +6835,10 @@ pub mod data_quality_rule {
         pub regex: ::prost::alloc::string::String,
     }
     /// Evaluates whether the column has duplicates.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct UniquenessExpectation {}
     /// Evaluates whether the column aggregate statistic lies between a specified
     /// range.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct StatisticRangeExpectation {
         /// Optional. The aggregate metric to evaluate.
@@ -7147,10 +6901,10 @@ pub mod data_quality_rule {
             /// (if the ProtoBuf definition does not change) and safe for programmatic use.
             pub fn as_str_name(&self) -> &'static str {
                 match self {
-                    ColumnStatistic::StatisticUndefined => "STATISTIC_UNDEFINED",
-                    ColumnStatistic::Mean => "MEAN",
-                    ColumnStatistic::Min => "MIN",
-                    ColumnStatistic::Max => "MAX",
+                    Self::StatisticUndefined => "STATISTIC_UNDEFINED",
+                    Self::Mean => "MEAN",
+                    Self::Min => "MIN",
+                    Self::Max => "MAX",
                 }
             }
             /// Creates an enum from field names used in the ProtoBuf definition.
@@ -7171,7 +6925,6 @@ pub mod data_quality_rule {
     /// produce a boolean value per row as the result.
     ///
     /// Example: col1 >= 0 AND col2 < 10
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct RowConditionExpectation {
         /// Optional. The SQL expression.
@@ -7184,7 +6937,6 @@ pub mod data_quality_rule {
     /// produce a scalar boolean result.
     ///
     /// Example: MIN(col1) >= 0
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct TableConditionExpectation {
         /// Optional. The SQL expression.
@@ -7204,7 +6956,6 @@ pub mod data_quality_rule {
     /// parameter](<https://cloud.google.com/dataplex/docs/auto-data-quality-overview#data-reference-parameter>).
     ///
     /// Example: `SELECT * FROM ${data()} WHERE price < 0`
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct SqlAssertion {
         /// Optional. The SQL statement.
@@ -7212,7 +6963,6 @@ pub mod data_quality_rule {
         pub sql_statement: ::prost::alloc::string::String,
     }
     /// The rule-specific configuration.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum RuleType {
         /// Row-level rule which evaluates whether each column value lies between a
@@ -7253,7 +7003,6 @@ pub mod data_quality_rule {
 }
 /// DataQualityColumnResult provides a more detailed, per-column view of
 /// the results.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DataQualityColumnResult {
     /// Output only. The column specified in the DataQualityRule.
@@ -7270,7 +7019,6 @@ pub struct DataQualityColumnResult {
 /// ResourceAccessSpec holds the access control configuration to be enforced
 /// on the resources, for example, Cloud Storage bucket, BigQuery dataset,
 /// BigQuery table.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ResourceAccessSpec {
     /// Optional. The format of strings follows the pattern followed by IAM in the
@@ -7290,7 +7038,6 @@ pub struct ResourceAccessSpec {
 /// associated with data, the data is only accessible to
 /// principals explicitly granted access through the DataAccessSpec. Principals
 /// with access to the containing resource are not implicitly granted access.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DataAccessSpec {
     /// Optional. The format of strings follows the pattern followed by IAM in the
@@ -7303,7 +7050,6 @@ pub struct DataAccessSpec {
 /// DataTaxonomy represents a set of hierarchical DataAttributes resources,
 /// grouped with a common theme Eg: 'SensitiveDataTaxonomy' can have attributes
 /// to manage PII data. It is defined at project level.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DataTaxonomy {
     /// Output only. The relative resource name of the DataTaxonomy, of the form:
@@ -7356,7 +7102,6 @@ pub struct DataTaxonomy {
 ///    - DataAccessSpec :
 ///                  - readers :bar@foo.com
 /// ```
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DataAttribute {
     /// Output only. The relative resource name of the dataAttribute, of the form:
@@ -7411,7 +7156,6 @@ pub struct DataAttribute {
 }
 /// DataAttributeBinding represents binding of attributes to resources. Eg: Bind
 /// 'CustomerInfo' entity with 'PII' attribute.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DataAttributeBinding {
     /// Output only. The relative resource name of the Data Attribute Binding, of
@@ -7470,7 +7214,6 @@ pub mod data_attribute_binding {
     /// Represents a subresource of the given resource, and associated bindings
     /// with it. Currently supported subresources are column and partition schema
     /// fields within a table.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Path {
         /// Required. The name identifier of the path.
@@ -7485,7 +7228,6 @@ pub mod data_attribute_binding {
     }
     /// The reference to the resource that is associated to attributes, or
     /// the query to match resources and associate attributes.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum ResourceReference {
         /// Optional. Immutable. The resource name of the resource that is associated
@@ -7498,7 +7240,6 @@ pub mod data_attribute_binding {
     }
 }
 /// Create DataTaxonomy request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateDataTaxonomyRequest {
     /// Required. The resource name of the data taxonomy location, of the form:
@@ -7523,7 +7264,6 @@ pub struct CreateDataTaxonomyRequest {
     pub validate_only: bool,
 }
 /// Update DataTaxonomy request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateDataTaxonomyRequest {
     /// Required. Mask of fields to update.
@@ -7538,7 +7278,6 @@ pub struct UpdateDataTaxonomyRequest {
     pub validate_only: bool,
 }
 /// Get DataTaxonomy request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetDataTaxonomyRequest {
     /// Required. The resource name of the DataTaxonomy:
@@ -7547,7 +7286,6 @@ pub struct GetDataTaxonomyRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// List DataTaxonomies request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListDataTaxonomiesRequest {
     /// Required. The resource name of the DataTaxonomy location, of the form:
@@ -7575,7 +7313,6 @@ pub struct ListDataTaxonomiesRequest {
     pub order_by: ::prost::alloc::string::String,
 }
 /// List DataTaxonomies response.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListDataTaxonomiesResponse {
     /// DataTaxonomies under the given parent location.
@@ -7590,7 +7327,6 @@ pub struct ListDataTaxonomiesResponse {
     pub unreachable_locations: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Delete DataTaxonomy request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteDataTaxonomyRequest {
     /// Required. The resource name of the DataTaxonomy:
@@ -7603,7 +7339,6 @@ pub struct DeleteDataTaxonomyRequest {
     pub etag: ::prost::alloc::string::String,
 }
 /// Create DataAttribute request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateDataAttributeRequest {
     /// Required. The resource name of the parent data taxonomy
@@ -7627,7 +7362,6 @@ pub struct CreateDataAttributeRequest {
     pub validate_only: bool,
 }
 /// Update DataAttribute request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateDataAttributeRequest {
     /// Required. Mask of fields to update.
@@ -7642,7 +7376,6 @@ pub struct UpdateDataAttributeRequest {
     pub validate_only: bool,
 }
 /// Get DataAttribute request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetDataAttributeRequest {
     /// Required. The resource name of the dataAttribute:
@@ -7651,7 +7384,6 @@ pub struct GetDataAttributeRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// List DataAttributes request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListDataAttributesRequest {
     /// Required. The resource name of the DataTaxonomy:
@@ -7678,7 +7410,6 @@ pub struct ListDataAttributesRequest {
     pub order_by: ::prost::alloc::string::String,
 }
 /// List DataAttributes response.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListDataAttributesResponse {
     /// DataAttributes under the given parent DataTaxonomy.
@@ -7693,7 +7424,6 @@ pub struct ListDataAttributesResponse {
     pub unreachable_locations: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Delete DataAttribute request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteDataAttributeRequest {
     /// Required. The resource name of the DataAttribute:
@@ -7706,7 +7436,6 @@ pub struct DeleteDataAttributeRequest {
     pub etag: ::prost::alloc::string::String,
 }
 /// Create DataAttributeBinding request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateDataAttributeBindingRequest {
     /// Required. The resource name of the parent data taxonomy
@@ -7730,7 +7459,6 @@ pub struct CreateDataAttributeBindingRequest {
     pub validate_only: bool,
 }
 /// Update DataAttributeBinding request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateDataAttributeBindingRequest {
     /// Required. Mask of fields to update.
@@ -7745,7 +7473,6 @@ pub struct UpdateDataAttributeBindingRequest {
     pub validate_only: bool,
 }
 /// Get DataAttributeBinding request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetDataAttributeBindingRequest {
     /// Required. The resource name of the DataAttributeBinding:
@@ -7754,7 +7481,6 @@ pub struct GetDataAttributeBindingRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// List DataAttributeBindings request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListDataAttributeBindingsRequest {
     /// Required. The resource name of the Location:
@@ -7785,7 +7511,6 @@ pub struct ListDataAttributeBindingsRequest {
     pub order_by: ::prost::alloc::string::String,
 }
 /// List DataAttributeBindings response.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListDataAttributeBindingsResponse {
     /// DataAttributeBindings under the given parent Location.
@@ -7800,7 +7525,6 @@ pub struct ListDataAttributeBindingsResponse {
     pub unreachable_locations: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Delete DataAttributeBinding request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteDataAttributeBindingRequest {
     /// Required. The resource name of the DataAttributeBinding:
@@ -7816,7 +7540,13 @@ pub struct DeleteDataAttributeBindingRequest {
 }
 /// Generated client implementations.
 pub mod data_taxonomy_service_client {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     use tonic::codegen::http::Uri;
     /// DataTaxonomyService enables attribute-based governance. The resources
@@ -7829,8 +7559,8 @@ pub mod data_taxonomy_service_client {
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
-        T::ResponseBody: Body<Data = Bytes> + Send + 'static,
-        <T::ResponseBody as Body>::Error: Into<StdError> + Send,
+        T::ResponseBody: Body<Data = Bytes> + std::marker::Send + 'static,
+        <T::ResponseBody as Body>::Error: Into<StdError> + std::marker::Send,
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
@@ -7855,7 +7585,7 @@ pub mod data_taxonomy_service_client {
             >,
             <T as tonic::codegen::Service<
                 http::Request<tonic::body::BoxBody>,
-            >>::Error: Into<StdError> + Send + Sync,
+            >>::Error: Into<StdError> + std::marker::Send + std::marker::Sync,
         {
             DataTaxonomyServiceClient::new(InterceptedService::new(inner, interceptor))
         }
@@ -7902,8 +7632,7 @@ pub mod data_taxonomy_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -7933,8 +7662,7 @@ pub mod data_taxonomy_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -7965,8 +7693,7 @@ pub mod data_taxonomy_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -7996,8 +7723,7 @@ pub mod data_taxonomy_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -8024,8 +7750,7 @@ pub mod data_taxonomy_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -8055,8 +7780,7 @@ pub mod data_taxonomy_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -8086,8 +7810,7 @@ pub mod data_taxonomy_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -8119,8 +7842,7 @@ pub mod data_taxonomy_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -8150,8 +7872,7 @@ pub mod data_taxonomy_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -8181,8 +7902,7 @@ pub mod data_taxonomy_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -8212,8 +7932,7 @@ pub mod data_taxonomy_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -8243,8 +7962,7 @@ pub mod data_taxonomy_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -8274,8 +7992,7 @@ pub mod data_taxonomy_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -8305,8 +8022,7 @@ pub mod data_taxonomy_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -8333,8 +8049,7 @@ pub mod data_taxonomy_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -8355,7 +8070,6 @@ pub mod data_taxonomy_service_client {
     }
 }
 /// Create dataScan request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateDataScanRequest {
     /// Required. The resource name of the parent location:
@@ -8382,7 +8096,6 @@ pub struct CreateDataScanRequest {
     pub validate_only: bool,
 }
 /// Update dataScan request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateDataScanRequest {
     /// Required. DataScan resource to be updated.
@@ -8399,7 +8112,6 @@ pub struct UpdateDataScanRequest {
     pub validate_only: bool,
 }
 /// Delete dataScan request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteDataScanRequest {
     /// Required. The resource name of the dataScan:
@@ -8410,7 +8122,6 @@ pub struct DeleteDataScanRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Get dataScan request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetDataScanRequest {
     /// Required. The resource name of the dataScan:
@@ -8453,9 +8164,9 @@ pub mod get_data_scan_request {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                DataScanView::Unspecified => "DATA_SCAN_VIEW_UNSPECIFIED",
-                DataScanView::Basic => "BASIC",
-                DataScanView::Full => "FULL",
+                Self::Unspecified => "DATA_SCAN_VIEW_UNSPECIFIED",
+                Self::Basic => "BASIC",
+                Self::Full => "FULL",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -8470,7 +8181,6 @@ pub mod get_data_scan_request {
     }
 }
 /// List dataScans request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListDataScansRequest {
     /// Required. The resource name of the parent location:
@@ -8499,7 +8209,6 @@ pub struct ListDataScansRequest {
     pub order_by: ::prost::alloc::string::String,
 }
 /// List dataScans response.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListDataScansResponse {
     /// DataScans (`BASIC` view only) under the given parent location.
@@ -8514,7 +8223,6 @@ pub struct ListDataScansResponse {
     pub unreachable: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Run DataScan Request
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RunDataScanRequest {
     /// Required. The resource name of the DataScan:
@@ -8527,7 +8235,6 @@ pub struct RunDataScanRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Run DataScan Response.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RunDataScanResponse {
     /// DataScanJob created by RunDataScan request.
@@ -8535,7 +8242,6 @@ pub struct RunDataScanResponse {
     pub job: ::core::option::Option<DataScanJob>,
 }
 /// Get DataScanJob request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetDataScanJobRequest {
     /// Required. The resource name of the DataScanJob:
@@ -8578,9 +8284,9 @@ pub mod get_data_scan_job_request {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                DataScanJobView::Unspecified => "DATA_SCAN_JOB_VIEW_UNSPECIFIED",
-                DataScanJobView::Basic => "BASIC",
-                DataScanJobView::Full => "FULL",
+                Self::Unspecified => "DATA_SCAN_JOB_VIEW_UNSPECIFIED",
+                Self::Basic => "BASIC",
+                Self::Full => "FULL",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -8595,7 +8301,6 @@ pub mod get_data_scan_job_request {
     }
 }
 /// List DataScanJobs request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListDataScanJobsRequest {
     /// Required. The resource name of the parent environment:
@@ -8637,7 +8342,6 @@ pub struct ListDataScanJobsRequest {
     pub filter: ::prost::alloc::string::String,
 }
 /// List DataScanJobs response.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListDataScanJobsResponse {
     /// DataScanJobs (`BASIC` view only) under a given dataScan.
@@ -8649,7 +8353,6 @@ pub struct ListDataScanJobsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request details for generating data quality rule recommendations.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GenerateDataQualityRulesRequest {
     /// Required. The name must be one of the following:
@@ -8662,7 +8365,6 @@ pub struct GenerateDataQualityRulesRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Response details for data quality rule recommendations.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GenerateDataQualityRulesResponse {
     /// The data quality rules that Dataplex generates based on the results
@@ -8680,7 +8382,6 @@ pub struct GenerateDataQualityRulesResponse {
 /// * Data Profile: analyzes the data in table(s) and generates insights about
 ///    the structure, content and relationships (such as null percent,
 ///    cardinality, min/max/mean, etc).
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DataScan {
     /// Output only. The relative resource name of the scan, of the form:
@@ -8744,7 +8445,6 @@ pub struct DataScan {
 /// Nested message and enum types in `DataScan`.
 pub mod data_scan {
     /// DataScan execution settings.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ExecutionSpec {
         /// Optional. Spec related to how often and when a scan should be triggered.
@@ -8768,7 +8468,6 @@ pub mod data_scan {
         /// When an option is selected for incremental scan, it cannot be unset or
         /// changed. If not specified, a data scan will run for all data in the
         /// table.
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Oneof)]
         pub enum Incremental {
             /// Immutable. The unnested field (of type *Date* or *Timestamp*) that
@@ -8780,8 +8479,7 @@ pub mod data_scan {
         }
     }
     /// Status of the data scan execution.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct ExecutionStatus {
         /// The time when the latest DataScanJob started.
         #[prost(message, optional, tag = "4")]
@@ -8793,7 +8491,6 @@ pub mod data_scan {
     /// Data Scan related setting.
     /// It is required and immutable which means once data_quality_spec is set, it
     /// cannot be changed to data_profile_spec.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Spec {
         /// DataQualityScan related setting.
@@ -8804,7 +8501,6 @@ pub mod data_scan {
         DataProfileSpec(super::DataProfileSpec),
     }
     /// The result of the data scan.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Result {
         /// Output only. The result of the data quality scan.
@@ -8816,7 +8512,6 @@ pub mod data_scan {
     }
 }
 /// A DataScanJob represents an instance of DataScan execution.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DataScanJob {
     /// Output only. The relative resource name of the DataScanJob, of the form:
@@ -8888,13 +8583,13 @@ pub mod data_scan_job {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                State::Unspecified => "STATE_UNSPECIFIED",
-                State::Running => "RUNNING",
-                State::Canceling => "CANCELING",
-                State::Cancelled => "CANCELLED",
-                State::Succeeded => "SUCCEEDED",
-                State::Failed => "FAILED",
-                State::Pending => "PENDING",
+                Self::Unspecified => "STATE_UNSPECIFIED",
+                Self::Running => "RUNNING",
+                Self::Canceling => "CANCELING",
+                Self::Cancelled => "CANCELLED",
+                Self::Succeeded => "SUCCEEDED",
+                Self::Failed => "FAILED",
+                Self::Pending => "PENDING",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -8912,7 +8607,6 @@ pub mod data_scan_job {
         }
     }
     /// Data Scan related setting.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Spec {
         /// Output only. DataQualityScan related setting.
@@ -8923,7 +8617,6 @@ pub mod data_scan_job {
         DataProfileSpec(super::DataProfileSpec),
     }
     /// The result of the data scan.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Result {
         /// Output only. The result of the data quality scan.
@@ -8952,9 +8645,9 @@ impl DataScanType {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            DataScanType::Unspecified => "DATA_SCAN_TYPE_UNSPECIFIED",
-            DataScanType::DataQuality => "DATA_QUALITY",
-            DataScanType::DataProfile => "DATA_PROFILE",
+            Self::Unspecified => "DATA_SCAN_TYPE_UNSPECIFIED",
+            Self::DataQuality => "DATA_QUALITY",
+            Self::DataProfile => "DATA_PROFILE",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -8969,7 +8662,13 @@ impl DataScanType {
 }
 /// Generated client implementations.
 pub mod data_scan_service_client {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     use tonic::codegen::http::Uri;
     /// DataScanService manages DataScan resources which can be configured to run
@@ -8983,8 +8682,8 @@ pub mod data_scan_service_client {
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
-        T::ResponseBody: Body<Data = Bytes> + Send + 'static,
-        <T::ResponseBody as Body>::Error: Into<StdError> + Send,
+        T::ResponseBody: Body<Data = Bytes> + std::marker::Send + 'static,
+        <T::ResponseBody as Body>::Error: Into<StdError> + std::marker::Send,
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
@@ -9009,7 +8708,7 @@ pub mod data_scan_service_client {
             >,
             <T as tonic::codegen::Service<
                 http::Request<tonic::body::BoxBody>,
-            >>::Error: Into<StdError> + Send + Sync,
+            >>::Error: Into<StdError> + std::marker::Send + std::marker::Sync,
         {
             DataScanServiceClient::new(InterceptedService::new(inner, interceptor))
         }
@@ -9056,8 +8755,7 @@ pub mod data_scan_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -9087,8 +8785,7 @@ pub mod data_scan_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -9118,8 +8815,7 @@ pub mod data_scan_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -9146,8 +8842,7 @@ pub mod data_scan_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -9177,8 +8872,7 @@ pub mod data_scan_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -9208,8 +8902,7 @@ pub mod data_scan_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -9236,8 +8929,7 @@ pub mod data_scan_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -9267,8 +8959,7 @@ pub mod data_scan_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -9301,8 +8992,7 @@ pub mod data_scan_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -9323,7 +9013,6 @@ pub mod data_scan_service_client {
     }
 }
 /// The payload associated with Discovery data processing.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DiscoveryEvent {
     /// The log message.
@@ -9351,7 +9040,6 @@ pub struct DiscoveryEvent {
 /// Nested message and enum types in `DiscoveryEvent`.
 pub mod discovery_event {
     /// Details about configuration events.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ConfigDetails {
         /// A list of discovery configuration parameters in effect.
@@ -9365,7 +9053,6 @@ pub mod discovery_event {
         >,
     }
     /// Details about the entity.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct EntityDetails {
         /// The name of the entity resource.
@@ -9377,7 +9064,6 @@ pub mod discovery_event {
         pub r#type: i32,
     }
     /// Details about the partition.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct PartitionDetails {
         /// The name to the partition resource.
@@ -9399,7 +9085,6 @@ pub mod discovery_event {
         >,
     }
     /// Details about the action.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ActionDetails {
         /// The type of action.
@@ -9445,14 +9130,14 @@ pub mod discovery_event {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                EventType::Unspecified => "EVENT_TYPE_UNSPECIFIED",
-                EventType::Config => "CONFIG",
-                EventType::EntityCreated => "ENTITY_CREATED",
-                EventType::EntityUpdated => "ENTITY_UPDATED",
-                EventType::EntityDeleted => "ENTITY_DELETED",
-                EventType::PartitionCreated => "PARTITION_CREATED",
-                EventType::PartitionUpdated => "PARTITION_UPDATED",
-                EventType::PartitionDeleted => "PARTITION_DELETED",
+                Self::Unspecified => "EVENT_TYPE_UNSPECIFIED",
+                Self::Config => "CONFIG",
+                Self::EntityCreated => "ENTITY_CREATED",
+                Self::EntityUpdated => "ENTITY_UPDATED",
+                Self::EntityDeleted => "ENTITY_DELETED",
+                Self::PartitionCreated => "PARTITION_CREATED",
+                Self::PartitionUpdated => "PARTITION_UPDATED",
+                Self::PartitionDeleted => "PARTITION_DELETED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -9498,9 +9183,9 @@ pub mod discovery_event {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                EntityType::Unspecified => "ENTITY_TYPE_UNSPECIFIED",
-                EntityType::Table => "TABLE",
-                EntityType::Fileset => "FILESET",
+                Self::Unspecified => "ENTITY_TYPE_UNSPECIFIED",
+                Self::Table => "TABLE",
+                Self::Fileset => "FILESET",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -9514,7 +9199,6 @@ pub mod discovery_event {
         }
     }
     /// Additional details about the event.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Details {
         /// Details about discovery configuration in effect.
@@ -9533,7 +9217,6 @@ pub mod discovery_event {
 }
 /// The payload associated with Job logs that contains events describing jobs
 /// that have run within a Lake.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct JobEvent {
     /// The log message.
@@ -9597,9 +9280,9 @@ pub mod job_event {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Type::Unspecified => "TYPE_UNSPECIFIED",
-                Type::Spark => "SPARK",
-                Type::Notebook => "NOTEBOOK",
+                Self::Unspecified => "TYPE_UNSPECIFIED",
+                Self::Spark => "SPARK",
+                Self::Notebook => "NOTEBOOK",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -9644,11 +9327,11 @@ pub mod job_event {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                State::Unspecified => "STATE_UNSPECIFIED",
-                State::Succeeded => "SUCCEEDED",
-                State::Failed => "FAILED",
-                State::Cancelled => "CANCELLED",
-                State::Aborted => "ABORTED",
+                Self::Unspecified => "STATE_UNSPECIFIED",
+                Self::Succeeded => "SUCCEEDED",
+                Self::Failed => "FAILED",
+                Self::Cancelled => "CANCELLED",
+                Self::Aborted => "ABORTED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -9689,8 +9372,8 @@ pub mod job_event {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Service::Unspecified => "SERVICE_UNSPECIFIED",
-                Service::Dataproc => "DATAPROC",
+                Self::Unspecified => "SERVICE_UNSPECIFIED",
+                Self::Dataproc => "DATAPROC",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -9731,9 +9414,9 @@ pub mod job_event {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                ExecutionTrigger::Unspecified => "EXECUTION_TRIGGER_UNSPECIFIED",
-                ExecutionTrigger::TaskConfig => "TASK_CONFIG",
-                ExecutionTrigger::RunRequest => "RUN_REQUEST",
+                Self::Unspecified => "EXECUTION_TRIGGER_UNSPECIFIED",
+                Self::TaskConfig => "TASK_CONFIG",
+                Self::RunRequest => "RUN_REQUEST",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -9749,7 +9432,6 @@ pub mod job_event {
 }
 /// These messages contain information about sessions within an environment.
 /// The monitored resource is 'Environment'.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SessionEvent {
     /// The log message.
@@ -9782,7 +9464,6 @@ pub struct SessionEvent {
 /// Nested message and enum types in `SessionEvent`.
 pub mod session_event {
     /// Execution details of the query.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct QueryDetail {
         /// The unique Query id identifying the query.
@@ -9834,9 +9515,9 @@ pub mod session_event {
             /// (if the ProtoBuf definition does not change) and safe for programmatic use.
             pub fn as_str_name(&self) -> &'static str {
                 match self {
-                    Engine::Unspecified => "ENGINE_UNSPECIFIED",
-                    Engine::SparkSql => "SPARK_SQL",
-                    Engine::Bigquery => "BIGQUERY",
+                    Self::Unspecified => "ENGINE_UNSPECIFIED",
+                    Self::SparkSql => "SPARK_SQL",
+                    Self::Bigquery => "BIGQUERY",
                 }
             }
             /// Creates an enum from field names used in the ProtoBuf definition.
@@ -9883,11 +9564,11 @@ pub mod session_event {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                EventType::Unspecified => "EVENT_TYPE_UNSPECIFIED",
-                EventType::Start => "START",
-                EventType::Stop => "STOP",
-                EventType::Query => "QUERY",
-                EventType::Create => "CREATE",
+                Self::Unspecified => "EVENT_TYPE_UNSPECIFIED",
+                Self::Start => "START",
+                Self::Stop => "STOP",
+                Self::Query => "QUERY",
+                Self::Create => "CREATE",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -9903,7 +9584,6 @@ pub mod session_event {
         }
     }
     /// Additional information about the Query metadata.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Detail {
         /// The execution details of the query.
@@ -9912,7 +9592,6 @@ pub mod session_event {
     }
 }
 /// Payload associated with Governance related log events.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GovernanceEvent {
     /// The log message.
@@ -9929,7 +9608,6 @@ pub struct GovernanceEvent {
 /// Nested message and enum types in `GovernanceEvent`.
 pub mod governance_event {
     /// Information about Entity resource that the log event is associated with.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Entity {
         /// The Entity resource the log event is associated with.
@@ -9971,9 +9649,9 @@ pub mod governance_event {
             /// (if the ProtoBuf definition does not change) and safe for programmatic use.
             pub fn as_str_name(&self) -> &'static str {
                 match self {
-                    EntityType::Unspecified => "ENTITY_TYPE_UNSPECIFIED",
-                    EntityType::Table => "TABLE",
-                    EntityType::Fileset => "FILESET",
+                    Self::Unspecified => "ENTITY_TYPE_UNSPECIFIED",
+                    Self::Table => "TABLE",
+                    Self::Fileset => "FILESET",
                 }
             }
             /// Creates an enum from field names used in the ProtoBuf definition.
@@ -10043,29 +9721,29 @@ pub mod governance_event {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                EventType::Unspecified => "EVENT_TYPE_UNSPECIFIED",
-                EventType::ResourceIamPolicyUpdate => "RESOURCE_IAM_POLICY_UPDATE",
-                EventType::BigqueryTableCreate => "BIGQUERY_TABLE_CREATE",
-                EventType::BigqueryTableUpdate => "BIGQUERY_TABLE_UPDATE",
-                EventType::BigqueryTableDelete => "BIGQUERY_TABLE_DELETE",
-                EventType::BigqueryConnectionCreate => "BIGQUERY_CONNECTION_CREATE",
-                EventType::BigqueryConnectionUpdate => "BIGQUERY_CONNECTION_UPDATE",
-                EventType::BigqueryConnectionDelete => "BIGQUERY_CONNECTION_DELETE",
-                EventType::BigqueryTaxonomyCreate => "BIGQUERY_TAXONOMY_CREATE",
-                EventType::BigqueryPolicyTagCreate => "BIGQUERY_POLICY_TAG_CREATE",
-                EventType::BigqueryPolicyTagDelete => "BIGQUERY_POLICY_TAG_DELETE",
-                EventType::BigqueryPolicyTagSetIamPolicy => {
+                Self::Unspecified => "EVENT_TYPE_UNSPECIFIED",
+                Self::ResourceIamPolicyUpdate => "RESOURCE_IAM_POLICY_UPDATE",
+                Self::BigqueryTableCreate => "BIGQUERY_TABLE_CREATE",
+                Self::BigqueryTableUpdate => "BIGQUERY_TABLE_UPDATE",
+                Self::BigqueryTableDelete => "BIGQUERY_TABLE_DELETE",
+                Self::BigqueryConnectionCreate => "BIGQUERY_CONNECTION_CREATE",
+                Self::BigqueryConnectionUpdate => "BIGQUERY_CONNECTION_UPDATE",
+                Self::BigqueryConnectionDelete => "BIGQUERY_CONNECTION_DELETE",
+                Self::BigqueryTaxonomyCreate => "BIGQUERY_TAXONOMY_CREATE",
+                Self::BigqueryPolicyTagCreate => "BIGQUERY_POLICY_TAG_CREATE",
+                Self::BigqueryPolicyTagDelete => "BIGQUERY_POLICY_TAG_DELETE",
+                Self::BigqueryPolicyTagSetIamPolicy => {
                     "BIGQUERY_POLICY_TAG_SET_IAM_POLICY"
                 }
-                EventType::AccessPolicyUpdate => "ACCESS_POLICY_UPDATE",
-                EventType::GovernanceRuleMatchedResources => {
+                Self::AccessPolicyUpdate => "ACCESS_POLICY_UPDATE",
+                Self::GovernanceRuleMatchedResources => {
                     "GOVERNANCE_RULE_MATCHED_RESOURCES"
                 }
-                EventType::GovernanceRuleSearchLimitExceeds => {
+                Self::GovernanceRuleSearchLimitExceeds => {
                     "GOVERNANCE_RULE_SEARCH_LIMIT_EXCEEDS"
                 }
-                EventType::GovernanceRuleErrors => "GOVERNANCE_RULE_ERRORS",
-                EventType::GovernanceRuleProcessing => "GOVERNANCE_RULE_PROCESSING",
+                Self::GovernanceRuleErrors => "GOVERNANCE_RULE_ERRORS",
+                Self::GovernanceRuleProcessing => "GOVERNANCE_RULE_PROCESSING",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -10102,7 +9780,6 @@ pub mod governance_event {
 /// These messages contain information about the execution of a datascan.
 /// The monitored resource is 'DataScan'
 /// Next ID: 13
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DataScanEvent {
     /// The data source of the data scan
@@ -10153,15 +9830,13 @@ pub struct DataScanEvent {
 /// Nested message and enum types in `DataScanEvent`.
 pub mod data_scan_event {
     /// Data profile result for data scan job.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct DataProfileResult {
         /// The count of rows processed in the data scan job.
         #[prost(int64, tag = "1")]
         pub row_count: i64,
     }
     /// Data quality result for data scan job.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct DataQualityResult {
         /// The count of rows processed in the data scan job.
@@ -10209,8 +9884,7 @@ pub mod data_scan_event {
         >,
     }
     /// Applied configs for data profile type data scan job.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct DataProfileAppliedConfigs {
         /// The percentage of the records selected from the dataset for DataScan.
         ///
@@ -10227,8 +9901,7 @@ pub mod data_scan_event {
         pub column_filter_applied: bool,
     }
     /// Applied configs for data quality type data scan job.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct DataQualityAppliedConfigs {
         /// The percentage of the records selected from the dataset for DataScan.
         ///
@@ -10241,7 +9914,6 @@ pub mod data_scan_event {
         pub row_filter_applied: bool,
     }
     /// Post scan actions result for data scan job.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct PostScanActionsResult {
         /// The result of BigQuery export post scan action.
@@ -10253,7 +9925,6 @@ pub mod data_scan_event {
     /// Nested message and enum types in `PostScanActionsResult`.
     pub mod post_scan_actions_result {
         /// The result of BigQuery export post scan action.
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct BigQueryExportResult {
             /// Execution state for the BigQuery exporting.
@@ -10296,10 +9967,10 @@ pub mod data_scan_event {
                 /// (if the ProtoBuf definition does not change) and safe for programmatic use.
                 pub fn as_str_name(&self) -> &'static str {
                     match self {
-                        State::Unspecified => "STATE_UNSPECIFIED",
-                        State::Succeeded => "SUCCEEDED",
-                        State::Failed => "FAILED",
-                        State::Skipped => "SKIPPED",
+                        Self::Unspecified => "STATE_UNSPECIFIED",
+                        Self::Succeeded => "SUCCEEDED",
+                        Self::Failed => "FAILED",
+                        Self::Skipped => "SKIPPED",
                     }
                 }
                 /// Creates an enum from field names used in the ProtoBuf definition.
@@ -10343,9 +10014,9 @@ pub mod data_scan_event {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                ScanType::Unspecified => "SCAN_TYPE_UNSPECIFIED",
-                ScanType::DataProfile => "DATA_PROFILE",
-                ScanType::DataQuality => "DATA_QUALITY",
+                Self::Unspecified => "SCAN_TYPE_UNSPECIFIED",
+                Self::DataProfile => "DATA_PROFILE",
+                Self::DataQuality => "DATA_QUALITY",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -10392,12 +10063,12 @@ pub mod data_scan_event {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                State::Unspecified => "STATE_UNSPECIFIED",
-                State::Started => "STARTED",
-                State::Succeeded => "SUCCEEDED",
-                State::Failed => "FAILED",
-                State::Cancelled => "CANCELLED",
-                State::Created => "CREATED",
+                Self::Unspecified => "STATE_UNSPECIFIED",
+                Self::Started => "STARTED",
+                Self::Succeeded => "SUCCEEDED",
+                Self::Failed => "FAILED",
+                Self::Cancelled => "CANCELLED",
+                Self::Created => "CREATED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -10441,9 +10112,9 @@ pub mod data_scan_event {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Trigger::Unspecified => "TRIGGER_UNSPECIFIED",
-                Trigger::OnDemand => "ON_DEMAND",
-                Trigger::Schedule => "SCHEDULE",
+                Self::Unspecified => "TRIGGER_UNSPECIFIED",
+                Self::OnDemand => "ON_DEMAND",
+                Self::Schedule => "SCHEDULE",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -10484,9 +10155,9 @@ pub mod data_scan_event {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Scope::Unspecified => "SCOPE_UNSPECIFIED",
-                Scope::Full => "FULL",
-                Scope::Incremental => "INCREMENTAL",
+                Self::Unspecified => "SCOPE_UNSPECIFIED",
+                Self::Full => "FULL",
+                Self::Incremental => "INCREMENTAL",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -10500,7 +10171,6 @@ pub mod data_scan_event {
         }
     }
     /// The result of the data scan job.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Result {
         /// Data profile result for data profile type data scan.
@@ -10511,8 +10181,7 @@ pub mod data_scan_event {
         DataQuality(DataQualityResult),
     }
     /// The applied configs in the data scan job.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
     pub enum AppliedConfigs {
         /// Applied configs for data profile type data scan.
         #[prost(message, tag = "201")]
@@ -10524,7 +10193,6 @@ pub mod data_scan_event {
 }
 /// Information about the result of a data quality rule for data quality scan.
 /// The monitored resource is 'DataScan'.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DataQualityScanRuleResult {
     /// Identifier of the specific data scan job this log entry is for.
@@ -10623,16 +10291,16 @@ pub mod data_quality_scan_rule_result {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                RuleType::Unspecified => "RULE_TYPE_UNSPECIFIED",
-                RuleType::NonNullExpectation => "NON_NULL_EXPECTATION",
-                RuleType::RangeExpectation => "RANGE_EXPECTATION",
-                RuleType::RegexExpectation => "REGEX_EXPECTATION",
-                RuleType::RowConditionExpectation => "ROW_CONDITION_EXPECTATION",
-                RuleType::SetExpectation => "SET_EXPECTATION",
-                RuleType::StatisticRangeExpectation => "STATISTIC_RANGE_EXPECTATION",
-                RuleType::TableConditionExpectation => "TABLE_CONDITION_EXPECTATION",
-                RuleType::UniquenessExpectation => "UNIQUENESS_EXPECTATION",
-                RuleType::SqlAssertion => "SQL_ASSERTION",
+                Self::Unspecified => "RULE_TYPE_UNSPECIFIED",
+                Self::NonNullExpectation => "NON_NULL_EXPECTATION",
+                Self::RangeExpectation => "RANGE_EXPECTATION",
+                Self::RegexExpectation => "REGEX_EXPECTATION",
+                Self::RowConditionExpectation => "ROW_CONDITION_EXPECTATION",
+                Self::SetExpectation => "SET_EXPECTATION",
+                Self::StatisticRangeExpectation => "STATISTIC_RANGE_EXPECTATION",
+                Self::TableConditionExpectation => "TABLE_CONDITION_EXPECTATION",
+                Self::UniquenessExpectation => "UNIQUENESS_EXPECTATION",
+                Self::SqlAssertion => "SQL_ASSERTION",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -10680,9 +10348,9 @@ pub mod data_quality_scan_rule_result {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                EvaluationType::Unspecified => "EVALUATION_TYPE_UNSPECIFIED",
-                EvaluationType::PerRow => "PER_ROW",
-                EvaluationType::Aggregate => "AGGREGATE",
+                Self::Unspecified => "EVALUATION_TYPE_UNSPECIFIED",
+                Self::PerRow => "PER_ROW",
+                Self::Aggregate => "AGGREGATE",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -10723,9 +10391,9 @@ pub mod data_quality_scan_rule_result {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Result::Unspecified => "RESULT_UNSPECIFIED",
-                Result::Passed => "PASSED",
-                Result::Failed => "FAILED",
+                Self::Unspecified => "RESULT_UNSPECIFIED",
+                Self::Passed => "PASSED",
+                Self::Failed => "FAILED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -10740,7 +10408,6 @@ pub mod data_quality_scan_rule_result {
     }
 }
 /// Create a metadata entity request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateEntityRequest {
     /// Required. The resource name of the parent zone:
@@ -10759,7 +10426,6 @@ pub struct CreateEntityRequest {
 /// The exiting entity will be fully replaced by the entity in the request.
 /// The entity ID is mutable. To modify the ID, use the current entity ID in the
 /// request URL and specify the new ID in the request body.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateEntityRequest {
     /// Required. Update description.
@@ -10771,7 +10437,6 @@ pub struct UpdateEntityRequest {
     pub validate_only: bool,
 }
 /// Delete a metadata entity request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteEntityRequest {
     /// Required. The resource name of the entity:
@@ -10784,7 +10449,6 @@ pub struct DeleteEntityRequest {
     pub etag: ::prost::alloc::string::String,
 }
 /// List metadata entities request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListEntitiesRequest {
     /// Required. The resource name of the parent zone:
@@ -10848,9 +10512,9 @@ pub mod list_entities_request {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                EntityView::Unspecified => "ENTITY_VIEW_UNSPECIFIED",
-                EntityView::Tables => "TABLES",
-                EntityView::Filesets => "FILESETS",
+                Self::Unspecified => "ENTITY_VIEW_UNSPECIFIED",
+                Self::Tables => "TABLES",
+                Self::Filesets => "FILESETS",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -10865,7 +10529,6 @@ pub mod list_entities_request {
     }
 }
 /// List metadata entities response.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListEntitiesResponse {
     /// Entities in the specified parent zone.
@@ -10877,7 +10540,6 @@ pub struct ListEntitiesResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Get metadata entity request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetEntityRequest {
     /// Required. The resource name of the entity:
@@ -10921,10 +10583,10 @@ pub mod get_entity_request {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                EntityView::Unspecified => "ENTITY_VIEW_UNSPECIFIED",
-                EntityView::Basic => "BASIC",
-                EntityView::Schema => "SCHEMA",
-                EntityView::Full => "FULL",
+                Self::Unspecified => "ENTITY_VIEW_UNSPECIFIED",
+                Self::Basic => "BASIC",
+                Self::Schema => "SCHEMA",
+                Self::Full => "FULL",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -10940,7 +10602,6 @@ pub mod get_entity_request {
     }
 }
 /// List metadata partitions request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListPartitionsRequest {
     /// Required. The resource name of the parent entity:
@@ -10982,7 +10643,6 @@ pub struct ListPartitionsRequest {
     pub filter: ::prost::alloc::string::String,
 }
 /// Create metadata partition request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreatePartitionRequest {
     /// Required. The resource name of the parent zone:
@@ -10998,7 +10658,6 @@ pub struct CreatePartitionRequest {
     pub validate_only: bool,
 }
 /// Delete metadata partition request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeletePartitionRequest {
     /// Required. The resource name of the partition.
@@ -11014,7 +10673,6 @@ pub struct DeletePartitionRequest {
     pub etag: ::prost::alloc::string::String,
 }
 /// List metadata partitions response.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListPartitionsResponse {
     /// Partitions under the specified parent entity.
@@ -11026,7 +10684,6 @@ pub struct ListPartitionsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Get metadata partition request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetPartitionRequest {
     /// Required. The resource name of the partition:
@@ -11037,7 +10694,6 @@ pub struct GetPartitionRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Represents tables and fileset metadata contained within a zone.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Entity {
     /// Output only. The resource name of the entity, of the form:
@@ -11118,7 +10774,6 @@ pub struct Entity {
 /// Nested message and enum types in `Entity`.
 pub mod entity {
     /// Provides compatibility information for various metadata stores.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct CompatibilityStatus {
         /// Output only. Whether this entity is compatible with Hive Metastore.
@@ -11131,7 +10786,6 @@ pub mod entity {
     /// Nested message and enum types in `CompatibilityStatus`.
     pub mod compatibility_status {
         /// Provides compatibility information for a specific metadata store.
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct Compatibility {
             /// Output only. Whether the entity is compatible and can be represented in
@@ -11172,9 +10826,9 @@ pub mod entity {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Type::Unspecified => "TYPE_UNSPECIFIED",
-                Type::Table => "TABLE",
-                Type::Fileset => "FILESET",
+                Self::Unspecified => "TYPE_UNSPECIFIED",
+                Self::Table => "TABLE",
+                Self::Fileset => "FILESET",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -11189,7 +10843,6 @@ pub mod entity {
     }
 }
 /// Represents partition metadata contained within entity instances.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Partition {
     /// Output only. Partition values used in the HTTP URL must be
@@ -11214,7 +10867,6 @@ pub struct Partition {
     pub etag: ::prost::alloc::string::String,
 }
 /// Schema information describing the structure and layout of the data.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Schema {
     /// Required. Set to `true` if user-managed or `false` if managed by Dataplex.
@@ -11248,7 +10900,6 @@ pub struct Schema {
 /// Nested message and enum types in `Schema`.
 pub mod schema {
     /// Represents a column field within a table schema.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct SchemaField {
         /// Required. The name of the field. Must contain only letters, numbers and
@@ -11274,7 +10925,6 @@ pub mod schema {
     /// have up to 20 partition fields, but only the first 10 partitions have the
     /// filtering ability due to performance consideration. **Note:**
     /// Partition fields are immutable.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct PartitionField {
         /// Required. Partition field name must consist of letters, numbers, and
@@ -11341,22 +10991,22 @@ pub mod schema {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Type::Unspecified => "TYPE_UNSPECIFIED",
-                Type::Boolean => "BOOLEAN",
-                Type::Byte => "BYTE",
-                Type::Int16 => "INT16",
-                Type::Int32 => "INT32",
-                Type::Int64 => "INT64",
-                Type::Float => "FLOAT",
-                Type::Double => "DOUBLE",
-                Type::Decimal => "DECIMAL",
-                Type::String => "STRING",
-                Type::Binary => "BINARY",
-                Type::Timestamp => "TIMESTAMP",
-                Type::Date => "DATE",
-                Type::Time => "TIME",
-                Type::Record => "RECORD",
-                Type::Null => "NULL",
+                Self::Unspecified => "TYPE_UNSPECIFIED",
+                Self::Boolean => "BOOLEAN",
+                Self::Byte => "BYTE",
+                Self::Int16 => "INT16",
+                Self::Int32 => "INT32",
+                Self::Int64 => "INT64",
+                Self::Float => "FLOAT",
+                Self::Double => "DOUBLE",
+                Self::Decimal => "DECIMAL",
+                Self::String => "STRING",
+                Self::Binary => "BINARY",
+                Self::Timestamp => "TIMESTAMP",
+                Self::Date => "DATE",
+                Self::Time => "TIME",
+                Self::Record => "RECORD",
+                Self::Null => "NULL",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -11412,10 +11062,10 @@ pub mod schema {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Mode::Unspecified => "MODE_UNSPECIFIED",
-                Mode::Required => "REQUIRED",
-                Mode::Nullable => "NULLABLE",
-                Mode::Repeated => "REPEATED",
+                Self::Unspecified => "MODE_UNSPECIFIED",
+                Self::Required => "REQUIRED",
+                Self::Nullable => "NULLABLE",
+                Self::Repeated => "REPEATED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -11457,8 +11107,8 @@ pub mod schema {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                PartitionStyle::Unspecified => "PARTITION_STYLE_UNSPECIFIED",
-                PartitionStyle::HiveCompatible => "HIVE_COMPATIBLE",
+                Self::Unspecified => "PARTITION_STYLE_UNSPECIFIED",
+                Self::HiveCompatible => "HIVE_COMPATIBLE",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -11472,7 +11122,6 @@ pub mod schema {
     }
 }
 /// Describes the format of the data within its storage location.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StorageFormat {
     /// Output only. The data format associated with the stored data, which
@@ -11509,7 +11158,6 @@ pub struct StorageFormat {
 /// Nested message and enum types in `StorageFormat`.
 pub mod storage_format {
     /// Describes CSV and similar semi-structured data formats.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct CsvOptions {
         /// Optional. The character encoding of the data. Accepts "US-ASCII",
@@ -11530,7 +11178,6 @@ pub mod storage_format {
         pub quote: ::prost::alloc::string::String,
     }
     /// Describes JSON data format.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct JsonOptions {
         /// Optional. The character encoding of the data. Accepts "US-ASCII", "UTF-8"
@@ -11539,7 +11186,6 @@ pub mod storage_format {
         pub encoding: ::prost::alloc::string::String,
     }
     /// Describes Iceberg data format.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct IcebergOptions {
         /// Optional. The location of where the iceberg metadata is present, must be
@@ -11595,19 +11241,19 @@ pub mod storage_format {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Format::Unspecified => "FORMAT_UNSPECIFIED",
-                Format::Parquet => "PARQUET",
-                Format::Avro => "AVRO",
-                Format::Orc => "ORC",
-                Format::Csv => "CSV",
-                Format::Json => "JSON",
-                Format::Image => "IMAGE",
-                Format::Audio => "AUDIO",
-                Format::Video => "VIDEO",
-                Format::Text => "TEXT",
-                Format::Tfrecord => "TFRECORD",
-                Format::Other => "OTHER",
-                Format::Unknown => "UNKNOWN",
+                Self::Unspecified => "FORMAT_UNSPECIFIED",
+                Self::Parquet => "PARQUET",
+                Self::Avro => "AVRO",
+                Self::Orc => "ORC",
+                Self::Csv => "CSV",
+                Self::Json => "JSON",
+                Self::Image => "IMAGE",
+                Self::Audio => "AUDIO",
+                Self::Video => "VIDEO",
+                Self::Text => "TEXT",
+                Self::Tfrecord => "TFRECORD",
+                Self::Other => "OTHER",
+                Self::Unknown => "UNKNOWN",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -11658,9 +11304,9 @@ pub mod storage_format {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                CompressionFormat::Unspecified => "COMPRESSION_FORMAT_UNSPECIFIED",
-                CompressionFormat::Gzip => "GZIP",
-                CompressionFormat::Bzip2 => "BZIP2",
+                Self::Unspecified => "COMPRESSION_FORMAT_UNSPECIFIED",
+                Self::Gzip => "GZIP",
+                Self::Bzip2 => "BZIP2",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -11674,7 +11320,6 @@ pub mod storage_format {
         }
     }
     /// Additional format-specific options.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Options {
         /// Optional. Additional information about CSV formatted data.
@@ -11689,8 +11334,7 @@ pub mod storage_format {
     }
 }
 /// Describes the access mechanism of the data within its storage location.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct StorageAccess {
     /// Output only. Describes the read access mechanism of the data. Not user
     /// settable.
@@ -11727,9 +11371,9 @@ pub mod storage_access {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                AccessMode::Unspecified => "ACCESS_MODE_UNSPECIFIED",
-                AccessMode::Direct => "DIRECT",
-                AccessMode::Managed => "MANAGED",
+                Self::Unspecified => "ACCESS_MODE_UNSPECIFIED",
+                Self::Direct => "DIRECT",
+                Self::Managed => "MANAGED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -11761,9 +11405,9 @@ impl StorageSystem {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            StorageSystem::Unspecified => "STORAGE_SYSTEM_UNSPECIFIED",
-            StorageSystem::CloudStorage => "CLOUD_STORAGE",
-            StorageSystem::Bigquery => "BIGQUERY",
+            Self::Unspecified => "STORAGE_SYSTEM_UNSPECIFIED",
+            Self::CloudStorage => "CLOUD_STORAGE",
+            Self::Bigquery => "BIGQUERY",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -11778,7 +11422,13 @@ impl StorageSystem {
 }
 /// Generated client implementations.
 pub mod metadata_service_client {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     use tonic::codegen::http::Uri;
     /// Metadata service manages metadata resources such as tables, filesets and
@@ -11791,8 +11441,8 @@ pub mod metadata_service_client {
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
-        T::ResponseBody: Body<Data = Bytes> + Send + 'static,
-        <T::ResponseBody as Body>::Error: Into<StdError> + Send,
+        T::ResponseBody: Body<Data = Bytes> + std::marker::Send + 'static,
+        <T::ResponseBody as Body>::Error: Into<StdError> + std::marker::Send,
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
@@ -11817,7 +11467,7 @@ pub mod metadata_service_client {
             >,
             <T as tonic::codegen::Service<
                 http::Request<tonic::body::BoxBody>,
-            >>::Error: Into<StdError> + Send + Sync,
+            >>::Error: Into<StdError> + std::marker::Send + std::marker::Sync,
         {
             MetadataServiceClient::new(InterceptedService::new(inner, interceptor))
         }
@@ -11861,8 +11511,7 @@ pub mod metadata_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -11889,8 +11538,7 @@ pub mod metadata_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -11917,8 +11565,7 @@ pub mod metadata_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -11945,8 +11592,7 @@ pub mod metadata_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -11976,8 +11622,7 @@ pub mod metadata_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -12004,8 +11649,7 @@ pub mod metadata_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -12032,8 +11676,7 @@ pub mod metadata_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -12060,8 +11703,7 @@ pub mod metadata_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -12091,8 +11733,7 @@ pub mod metadata_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;

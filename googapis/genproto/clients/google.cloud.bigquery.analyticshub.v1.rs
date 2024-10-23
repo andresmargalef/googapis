@@ -2,7 +2,6 @@
 /// A data exchange is a container that lets you share data. Along with the
 /// descriptive information about the data exchange, it contains listings that
 /// reference shared datasets.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DataExchange {
     /// Output only. The resource name of the data exchange.
@@ -45,8 +44,7 @@ pub struct DataExchange {
 }
 /// Sharing environment is a behavior model for sharing data within a
 /// data exchange. This option is configurable for a data exchange.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct SharingEnvironmentConfig {
     #[prost(oneof = "sharing_environment_config::Environment", tags = "1, 2")]
     pub environment: ::core::option::Option<sharing_environment_config::Environment>,
@@ -54,12 +52,10 @@ pub struct SharingEnvironmentConfig {
 /// Nested message and enum types in `SharingEnvironmentConfig`.
 pub mod sharing_environment_config {
     /// Default Analytics Hub data exchange, used for secured data sharing.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct DefaultExchangeConfig {}
     /// Data Clean Room (DCR), used for privacy-safe and secured data sharing.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct DcrExchangeConfig {
         /// Output only. If True, this DCR restricts the contributors to sharing
         /// only a single resource in a Listing. And no two resources should have the
@@ -77,8 +73,7 @@ pub mod sharing_environment_config {
         #[prost(bool, optional, tag = "2")]
         pub single_linked_dataset_per_cleanroom: ::core::option::Option<bool>,
     }
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
     pub enum Environment {
         /// Default Analytics Hub data exchange, used for secured data sharing.
         #[prost(message, tag = "1")]
@@ -89,7 +84,6 @@ pub mod sharing_environment_config {
     }
 }
 /// Contains details of the data provider.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DataProvider {
     /// Optional. Name of the data provider.
@@ -101,7 +95,6 @@ pub struct DataProvider {
     pub primary_contact: ::prost::alloc::string::String,
 }
 /// Contains details of the listing publisher.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Publisher {
     /// Optional. Name of the listing publisher.
@@ -113,7 +106,6 @@ pub struct Publisher {
     pub primary_contact: ::prost::alloc::string::String,
 }
 /// Contains the reference that identifies a destination bigquery dataset.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DestinationDatasetReference {
     /// Required. A unique ID for this dataset, without the project name. The ID
@@ -126,7 +118,6 @@ pub struct DestinationDatasetReference {
     pub project_id: ::prost::alloc::string::String,
 }
 /// Defines the destination bigquery dataset.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DestinationDataset {
     /// Required. A reference that identifies the destination dataset.
@@ -158,7 +149,6 @@ pub struct DestinationDataset {
 /// subscribe to. It contains a reference to the data source along with
 /// descriptive information that will help subscribers find and subscribe the
 /// data.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Listing {
     /// Output only. The resource name of the listing.
@@ -228,7 +218,6 @@ pub mod listing {
     /// dataset in
     /// the subscriber's project. A Linked dataset is an opaque, read-only BigQuery
     /// dataset that serves as a _symbolic link_ to a shared dataset.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct BigQueryDatasetSource {
         /// Resource name of the dataset source for this listing.
@@ -246,7 +235,6 @@ pub mod listing {
     /// Nested message and enum types in `BigQueryDatasetSource`.
     pub mod big_query_dataset_source {
         /// Resource in this dataset that are selectively shared.
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct SelectedResource {
             #[prost(oneof = "selected_resource::Resource", tags = "1")]
@@ -254,7 +242,6 @@ pub mod listing {
         }
         /// Nested message and enum types in `SelectedResource`.
         pub mod selected_resource {
-            #[allow(clippy::derive_partial_eq_without_eq)]
             #[derive(Clone, PartialEq, ::prost::Oneof)]
             pub enum Resource {
                 /// Optional. Format:
@@ -268,8 +255,7 @@ pub mod listing {
     }
     /// Restricted export config, used to configure restricted export on linked
     /// dataset.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct RestrictedExportConfig {
         /// Optional. If true, enable restricted export.
         #[prost(bool, tag = "3")]
@@ -310,8 +296,8 @@ pub mod listing {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                State::Unspecified => "STATE_UNSPECIFIED",
-                State::Active => "ACTIVE",
+                Self::Unspecified => "STATE_UNSPECIFIED",
+                Self::Active => "ACTIVE",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -365,30 +351,28 @@ pub mod listing {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Category::Unspecified => "CATEGORY_UNSPECIFIED",
-                Category::Others => "CATEGORY_OTHERS",
-                Category::AdvertisingAndMarketing => "CATEGORY_ADVERTISING_AND_MARKETING",
-                Category::Commerce => "CATEGORY_COMMERCE",
-                Category::ClimateAndEnvironment => "CATEGORY_CLIMATE_AND_ENVIRONMENT",
-                Category::Demographics => "CATEGORY_DEMOGRAPHICS",
-                Category::Economics => "CATEGORY_ECONOMICS",
-                Category::Education => "CATEGORY_EDUCATION",
-                Category::Energy => "CATEGORY_ENERGY",
-                Category::Financial => "CATEGORY_FINANCIAL",
-                Category::Gaming => "CATEGORY_GAMING",
-                Category::Geospatial => "CATEGORY_GEOSPATIAL",
-                Category::HealthcareAndLifeScience => {
-                    "CATEGORY_HEALTHCARE_AND_LIFE_SCIENCE"
-                }
-                Category::Media => "CATEGORY_MEDIA",
-                Category::PublicSector => "CATEGORY_PUBLIC_SECTOR",
-                Category::Retail => "CATEGORY_RETAIL",
-                Category::Sports => "CATEGORY_SPORTS",
-                Category::ScienceAndResearch => "CATEGORY_SCIENCE_AND_RESEARCH",
-                Category::TransportationAndLogistics => {
+                Self::Unspecified => "CATEGORY_UNSPECIFIED",
+                Self::Others => "CATEGORY_OTHERS",
+                Self::AdvertisingAndMarketing => "CATEGORY_ADVERTISING_AND_MARKETING",
+                Self::Commerce => "CATEGORY_COMMERCE",
+                Self::ClimateAndEnvironment => "CATEGORY_CLIMATE_AND_ENVIRONMENT",
+                Self::Demographics => "CATEGORY_DEMOGRAPHICS",
+                Self::Economics => "CATEGORY_ECONOMICS",
+                Self::Education => "CATEGORY_EDUCATION",
+                Self::Energy => "CATEGORY_ENERGY",
+                Self::Financial => "CATEGORY_FINANCIAL",
+                Self::Gaming => "CATEGORY_GAMING",
+                Self::Geospatial => "CATEGORY_GEOSPATIAL",
+                Self::HealthcareAndLifeScience => "CATEGORY_HEALTHCARE_AND_LIFE_SCIENCE",
+                Self::Media => "CATEGORY_MEDIA",
+                Self::PublicSector => "CATEGORY_PUBLIC_SECTOR",
+                Self::Retail => "CATEGORY_RETAIL",
+                Self::Sports => "CATEGORY_SPORTS",
+                Self::ScienceAndResearch => "CATEGORY_SCIENCE_AND_RESEARCH",
+                Self::TransportationAndLogistics => {
                     "CATEGORY_TRANSPORTATION_AND_LOGISTICS"
                 }
-                Category::TravelAndTourism => "CATEGORY_TRAVEL_AND_TOURISM",
+                Self::TravelAndTourism => "CATEGORY_TRAVEL_AND_TOURISM",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -425,7 +409,6 @@ pub mod listing {
         }
     }
     /// Listing source.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Source {
         /// Required. Shared dataset i.e. BigQuery dataset source.
@@ -436,7 +419,6 @@ pub mod listing {
 /// A subscription represents a subscribers' access to a particular set of
 /// published data. It contains references to associated listings,
 /// data exchanges, and linked datasets.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Subscription {
     /// Output only. The resource name of the subscription.
@@ -479,7 +461,6 @@ pub struct Subscription {
 /// Nested message and enum types in `Subscription`.
 pub mod subscription {
     /// Reference to a linked resource tracked by this Subscription.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct LinkedResource {
         #[prost(oneof = "linked_resource::Reference", tags = "1")]
@@ -487,7 +468,6 @@ pub mod subscription {
     }
     /// Nested message and enum types in `LinkedResource`.
     pub mod linked_resource {
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Oneof)]
         pub enum Reference {
             /// Output only. Name of the linked dataset, e.g.
@@ -528,10 +508,10 @@ pub mod subscription {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                State::Unspecified => "STATE_UNSPECIFIED",
-                State::Active => "STATE_ACTIVE",
-                State::Stale => "STATE_STALE",
-                State::Inactive => "STATE_INACTIVE",
+                Self::Unspecified => "STATE_UNSPECIFIED",
+                Self::Active => "STATE_ACTIVE",
+                Self::Stale => "STATE_STALE",
+                Self::Inactive => "STATE_INACTIVE",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -545,7 +525,6 @@ pub mod subscription {
             }
         }
     }
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum ResourceName {
         /// Output only. Resource name of the source Listing.
@@ -559,7 +538,6 @@ pub mod subscription {
     }
 }
 /// Message for requesting the list of data exchanges.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListDataExchangesRequest {
     /// Required. The parent resource path of the data exchanges.
@@ -576,7 +554,6 @@ pub struct ListDataExchangesRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Message for response to the list of data exchanges.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListDataExchangesResponse {
     /// The list of data exchanges.
@@ -588,7 +565,6 @@ pub struct ListDataExchangesResponse {
 }
 /// Message for requesting the list of data exchanges from projects in an
 /// organization and location.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListOrgDataExchangesRequest {
     /// Required. The organization resource path of the projects containing
@@ -606,7 +582,6 @@ pub struct ListOrgDataExchangesRequest {
 }
 /// Message for response to listing data exchanges in an organization and
 /// location.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListOrgDataExchangesResponse {
     /// The list of data exchanges.
@@ -617,7 +592,6 @@ pub struct ListOrgDataExchangesResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Message for getting a data exchange.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetDataExchangeRequest {
     /// Required. The resource name of the data exchange.
@@ -626,7 +600,6 @@ pub struct GetDataExchangeRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Message for creating a data exchange.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateDataExchangeRequest {
     /// Required. The parent resource path of the data exchange.
@@ -645,7 +618,6 @@ pub struct CreateDataExchangeRequest {
     pub data_exchange: ::core::option::Option<DataExchange>,
 }
 /// Message for updating a data exchange.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateDataExchangeRequest {
     /// Required. Field mask specifies the fields to update in the data exchange
@@ -658,7 +630,6 @@ pub struct UpdateDataExchangeRequest {
     pub data_exchange: ::core::option::Option<DataExchange>,
 }
 /// Message for deleting a data exchange.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteDataExchangeRequest {
     /// Required. The full name of the data exchange resource that you want to
@@ -667,7 +638,6 @@ pub struct DeleteDataExchangeRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Message for requesting the list of listings.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListListingsRequest {
     /// Required. The parent resource path of the listing.
@@ -684,7 +654,6 @@ pub struct ListListingsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Message for response to the list of Listings.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListListingsResponse {
     /// The list of Listing.
@@ -695,7 +664,6 @@ pub struct ListListingsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Message for getting a listing.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetListingRequest {
     /// Required. The resource name of the listing.
@@ -704,7 +672,6 @@ pub struct GetListingRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Message for creating a listing.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateListingRequest {
     /// Required. The parent resource path of the listing.
@@ -723,7 +690,6 @@ pub struct CreateListingRequest {
     pub listing: ::core::option::Option<Listing>,
 }
 /// Message for updating a Listing.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateListingRequest {
     /// Required. Field mask specifies the fields to update in the listing
@@ -736,7 +702,6 @@ pub struct UpdateListingRequest {
     pub listing: ::core::option::Option<Listing>,
 }
 /// Message for deleting a listing.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteListingRequest {
     /// Required. Resource name of the listing to delete.
@@ -745,7 +710,6 @@ pub struct DeleteListingRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Message for subscribing to a listing.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeListingRequest {
     /// Required. Resource name of the listing that you want to subscribe to.
@@ -759,7 +723,6 @@ pub struct SubscribeListingRequest {
 /// Nested message and enum types in `SubscribeListingRequest`.
 pub mod subscribe_listing_request {
     /// Resulting destination of the listing that you subscribed to.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Destination {
         /// BigQuery destination dataset to create for the subscriber.
@@ -768,7 +731,6 @@ pub mod subscribe_listing_request {
     }
 }
 /// Message for response when you subscribe to a listing.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeListingResponse {
     /// Subscription object created from this subscribe action.
@@ -776,7 +738,6 @@ pub struct SubscribeListingResponse {
     pub subscription: ::core::option::Option<Subscription>,
 }
 /// Message for subscribing to a Data Exchange.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeDataExchangeRequest {
     /// Required. Resource name of the Data Exchange.
@@ -796,7 +757,6 @@ pub struct SubscribeDataExchangeRequest {
     pub subscriber_contact: ::prost::alloc::string::String,
 }
 /// Message for response when you subscribe to a Data Exchange.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeDataExchangeResponse {
     /// Subscription object created from this subscribe action.
@@ -804,7 +764,6 @@ pub struct SubscribeDataExchangeResponse {
     pub subscription: ::core::option::Option<Subscription>,
 }
 /// Message for refreshing a subscription.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RefreshSubscriptionRequest {
     /// Required. Resource name of the Subscription to refresh.
@@ -813,7 +772,6 @@ pub struct RefreshSubscriptionRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Message for response when you refresh a subscription.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RefreshSubscriptionResponse {
     /// The refreshed subscription resource.
@@ -821,7 +779,6 @@ pub struct RefreshSubscriptionResponse {
     pub subscription: ::core::option::Option<Subscription>,
 }
 /// Message for getting a subscription.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetSubscriptionRequest {
     /// Required. Resource name of the subscription.
@@ -830,7 +787,6 @@ pub struct GetSubscriptionRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Message for listing subscriptions.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListSubscriptionsRequest {
     /// Required. The parent resource path of the subscription.
@@ -848,7 +804,6 @@ pub struct ListSubscriptionsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Message for response to the listing of subscriptions.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListSubscriptionsResponse {
     /// The list of subscriptions.
@@ -859,7 +814,6 @@ pub struct ListSubscriptionsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Message for listing subscriptions of a shared resource.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListSharedResourceSubscriptionsRequest {
     /// Required. Resource name of the requested target. This resource may be
@@ -880,7 +834,6 @@ pub struct ListSharedResourceSubscriptionsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Message for response to the listing of shared resource subscriptions.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListSharedResourceSubscriptionsResponse {
     /// The list of subscriptions.
@@ -891,7 +844,6 @@ pub struct ListSharedResourceSubscriptionsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Message for revoking a subscription.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RevokeSubscriptionRequest {
     /// Required. Resource name of the subscription to revoke.
@@ -900,11 +852,9 @@ pub struct RevokeSubscriptionRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Message for response when you revoke a subscription.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct RevokeSubscriptionResponse {}
 /// Message for deleting a subscription.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteSubscriptionRequest {
     /// Required. Resource name of the subscription to delete.
@@ -913,7 +863,6 @@ pub struct DeleteSubscriptionRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Represents the metadata of a long-running operation in Analytics Hub.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OperationMetadata {
     /// Output only. The time the operation was created.
@@ -944,7 +893,13 @@ pub struct OperationMetadata {
 }
 /// Generated client implementations.
 pub mod analytics_hub_service_client {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     use tonic::codegen::http::Uri;
     /// The `AnalyticsHubService` API facilitates data sharing within and across
@@ -961,8 +916,8 @@ pub mod analytics_hub_service_client {
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
-        T::ResponseBody: Body<Data = Bytes> + Send + 'static,
-        <T::ResponseBody as Body>::Error: Into<StdError> + Send,
+        T::ResponseBody: Body<Data = Bytes> + std::marker::Send + 'static,
+        <T::ResponseBody as Body>::Error: Into<StdError> + std::marker::Send,
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
@@ -987,7 +942,7 @@ pub mod analytics_hub_service_client {
             >,
             <T as tonic::codegen::Service<
                 http::Request<tonic::body::BoxBody>,
-            >>::Error: Into<StdError> + Send + Sync,
+            >>::Error: Into<StdError> + std::marker::Send + std::marker::Sync,
         {
             AnalyticsHubServiceClient::new(InterceptedService::new(inner, interceptor))
         }
@@ -1034,8 +989,7 @@ pub mod analytics_hub_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1066,8 +1020,7 @@ pub mod analytics_hub_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1094,8 +1047,7 @@ pub mod analytics_hub_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1122,8 +1074,7 @@ pub mod analytics_hub_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1150,8 +1101,7 @@ pub mod analytics_hub_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1178,8 +1128,7 @@ pub mod analytics_hub_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1209,8 +1158,7 @@ pub mod analytics_hub_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1237,8 +1185,7 @@ pub mod analytics_hub_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1265,8 +1212,7 @@ pub mod analytics_hub_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1293,8 +1239,7 @@ pub mod analytics_hub_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1321,8 +1266,7 @@ pub mod analytics_hub_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1357,8 +1301,7 @@ pub mod analytics_hub_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1389,8 +1332,7 @@ pub mod analytics_hub_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1422,8 +1364,7 @@ pub mod analytics_hub_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1450,8 +1391,7 @@ pub mod analytics_hub_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1481,8 +1421,7 @@ pub mod analytics_hub_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1514,8 +1453,7 @@ pub mod analytics_hub_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1545,8 +1483,7 @@ pub mod analytics_hub_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1576,8 +1513,7 @@ pub mod analytics_hub_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1609,8 +1545,7 @@ pub mod analytics_hub_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1642,8 +1577,7 @@ pub mod analytics_hub_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1677,8 +1611,7 @@ pub mod analytics_hub_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;

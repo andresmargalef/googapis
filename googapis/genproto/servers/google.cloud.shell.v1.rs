@@ -3,7 +3,6 @@
 /// image specifying what is installed on the environment and a home directory
 /// containing the user's data that will remain across sessions. Each user has
 /// at least an environment with the ID "default".
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Environment {
     /// Immutable. Full name of this resource, in the format
@@ -86,11 +85,11 @@ pub mod environment {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                State::Unspecified => "STATE_UNSPECIFIED",
-                State::Suspended => "SUSPENDED",
-                State::Pending => "PENDING",
-                State::Running => "RUNNING",
-                State::Deleting => "DELETING",
+                Self::Unspecified => "STATE_UNSPECIFIED",
+                Self::Suspended => "SUSPENDED",
+                Self::Pending => "PENDING",
+                Self::Running => "RUNNING",
+                Self::Deleting => "DELETING",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -108,7 +107,6 @@ pub mod environment {
 }
 /// Request message for
 /// [GetEnvironment][google.cloud.shell.v1.CloudShellService.GetEnvironment].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetEnvironmentRequest {
     /// Required. Name of the requested resource, for example `users/me/environments/default`
@@ -118,17 +116,14 @@ pub struct GetEnvironmentRequest {
 }
 /// Message included in the metadata field of operations returned from
 /// [CreateEnvironment][google.cloud.shell.v1.CloudShellService.CreateEnvironment].
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct CreateEnvironmentMetadata {}
 /// Message included in the metadata field of operations returned from
 /// [DeleteEnvironment][google.cloud.shell.v1.CloudShellService.DeleteEnvironment].
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct DeleteEnvironmentMetadata {}
 /// Request message for
 /// [StartEnvironment][google.cloud.shell.v1.CloudShellService.StartEnvironment].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StartEnvironmentRequest {
     /// Name of the resource that should be started, for example
@@ -148,7 +143,6 @@ pub struct StartEnvironmentRequest {
 }
 /// Request message for
 /// [AuthorizeEnvironment][google.cloud.shell.v1.CloudShellService.AuthorizeEnvironment].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AuthorizeEnvironmentRequest {
     /// Name of the resource that should receive the credentials, for example
@@ -169,18 +163,15 @@ pub struct AuthorizeEnvironmentRequest {
 }
 /// Response message for
 /// [AuthorizeEnvironment][google.cloud.shell.v1.CloudShellService.AuthorizeEnvironment].
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct AuthorizeEnvironmentResponse {}
 /// Message included in the metadata field of operations returned from
 /// [AuthorizeEnvironment][google.cloud.shell.v1.CloudShellService.AuthorizeEnvironment].
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct AuthorizeEnvironmentMetadata {}
 /// Message included in the metadata field of operations returned from
 /// [StartEnvironment][google.cloud.shell.v1.CloudShellService.StartEnvironment].
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct StartEnvironmentMetadata {
     /// Current state of the environment being started.
     #[prost(enumeration = "start_environment_metadata::State", tag = "1")]
@@ -232,11 +223,11 @@ pub mod start_environment_metadata {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                State::Unspecified => "STATE_UNSPECIFIED",
-                State::Starting => "STARTING",
-                State::UnarchivingDisk => "UNARCHIVING_DISK",
-                State::AwaitingComputeResources => "AWAITING_COMPUTE_RESOURCES",
-                State::Finished => "FINISHED",
+                Self::Unspecified => "STATE_UNSPECIFIED",
+                Self::Starting => "STARTING",
+                Self::UnarchivingDisk => "UNARCHIVING_DISK",
+                Self::AwaitingComputeResources => "AWAITING_COMPUTE_RESOURCES",
+                Self::Finished => "FINISHED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -255,7 +246,6 @@ pub mod start_environment_metadata {
 /// Message included in the response field of operations returned from
 /// [StartEnvironment][google.cloud.shell.v1.CloudShellService.StartEnvironment]
 /// once the operation is complete.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StartEnvironmentResponse {
     /// Environment that was started.
@@ -264,7 +254,6 @@ pub struct StartEnvironmentResponse {
 }
 /// Request message for
 /// [AddPublicKey][google.cloud.shell.v1.CloudShellService.AddPublicKey].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AddPublicKeyRequest {
     /// Environment this key should be added to, e.g.
@@ -282,7 +271,6 @@ pub struct AddPublicKeyRequest {
 }
 /// Response message for
 /// [AddPublicKey][google.cloud.shell.v1.CloudShellService.AddPublicKey].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AddPublicKeyResponse {
     /// Key that was added to the environment.
@@ -291,12 +279,10 @@ pub struct AddPublicKeyResponse {
 }
 /// Message included in the metadata field of operations returned from
 /// [AddPublicKey][google.cloud.shell.v1.CloudShellService.AddPublicKey].
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct AddPublicKeyMetadata {}
 /// Request message for
 /// [RemovePublicKey][google.cloud.shell.v1.CloudShellService.RemovePublicKey].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RemovePublicKeyRequest {
     /// Environment this key should be removed from, e.g.
@@ -309,18 +295,15 @@ pub struct RemovePublicKeyRequest {
 }
 /// Response message for
 /// [RemovePublicKey][google.cloud.shell.v1.CloudShellService.RemovePublicKey].
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct RemovePublicKeyResponse {}
 /// Message included in the metadata field of operations returned from
 /// [RemovePublicKey][google.cloud.shell.v1.CloudShellService.RemovePublicKey].
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct RemovePublicKeyMetadata {}
 /// Cloud-shell specific information that will be included as details in failure
 /// responses.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct CloudShellErrorDetails {
     /// Code indicating the specific error the occurred.
     #[prost(enumeration = "cloud_shell_error_details::CloudShellErrorCode", tag = "1")]
@@ -367,12 +350,12 @@ pub mod cloud_shell_error_details {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                CloudShellErrorCode::Unspecified => "CLOUD_SHELL_ERROR_CODE_UNSPECIFIED",
-                CloudShellErrorCode::ImageUnavailable => "IMAGE_UNAVAILABLE",
-                CloudShellErrorCode::CloudShellDisabled => "CLOUD_SHELL_DISABLED",
-                CloudShellErrorCode::TosViolation => "TOS_VIOLATION",
-                CloudShellErrorCode::QuotaExceeded => "QUOTA_EXCEEDED",
-                CloudShellErrorCode::EnvironmentUnavailable => "ENVIRONMENT_UNAVAILABLE",
+                Self::Unspecified => "CLOUD_SHELL_ERROR_CODE_UNSPECIFIED",
+                Self::ImageUnavailable => "IMAGE_UNAVAILABLE",
+                Self::CloudShellDisabled => "CLOUD_SHELL_DISABLED",
+                Self::TosViolation => "TOS_VIOLATION",
+                Self::QuotaExceeded => "QUOTA_EXCEEDED",
+                Self::EnvironmentUnavailable => "ENVIRONMENT_UNAVAILABLE",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -391,11 +374,17 @@ pub mod cloud_shell_error_details {
 }
 /// Generated server implementations.
 pub mod cloud_shell_service_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with CloudShellServiceServer.
     #[async_trait]
-    pub trait CloudShellService: Send + Sync + 'static {
+    pub trait CloudShellService: std::marker::Send + std::marker::Sync + 'static {
         /// Gets an environment. Returns NOT_FOUND if the environment does not exist.
         async fn get_environment(
             &self,
@@ -455,20 +444,18 @@ pub mod cloud_shell_service_server {
     /// which can then be used to connect to that environment via a separate SSH
     /// client.
     #[derive(Debug)]
-    pub struct CloudShellServiceServer<T: CloudShellService> {
-        inner: _Inner<T>,
+    pub struct CloudShellServiceServer<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: CloudShellService> CloudShellServiceServer<T> {
+    impl<T> CloudShellServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -518,8 +505,8 @@ pub mod cloud_shell_service_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for CloudShellServiceServer<T>
     where
         T: CloudShellService,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -531,7 +518,6 @@ pub mod cloud_shell_service_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.cloud.shell.v1.CloudShellService/GetEnvironment" => {
                     #[allow(non_camel_case_types)]
@@ -563,7 +549,6 @@ pub mod cloud_shell_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetEnvironmentSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -610,7 +595,6 @@ pub mod cloud_shell_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = StartEnvironmentSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -660,7 +644,6 @@ pub mod cloud_shell_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = AuthorizeEnvironmentSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -707,7 +690,6 @@ pub mod cloud_shell_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = AddPublicKeySvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -754,7 +736,6 @@ pub mod cloud_shell_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = RemovePublicKeySvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -773,20 +754,25 @@ pub mod cloud_shell_service_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: CloudShellService> Clone for CloudShellServiceServer<T> {
+    impl<T> Clone for CloudShellServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -798,18 +784,9 @@ pub mod cloud_shell_service_server {
             }
         }
     }
-    impl<T: CloudShellService> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: CloudShellService> tonic::server::NamedService
-    for CloudShellServiceServer<T> {
-        const NAME: &'static str = "google.cloud.shell.v1.CloudShellService";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.cloud.shell.v1.CloudShellService";
+    impl<T> tonic::server::NamedService for CloudShellServiceServer<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }

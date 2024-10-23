@@ -3,7 +3,6 @@
 ///
 /// The backup contains all documents and index configurations for the given
 /// database at a specific point in time.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Backup {
     /// Output only. The unique resource name of the Backup.
@@ -40,8 +39,7 @@ pub struct Backup {
 /// Nested message and enum types in `Backup`.
 pub mod backup {
     /// Backup specific statistics.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct Stats {
         /// Output only. Summation of the size of all documents and index entries in
         /// the backup, measured in bytes.
@@ -85,10 +83,10 @@ pub mod backup {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                State::Unspecified => "STATE_UNSPECIFIED",
-                State::Creating => "CREATING",
-                State::Ready => "READY",
-                State::NotAvailable => "NOT_AVAILABLE",
+                Self::Unspecified => "STATE_UNSPECIFIED",
+                Self::Creating => "CREATING",
+                Self::Ready => "READY",
+                Self::NotAvailable => "NOT_AVAILABLE",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -104,7 +102,6 @@ pub mod backup {
     }
 }
 /// A Cloud Firestore Database.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Database {
     /// The resource name of the Database.
@@ -215,9 +212,9 @@ pub mod database {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                DatabaseType::Unspecified => "DATABASE_TYPE_UNSPECIFIED",
-                DatabaseType::FirestoreNative => "FIRESTORE_NATIVE",
-                DatabaseType::DatastoreMode => "DATASTORE_MODE",
+                Self::Unspecified => "DATABASE_TYPE_UNSPECIFIED",
+                Self::FirestoreNative => "FIRESTORE_NATIVE",
+                Self::DatastoreMode => "DATASTORE_MODE",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -269,12 +266,10 @@ pub mod database {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                ConcurrencyMode::Unspecified => "CONCURRENCY_MODE_UNSPECIFIED",
-                ConcurrencyMode::Optimistic => "OPTIMISTIC",
-                ConcurrencyMode::Pessimistic => "PESSIMISTIC",
-                ConcurrencyMode::OptimisticWithEntityGroups => {
-                    "OPTIMISTIC_WITH_ENTITY_GROUPS"
-                }
+                Self::Unspecified => "CONCURRENCY_MODE_UNSPECIFIED",
+                Self::Optimistic => "OPTIMISTIC",
+                Self::Pessimistic => "PESSIMISTIC",
+                Self::OptimisticWithEntityGroups => "OPTIMISTIC_WITH_ENTITY_GROUPS",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -324,15 +319,9 @@ pub mod database {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                PointInTimeRecoveryEnablement::Unspecified => {
-                    "POINT_IN_TIME_RECOVERY_ENABLEMENT_UNSPECIFIED"
-                }
-                PointInTimeRecoveryEnablement::PointInTimeRecoveryEnabled => {
-                    "POINT_IN_TIME_RECOVERY_ENABLED"
-                }
-                PointInTimeRecoveryEnablement::PointInTimeRecoveryDisabled => {
-                    "POINT_IN_TIME_RECOVERY_DISABLED"
-                }
+                Self::Unspecified => "POINT_IN_TIME_RECOVERY_ENABLEMENT_UNSPECIFIED",
+                Self::PointInTimeRecoveryEnabled => "POINT_IN_TIME_RECOVERY_ENABLED",
+                Self::PointInTimeRecoveryDisabled => "POINT_IN_TIME_RECOVERY_DISABLED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -385,11 +374,9 @@ pub mod database {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                AppEngineIntegrationMode::Unspecified => {
-                    "APP_ENGINE_INTEGRATION_MODE_UNSPECIFIED"
-                }
-                AppEngineIntegrationMode::Enabled => "ENABLED",
-                AppEngineIntegrationMode::Disabled => "DISABLED",
+                Self::Unspecified => "APP_ENGINE_INTEGRATION_MODE_UNSPECIFIED",
+                Self::Enabled => "ENABLED",
+                Self::Disabled => "DISABLED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -430,15 +417,9 @@ pub mod database {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                DeleteProtectionState::Unspecified => {
-                    "DELETE_PROTECTION_STATE_UNSPECIFIED"
-                }
-                DeleteProtectionState::DeleteProtectionDisabled => {
-                    "DELETE_PROTECTION_DISABLED"
-                }
-                DeleteProtectionState::DeleteProtectionEnabled => {
-                    "DELETE_PROTECTION_ENABLED"
-                }
+                Self::Unspecified => "DELETE_PROTECTION_STATE_UNSPECIFIED",
+                Self::DeleteProtectionDisabled => "DELETE_PROTECTION_DISABLED",
+                Self::DeleteProtectionEnabled => "DELETE_PROTECTION_ENABLED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -454,7 +435,6 @@ pub mod database {
 }
 /// Cloud Firestore indexes enable simple and complex queries against
 /// documents in a database.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Index {
     /// Output only. A server defined name for this index.
@@ -497,7 +477,6 @@ pub mod index {
     /// A field in an index.
     /// The field_path describes which field is indexed, the value_mode describes
     /// how the field value is indexed.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct IndexField {
         /// Can be __name__.
@@ -512,8 +491,7 @@ pub mod index {
     /// Nested message and enum types in `IndexField`.
     pub mod index_field {
         /// The index configuration to support vector search operations
-        #[allow(clippy::derive_partial_eq_without_eq)]
-        #[derive(Clone, PartialEq, ::prost::Message)]
+        #[derive(Clone, Copy, PartialEq, ::prost::Message)]
         pub struct VectorConfig {
             /// Required. The vector dimension this configuration applies to.
             ///
@@ -529,12 +507,10 @@ pub mod index {
         pub mod vector_config {
             /// An index that stores vectors in a flat data structure, and supports
             /// exhaustive search.
-            #[allow(clippy::derive_partial_eq_without_eq)]
-            #[derive(Clone, PartialEq, ::prost::Message)]
+            #[derive(Clone, Copy, PartialEq, ::prost::Message)]
             pub struct FlatIndex {}
             /// The type of index used.
-            #[allow(clippy::derive_partial_eq_without_eq)]
-            #[derive(Clone, PartialEq, ::prost::Oneof)]
+            #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
             pub enum Type {
                 /// Indicates the vector index is a flat index.
                 #[prost(message, tag = "2")]
@@ -569,9 +545,9 @@ pub mod index {
             /// (if the ProtoBuf definition does not change) and safe for programmatic use.
             pub fn as_str_name(&self) -> &'static str {
                 match self {
-                    Order::Unspecified => "ORDER_UNSPECIFIED",
-                    Order::Ascending => "ASCENDING",
-                    Order::Descending => "DESCENDING",
+                    Self::Unspecified => "ORDER_UNSPECIFIED",
+                    Self::Ascending => "ASCENDING",
+                    Self::Descending => "DESCENDING",
                 }
             }
             /// Creates an enum from field names used in the ProtoBuf definition.
@@ -610,8 +586,8 @@ pub mod index {
             /// (if the ProtoBuf definition does not change) and safe for programmatic use.
             pub fn as_str_name(&self) -> &'static str {
                 match self {
-                    ArrayConfig::Unspecified => "ARRAY_CONFIG_UNSPECIFIED",
-                    ArrayConfig::Contains => "CONTAINS",
+                    Self::Unspecified => "ARRAY_CONFIG_UNSPECIFIED",
+                    Self::Contains => "CONTAINS",
                 }
             }
             /// Creates an enum from field names used in the ProtoBuf definition.
@@ -624,8 +600,7 @@ pub mod index {
             }
         }
         /// How the field value is indexed.
-        #[allow(clippy::derive_partial_eq_without_eq)]
-        #[derive(Clone, PartialEq, ::prost::Oneof)]
+        #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
         pub enum ValueMode {
             /// Indicates that this field supports ordering by the specified order or
             /// comparing using =, !=, <, <=, >, >=.
@@ -676,10 +651,10 @@ pub mod index {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                QueryScope::Unspecified => "QUERY_SCOPE_UNSPECIFIED",
-                QueryScope::Collection => "COLLECTION",
-                QueryScope::CollectionGroup => "COLLECTION_GROUP",
-                QueryScope::CollectionRecursive => "COLLECTION_RECURSIVE",
+                Self::Unspecified => "QUERY_SCOPE_UNSPECIFIED",
+                Self::Collection => "COLLECTION",
+                Self::CollectionGroup => "COLLECTION_GROUP",
+                Self::CollectionRecursive => "COLLECTION_RECURSIVE",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -721,8 +696,8 @@ pub mod index {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                ApiScope::AnyApi => "ANY_API",
-                ApiScope::DatastoreModeApi => "DATASTORE_MODE_API",
+                Self::AnyApi => "ANY_API",
+                Self::DatastoreModeApi => "DATASTORE_MODE_API",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -779,10 +754,10 @@ pub mod index {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                State::Unspecified => "STATE_UNSPECIFIED",
-                State::Creating => "CREATING",
-                State::Ready => "READY",
-                State::NeedsRepair => "NEEDS_REPAIR",
+                Self::Unspecified => "STATE_UNSPECIFIED",
+                Self::Creating => "CREATING",
+                Self::Ready => "READY",
+                Self::NeedsRepair => "NEEDS_REPAIR",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -801,7 +776,6 @@ pub mod index {
 ///
 /// Fields are grouped by their "Collection Group", which represent all
 /// collections in the database with the same id.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Field {
     /// Required. A field name of the form:
@@ -845,7 +819,6 @@ pub struct Field {
 /// Nested message and enum types in `Field`.
 pub mod field {
     /// The index configuration for this field.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct IndexConfig {
         /// The indexes supported for this field.
@@ -878,8 +851,7 @@ pub mod field {
     /// indicate that the document is eligible for immediate expiration. Using any
     /// other data type or leaving the field absent will disable expiration for the
     /// individual document.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct TtlConfig {
         /// Output only. The state of the TTL configuration.
         #[prost(enumeration = "ttl_config::State", tag = "1")]
@@ -924,10 +896,10 @@ pub mod field {
             /// (if the ProtoBuf definition does not change) and safe for programmatic use.
             pub fn as_str_name(&self) -> &'static str {
                 match self {
-                    State::Unspecified => "STATE_UNSPECIFIED",
-                    State::Creating => "CREATING",
-                    State::Active => "ACTIVE",
-                    State::NeedsRepair => "NEEDS_REPAIR",
+                    Self::Unspecified => "STATE_UNSPECIFIED",
+                    Self::Creating => "CREATING",
+                    Self::Active => "ACTIVE",
+                    Self::NeedsRepair => "NEEDS_REPAIR",
                 }
             }
             /// Creates an enum from field names used in the ProtoBuf definition.
@@ -946,7 +918,6 @@ pub mod field {
 /// Metadata for [google.longrunning.Operation][google.longrunning.Operation]
 /// results from
 /// [FirestoreAdmin.CreateIndex][google.firestore.admin.v1.FirestoreAdmin.CreateIndex].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct IndexOperationMetadata {
     /// The time this operation started.
@@ -973,7 +944,6 @@ pub struct IndexOperationMetadata {
 /// Metadata for [google.longrunning.Operation][google.longrunning.Operation]
 /// results from
 /// [FirestoreAdmin.UpdateField][google.firestore.admin.v1.FirestoreAdmin.UpdateField].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FieldOperationMetadata {
     /// The time this operation started.
@@ -1012,7 +982,6 @@ pub struct FieldOperationMetadata {
 /// Nested message and enum types in `FieldOperationMetadata`.
 pub mod field_operation_metadata {
     /// Information about an index configuration change.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct IndexConfigDelta {
         /// Specifies how the index is changing.
@@ -1052,9 +1021,9 @@ pub mod field_operation_metadata {
             /// (if the ProtoBuf definition does not change) and safe for programmatic use.
             pub fn as_str_name(&self) -> &'static str {
                 match self {
-                    ChangeType::Unspecified => "CHANGE_TYPE_UNSPECIFIED",
-                    ChangeType::Add => "ADD",
-                    ChangeType::Remove => "REMOVE",
+                    Self::Unspecified => "CHANGE_TYPE_UNSPECIFIED",
+                    Self::Add => "ADD",
+                    Self::Remove => "REMOVE",
                 }
             }
             /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1069,8 +1038,7 @@ pub mod field_operation_metadata {
         }
     }
     /// Information about a TTL configuration change.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct TtlConfigDelta {
         /// Specifies how the TTL configuration is changing.
         #[prost(enumeration = "ttl_config_delta::ChangeType", tag = "1")]
@@ -1106,9 +1074,9 @@ pub mod field_operation_metadata {
             /// (if the ProtoBuf definition does not change) and safe for programmatic use.
             pub fn as_str_name(&self) -> &'static str {
                 match self {
-                    ChangeType::Unspecified => "CHANGE_TYPE_UNSPECIFIED",
-                    ChangeType::Add => "ADD",
-                    ChangeType::Remove => "REMOVE",
+                    Self::Unspecified => "CHANGE_TYPE_UNSPECIFIED",
+                    Self::Add => "ADD",
+                    Self::Remove => "REMOVE",
                 }
             }
             /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1126,7 +1094,6 @@ pub mod field_operation_metadata {
 /// Metadata for [google.longrunning.Operation][google.longrunning.Operation]
 /// results from
 /// [FirestoreAdmin.ExportDocuments][google.firestore.admin.v1.FirestoreAdmin.ExportDocuments].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExportDocumentsMetadata {
     /// The time this operation started.
@@ -1163,7 +1130,6 @@ pub struct ExportDocumentsMetadata {
 /// Metadata for [google.longrunning.Operation][google.longrunning.Operation]
 /// results from
 /// [FirestoreAdmin.ImportDocuments][google.firestore.admin.v1.FirestoreAdmin.ImportDocuments].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ImportDocumentsMetadata {
     /// The time this operation started.
@@ -1195,7 +1161,6 @@ pub struct ImportDocumentsMetadata {
 /// Metadata for [google.longrunning.Operation][google.longrunning.Operation]
 /// results from
 /// [FirestoreAdmin.BulkDeleteDocuments][google.firestore.admin.v1.FirestoreAdmin.BulkDeleteDocuments].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BulkDeleteDocumentsMetadata {
     /// The time this operation started.
@@ -1229,7 +1194,6 @@ pub struct BulkDeleteDocumentsMetadata {
 }
 /// Returned in the [google.longrunning.Operation][google.longrunning.Operation]
 /// response field.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExportDocumentsResponse {
     /// Location of the output files. This can be used to begin an import
@@ -1240,7 +1204,6 @@ pub struct ExportDocumentsResponse {
 }
 /// Metadata for the [long-running operation][google.longrunning.Operation] from
 /// the [RestoreDatabase][google.firestore.admin.v1.RestoreDatabase] request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RestoreDatabaseMetadata {
     /// The time the restore was started.
@@ -1265,8 +1228,7 @@ pub struct RestoreDatabaseMetadata {
 /// Describes the progress of the operation.
 /// Unit of work is generic and must be interpreted based on where
 /// [Progress][google.firestore.admin.v1.Progress] is used.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct Progress {
     /// The amount of work estimated.
     #[prost(int64, tag = "1")]
@@ -1305,14 +1267,14 @@ impl OperationState {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            OperationState::Unspecified => "OPERATION_STATE_UNSPECIFIED",
-            OperationState::Initializing => "INITIALIZING",
-            OperationState::Processing => "PROCESSING",
-            OperationState::Cancelling => "CANCELLING",
-            OperationState::Finalizing => "FINALIZING",
-            OperationState::Successful => "SUCCESSFUL",
-            OperationState::Failed => "FAILED",
-            OperationState::Cancelled => "CANCELLED",
+            Self::Unspecified => "OPERATION_STATE_UNSPECIFIED",
+            Self::Initializing => "INITIALIZING",
+            Self::Processing => "PROCESSING",
+            Self::Cancelling => "CANCELLING",
+            Self::Finalizing => "FINALIZING",
+            Self::Successful => "SUCCESSFUL",
+            Self::Failed => "FAILED",
+            Self::Cancelled => "CANCELLED",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1334,7 +1296,6 @@ impl OperationState {
 ///
 /// This resource is owned by the database it is backing up, and is deleted along
 /// with the database. The actual backups are not though.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BackupSchedule {
     /// Output only. The unique backup schedule identifier across all locations and
@@ -1368,8 +1329,7 @@ pub struct BackupSchedule {
 /// Nested message and enum types in `BackupSchedule`.
 pub mod backup_schedule {
     /// A oneof field to represent when backups will be taken.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
     pub enum Recurrence {
         /// For a schedule that runs daily.
         #[prost(message, tag = "7")]
@@ -1382,14 +1342,12 @@ pub mod backup_schedule {
 /// Represents a recurring schedule that runs at a specific time every day.
 ///
 /// The time zone is UTC.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct DailyRecurrence {}
 /// Represents a recurring schedule that runs on a specified day of the week.
 ///
 /// The time zone is UTC.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct WeeklyRecurrence {
     /// The day of week to run.
     ///
@@ -1398,7 +1356,6 @@ pub struct WeeklyRecurrence {
     pub day: i32,
 }
 /// A request to list the Firestore Databases in all locations for a project.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListDatabasesRequest {
     /// Required. A parent name of the form
@@ -1411,7 +1368,6 @@ pub struct ListDatabasesRequest {
 }
 /// The request for
 /// [FirestoreAdmin.CreateDatabase][google.firestore.admin.v1.FirestoreAdmin.CreateDatabase].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateDatabaseRequest {
     /// Required. A parent name of the form
@@ -1433,11 +1389,9 @@ pub struct CreateDatabaseRequest {
     pub database_id: ::prost::alloc::string::String,
 }
 /// Metadata related to the create database operation.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct CreateDatabaseMetadata {}
 /// The list of databases for a project.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListDatabasesResponse {
     /// The databases in the project.
@@ -1457,7 +1411,6 @@ pub struct ListDatabasesResponse {
 }
 /// The request for
 /// [FirestoreAdmin.GetDatabase][google.firestore.admin.v1.FirestoreAdmin.GetDatabase].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetDatabaseRequest {
     /// Required. A name of the form
@@ -1467,7 +1420,6 @@ pub struct GetDatabaseRequest {
 }
 /// The request for
 /// [FirestoreAdmin.UpdateDatabase][google.firestore.admin.v1.FirestoreAdmin.UpdateDatabase].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateDatabaseRequest {
     /// Required. The database to update.
@@ -1478,12 +1430,10 @@ pub struct UpdateDatabaseRequest {
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
 /// Metadata related to the update database operation.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct UpdateDatabaseMetadata {}
 /// The request for
 /// [FirestoreAdmin.DeleteDatabase][google.firestore.admin.v1.FirestoreAdmin.DeleteDatabase].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteDatabaseRequest {
     /// Required. A name of the form
@@ -1497,12 +1447,10 @@ pub struct DeleteDatabaseRequest {
     pub etag: ::prost::alloc::string::String,
 }
 /// Metadata related to the delete database operation.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct DeleteDatabaseMetadata {}
 /// The request for
 /// [FirestoreAdmin.CreateBackupSchedule][google.firestore.admin.v1.FirestoreAdmin.CreateBackupSchedule].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateBackupScheduleRequest {
     /// Required. The parent database.
@@ -1516,7 +1464,6 @@ pub struct CreateBackupScheduleRequest {
 }
 /// The request for
 /// [FirestoreAdmin.GetBackupSchedule][google.firestore.admin.v1.FirestoreAdmin.GetBackupSchedule].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetBackupScheduleRequest {
     /// Required. The name of the backup schedule.
@@ -1528,7 +1475,6 @@ pub struct GetBackupScheduleRequest {
 }
 /// The request for
 /// [FirestoreAdmin.UpdateBackupSchedule][google.firestore.admin.v1.FirestoreAdmin.UpdateBackupSchedule].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateBackupScheduleRequest {
     /// Required. The backup schedule to update.
@@ -1540,7 +1486,6 @@ pub struct UpdateBackupScheduleRequest {
 }
 /// The request for
 /// [FirestoreAdmin.ListBackupSchedules][google.firestore.admin.v1.FirestoreAdmin.ListBackupSchedules].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListBackupSchedulesRequest {
     /// Required. The parent database.
@@ -1551,7 +1496,6 @@ pub struct ListBackupSchedulesRequest {
 }
 /// The response for
 /// [FirestoreAdmin.ListBackupSchedules][google.firestore.admin.v1.FirestoreAdmin.ListBackupSchedules].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListBackupSchedulesResponse {
     /// List of all backup schedules.
@@ -1559,7 +1503,6 @@ pub struct ListBackupSchedulesResponse {
     pub backup_schedules: ::prost::alloc::vec::Vec<BackupSchedule>,
 }
 /// The request for [FirestoreAdmin.DeleteBackupSchedules][].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteBackupScheduleRequest {
     /// Required. The name of the backup schedule.
@@ -1571,7 +1514,6 @@ pub struct DeleteBackupScheduleRequest {
 }
 /// The request for
 /// [FirestoreAdmin.CreateIndex][google.firestore.admin.v1.FirestoreAdmin.CreateIndex].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateIndexRequest {
     /// Required. A parent name of the form
@@ -1584,7 +1526,6 @@ pub struct CreateIndexRequest {
 }
 /// The request for
 /// [FirestoreAdmin.ListIndexes][google.firestore.admin.v1.FirestoreAdmin.ListIndexes].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListIndexesRequest {
     /// Required. A parent name of the form
@@ -1605,7 +1546,6 @@ pub struct ListIndexesRequest {
 }
 /// The response for
 /// [FirestoreAdmin.ListIndexes][google.firestore.admin.v1.FirestoreAdmin.ListIndexes].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListIndexesResponse {
     /// The requested indexes.
@@ -1618,7 +1558,6 @@ pub struct ListIndexesResponse {
 }
 /// The request for
 /// [FirestoreAdmin.GetIndex][google.firestore.admin.v1.FirestoreAdmin.GetIndex].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetIndexRequest {
     /// Required. A name of the form
@@ -1628,7 +1567,6 @@ pub struct GetIndexRequest {
 }
 /// The request for
 /// [FirestoreAdmin.DeleteIndex][google.firestore.admin.v1.FirestoreAdmin.DeleteIndex].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteIndexRequest {
     /// Required. A name of the form
@@ -1638,7 +1576,6 @@ pub struct DeleteIndexRequest {
 }
 /// The request for
 /// [FirestoreAdmin.UpdateField][google.firestore.admin.v1.FirestoreAdmin.UpdateField].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateFieldRequest {
     /// Required. The field to be updated.
@@ -1651,7 +1588,6 @@ pub struct UpdateFieldRequest {
 }
 /// The request for
 /// [FirestoreAdmin.GetField][google.firestore.admin.v1.FirestoreAdmin.GetField].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetFieldRequest {
     /// Required. A name of the form
@@ -1661,7 +1597,6 @@ pub struct GetFieldRequest {
 }
 /// The request for
 /// [FirestoreAdmin.ListFields][google.firestore.admin.v1.FirestoreAdmin.ListFields].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListFieldsRequest {
     /// Required. A parent name of the form
@@ -1688,7 +1623,6 @@ pub struct ListFieldsRequest {
 }
 /// The response for
 /// [FirestoreAdmin.ListFields][google.firestore.admin.v1.FirestoreAdmin.ListFields].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListFieldsResponse {
     /// The requested fields.
@@ -1701,7 +1635,6 @@ pub struct ListFieldsResponse {
 }
 /// The request for
 /// [FirestoreAdmin.ExportDocuments][google.firestore.admin.v1.FirestoreAdmin.ExportDocuments].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExportDocumentsRequest {
     /// Required. Database to export. Should be of the form:
@@ -1742,7 +1675,6 @@ pub struct ExportDocumentsRequest {
 }
 /// The request for
 /// [FirestoreAdmin.ImportDocuments][google.firestore.admin.v1.FirestoreAdmin.ImportDocuments].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ImportDocumentsRequest {
     /// Required. Database to import into. Should be of the form:
@@ -1779,7 +1711,6 @@ pub struct ImportDocumentsRequest {
 /// Please use
 /// [FirestoreAdmin.DeleteDatabase][google.firestore.admin.v1.FirestoreAdmin.DeleteDatabase]
 /// instead.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BulkDeleteDocumentsRequest {
     /// Required. Database to operate. Should be of the form:
@@ -1807,12 +1738,10 @@ pub struct BulkDeleteDocumentsRequest {
 }
 /// The response for
 /// [FirestoreAdmin.BulkDeleteDocuments][google.firestore.admin.v1.FirestoreAdmin.BulkDeleteDocuments].
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct BulkDeleteDocumentsResponse {}
 /// The request for
 /// [FirestoreAdmin.GetBackup][google.firestore.admin.v1.FirestoreAdmin.GetBackup].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetBackupRequest {
     /// Required. Name of the backup to fetch.
@@ -1823,7 +1752,6 @@ pub struct GetBackupRequest {
 }
 /// The request for
 /// [FirestoreAdmin.ListBackups][google.firestore.admin.v1.FirestoreAdmin.ListBackups].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListBackupsRequest {
     /// Required. The location to list backups from.
@@ -1837,7 +1765,6 @@ pub struct ListBackupsRequest {
 }
 /// The response for
 /// [FirestoreAdmin.ListBackups][google.firestore.admin.v1.FirestoreAdmin.ListBackups].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListBackupsResponse {
     /// List of all backups for the project.
@@ -1854,7 +1781,6 @@ pub struct ListBackupsResponse {
 }
 /// The request for
 /// [FirestoreAdmin.DeleteBackup][google.firestore.admin.v1.FirestoreAdmin.DeleteBackup].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteBackupRequest {
     /// Required. Name of the backup to delete.
@@ -1865,7 +1791,6 @@ pub struct DeleteBackupRequest {
 }
 /// The request message for
 /// [FirestoreAdmin.RestoreDatabase][google.firestore.admin.v1.RestoreDatabase].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RestoreDatabaseRequest {
     /// Required. The project to restore the database in. Format is
@@ -1892,7 +1817,13 @@ pub struct RestoreDatabaseRequest {
 }
 /// Generated client implementations.
 pub mod firestore_admin_client {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     use tonic::codegen::http::Uri;
     /// The Cloud Firestore Admin API.
@@ -1931,8 +1862,8 @@ pub mod firestore_admin_client {
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
-        T::ResponseBody: Body<Data = Bytes> + Send + 'static,
-        <T::ResponseBody as Body>::Error: Into<StdError> + Send,
+        T::ResponseBody: Body<Data = Bytes> + std::marker::Send + 'static,
+        <T::ResponseBody as Body>::Error: Into<StdError> + std::marker::Send,
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
@@ -1957,7 +1888,7 @@ pub mod firestore_admin_client {
             >,
             <T as tonic::codegen::Service<
                 http::Request<tonic::body::BoxBody>,
-            >>::Error: Into<StdError> + Send + Sync,
+            >>::Error: Into<StdError> + std::marker::Send + std::marker::Sync,
         {
             FirestoreAdminClient::new(InterceptedService::new(inner, interceptor))
         }
@@ -2008,8 +1939,7 @@ pub mod firestore_admin_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -2039,8 +1969,7 @@ pub mod firestore_admin_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -2067,8 +1996,7 @@ pub mod firestore_admin_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -2095,8 +2023,7 @@ pub mod firestore_admin_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -2123,8 +2050,7 @@ pub mod firestore_admin_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -2169,8 +2095,7 @@ pub mod firestore_admin_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -2208,8 +2133,7 @@ pub mod firestore_admin_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -2249,8 +2173,7 @@ pub mod firestore_admin_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -2284,8 +2207,7 @@ pub mod firestore_admin_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -2322,8 +2244,7 @@ pub mod firestore_admin_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -2353,8 +2274,7 @@ pub mod firestore_admin_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -2381,8 +2301,7 @@ pub mod firestore_admin_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -2412,8 +2331,7 @@ pub mod firestore_admin_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -2443,8 +2361,7 @@ pub mod firestore_admin_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -2474,8 +2391,7 @@ pub mod firestore_admin_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -2502,8 +2418,7 @@ pub mod firestore_admin_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -2533,8 +2448,7 @@ pub mod firestore_admin_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -2561,8 +2475,7 @@ pub mod firestore_admin_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -2608,8 +2521,7 @@ pub mod firestore_admin_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -2638,8 +2550,7 @@ pub mod firestore_admin_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -2666,8 +2577,7 @@ pub mod firestore_admin_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -2697,8 +2607,7 @@ pub mod firestore_admin_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -2725,8 +2634,7 @@ pub mod firestore_admin_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -2753,8 +2661,7 @@ pub mod firestore_admin_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -2776,6 +2683,5 @@ pub mod firestore_admin_client {
 }
 /// The metadata message for
 /// [google.cloud.location.Location.metadata][google.cloud.location.Location.metadata].
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct LocationMetadata {}

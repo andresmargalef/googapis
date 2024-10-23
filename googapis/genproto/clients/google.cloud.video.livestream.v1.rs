@@ -2,7 +2,6 @@
 /// Encoding of an input element such as an audio, video, or text track.
 /// Elementary streams must be packaged before mapping and sharing between
 /// different output formats.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ElementaryStream {
     /// A unique key for this elementary stream.
@@ -15,7 +14,6 @@ pub struct ElementaryStream {
 /// Nested message and enum types in `ElementaryStream`.
 pub mod elementary_stream {
     /// Required. Encoding of an audio, video, or text track.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum ElementaryStream {
         /// Encoding of a video stream.
@@ -30,7 +28,6 @@ pub mod elementary_stream {
     }
 }
 /// Multiplexing settings for output stream.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MuxStream {
     /// A unique key for this multiplexed stream.
@@ -62,7 +59,6 @@ pub struct MuxStream {
     pub encryption_id: ::prost::alloc::string::String,
 }
 /// Manifest configuration.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Manifest {
     /// The name of the generated file. The default is `manifest` with the
@@ -137,9 +133,9 @@ pub mod manifest {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                ManifestType::Unspecified => "MANIFEST_TYPE_UNSPECIFIED",
-                ManifestType::Hls => "HLS",
-                ManifestType::Dash => "DASH",
+                Self::Unspecified => "MANIFEST_TYPE_UNSPECIFIED",
+                Self::Hls => "HLS",
+                Self::Dash => "DASH",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -154,7 +150,6 @@ pub mod manifest {
     }
 }
 /// Sprite sheet configuration.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SpriteSheet {
     /// Format type. The default is `jpeg`.
@@ -198,8 +193,7 @@ pub struct SpriteSheet {
     pub quality: i32,
 }
 /// Preprocessing configurations.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct PreprocessingConfig {
     /// Audio preprocessing configuration.
     #[prost(message, optional, tag = "1")]
@@ -214,8 +208,7 @@ pub struct PreprocessingConfig {
 /// Nested message and enum types in `PreprocessingConfig`.
 pub mod preprocessing_config {
     /// Audio preprocessing configuration.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct Audio {
         /// Specify audio loudness normalization in loudness units relative to full
         /// scale (LUFS). Enter a value between -24 and 0 according to the following:
@@ -233,8 +226,7 @@ pub mod preprocessing_config {
     }
     /// Video cropping configuration for the input video. The cropped input video
     /// is scaled to match the output resolution.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct Crop {
         /// The number of pixels to crop from the top. The default is 0.
         #[prost(int32, tag = "1")]
@@ -251,8 +243,7 @@ pub mod preprocessing_config {
     }
     /// Pad filter configuration for the input video. The padded input video
     /// is scaled after padding with black to match the output resolution.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct Pad {
         /// The number of pixels to add to the top. The default is 0.
         #[prost(int32, tag = "1")]
@@ -269,7 +260,6 @@ pub mod preprocessing_config {
     }
 }
 /// Video stream resource.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VideoStream {
     /// Codec settings.
@@ -279,7 +269,6 @@ pub struct VideoStream {
 /// Nested message and enum types in `VideoStream`.
 pub mod video_stream {
     /// H264 codec settings.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct H264CodecSettings {
         /// Required. The width of the video in pixels. Must be an even integer.
@@ -373,8 +362,7 @@ pub mod video_stream {
     /// Nested message and enum types in `H264CodecSettings`.
     pub mod h264_codec_settings {
         /// GOP mode can be either by frame count or duration.
-        #[allow(clippy::derive_partial_eq_without_eq)]
-        #[derive(Clone, PartialEq, ::prost::Oneof)]
+        #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
         pub enum GopMode {
             /// Select the GOP size based on the specified frame count.
             /// If GOP frame count is set instead of GOP duration, GOP duration will be
@@ -396,7 +384,6 @@ pub mod video_stream {
         }
     }
     /// Codec settings.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum CodecSettings {
         /// H264 codec settings.
@@ -405,7 +392,6 @@ pub mod video_stream {
     }
 }
 /// Audio stream resource.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AudioStream {
     /// Specifies whether pass through (transmuxing) is enabled or not.
@@ -451,7 +437,6 @@ pub struct AudioStream {
 /// Nested message and enum types in `AudioStream`.
 pub mod audio_stream {
     /// The mapping for the input streams and audio channels.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct AudioMapping {
         /// Required. The `Channel`
@@ -482,7 +467,6 @@ pub mod audio_stream {
     }
 }
 /// Encoding of a text stream. For example, closed captions or subtitles.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TextStream {
     /// Required. The codec for this text stream.
@@ -495,8 +479,7 @@ pub struct TextStream {
     pub codec: ::prost::alloc::string::String,
 }
 /// Segment settings for `fmp4` and `ts`.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct SegmentSettings {
     /// Duration of the segments in seconds. The default is `6s`. Note that
     /// `segmentDuration` must be greater than or equal to
@@ -511,7 +494,6 @@ pub struct SegmentSettings {
     pub segment_duration: ::core::option::Option<::prost_types::Duration>,
 }
 /// Timecode configuration.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TimecodeConfig {
     /// The source of the timecode that will later be used in outputs/manifests.
@@ -555,9 +537,9 @@ pub mod timecode_config {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                TimecodeSource::Unspecified => "TIMECODE_SOURCE_UNSPECIFIED",
-                TimecodeSource::MediaTimestamp => "MEDIA_TIMESTAMP",
-                TimecodeSource::EmbeddedTimecode => "EMBEDDED_TIMECODE",
+                Self::Unspecified => "TIMECODE_SOURCE_UNSPECIFIED",
+                Self::MediaTimestamp => "MEDIA_TIMESTAMP",
+                Self::EmbeddedTimecode => "EMBEDDED_TIMECODE",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -573,7 +555,6 @@ pub mod timecode_config {
     /// For EMBEDDED_TIMECODE source only.
     /// Used to interpret the embedded timecode (which contains only the time part
     /// and no date). We assume all inputs are live.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum TimeOffset {
         /// UTC offset. Must be whole seconds, between -18 hours and +18 hours.
@@ -586,7 +567,6 @@ pub mod timecode_config {
 }
 /// Input resource represents the endpoint from which the channel ingests
 /// the input stream.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Input {
     /// The resource name of the input, in the form of:
@@ -638,7 +618,6 @@ pub mod input {
     /// Security rules for access control. Each field represents one security rule.
     /// Only when the source of the input stream satisfies all the fields, this
     /// input stream can be accepted.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct SecurityRule {
         /// At least one ip range must match unless none specified. The IP range is
@@ -675,9 +654,9 @@ pub mod input {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Type::Unspecified => "TYPE_UNSPECIFIED",
-                Type::RtmpPush => "RTMP_PUSH",
-                Type::SrtPush => "SRT_PUSH",
+                Self::Unspecified => "TYPE_UNSPECIFIED",
+                Self::RtmpPush => "RTMP_PUSH",
+                Self::SrtPush => "SRT_PUSH",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -720,10 +699,10 @@ pub mod input {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Tier::Unspecified => "TIER_UNSPECIFIED",
-                Tier::Sd => "SD",
-                Tier::Hd => "HD",
-                Tier::Uhd => "UHD",
+                Self::Unspecified => "TIER_UNSPECIFIED",
+                Self::Sd => "SD",
+                Self::Hd => "HD",
+                Self::Uhd => "UHD",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -743,7 +722,6 @@ pub mod input {
 /// input, transcoding it to multiple renditions, and publishing output live
 /// streams in certain formats (for example, HLS or DASH) to the specified
 /// location.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Channel {
     /// The resource name of the channel, in the form of:
@@ -819,7 +797,6 @@ pub struct Channel {
 /// Nested message and enum types in `Channel`.
 pub mod channel {
     /// Location of output file(s) in a Google Cloud Storage bucket.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Output {
         /// URI for the output file(s). For example, `gs://my-bucket/outputs/`.
@@ -869,14 +846,14 @@ pub mod channel {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                StreamingState::Unspecified => "STREAMING_STATE_UNSPECIFIED",
-                StreamingState::Streaming => "STREAMING",
-                StreamingState::AwaitingInput => "AWAITING_INPUT",
-                StreamingState::StreamingError => "STREAMING_ERROR",
-                StreamingState::StreamingNoInput => "STREAMING_NO_INPUT",
-                StreamingState::Stopped => "STOPPED",
-                StreamingState::Starting => "STARTING",
-                StreamingState::Stopping => "STOPPING",
+                Self::Unspecified => "STREAMING_STATE_UNSPECIFIED",
+                Self::Streaming => "STREAMING",
+                Self::AwaitingInput => "AWAITING_INPUT",
+                Self::StreamingError => "STREAMING_ERROR",
+                Self::StreamingNoInput => "STREAMING_NO_INPUT",
+                Self::Stopped => "STOPPED",
+                Self::Starting => "STARTING",
+                Self::Stopping => "STOPPING",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -896,8 +873,7 @@ pub mod channel {
     }
 }
 /// Configuration for the input sources of a channel.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct InputConfig {
     /// Input switch mode. Default mode is `FAILOVER_PREFER_PRIMARY`.
     #[prost(enumeration = "input_config::InputSwitchMode", tag = "1")]
@@ -941,9 +917,9 @@ pub mod input_config {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                InputSwitchMode::Unspecified => "INPUT_SWITCH_MODE_UNSPECIFIED",
-                InputSwitchMode::FailoverPreferPrimary => "FAILOVER_PREFER_PRIMARY",
-                InputSwitchMode::Manual => "MANUAL",
+                Self::Unspecified => "INPUT_SWITCH_MODE_UNSPECIFIED",
+                Self::FailoverPreferPrimary => "FAILOVER_PREFER_PRIMARY",
+                Self::Manual => "MANUAL",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -961,8 +937,7 @@ pub mod input_config {
 /// See [Using and managing platform
 /// logs](<https://cloud.google.com/logging/docs/api/platform-logs#managing-logs>)
 /// for more information about how to view platform logs through Cloud Logging.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct LogConfig {
     /// The severity level of platform logging for this resource.
     #[prost(enumeration = "log_config::LogSeverity", tag = "1")]
@@ -1011,12 +986,12 @@ pub mod log_config {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                LogSeverity::Unspecified => "LOG_SEVERITY_UNSPECIFIED",
-                LogSeverity::Off => "OFF",
-                LogSeverity::Debug => "DEBUG",
-                LogSeverity::Info => "INFO",
-                LogSeverity::Warning => "WARNING",
-                LogSeverity::Error => "ERROR",
+                Self::Unspecified => "LOG_SEVERITY_UNSPECIFIED",
+                Self::Off => "OFF",
+                Self::Debug => "DEBUG",
+                Self::Info => "INFO",
+                Self::Warning => "WARNING",
+                Self::Error => "ERROR",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1034,7 +1009,6 @@ pub mod log_config {
     }
 }
 /// Properties of the input stream.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct InputStreamProperty {
     /// The time that the current input stream is accepted and the connection is
@@ -1049,7 +1023,6 @@ pub struct InputStreamProperty {
     pub audio_streams: ::prost::alloc::vec::Vec<AudioStreamProperty>,
 }
 /// Properties of the video stream.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VideoStreamProperty {
     /// Index of this video stream.
@@ -1060,7 +1033,6 @@ pub struct VideoStreamProperty {
     pub video_format: ::core::option::Option<VideoFormat>,
 }
 /// Properties of the video format.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VideoFormat {
     /// Video codec used in this video stream.
@@ -1077,7 +1049,6 @@ pub struct VideoFormat {
     pub frame_rate: f64,
 }
 /// Properties of the audio stream.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AudioStreamProperty {
     /// Index of this audio stream.
@@ -1088,7 +1059,6 @@ pub struct AudioStreamProperty {
     pub audio_format: ::core::option::Option<AudioFormat>,
 }
 /// Properties of the audio format.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AudioFormat {
     /// Audio codec used in this audio stream.
@@ -1102,7 +1072,6 @@ pub struct AudioFormat {
     pub channel_layout: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// A group of information for attaching an input resource to this channel.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct InputAttachment {
     /// A unique key for this input attachment.
@@ -1119,7 +1088,6 @@ pub struct InputAttachment {
 /// Nested message and enum types in `InputAttachment`.
 pub mod input_attachment {
     /// Configurations to follow when automatic failover happens.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct AutomaticFailover {
         /// The
@@ -1132,7 +1100,6 @@ pub mod input_attachment {
 }
 /// Event is a sub-resource of a channel, which can be scheduled by the user to
 /// execute operations on a channel resource without having to stop the channel.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Event {
     /// The resource name of the event, in the form of:
@@ -1181,7 +1148,6 @@ pub struct Event {
 /// Nested message and enum types in `Event`.
 pub mod event {
     /// Switches to another input stream. Automatic failover is then disabled.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct InputSwitchTask {
         /// The
@@ -1191,15 +1157,13 @@ pub mod event {
         pub input_key: ::prost::alloc::string::String,
     }
     /// Inserts a new ad opportunity.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct AdBreakTask {
         /// Duration of an ad opportunity. Must be greater than 0.
         #[prost(message, optional, tag = "1")]
         pub duration: ::core::option::Option<::prost_types::Duration>,
     }
     /// Inserts a slate.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct SlateTask {
         /// Optional. Duration of the slate. Must be greater than 0 if specified.
@@ -1215,12 +1179,10 @@ pub mod event {
     }
     /// Stops any events which are currently running. This only applies to events
     /// with a duration.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct ReturnToProgramTask {}
     /// Mutes the stream.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct MuteTask {
         /// Duration for which the stream should be muted. If omitted, the stream
         /// will be muted until an UnmuteTask event is sent.
@@ -1229,8 +1191,7 @@ pub mod event {
     }
     /// Unmutes the stream. The task will fail if the stream is not
     /// currently muted.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct UnmuteTask {}
     /// State of the event
     #[derive(
@@ -1268,13 +1229,13 @@ pub mod event {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                State::Unspecified => "STATE_UNSPECIFIED",
-                State::Scheduled => "SCHEDULED",
-                State::Running => "RUNNING",
-                State::Succeeded => "SUCCEEDED",
-                State::Failed => "FAILED",
-                State::Pending => "PENDING",
-                State::Stopped => "STOPPED",
+                Self::Unspecified => "STATE_UNSPECIFIED",
+                Self::Scheduled => "SCHEDULED",
+                Self::Running => "RUNNING",
+                Self::Succeeded => "SUCCEEDED",
+                Self::Failed => "FAILED",
+                Self::Pending => "PENDING",
+                Self::Stopped => "STOPPED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1292,7 +1253,6 @@ pub mod event {
         }
     }
     /// Required. Operation to be executed by this event.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Task {
         /// Switches to another input stream.
@@ -1316,7 +1276,6 @@ pub mod event {
     }
 }
 /// An asset represents a video or an image.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Asset {
     /// The resource name of the asset, in the form of:
@@ -1363,7 +1322,6 @@ pub mod asset {
     /// VideoAsset represents a video. The supported formats are MP4, MPEG-TS, and
     /// FLV. The supported video codec is H264. The supported audio codecs are
     /// AAC, AC3, MP2, and MP3.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct VideoAsset {
         /// Cloud Storage URI of the video. The format is `gs://my-bucket/my-object`.
@@ -1371,7 +1329,6 @@ pub mod asset {
         pub uri: ::prost::alloc::string::String,
     }
     /// Image represents an image. The supported format is JPEG.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ImageAsset {
         /// Cloud Storage URI of the image. The format is `gs://my-bucket/my-object`.
@@ -1410,11 +1367,11 @@ pub mod asset {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                State::Unspecified => "STATE_UNSPECIFIED",
-                State::Creating => "CREATING",
-                State::Active => "ACTIVE",
-                State::Deleting => "DELETING",
-                State::Error => "ERROR",
+                Self::Unspecified => "STATE_UNSPECIFIED",
+                Self::Creating => "CREATING",
+                Self::Active => "ACTIVE",
+                Self::Deleting => "DELETING",
+                Self::Error => "ERROR",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1431,7 +1388,6 @@ pub mod asset {
     }
     /// The reference to the asset.
     /// The maximum size of the resource is 250 MB.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Resource {
         /// VideoAsset represents a video.
@@ -1443,7 +1399,6 @@ pub mod asset {
     }
 }
 /// Encryption settings.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Encryption {
     /// Required. Identifier for this set of encryption options.
@@ -1462,7 +1417,6 @@ pub struct Encryption {
 /// Nested message and enum types in `Encryption`.
 pub mod encryption {
     /// Configuration for secrets stored in Google Secret Manager.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct SecretManagerSource {
         /// Required. The name of the Secret Version containing the encryption key.
@@ -1471,25 +1425,20 @@ pub mod encryption {
         pub secret_version: ::prost::alloc::string::String,
     }
     /// Widevine configuration.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct Widevine {}
     /// Fairplay configuration.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct Fairplay {}
     /// Playready configuration.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct Playready {}
     /// Clearkey configuration.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct Clearkey {}
     /// Defines configuration for DRM systems in use. If a field is omitted,
     /// that DRM system will be considered to be disabled.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct DrmSystems {
         /// Widevine configuration.
         #[prost(message, optional, tag = "1")]
@@ -1505,15 +1454,12 @@ pub mod encryption {
         pub clearkey: ::core::option::Option<Clearkey>,
     }
     /// Configuration for HLS AES-128 encryption.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct Aes128Encryption {}
     /// Configuration for HLS SAMPLE-AES encryption.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct SampleAesEncryption {}
     /// Configuration for MPEG-Dash Common Encryption (MPEG-CENC).
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct MpegCommonEncryption {
         /// Required. Specify the encryption scheme, supported schemes:
@@ -1523,7 +1469,6 @@ pub mod encryption {
         pub scheme: ::prost::alloc::string::String,
     }
     /// Defines where content keys are stored.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum SecretSource {
         /// For keys stored in Google Secret Manager.
@@ -1531,7 +1476,6 @@ pub mod encryption {
         SecretManagerKeySource(SecretManagerSource),
     }
     /// Encryption modes for HLS and MPEG-Dash.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum EncryptionMode {
         /// Configuration for HLS AES-128 encryption.
@@ -1549,7 +1493,6 @@ pub mod encryption {
 /// location. Currently we support only one pool resource per project per
 /// location. After the creation of the first input, a default pool is created
 /// automatically at "projects/{project}/locations/{location}/pools/default".
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Pool {
     /// The resource name of the pool, in the form of:
@@ -1575,7 +1518,6 @@ pub struct Pool {
 /// Nested message and enum types in `Pool`.
 pub mod pool {
     /// Defines the network configuration for the pool.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct NetworkConfig {
         /// peered_network is the network resource URL of the network that is peered
@@ -1590,7 +1532,6 @@ pub mod pool {
     }
 }
 /// Request message for "LivestreamService.CreateAsset".
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateAssetRequest {
     /// Required. The parent location for the resource, in the form of:
@@ -1622,7 +1563,6 @@ pub struct CreateAssetRequest {
     pub request_id: ::prost::alloc::string::String,
 }
 /// Request message for "LivestreamService.DeleteAsset".
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteAssetRequest {
     /// Required. The name of the asset resource, in the form of:
@@ -1646,7 +1586,6 @@ pub struct DeleteAssetRequest {
     pub request_id: ::prost::alloc::string::String,
 }
 /// Request message for "LivestreamService.ListAssets".
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAssetsRequest {
     /// Required. The parent location for the resource, in the form of:
@@ -1668,7 +1607,6 @@ pub struct ListAssetsRequest {
     pub order_by: ::prost::alloc::string::String,
 }
 /// Response message for "LivestreamService.ListAssets".
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAssetsResponse {
     /// The list of Assets
@@ -1682,7 +1620,6 @@ pub struct ListAssetsResponse {
     pub unreachable: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Request message for "LivestreamService.GetAsset".
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetAssetRequest {
     /// Required. Name of the resource, in the following form:
@@ -1691,7 +1628,6 @@ pub struct GetAssetRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for "LivestreamService.CreateChannel".
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateChannelRequest {
     /// Required. The parent location for the resource, in the form of:
@@ -1723,7 +1659,6 @@ pub struct CreateChannelRequest {
     pub request_id: ::prost::alloc::string::String,
 }
 /// Request message for "LivestreamService.ListChannels".
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListChannelsRequest {
     /// Required. The parent location for the resource, in the form of:
@@ -1749,7 +1684,6 @@ pub struct ListChannelsRequest {
     pub order_by: ::prost::alloc::string::String,
 }
 /// Response message for "LivestreamService.ListChannels".
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListChannelsResponse {
     /// A list of channels.
@@ -1764,7 +1698,6 @@ pub struct ListChannelsResponse {
     pub unreachable: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Request message for "LivestreamService.GetChannel".
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetChannelRequest {
     /// Required. The name of the channel resource, in the form of:
@@ -1773,7 +1706,6 @@ pub struct GetChannelRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for "LivestreamService.DeleteChannel".
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteChannelRequest {
     /// Required. The name of the channel resource, in the form of:
@@ -1803,7 +1735,6 @@ pub struct DeleteChannelRequest {
     pub force: bool,
 }
 /// Request message for "LivestreamService.UpdateChannel".
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateChannelRequest {
     /// Field mask is used to specify the fields to be overwritten in the Channel
@@ -1848,7 +1779,6 @@ pub struct UpdateChannelRequest {
     pub request_id: ::prost::alloc::string::String,
 }
 /// Request message for "LivestreamService.StartChannel".
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StartChannelRequest {
     /// Required. The name of the channel resource, in the form of:
@@ -1872,7 +1802,6 @@ pub struct StartChannelRequest {
     pub request_id: ::prost::alloc::string::String,
 }
 /// Request message for "LivestreamService.StopChannel".
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StopChannelRequest {
     /// Required. The name of the channel resource, in the form of:
@@ -1896,7 +1825,6 @@ pub struct StopChannelRequest {
     pub request_id: ::prost::alloc::string::String,
 }
 /// Request message for "LivestreamService.CreateInput".
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateInputRequest {
     /// Required. The parent location for the resource, in the form of:
@@ -1928,7 +1856,6 @@ pub struct CreateInputRequest {
     pub request_id: ::prost::alloc::string::String,
 }
 /// Request message for "LivestreamService.ListInputs".
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListInputsRequest {
     /// Required. The parent location for the resource, in the form of:
@@ -1954,7 +1881,6 @@ pub struct ListInputsRequest {
     pub order_by: ::prost::alloc::string::String,
 }
 /// Response message for "LivestreamService.ListInputs".
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListInputsResponse {
     /// A list of inputs.
@@ -1969,7 +1895,6 @@ pub struct ListInputsResponse {
     pub unreachable: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Request message for "LivestreamService.GetInput".
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetInputRequest {
     /// Required. The name of the input resource, in the form of:
@@ -1978,7 +1903,6 @@ pub struct GetInputRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for "LivestreamService.DeleteInput".
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteInputRequest {
     /// Required. The name of the input resource, in the form of:
@@ -2002,7 +1926,6 @@ pub struct DeleteInputRequest {
     pub request_id: ::prost::alloc::string::String,
 }
 /// Request message for "LivestreamService.UpdateInput".
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateInputRequest {
     /// Field mask is used to specify the fields to be overwritten in the Input
@@ -2039,7 +1962,6 @@ pub struct UpdateInputRequest {
     pub request_id: ::prost::alloc::string::String,
 }
 /// Request message for "LivestreamService.CreateEvent".
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateEventRequest {
     /// Required. The parent channel for the resource, in the form of:
@@ -2071,7 +1993,6 @@ pub struct CreateEventRequest {
     pub request_id: ::prost::alloc::string::String,
 }
 /// Request message for "LivestreamService.ListEvents".
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListEventsRequest {
     /// Required. The parent channel for the resource, in the form of:
@@ -2097,7 +2018,6 @@ pub struct ListEventsRequest {
     pub order_by: ::prost::alloc::string::String,
 }
 /// Response message for "LivestreamService.ListEvents".
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListEventsResponse {
     /// A list of events.
@@ -2112,7 +2032,6 @@ pub struct ListEventsResponse {
     pub unreachable: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Request message for "LivestreamService.GetEvent".
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetEventRequest {
     /// Required. The name of the event resource, in the form of:
@@ -2121,7 +2040,6 @@ pub struct GetEventRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for "LivestreamService.DeleteEvent".
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteEventRequest {
     /// Required. The name of the event resource, in the form of:
@@ -2145,11 +2063,9 @@ pub struct DeleteEventRequest {
     pub request_id: ::prost::alloc::string::String,
 }
 /// Response message for Start/Stop Channel long-running operations.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct ChannelOperationResponse {}
 /// Represents the metadata of the long-running operation.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OperationMetadata {
     /// Output only. The time the operation was created.
@@ -2176,7 +2092,6 @@ pub struct OperationMetadata {
     pub api_version: ::prost::alloc::string::String,
 }
 /// Request message for "LivestreamService.GetPool".
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetPoolRequest {
     /// Required. The name of the pool resource, in the form of:
@@ -2185,7 +2100,6 @@ pub struct GetPoolRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for "LivestreamService.UpdatePool".
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdatePoolRequest {
     /// Field mask is used to specify the fields to be overwritten in the Pool
@@ -2218,7 +2132,13 @@ pub struct UpdatePoolRequest {
 }
 /// Generated client implementations.
 pub mod livestream_service_client {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     use tonic::codegen::http::Uri;
     /// Using Live Stream API, you can generate live streams in the various
@@ -2234,8 +2154,8 @@ pub mod livestream_service_client {
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
-        T::ResponseBody: Body<Data = Bytes> + Send + 'static,
-        <T::ResponseBody as Body>::Error: Into<StdError> + Send,
+        T::ResponseBody: Body<Data = Bytes> + std::marker::Send + 'static,
+        <T::ResponseBody as Body>::Error: Into<StdError> + std::marker::Send,
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
@@ -2260,7 +2180,7 @@ pub mod livestream_service_client {
             >,
             <T as tonic::codegen::Service<
                 http::Request<tonic::body::BoxBody>,
-            >>::Error: Into<StdError> + Send + Sync,
+            >>::Error: Into<StdError> + std::marker::Send + std::marker::Sync,
         {
             LivestreamServiceClient::new(InterceptedService::new(inner, interceptor))
         }
@@ -2308,8 +2228,7 @@ pub mod livestream_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -2339,8 +2258,7 @@ pub mod livestream_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -2367,8 +2285,7 @@ pub mod livestream_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -2398,8 +2315,7 @@ pub mod livestream_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -2429,8 +2345,7 @@ pub mod livestream_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -2461,8 +2376,7 @@ pub mod livestream_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -2493,8 +2407,7 @@ pub mod livestream_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -2524,8 +2437,7 @@ pub mod livestream_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -2555,8 +2467,7 @@ pub mod livestream_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -2583,8 +2494,7 @@ pub mod livestream_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -2614,8 +2524,7 @@ pub mod livestream_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -2645,8 +2554,7 @@ pub mod livestream_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -2673,8 +2581,7 @@ pub mod livestream_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -2704,8 +2611,7 @@ pub mod livestream_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -2732,8 +2638,7 @@ pub mod livestream_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -2760,8 +2665,7 @@ pub mod livestream_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -2792,8 +2696,7 @@ pub mod livestream_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -2823,8 +2726,7 @@ pub mod livestream_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -2851,8 +2753,7 @@ pub mod livestream_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -2882,8 +2783,7 @@ pub mod livestream_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -2910,8 +2810,7 @@ pub mod livestream_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -2941,8 +2840,7 @@ pub mod livestream_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;

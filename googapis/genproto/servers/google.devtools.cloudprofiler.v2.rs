@@ -4,7 +4,6 @@
 /// of profile types supported by the agent. The creation call will hang until a
 /// profile of one of these types needs to be collected.
 ///
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateProfileRequest {
     /// Parent project to create the profile in.
@@ -19,7 +18,6 @@ pub struct CreateProfileRequest {
 }
 /// CreateOfflineProfileRequest describes a profile resource offline creation
 /// request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateOfflineProfileRequest {
     /// Parent project to create the profile in.
@@ -30,7 +28,6 @@ pub struct CreateOfflineProfileRequest {
     pub profile: ::core::option::Option<Profile>,
 }
 /// UpdateProfileRequest contains the profile to update.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateProfileRequest {
     /// Profile to update.
@@ -44,7 +41,6 @@ pub struct UpdateProfileRequest {
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
 /// Profile resource.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Profile {
     /// Output only. Opaque, server-assigned, unique ID for this profile.
@@ -84,7 +80,6 @@ pub struct Profile {
     pub start_time: ::core::option::Option<::prost_types::Timestamp>,
 }
 /// Deployment contains the deployment identification information.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Deployment {
     /// Project ID is the ID of a cloud project.
@@ -120,7 +115,6 @@ pub struct Deployment {
 }
 /// ListProfilesRequest contains request parameters for listing profiles for
 /// deployments in projects which the user has permissions to view.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListProfilesRequest {
     /// Required. The parent, which owns this collection of profiles.
@@ -140,7 +134,6 @@ pub struct ListProfilesRequest {
 }
 /// ListProfileResponse contains the list of collected profiles for deployments
 /// in projects which the user has permissions to view.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListProfilesResponse {
     /// List of profiles fetched.
@@ -193,14 +186,14 @@ impl ProfileType {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            ProfileType::Unspecified => "PROFILE_TYPE_UNSPECIFIED",
-            ProfileType::Cpu => "CPU",
-            ProfileType::Wall => "WALL",
-            ProfileType::Heap => "HEAP",
-            ProfileType::Threads => "THREADS",
-            ProfileType::Contention => "CONTENTION",
-            ProfileType::PeakHeap => "PEAK_HEAP",
-            ProfileType::HeapAlloc => "HEAP_ALLOC",
+            Self::Unspecified => "PROFILE_TYPE_UNSPECIFIED",
+            Self::Cpu => "CPU",
+            Self::Wall => "WALL",
+            Self::Heap => "HEAP",
+            Self::Threads => "THREADS",
+            Self::Contention => "CONTENTION",
+            Self::PeakHeap => "PEAK_HEAP",
+            Self::HeapAlloc => "HEAP_ALLOC",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -220,11 +213,17 @@ impl ProfileType {
 }
 /// Generated server implementations.
 pub mod profiler_service_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with ProfilerServiceServer.
     #[async_trait]
-    pub trait ProfilerService: Send + Sync + 'static {
+    pub trait ProfilerService: std::marker::Send + std::marker::Sync + 'static {
         /// CreateProfile creates a new profile resource in the online mode.
         ///
         /// _Direct use of this API is discouraged, please use a [supported
@@ -280,20 +279,18 @@ pub mod profiler_service_server {
     /// __The APIs listed in this service are intended for use within our profiler
     /// agents only.__
     #[derive(Debug)]
-    pub struct ProfilerServiceServer<T: ProfilerService> {
-        inner: _Inner<T>,
+    pub struct ProfilerServiceServer<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: ProfilerService> ProfilerServiceServer<T> {
+    impl<T> ProfilerServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -343,8 +340,8 @@ pub mod profiler_service_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for ProfilerServiceServer<T>
     where
         T: ProfilerService,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -356,7 +353,6 @@ pub mod profiler_service_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.devtools.cloudprofiler.v2.ProfilerService/CreateProfile" => {
                     #[allow(non_camel_case_types)]
@@ -388,7 +384,6 @@ pub mod profiler_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = CreateProfileSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -438,7 +433,6 @@ pub mod profiler_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = CreateOfflineProfileSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -485,7 +479,6 @@ pub mod profiler_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = UpdateProfileSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -504,20 +497,25 @@ pub mod profiler_service_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: ProfilerService> Clone for ProfilerServiceServer<T> {
+    impl<T> Clone for ProfilerServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -529,27 +527,25 @@ pub mod profiler_service_server {
             }
         }
     }
-    impl<T: ProfilerService> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: ProfilerService> tonic::server::NamedService for ProfilerServiceServer<T> {
-        const NAME: &'static str = "google.devtools.cloudprofiler.v2.ProfilerService";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.devtools.cloudprofiler.v2.ProfilerService";
+    impl<T> tonic::server::NamedService for ProfilerServiceServer<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }
 /// Generated server implementations.
 pub mod export_service_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with ExportServiceServer.
     #[async_trait]
-    pub trait ExportService: Send + Sync + 'static {
+    pub trait ExportService: std::marker::Send + std::marker::Sync + 'static {
         /// Lists profiles which have been collected so far and for which the caller
         /// has permission to view.
         async fn list_profiles(
@@ -563,20 +559,18 @@ pub mod export_service_server {
     /// Service allows existing Cloud Profiler customers to export their profile data
     /// out of Google Cloud.
     #[derive(Debug)]
-    pub struct ExportServiceServer<T: ExportService> {
-        inner: _Inner<T>,
+    pub struct ExportServiceServer<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: ExportService> ExportServiceServer<T> {
+    impl<T> ExportServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -626,8 +620,8 @@ pub mod export_service_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for ExportServiceServer<T>
     where
         T: ExportService,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -639,7 +633,6 @@ pub mod export_service_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.devtools.cloudprofiler.v2.ExportService/ListProfiles" => {
                     #[allow(non_camel_case_types)]
@@ -670,7 +663,6 @@ pub mod export_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListProfilesSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -689,20 +681,25 @@ pub mod export_service_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: ExportService> Clone for ExportServiceServer<T> {
+    impl<T> Clone for ExportServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -714,17 +711,9 @@ pub mod export_service_server {
             }
         }
     }
-    impl<T: ExportService> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: ExportService> tonic::server::NamedService for ExportServiceServer<T> {
-        const NAME: &'static str = "google.devtools.cloudprofiler.v2.ExportService";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.devtools.cloudprofiler.v2.ExportService";
+    impl<T> tonic::server::NamedService for ExportServiceServer<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }

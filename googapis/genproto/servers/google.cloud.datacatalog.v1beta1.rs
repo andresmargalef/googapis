@@ -18,9 +18,9 @@ impl IntegratedSystem {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            IntegratedSystem::Unspecified => "INTEGRATED_SYSTEM_UNSPECIFIED",
-            IntegratedSystem::Bigquery => "BIGQUERY",
-            IntegratedSystem::CloudPubsub => "CLOUD_PUBSUB",
+            Self::Unspecified => "INTEGRATED_SYSTEM_UNSPECIFIED",
+            Self::Bigquery => "BIGQUERY",
+            Self::CloudPubsub => "CLOUD_PUBSUB",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -52,9 +52,9 @@ impl ManagingSystem {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            ManagingSystem::Unspecified => "MANAGING_SYSTEM_UNSPECIFIED",
-            ManagingSystem::Dataplex => "MANAGING_SYSTEM_DATAPLEX",
-            ManagingSystem::Other => "MANAGING_SYSTEM_OTHER",
+            Self::Unspecified => "MANAGING_SYSTEM_UNSPECIFIED",
+            Self::Dataplex => "MANAGING_SYSTEM_DATAPLEX",
+            Self::Other => "MANAGING_SYSTEM_OTHER",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -68,8 +68,7 @@ impl ManagingSystem {
     }
 }
 /// Timestamps about this resource according to a particular system.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct SystemTimestamps {
     /// The creation time of the resource within the given system.
     #[prost(message, optional, tag = "1")]
@@ -83,7 +82,6 @@ pub struct SystemTimestamps {
     pub expire_time: ::core::option::Option<::prost_types::Timestamp>,
 }
 /// Describes a Cloud Storage fileset entry.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GcsFilesetSpec {
     /// Required. Patterns to identify a set of files in Google Cloud Storage.
@@ -122,7 +120,6 @@ pub struct GcsFilesetSpec {
     pub sample_gcs_file_specs: ::prost::alloc::vec::Vec<GcsFileSpec>,
 }
 /// Specifications of a single file in Cloud Storage.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GcsFileSpec {
     /// Required. The full file path. Example: `gs://bucket_name/a/b.txt`.
@@ -136,7 +133,6 @@ pub struct GcsFileSpec {
     pub size_bytes: i64,
 }
 /// Represents a schema (e.g. BigQuery, GoogleSQL, Avro schema).
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Schema {
     /// Required. Schema of columns. A maximum of 10,000 columns and sub-columns
@@ -146,7 +142,6 @@ pub struct Schema {
 }
 /// Representation of a column within a schema. Columns could be nested inside
 /// other columns.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ColumnSchema {
     /// Required. Name of the column.
@@ -170,7 +165,6 @@ pub struct ColumnSchema {
 }
 /// A result that appears in the response of a search request. Each result
 /// captures details of one entry that matches the search.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchCatalogResult {
     /// Type of the search result. This field can be used to determine which Get
@@ -221,10 +215,10 @@ impl SearchResultType {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            SearchResultType::Unspecified => "SEARCH_RESULT_TYPE_UNSPECIFIED",
-            SearchResultType::Entry => "ENTRY",
-            SearchResultType::TagTemplate => "TAG_TEMPLATE",
-            SearchResultType::EntryGroup => "ENTRY_GROUP",
+            Self::Unspecified => "SEARCH_RESULT_TYPE_UNSPECIFIED",
+            Self::Entry => "ENTRY",
+            Self::TagTemplate => "TAG_TEMPLATE",
+            Self::EntryGroup => "ENTRY_GROUP",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -239,7 +233,6 @@ impl SearchResultType {
     }
 }
 /// Describes a BigQuery table.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BigQueryTableSpec {
     /// Output only. The table source type.
@@ -252,7 +245,6 @@ pub struct BigQueryTableSpec {
 /// Nested message and enum types in `BigQueryTableSpec`.
 pub mod big_query_table_spec {
     /// Output only.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum TypeSpec {
         /// Table view specification. This field should only be populated if
@@ -266,7 +258,6 @@ pub mod big_query_table_spec {
     }
 }
 /// Table view specification.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ViewSpec {
     /// Output only. The query that defines the table view.
@@ -274,7 +265,6 @@ pub struct ViewSpec {
     pub view_query: ::prost::alloc::string::String,
 }
 /// Normal BigQuery table spec.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TableSpec {
     /// Output only. If the table is a dated shard, i.e., with name pattern
@@ -288,7 +278,6 @@ pub struct TableSpec {
 /// Spec for a group of BigQuery tables with name pattern `\[prefix\]YYYYMMDD`.
 /// Context:
 /// <https://cloud.google.com/bigquery/docs/partitioned-tables#partitioning_versus_sharding>
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BigQueryDateShardedSpec {
     /// Output only. The Data Catalog resource name of the dataset entry the
@@ -326,10 +315,10 @@ impl TableSourceType {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            TableSourceType::Unspecified => "TABLE_SOURCE_TYPE_UNSPECIFIED",
-            TableSourceType::BigqueryView => "BIGQUERY_VIEW",
-            TableSourceType::BigqueryTable => "BIGQUERY_TABLE",
-            TableSourceType::BigqueryMaterializedView => "BIGQUERY_MATERIALIZED_VIEW",
+            Self::Unspecified => "TABLE_SOURCE_TYPE_UNSPECIFIED",
+            Self::BigqueryView => "BIGQUERY_VIEW",
+            Self::BigqueryTable => "BIGQUERY_TABLE",
+            Self::BigqueryMaterializedView => "BIGQUERY_MATERIALIZED_VIEW",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -349,7 +338,6 @@ impl TableSourceType {
 /// See [Data Catalog
 /// IAM](<https://cloud.google.com/data-catalog/docs/concepts/iam>) for information
 /// on the permissions needed to create or view tags.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Tag {
     /// The resource name of the tag in URL format. Example:
@@ -389,7 +377,6 @@ pub mod tag {
     /// provided, the tag is attached to the parent resource itself.
     /// Deleting the scope from the parent resource will delete all tags attached
     /// to that scope. These fields cannot be updated after creation.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Scope {
         /// Resources like Entry can have schemas associated with them. This scope
@@ -405,7 +392,6 @@ pub mod tag {
 }
 /// Contains the value and supporting information for a field within
 /// a [Tag][google.cloud.datacatalog.v1beta1.Tag].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TagField {
     /// Output only. The display name of this field.
@@ -426,7 +412,6 @@ pub struct TagField {
 /// Nested message and enum types in `TagField`.
 pub mod tag_field {
     /// Holds an enum value.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct EnumValue {
         /// The display name of the enum value.
@@ -434,7 +419,6 @@ pub mod tag_field {
         pub display_name: ::prost::alloc::string::String,
     }
     /// Required. The value of this field.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Kind {
         /// Holds the value for a tag field with double type.
@@ -463,7 +447,6 @@ pub mod tag_field {
 /// the [TagTemplate
 /// User](<https://cloud.google.com/data-catalog/docs/how-to/template-user>) role,
 /// which includes permission to use the tag template to tag resources.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TagTemplate {
     /// The resource name of the tag template in URL format. Example:
@@ -492,7 +475,6 @@ pub struct TagTemplate {
     >,
 }
 /// The template for an individual field within a tag template.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TagTemplateField {
     /// Output only. The resource name of the tag template field in URL format.
@@ -523,7 +505,6 @@ pub struct TagTemplateField {
     #[prost(int32, tag = "5")]
     pub order: i32,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FieldType {
     /// Required.
@@ -532,7 +513,6 @@ pub struct FieldType {
 }
 /// Nested message and enum types in `FieldType`.
 pub mod field_type {
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct EnumType {
         #[prost(message, repeated, tag = "1")]
@@ -540,7 +520,6 @@ pub mod field_type {
     }
     /// Nested message and enum types in `EnumType`.
     pub mod enum_type {
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct EnumValue {
             /// Required. The display name of the enum value. Must not be an empty
@@ -580,11 +559,11 @@ pub mod field_type {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                PrimitiveType::Unspecified => "PRIMITIVE_TYPE_UNSPECIFIED",
-                PrimitiveType::Double => "DOUBLE",
-                PrimitiveType::String => "STRING",
-                PrimitiveType::Bool => "BOOL",
-                PrimitiveType::Timestamp => "TIMESTAMP",
+                Self::Unspecified => "PRIMITIVE_TYPE_UNSPECIFIED",
+                Self::Double => "DOUBLE",
+                Self::String => "STRING",
+                Self::Bool => "BOOL",
+                Self::Timestamp => "TIMESTAMP",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -600,7 +579,6 @@ pub mod field_type {
         }
     }
     /// Required.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum TypeDecl {
         /// Represents primitive types - string, bool etc.
@@ -618,8 +596,7 @@ pub mod field_type {
 /// - The usage stats might be underestimated, e.g. wildcard table references
 /// are not yet counted in usage computation
 /// <https://cloud.google.com/bigquery/docs/querying-wildcard-tables>
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct UsageStats {
     /// The number of times that the underlying entry was successfully used.
     #[prost(float, tag = "1")]
@@ -637,7 +614,6 @@ pub struct UsageStats {
     pub total_execution_time_for_completions_millis: f32,
 }
 /// The set of all usage signals that we store in Data Catalog.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UsageSignal {
     /// The timestamp of the end of the usage statistics duration.
@@ -653,7 +629,6 @@ pub struct UsageSignal {
 }
 /// Request message for
 /// [SearchCatalog][google.cloud.datacatalog.v1beta1.DataCatalog.SearchCatalog].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchCatalogRequest {
     /// Required. The scope of this search request. A `scope` that has empty
@@ -703,7 +678,6 @@ pub struct SearchCatalogRequest {
 /// Nested message and enum types in `SearchCatalogRequest`.
 pub mod search_catalog_request {
     /// The criteria that select the subspace used for query matching.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Scope {
         /// The list of organization IDs to search within. To find your organization
@@ -767,7 +741,6 @@ pub mod search_catalog_request {
 }
 /// Response message for
 /// [SearchCatalog][google.cloud.datacatalog.v1beta1.DataCatalog.SearchCatalog].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchCatalogResponse {
     /// Search results.
@@ -788,7 +761,6 @@ pub struct SearchCatalogResponse {
 }
 /// Request message for
 /// [CreateEntryGroup][google.cloud.datacatalog.v1beta1.DataCatalog.CreateEntryGroup].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateEntryGroupRequest {
     /// Required. The name of the project this entry group is in. Example:
@@ -810,7 +782,6 @@ pub struct CreateEntryGroupRequest {
 }
 /// Request message for
 /// [UpdateEntryGroup][google.cloud.datacatalog.v1beta1.DataCatalog.UpdateEntryGroup].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateEntryGroupRequest {
     /// Required. The updated entry group. "name" field must be set.
@@ -826,7 +797,6 @@ pub struct UpdateEntryGroupRequest {
 }
 /// Request message for
 /// [GetEntryGroup][google.cloud.datacatalog.v1beta1.DataCatalog.GetEntryGroup].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetEntryGroupRequest {
     /// Required. The name of the entry group. For example,
@@ -839,7 +809,6 @@ pub struct GetEntryGroupRequest {
 }
 /// Request message for
 /// [DeleteEntryGroup][google.cloud.datacatalog.v1beta1.DataCatalog.DeleteEntryGroup].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteEntryGroupRequest {
     /// Required. The name of the entry group. For example,
@@ -852,7 +821,6 @@ pub struct DeleteEntryGroupRequest {
 }
 /// Request message for
 /// [ListEntryGroups][google.cloud.datacatalog.v1beta1.DataCatalog.ListEntryGroups].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListEntryGroupsRequest {
     /// Required. The name of the location that contains the entry groups, which
@@ -872,7 +840,6 @@ pub struct ListEntryGroupsRequest {
 }
 /// Response message for
 /// [ListEntryGroups][google.cloud.datacatalog.v1beta1.DataCatalog.ListEntryGroups].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListEntryGroupsResponse {
     /// EntryGroup details.
@@ -885,7 +852,6 @@ pub struct ListEntryGroupsResponse {
 }
 /// Request message for
 /// [CreateEntry][google.cloud.datacatalog.v1beta1.DataCatalog.CreateEntry].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateEntryRequest {
     /// Required. The name of the entry group this entry is in. Example:
@@ -905,7 +871,6 @@ pub struct CreateEntryRequest {
 }
 /// Request message for
 /// [UpdateEntry][google.cloud.datacatalog.v1beta1.DataCatalog.UpdateEntry].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateEntryRequest {
     /// Required. The updated entry. The "name" field must be set.
@@ -940,7 +905,6 @@ pub struct UpdateEntryRequest {
 }
 /// Request message for
 /// [DeleteEntry][google.cloud.datacatalog.v1beta1.DataCatalog.DeleteEntry].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteEntryRequest {
     /// Required. The name of the entry. Example:
@@ -951,7 +915,6 @@ pub struct DeleteEntryRequest {
 }
 /// Request message for
 /// [GetEntry][google.cloud.datacatalog.v1beta1.DataCatalog.GetEntry].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetEntryRequest {
     /// Required. The name of the entry. Example:
@@ -962,7 +925,6 @@ pub struct GetEntryRequest {
 }
 /// Request message for
 /// [LookupEntry][google.cloud.datacatalog.v1beta1.DataCatalog.LookupEntry].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LookupEntryRequest {
     /// Required. Represents either the Google Cloud Platform resource or SQL name
@@ -974,7 +936,6 @@ pub struct LookupEntryRequest {
 pub mod lookup_entry_request {
     /// Required. Represents either the Google Cloud Platform resource or SQL name
     /// for a Google Cloud Platform resource.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum TargetName {
         /// The full name of the Google Cloud Platform resource the Data Catalog
@@ -1014,7 +975,6 @@ pub mod lookup_entry_request {
 /// An Entry resource contains resource details, such as its schema. An Entry can
 /// also be used to attach flexible metadata, such as a
 /// [Tag][google.cloud.datacatalog.v1beta1.Tag].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Entry {
     /// Output only. The Data Catalog resource name of the entry in URL format.
@@ -1074,7 +1034,6 @@ pub struct Entry {
 /// Nested message and enum types in `Entry`.
 pub mod entry {
     /// Required. Entry type.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum EntryType {
         /// The type of the entry.
@@ -1095,7 +1054,6 @@ pub mod entry {
         UserSpecifiedType(::prost::alloc::string::String),
     }
     /// The source system of the entry.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum System {
         /// Output only. This field indicates the entry's source system that Data
@@ -1111,7 +1069,6 @@ pub mod entry {
         UserSpecifiedSystem(::prost::alloc::string::String),
     }
     /// Type specification information.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum TypeSpec {
         /// Specification that applies to a Cloud Storage fileset. This is only valid
@@ -1132,7 +1089,6 @@ pub mod entry {
 /// EntryGroup Metadata.
 /// An EntryGroup resource represents a logical grouping of zero or more
 /// Data Catalog [Entry][google.cloud.datacatalog.v1beta1.Entry] resources.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EntryGroup {
     /// The resource name of the entry group in URL format. Example:
@@ -1159,7 +1115,6 @@ pub struct EntryGroup {
 }
 /// Request message for
 /// [CreateTagTemplate][google.cloud.datacatalog.v1beta1.DataCatalog.CreateTagTemplate].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateTagTemplateRequest {
     /// Required. The name of the project and the template location
@@ -1179,7 +1134,6 @@ pub struct CreateTagTemplateRequest {
 }
 /// Request message for
 /// [GetTagTemplate][google.cloud.datacatalog.v1beta1.DataCatalog.GetTagTemplate].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetTagTemplateRequest {
     /// Required. The name of the tag template. Example:
@@ -1190,7 +1144,6 @@ pub struct GetTagTemplateRequest {
 }
 /// Request message for
 /// [UpdateTagTemplate][google.cloud.datacatalog.v1beta1.DataCatalog.UpdateTagTemplate].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateTagTemplateRequest {
     /// Required. The template to update. The "name" field must be set.
@@ -1207,7 +1160,6 @@ pub struct UpdateTagTemplateRequest {
 }
 /// Request message for
 /// [DeleteTagTemplate][google.cloud.datacatalog.v1beta1.DataCatalog.DeleteTagTemplate].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteTagTemplateRequest {
     /// Required. The name of the tag template to delete. Example:
@@ -1223,7 +1175,6 @@ pub struct DeleteTagTemplateRequest {
 }
 /// Request message for
 /// [CreateTag][google.cloud.datacatalog.v1beta1.DataCatalog.CreateTag].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateTagRequest {
     /// Required. The name of the resource to attach this tag to. Tags can be
@@ -1241,7 +1192,6 @@ pub struct CreateTagRequest {
 }
 /// Request message for
 /// [UpdateTag][google.cloud.datacatalog.v1beta1.DataCatalog.UpdateTag].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateTagRequest {
     /// Required. The updated tag. The "name" field must be set.
@@ -1260,7 +1210,6 @@ pub struct UpdateTagRequest {
 }
 /// Request message for
 /// [DeleteTag][google.cloud.datacatalog.v1beta1.DataCatalog.DeleteTag].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteTagRequest {
     /// Required. The name of the tag to delete. Example:
@@ -1271,7 +1220,6 @@ pub struct DeleteTagRequest {
 }
 /// Request message for
 /// [CreateTagTemplateField][google.cloud.datacatalog.v1beta1.DataCatalog.CreateTagTemplateField].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateTagTemplateFieldRequest {
     /// Required. The name of the project and the template location
@@ -1295,7 +1243,6 @@ pub struct CreateTagTemplateFieldRequest {
 }
 /// Request message for
 /// [UpdateTagTemplateField][google.cloud.datacatalog.v1beta1.DataCatalog.UpdateTagTemplateField].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateTagTemplateFieldRequest {
     /// Required. The name of the tag template field. Example:
@@ -1327,7 +1274,6 @@ pub struct UpdateTagTemplateFieldRequest {
 }
 /// Request message for
 /// [RenameTagTemplateField][google.cloud.datacatalog.v1beta1.DataCatalog.RenameTagTemplateField].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RenameTagTemplateFieldRequest {
     /// Required. The name of the tag template. Example:
@@ -1342,7 +1288,6 @@ pub struct RenameTagTemplateFieldRequest {
 }
 /// Request message for
 /// [RenameTagTemplateFieldEnumValue][google.cloud.datacatalog.v1.DataCatalog.RenameTagTemplateFieldEnumValue].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RenameTagTemplateFieldEnumValueRequest {
     /// Required. The name of the enum field value. Example:
@@ -1357,7 +1302,6 @@ pub struct RenameTagTemplateFieldEnumValueRequest {
 }
 /// Request message for
 /// [DeleteTagTemplateField][google.cloud.datacatalog.v1beta1.DataCatalog.DeleteTagTemplateField].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteTagTemplateFieldRequest {
     /// Required. The name of the tag template field to delete. Example:
@@ -1373,7 +1317,6 @@ pub struct DeleteTagTemplateFieldRequest {
 }
 /// Request message for
 /// [ListTags][google.cloud.datacatalog.v1beta1.DataCatalog.ListTags].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListTagsRequest {
     /// Required. The name of the Data Catalog resource to list the tags of. The
@@ -1396,7 +1339,6 @@ pub struct ListTagsRequest {
 }
 /// Response message for
 /// [ListTags][google.cloud.datacatalog.v1beta1.DataCatalog.ListTags].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListTagsResponse {
     /// [Tag][google.cloud.datacatalog.v1beta1.Tag] details.
@@ -1409,7 +1351,6 @@ pub struct ListTagsResponse {
 }
 /// Request message for
 /// [ListEntries][google.cloud.datacatalog.v1beta1.DataCatalog.ListEntries].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListEntriesRequest {
     /// Required. The name of the entry group that contains the entries, which can
@@ -1435,7 +1376,6 @@ pub struct ListEntriesRequest {
 }
 /// Response message for
 /// [ListEntries][google.cloud.datacatalog.v1beta1.DataCatalog.ListEntries].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListEntriesResponse {
     /// Entry details.
@@ -1474,11 +1414,11 @@ impl EntryType {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            EntryType::Unspecified => "ENTRY_TYPE_UNSPECIFIED",
-            EntryType::Table => "TABLE",
-            EntryType::Model => "MODEL",
-            EntryType::DataStream => "DATA_STREAM",
-            EntryType::Fileset => "FILESET",
+            Self::Unspecified => "ENTRY_TYPE_UNSPECIFIED",
+            Self::Table => "TABLE",
+            Self::Model => "MODEL",
+            Self::DataStream => "DATA_STREAM",
+            Self::Fileset => "FILESET",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1495,11 +1435,17 @@ impl EntryType {
 }
 /// Generated server implementations.
 pub mod data_catalog_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with DataCatalogServer.
     #[async_trait]
-    pub trait DataCatalog: Send + Sync + 'static {
+    pub trait DataCatalog: std::marker::Send + std::marker::Sync + 'static {
         /// Searches Data Catalog for multiple resources like entries, tags that
         /// match a query.
         ///
@@ -1814,20 +1760,18 @@ pub mod data_catalog_server {
     /// Data Catalog API service allows clients to discover, understand, and manage
     /// their data.
     #[derive(Debug)]
-    pub struct DataCatalogServer<T: DataCatalog> {
-        inner: _Inner<T>,
+    pub struct DataCatalogServer<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: DataCatalog> DataCatalogServer<T> {
+    impl<T> DataCatalogServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -1877,8 +1821,8 @@ pub mod data_catalog_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for DataCatalogServer<T>
     where
         T: DataCatalog,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -1890,7 +1834,6 @@ pub mod data_catalog_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.cloud.datacatalog.v1beta1.DataCatalog/SearchCatalog" => {
                     #[allow(non_camel_case_types)]
@@ -1921,7 +1864,6 @@ pub mod data_catalog_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = SearchCatalogSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1968,7 +1910,6 @@ pub mod data_catalog_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = CreateEntryGroupSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -2015,7 +1956,6 @@ pub mod data_catalog_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = UpdateEntryGroupSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -2061,7 +2001,6 @@ pub mod data_catalog_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetEntryGroupSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -2108,7 +2047,6 @@ pub mod data_catalog_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = DeleteEntryGroupSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -2154,7 +2092,6 @@ pub mod data_catalog_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListEntryGroupsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -2200,7 +2137,6 @@ pub mod data_catalog_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = CreateEntrySvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -2246,7 +2182,6 @@ pub mod data_catalog_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = UpdateEntrySvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -2292,7 +2227,6 @@ pub mod data_catalog_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = DeleteEntrySvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -2338,7 +2272,6 @@ pub mod data_catalog_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetEntrySvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -2384,7 +2317,6 @@ pub mod data_catalog_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = LookupEntrySvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -2430,7 +2362,6 @@ pub mod data_catalog_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListEntriesSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -2477,7 +2408,6 @@ pub mod data_catalog_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = CreateTagTemplateSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -2523,7 +2453,6 @@ pub mod data_catalog_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetTagTemplateSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -2570,7 +2499,6 @@ pub mod data_catalog_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = UpdateTagTemplateSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -2617,7 +2545,6 @@ pub mod data_catalog_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = DeleteTagTemplateSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -2667,7 +2594,6 @@ pub mod data_catalog_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = CreateTagTemplateFieldSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -2717,7 +2643,6 @@ pub mod data_catalog_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = UpdateTagTemplateFieldSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -2767,7 +2692,6 @@ pub mod data_catalog_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = RenameTagTemplateFieldSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -2822,7 +2746,6 @@ pub mod data_catalog_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = RenameTagTemplateFieldEnumValueSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -2872,7 +2795,6 @@ pub mod data_catalog_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = DeleteTagTemplateFieldSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -2918,7 +2840,6 @@ pub mod data_catalog_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = CreateTagSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -2964,7 +2885,6 @@ pub mod data_catalog_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = UpdateTagSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -3010,7 +2930,6 @@ pub mod data_catalog_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = DeleteTagSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -3056,7 +2975,6 @@ pub mod data_catalog_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListTagsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -3105,7 +3023,6 @@ pub mod data_catalog_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = SetIamPolicySvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -3154,7 +3071,6 @@ pub mod data_catalog_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetIamPolicySvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -3204,7 +3120,6 @@ pub mod data_catalog_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = TestIamPermissionsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -3223,20 +3138,25 @@ pub mod data_catalog_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: DataCatalog> Clone for DataCatalogServer<T> {
+    impl<T> Clone for DataCatalogServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -3248,18 +3168,10 @@ pub mod data_catalog_server {
             }
         }
     }
-    impl<T: DataCatalog> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: DataCatalog> tonic::server::NamedService for DataCatalogServer<T> {
-        const NAME: &'static str = "google.cloud.datacatalog.v1beta1.DataCatalog";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.cloud.datacatalog.v1beta1.DataCatalog";
+    impl<T> tonic::server::NamedService for DataCatalogServer<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }
 /// A taxonomy is a collection of policy tags that classify data along a common
@@ -3267,7 +3179,6 @@ pub mod data_catalog_server {
 /// denoting PII such as age, zipcode, and SSN. A data *origin* taxonomy could
 /// contain policy tags to distinguish user data, employee data, partner data,
 /// public data.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Taxonomy {
     /// Identifier. Resource name of this taxonomy, whose format is:
@@ -3307,7 +3218,6 @@ pub struct Taxonomy {
 /// Nested message and enum types in `Taxonomy`.
 pub mod taxonomy {
     /// The source system of the Taxonomy.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Service {
         /// The Google Cloud service name.
@@ -3344,8 +3254,8 @@ pub mod taxonomy {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                PolicyType::Unspecified => "POLICY_TYPE_UNSPECIFIED",
-                PolicyType::FineGrainedAccessControl => "FINE_GRAINED_ACCESS_CONTROL",
+                Self::Unspecified => "POLICY_TYPE_UNSPECIFIED",
+                Self::FineGrainedAccessControl => "FINE_GRAINED_ACCESS_CONTROL",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -3362,7 +3272,6 @@ pub mod taxonomy {
 /// in a hierarchy. For example, consider the following hierarchy:
 /// Geolocation -&gt; (LatLong, City, ZipCode). PolicyTag "Geolocation"
 /// contains three child policy tags: "LatLong", "City", and "ZipCode".
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PolicyTag {
     /// Identifier. Resource name of this policy tag, whose format is:
@@ -3395,7 +3304,6 @@ pub struct PolicyTag {
 }
 /// Request message for
 /// [CreateTaxonomy][google.cloud.datacatalog.v1beta1.PolicyTagManager.CreateTaxonomy].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateTaxonomyRequest {
     /// Required. Resource name of the project that the taxonomy will belong to.
@@ -3407,7 +3315,6 @@ pub struct CreateTaxonomyRequest {
 }
 /// Request message for
 /// [DeleteTaxonomy][google.cloud.datacatalog.v1beta1.PolicyTagManager.DeleteTaxonomy].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteTaxonomyRequest {
     /// Required. Resource name of the taxonomy to be deleted. All policy tags in
@@ -3417,7 +3324,6 @@ pub struct DeleteTaxonomyRequest {
 }
 /// Request message for
 /// [UpdateTaxonomy][google.cloud.datacatalog.v1beta1.PolicyTagManager.UpdateTaxonomy].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateTaxonomyRequest {
     /// The taxonomy to update. Only description, display_name, and activated
@@ -3433,7 +3339,6 @@ pub struct UpdateTaxonomyRequest {
 }
 /// Request message for
 /// [ListTaxonomies][google.cloud.datacatalog.v1beta1.PolicyTagManager.ListTaxonomies].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListTaxonomiesRequest {
     /// Required. Resource name of the project to list the taxonomies of.
@@ -3454,7 +3359,6 @@ pub struct ListTaxonomiesRequest {
 }
 /// Response message for
 /// [ListTaxonomies][google.cloud.datacatalog.v1beta1.PolicyTagManager.ListTaxonomies].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListTaxonomiesResponse {
     /// Taxonomies that the project contains.
@@ -3467,7 +3371,6 @@ pub struct ListTaxonomiesResponse {
 }
 /// Request message for
 /// [GetTaxonomy][google.cloud.datacatalog.v1beta1.PolicyTagManager.GetTaxonomy].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetTaxonomyRequest {
     /// Required. Resource name of the requested taxonomy.
@@ -3476,7 +3379,6 @@ pub struct GetTaxonomyRequest {
 }
 /// Request message for
 /// [CreatePolicyTag][google.cloud.datacatalog.v1beta1.PolicyTagManager.CreatePolicyTag].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreatePolicyTagRequest {
     /// Required. Resource name of the taxonomy that the policy tag will belong to.
@@ -3488,7 +3390,6 @@ pub struct CreatePolicyTagRequest {
 }
 /// Request message for
 /// [DeletePolicyTag][google.cloud.datacatalog.v1beta1.PolicyTagManager.DeletePolicyTag].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeletePolicyTagRequest {
     /// Required. Resource name of the policy tag to be deleted. All of its
@@ -3498,7 +3399,6 @@ pub struct DeletePolicyTagRequest {
 }
 /// Request message for
 /// [UpdatePolicyTag][google.cloud.datacatalog.v1beta1.PolicyTagManager.UpdatePolicyTag].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdatePolicyTagRequest {
     /// The policy tag to update. Only the description, display_name, and
@@ -3517,7 +3417,6 @@ pub struct UpdatePolicyTagRequest {
 }
 /// Request message for
 /// [ListPolicyTags][google.cloud.datacatalog.v1beta1.PolicyTagManager.ListPolicyTags].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListPolicyTagsRequest {
     /// Required. Resource name of the taxonomy to list the policy tags of.
@@ -3534,7 +3433,6 @@ pub struct ListPolicyTagsRequest {
 }
 /// Response message for
 /// [ListPolicyTags][google.cloud.datacatalog.v1beta1.PolicyTagManager.ListPolicyTags].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListPolicyTagsResponse {
     /// The policy tags that are in the requested taxonomy.
@@ -3547,7 +3445,6 @@ pub struct ListPolicyTagsResponse {
 }
 /// Request message for
 /// [GetPolicyTag][google.cloud.datacatalog.v1beta1.PolicyTagManager.GetPolicyTag].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetPolicyTagRequest {
     /// Required. Resource name of the requested policy tag.
@@ -3556,11 +3453,17 @@ pub struct GetPolicyTagRequest {
 }
 /// Generated server implementations.
 pub mod policy_tag_manager_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with PolicyTagManagerServer.
     #[async_trait]
-    pub trait PolicyTagManager: Send + Sync + 'static {
+    pub trait PolicyTagManager: std::marker::Send + std::marker::Sync + 'static {
         /// Creates a taxonomy in the specified project.
         async fn create_taxonomy(
             &self,
@@ -3656,20 +3559,18 @@ pub mod policy_tag_manager_server {
     /// The policy tag manager API service allows clients to manage their taxonomies
     /// and policy tags.
     #[derive(Debug)]
-    pub struct PolicyTagManagerServer<T: PolicyTagManager> {
-        inner: _Inner<T>,
+    pub struct PolicyTagManagerServer<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: PolicyTagManager> PolicyTagManagerServer<T> {
+    impl<T> PolicyTagManagerServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -3719,8 +3620,8 @@ pub mod policy_tag_manager_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for PolicyTagManagerServer<T>
     where
         T: PolicyTagManager,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -3732,7 +3633,6 @@ pub mod policy_tag_manager_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.cloud.datacatalog.v1beta1.PolicyTagManager/CreateTaxonomy" => {
                     #[allow(non_camel_case_types)]
@@ -3764,7 +3664,6 @@ pub mod policy_tag_manager_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = CreateTaxonomySvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -3811,7 +3710,6 @@ pub mod policy_tag_manager_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = DeleteTaxonomySvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -3858,7 +3756,6 @@ pub mod policy_tag_manager_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = UpdateTaxonomySvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -3905,7 +3802,6 @@ pub mod policy_tag_manager_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListTaxonomiesSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -3951,7 +3847,6 @@ pub mod policy_tag_manager_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetTaxonomySvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -3998,7 +3893,6 @@ pub mod policy_tag_manager_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = CreatePolicyTagSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -4045,7 +3939,6 @@ pub mod policy_tag_manager_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = DeletePolicyTagSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -4092,7 +3985,6 @@ pub mod policy_tag_manager_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = UpdatePolicyTagSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -4139,7 +4031,6 @@ pub mod policy_tag_manager_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListPolicyTagsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -4186,7 +4077,6 @@ pub mod policy_tag_manager_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetPolicyTagSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -4236,7 +4126,6 @@ pub mod policy_tag_manager_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetIamPolicySvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -4286,7 +4175,6 @@ pub mod policy_tag_manager_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = SetIamPolicySvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -4339,7 +4227,6 @@ pub mod policy_tag_manager_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = TestIamPermissionsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -4358,20 +4245,25 @@ pub mod policy_tag_manager_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: PolicyTagManager> Clone for PolicyTagManagerServer<T> {
+    impl<T> Clone for PolicyTagManagerServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -4383,23 +4275,14 @@ pub mod policy_tag_manager_server {
             }
         }
     }
-    impl<T: PolicyTagManager> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: PolicyTagManager> tonic::server::NamedService for PolicyTagManagerServer<T> {
-        const NAME: &'static str = "google.cloud.datacatalog.v1beta1.PolicyTagManager";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.cloud.datacatalog.v1beta1.PolicyTagManager";
+    impl<T> tonic::server::NamedService for PolicyTagManagerServer<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }
 /// Message capturing a taxonomy and its policy tag hierarchy as a nested proto.
 /// Used for taxonomy import/export and mutation.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SerializedTaxonomy {
     /// Required. Display name of the taxonomy. Max 200 bytes when encoded in
@@ -4419,7 +4302,6 @@ pub struct SerializedTaxonomy {
     pub activated_policy_types: ::prost::alloc::vec::Vec<i32>,
 }
 /// Message representing one policy tag when exported as a nested proto.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SerializedPolicyTag {
     /// Resource name of the policy tag.
@@ -4442,7 +4324,6 @@ pub struct SerializedPolicyTag {
 }
 /// Request message for
 /// [ImportTaxonomies][google.cloud.datacatalog.v1beta1.PolicyTagManagerSerialization.ImportTaxonomies].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ImportTaxonomiesRequest {
     /// Required. Resource name of project that the imported taxonomies will belong
@@ -4456,7 +4337,6 @@ pub struct ImportTaxonomiesRequest {
 /// Nested message and enum types in `ImportTaxonomiesRequest`.
 pub mod import_taxonomies_request {
     /// Source taxonomies to be imported.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Source {
         /// Inline source used for taxonomies to be imported.
@@ -4465,7 +4345,6 @@ pub mod import_taxonomies_request {
     }
 }
 /// Inline source used for taxonomies import.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct InlineSource {
     /// Required. Taxonomies to be imported.
@@ -4474,7 +4353,6 @@ pub struct InlineSource {
 }
 /// Response message for
 /// [ImportTaxonomies][google.cloud.datacatalog.v1beta1.PolicyTagManagerSerialization.ImportTaxonomies].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ImportTaxonomiesResponse {
     /// Taxonomies that were imported.
@@ -4483,7 +4361,6 @@ pub struct ImportTaxonomiesResponse {
 }
 /// Request message for
 /// [ExportTaxonomies][google.cloud.datacatalog.v1beta1.PolicyTagManagerSerialization.ExportTaxonomies].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExportTaxonomiesRequest {
     /// Required. Resource name of the project that taxonomies to be exported
@@ -4500,8 +4377,7 @@ pub struct ExportTaxonomiesRequest {
 /// Nested message and enum types in `ExportTaxonomiesRequest`.
 pub mod export_taxonomies_request {
     /// Required. Taxonomies export destination.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
     pub enum Destination {
         /// Export taxonomies as serialized taxonomies.
         #[prost(bool, tag = "3")]
@@ -4510,7 +4386,6 @@ pub mod export_taxonomies_request {
 }
 /// Response message for
 /// [ExportTaxonomies][google.cloud.datacatalog.v1beta1.PolicyTagManagerSerialization.ExportTaxonomies].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExportTaxonomiesResponse {
     /// List of taxonomies and policy tags in a tree structure.
@@ -4519,11 +4394,17 @@ pub struct ExportTaxonomiesResponse {
 }
 /// Generated server implementations.
 pub mod policy_tag_manager_serialization_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with PolicyTagManagerSerializationServer.
     #[async_trait]
-    pub trait PolicyTagManagerSerialization: Send + Sync + 'static {
+    pub trait PolicyTagManagerSerialization: std::marker::Send + std::marker::Sync + 'static {
         /// Imports all taxonomies and their policy tags to a project as new
         /// taxonomies.
         ///
@@ -4551,20 +4432,18 @@ pub mod policy_tag_manager_serialization_server {
     /// Policy tag manager serialization API service allows clients to manipulate
     /// their taxonomies and policy tags data with serialized format.
     #[derive(Debug)]
-    pub struct PolicyTagManagerSerializationServer<T: PolicyTagManagerSerialization> {
-        inner: _Inner<T>,
+    pub struct PolicyTagManagerSerializationServer<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: PolicyTagManagerSerialization> PolicyTagManagerSerializationServer<T> {
+    impl<T> PolicyTagManagerSerializationServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -4615,8 +4494,8 @@ pub mod policy_tag_manager_serialization_server {
     for PolicyTagManagerSerializationServer<T>
     where
         T: PolicyTagManagerSerialization,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -4628,7 +4507,6 @@ pub mod policy_tag_manager_serialization_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.cloud.datacatalog.v1beta1.PolicyTagManagerSerialization/ImportTaxonomies" => {
                     #[allow(non_camel_case_types)]
@@ -4665,7 +4543,6 @@ pub mod policy_tag_manager_serialization_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ImportTaxonomiesSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -4717,7 +4594,6 @@ pub mod policy_tag_manager_serialization_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ExportTaxonomiesSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -4736,21 +4612,25 @@ pub mod policy_tag_manager_serialization_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: PolicyTagManagerSerialization> Clone
-    for PolicyTagManagerSerializationServer<T> {
+    impl<T> Clone for PolicyTagManagerSerializationServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -4762,18 +4642,9 @@ pub mod policy_tag_manager_serialization_server {
             }
         }
     }
-    impl<T: PolicyTagManagerSerialization> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: PolicyTagManagerSerialization> tonic::server::NamedService
-    for PolicyTagManagerSerializationServer<T> {
-        const NAME: &'static str = "google.cloud.datacatalog.v1beta1.PolicyTagManagerSerialization";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.cloud.datacatalog.v1beta1.PolicyTagManagerSerialization";
+    impl<T> tonic::server::NamedService for PolicyTagManagerSerializationServer<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }

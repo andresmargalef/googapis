@@ -2,7 +2,6 @@
 /// Information about the author of the UGC data. Used in
 /// [Photo][google.maps.places.v1.Photo], and
 /// [Review][google.maps.places.v1.Review].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AuthorAttribution {
     /// Name of the author of the [Photo][google.maps.places.v1.Photo] or
@@ -20,7 +19,6 @@ pub struct AuthorAttribution {
     pub photo_uri: ::prost::alloc::string::String,
 }
 /// Information about a review of a place.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Review {
     /// A reference representing this place review which may be used to look up
@@ -55,7 +53,6 @@ pub struct Review {
 /// for more details.
 ///
 /// Reference that the generative content is related to.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct References {
     /// Reviews that serve as references.
@@ -67,7 +64,6 @@ pub struct References {
     pub places: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// A block of content that can be served individually.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ContentBlock {
     /// The topic of the content, for example "overview" or "restaurant".
@@ -85,7 +81,6 @@ pub struct ContentBlock {
     pub references: ::core::option::Option<References>,
 }
 /// Information about a photo of a place.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Photo {
     /// Identifier. A reference representing this place photo which may be used to
@@ -108,7 +103,6 @@ pub struct Photo {
 /// for more details.
 ///
 /// Content that is contextual to the place query.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ContextualContent {
     /// List of reviews about this place, contexual to the place query.
@@ -134,7 +128,6 @@ pub mod contextual_content {
     ///
     /// Justifications for the place. Justifications answers the question of why a
     /// place could interest an end user.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Justification {
         #[prost(oneof = "justification::Justification", tags = "1, 2")]
@@ -150,7 +143,6 @@ pub mod contextual_content {
         /// that would interest an end user. For instance, if the search query is
         /// "firewood pizza", the review justification highlights the text relevant
         /// to the search query.
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct ReviewJustification {
             #[prost(message, optional, tag = "1")]
@@ -167,7 +159,6 @@ pub mod contextual_content {
             /// review itself. The exact word to highlight is marked by the
             /// HighlightedTextRange. There could be several words in the text being
             /// highlighted.
-            #[allow(clippy::derive_partial_eq_without_eq)]
             #[derive(Clone, PartialEq, ::prost::Message)]
             pub struct HighlightedText {
                 #[prost(string, tag = "1")]
@@ -181,8 +172,7 @@ pub mod contextual_content {
             /// Nested message and enum types in `HighlightedText`.
             pub mod highlighted_text {
                 /// The range of highlighted text.
-                #[allow(clippy::derive_partial_eq_without_eq)]
-                #[derive(Clone, PartialEq, ::prost::Message)]
+                #[derive(Clone, Copy, PartialEq, ::prost::Message)]
                 pub struct HighlightedTextRange {
                     #[prost(int32, tag = "1")]
                     pub start_index: i32,
@@ -196,8 +186,7 @@ pub mod contextual_content {
         /// for more details.
         /// BusinessAvailabilityAttributes justifications. This shows some attributes
         /// a business has that could interest an end user.
-        #[allow(clippy::derive_partial_eq_without_eq)]
-        #[derive(Clone, PartialEq, ::prost::Message)]
+        #[derive(Clone, Copy, PartialEq, ::prost::Message)]
         pub struct BusinessAvailabilityAttributesJustification {
             /// If a place provides takeout.
             #[prost(bool, tag = "1")]
@@ -209,7 +198,6 @@ pub mod contextual_content {
             #[prost(bool, tag = "3")]
             pub dine_in: bool,
         }
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Oneof)]
         pub enum Justification {
             /// Experimental: See
@@ -232,7 +220,6 @@ pub mod contextual_content {
 /// <https://afdc.energy.gov/fuels/electricity_infrastructure.html> One port
 /// could charge one car at a time. One port has one or more connectors. One
 /// station has one or more ports.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EvChargeOptions {
     /// Number of connectors at this station. However, because some ports can have
@@ -253,8 +240,7 @@ pub mod ev_charge_options {
     /// EV charging information grouped by \[type, max_charge_rate_kw\].
     /// Shows EV charge aggregation of connectors that have the same type and max
     /// charge rate in kw.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct ConnectorAggregation {
         /// The connector type of this aggregation.
         #[prost(enumeration = "super::EvConnectorType", tag = "1")]
@@ -320,18 +306,16 @@ impl EvConnectorType {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            EvConnectorType::Unspecified => "EV_CONNECTOR_TYPE_UNSPECIFIED",
-            EvConnectorType::Other => "EV_CONNECTOR_TYPE_OTHER",
-            EvConnectorType::J1772 => "EV_CONNECTOR_TYPE_J1772",
-            EvConnectorType::Type2 => "EV_CONNECTOR_TYPE_TYPE_2",
-            EvConnectorType::Chademo => "EV_CONNECTOR_TYPE_CHADEMO",
-            EvConnectorType::CcsCombo1 => "EV_CONNECTOR_TYPE_CCS_COMBO_1",
-            EvConnectorType::CcsCombo2 => "EV_CONNECTOR_TYPE_CCS_COMBO_2",
-            EvConnectorType::Tesla => "EV_CONNECTOR_TYPE_TESLA",
-            EvConnectorType::UnspecifiedGbT => "EV_CONNECTOR_TYPE_UNSPECIFIED_GB_T",
-            EvConnectorType::UnspecifiedWallOutlet => {
-                "EV_CONNECTOR_TYPE_UNSPECIFIED_WALL_OUTLET"
-            }
+            Self::Unspecified => "EV_CONNECTOR_TYPE_UNSPECIFIED",
+            Self::Other => "EV_CONNECTOR_TYPE_OTHER",
+            Self::J1772 => "EV_CONNECTOR_TYPE_J1772",
+            Self::Type2 => "EV_CONNECTOR_TYPE_TYPE_2",
+            Self::Chademo => "EV_CONNECTOR_TYPE_CHADEMO",
+            Self::CcsCombo1 => "EV_CONNECTOR_TYPE_CCS_COMBO_1",
+            Self::CcsCombo2 => "EV_CONNECTOR_TYPE_CCS_COMBO_2",
+            Self::Tesla => "EV_CONNECTOR_TYPE_TESLA",
+            Self::UnspecifiedGbT => "EV_CONNECTOR_TYPE_UNSPECIFIED_GB_T",
+            Self::UnspecifiedWallOutlet => "EV_CONNECTOR_TYPE_UNSPECIFIED_WALL_OUTLET",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -355,7 +339,6 @@ impl EvConnectorType {
 }
 /// The most recent information about fuel options in a gas station. This
 /// information is updated regularly.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FuelOptions {
     /// The last known fuel price for each type of fuel this station has. There is
@@ -366,7 +349,6 @@ pub struct FuelOptions {
 /// Nested message and enum types in `FuelOptions`.
 pub mod fuel_options {
     /// Fuel price information for a given type.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct FuelPrice {
         /// The type of fuel.
@@ -441,25 +423,25 @@ pub mod fuel_options {
             /// (if the ProtoBuf definition does not change) and safe for programmatic use.
             pub fn as_str_name(&self) -> &'static str {
                 match self {
-                    FuelType::Unspecified => "FUEL_TYPE_UNSPECIFIED",
-                    FuelType::Diesel => "DIESEL",
-                    FuelType::RegularUnleaded => "REGULAR_UNLEADED",
-                    FuelType::Midgrade => "MIDGRADE",
-                    FuelType::Premium => "PREMIUM",
-                    FuelType::Sp91 => "SP91",
-                    FuelType::Sp91E10 => "SP91_E10",
-                    FuelType::Sp92 => "SP92",
-                    FuelType::Sp95 => "SP95",
-                    FuelType::Sp95E10 => "SP95_E10",
-                    FuelType::Sp98 => "SP98",
-                    FuelType::Sp99 => "SP99",
-                    FuelType::Sp100 => "SP100",
-                    FuelType::Lpg => "LPG",
-                    FuelType::E80 => "E80",
-                    FuelType::E85 => "E85",
-                    FuelType::Methane => "METHANE",
-                    FuelType::BioDiesel => "BIO_DIESEL",
-                    FuelType::TruckDiesel => "TRUCK_DIESEL",
+                    Self::Unspecified => "FUEL_TYPE_UNSPECIFIED",
+                    Self::Diesel => "DIESEL",
+                    Self::RegularUnleaded => "REGULAR_UNLEADED",
+                    Self::Midgrade => "MIDGRADE",
+                    Self::Premium => "PREMIUM",
+                    Self::Sp91 => "SP91",
+                    Self::Sp91E10 => "SP91_E10",
+                    Self::Sp92 => "SP92",
+                    Self::Sp95 => "SP95",
+                    Self::Sp95E10 => "SP95_E10",
+                    Self::Sp98 => "SP98",
+                    Self::Sp99 => "SP99",
+                    Self::Sp100 => "SP100",
+                    Self::Lpg => "LPG",
+                    Self::E80 => "E80",
+                    Self::E85 => "E85",
+                    Self::Methane => "METHANE",
+                    Self::BioDiesel => "BIO_DIESEL",
+                    Self::TruckDiesel => "TRUCK_DIESEL",
                 }
             }
             /// Creates an enum from field names used in the ProtoBuf definition.
@@ -491,8 +473,7 @@ pub mod fuel_options {
     }
 }
 /// Circle with a LatLng as center and radius.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct Circle {
     /// Required. Center latitude and longitude.
     ///
@@ -506,7 +487,6 @@ pub struct Circle {
     pub radius: f64,
 }
 /// All the information representing a Place.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Place {
     /// This Place's resource name, in `places/{place_id}` format.  Can be used to
@@ -767,7 +747,6 @@ pub struct Place {
 pub mod place {
     /// The structured components that form the formatted address, if this
     /// information is available.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct AddressComponent {
         /// The full text description or name of the address component. For example,
@@ -790,7 +769,6 @@ pub mod place {
     /// Plus code (<http://plus.codes>) is a location reference with two formats:
     /// global code defining a 14mx14m (1/8000th of a degree) or smaller rectangle,
     /// and compound code, replacing the prefix with a reference location.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct PlusCode {
         /// Place's global (full) code, such as "9FWM33GV+HQ", representing an
@@ -804,7 +782,6 @@ pub mod place {
         pub compound_code: ::prost::alloc::string::String,
     }
     /// Information about business hour of the place.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct OpeningHours {
         /// Is this place open right now?  Always present unless we lack time-of-day
@@ -838,8 +815,7 @@ pub mod place {
     /// Nested message and enum types in `OpeningHours`.
     pub mod opening_hours {
         /// A period the place remains in open_now status.
-        #[allow(clippy::derive_partial_eq_without_eq)]
-        #[derive(Clone, PartialEq, ::prost::Message)]
+        #[derive(Clone, Copy, PartialEq, ::prost::Message)]
         pub struct Period {
             /// The time that the place starts to be open.
             #[prost(message, optional, tag = "1")]
@@ -851,8 +827,7 @@ pub mod place {
         /// Nested message and enum types in `Period`.
         pub mod period {
             /// Status changing points.
-            #[allow(clippy::derive_partial_eq_without_eq)]
-            #[derive(Clone, PartialEq, ::prost::Message)]
+            #[derive(Clone, Copy, PartialEq, ::prost::Message)]
             pub struct Point {
                 /// A day of the week, as an integer in the range 0-6.  0 is Sunday, 1 is
                 /// Monday, etc.
@@ -881,8 +856,7 @@ pub mod place {
         /// Structured information for special days that fall within the period that
         /// the returned opening hours cover. Special days are days that could impact
         /// the business hours of a place, e.g. Christmas day.
-        #[allow(clippy::derive_partial_eq_without_eq)]
-        #[derive(Clone, PartialEq, ::prost::Message)]
+        #[derive(Clone, Copy, PartialEq, ::prost::Message)]
         pub struct SpecialDay {
             /// The date of this special day.
             #[prost(message, optional, tag = "1")]
@@ -940,20 +914,20 @@ pub mod place {
             /// (if the ProtoBuf definition does not change) and safe for programmatic use.
             pub fn as_str_name(&self) -> &'static str {
                 match self {
-                    SecondaryHoursType::Unspecified => "SECONDARY_HOURS_TYPE_UNSPECIFIED",
-                    SecondaryHoursType::DriveThrough => "DRIVE_THROUGH",
-                    SecondaryHoursType::HappyHour => "HAPPY_HOUR",
-                    SecondaryHoursType::Delivery => "DELIVERY",
-                    SecondaryHoursType::Takeout => "TAKEOUT",
-                    SecondaryHoursType::Kitchen => "KITCHEN",
-                    SecondaryHoursType::Breakfast => "BREAKFAST",
-                    SecondaryHoursType::Lunch => "LUNCH",
-                    SecondaryHoursType::Dinner => "DINNER",
-                    SecondaryHoursType::Brunch => "BRUNCH",
-                    SecondaryHoursType::Pickup => "PICKUP",
-                    SecondaryHoursType::Access => "ACCESS",
-                    SecondaryHoursType::SeniorHours => "SENIOR_HOURS",
-                    SecondaryHoursType::OnlineServiceHours => "ONLINE_SERVICE_HOURS",
+                    Self::Unspecified => "SECONDARY_HOURS_TYPE_UNSPECIFIED",
+                    Self::DriveThrough => "DRIVE_THROUGH",
+                    Self::HappyHour => "HAPPY_HOUR",
+                    Self::Delivery => "DELIVERY",
+                    Self::Takeout => "TAKEOUT",
+                    Self::Kitchen => "KITCHEN",
+                    Self::Breakfast => "BREAKFAST",
+                    Self::Lunch => "LUNCH",
+                    Self::Dinner => "DINNER",
+                    Self::Brunch => "BRUNCH",
+                    Self::Pickup => "PICKUP",
+                    Self::Access => "ACCESS",
+                    Self::SeniorHours => "SENIOR_HOURS",
+                    Self::OnlineServiceHours => "ONLINE_SERVICE_HOURS",
                 }
             }
             /// Creates an enum from field names used in the ProtoBuf definition.
@@ -979,7 +953,6 @@ pub mod place {
         }
     }
     /// Information about data providers of this place.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Attribution {
         /// Name of the Place's data provider.
@@ -990,8 +963,7 @@ pub mod place {
         pub provider_uri: ::prost::alloc::string::String,
     }
     /// Payment options the place accepts.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct PaymentOptions {
         /// Place accepts credit cards as payment.
         #[prost(bool, optional, tag = "1")]
@@ -1009,8 +981,7 @@ pub mod place {
     }
     /// Information about parking options for the place. A parking lot could
     /// support more than one option at the same time.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct ParkingOptions {
         /// Place offers free parking lots.
         #[prost(bool, optional, tag = "1")]
@@ -1036,7 +1007,6 @@ pub mod place {
     }
     /// Place resource name and id of sub destinations that relate to the place.
     /// For example, different terminals are different destinations of an airport.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct SubDestination {
         /// The resource name of the sub destination.
@@ -1047,8 +1017,7 @@ pub mod place {
         pub id: ::prost::alloc::string::String,
     }
     /// Information about the accessibility options a place offers.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct AccessibilityOptions {
         /// Place offers wheelchair accessible parking.
         #[prost(bool, optional, tag = "1")]
@@ -1068,7 +1037,6 @@ pub mod place {
     /// for more details.
     ///
     /// AI-generated summary of the place.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct GenerativeSummary {
         /// The overview of the place.
@@ -1090,7 +1058,6 @@ pub mod place {
     /// for more details.
     ///
     /// AI-generated summary of the area that the place is in.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct AreaSummary {
         /// Content blocks that compose the area summary. Each block has a separate
@@ -1128,10 +1095,10 @@ pub mod place {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                BusinessStatus::Unspecified => "BUSINESS_STATUS_UNSPECIFIED",
-                BusinessStatus::Operational => "OPERATIONAL",
-                BusinessStatus::ClosedTemporarily => "CLOSED_TEMPORARILY",
-                BusinessStatus::ClosedPermanently => "CLOSED_PERMANENTLY",
+                Self::Unspecified => "BUSINESS_STATUS_UNSPECIFIED",
+                Self::Operational => "OPERATIONAL",
+                Self::ClosedTemporarily => "CLOSED_TEMPORARILY",
+                Self::ClosedPermanently => "CLOSED_PERMANENTLY",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1170,12 +1137,12 @@ impl PriceLevel {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            PriceLevel::Unspecified => "PRICE_LEVEL_UNSPECIFIED",
-            PriceLevel::Free => "PRICE_LEVEL_FREE",
-            PriceLevel::Inexpensive => "PRICE_LEVEL_INEXPENSIVE",
-            PriceLevel::Moderate => "PRICE_LEVEL_MODERATE",
-            PriceLevel::Expensive => "PRICE_LEVEL_EXPENSIVE",
-            PriceLevel::VeryExpensive => "PRICE_LEVEL_VERY_EXPENSIVE",
+            Self::Unspecified => "PRICE_LEVEL_UNSPECIFIED",
+            Self::Free => "PRICE_LEVEL_FREE",
+            Self::Inexpensive => "PRICE_LEVEL_INEXPENSIVE",
+            Self::Moderate => "PRICE_LEVEL_MODERATE",
+            Self::Expensive => "PRICE_LEVEL_EXPENSIVE",
+            Self::VeryExpensive => "PRICE_LEVEL_VERY_EXPENSIVE",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1194,7 +1161,6 @@ impl PriceLevel {
 /// Request proto for Search Nearby.
 ///
 ///
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchNearbyRequest {
     /// Place details will be displayed with the preferred language if available.
@@ -1314,16 +1280,14 @@ pub struct SearchNearbyRequest {
 /// Nested message and enum types in `SearchNearbyRequest`.
 pub mod search_nearby_request {
     /// The region to search.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct LocationRestriction {
         #[prost(oneof = "location_restriction::Type", tags = "2")]
         pub r#type: ::core::option::Option<location_restriction::Type>,
     }
     /// Nested message and enum types in `LocationRestriction`.
     pub mod location_restriction {
-        #[allow(clippy::derive_partial_eq_without_eq)]
-        #[derive(Clone, PartialEq, ::prost::Oneof)]
+        #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
         pub enum Type {
             /// A circle defined by center point and radius.
             #[prost(message, tag = "2")]
@@ -1358,9 +1322,9 @@ pub mod search_nearby_request {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                RankPreference::Unspecified => "RANK_PREFERENCE_UNSPECIFIED",
-                RankPreference::Distance => "DISTANCE",
-                RankPreference::Popularity => "POPULARITY",
+                Self::Unspecified => "RANK_PREFERENCE_UNSPECIFIED",
+                Self::Distance => "DISTANCE",
+                Self::Popularity => "POPULARITY",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1376,7 +1340,6 @@ pub mod search_nearby_request {
 }
 /// Response proto for Search Nearby.
 ///
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchNearbyResponse {
     /// A list of places that meets user's requirements like places
@@ -1387,7 +1350,6 @@ pub struct SearchNearbyResponse {
 /// Request proto for SearchText.
 ///
 ///
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchTextRequest {
     /// Required. The text query for textual search.
@@ -1468,16 +1430,14 @@ pub struct SearchTextRequest {
 pub mod search_text_request {
     /// The region to search. This location serves as a bias which means results
     /// around given location might be returned.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct LocationBias {
         #[prost(oneof = "location_bias::Type", tags = "1, 2")]
         pub r#type: ::core::option::Option<location_bias::Type>,
     }
     /// Nested message and enum types in `LocationBias`.
     pub mod location_bias {
-        #[allow(clippy::derive_partial_eq_without_eq)]
-        #[derive(Clone, PartialEq, ::prost::Oneof)]
+        #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
         pub enum Type {
             /// A rectangle box defined by northeast and southwest corner.
             /// `rectangle.high()` must be the northeast point of the rectangle
@@ -1494,16 +1454,14 @@ pub mod search_text_request {
     }
     /// The region to search. This location serves as a restriction which means
     /// results outside given location will not be returned.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct LocationRestriction {
         #[prost(oneof = "location_restriction::Type", tags = "1")]
         pub r#type: ::core::option::Option<location_restriction::Type>,
     }
     /// Nested message and enum types in `LocationRestriction`.
     pub mod location_restriction {
-        #[allow(clippy::derive_partial_eq_without_eq)]
-        #[derive(Clone, PartialEq, ::prost::Oneof)]
+        #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
         pub enum Type {
             /// A rectangle box defined by northeast and southwest corner.
             /// `rectangle.high()` must be the northeast point of the rectangle
@@ -1516,7 +1474,6 @@ pub mod search_text_request {
         }
     }
     /// Searchable EV options of a place search request.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct EvOptions {
         /// Optional. Minimum required charging rate in kilowatts. A place with a
@@ -1564,9 +1521,9 @@ pub mod search_text_request {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                RankPreference::Unspecified => "RANK_PREFERENCE_UNSPECIFIED",
-                RankPreference::Distance => "DISTANCE",
-                RankPreference::Relevance => "RELEVANCE",
+                Self::Unspecified => "RANK_PREFERENCE_UNSPECIFIED",
+                Self::Distance => "DISTANCE",
+                Self::Relevance => "RELEVANCE",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1582,7 +1539,6 @@ pub mod search_text_request {
 }
 /// Response proto for SearchText.
 ///
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchTextResponse {
     /// A list of places that meet the user's text search criteria.
@@ -1603,7 +1559,6 @@ pub struct SearchTextResponse {
     pub contextual_contents: ::prost::alloc::vec::Vec<ContextualContent>,
 }
 /// Request for fetching a photo of a place using a photo resource name.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetPhotoMediaRequest {
     /// Required. The resource name of a photo media in the format:
@@ -1649,7 +1604,6 @@ pub struct GetPhotoMediaRequest {
     pub skip_http_redirect: bool,
 }
 /// A photo media from Places API.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PhotoMedia {
     /// The resource name of a photo media in the format:
@@ -1662,7 +1616,6 @@ pub struct PhotoMedia {
 }
 /// Request for fetching a Place based on its resource name, which is a string in
 /// the `places/{place_id}` format.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetPlaceRequest {
     /// Required. The resource name of a place, in the `places/{place_id}` format.
@@ -1716,7 +1669,6 @@ pub struct GetPlaceRequest {
     pub session_token: ::prost::alloc::string::String,
 }
 /// Request proto for AutocompletePlaces.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AutocompletePlacesRequest {
     /// Required. The text string on which to search.
@@ -1815,16 +1767,14 @@ pub struct AutocompletePlacesRequest {
 pub mod autocomplete_places_request {
     /// The region to search. The results may be biased around the specified
     /// region.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct LocationBias {
         #[prost(oneof = "location_bias::Type", tags = "1, 2")]
         pub r#type: ::core::option::Option<location_bias::Type>,
     }
     /// Nested message and enum types in `LocationBias`.
     pub mod location_bias {
-        #[allow(clippy::derive_partial_eq_without_eq)]
-        #[derive(Clone, PartialEq, ::prost::Oneof)]
+        #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
         pub enum Type {
             /// A viewport defined by a northeast and a southwest corner.
             #[prost(message, tag = "1")]
@@ -1836,16 +1786,14 @@ pub mod autocomplete_places_request {
     }
     /// The region to search. The results will be restricted to the specified
     /// region.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct LocationRestriction {
         #[prost(oneof = "location_restriction::Type", tags = "1, 2")]
         pub r#type: ::core::option::Option<location_restriction::Type>,
     }
     /// Nested message and enum types in `LocationRestriction`.
     pub mod location_restriction {
-        #[allow(clippy::derive_partial_eq_without_eq)]
-        #[derive(Clone, PartialEq, ::prost::Oneof)]
+        #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
         pub enum Type {
             /// A viewport defined by a northeast and a southwest corner.
             #[prost(message, tag = "1")]
@@ -1857,7 +1805,6 @@ pub mod autocomplete_places_request {
     }
 }
 /// Response proto for AutocompletePlaces.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AutocompletePlacesResponse {
     /// Contains a list of suggestions, ordered in descending order of relevance.
@@ -1867,7 +1814,6 @@ pub struct AutocompletePlacesResponse {
 /// Nested message and enum types in `AutocompletePlacesResponse`.
 pub mod autocomplete_places_response {
     /// An Autocomplete suggestion result.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Suggestion {
         #[prost(oneof = "suggestion::Kind", tags = "1, 2")]
@@ -1876,8 +1822,7 @@ pub mod autocomplete_places_response {
     /// Nested message and enum types in `Suggestion`.
     pub mod suggestion {
         /// Identifies a substring within a given text.
-        #[allow(clippy::derive_partial_eq_without_eq)]
-        #[derive(Clone, PartialEq, ::prost::Message)]
+        #[derive(Clone, Copy, PartialEq, ::prost::Message)]
         pub struct StringRange {
             /// Zero-based offset of the first Unicode character of the string
             /// (inclusive).
@@ -1889,7 +1834,6 @@ pub mod autocomplete_places_response {
         }
         /// Text representing a Place or query prediction. The text may be used as is
         /// or formatted.
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct FormattableText {
             /// Text that may be used as is or formatted with `matches`.
@@ -1914,7 +1858,6 @@ pub mod autocomplete_places_response {
         ///
         /// The secondary text contains additional disambiguating features (such as a
         /// city or region) to further identify the Place or refine the query.
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct StructuredFormat {
             /// Represents the name of the Place or query.
@@ -1926,7 +1869,6 @@ pub mod autocomplete_places_response {
             pub secondary_text: ::core::option::Option<FormattableText>,
         }
         /// Prediction results for a Place Autocomplete prediction.
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct PlacePrediction {
             /// The resource name of the suggested Place. This name can be used in
@@ -1979,7 +1921,6 @@ pub mod autocomplete_places_response {
             pub distance_meters: i32,
         }
         /// Prediction results for a Query Autocomplete prediction.
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct QueryPrediction {
             /// The predicted text. This text does not represent a Place, but rather a
@@ -2009,7 +1950,6 @@ pub mod autocomplete_places_response {
             #[prost(message, optional, tag = "2")]
             pub structured_format: ::core::option::Option<StructuredFormat>,
         }
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Oneof)]
         pub enum Kind {
             /// A prediction for a Place.
@@ -2023,11 +1963,17 @@ pub mod autocomplete_places_response {
 }
 /// Generated server implementations.
 pub mod places_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with PlacesServer.
     #[async_trait]
-    pub trait Places: Send + Sync + 'static {
+    pub trait Places: std::marker::Send + std::marker::Sync + 'static {
         /// Search for places near locations.
         async fn search_nearby(
             &self,
@@ -2070,20 +2016,18 @@ pub mod places_server {
     /// can be set via the HTTP header `X-Goog-FieldMask`. See:
     /// https://developers.google.com/maps/documentation/places/web-service/choose-fields
     #[derive(Debug)]
-    pub struct PlacesServer<T: Places> {
-        inner: _Inner<T>,
+    pub struct PlacesServer<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: Places> PlacesServer<T> {
+    impl<T> PlacesServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -2133,8 +2077,8 @@ pub mod places_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for PlacesServer<T>
     where
         T: Places,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -2146,7 +2090,6 @@ pub mod places_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.maps.places.v1.Places/SearchNearby" => {
                     #[allow(non_camel_case_types)]
@@ -2177,7 +2120,6 @@ pub mod places_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = SearchNearbySvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -2221,7 +2163,6 @@ pub mod places_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = SearchTextSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -2267,7 +2208,6 @@ pub mod places_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetPhotoMediaSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -2311,7 +2251,6 @@ pub mod places_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetPlaceSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -2357,7 +2296,6 @@ pub mod places_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = AutocompletePlacesSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -2376,20 +2314,25 @@ pub mod places_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: Places> Clone for PlacesServer<T> {
+    impl<T> Clone for PlacesServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -2401,17 +2344,9 @@ pub mod places_server {
             }
         }
     }
-    impl<T: Places> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: Places> tonic::server::NamedService for PlacesServer<T> {
-        const NAME: &'static str = "google.maps.places.v1.Places";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.maps.places.v1.Places";
+    impl<T> tonic::server::NamedService for PlacesServer<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }

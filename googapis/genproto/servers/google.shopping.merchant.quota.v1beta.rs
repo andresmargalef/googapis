@@ -2,7 +2,6 @@
 /// The group information for methods in the Merchant API. The quota is shared
 /// between all methods in the group. Even if none of the methods within the
 /// group have usage the information for the group is returned.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QuotaGroup {
     /// Identifier. The resource name of the quota group.
@@ -26,7 +25,6 @@ pub struct QuotaGroup {
     pub method_details: ::prost::alloc::vec::Vec<MethodDetails>,
 }
 /// The method details per method in the Merchant API.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MethodDetails {
     /// Output only. The name of the method for example `products.list`.
@@ -44,7 +42,6 @@ pub struct MethodDetails {
     pub path: ::prost::alloc::string::String,
 }
 /// Request message for the ListQuotaGroups method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListQuotaGroupsRequest {
     /// Required. The merchant account who owns the collection of method quotas
@@ -61,7 +58,6 @@ pub struct ListQuotaGroupsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for the ListMethodGroups method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListQuotaGroupsResponse {
     /// The methods, current quota usage and limits per each group. The quota is
@@ -77,11 +73,17 @@ pub struct ListQuotaGroupsResponse {
 }
 /// Generated server implementations.
 pub mod quota_service_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with QuotaServiceServer.
     #[async_trait]
-    pub trait QuotaService: Send + Sync + 'static {
+    pub trait QuotaService: std::marker::Send + std::marker::Sync + 'static {
         /// Lists the daily call quota and usage per group for your Merchant
         /// Center account.
         async fn list_quota_groups(
@@ -94,20 +96,18 @@ pub mod quota_service_server {
     }
     /// Service to get method call quota information per Merchant API method.
     #[derive(Debug)]
-    pub struct QuotaServiceServer<T: QuotaService> {
-        inner: _Inner<T>,
+    pub struct QuotaServiceServer<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: QuotaService> QuotaServiceServer<T> {
+    impl<T> QuotaServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -157,8 +157,8 @@ pub mod quota_service_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for QuotaServiceServer<T>
     where
         T: QuotaService,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -170,7 +170,6 @@ pub mod quota_service_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.shopping.merchant.quota.v1beta.QuotaService/ListQuotaGroups" => {
                     #[allow(non_camel_case_types)]
@@ -202,7 +201,6 @@ pub mod quota_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListQuotaGroupsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -221,20 +219,25 @@ pub mod quota_service_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: QuotaService> Clone for QuotaServiceServer<T> {
+    impl<T> Clone for QuotaServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -246,17 +249,9 @@ pub mod quota_service_server {
             }
         }
     }
-    impl<T: QuotaService> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: QuotaService> tonic::server::NamedService for QuotaServiceServer<T> {
-        const NAME: &'static str = "google.shopping.merchant.quota.v1beta.QuotaService";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.shopping.merchant.quota.v1beta.QuotaService";
+    impl<T> tonic::server::NamedService for QuotaServiceServer<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }

@@ -2,7 +2,6 @@
 /// FeatureMap represents extra features that customers want to include in the
 /// recommendation model for catalogs/user events as categorical/numerical
 /// features.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FeatureMap {
     /// Categorical features that can take on one of a limited number of possible
@@ -34,7 +33,6 @@ pub struct FeatureMap {
 /// Nested message and enum types in `FeatureMap`.
 pub mod feature_map {
     /// A list of string features.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct StringList {
         /// String feature value with a length limit of 128 bytes.
@@ -42,7 +40,6 @@ pub mod feature_map {
         pub value: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     }
     /// A list of float features.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct FloatList {
         /// Float feature value.
@@ -51,7 +48,6 @@ pub mod feature_map {
     }
 }
 /// CatalogItem captures all metadata information of items to be recommended.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CatalogItem {
     /// Required. Catalog item identifier. UTF-8 encoded string with a length limit
@@ -119,7 +115,6 @@ pub struct CatalogItem {
 /// Nested message and enum types in `CatalogItem`.
 pub mod catalog_item {
     /// Category represents catalog item category hierarchy.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct CategoryHierarchy {
         /// Required. Catalog item categories. Each category should be a UTF-8
@@ -131,7 +126,6 @@ pub mod catalog_item {
         pub categories: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     }
     /// Extra catalog item metadata for different recommendation types.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum RecommendationType {
         /// Optional. Metadata specific to retail products.
@@ -140,7 +134,6 @@ pub mod catalog_item {
     }
 }
 /// ProductCatalogItem captures item metadata specific to retail products.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ProductCatalogItem {
     /// Optional. A map to pass the costs associated with the product.
@@ -177,8 +170,7 @@ pub struct ProductCatalogItem {
 /// Nested message and enum types in `ProductCatalogItem`.
 pub mod product_catalog_item {
     /// Exact product price.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct ExactPrice {
         /// Optional. Display price of the product.
         #[prost(float, tag = "1")]
@@ -190,8 +182,7 @@ pub mod product_catalog_item {
     }
     /// Product price range when there are a range of prices for different
     /// variations of the same product.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct PriceRange {
         /// Required. The minimum product price.
         #[prost(float, tag = "1")]
@@ -231,10 +222,10 @@ pub mod product_catalog_item {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                StockState::Unspecified => "STOCK_STATE_UNSPECIFIED",
-                StockState::OutOfStock => "OUT_OF_STOCK",
-                StockState::Preorder => "PREORDER",
-                StockState::Backorder => "BACKORDER",
+                Self::Unspecified => "STOCK_STATE_UNSPECIFIED",
+                Self::OutOfStock => "OUT_OF_STOCK",
+                Self::Preorder => "PREORDER",
+                Self::Backorder => "BACKORDER",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -249,8 +240,7 @@ pub mod product_catalog_item {
         }
     }
     /// Product price. Only one of 'exactPrice'/'priceRange' can be provided.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
     pub enum Price {
         /// Optional. The exact product price.
         #[prost(message, tag = "1")]
@@ -261,7 +251,6 @@ pub mod product_catalog_item {
     }
 }
 /// Catalog item thumbnail/detail image.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Image {
     /// Required. URL of the image with a length limit of 5 KiB.
@@ -276,7 +265,6 @@ pub struct Image {
 }
 /// UserEvent captures all metadata information recommendation engine needs to
 /// know about how end users interact with customers' website.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UserEvent {
     /// Required. User event type. Allowed values are:
@@ -375,10 +363,10 @@ pub mod user_event {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                EventSource::Unspecified => "EVENT_SOURCE_UNSPECIFIED",
-                EventSource::Automl => "AUTOML",
-                EventSource::Ecommerce => "ECOMMERCE",
-                EventSource::BatchUpload => "BATCH_UPLOAD",
+                Self::Unspecified => "EVENT_SOURCE_UNSPECIFIED",
+                Self::Automl => "AUTOML",
+                Self::Ecommerce => "ECOMMERCE",
+                Self::BatchUpload => "BATCH_UPLOAD",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -394,7 +382,6 @@ pub mod user_event {
     }
 }
 /// Information of end users.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UserInfo {
     /// Required. A unique identifier for tracking visitors with a length limit of
@@ -433,7 +420,6 @@ pub struct UserInfo {
     pub direct_user_request: bool,
 }
 /// User event details shared by all recommendation types.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EventDetail {
     /// Optional. Complete url (window.location.href) of the user's current page.
@@ -489,7 +475,6 @@ pub struct EventDetail {
 }
 /// ProductEventDetail captures user event information specific to retail
 /// products.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ProductEventDetail {
     /// Required for `search` events. Other event types should not set this field.
@@ -549,7 +534,6 @@ pub struct ProductEventDetail {
     pub purchase_transaction: ::core::option::Option<PurchaseTransaction>,
 }
 /// A transaction represents the entire purchase transaction.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PurchaseTransaction {
     /// Optional. The transaction ID with a length limit of 128 bytes.
@@ -583,7 +567,6 @@ pub struct PurchaseTransaction {
     pub currency_code: ::prost::alloc::string::String,
 }
 /// Detailed product information associated with a user event.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ProductDetail {
     /// Required. Catalog item ID. UTF-8 encoded string with a length limit of 128
@@ -628,7 +611,6 @@ pub struct ProductDetail {
 }
 /// Google Cloud Storage location for input content.
 /// format.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GcsSource {
     /// Required. Google Cloud Storage URIs to input files. URI can be up to
@@ -642,7 +624,6 @@ pub struct GcsSource {
     pub input_uris: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// The inline source for the input config for ImportCatalogItems method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CatalogInlineSource {
     /// Optional. A list of catalog items to update/create. Recommended max of 10k
@@ -651,7 +632,6 @@ pub struct CatalogInlineSource {
     pub catalog_items: ::prost::alloc::vec::Vec<CatalogItem>,
 }
 /// The inline source for the input config for ImportUserEvents method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UserEventInlineSource {
     /// Optional. A list of user events to import. Recommended max of 10k items.
@@ -659,7 +639,6 @@ pub struct UserEventInlineSource {
     pub user_events: ::prost::alloc::vec::Vec<UserEvent>,
 }
 /// Configuration of destination for Import related errors.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ImportErrorsConfig {
     /// Required. Errors destination.
@@ -669,7 +648,6 @@ pub struct ImportErrorsConfig {
 /// Nested message and enum types in `ImportErrorsConfig`.
 pub mod import_errors_config {
     /// Required. Errors destination.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Destination {
         /// Google Cloud Storage path for import errors. This must be an empty,
@@ -681,7 +659,6 @@ pub mod import_errors_config {
     }
 }
 /// Request message for Import methods.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ImportCatalogItemsRequest {
     /// Required. `projects/1234/locations/global/catalogs/default_catalog`
@@ -701,7 +678,6 @@ pub struct ImportCatalogItemsRequest {
     pub errors_config: ::core::option::Option<ImportErrorsConfig>,
 }
 /// Request message for the ImportUserEvents request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ImportUserEventsRequest {
     /// Required.
@@ -724,7 +700,6 @@ pub struct ImportUserEventsRequest {
     pub errors_config: ::core::option::Option<ImportErrorsConfig>,
 }
 /// The input config source.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct InputConfig {
     /// Required. The source of the input.
@@ -734,7 +709,6 @@ pub struct InputConfig {
 /// Nested message and enum types in `InputConfig`.
 pub mod input_config {
     /// Required. The source of the input.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Source {
         /// The Inline source for the input content for Catalog items.
@@ -750,7 +724,6 @@ pub mod input_config {
 }
 /// Metadata related to the progress of the Import operation. This will be
 /// returned by the google.longrunning.Operation.metadata field.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ImportMetadata {
     /// Name of the operation.
@@ -777,7 +750,6 @@ pub struct ImportMetadata {
 /// Response of the ImportCatalogItemsRequest. If the long running
 /// operation is done, then this message is returned by the
 /// google.longrunning.Operations.response field if the operation was successful.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ImportCatalogItemsResponse {
     /// A sample of errors encountered while processing the request.
@@ -790,7 +762,6 @@ pub struct ImportCatalogItemsResponse {
 /// Response of the ImportUserEventsRequest. If the long running
 /// operation was successful, then this message is returned by the
 /// google.longrunning.Operations.response field if the operation was successful.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ImportUserEventsResponse {
     /// A sample of errors encountered while processing the request.
@@ -806,8 +777,7 @@ pub struct ImportUserEventsResponse {
 }
 /// A summary of import result. The UserEventImportSummary summarizes
 /// the import status for user events.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct UserEventImportSummary {
     /// Count of user events imported with complete existing catalog information.
     #[prost(int64, tag = "1")]
@@ -818,7 +788,6 @@ pub struct UserEventImportSummary {
     pub unjoined_events_count: i64,
 }
 /// Request message for CreateCatalogItem method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateCatalogItemRequest {
     /// Required. The parent catalog resource name, such as
@@ -830,7 +799,6 @@ pub struct CreateCatalogItemRequest {
     pub catalog_item: ::core::option::Option<CatalogItem>,
 }
 /// Request message for GetCatalogItem method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetCatalogItemRequest {
     /// Required. Full resource name of catalog item, such as
@@ -839,7 +807,6 @@ pub struct GetCatalogItemRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for ListCatalogItems method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCatalogItemsRequest {
     /// Required. The parent catalog resource name, such as
@@ -858,7 +825,6 @@ pub struct ListCatalogItemsRequest {
     pub filter: ::prost::alloc::string::String,
 }
 /// Response message for ListCatalogItems method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCatalogItemsResponse {
     /// The catalog items.
@@ -870,7 +836,6 @@ pub struct ListCatalogItemsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for UpdateCatalogItem method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateCatalogItemRequest {
     /// Required. Full resource name of catalog item, such as
@@ -887,7 +852,6 @@ pub struct UpdateCatalogItemRequest {
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
 /// Request message for DeleteCatalogItem method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteCatalogItemRequest {
     /// Required. Full resource name of catalog item, such as
@@ -897,11 +861,17 @@ pub struct DeleteCatalogItemRequest {
 }
 /// Generated server implementations.
 pub mod catalog_service_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with CatalogServiceServer.
     #[async_trait]
-    pub trait CatalogService: Send + Sync + 'static {
+    pub trait CatalogService: std::marker::Send + std::marker::Sync + 'static {
         /// Creates a catalog item.
         async fn create_catalog_item(
             &self,
@@ -947,20 +917,18 @@ pub mod catalog_service_server {
     }
     /// Service for ingesting catalog information of the customer's website.
     #[derive(Debug)]
-    pub struct CatalogServiceServer<T: CatalogService> {
-        inner: _Inner<T>,
+    pub struct CatalogServiceServer<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: CatalogService> CatalogServiceServer<T> {
+    impl<T> CatalogServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -1010,8 +978,8 @@ pub mod catalog_service_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for CatalogServiceServer<T>
     where
         T: CatalogService,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -1023,7 +991,6 @@ pub mod catalog_service_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.cloud.recommendationengine.v1beta1.CatalogService/CreateCatalogItem" => {
                     #[allow(non_camel_case_types)]
@@ -1055,7 +1022,6 @@ pub mod catalog_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = CreateCatalogItemSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1102,7 +1068,6 @@ pub mod catalog_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetCatalogItemSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1149,7 +1114,6 @@ pub mod catalog_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListCatalogItemsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1196,7 +1160,6 @@ pub mod catalog_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = UpdateCatalogItemSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1243,7 +1206,6 @@ pub mod catalog_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = DeleteCatalogItemSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1290,7 +1252,6 @@ pub mod catalog_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ImportCatalogItemsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1309,20 +1270,25 @@ pub mod catalog_service_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: CatalogService> Clone for CatalogServiceServer<T> {
+    impl<T> Clone for CatalogServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -1334,22 +1300,13 @@ pub mod catalog_service_server {
             }
         }
     }
-    impl<T: CatalogService> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: CatalogService> tonic::server::NamedService for CatalogServiceServer<T> {
-        const NAME: &'static str = "google.cloud.recommendationengine.v1beta1.CatalogService";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.cloud.recommendationengine.v1beta1.CatalogService";
+    impl<T> tonic::server::NamedService for CatalogServiceServer<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }
 /// Registered Api Key.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PredictionApiKeyRegistration {
     /// The API key.
@@ -1357,7 +1314,6 @@ pub struct PredictionApiKeyRegistration {
     pub api_key: ::prost::alloc::string::String,
 }
 /// Request message for the `CreatePredictionApiKeyRegistration` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreatePredictionApiKeyRegistrationRequest {
     /// Required. The parent resource path.
@@ -1371,7 +1327,6 @@ pub struct CreatePredictionApiKeyRegistrationRequest {
     >,
 }
 /// Request message for the `ListPredictionApiKeyRegistrations`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListPredictionApiKeyRegistrationsRequest {
     /// Required. The parent placement resource name such as
@@ -1387,7 +1342,6 @@ pub struct ListPredictionApiKeyRegistrationsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for the `ListPredictionApiKeyRegistrations`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListPredictionApiKeyRegistrationsResponse {
     /// The list of registered API keys.
@@ -1401,7 +1355,6 @@ pub struct ListPredictionApiKeyRegistrationsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for `DeletePredictionApiKeyRegistration` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeletePredictionApiKeyRegistrationRequest {
     /// Required. The API key to unregister including full resource path.
@@ -1411,11 +1364,17 @@ pub struct DeletePredictionApiKeyRegistrationRequest {
 }
 /// Generated server implementations.
 pub mod prediction_api_key_registry_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with PredictionApiKeyRegistryServer.
     #[async_trait]
-    pub trait PredictionApiKeyRegistry: Send + Sync + 'static {
+    pub trait PredictionApiKeyRegistry: std::marker::Send + std::marker::Sync + 'static {
         /// Register an API key for use with predict method.
         async fn create_prediction_api_key_registration(
             &self,
@@ -1444,20 +1403,18 @@ pub mod prediction_api_key_registry_server {
     /// authenticate your `predict` method call, you do not need to register an API
     /// key. You can register up to 20 API keys per project.
     #[derive(Debug)]
-    pub struct PredictionApiKeyRegistryServer<T: PredictionApiKeyRegistry> {
-        inner: _Inner<T>,
+    pub struct PredictionApiKeyRegistryServer<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: PredictionApiKeyRegistry> PredictionApiKeyRegistryServer<T> {
+    impl<T> PredictionApiKeyRegistryServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -1508,8 +1465,8 @@ pub mod prediction_api_key_registry_server {
     for PredictionApiKeyRegistryServer<T>
     where
         T: PredictionApiKeyRegistry,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -1521,7 +1478,6 @@ pub mod prediction_api_key_registry_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.cloud.recommendationengine.v1beta1.PredictionApiKeyRegistry/CreatePredictionApiKeyRegistration" => {
                     #[allow(non_camel_case_types)]
@@ -1563,7 +1519,6 @@ pub mod prediction_api_key_registry_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = CreatePredictionApiKeyRegistrationSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1620,7 +1575,6 @@ pub mod prediction_api_key_registry_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListPredictionApiKeyRegistrationsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1677,7 +1631,6 @@ pub mod prediction_api_key_registry_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = DeletePredictionApiKeyRegistrationSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1696,20 +1649,25 @@ pub mod prediction_api_key_registry_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: PredictionApiKeyRegistry> Clone for PredictionApiKeyRegistryServer<T> {
+    impl<T> Clone for PredictionApiKeyRegistryServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -1721,23 +1679,13 @@ pub mod prediction_api_key_registry_server {
             }
         }
     }
-    impl<T: PredictionApiKeyRegistry> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: PredictionApiKeyRegistry> tonic::server::NamedService
-    for PredictionApiKeyRegistryServer<T> {
-        const NAME: &'static str = "google.cloud.recommendationengine.v1beta1.PredictionApiKeyRegistry";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.cloud.recommendationengine.v1beta1.PredictionApiKeyRegistry";
+    impl<T> tonic::server::NamedService for PredictionApiKeyRegistryServer<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }
 /// Request message for Predict method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PredictRequest {
     /// Required. Full resource name of the format:
@@ -1845,7 +1793,6 @@ pub struct PredictRequest {
     >,
 }
 /// Response message for predict method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PredictResponse {
     /// A list of recommended items. The order represents the ranking (from the
@@ -1879,7 +1826,6 @@ pub struct PredictResponse {
 /// Nested message and enum types in `PredictResponse`.
 pub mod predict_response {
     /// PredictionResult represents the recommendation prediction results.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct PredictionResult {
         /// ID of the recommended catalog item
@@ -1902,11 +1848,17 @@ pub mod predict_response {
 }
 /// Generated server implementations.
 pub mod prediction_service_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with PredictionServiceServer.
     #[async_trait]
-    pub trait PredictionService: Send + Sync + 'static {
+    pub trait PredictionService: std::marker::Send + std::marker::Sync + 'static {
         /// Makes a recommendation prediction. If using API Key based authentication,
         /// the API Key must be registered using the
         /// [PredictionApiKeyRegistry][google.cloud.recommendationengine.v1beta1.PredictionApiKeyRegistry]
@@ -1918,20 +1870,18 @@ pub mod prediction_service_server {
     }
     /// Service for making recommendation prediction.
     #[derive(Debug)]
-    pub struct PredictionServiceServer<T: PredictionService> {
-        inner: _Inner<T>,
+    pub struct PredictionServiceServer<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: PredictionService> PredictionServiceServer<T> {
+    impl<T> PredictionServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -1981,8 +1931,8 @@ pub mod prediction_service_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for PredictionServiceServer<T>
     where
         T: PredictionService,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -1994,7 +1944,6 @@ pub mod prediction_service_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.cloud.recommendationengine.v1beta1.PredictionService/Predict" => {
                     #[allow(non_camel_case_types)]
@@ -2025,7 +1974,6 @@ pub mod prediction_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = PredictSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -2044,20 +1992,25 @@ pub mod prediction_service_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: PredictionService> Clone for PredictionServiceServer<T> {
+    impl<T> Clone for PredictionServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -2069,23 +2022,13 @@ pub mod prediction_service_server {
             }
         }
     }
-    impl<T: PredictionService> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: PredictionService> tonic::server::NamedService
-    for PredictionServiceServer<T> {
-        const NAME: &'static str = "google.cloud.recommendationengine.v1beta1.PredictionService";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.cloud.recommendationengine.v1beta1.PredictionService";
+    impl<T> tonic::server::NamedService for PredictionServiceServer<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }
 /// Request message for PurgeUserEvents method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PurgeUserEventsRequest {
     /// Required. The resource name of the event_store under which the events are
@@ -2121,7 +2064,6 @@ pub struct PurgeUserEventsRequest {
 }
 /// Metadata related to the progress of the PurgeUserEvents operation.
 /// This will be returned by the google.longrunning.Operation.metadata field.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PurgeUserEventsMetadata {
     /// The ID of the request / operation.
@@ -2134,7 +2076,6 @@ pub struct PurgeUserEventsMetadata {
 /// Response of the PurgeUserEventsRequest. If the long running operation is
 /// successfully done, then this message is returned by the
 /// google.longrunning.Operations.response field.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PurgeUserEventsResponse {
     /// The total count of events purged as a result of the operation.
@@ -2146,7 +2087,6 @@ pub struct PurgeUserEventsResponse {
     pub user_events_sample: ::prost::alloc::vec::Vec<UserEvent>,
 }
 /// Request message for WriteUserEvent method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct WriteUserEventRequest {
     /// Required. The parent eventStore resource name, such as
@@ -2158,7 +2098,6 @@ pub struct WriteUserEventRequest {
     pub user_event: ::core::option::Option<UserEvent>,
 }
 /// Request message for CollectUserEvent method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CollectUserEventRequest {
     /// Required. The parent eventStore name, such as
@@ -2181,7 +2120,6 @@ pub struct CollectUserEventRequest {
     pub ets: i64,
 }
 /// Request message for ListUserEvents method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListUserEventsRequest {
     /// Required. The parent eventStore resource name, such as
@@ -2231,7 +2169,6 @@ pub struct ListUserEventsRequest {
     pub filter: ::prost::alloc::string::String,
 }
 /// Response message for ListUserEvents method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListUserEventsResponse {
     /// The user events.
@@ -2244,11 +2181,17 @@ pub struct ListUserEventsResponse {
 }
 /// Generated server implementations.
 pub mod user_event_service_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with UserEventServiceServer.
     #[async_trait]
-    pub trait UserEventService: Send + Sync + 'static {
+    pub trait UserEventService: std::marker::Send + std::marker::Sync + 'static {
         /// Writes a single user event.
         async fn write_user_event(
             &self,
@@ -2302,20 +2245,18 @@ pub mod user_event_service_server {
     }
     /// Service for ingesting end user actions on the customer website.
     #[derive(Debug)]
-    pub struct UserEventServiceServer<T: UserEventService> {
-        inner: _Inner<T>,
+    pub struct UserEventServiceServer<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: UserEventService> UserEventServiceServer<T> {
+    impl<T> UserEventServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -2365,8 +2306,8 @@ pub mod user_event_service_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for UserEventServiceServer<T>
     where
         T: UserEventService,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -2378,7 +2319,6 @@ pub mod user_event_service_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.cloud.recommendationengine.v1beta1.UserEventService/WriteUserEvent" => {
                     #[allow(non_camel_case_types)]
@@ -2410,7 +2350,6 @@ pub mod user_event_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = WriteUserEventSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -2457,7 +2396,6 @@ pub mod user_event_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = CollectUserEventSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -2504,7 +2442,6 @@ pub mod user_event_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListUserEventsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -2551,7 +2488,6 @@ pub mod user_event_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = PurgeUserEventsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -2598,7 +2534,6 @@ pub mod user_event_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ImportUserEventsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -2617,20 +2552,25 @@ pub mod user_event_service_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: UserEventService> Clone for UserEventServiceServer<T> {
+    impl<T> Clone for UserEventServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -2642,17 +2582,9 @@ pub mod user_event_service_server {
             }
         }
     }
-    impl<T: UserEventService> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: UserEventService> tonic::server::NamedService for UserEventServiceServer<T> {
-        const NAME: &'static str = "google.cloud.recommendationengine.v1beta1.UserEventService";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.cloud.recommendationengine.v1beta1.UserEventService";
+    impl<T> tonic::server::NamedService for UserEventServiceServer<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }

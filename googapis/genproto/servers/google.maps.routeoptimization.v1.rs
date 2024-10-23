@@ -4,7 +4,6 @@
 /// file will contain one `OptimizeToursResponse`. The request contains
 /// information to read/write and parse the files. All the input and output files
 /// should be under the same project.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BatchOptimizeToursRequest {
     /// Required. Target project and location to make a call.
@@ -26,7 +25,6 @@ pub struct BatchOptimizeToursRequest {
 /// Nested message and enum types in `BatchOptimizeToursRequest`.
 pub mod batch_optimize_tours_request {
     /// Information for solving one optimization model asynchronously.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct AsyncModelConfig {
         /// Optional. User defined model name, can be used as alias by users to keep
@@ -43,16 +41,13 @@ pub mod batch_optimize_tours_request {
 }
 /// Response to a `BatchOptimizeToursRequest`. This is returned in
 /// the Long Running Operation after the operation is complete.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct BatchOptimizeToursResponse {}
 /// Operation metadata for `BatchOptimizeToursRequest` calls.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct BatchOptimizeToursMetadata {}
 /// Request to be given to a tour optimization solver which defines the
 /// shipment model to solve as well as optimization parameters.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OptimizeToursRequest {
     /// Required. Target project or location to make a call.
@@ -305,11 +300,9 @@ pub mod optimize_tours_request {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                SolvingMode::DefaultSolve => "DEFAULT_SOLVE",
-                SolvingMode::ValidateOnly => "VALIDATE_ONLY",
-                SolvingMode::DetectSomeInfeasibleShipments => {
-                    "DETECT_SOME_INFEASIBLE_SHIPMENTS"
-                }
+                Self::DefaultSolve => "DEFAULT_SOLVE",
+                Self::ValidateOnly => "VALIDATE_ONLY",
+                Self::DetectSomeInfeasibleShipments => "DETECT_SOME_INFEASIBLE_SHIPMENTS",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -353,9 +346,9 @@ pub mod optimize_tours_request {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                SearchMode::Unspecified => "SEARCH_MODE_UNSPECIFIED",
-                SearchMode::ReturnFast => "RETURN_FAST",
-                SearchMode::ConsumeAllAvailableTime => "CONSUME_ALL_AVAILABLE_TIME",
+                Self::Unspecified => "SEARCH_MODE_UNSPECIFIED",
+                Self::ReturnFast => "RETURN_FAST",
+                Self::ConsumeAllAvailableTime => "CONSUME_ALL_AVAILABLE_TIME",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -372,7 +365,6 @@ pub mod optimize_tours_request {
 /// Response after solving a tour optimization problem containing the routes
 /// followed by each vehicle, the shipments which have been skipped and the
 /// overall cost of the solution.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OptimizeToursResponse {
     /// Routes computed for each vehicle; the i-th route corresponds to the i-th
@@ -400,7 +392,6 @@ pub struct OptimizeToursResponse {
 /// Nested message and enum types in `OptimizeToursResponse`.
 pub mod optimize_tours_response {
     /// Overall metrics, aggregated over all routes.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Metrics {
         /// Aggregated over the routes. Each metric is the sum (or max, for loads)
@@ -452,7 +443,6 @@ pub mod optimize_tours_response {
 ///    travel time, and fixed cost over all vehicles).
 /// * the unperformed shipment penalties.
 /// * the cost of the global duration of the shipments
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ShipmentModel {
     /// Set of shipments which must be performed in the model.
@@ -642,7 +632,6 @@ pub struct ShipmentModel {
 pub mod shipment_model {
     /// Specifies a duration and distance matrix from visit and vehicle start
     /// locations to visit and vehicle end locations.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct DurationDistanceMatrix {
         /// Specifies the rows of the duration and distance matrix. It must have as
@@ -665,7 +654,6 @@ pub mod shipment_model {
     /// Nested message and enum types in `DurationDistanceMatrix`.
     pub mod duration_distance_matrix {
         /// Specifies a row of the duration and distance matrix.
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct Row {
             /// Duration values for a given row. It must have as many elements as
@@ -689,8 +677,7 @@ pub mod shipment_model {
     ///
     /// Furthermore, precedences only apply when both shipments are performed and
     /// are otherwise ignored.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct PrecedenceRule {
         /// Shipment index of the "first" event. This field must be specified.
         #[prost(int32, optional, tag = "1")]
@@ -714,7 +701,6 @@ pub mod shipment_model {
 /// must visit one of its pickup locations (and decrease its spare capacities
 /// accordingly), then visit one of its delivery locations later on (and
 /// therefore re-increase its spare capacities accordingly).
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Shipment {
     /// The user-defined display name of the shipment.
@@ -855,7 +841,6 @@ pub mod shipment {
     /// (or two, see below), opening and closing times represented by time windows,
     /// and a service duration time (time spent by the vehicle once it has arrived
     /// to pickup or drop off goods).
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct VisitRequest {
         /// The geo-location where the vehicle arrives when performing this
@@ -945,8 +930,7 @@ pub mod shipment {
     /// load if it's a pickup, or subtracted if it's a delivery. This message
     /// defines such amount. See
     /// [load_demands][google.maps.routeoptimization.v1.Shipment.load_demands].
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct Load {
         /// The amount by which the load of the vehicle performing the corresponding
         /// visit will vary. Since it is an integer, users are advised to choose an
@@ -958,7 +942,6 @@ pub mod shipment {
 /// Specifies incompatibilties between shipments depending on their
 /// shipment_type. The appearance of incompatible shipments on the same route is
 /// restricted based on the incompatibility mode.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ShipmentTypeIncompatibility {
     /// List of incompatible types. Two shipments having different `shipment_types`
@@ -1011,11 +994,9 @@ pub mod shipment_type_incompatibility {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                IncompatibilityMode::Unspecified => "INCOMPATIBILITY_MODE_UNSPECIFIED",
-                IncompatibilityMode::NotPerformedBySameVehicle => {
-                    "NOT_PERFORMED_BY_SAME_VEHICLE"
-                }
-                IncompatibilityMode::NotInSameVehicleSimultaneously => {
+                Self::Unspecified => "INCOMPATIBILITY_MODE_UNSPECIFIED",
+                Self::NotPerformedBySameVehicle => "NOT_PERFORMED_BY_SAME_VEHICLE",
+                Self::NotInSameVehicleSimultaneously => {
                     "NOT_IN_SAME_VEHICLE_SIMULTANEOUSLY"
                 }
             }
@@ -1035,7 +1016,6 @@ pub mod shipment_type_incompatibility {
 }
 /// Specifies requirements between shipments based on their shipment_type.
 /// The specifics of the requirement are defined by the requirement mode.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ShipmentTypeRequirement {
     /// List of alternative shipment types required by the
@@ -1101,14 +1081,10 @@ pub mod shipment_type_requirement {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                RequirementMode::Unspecified => "REQUIREMENT_MODE_UNSPECIFIED",
-                RequirementMode::PerformedBySameVehicle => "PERFORMED_BY_SAME_VEHICLE",
-                RequirementMode::InSameVehicleAtPickupTime => {
-                    "IN_SAME_VEHICLE_AT_PICKUP_TIME"
-                }
-                RequirementMode::InSameVehicleAtDeliveryTime => {
-                    "IN_SAME_VEHICLE_AT_DELIVERY_TIME"
-                }
+                Self::Unspecified => "REQUIREMENT_MODE_UNSPECIFIED",
+                Self::PerformedBySameVehicle => "PERFORMED_BY_SAME_VEHICLE",
+                Self::InSameVehicleAtPickupTime => "IN_SAME_VEHICLE_AT_PICKUP_TIME",
+                Self::InSameVehicleAtDeliveryTime => "IN_SAME_VEHICLE_AT_DELIVERY_TIME",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1128,7 +1104,6 @@ pub mod shipment_type_requirement {
 /// Models a vehicle in a shipment problem. Solving a shipment problem will
 /// build a route starting from `start_location` and ending at `end_location`
 /// for this vehicle. A route is a sequence of visits (see `ShipmentRoute`).
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Vehicle {
     /// The user-defined display name of the vehicle.
@@ -1332,8 +1307,7 @@ pub mod vehicle {
     /// Defines a load limit applying to a vehicle, e.g. "this truck may only
     /// carry up to 3500 kg". See
     /// [load_limits][google.maps.routeoptimization.v1.Vehicle.load_limits].
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct LoadLimit {
         /// The maximum acceptable amount of load.
         #[prost(int64, optional, tag = "1")]
@@ -1362,8 +1336,7 @@ pub mod vehicle {
     /// Nested message and enum types in `LoadLimit`.
     pub mod load_limit {
         /// Interval of acceptable load amounts.
-        #[allow(clippy::derive_partial_eq_without_eq)]
-        #[derive(Clone, PartialEq, ::prost::Message)]
+        #[derive(Clone, Copy, PartialEq, ::prost::Message)]
         pub struct Interval {
             /// A minimum acceptable load. Must be ≥ 0.
             /// If they're both specified,
@@ -1387,8 +1360,7 @@ pub mod vehicle {
     ///
     /// When a soft limit field is defined, both the soft max threshold and its
     /// associated cost must be defined together.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct DurationLimit {
         /// A hard limit constraining the duration to be at most max_duration.
         #[prost(message, optional, tag = "1")]
@@ -1469,9 +1441,9 @@ pub mod vehicle {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                TravelMode::Unspecified => "TRAVEL_MODE_UNSPECIFIED",
-                TravelMode::Driving => "DRIVING",
-                TravelMode::Walking => "WALKING",
+                Self::Unspecified => "TRAVEL_MODE_UNSPECIFIED",
+                Self::Driving => "DRIVING",
+                Self::Walking => "WALKING",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1517,9 +1489,9 @@ pub mod vehicle {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                UnloadingPolicy::Unspecified => "UNLOADING_POLICY_UNSPECIFIED",
-                UnloadingPolicy::LastInFirstOut => "LAST_IN_FIRST_OUT",
-                UnloadingPolicy::FirstInFirstOut => "FIRST_IN_FIRST_OUT",
+                Self::Unspecified => "UNLOADING_POLICY_UNSPECIFIED",
+                Self::LastInFirstOut => "LAST_IN_FIRST_OUT",
+                Self::FirstInFirstOut => "FIRST_IN_FIRST_OUT",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1554,8 +1526,7 @@ pub mod vehicle {
 ///    0 <= `start_time` <= `soft_start_time` <= `end_time` and
 ///    0 <= `start_time` <= `soft_end_time` <= `end_time`.
 /// ```
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct TimeWindow {
     /// The hard time window start time. If unspecified it will be set to
     /// `ShipmentModel.global_start_time`.
@@ -1603,8 +1574,7 @@ pub struct TimeWindow {
 ///
 /// If a soft limit is defined, both `soft_max_meters` and
 /// `cost_per_kilometer_above_soft_max` must be defined and be nonnegative.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct DistanceLimit {
     /// A hard limit constraining the distance to be at most max_meters. The limit
     /// must be nonnegative.
@@ -1633,7 +1603,6 @@ pub struct DistanceLimit {
 /// route. Several `TransitionAttributes` may apply to the same transition: in
 /// that case, all extra costs add up and the strictest constraint or limit
 /// applies (following natural "AND" semantics).
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TransitionAttributes {
     /// Tags defining the set of (src->dst) transitions these attributes apply to.
@@ -1687,7 +1656,6 @@ pub struct TransitionAttributes {
 }
 /// Encapsulates a waypoint. Waypoints mark arrival and departure locations of
 /// VisitRequests, and start and end locations of Vehicles.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Waypoint {
     /// Optional. Indicates that the location of this waypoint is meant to have a
@@ -1705,7 +1673,6 @@ pub struct Waypoint {
 /// Nested message and enum types in `Waypoint`.
 pub mod waypoint {
     /// Different ways to represent a location.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum LocationType {
         /// A point specified using geographic coordinates, including an optional
@@ -1718,8 +1685,7 @@ pub mod waypoint {
     }
 }
 /// Encapsulates a location (a geographic point, and an optional heading).
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct Location {
     /// The waypoint's geographic coordinates.
     #[prost(message, optional, tag = "1")]
@@ -1741,7 +1707,6 @@ pub struct Location {
 /// * or before the vehicle start (the vehicle may not start in the middle of
 ///    a break), in which case it does not affect the vehicle start time.
 /// * or after the vehicle end (ditto, with the vehicle end time).
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BreakRule {
     /// Sequence of breaks. See the `BreakRequest` message.
@@ -1759,8 +1724,7 @@ pub mod break_rule {
     /// that sequence, in the order in which they must occur. Their time windows
     /// (`earliest_start_time` / `latest_start_time`) may overlap, but they must
     /// be compatible with the order (this is checked).
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct BreakRequest {
         /// Required. Lower bound (inclusive) on the start of the break.
         #[prost(message, optional, tag = "1")]
@@ -1805,8 +1769,7 @@ pub mod break_rule {
     ///     .. performing travel and visits ..
     ///    23:59 vehicle end
     /// ```
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct FrequencyConstraint {
         /// Required. Minimum break duration for this constraint. Nonnegative.
         /// See description of `FrequencyConstraint`.
@@ -1903,7 +1866,6 @@ pub mod break_rule {
 ///    ||     |       |           |       |           |         |         ||
 /// --++-----------------------------------------------------------------++-->
 /// ```
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ShipmentRoute {
     /// Vehicle performing the route, identified by its index in the source
@@ -1986,7 +1948,6 @@ pub struct ShipmentRoute {
 pub mod shipment_route {
     /// A visit performed during a route. This visit corresponds to a pickup or a
     /// delivery of a `Shipment`.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Visit {
         /// Index of the `shipments` field in the source
@@ -2048,7 +2009,6 @@ pub mod shipment_route {
     ///
     /// If the vehicle does not have a `start_location` and/or `end_location`, the
     /// corresponding travel metrics are 0.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Transition {
         /// Travel duration during this transition.
@@ -2121,8 +2081,7 @@ pub mod shipment_route {
     /// Reports the actual load of the vehicle at some point along the route,
     /// for a given type (see
     /// [Transition.vehicle_loads][google.maps.routeoptimization.v1.ShipmentRoute.Transition.vehicle_loads]).
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct VehicleLoad {
         /// The amount of load on the vehicle, for the given type. The unit of load
         /// is usually indicated by the type. See
@@ -2134,7 +2093,6 @@ pub mod shipment_route {
     /// encoding can be found here:
     /// <https://developers.google.com/maps/documentation/utilities/polylinealgorithm>
     /// <https://developers.google.com/maps/documentation/javascript/reference/geometry#encoding.>
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct EncodedPolyline {
         /// String representing encoded points of the polyline.
@@ -2142,8 +2100,7 @@ pub mod shipment_route {
         pub points: ::prost::alloc::string::String,
     }
     /// Data representing the execution of a break.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct Break {
         /// Start time of a break.
         #[prost(message, optional, tag = "1")]
@@ -2156,7 +2113,6 @@ pub mod shipment_route {
 /// Specifies details of unperformed shipments in a solution. For trivial cases
 /// and/or if we are able to identify the cause for skipping, we report the
 /// reason here.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SkippedShipment {
     /// The index corresponds to the index of the shipment in the source
@@ -2201,7 +2157,6 @@ pub mod skipped_shipment {
     /// capacity would be exceeded (including vehicle 1), at least one vehicle's
     /// "Pears" capacity would be exceeded (including vehicle 3) and at least one
     /// vehicle's distance limit would be exceeded (including vehicle 1).
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Reason {
         /// Refer to the comments of Code.
@@ -2275,24 +2230,24 @@ pub mod skipped_shipment {
             /// (if the ProtoBuf definition does not change) and safe for programmatic use.
             pub fn as_str_name(&self) -> &'static str {
                 match self {
-                    Code::Unspecified => "CODE_UNSPECIFIED",
-                    Code::NoVehicle => "NO_VEHICLE",
-                    Code::DemandExceedsVehicleCapacity => {
+                    Self::Unspecified => "CODE_UNSPECIFIED",
+                    Self::NoVehicle => "NO_VEHICLE",
+                    Self::DemandExceedsVehicleCapacity => {
                         "DEMAND_EXCEEDS_VEHICLE_CAPACITY"
                     }
-                    Code::CannotBePerformedWithinVehicleDistanceLimit => {
+                    Self::CannotBePerformedWithinVehicleDistanceLimit => {
                         "CANNOT_BE_PERFORMED_WITHIN_VEHICLE_DISTANCE_LIMIT"
                     }
-                    Code::CannotBePerformedWithinVehicleDurationLimit => {
+                    Self::CannotBePerformedWithinVehicleDurationLimit => {
                         "CANNOT_BE_PERFORMED_WITHIN_VEHICLE_DURATION_LIMIT"
                     }
-                    Code::CannotBePerformedWithinVehicleTravelDurationLimit => {
+                    Self::CannotBePerformedWithinVehicleTravelDurationLimit => {
                         "CANNOT_BE_PERFORMED_WITHIN_VEHICLE_TRAVEL_DURATION_LIMIT"
                     }
-                    Code::CannotBePerformedWithinVehicleTimeWindows => {
+                    Self::CannotBePerformedWithinVehicleTimeWindows => {
                         "CANNOT_BE_PERFORMED_WITHIN_VEHICLE_TIME_WINDOWS"
                     }
-                    Code::VehicleNotAllowed => "VEHICLE_NOT_ALLOWED",
+                    Self::VehicleNotAllowed => "VEHICLE_NOT_ALLOWED",
                 }
             }
             /// Creates an enum from field names used in the ProtoBuf definition.
@@ -2330,7 +2285,6 @@ pub mod skipped_shipment {
 /// and/or [Visit][google.maps.routeoptimization.v1.ShipmentRoute.Visit] (resp.
 /// over all [ShipmentRoute][google.maps.routeoptimization.v1.ShipmentRoute])
 /// elements.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AggregatedMetrics {
     /// Number of shipments performed. Note that a pickup and delivery pair only
@@ -2378,7 +2332,6 @@ pub struct AggregatedMetrics {
 }
 /// Solution injected in the request including information about which visits
 /// must be constrained and how they must be constrained.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct InjectedSolutionConstraint {
     /// Routes of the solution to inject. Some routes may be omitted from the
@@ -2404,7 +2357,6 @@ pub mod injected_solution_constraint {
     /// visits will be relaxed and to which level. Shipments listed in
     /// the `skipped_shipment` field are constrained to be skipped; i.e., they
     /// cannot be performed.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ConstraintRelaxation {
         /// All the visit constraint relaxations that will apply to visits on
@@ -2463,8 +2415,7 @@ pub mod injected_solution_constraint {
         /// and no visits may be inserted into these sequences. Also, if a
         /// vehicle start or end does not satisfy the conditions of any
         /// relaxation the time is fixed, unless the vehicle is empty.
-        #[allow(clippy::derive_partial_eq_without_eq)]
-        #[derive(Clone, PartialEq, ::prost::Message)]
+        #[derive(Clone, Copy, PartialEq, ::prost::Message)]
         pub struct Relaxation {
             /// The constraint relaxation level that applies when the conditions
             /// at or after `threshold_time` AND at least `threshold_visit_count` are
@@ -2529,14 +2480,14 @@ pub mod injected_solution_constraint {
                 /// (if the ProtoBuf definition does not change) and safe for programmatic use.
                 pub fn as_str_name(&self) -> &'static str {
                     match self {
-                        Level::Unspecified => "LEVEL_UNSPECIFIED",
-                        Level::RelaxVisitTimesAfterThreshold => {
+                        Self::Unspecified => "LEVEL_UNSPECIFIED",
+                        Self::RelaxVisitTimesAfterThreshold => {
                             "RELAX_VISIT_TIMES_AFTER_THRESHOLD"
                         }
-                        Level::RelaxVisitTimesAndSequenceAfterThreshold => {
+                        Self::RelaxVisitTimesAndSequenceAfterThreshold => {
                             "RELAX_VISIT_TIMES_AND_SEQUENCE_AFTER_THRESHOLD"
                         }
-                        Level::RelaxAllAfterThreshold => "RELAX_ALL_AFTER_THRESHOLD",
+                        Self::RelaxAllAfterThreshold => "RELAX_ALL_AFTER_THRESHOLD",
                     }
                 }
                 /// Creates an enum from field names used in the ProtoBuf definition.
@@ -2558,7 +2509,6 @@ pub mod injected_solution_constraint {
     }
 }
 /// Describes an error encountered when validating an `OptimizeToursRequest`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OptimizeToursValidationError {
     /// A validation error is defined by the pair (`code`, `display_name`) which
@@ -2841,7 +2791,6 @@ pub mod optimize_tours_validation_error {
     /// ```
     /// We however omit top-level entities such as `OptimizeToursRequest` or
     /// `ShipmentModel` to avoid crowding the message.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct FieldReference {
         /// Name of the field, e.g., "vehicles".
@@ -2857,7 +2806,6 @@ pub mod optimize_tours_validation_error {
     }
     /// Nested message and enum types in `FieldReference`.
     pub mod field_reference {
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Oneof)]
         pub enum IndexOrKey {
             /// Index of the field if repeated.
@@ -2871,7 +2819,6 @@ pub mod optimize_tours_validation_error {
 }
 /// Specify an input for
 /// [BatchOptimizeTours][google.maps.routeoptimization.v1.RouteOptimizationService.BatchOptimizeTours].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct InputConfig {
     /// Required. The input data format.
@@ -2884,7 +2831,6 @@ pub struct InputConfig {
 /// Nested message and enum types in `InputConfig`.
 pub mod input_config {
     /// Required.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Source {
         /// A Google Cloud Storage location. This must be a single object (file).
@@ -2895,7 +2841,6 @@ pub mod input_config {
 /// Specify a destination for
 /// [BatchOptimizeTours][google.maps.routeoptimization.v1.RouteOptimizationService.BatchOptimizeTours]
 /// results.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OutputConfig {
     /// Required. The output data format.
@@ -2908,7 +2853,6 @@ pub struct OutputConfig {
 /// Nested message and enum types in `OutputConfig`.
 pub mod output_config {
     /// Required.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Destination {
         /// The Google Cloud Storage location to write the output to.
@@ -2917,7 +2861,6 @@ pub mod output_config {
     }
 }
 /// The Google Cloud Storage location where the input file will be read from.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GcsSource {
     /// Required. URI of a Google Cloud Storage object with the format
@@ -2927,7 +2870,6 @@ pub struct GcsSource {
 }
 /// The Google Cloud Storage location where the output file(s) will be written
 /// to.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GcsDestination {
     /// Required. Google Cloud Storage URI.
@@ -2953,9 +2895,9 @@ impl DataFormat {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            DataFormat::Unspecified => "DATA_FORMAT_UNSPECIFIED",
-            DataFormat::Json => "JSON",
-            DataFormat::ProtoText => "PROTO_TEXT",
+            Self::Unspecified => "DATA_FORMAT_UNSPECIFIED",
+            Self::Json => "JSON",
+            Self::ProtoText => "PROTO_TEXT",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -2970,11 +2912,17 @@ impl DataFormat {
 }
 /// Generated server implementations.
 pub mod route_optimization_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with RouteOptimizationServer.
     #[async_trait]
-    pub trait RouteOptimization: Send + Sync + 'static {
+    pub trait RouteOptimization: std::marker::Send + std::marker::Sync + 'static {
         /// Sends an `OptimizeToursRequest` containing a `ShipmentModel` and returns an
         /// `OptimizeToursResponse` containing `ShipmentRoute`s, which are a set of
         /// routes to be performed by vehicles minimizing the overall cost.
@@ -3033,20 +2981,18 @@ pub mod route_optimization_server {
     ///     * at least one of latitude and longitude must be non-zero.
     ///
     #[derive(Debug)]
-    pub struct RouteOptimizationServer<T: RouteOptimization> {
-        inner: _Inner<T>,
+    pub struct RouteOptimizationServer<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: RouteOptimization> RouteOptimizationServer<T> {
+    impl<T> RouteOptimizationServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -3096,8 +3042,8 @@ pub mod route_optimization_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for RouteOptimizationServer<T>
     where
         T: RouteOptimization,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -3109,7 +3055,6 @@ pub mod route_optimization_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.maps.routeoptimization.v1.RouteOptimization/OptimizeTours" => {
                     #[allow(non_camel_case_types)]
@@ -3141,7 +3086,6 @@ pub mod route_optimization_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = OptimizeToursSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -3191,7 +3135,6 @@ pub mod route_optimization_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = BatchOptimizeToursSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -3210,20 +3153,25 @@ pub mod route_optimization_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: RouteOptimization> Clone for RouteOptimizationServer<T> {
+    impl<T> Clone for RouteOptimizationServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -3235,18 +3183,9 @@ pub mod route_optimization_server {
             }
         }
     }
-    impl<T: RouteOptimization> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: RouteOptimization> tonic::server::NamedService
-    for RouteOptimizationServer<T> {
-        const NAME: &'static str = "google.maps.routeoptimization.v1.RouteOptimization";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.maps.routeoptimization.v1.RouteOptimization";
+    impl<T> tonic::server::NamedService for RouteOptimizationServer<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }

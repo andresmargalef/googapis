@@ -2,7 +2,6 @@
 /// [Developer Preview](<https://developers.google.com/workspace/preview>).
 /// Virtual place where conferences are held. Only one active conference can be
 /// held in one space at any given time.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Space {
     /// Immutable. Resource name of the space.
@@ -26,7 +25,6 @@ pub struct Space {
     pub active_conference: ::core::option::Option<ActiveConference>,
 }
 /// Active conference.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ActiveConference {
     /// Output only. Reference to 'ConferenceRecord' resource.
@@ -36,8 +34,7 @@ pub struct ActiveConference {
     pub conference_record: ::prost::alloc::string::String,
 }
 /// The configuration pertaining to a meeting space.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct SpaceConfig {
     /// Access type of the meeting space that determines who can join without
     /// knocking. Default: The user's default access settings.  Controlled by the
@@ -86,10 +83,10 @@ pub mod space_config {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                AccessType::Unspecified => "ACCESS_TYPE_UNSPECIFIED",
-                AccessType::Open => "OPEN",
-                AccessType::Trusted => "TRUSTED",
-                AccessType::Restricted => "RESTRICTED",
+                Self::Unspecified => "ACCESS_TYPE_UNSPECIFIED",
+                Self::Open => "OPEN",
+                Self::Trusted => "TRUSTED",
+                Self::Restricted => "RESTRICTED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -134,9 +131,9 @@ pub mod space_config {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                EntryPointAccess::Unspecified => "ENTRY_POINT_ACCESS_UNSPECIFIED",
-                EntryPointAccess::All => "ALL",
-                EntryPointAccess::CreatorAppOnly => "CREATOR_APP_ONLY",
+                Self::Unspecified => "ENTRY_POINT_ACCESS_UNSPECIFIED",
+                Self::All => "ALL",
+                Self::CreatorAppOnly => "CREATOR_APP_ONLY",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -152,7 +149,6 @@ pub mod space_config {
 }
 /// [Developer Preview](<https://developers.google.com/workspace/preview>).
 /// Single instance of a meeting held in a space.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ConferenceRecord {
     /// Identifier. Resource name of the conference record.
@@ -178,7 +174,6 @@ pub struct ConferenceRecord {
 }
 /// [Developer Preview](<https://developers.google.com/workspace/preview>).
 /// User who attended or is attending a conference.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Participant {
     /// Output only. Resource name of the participant.
@@ -198,7 +193,6 @@ pub struct Participant {
 }
 /// Nested message and enum types in `Participant`.
 pub mod participant {
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum User {
         /// Signed-in user.
@@ -218,7 +212,6 @@ pub mod participant {
 /// assigned. That means if a user joins a space multiple times from the same
 /// device, they're assigned different IDs, and are also be treated as different
 /// participant sessions.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ParticipantSession {
     /// Identifier. Session id.
@@ -236,7 +229,6 @@ pub struct ParticipantSession {
 /// a) An individual joining from a personal computer, mobile device, or through
 /// companion mode.
 /// b) A robot account used by conference room devices.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SignedinUser {
     /// Output only. Unique ID for the user. Interoperable with Admin SDK API and
@@ -250,7 +242,6 @@ pub struct SignedinUser {
     pub display_name: ::prost::alloc::string::String,
 }
 /// User who joins anonymously (meaning not signed into a Google Account).
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AnonymousUser {
     /// Output only. User provided name when they join a conference anonymously.
@@ -259,7 +250,6 @@ pub struct AnonymousUser {
 }
 /// User dialing in from a phone where the user's identity is unknown because
 /// they haven't signed in with a Google Account.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PhoneUser {
     /// Output only. Partially redacted user's phone number when they call in.
@@ -268,7 +258,6 @@ pub struct PhoneUser {
 }
 /// [Developer Preview](<https://developers.google.com/workspace/preview>).
 /// Metadata about a recording created during a conference.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Recording {
     /// Output only. Resource name of the recording.
@@ -322,10 +311,10 @@ pub mod recording {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                State::Unspecified => "STATE_UNSPECIFIED",
-                State::Started => "STARTED",
-                State::Ended => "ENDED",
-                State::FileGenerated => "FILE_GENERATED",
+                Self::Unspecified => "STATE_UNSPECIFIED",
+                Self::Started => "STARTED",
+                Self::Ended => "ENDED",
+                Self::FileGenerated => "FILE_GENERATED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -339,7 +328,6 @@ pub mod recording {
             }
         }
     }
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Destination {
         /// Output only. Recording is saved to Google Drive as an mp4 file. The
@@ -350,7 +338,6 @@ pub mod recording {
     }
 }
 /// Export location where a recording file is saved in Google Drive.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DriveDestination {
     /// Output only. The `fileId` for the underlying MP4 file. For example,
@@ -368,7 +355,6 @@ pub struct DriveDestination {
 /// [Developer Preview](<https://developers.google.com/workspace/preview>).
 /// Metadata for a transcript generated from a conference. It refers to the ASR
 /// (Automatic Speech Recognition) result of user's speech during the conference.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Transcript {
     /// Output only. Resource name of the transcript.
@@ -422,10 +408,10 @@ pub mod transcript {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                State::Unspecified => "STATE_UNSPECIFIED",
-                State::Started => "STARTED",
-                State::Ended => "ENDED",
-                State::FileGenerated => "FILE_GENERATED",
+                Self::Unspecified => "STATE_UNSPECIFIED",
+                Self::Started => "STARTED",
+                Self::Ended => "ENDED",
+                Self::FileGenerated => "FILE_GENERATED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -439,7 +425,6 @@ pub mod transcript {
             }
         }
     }
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Destination {
         /// Output only. Where the Google Docs transcript is saved.
@@ -448,7 +433,6 @@ pub mod transcript {
     }
 }
 /// Google Docs location where the transcript file is saved.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DocsDestination {
     /// Output only. The document ID for the underlying Google Docs transcript
@@ -466,7 +450,6 @@ pub struct DocsDestination {
 }
 /// [Developer Preview](<https://developers.google.com/workspace/preview>).
 /// Single entry for one user’s speech during a transcript session.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TranscriptEntry {
     /// Output only. Resource name of the entry. Format:
@@ -492,7 +475,6 @@ pub struct TranscriptEntry {
     pub end_time: ::core::option::Option<::prost_types::Timestamp>,
 }
 /// Request to create a space.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateSpaceRequest {
     /// Space to be created. As of May 2023, the input space can be empty. Later on
@@ -501,7 +483,6 @@ pub struct CreateSpaceRequest {
     pub space: ::core::option::Option<Space>,
 }
 /// Request to get a space.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetSpaceRequest {
     /// Required. Resource name of the space.
@@ -509,7 +490,6 @@ pub struct GetSpaceRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request to update a space.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateSpaceRequest {
     /// Required. Space to be updated.
@@ -523,7 +503,6 @@ pub struct UpdateSpaceRequest {
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
 /// Request to end an ongoing conference of a space.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EndActiveConferenceRequest {
     /// Required. Resource name of the space.
@@ -531,7 +510,6 @@ pub struct EndActiveConferenceRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request to get a conference record.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetConferenceRecordRequest {
     /// Required. Resource name of the conference.
@@ -539,7 +517,6 @@ pub struct GetConferenceRecordRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request to fetch list of conference records per user.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListConferenceRecordsRequest {
     /// Optional. Maximum number of conference records to return. The service might
@@ -564,7 +541,6 @@ pub struct ListConferenceRecordsRequest {
     pub filter: ::prost::alloc::string::String,
 }
 /// Response of ListConferenceRecords method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListConferenceRecordsResponse {
     /// List of conferences in one page.
@@ -576,7 +552,6 @@ pub struct ListConferenceRecordsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request to get a Participant.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetParticipantRequest {
     /// Required. Resource name of the participant.
@@ -584,7 +559,6 @@ pub struct GetParticipantRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request to fetch list of participant per conference.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListParticipantsRequest {
     /// Required. Format: `conferenceRecords/{conference_record}`
@@ -612,7 +586,6 @@ pub struct ListParticipantsRequest {
     pub filter: ::prost::alloc::string::String,
 }
 /// Response of ListParticipants method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListParticipantsResponse {
     /// List of participants in one page.
@@ -630,7 +603,6 @@ pub struct ListParticipantsResponse {
     pub total_size: i32,
 }
 /// Request to get a participant session.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetParticipantSessionRequest {
     /// Required. Resource name of the participant.
@@ -639,7 +611,6 @@ pub struct GetParticipantSessionRequest {
 }
 /// Request to fetch list of participant sessions per conference record per
 /// participant.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListParticipantSessionsRequest {
     /// Required. Format:
@@ -667,7 +638,6 @@ pub struct ListParticipantSessionsRequest {
     pub filter: ::prost::alloc::string::String,
 }
 /// Response of ListParticipants method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListParticipantSessionsResponse {
     /// List of participants in one page.
@@ -679,7 +649,6 @@ pub struct ListParticipantSessionsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for GetRecording method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetRecordingRequest {
     /// Required. Resource name of the recording.
@@ -687,7 +656,6 @@ pub struct GetRecordingRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request for ListRecordings method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListRecordingsRequest {
     /// Required. Format: `conferenceRecords/{conference_record}`
@@ -705,7 +673,6 @@ pub struct ListRecordingsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response for ListRecordings method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListRecordingsResponse {
     /// List of recordings in one page.
@@ -717,7 +684,6 @@ pub struct ListRecordingsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request for GetTranscript method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetTranscriptRequest {
     /// Required. Resource name of the transcript.
@@ -725,7 +691,6 @@ pub struct GetTranscriptRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request for ListTranscripts method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListTranscriptsRequest {
     /// Required. Format: `conferenceRecords/{conference_record}`
@@ -743,7 +708,6 @@ pub struct ListTranscriptsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response for ListTranscripts method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListTranscriptsResponse {
     /// List of transcripts in one page.
@@ -755,7 +719,6 @@ pub struct ListTranscriptsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request for GetTranscriptEntry method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetTranscriptEntryRequest {
     /// Required. Resource name of the `TranscriptEntry`.
@@ -763,7 +726,6 @@ pub struct GetTranscriptEntryRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request for ListTranscriptEntries method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListTranscriptEntriesRequest {
     /// Required. Format:
@@ -782,7 +744,6 @@ pub struct ListTranscriptEntriesRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response for ListTranscriptEntries method
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListTranscriptEntriesResponse {
     /// List of TranscriptEntries in one page.
@@ -795,11 +756,17 @@ pub struct ListTranscriptEntriesResponse {
 }
 /// Generated server implementations.
 pub mod spaces_service_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with SpacesServiceServer.
     #[async_trait]
-    pub trait SpacesService: Send + Sync + 'static {
+    pub trait SpacesService: std::marker::Send + std::marker::Sync + 'static {
         /// [Developer Preview](https://developers.google.com/workspace/preview).
         /// Creates a space.
         async fn create_space(
@@ -827,20 +794,18 @@ pub mod spaces_service_server {
     }
     /// REST API for services dealing with spaces.
     #[derive(Debug)]
-    pub struct SpacesServiceServer<T: SpacesService> {
-        inner: _Inner<T>,
+    pub struct SpacesServiceServer<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: SpacesService> SpacesServiceServer<T> {
+    impl<T> SpacesServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -890,8 +855,8 @@ pub mod spaces_service_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for SpacesServiceServer<T>
     where
         T: SpacesService,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -903,7 +868,6 @@ pub mod spaces_service_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.apps.meet.v2beta.SpacesService/CreateSpace" => {
                     #[allow(non_camel_case_types)]
@@ -934,7 +898,6 @@ pub mod spaces_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = CreateSpaceSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -980,7 +943,6 @@ pub mod spaces_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetSpaceSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1026,7 +988,6 @@ pub mod spaces_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = UpdateSpaceSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1073,7 +1034,6 @@ pub mod spaces_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = EndActiveConferenceSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1092,20 +1052,25 @@ pub mod spaces_service_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: SpacesService> Clone for SpacesServiceServer<T> {
+    impl<T> Clone for SpacesServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -1117,27 +1082,25 @@ pub mod spaces_service_server {
             }
         }
     }
-    impl<T: SpacesService> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: SpacesService> tonic::server::NamedService for SpacesServiceServer<T> {
-        const NAME: &'static str = "google.apps.meet.v2beta.SpacesService";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.apps.meet.v2beta.SpacesService";
+    impl<T> tonic::server::NamedService for SpacesServiceServer<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }
 /// Generated server implementations.
 pub mod conference_records_service_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with ConferenceRecordsServiceServer.
     #[async_trait]
-    pub trait ConferenceRecordsService: Send + Sync + 'static {
+    pub trait ConferenceRecordsService: std::marker::Send + std::marker::Sync + 'static {
         /// [Developer Preview](https://developers.google.com/workspace/preview).
         /// Gets a conference record by conference ID.
         async fn get_conference_record(
@@ -1254,20 +1217,18 @@ pub mod conference_records_service_server {
     }
     /// REST API for services dealing with conference records.
     #[derive(Debug)]
-    pub struct ConferenceRecordsServiceServer<T: ConferenceRecordsService> {
-        inner: _Inner<T>,
+    pub struct ConferenceRecordsServiceServer<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: ConferenceRecordsService> ConferenceRecordsServiceServer<T> {
+    impl<T> ConferenceRecordsServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -1318,8 +1279,8 @@ pub mod conference_records_service_server {
     for ConferenceRecordsServiceServer<T>
     where
         T: ConferenceRecordsService,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -1331,7 +1292,6 @@ pub mod conference_records_service_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.apps.meet.v2beta.ConferenceRecordsService/GetConferenceRecord" => {
                     #[allow(non_camel_case_types)]
@@ -1368,7 +1328,6 @@ pub mod conference_records_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetConferenceRecordSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1420,7 +1379,6 @@ pub mod conference_records_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListConferenceRecordsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1470,7 +1428,6 @@ pub mod conference_records_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetParticipantSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1520,7 +1477,6 @@ pub mod conference_records_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListParticipantsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1572,7 +1528,6 @@ pub mod conference_records_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetParticipantSessionSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1626,7 +1581,6 @@ pub mod conference_records_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListParticipantSessionsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1676,7 +1630,6 @@ pub mod conference_records_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetRecordingSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1726,7 +1679,6 @@ pub mod conference_records_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListRecordingsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1776,7 +1728,6 @@ pub mod conference_records_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetTranscriptSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1826,7 +1777,6 @@ pub mod conference_records_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListTranscriptsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1878,7 +1828,6 @@ pub mod conference_records_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetTranscriptEntrySvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1930,7 +1879,6 @@ pub mod conference_records_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListTranscriptEntriesSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1949,20 +1897,25 @@ pub mod conference_records_service_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: ConferenceRecordsService> Clone for ConferenceRecordsServiceServer<T> {
+    impl<T> Clone for ConferenceRecordsServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -1974,18 +1927,9 @@ pub mod conference_records_service_server {
             }
         }
     }
-    impl<T: ConferenceRecordsService> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: ConferenceRecordsService> tonic::server::NamedService
-    for ConferenceRecordsServiceServer<T> {
-        const NAME: &'static str = "google.apps.meet.v2beta.ConferenceRecordsService";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.apps.meet.v2beta.ConferenceRecordsService";
+    impl<T> tonic::server::NamedService for ConferenceRecordsServiceServer<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }

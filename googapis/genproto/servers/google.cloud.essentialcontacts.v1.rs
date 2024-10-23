@@ -39,15 +39,15 @@ impl NotificationCategory {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            NotificationCategory::Unspecified => "NOTIFICATION_CATEGORY_UNSPECIFIED",
-            NotificationCategory::All => "ALL",
-            NotificationCategory::Suspension => "SUSPENSION",
-            NotificationCategory::Security => "SECURITY",
-            NotificationCategory::Technical => "TECHNICAL",
-            NotificationCategory::Billing => "BILLING",
-            NotificationCategory::Legal => "LEGAL",
-            NotificationCategory::ProductUpdates => "PRODUCT_UPDATES",
-            NotificationCategory::TechnicalIncidents => "TECHNICAL_INCIDENTS",
+            Self::Unspecified => "NOTIFICATION_CATEGORY_UNSPECIFIED",
+            Self::All => "ALL",
+            Self::Suspension => "SUSPENSION",
+            Self::Security => "SECURITY",
+            Self::Technical => "TECHNICAL",
+            Self::Billing => "BILLING",
+            Self::Legal => "LEGAL",
+            Self::ProductUpdates => "PRODUCT_UPDATES",
+            Self::TechnicalIncidents => "TECHNICAL_INCIDENTS",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -87,9 +87,9 @@ impl ValidationState {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            ValidationState::Unspecified => "VALIDATION_STATE_UNSPECIFIED",
-            ValidationState::Valid => "VALID",
-            ValidationState::Invalid => "INVALID",
+            Self::Unspecified => "VALIDATION_STATE_UNSPECIFIED",
+            Self::Valid => "VALID",
+            Self::Invalid => "INVALID",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -103,7 +103,6 @@ impl ValidationState {
     }
 }
 /// A contact that will receive notifications from Google Cloud.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Contact {
     /// Output only. The identifier for the contact.
@@ -135,7 +134,6 @@ pub struct Contact {
     pub validate_time: ::core::option::Option<::prost_types::Timestamp>,
 }
 /// Request message for the ListContacts method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListContactsRequest {
     /// Required. The parent resource name.
@@ -157,7 +155,6 @@ pub struct ListContactsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for the ListContacts method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListContactsResponse {
     /// The contacts for the specified resource.
@@ -171,7 +168,6 @@ pub struct ListContactsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for the GetContact method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetContactRequest {
     /// Required. The name of the contact to retrieve.
@@ -182,7 +178,6 @@ pub struct GetContactRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for the DeleteContact method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteContactRequest {
     /// Required. The name of the contact to delete.
@@ -193,7 +188,6 @@ pub struct DeleteContactRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for the CreateContact method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateContactRequest {
     /// Required. The resource to save this contact for.
@@ -207,7 +201,6 @@ pub struct CreateContactRequest {
     pub contact: ::core::option::Option<Contact>,
 }
 /// Request message for the UpdateContact method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateContactRequest {
     /// Required. The contact resource to replace the existing saved contact. Note:
@@ -221,7 +214,6 @@ pub struct UpdateContactRequest {
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
 /// Request message for the ComputeContacts method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ComputeContactsRequest {
     /// Required. The name of the resource to compute contacts for.
@@ -248,7 +240,6 @@ pub struct ComputeContactsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for the ComputeContacts method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ComputeContactsResponse {
     /// All contacts for the resource that are subscribed to the specified
@@ -264,7 +255,6 @@ pub struct ComputeContactsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for the SendTestMessage method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SendTestMessageRequest {
     /// Required. The list of names of the contacts to send a test message to.
@@ -287,11 +277,17 @@ pub struct SendTestMessageRequest {
 }
 /// Generated server implementations.
 pub mod essential_contacts_service_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with EssentialContactsServiceServer.
     #[async_trait]
-    pub trait EssentialContactsService: Send + Sync + 'static {
+    pub trait EssentialContactsService: std::marker::Send + std::marker::Sync + 'static {
         /// Adds a new contact for a resource.
         async fn create_contact(
             &self,
@@ -340,20 +336,18 @@ pub mod essential_contacts_service_server {
     }
     /// Manages contacts for important Google Cloud notifications.
     #[derive(Debug)]
-    pub struct EssentialContactsServiceServer<T: EssentialContactsService> {
-        inner: _Inner<T>,
+    pub struct EssentialContactsServiceServer<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: EssentialContactsService> EssentialContactsServiceServer<T> {
+    impl<T> EssentialContactsServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -404,8 +398,8 @@ pub mod essential_contacts_service_server {
     for EssentialContactsServiceServer<T>
     where
         T: EssentialContactsService,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -417,7 +411,6 @@ pub mod essential_contacts_service_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.cloud.essentialcontacts.v1.EssentialContactsService/CreateContact" => {
                     #[allow(non_camel_case_types)]
@@ -452,7 +445,6 @@ pub mod essential_contacts_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = CreateContactSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -502,7 +494,6 @@ pub mod essential_contacts_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = UpdateContactSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -552,7 +543,6 @@ pub mod essential_contacts_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListContactsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -602,7 +592,6 @@ pub mod essential_contacts_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetContactSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -652,7 +641,6 @@ pub mod essential_contacts_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = DeleteContactSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -702,7 +690,6 @@ pub mod essential_contacts_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ComputeContactsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -752,7 +739,6 @@ pub mod essential_contacts_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = SendTestMessageSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -771,20 +757,25 @@ pub mod essential_contacts_service_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: EssentialContactsService> Clone for EssentialContactsServiceServer<T> {
+    impl<T> Clone for EssentialContactsServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -796,18 +787,9 @@ pub mod essential_contacts_service_server {
             }
         }
     }
-    impl<T: EssentialContactsService> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: EssentialContactsService> tonic::server::NamedService
-    for EssentialContactsServiceServer<T> {
-        const NAME: &'static str = "google.cloud.essentialcontacts.v1.EssentialContactsService";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.cloud.essentialcontacts.v1.EssentialContactsService";
+    impl<T> tonic::server::NamedService for EssentialContactsServiceServer<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }

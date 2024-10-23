@@ -2,7 +2,6 @@
 /// A data exchange is a container that lets you share data. Along with the
 /// descriptive information about the data exchange, it contains listings that
 /// reference shared datasets.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DataExchange {
     /// Output only. The resource name of the data exchange.
@@ -42,7 +41,6 @@ pub struct DataExchange {
     pub icon: ::prost::alloc::vec::Vec<u8>,
 }
 /// Contains details of the data provider.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DataProvider {
     /// Optional. Name of the data provider.
@@ -54,7 +52,6 @@ pub struct DataProvider {
     pub primary_contact: ::prost::alloc::string::String,
 }
 /// Contains details of the listing publisher.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Publisher {
     /// Optional. Name of the listing publisher.
@@ -66,7 +63,6 @@ pub struct Publisher {
     pub primary_contact: ::prost::alloc::string::String,
 }
 /// Contains the reference that identifies a destination bigquery dataset.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DestinationDatasetReference {
     /// Required. A unique ID for this dataset, without the project name. The ID
@@ -79,7 +75,6 @@ pub struct DestinationDatasetReference {
     pub project_id: ::prost::alloc::string::String,
 }
 /// Defines the destination bigquery dataset.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DestinationDataset {
     /// Required. A reference that identifies the destination dataset.
@@ -111,7 +106,6 @@ pub struct DestinationDataset {
 /// subscribe to. It contains a reference to the data source along with
 /// descriptive information that will help subscribers find and subscribe the
 /// data.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Listing {
     /// Output only. The resource name of the listing.
@@ -177,7 +171,6 @@ pub mod listing {
     /// dataset in
     /// the subscriber's project. A Linked dataset is an opaque, read-only BigQuery
     /// dataset that serves as a _symbolic link_ to a shared dataset.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct BigQueryDatasetSource {
         /// Resource name of the dataset source for this listing.
@@ -212,8 +205,8 @@ pub mod listing {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                State::Unspecified => "STATE_UNSPECIFIED",
-                State::Active => "ACTIVE",
+                Self::Unspecified => "STATE_UNSPECIFIED",
+                Self::Active => "ACTIVE",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -267,30 +260,28 @@ pub mod listing {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Category::Unspecified => "CATEGORY_UNSPECIFIED",
-                Category::Others => "CATEGORY_OTHERS",
-                Category::AdvertisingAndMarketing => "CATEGORY_ADVERTISING_AND_MARKETING",
-                Category::Commerce => "CATEGORY_COMMERCE",
-                Category::ClimateAndEnvironment => "CATEGORY_CLIMATE_AND_ENVIRONMENT",
-                Category::Demographics => "CATEGORY_DEMOGRAPHICS",
-                Category::Economics => "CATEGORY_ECONOMICS",
-                Category::Education => "CATEGORY_EDUCATION",
-                Category::Energy => "CATEGORY_ENERGY",
-                Category::Financial => "CATEGORY_FINANCIAL",
-                Category::Gaming => "CATEGORY_GAMING",
-                Category::Geospatial => "CATEGORY_GEOSPATIAL",
-                Category::HealthcareAndLifeScience => {
-                    "CATEGORY_HEALTHCARE_AND_LIFE_SCIENCE"
-                }
-                Category::Media => "CATEGORY_MEDIA",
-                Category::PublicSector => "CATEGORY_PUBLIC_SECTOR",
-                Category::Retail => "CATEGORY_RETAIL",
-                Category::Sports => "CATEGORY_SPORTS",
-                Category::ScienceAndResearch => "CATEGORY_SCIENCE_AND_RESEARCH",
-                Category::TransportationAndLogistics => {
+                Self::Unspecified => "CATEGORY_UNSPECIFIED",
+                Self::Others => "CATEGORY_OTHERS",
+                Self::AdvertisingAndMarketing => "CATEGORY_ADVERTISING_AND_MARKETING",
+                Self::Commerce => "CATEGORY_COMMERCE",
+                Self::ClimateAndEnvironment => "CATEGORY_CLIMATE_AND_ENVIRONMENT",
+                Self::Demographics => "CATEGORY_DEMOGRAPHICS",
+                Self::Economics => "CATEGORY_ECONOMICS",
+                Self::Education => "CATEGORY_EDUCATION",
+                Self::Energy => "CATEGORY_ENERGY",
+                Self::Financial => "CATEGORY_FINANCIAL",
+                Self::Gaming => "CATEGORY_GAMING",
+                Self::Geospatial => "CATEGORY_GEOSPATIAL",
+                Self::HealthcareAndLifeScience => "CATEGORY_HEALTHCARE_AND_LIFE_SCIENCE",
+                Self::Media => "CATEGORY_MEDIA",
+                Self::PublicSector => "CATEGORY_PUBLIC_SECTOR",
+                Self::Retail => "CATEGORY_RETAIL",
+                Self::Sports => "CATEGORY_SPORTS",
+                Self::ScienceAndResearch => "CATEGORY_SCIENCE_AND_RESEARCH",
+                Self::TransportationAndLogistics => {
                     "CATEGORY_TRANSPORTATION_AND_LOGISTICS"
                 }
-                Category::TravelAndTourism => "CATEGORY_TRAVEL_AND_TOURISM",
+                Self::TravelAndTourism => "CATEGORY_TRAVEL_AND_TOURISM",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -327,7 +318,6 @@ pub mod listing {
         }
     }
     /// Listing source.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Source {
         /// Required. Shared dataset i.e. BigQuery dataset source.
@@ -336,7 +326,6 @@ pub mod listing {
     }
 }
 /// Message for requesting the list of data exchanges.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListDataExchangesRequest {
     /// Required. The parent resource path of the data exchanges.
@@ -353,7 +342,6 @@ pub struct ListDataExchangesRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Message for response to the list of data exchanges.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListDataExchangesResponse {
     /// The list of data exchanges.
@@ -365,7 +353,6 @@ pub struct ListDataExchangesResponse {
 }
 /// Message for requesting the list of data exchanges from projects in an
 /// organization and location.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListOrgDataExchangesRequest {
     /// Required. The organization resource path of the projects containing DataExchanges.
@@ -383,7 +370,6 @@ pub struct ListOrgDataExchangesRequest {
 }
 /// Message for response to listing data exchanges in an organization and
 /// location.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListOrgDataExchangesResponse {
     /// The list of data exchanges.
@@ -394,7 +380,6 @@ pub struct ListOrgDataExchangesResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Message for getting a data exchange.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetDataExchangeRequest {
     /// Required. The resource name of the data exchange.
@@ -403,7 +388,6 @@ pub struct GetDataExchangeRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Message for creating a data exchange.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateDataExchangeRequest {
     /// Required. The parent resource path of the data exchange.
@@ -422,7 +406,6 @@ pub struct CreateDataExchangeRequest {
     pub data_exchange: ::core::option::Option<DataExchange>,
 }
 /// Message for updating a data exchange.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateDataExchangeRequest {
     /// Required. Field mask specifies the fields to update in the data exchange
@@ -435,7 +418,6 @@ pub struct UpdateDataExchangeRequest {
     pub data_exchange: ::core::option::Option<DataExchange>,
 }
 /// Message for deleting a data exchange.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteDataExchangeRequest {
     /// Required. The full name of the data exchange resource that you want to delete.
@@ -444,7 +426,6 @@ pub struct DeleteDataExchangeRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Message for requesting the list of listings.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListListingsRequest {
     /// Required. The parent resource path of the listing.
@@ -461,7 +442,6 @@ pub struct ListListingsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Message for response to the list of Listings.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListListingsResponse {
     /// The list of Listing.
@@ -472,7 +452,6 @@ pub struct ListListingsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Message for getting a listing.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetListingRequest {
     /// Required. The resource name of the listing.
@@ -481,7 +460,6 @@ pub struct GetListingRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Message for creating a listing.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateListingRequest {
     /// Required. The parent resource path of the listing.
@@ -500,7 +478,6 @@ pub struct CreateListingRequest {
     pub listing: ::core::option::Option<Listing>,
 }
 /// Message for updating a Listing.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateListingRequest {
     /// Required. Field mask specifies the fields to update in the listing resource. The
@@ -513,7 +490,6 @@ pub struct UpdateListingRequest {
     pub listing: ::core::option::Option<Listing>,
 }
 /// Message for deleting a listing.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteListingRequest {
     /// Required. Resource name of the listing to delete.
@@ -522,7 +498,6 @@ pub struct DeleteListingRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Message for subscribing to a listing.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeListingRequest {
     /// Required. Resource name of the listing that you want to subscribe to.
@@ -536,7 +511,6 @@ pub struct SubscribeListingRequest {
 /// Nested message and enum types in `SubscribeListingRequest`.
 pub mod subscribe_listing_request {
     /// Resulting destination of the listing that you subscribed to.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Destination {
         /// BigQuery destination dataset to create for the subscriber.
@@ -545,16 +519,21 @@ pub mod subscribe_listing_request {
     }
 }
 /// Message for response when you subscribe to a listing.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct SubscribeListingResponse {}
 /// Generated server implementations.
 pub mod analytics_hub_service_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with AnalyticsHubServiceServer.
     #[async_trait]
-    pub trait AnalyticsHubService: Send + Sync + 'static {
+    pub trait AnalyticsHubService: std::marker::Send + std::marker::Sync + 'static {
         /// Lists all data exchanges in a given project and location.
         async fn list_data_exchanges(
             &self,
@@ -673,20 +652,18 @@ pub mod analytics_hub_service_server {
     /// listings. When you subscribe to a listing, Analytics Hub creates a linked
     /// dataset in your project.
     #[derive(Debug)]
-    pub struct AnalyticsHubServiceServer<T: AnalyticsHubService> {
-        inner: _Inner<T>,
+    pub struct AnalyticsHubServiceServer<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: AnalyticsHubService> AnalyticsHubServiceServer<T> {
+    impl<T> AnalyticsHubServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -736,8 +713,8 @@ pub mod analytics_hub_service_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for AnalyticsHubServiceServer<T>
     where
         T: AnalyticsHubService,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -749,7 +726,6 @@ pub mod analytics_hub_service_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService/ListDataExchanges" => {
                     #[allow(non_camel_case_types)]
@@ -784,7 +760,6 @@ pub mod analytics_hub_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListDataExchangesSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -834,7 +809,6 @@ pub mod analytics_hub_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListOrgDataExchangesSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -884,7 +858,6 @@ pub mod analytics_hub_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetDataExchangeSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -934,7 +907,6 @@ pub mod analytics_hub_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = CreateDataExchangeSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -984,7 +956,6 @@ pub mod analytics_hub_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = UpdateDataExchangeSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1034,7 +1005,6 @@ pub mod analytics_hub_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = DeleteDataExchangeSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1081,7 +1051,6 @@ pub mod analytics_hub_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListListingsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1128,7 +1097,6 @@ pub mod analytics_hub_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetListingSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1175,7 +1143,6 @@ pub mod analytics_hub_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = CreateListingSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1222,7 +1189,6 @@ pub mod analytics_hub_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = UpdateListingSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1269,7 +1235,6 @@ pub mod analytics_hub_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = DeleteListingSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1319,7 +1284,6 @@ pub mod analytics_hub_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = SubscribeListingSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1369,7 +1333,6 @@ pub mod analytics_hub_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetIamPolicySvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1419,7 +1382,6 @@ pub mod analytics_hub_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = SetIamPolicySvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1472,7 +1434,6 @@ pub mod analytics_hub_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = TestIamPermissionsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1491,20 +1452,25 @@ pub mod analytics_hub_service_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: AnalyticsHubService> Clone for AnalyticsHubServiceServer<T> {
+    impl<T> Clone for AnalyticsHubServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -1516,18 +1482,9 @@ pub mod analytics_hub_service_server {
             }
         }
     }
-    impl<T: AnalyticsHubService> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: AnalyticsHubService> tonic::server::NamedService
-    for AnalyticsHubServiceServer<T> {
-        const NAME: &'static str = "google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService";
+    impl<T> tonic::server::NamedService for AnalyticsHubServiceServer<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }

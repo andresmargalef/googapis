@@ -3,7 +3,6 @@
 /// Scope](<https://cloud.google.com/monitoring/settings#concept-scope>) in Cloud
 /// Monitoring, which specifies one or more Google projects and zero or more AWS
 /// accounts to monitor together.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MetricsScope {
     /// Immutable. The resource name of the Monitoring Metrics Scope.
@@ -27,7 +26,6 @@ pub struct MetricsScope {
 /// A [project being
 /// monitored](<https://cloud.google.com/monitoring/settings/multiple-projects#create-multi>)
 /// by a `Metrics Scope`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MonitoredProject {
     /// Immutable. The resource name of the `MonitoredProject`. On input, the resource name
@@ -42,7 +40,6 @@ pub struct MonitoredProject {
     pub create_time: ::core::option::Option<::prost_types::Timestamp>,
 }
 /// Request for the `GetMetricsScope` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetMetricsScopeRequest {
     /// Required. The resource name of the `Metrics Scope`.
@@ -52,7 +49,6 @@ pub struct GetMetricsScopeRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request for the `ListMetricsScopesByMonitoredProject` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListMetricsScopesByMonitoredProjectRequest {
     /// Required. The resource name of the `Monitored Project` being requested.
@@ -62,7 +58,6 @@ pub struct ListMetricsScopesByMonitoredProjectRequest {
     pub monitored_resource_container: ::prost::alloc::string::String,
 }
 /// Response for the `ListMetricsScopesByMonitoredProject` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListMetricsScopesByMonitoredProjectResponse {
     /// A set of all metrics scopes that the specified monitored project has been
@@ -71,7 +66,6 @@ pub struct ListMetricsScopesByMonitoredProjectResponse {
     pub metrics_scopes: ::prost::alloc::vec::Vec<MetricsScope>,
 }
 /// Request for the `CreateMonitoredProject` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateMonitoredProjectRequest {
     /// Required. The resource name of the existing `Metrics Scope` that will monitor this
@@ -88,7 +82,6 @@ pub struct CreateMonitoredProjectRequest {
     pub monitored_project: ::core::option::Option<MonitoredProject>,
 }
 /// Request for the `DeleteMonitoredProject` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteMonitoredProjectRequest {
     /// Required. The resource name of the `MonitoredProject`.
@@ -103,8 +96,7 @@ pub struct DeleteMonitoredProjectRequest {
 }
 /// Contains metadata for longrunning operation for the edit Metrics Scope
 /// endpoints.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct OperationMetadata {
     /// Current state of the batch operation.
     #[prost(enumeration = "operation_metadata::State", tag = "1")]
@@ -150,11 +142,11 @@ pub mod operation_metadata {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                State::Unspecified => "STATE_UNSPECIFIED",
-                State::Created => "CREATED",
-                State::Running => "RUNNING",
-                State::Done => "DONE",
-                State::Cancelled => "CANCELLED",
+                Self::Unspecified => "STATE_UNSPECIFIED",
+                Self::Created => "CREATED",
+                Self::Running => "RUNNING",
+                Self::Done => "DONE",
+                Self::Cancelled => "CANCELLED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -172,11 +164,17 @@ pub mod operation_metadata {
 }
 /// Generated server implementations.
 pub mod metrics_scopes_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with MetricsScopesServer.
     #[async_trait]
-    pub trait MetricsScopes: Send + Sync + 'static {
+    pub trait MetricsScopes: std::marker::Send + std::marker::Sync + 'static {
         /// Returns a specific `Metrics Scope`.
         async fn get_metrics_scope(
             &self,
@@ -213,20 +211,18 @@ pub mod metrics_scopes_server {
     /// Manages Cloud Monitoring Metrics Scopes, and the monitoring of Google Cloud
     /// projects and AWS accounts.
     #[derive(Debug)]
-    pub struct MetricsScopesServer<T: MetricsScopes> {
-        inner: _Inner<T>,
+    pub struct MetricsScopesServer<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: MetricsScopes> MetricsScopesServer<T> {
+    impl<T> MetricsScopesServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -276,8 +272,8 @@ pub mod metrics_scopes_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for MetricsScopesServer<T>
     where
         T: MetricsScopes,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -289,7 +285,6 @@ pub mod metrics_scopes_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.monitoring.metricsscope.v1.MetricsScopes/GetMetricsScope" => {
                     #[allow(non_camel_case_types)]
@@ -321,7 +316,6 @@ pub mod metrics_scopes_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetMetricsScopeSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -376,7 +370,6 @@ pub mod metrics_scopes_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListMetricsScopesByMonitoredProjectSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -426,7 +419,6 @@ pub mod metrics_scopes_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = CreateMonitoredProjectSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -476,7 +468,6 @@ pub mod metrics_scopes_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = DeleteMonitoredProjectSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -495,20 +486,25 @@ pub mod metrics_scopes_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: MetricsScopes> Clone for MetricsScopesServer<T> {
+    impl<T> Clone for MetricsScopesServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -520,17 +516,9 @@ pub mod metrics_scopes_server {
             }
         }
     }
-    impl<T: MetricsScopes> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: MetricsScopes> tonic::server::NamedService for MetricsScopesServer<T> {
-        const NAME: &'static str = "google.monitoring.metricsscope.v1.MetricsScopes";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.monitoring.metricsscope.v1.MetricsScopes";
+    impl<T> tonic::server::NamedService for MetricsScopesServer<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }

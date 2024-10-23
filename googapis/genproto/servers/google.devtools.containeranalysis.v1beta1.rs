@@ -2,7 +2,6 @@
 /// GeneratePackagesSummaryRequest is the request body for the
 /// GeneratePackagesSummary API method. It just takes a single name argument,
 /// referring to the resource.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GeneratePackagesSummaryRequest {
     /// Required. The name of the resource to get a packages summary for in the
@@ -11,7 +10,6 @@ pub struct GeneratePackagesSummaryRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// A summary of the packages found within the given resource.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PackagesSummaryResponse {
     /// The unique URL of the image or the container for which this summary
@@ -27,7 +25,6 @@ pub struct PackagesSummaryResponse {
 /// Nested message and enum types in `PackagesSummaryResponse`.
 pub mod packages_summary_response {
     /// Per license count
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct LicensesSummary {
         /// The license of the package. Note that the format of this value is not
@@ -41,7 +38,6 @@ pub mod packages_summary_response {
     }
 }
 /// The request to a call of ExportSBOM
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExportSbomRequest {
     /// Required. The name of the resource in the form of
@@ -50,7 +46,6 @@ pub struct ExportSbomRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// The response from a call to ExportSBOM
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExportSbomResponse {
     /// The name of the discovery occurrence in the form
@@ -61,11 +56,17 @@ pub struct ExportSbomResponse {
 }
 /// Generated server implementations.
 pub mod container_analysis_v1_beta1_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with ContainerAnalysisV1Beta1Server.
     #[async_trait]
-    pub trait ContainerAnalysisV1Beta1: Send + Sync + 'static {
+    pub trait ContainerAnalysisV1Beta1: std::marker::Send + std::marker::Sync + 'static {
         /// Sets the access control policy on the specified note or occurrence.
         /// Requires `containeranalysis.notes.setIamPolicy` or
         /// `containeranalysis.occurrences.setIamPolicy` permission if the resource is
@@ -149,20 +150,18 @@ pub mod container_analysis_v1_beta1_server {
     /// there would be one note for the vulnerability and an occurrence for each
     /// image with the vulnerability referring to that note.
     #[derive(Debug)]
-    pub struct ContainerAnalysisV1Beta1Server<T: ContainerAnalysisV1Beta1> {
-        inner: _Inner<T>,
+    pub struct ContainerAnalysisV1Beta1Server<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: ContainerAnalysisV1Beta1> ContainerAnalysisV1Beta1Server<T> {
+    impl<T> ContainerAnalysisV1Beta1Server<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -213,8 +212,8 @@ pub mod container_analysis_v1_beta1_server {
     for ContainerAnalysisV1Beta1Server<T>
     where
         T: ContainerAnalysisV1Beta1,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -226,7 +225,6 @@ pub mod container_analysis_v1_beta1_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.devtools.containeranalysis.v1beta1.ContainerAnalysisV1Beta1/SetIamPolicy" => {
                     #[allow(non_camel_case_types)]
@@ -264,7 +262,6 @@ pub mod container_analysis_v1_beta1_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = SetIamPolicySvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -317,7 +314,6 @@ pub mod container_analysis_v1_beta1_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetIamPolicySvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -372,7 +368,6 @@ pub mod container_analysis_v1_beta1_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = TestIamPermissionsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -426,7 +421,6 @@ pub mod container_analysis_v1_beta1_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GeneratePackagesSummarySvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -476,7 +470,6 @@ pub mod container_analysis_v1_beta1_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ExportSBOMSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -495,20 +488,25 @@ pub mod container_analysis_v1_beta1_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: ContainerAnalysisV1Beta1> Clone for ContainerAnalysisV1Beta1Server<T> {
+    impl<T> Clone for ContainerAnalysisV1Beta1Server<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -520,18 +518,9 @@ pub mod container_analysis_v1_beta1_server {
             }
         }
     }
-    impl<T: ContainerAnalysisV1Beta1> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: ContainerAnalysisV1Beta1> tonic::server::NamedService
-    for ContainerAnalysisV1Beta1Server<T> {
-        const NAME: &'static str = "google.devtools.containeranalysis.v1beta1.ContainerAnalysisV1Beta1";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.devtools.containeranalysis.v1beta1.ContainerAnalysisV1Beta1";
+    impl<T> tonic::server::NamedService for ContainerAnalysisV1Beta1Server<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }

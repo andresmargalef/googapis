@@ -2,7 +2,6 @@
 /// Represents a set of declarations about what (if any) ad partners
 /// are associated with a given creative. This can be set at the network level,
 /// as a default for all creatives, or overridden for a particular creative.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AdPartnerDeclaration {
     /// They type of declaration.
@@ -15,8 +14,7 @@ pub struct AdPartnerDeclaration {
 }
 /// Wrapper message for
 /// [DeclarationTypeEnum][google.ads.admanager.v1.DeclarationTypeEnum].
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct DeclarationTypeEnum {}
 /// Nested message and enum types in `DeclarationTypeEnum`.
 pub mod declaration_type_enum {
@@ -48,9 +46,9 @@ pub mod declaration_type_enum {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                DeclarationType::Unspecified => "DECLARATION_TYPE_UNSPECIFIED",
-                DeclarationType::None => "NONE",
-                DeclarationType::Declared => "DECLARED",
+                Self::Unspecified => "DECLARATION_TYPE_UNSPECIFIED",
+                Self::None => "NONE",
+                Self::Declared => "DECLARED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -65,7 +63,6 @@ pub mod declaration_type_enum {
     }
 }
 /// The AdPartner resource.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AdPartner {
     /// Identifier. The resource name of the AdPartner.
@@ -74,7 +71,6 @@ pub struct AdPartner {
     pub name: ::prost::alloc::string::String,
 }
 /// Request object for GetAdPartner method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetAdPartnerRequest {
     /// Required. The resource name of the AdPartner.
@@ -83,7 +79,6 @@ pub struct GetAdPartnerRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request object for ListAdPartners method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAdPartnersRequest {
     /// Required. The parent, which owns this collection of AdPartners.
@@ -119,7 +114,6 @@ pub struct ListAdPartnersRequest {
 }
 /// Response object for ListAdPartnersRequest containing matching AdPartner
 /// resources.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAdPartnersResponse {
     /// The AdPartner from the specified network.
@@ -145,11 +139,17 @@ pub struct ListAdPartnersResponse {
 }
 /// Generated server implementations.
 pub mod ad_partner_service_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with AdPartnerServiceServer.
     #[async_trait]
-    pub trait AdPartnerService: Send + Sync + 'static {
+    pub trait AdPartnerService: std::marker::Send + std::marker::Sync + 'static {
         /// API to retrieve a AdPartner object.
         async fn get_ad_partner(
             &self,
@@ -166,20 +166,18 @@ pub mod ad_partner_service_server {
     }
     /// Provides methods for handling AdPartner objects.
     #[derive(Debug)]
-    pub struct AdPartnerServiceServer<T: AdPartnerService> {
-        inner: _Inner<T>,
+    pub struct AdPartnerServiceServer<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: AdPartnerService> AdPartnerServiceServer<T> {
+    impl<T> AdPartnerServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -229,8 +227,8 @@ pub mod ad_partner_service_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for AdPartnerServiceServer<T>
     where
         T: AdPartnerService,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -242,7 +240,6 @@ pub mod ad_partner_service_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.ads.admanager.v1.AdPartnerService/GetAdPartner" => {
                     #[allow(non_camel_case_types)]
@@ -274,7 +271,6 @@ pub mod ad_partner_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetAdPartnerSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -321,7 +317,6 @@ pub mod ad_partner_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListAdPartnersSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -340,20 +335,25 @@ pub mod ad_partner_service_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: AdPartnerService> Clone for AdPartnerServiceServer<T> {
+    impl<T> Clone for AdPartnerServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -365,24 +365,15 @@ pub mod ad_partner_service_server {
             }
         }
     }
-    impl<T: AdPartnerService> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: AdPartnerService> tonic::server::NamedService for AdPartnerServiceServer<T> {
-        const NAME: &'static str = "google.ads.admanager.v1.AdPartnerService";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.ads.admanager.v1.AdPartnerService";
+    impl<T> tonic::server::NamedService for AdPartnerServiceServer<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }
 /// Wrapper message for
 /// [AppliedAdsenseEnabled][google.ads.admanager.v1.AppliedAdsenseEnabledEnum.AppliedAdsenseEnabled]
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct AppliedAdsenseEnabledEnum {}
 /// Nested message and enum types in `AppliedAdsenseEnabledEnum`.
 pub mod applied_adsense_enabled_enum {
@@ -415,11 +406,9 @@ pub mod applied_adsense_enabled_enum {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                AppliedAdsenseEnabled::Unspecified => {
-                    "APPLIED_ADSENSE_ENABLED_UNSPECIFIED"
-                }
-                AppliedAdsenseEnabled::True => "TRUE",
-                AppliedAdsenseEnabled::False => "FALSE",
+                Self::Unspecified => "APPLIED_ADSENSE_ENABLED_UNSPECIFIED",
+                Self::True => "TRUE",
+                Self::False => "FALSE",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -435,8 +424,7 @@ pub mod applied_adsense_enabled_enum {
 }
 /// Wrapper message for
 /// [EnvironmentType][google.ads.admanager.v1.EnvironmentTypeEnum.EnvironmentType].
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct EnvironmentTypeEnum {}
 /// Nested message and enum types in `EnvironmentTypeEnum`.
 pub mod environment_type_enum {
@@ -468,9 +456,9 @@ pub mod environment_type_enum {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                EnvironmentType::Unspecified => "ENVIRONMENT_TYPE_UNSPECIFIED",
-                EnvironmentType::Browser => "BROWSER",
-                EnvironmentType::VideoPlayer => "VIDEO_PLAYER",
+                Self::Unspecified => "ENVIRONMENT_TYPE_UNSPECIFIED",
+                Self::Browser => "BROWSER",
+                Self::VideoPlayer => "VIDEO_PLAYER",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -485,8 +473,7 @@ pub mod environment_type_enum {
     }
 }
 /// Represents the dimensions of an AdUnit, LineItem, or Creative.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct Size {
     /// Required. The width of the [Creative](google.ads.admanager.v1.Creative),
     /// [AdUnit](google.ads.admanager.v1.AdUnit), or
@@ -507,8 +494,7 @@ pub struct Size {
 }
 /// Wrapper message for
 /// [SizeType][google.ads.admanager.v1.SizeTypeEnum.SizeType].
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct SizeTypeEnum {}
 /// Nested message and enum types in `SizeTypeEnum`.
 pub mod size_type_enum {
@@ -556,14 +542,14 @@ pub mod size_type_enum {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                SizeType::Unspecified => "SIZE_TYPE_UNSPECIFIED",
-                SizeType::Pixel => "PIXEL",
-                SizeType::AspectRatio => "ASPECT_RATIO",
-                SizeType::Interstitial => "INTERSTITIAL",
-                SizeType::Ignored => "IGNORED",
-                SizeType::Native => "NATIVE",
-                SizeType::Fluid => "FLUID",
-                SizeType::Audio => "AUDIO",
+                Self::Unspecified => "SIZE_TYPE_UNSPECIFIED",
+                Self::Pixel => "PIXEL",
+                Self::AspectRatio => "ASPECT_RATIO",
+                Self::Interstitial => "INTERSTITIAL",
+                Self::Ignored => "IGNORED",
+                Self::Native => "NATIVE",
+                Self::Fluid => "FLUID",
+                Self::Audio => "AUDIO",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -583,7 +569,6 @@ pub mod size_type_enum {
     }
 }
 /// Represents the size, environment, and companions of an ad in an ad unit.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AdUnitSize {
     /// Required. The Size of the AdUnit.
@@ -599,7 +584,6 @@ pub struct AdUnitSize {
     pub companions: ::prost::alloc::vec::Vec<Size>,
 }
 /// Represents a Label that can be applied to an entity.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AppliedLabel {
     /// Required. The label to be applied.
@@ -611,8 +595,7 @@ pub struct AppliedLabel {
     pub negated: bool,
 }
 /// Represents a Frequency Cap that can be applied to an entity.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct FrequencyCap {
     /// The maximum number of impressions for this frequency cap.
     #[prost(int64, optional, tag = "1")]
@@ -625,8 +608,7 @@ pub struct FrequencyCap {
     pub time_unit: ::core::option::Option<i32>,
 }
 /// Wrapper message for TimeUnit.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct TimeUnitEnum {}
 /// Nested message and enum types in `TimeUnitEnum`.
 pub mod time_unit_enum {
@@ -671,15 +653,15 @@ pub mod time_unit_enum {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                TimeUnit::Unspecified => "TIME_UNIT_UNSPECIFIED",
-                TimeUnit::Minute => "MINUTE",
-                TimeUnit::Hour => "HOUR",
-                TimeUnit::Day => "DAY",
-                TimeUnit::Week => "WEEK",
-                TimeUnit::Month => "MONTH",
-                TimeUnit::Lifetime => "LIFETIME",
-                TimeUnit::Pod => "POD",
-                TimeUnit::Stream => "STREAM",
+                Self::Unspecified => "TIME_UNIT_UNSPECIFIED",
+                Self::Minute => "MINUTE",
+                Self::Hour => "HOUR",
+                Self::Day => "DAY",
+                Self::Week => "WEEK",
+                Self::Month => "MONTH",
+                Self::Lifetime => "LIFETIME",
+                Self::Pod => "POD",
+                Self::Stream => "STREAM",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -700,7 +682,6 @@ pub mod time_unit_enum {
     }
 }
 /// The AdUnit resource.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AdUnit {
     /// Identifier. The resource name of the AdUnit.
@@ -845,10 +826,10 @@ pub mod ad_unit {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Status::Unspecified => "STATUS_UNSPECIFIED",
-                Status::Active => "ACTIVE",
-                Status::Inactive => "INACTIVE",
-                Status::Archived => "ARCHIVED",
+                Self::Unspecified => "STATUS_UNSPECIFIED",
+                Self::Active => "ACTIVE",
+                Self::Inactive => "INACTIVE",
+                Self::Archived => "ARCHIVED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -864,7 +845,6 @@ pub mod ad_unit {
     }
 }
 /// The summary of a parent AdUnit.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AdUnitParent {
     /// Output only. The parent of the current AdUnit
@@ -881,8 +861,7 @@ pub struct AdUnitParent {
 }
 /// Wrapper message for
 /// [TargetWindow][google.ads.admanager.v1.TargetWindowEnum.TargetWindow].
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct TargetWindowEnum {}
 /// Nested message and enum types in `TargetWindowEnum`.
 pub mod target_window_enum {
@@ -915,9 +894,9 @@ pub mod target_window_enum {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                TargetWindow::Unspecified => "TARGET_WINDOW_UNSPECIFIED",
-                TargetWindow::Top => "TOP",
-                TargetWindow::Blank => "BLANK",
+                Self::Unspecified => "TARGET_WINDOW_UNSPECIFIED",
+                Self::Top => "TOP",
+                Self::Blank => "BLANK",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -932,7 +911,6 @@ pub mod target_window_enum {
     }
 }
 /// Frequency cap using a label.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LabelFrequencyCap {
     /// The label to used for frequency capping.
@@ -945,8 +923,7 @@ pub struct LabelFrequencyCap {
 }
 /// Wrapper message for
 /// [SmartSizeMode][google.ads.admanager.v1.SmartSizeModeEnum.SmartSizeMode].
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct SmartSizeModeEnum {}
 /// Nested message and enum types in `SmartSizeModeEnum`.
 pub mod smart_size_mode_enum {
@@ -981,10 +958,10 @@ pub mod smart_size_mode_enum {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                SmartSizeMode::Unspecified => "SMART_SIZE_MODE_UNSPECIFIED",
-                SmartSizeMode::None => "NONE",
-                SmartSizeMode::SmartBanner => "SMART_BANNER",
-                SmartSizeMode::DynamicSize => "DYNAMIC_SIZE",
+                Self::Unspecified => "SMART_SIZE_MODE_UNSPECIFIED",
+                Self::None => "NONE",
+                Self::SmartBanner => "SMART_BANNER",
+                Self::DynamicSize => "DYNAMIC_SIZE",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1000,7 +977,6 @@ pub mod smart_size_mode_enum {
     }
 }
 /// Request object for GetAdUnit method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetAdUnitRequest {
     /// Required. The resource name of the AdUnit.
@@ -1009,7 +985,6 @@ pub struct GetAdUnitRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request object for ListAdUnits method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAdUnitsRequest {
     /// Required. The parent, which owns this collection of AdUnits.
@@ -1044,7 +1019,6 @@ pub struct ListAdUnitsRequest {
     pub skip: i32,
 }
 /// Response object for ListAdUnitsRequest containing matching AdUnit resources.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAdUnitsResponse {
     /// The AdUnit from the specified network.
@@ -1070,11 +1044,17 @@ pub struct ListAdUnitsResponse {
 }
 /// Generated server implementations.
 pub mod ad_unit_service_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with AdUnitServiceServer.
     #[async_trait]
-    pub trait AdUnitService: Send + Sync + 'static {
+    pub trait AdUnitService: std::marker::Send + std::marker::Sync + 'static {
         /// API to retrieve an AdUnit object.
         async fn get_ad_unit(
             &self,
@@ -1091,20 +1071,18 @@ pub mod ad_unit_service_server {
     }
     /// Provides methods for handling AdUnit objects.
     #[derive(Debug)]
-    pub struct AdUnitServiceServer<T: AdUnitService> {
-        inner: _Inner<T>,
+    pub struct AdUnitServiceServer<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: AdUnitService> AdUnitServiceServer<T> {
+    impl<T> AdUnitServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -1154,8 +1132,8 @@ pub mod ad_unit_service_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for AdUnitServiceServer<T>
     where
         T: AdUnitService,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -1167,7 +1145,6 @@ pub mod ad_unit_service_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.ads.admanager.v1.AdUnitService/GetAdUnit" => {
                     #[allow(non_camel_case_types)]
@@ -1198,7 +1175,6 @@ pub mod ad_unit_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetAdUnitSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1244,7 +1220,6 @@ pub mod ad_unit_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListAdUnitsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1263,20 +1238,25 @@ pub mod ad_unit_service_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: AdUnitService> Clone for AdUnitServiceServer<T> {
+    impl<T> Clone for AdUnitServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -1288,18 +1268,10 @@ pub mod ad_unit_service_server {
             }
         }
     }
-    impl<T: AdUnitService> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: AdUnitService> tonic::server::NamedService for AdUnitServiceServer<T> {
-        const NAME: &'static str = "google.ads.admanager.v1.AdUnitService";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.ads.admanager.v1.AdUnitService";
+    impl<T> tonic::server::NamedService for AdUnitServiceServer<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }
 /// / AdManagerError contains all the information required for processing a
@@ -1307,7 +1279,6 @@ pub mod ad_unit_service_server {
 /// /
 /// / At least one AdManagerError should be included in all error messages sent
 /// to / the client.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AdManagerError {
     /// The unique identifying string for this error.
@@ -1331,8 +1302,7 @@ pub struct AdManagerError {
 }
 /// Wrapper message for
 /// [CompanyCreditStatus][google.ads.admanager.v1.CompanyCreditStatusEnum.CompanyCreditStatus]
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct CompanyCreditStatusEnum {}
 /// Nested message and enum types in `CompanyCreditStatusEnum`.
 pub mod company_credit_status_enum {
@@ -1417,12 +1387,12 @@ pub mod company_credit_status_enum {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                CompanyCreditStatus::Unspecified => "COMPANY_CREDIT_STATUS_UNSPECIFIED",
-                CompanyCreditStatus::Active => "ACTIVE",
-                CompanyCreditStatus::Inactive => "INACTIVE",
-                CompanyCreditStatus::OnHold => "ON_HOLD",
-                CompanyCreditStatus::Stop => "STOP",
-                CompanyCreditStatus::Blocked => "BLOCKED",
+                Self::Unspecified => "COMPANY_CREDIT_STATUS_UNSPECIFIED",
+                Self::Active => "ACTIVE",
+                Self::Inactive => "INACTIVE",
+                Self::OnHold => "ON_HOLD",
+                Self::Stop => "STOP",
+                Self::Blocked => "BLOCKED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1441,8 +1411,7 @@ pub mod company_credit_status_enum {
 }
 /// Wrapper message for
 /// [CompanyType][google.ads.admanager.v1.CompanyTypeEnum.CompanyType]
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct CompanyTypeEnum {}
 /// Nested message and enum types in `CompanyTypeEnum`.
 pub mod company_type_enum {
@@ -1483,13 +1452,13 @@ pub mod company_type_enum {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                CompanyType::Unspecified => "COMPANY_TYPE_UNSPECIFIED",
-                CompanyType::Advertiser => "ADVERTISER",
-                CompanyType::HouseAdvertiser => "HOUSE_ADVERTISER",
-                CompanyType::Agency => "AGENCY",
-                CompanyType::HouseAgency => "HOUSE_AGENCY",
-                CompanyType::AdNetwork => "AD_NETWORK",
-                CompanyType::ViewabilityProvider => "VIEWABILITY_PROVIDER",
+                Self::Unspecified => "COMPANY_TYPE_UNSPECIFIED",
+                Self::Advertiser => "ADVERTISER",
+                Self::HouseAdvertiser => "HOUSE_ADVERTISER",
+                Self::Agency => "AGENCY",
+                Self::HouseAgency => "HOUSE_AGENCY",
+                Self::AdNetwork => "AD_NETWORK",
+                Self::ViewabilityProvider => "VIEWABILITY_PROVIDER",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1508,7 +1477,6 @@ pub mod company_type_enum {
     }
 }
 /// The `Company` resource.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Company {
     /// Identifier. The resource name of the `Company`.
@@ -1575,7 +1543,6 @@ pub struct Company {
     pub applied_teams: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Request object for `GetCompany` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetCompanyRequest {
     /// Required. The resource name of the Company.
@@ -1584,7 +1551,6 @@ pub struct GetCompanyRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request object for `ListCompanies` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCompaniesRequest {
     /// Required. The parent, which owns this collection of Companies.
@@ -1620,7 +1586,6 @@ pub struct ListCompaniesRequest {
 }
 /// Response object for `ListCompaniesRequest` containing matching `Company`
 /// resources.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCompaniesResponse {
     /// The `Company` from the specified network.
@@ -1646,11 +1611,17 @@ pub struct ListCompaniesResponse {
 }
 /// Generated server implementations.
 pub mod company_service_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with CompanyServiceServer.
     #[async_trait]
-    pub trait CompanyService: Send + Sync + 'static {
+    pub trait CompanyService: std::marker::Send + std::marker::Sync + 'static {
         /// API to retrieve a `Company` object.
         async fn get_company(
             &self,
@@ -1667,20 +1638,18 @@ pub mod company_service_server {
     }
     /// Provides methods for handling `Company` objects.
     #[derive(Debug)]
-    pub struct CompanyServiceServer<T: CompanyService> {
-        inner: _Inner<T>,
+    pub struct CompanyServiceServer<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: CompanyService> CompanyServiceServer<T> {
+    impl<T> CompanyServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -1730,8 +1699,8 @@ pub mod company_service_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for CompanyServiceServer<T>
     where
         T: CompanyService,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -1743,7 +1712,6 @@ pub mod company_service_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.ads.admanager.v1.CompanyService/GetCompany" => {
                     #[allow(non_camel_case_types)]
@@ -1774,7 +1742,6 @@ pub mod company_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetCompanySvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1820,7 +1787,6 @@ pub mod company_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListCompaniesSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1839,20 +1805,25 @@ pub mod company_service_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: CompanyService> Clone for CompanyServiceServer<T> {
+    impl<T> Clone for CompanyServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -1864,24 +1835,15 @@ pub mod company_service_server {
             }
         }
     }
-    impl<T: CompanyService> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: CompanyService> tonic::server::NamedService for CompanyServiceServer<T> {
-        const NAME: &'static str = "google.ads.admanager.v1.CompanyService";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.ads.admanager.v1.CompanyService";
+    impl<T> tonic::server::NamedService for CompanyServiceServer<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }
 /// Wrapper message for
 /// [ComputedStatus][google.ads.admanager.v1.ComputedStatusEnum.ComputedStatus].
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct ComputedStatusEnum {}
 /// Nested message and enum types in `ComputedStatusEnum`.
 pub mod computed_status_enum {
@@ -1936,18 +1898,18 @@ pub mod computed_status_enum {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                ComputedStatus::Unspecified => "COMPUTED_STATUS_UNSPECIFIED",
-                ComputedStatus::DeliveryExtended => "DELIVERY_EXTENDED",
-                ComputedStatus::Delivering => "DELIVERING",
-                ComputedStatus::Ready => "READY",
-                ComputedStatus::Paused => "PAUSED",
-                ComputedStatus::Inactive => "INACTIVE",
-                ComputedStatus::PausedInventoryReleased => "PAUSED_INVENTORY_RELEASED",
-                ComputedStatus::PendingApproval => "PENDING_APPROVAL",
-                ComputedStatus::Completed => "COMPLETED",
-                ComputedStatus::Disapproved => "DISAPPROVED",
-                ComputedStatus::Draft => "DRAFT",
-                ComputedStatus::Canceled => "CANCELED",
+                Self::Unspecified => "COMPUTED_STATUS_UNSPECIFIED",
+                Self::DeliveryExtended => "DELIVERY_EXTENDED",
+                Self::Delivering => "DELIVERING",
+                Self::Ready => "READY",
+                Self::Paused => "PAUSED",
+                Self::Inactive => "INACTIVE",
+                Self::PausedInventoryReleased => "PAUSED_INVENTORY_RELEASED",
+                Self::PendingApproval => "PENDING_APPROVAL",
+                Self::Completed => "COMPLETED",
+                Self::Disapproved => "DISAPPROVED",
+                Self::Draft => "DRAFT",
+                Self::Canceled => "CANCELED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1971,7 +1933,6 @@ pub mod computed_status_enum {
     }
 }
 /// The Contact resource.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Contact {
     /// Identifier. The resource name of the Contact.
@@ -1983,7 +1944,6 @@ pub struct Contact {
     pub contact_id: i64,
 }
 /// Request object for GetContact method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetContactRequest {
     /// Required. The resource name of the Contact.
@@ -1992,7 +1952,6 @@ pub struct GetContactRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request object for ListContacts method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListContactsRequest {
     /// Required. The parent, which owns this collection of Contacts.
@@ -2028,7 +1987,6 @@ pub struct ListContactsRequest {
 }
 /// Response object for ListContactsRequest containing matching Contact
 /// resources.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListContactsResponse {
     /// The Contact from the specified network.
@@ -2054,11 +2012,17 @@ pub struct ListContactsResponse {
 }
 /// Generated server implementations.
 pub mod contact_service_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with ContactServiceServer.
     #[async_trait]
-    pub trait ContactService: Send + Sync + 'static {
+    pub trait ContactService: std::marker::Send + std::marker::Sync + 'static {
         /// API to retrieve a Contact object.
         async fn get_contact(
             &self,
@@ -2075,20 +2039,18 @@ pub mod contact_service_server {
     }
     /// Provides methods for handling Contact objects.
     #[derive(Debug)]
-    pub struct ContactServiceServer<T: ContactService> {
-        inner: _Inner<T>,
+    pub struct ContactServiceServer<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: ContactService> ContactServiceServer<T> {
+    impl<T> ContactServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -2138,8 +2100,8 @@ pub mod contact_service_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for ContactServiceServer<T>
     where
         T: ContactService,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -2151,7 +2113,6 @@ pub mod contact_service_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.ads.admanager.v1.ContactService/GetContact" => {
                     #[allow(non_camel_case_types)]
@@ -2182,7 +2143,6 @@ pub mod contact_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetContactSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -2228,7 +2188,6 @@ pub mod contact_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListContactsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -2247,20 +2206,25 @@ pub mod contact_service_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: ContactService> Clone for ContactServiceServer<T> {
+    impl<T> Clone for ContactServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -2272,24 +2236,15 @@ pub mod contact_service_server {
             }
         }
     }
-    impl<T: ContactService> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: ContactService> tonic::server::NamedService for ContactServiceServer<T> {
-        const NAME: &'static str = "google.ads.admanager.v1.ContactService";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.ads.admanager.v1.ContactService";
+    impl<T> tonic::server::NamedService for ContactServiceServer<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }
 /// Describes a slot that a creative is expected to fill. This is used in
 /// forecasting and to validate that the correct creatives are associated with
 /// the line item.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreativePlaceholder {
     /// Required. The size that the creative is expected to have.
@@ -2322,7 +2277,6 @@ pub struct CreativePlaceholder {
     pub creative_targeting_display_name: ::prost::alloc::string::String,
 }
 /// The Creative resource.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Creative {
     /// Identifier. The resource name of the Creative.
@@ -2359,7 +2313,6 @@ pub struct Creative {
     pub ad_partner_declaration: ::core::option::Option<AdPartnerDeclaration>,
 }
 /// Request object for GetCreative method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetCreativeRequest {
     /// Required. The resource name of the Creative.
@@ -2368,7 +2321,6 @@ pub struct GetCreativeRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request object for ListCreatives method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCreativesRequest {
     /// Required. The parent, which owns this collection of Creatives.
@@ -2404,7 +2356,6 @@ pub struct ListCreativesRequest {
 }
 /// Response object for ListCreativesRequest containing matching Creative
 /// resources.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCreativesResponse {
     /// The Creative from the specified network.
@@ -2430,11 +2381,17 @@ pub struct ListCreativesResponse {
 }
 /// Generated server implementations.
 pub mod creative_service_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with CreativeServiceServer.
     #[async_trait]
-    pub trait CreativeService: Send + Sync + 'static {
+    pub trait CreativeService: std::marker::Send + std::marker::Sync + 'static {
         /// API to retrieve a Creative object.
         async fn get_creative(
             &self,
@@ -2451,20 +2408,18 @@ pub mod creative_service_server {
     }
     /// Provides methods for handling Creative objects.
     #[derive(Debug)]
-    pub struct CreativeServiceServer<T: CreativeService> {
-        inner: _Inner<T>,
+    pub struct CreativeServiceServer<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: CreativeService> CreativeServiceServer<T> {
+    impl<T> CreativeServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -2514,8 +2469,8 @@ pub mod creative_service_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for CreativeServiceServer<T>
     where
         T: CreativeService,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -2527,7 +2482,6 @@ pub mod creative_service_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.ads.admanager.v1.CreativeService/GetCreative" => {
                     #[allow(non_camel_case_types)]
@@ -2558,7 +2512,6 @@ pub mod creative_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetCreativeSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -2605,7 +2558,6 @@ pub mod creative_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListCreativesSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -2624,20 +2576,25 @@ pub mod creative_service_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: CreativeService> Clone for CreativeServiceServer<T> {
+    impl<T> Clone for CreativeServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -2649,24 +2606,15 @@ pub mod creative_service_server {
             }
         }
     }
-    impl<T: CreativeService> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: CreativeService> tonic::server::NamedService for CreativeServiceServer<T> {
-        const NAME: &'static str = "google.ads.admanager.v1.CreativeService";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.ads.admanager.v1.CreativeService";
+    impl<T> tonic::server::NamedService for CreativeServiceServer<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }
 /// Wrapper message for
 /// [CustomFieldDataType][google.ads.admanager.v1.CustomFieldDataTypeEnum.CustomFieldDataType]
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct CustomFieldDataTypeEnum {}
 /// Nested message and enum types in `CustomFieldDataTypeEnum`.
 pub mod custom_field_data_type_enum {
@@ -2704,11 +2652,11 @@ pub mod custom_field_data_type_enum {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                CustomFieldDataType::Unspecified => "CUSTOM_FIELD_DATA_TYPE_UNSPECIFIED",
-                CustomFieldDataType::String => "STRING",
-                CustomFieldDataType::Number => "NUMBER",
-                CustomFieldDataType::Toggle => "TOGGLE",
-                CustomFieldDataType::DropDown => "DROP_DOWN",
+                Self::Unspecified => "CUSTOM_FIELD_DATA_TYPE_UNSPECIFIED",
+                Self::String => "STRING",
+                Self::Number => "NUMBER",
+                Self::Toggle => "TOGGLE",
+                Self::DropDown => "DROP_DOWN",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -2726,8 +2674,7 @@ pub mod custom_field_data_type_enum {
 }
 /// Wrapper message for
 /// [CustomFieldEntityType][google.ads.admanager.v1.CustomFieldEntityTypeEnum.CustomFieldEntityType]
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct CustomFieldEntityTypeEnum {}
 /// Nested message and enum types in `CustomFieldEntityTypeEnum`.
 pub mod custom_field_entity_type_enum {
@@ -2765,14 +2712,12 @@ pub mod custom_field_entity_type_enum {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                CustomFieldEntityType::Unspecified => {
-                    "CUSTOM_FIELD_ENTITY_TYPE_UNSPECIFIED"
-                }
-                CustomFieldEntityType::LineItem => "LINE_ITEM",
-                CustomFieldEntityType::Order => "ORDER",
-                CustomFieldEntityType::Creative => "CREATIVE",
-                CustomFieldEntityType::Proposal => "PROPOSAL",
-                CustomFieldEntityType::ProposalLineItem => "PROPOSAL_LINE_ITEM",
+                Self::Unspecified => "CUSTOM_FIELD_ENTITY_TYPE_UNSPECIFIED",
+                Self::LineItem => "LINE_ITEM",
+                Self::Order => "ORDER",
+                Self::Creative => "CREATIVE",
+                Self::Proposal => "PROPOSAL",
+                Self::ProposalLineItem => "PROPOSAL_LINE_ITEM",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -2791,8 +2736,7 @@ pub mod custom_field_entity_type_enum {
 }
 /// Wrapper message for
 /// [CustomFieldStatus][google.ads.admanager.v1.CustomFieldStatusEnum.CustomFieldStatus]
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct CustomFieldStatusEnum {}
 /// Nested message and enum types in `CustomFieldStatusEnum`.
 pub mod custom_field_status_enum {
@@ -2824,9 +2768,9 @@ pub mod custom_field_status_enum {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                CustomFieldStatus::Unspecified => "CUSTOM_FIELD_STATUS_UNSPECIFIED",
-                CustomFieldStatus::Active => "ACTIVE",
-                CustomFieldStatus::Inactive => "INACTIVE",
+                Self::Unspecified => "CUSTOM_FIELD_STATUS_UNSPECIFIED",
+                Self::Active => "ACTIVE",
+                Self::Inactive => "INACTIVE",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -2842,8 +2786,7 @@ pub mod custom_field_status_enum {
 }
 /// Wrapper message for
 /// [CustomFieldVisibility][google.ads.admanager.v1.CustomFieldVisibilityEnum.CustomFieldVisibility]
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct CustomFieldVisibilityEnum {}
 /// Nested message and enum types in `CustomFieldVisibilityEnum`.
 pub mod custom_field_visibility_enum {
@@ -2878,12 +2821,10 @@ pub mod custom_field_visibility_enum {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                CustomFieldVisibility::Unspecified => {
-                    "CUSTOM_FIELD_VISIBILITY_UNSPECIFIED"
-                }
-                CustomFieldVisibility::Hidden => "HIDDEN",
-                CustomFieldVisibility::ReadOnly => "READ_ONLY",
-                CustomFieldVisibility::Editable => "EDITABLE",
+                Self::Unspecified => "CUSTOM_FIELD_VISIBILITY_UNSPECIFIED",
+                Self::Hidden => "HIDDEN",
+                Self::ReadOnly => "READ_ONLY",
+                Self::Editable => "EDITABLE",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -2899,7 +2840,6 @@ pub mod custom_field_visibility_enum {
     }
 }
 /// The `CustomField` resource.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CustomField {
     /// Identifier. The resource name of the `CustomField`.
@@ -2944,7 +2884,6 @@ pub struct CustomField {
     pub options: ::prost::alloc::vec::Vec<CustomFieldOption>,
 }
 /// An option for a drop-down `CustomField`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CustomFieldOption {
     /// Output only. `CustomFieldOption` ID.
@@ -2957,7 +2896,6 @@ pub struct CustomFieldOption {
     pub display_name: ::prost::alloc::string::String,
 }
 /// Request object for `GetCustomField` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetCustomFieldRequest {
     /// Required. The resource name of the CustomField.
@@ -2966,7 +2904,6 @@ pub struct GetCustomFieldRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request object for `ListCustomFields` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCustomFieldsRequest {
     /// Required. The parent, which owns this collection of CustomFields.
@@ -3000,7 +2937,6 @@ pub struct ListCustomFieldsRequest {
 }
 /// Response object for `ListCustomFieldsRequest` containing matching
 /// `CustomField` objects.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCustomFieldsResponse {
     /// The `CustomField` objects from the specified network.
@@ -3026,11 +2962,17 @@ pub struct ListCustomFieldsResponse {
 }
 /// Generated server implementations.
 pub mod custom_field_service_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with CustomFieldServiceServer.
     #[async_trait]
-    pub trait CustomFieldService: Send + Sync + 'static {
+    pub trait CustomFieldService: std::marker::Send + std::marker::Sync + 'static {
         /// API to retrieve a `CustomField` object.
         async fn get_custom_field(
             &self,
@@ -3047,20 +2989,18 @@ pub mod custom_field_service_server {
     }
     /// Provides methods for handling `CustomField` objects.
     #[derive(Debug)]
-    pub struct CustomFieldServiceServer<T: CustomFieldService> {
-        inner: _Inner<T>,
+    pub struct CustomFieldServiceServer<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: CustomFieldService> CustomFieldServiceServer<T> {
+    impl<T> CustomFieldServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -3110,8 +3050,8 @@ pub mod custom_field_service_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for CustomFieldServiceServer<T>
     where
         T: CustomFieldService,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -3123,7 +3063,6 @@ pub mod custom_field_service_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.ads.admanager.v1.CustomFieldService/GetCustomField" => {
                     #[allow(non_camel_case_types)]
@@ -3155,7 +3094,6 @@ pub mod custom_field_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetCustomFieldSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -3205,7 +3143,6 @@ pub mod custom_field_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListCustomFieldsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -3224,20 +3161,25 @@ pub mod custom_field_service_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: CustomFieldService> Clone for CustomFieldServiceServer<T> {
+    impl<T> Clone for CustomFieldServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -3249,25 +3191,15 @@ pub mod custom_field_service_server {
             }
         }
     }
-    impl<T: CustomFieldService> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: CustomFieldService> tonic::server::NamedService
-    for CustomFieldServiceServer<T> {
-        const NAME: &'static str = "google.ads.admanager.v1.CustomFieldService";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.ads.admanager.v1.CustomFieldService";
+    impl<T> tonic::server::NamedService for CustomFieldServiceServer<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }
 /// Wrapper message for
 /// [CustomTargetingKeyStatus][google.ads.admanager.v1.CustomTargetingKeyStatusEnum.CustomTargetingKeyStatus]
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct CustomTargetingKeyStatusEnum {}
 /// Nested message and enum types in `CustomTargetingKeyStatusEnum`.
 pub mod custom_targeting_key_status_enum {
@@ -3299,11 +3231,9 @@ pub mod custom_targeting_key_status_enum {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                CustomTargetingKeyStatus::Unspecified => {
-                    "CUSTOM_TARGETING_KEY_STATUS_UNSPECIFIED"
-                }
-                CustomTargetingKeyStatus::Active => "ACTIVE",
-                CustomTargetingKeyStatus::Inactive => "INACTIVE",
+                Self::Unspecified => "CUSTOM_TARGETING_KEY_STATUS_UNSPECIFIED",
+                Self::Active => "ACTIVE",
+                Self::Inactive => "INACTIVE",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -3319,8 +3249,7 @@ pub mod custom_targeting_key_status_enum {
 }
 /// Wrapper message for
 /// [CustomTargetingKeyType][google.ads.admanager.v1.CustomTargetingKeyTypeEnum.CustomTargetingKeyType]
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct CustomTargetingKeyTypeEnum {}
 /// Nested message and enum types in `CustomTargetingKeyTypeEnum`.
 pub mod custom_targeting_key_type_enum {
@@ -3352,11 +3281,9 @@ pub mod custom_targeting_key_type_enum {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                CustomTargetingKeyType::Unspecified => {
-                    "CUSTOM_TARGETING_KEY_TYPE_UNSPECIFIED"
-                }
-                CustomTargetingKeyType::Predefined => "PREDEFINED",
-                CustomTargetingKeyType::Freeform => "FREEFORM",
+                Self::Unspecified => "CUSTOM_TARGETING_KEY_TYPE_UNSPECIFIED",
+                Self::Predefined => "PREDEFINED",
+                Self::Freeform => "FREEFORM",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -3372,8 +3299,7 @@ pub mod custom_targeting_key_type_enum {
 }
 /// Wrapper message for
 /// [CustomTargetingKeyReportableType][google.ads.admanager.v1.CustomTargetingKeyReportableTypeEnum.CustomTargetingKeyReportableType]
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct CustomTargetingKeyReportableTypeEnum {}
 /// Nested message and enum types in `CustomTargetingKeyReportableTypeEnum`.
 pub mod custom_targeting_key_reportable_type_enum {
@@ -3407,12 +3333,10 @@ pub mod custom_targeting_key_reportable_type_enum {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                CustomTargetingKeyReportableType::Unspecified => {
-                    "CUSTOM_TARGETING_KEY_REPORTABLE_TYPE_UNSPECIFIED"
-                }
-                CustomTargetingKeyReportableType::Off => "OFF",
-                CustomTargetingKeyReportableType::On => "ON",
-                CustomTargetingKeyReportableType::CustomDimension => "CUSTOM_DIMENSION",
+                Self::Unspecified => "CUSTOM_TARGETING_KEY_REPORTABLE_TYPE_UNSPECIFIED",
+                Self::Off => "OFF",
+                Self::On => "ON",
+                Self::CustomDimension => "CUSTOM_DIMENSION",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -3430,7 +3354,6 @@ pub mod custom_targeting_key_reportable_type_enum {
     }
 }
 /// The `CustomTargetingKey` resource.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CustomTargetingKey {
     /// Identifier. The resource name of the `CustomTargetingKey`.
@@ -3471,7 +3394,6 @@ pub struct CustomTargetingKey {
     pub reportable_type: i32,
 }
 /// Request object for `GetCustomTargetingKey` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetCustomTargetingKeyRequest {
     /// Required. The resource name of the CustomTargetingKey.
@@ -3481,7 +3403,6 @@ pub struct GetCustomTargetingKeyRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request object for `ListCustomTargetingKeys` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCustomTargetingKeysRequest {
     /// Required. The parent, which owns this collection of CustomTargetingKeys.
@@ -3517,7 +3438,6 @@ pub struct ListCustomTargetingKeysRequest {
 }
 /// Response object for `ListCustomTargetingKeysRequest` containing matching
 /// `CustomTargetingKey` objects.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCustomTargetingKeysResponse {
     /// The `CustomTargetingKey` objects from the specified network.
@@ -3543,11 +3463,17 @@ pub struct ListCustomTargetingKeysResponse {
 }
 /// Generated server implementations.
 pub mod custom_targeting_key_service_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with CustomTargetingKeyServiceServer.
     #[async_trait]
-    pub trait CustomTargetingKeyService: Send + Sync + 'static {
+    pub trait CustomTargetingKeyService: std::marker::Send + std::marker::Sync + 'static {
         /// API to retrieve a `CustomTargetingKey` object.
         async fn get_custom_targeting_key(
             &self,
@@ -3567,20 +3493,18 @@ pub mod custom_targeting_key_service_server {
     }
     /// Provides methods for handling `CustomTargetingKey` objects.
     #[derive(Debug)]
-    pub struct CustomTargetingKeyServiceServer<T: CustomTargetingKeyService> {
-        inner: _Inner<T>,
+    pub struct CustomTargetingKeyServiceServer<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: CustomTargetingKeyService> CustomTargetingKeyServiceServer<T> {
+    impl<T> CustomTargetingKeyServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -3631,8 +3555,8 @@ pub mod custom_targeting_key_service_server {
     for CustomTargetingKeyServiceServer<T>
     where
         T: CustomTargetingKeyService,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -3644,7 +3568,6 @@ pub mod custom_targeting_key_service_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.ads.admanager.v1.CustomTargetingKeyService/GetCustomTargetingKey" => {
                     #[allow(non_camel_case_types)]
@@ -3681,7 +3604,6 @@ pub mod custom_targeting_key_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetCustomTargetingKeySvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -3735,7 +3657,6 @@ pub mod custom_targeting_key_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListCustomTargetingKeysSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -3754,20 +3675,25 @@ pub mod custom_targeting_key_service_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: CustomTargetingKeyService> Clone for CustomTargetingKeyServiceServer<T> {
+    impl<T> Clone for CustomTargetingKeyServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -3779,25 +3705,15 @@ pub mod custom_targeting_key_service_server {
             }
         }
     }
-    impl<T: CustomTargetingKeyService> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: CustomTargetingKeyService> tonic::server::NamedService
-    for CustomTargetingKeyServiceServer<T> {
-        const NAME: &'static str = "google.ads.admanager.v1.CustomTargetingKeyService";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.ads.admanager.v1.CustomTargetingKeyService";
+    impl<T> tonic::server::NamedService for CustomTargetingKeyServiceServer<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }
 /// Wrapper message for
 /// [CustomTargetingValueStatus][google.ads.admanager.v1.CustomTargetingValueStatusEnum.CustomTargetingValueStatus]
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct CustomTargetingValueStatusEnum {}
 /// Nested message and enum types in `CustomTargetingValueStatusEnum`.
 pub mod custom_targeting_value_status_enum {
@@ -3829,11 +3745,9 @@ pub mod custom_targeting_value_status_enum {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                CustomTargetingValueStatus::Unspecified => {
-                    "CUSTOM_TARGETING_VALUE_STATUS_UNSPECIFIED"
-                }
-                CustomTargetingValueStatus::Active => "ACTIVE",
-                CustomTargetingValueStatus::Inactive => "INACTIVE",
+                Self::Unspecified => "CUSTOM_TARGETING_VALUE_STATUS_UNSPECIFIED",
+                Self::Active => "ACTIVE",
+                Self::Inactive => "INACTIVE",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -3849,8 +3763,7 @@ pub mod custom_targeting_value_status_enum {
 }
 /// Wrapper message for
 /// [CustomTargetingValueMatchType][google.ads.admanager.v1.CustomTargetingValueMatchTypeEnum.CustomTargetingValueMatchType]
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct CustomTargetingValueMatchTypeEnum {}
 /// Nested message and enum types in `CustomTargetingValueMatchTypeEnum`.
 pub mod custom_targeting_value_match_type_enum {
@@ -3911,15 +3824,13 @@ pub mod custom_targeting_value_match_type_enum {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                CustomTargetingValueMatchType::Unspecified => {
-                    "CUSTOM_TARGETING_VALUE_MATCH_TYPE_UNSPECIFIED"
-                }
-                CustomTargetingValueMatchType::Exact => "EXACT",
-                CustomTargetingValueMatchType::Broad => "BROAD",
-                CustomTargetingValueMatchType::Prefix => "PREFIX",
-                CustomTargetingValueMatchType::BroadPrefix => "BROAD_PREFIX",
-                CustomTargetingValueMatchType::Suffix => "SUFFIX",
-                CustomTargetingValueMatchType::Contains => "CONTAINS",
+                Self::Unspecified => "CUSTOM_TARGETING_VALUE_MATCH_TYPE_UNSPECIFIED",
+                Self::Exact => "EXACT",
+                Self::Broad => "BROAD",
+                Self::Prefix => "PREFIX",
+                Self::BroadPrefix => "BROAD_PREFIX",
+                Self::Suffix => "SUFFIX",
+                Self::Contains => "CONTAINS",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -3940,7 +3851,6 @@ pub mod custom_targeting_value_match_type_enum {
     }
 }
 /// The `CustomTargetingValue` resource.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CustomTargetingValue {
     /// Identifier. The resource name of the `CustomTargetingValue`.
@@ -3973,7 +3883,6 @@ pub struct CustomTargetingValue {
     pub status: i32,
 }
 /// Request object for `GetCustomTargetingValue` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetCustomTargetingValueRequest {
     /// Required. The resource name of the CustomTargetingValue.
@@ -3983,7 +3892,6 @@ pub struct GetCustomTargetingValueRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request object for `ListCustomTargetingValues` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCustomTargetingValuesRequest {
     /// Required. The parent, which owns this collection of CustomTargetingValues.
@@ -4022,7 +3930,6 @@ pub struct ListCustomTargetingValuesRequest {
 }
 /// Response object for `ListCustomTargetingValuesRequest` containing matching
 /// `CustomTargetingValue` objects.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCustomTargetingValuesResponse {
     /// The `CustomTargetingValue` objects from the specified network.
@@ -4048,11 +3955,17 @@ pub struct ListCustomTargetingValuesResponse {
 }
 /// Generated server implementations.
 pub mod custom_targeting_value_service_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with CustomTargetingValueServiceServer.
     #[async_trait]
-    pub trait CustomTargetingValueService: Send + Sync + 'static {
+    pub trait CustomTargetingValueService: std::marker::Send + std::marker::Sync + 'static {
         /// API to retrieve a `CustomTargetingValue` object.
         async fn get_custom_targeting_value(
             &self,
@@ -4072,20 +3985,18 @@ pub mod custom_targeting_value_service_server {
     }
     /// Provides methods for handling `CustomTargetingValue` objects.
     #[derive(Debug)]
-    pub struct CustomTargetingValueServiceServer<T: CustomTargetingValueService> {
-        inner: _Inner<T>,
+    pub struct CustomTargetingValueServiceServer<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: CustomTargetingValueService> CustomTargetingValueServiceServer<T> {
+    impl<T> CustomTargetingValueServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -4136,8 +4047,8 @@ pub mod custom_targeting_value_service_server {
     for CustomTargetingValueServiceServer<T>
     where
         T: CustomTargetingValueService,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -4149,7 +4060,6 @@ pub mod custom_targeting_value_service_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.ads.admanager.v1.CustomTargetingValueService/GetCustomTargetingValue" => {
                     #[allow(non_camel_case_types)]
@@ -4188,7 +4098,6 @@ pub mod custom_targeting_value_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetCustomTargetingValueSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -4243,7 +4152,6 @@ pub mod custom_targeting_value_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListCustomTargetingValuesSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -4262,20 +4170,25 @@ pub mod custom_targeting_value_service_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: CustomTargetingValueService> Clone for CustomTargetingValueServiceServer<T> {
+    impl<T> Clone for CustomTargetingValueServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -4287,26 +4200,16 @@ pub mod custom_targeting_value_service_server {
             }
         }
     }
-    impl<T: CustomTargetingValueService> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: CustomTargetingValueService> tonic::server::NamedService
-    for CustomTargetingValueServiceServer<T> {
-        const NAME: &'static str = "google.ads.admanager.v1.CustomTargetingValueService";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.ads.admanager.v1.CustomTargetingValueService";
+    impl<T> tonic::server::NamedService for CustomTargetingValueServiceServer<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }
 /// Defines the criteria a [LineItem][google.ads.admanager.v1.LineItem] needs to
 /// satisfy to meet its delivery
 ///   goal.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct Goal {
     /// The type of the goal for the LineItem. It defines the period over which the
     /// goal should be reached.
@@ -4337,8 +4240,7 @@ pub struct Goal {
 }
 /// Wrapper message for
 /// [GoalType][google.ads.admanager.v1.GoalTypeEnum.GoalType].
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct GoalTypeEnum {}
 /// Nested message and enum types in `GoalTypeEnum`.
 pub mod goal_type_enum {
@@ -4400,10 +4302,10 @@ pub mod goal_type_enum {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                GoalType::Unspecified => "GOAL_TYPE_UNSPECIFIED",
-                GoalType::None => "NONE",
-                GoalType::Lifetime => "LIFETIME",
-                GoalType::Daily => "DAILY",
+                Self::Unspecified => "GOAL_TYPE_UNSPECIFIED",
+                Self::None => "NONE",
+                Self::Lifetime => "LIFETIME",
+                Self::Daily => "DAILY",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -4420,8 +4322,7 @@ pub mod goal_type_enum {
 }
 /// Wrapper message for
 /// [UnitType][google.ads.admanager.v1.UnitTypeEnum.UnitType].
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct UnitTypeEnum {}
 /// Nested message and enum types in `UnitTypeEnum`.
 pub mod unit_type_enum {
@@ -4491,14 +4392,14 @@ pub mod unit_type_enum {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                UnitType::Unspecified => "UNIT_TYPE_UNSPECIFIED",
-                UnitType::Impressions => "IMPRESSIONS",
-                UnitType::Clicks => "CLICKS",
-                UnitType::ClickThroughCpaConversions => "CLICK_THROUGH_CPA_CONVERSIONS",
-                UnitType::ViewThroughCpaConversions => "VIEW_THROUGH_CPA_CONVERSIONS",
-                UnitType::TotalCpaConversions => "TOTAL_CPA_CONVERSIONS",
-                UnitType::ViewableImpressions => "VIEWABLE_IMPRESSIONS",
-                UnitType::InTargetImpressions => "IN_TARGET_IMPRESSIONS",
+                Self::Unspecified => "UNIT_TYPE_UNSPECIFIED",
+                Self::Impressions => "IMPRESSIONS",
+                Self::Clicks => "CLICKS",
+                Self::ClickThroughCpaConversions => "CLICK_THROUGH_CPA_CONVERSIONS",
+                Self::ViewThroughCpaConversions => "VIEW_THROUGH_CPA_CONVERSIONS",
+                Self::TotalCpaConversions => "TOTAL_CPA_CONVERSIONS",
+                Self::ViewableImpressions => "VIEWABLE_IMPRESSIONS",
+                Self::InTargetImpressions => "IN_TARGET_IMPRESSIONS",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -4518,7 +4419,6 @@ pub mod unit_type_enum {
     }
 }
 /// The Label resource.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Label {
     /// Identifier. The resource name of the Label.
@@ -4527,7 +4427,6 @@ pub struct Label {
     pub name: ::prost::alloc::string::String,
 }
 /// Request object for GetLabel method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetLabelRequest {
     /// Required. The resource name of the Label.
@@ -4536,7 +4435,6 @@ pub struct GetLabelRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request object for ListLabels method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListLabelsRequest {
     /// Required. The parent, which owns this collection of Labels.
@@ -4571,7 +4469,6 @@ pub struct ListLabelsRequest {
 }
 /// Response object for ListLabelsRequest containing matching Label
 /// resources.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListLabelsResponse {
     /// The Label from the specified network.
@@ -4597,11 +4494,17 @@ pub struct ListLabelsResponse {
 }
 /// Generated server implementations.
 pub mod label_service_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with LabelServiceServer.
     #[async_trait]
-    pub trait LabelService: Send + Sync + 'static {
+    pub trait LabelService: std::marker::Send + std::marker::Sync + 'static {
         /// API to retrieve a Label object.
         async fn get_label(
             &self,
@@ -4618,20 +4521,18 @@ pub mod label_service_server {
     }
     /// Provides methods for handling Label objects.
     #[derive(Debug)]
-    pub struct LabelServiceServer<T: LabelService> {
-        inner: _Inner<T>,
+    pub struct LabelServiceServer<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: LabelService> LabelServiceServer<T> {
+    impl<T> LabelServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -4681,8 +4582,8 @@ pub mod label_service_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for LabelServiceServer<T>
     where
         T: LabelService,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -4694,7 +4595,6 @@ pub mod label_service_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.ads.admanager.v1.LabelService/GetLabel" => {
                     #[allow(non_camel_case_types)]
@@ -4725,7 +4625,6 @@ pub mod label_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetLabelSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -4771,7 +4670,6 @@ pub mod label_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListLabelsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -4790,20 +4688,25 @@ pub mod label_service_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: LabelService> Clone for LabelServiceServer<T> {
+    impl<T> Clone for LabelServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -4815,24 +4718,15 @@ pub mod label_service_server {
             }
         }
     }
-    impl<T: LabelService> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: LabelService> tonic::server::NamedService for LabelServiceServer<T> {
-        const NAME: &'static str = "google.ads.admanager.v1.LabelService";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.ads.admanager.v1.LabelService";
+    impl<T> tonic::server::NamedService for LabelServiceServer<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }
 /// Wrapper message for
 /// [LineItemCostType][google.ads.admanager.v1.LineItemCostTypeEnum.LineItemCostType].
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct LineItemCostTypeEnum {}
 /// Nested message and enum types in `LineItemCostTypeEnum`.
 pub mod line_item_cost_type_enum {
@@ -4910,14 +4804,14 @@ pub mod line_item_cost_type_enum {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                LineItemCostType::Unspecified => "LINE_ITEM_COST_TYPE_UNSPECIFIED",
-                LineItemCostType::Cpa => "CPA",
-                LineItemCostType::Cpc => "CPC",
-                LineItemCostType::Cpd => "CPD",
-                LineItemCostType::Cpm => "CPM",
-                LineItemCostType::Vcpm => "VCPM",
-                LineItemCostType::CpmInTarget => "CPM_IN_TARGET",
-                LineItemCostType::Cpf => "CPF",
+                Self::Unspecified => "LINE_ITEM_COST_TYPE_UNSPECIFIED",
+                Self::Cpa => "CPA",
+                Self::Cpc => "CPC",
+                Self::Cpd => "CPD",
+                Self::Cpm => "CPM",
+                Self::Vcpm => "VCPM",
+                Self::CpmInTarget => "CPM_IN_TARGET",
+                Self::Cpf => "CPF",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -4938,8 +4832,7 @@ pub mod line_item_cost_type_enum {
 }
 /// Wrapper message for
 /// [CreativeRotationType][google.ads.admanager.v1.CreativeRotationTypeEnum.CreativeRotationType].
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct CreativeRotationTypeEnum {}
 /// Nested message and enum types in `CreativeRotationTypeEnum`.
 pub mod creative_rotation_type_enum {
@@ -4980,11 +4873,11 @@ pub mod creative_rotation_type_enum {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                CreativeRotationType::Unspecified => "CREATIVE_ROTATION_TYPE_UNSPECIFIED",
-                CreativeRotationType::Evenly => "EVENLY",
-                CreativeRotationType::Optimized => "OPTIMIZED",
-                CreativeRotationType::Weighted => "WEIGHTED",
-                CreativeRotationType::Sequential => "SEQUENTIAL",
+                Self::Unspecified => "CREATIVE_ROTATION_TYPE_UNSPECIFIED",
+                Self::Evenly => "EVENLY",
+                Self::Optimized => "OPTIMIZED",
+                Self::Weighted => "WEIGHTED",
+                Self::Sequential => "SEQUENTIAL",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -5002,8 +4895,7 @@ pub mod creative_rotation_type_enum {
 }
 /// Wrapper message for
 /// [DeliveryRateType][google.ads.admanager.v1.DeliveryRateTypeEnum.DeliveryRateType].
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct DeliveryRateTypeEnum {}
 /// Nested message and enum types in `DeliveryRateTypeEnum`.
 pub mod delivery_rate_type_enum {
@@ -5044,10 +4936,10 @@ pub mod delivery_rate_type_enum {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                DeliveryRateType::Unspecified => "DELIVERY_RATE_TYPE_UNSPECIFIED",
-                DeliveryRateType::Evenly => "EVENLY",
-                DeliveryRateType::Frontloaded => "FRONTLOADED",
-                DeliveryRateType::AsFastAsPossible => "AS_FAST_AS_POSSIBLE",
+                Self::Unspecified => "DELIVERY_RATE_TYPE_UNSPECIFIED",
+                Self::Evenly => "EVENLY",
+                Self::Frontloaded => "FRONTLOADED",
+                Self::AsFastAsPossible => "AS_FAST_AS_POSSIBLE",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -5064,8 +4956,7 @@ pub mod delivery_rate_type_enum {
 }
 /// Wrapper message for
 /// [LineItemDiscountType][google.ads.admanager.v1.LineItemDiscountTypeEnum.LineItemDiscountType].
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct LineItemDiscountTypeEnum {}
 /// Nested message and enum types in `LineItemDiscountTypeEnum`.
 pub mod line_item_discount_type_enum {
@@ -5097,11 +4988,9 @@ pub mod line_item_discount_type_enum {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                LineItemDiscountType::Unspecified => {
-                    "LINE_ITEM_DISCOUNT_TYPE_UNSPECIFIED"
-                }
-                LineItemDiscountType::AbsoluteValue => "ABSOLUTE_VALUE",
-                LineItemDiscountType::Percentage => "PERCENTAGE",
+                Self::Unspecified => "LINE_ITEM_DISCOUNT_TYPE_UNSPECIFIED",
+                Self::AbsoluteValue => "ABSOLUTE_VALUE",
+                Self::Percentage => "PERCENTAGE",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -5117,8 +5006,7 @@ pub mod line_item_discount_type_enum {
 }
 /// Wrapper message for
 /// [LineItemType][google.ads.admanager.v1.LineItemTypeEnum.LineItemType].
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct LineItemTypeEnum {}
 /// Nested message and enum types in `LineItemTypeEnum`.
 pub mod line_item_type_enum {
@@ -5187,20 +5075,20 @@ pub mod line_item_type_enum {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                LineItemType::Unspecified => "LINE_ITEM_TYPE_UNSPECIFIED",
-                LineItemType::Sponsorship => "SPONSORSHIP",
-                LineItemType::Standard => "STANDARD",
-                LineItemType::Network => "NETWORK",
-                LineItemType::Bulk => "BULK",
-                LineItemType::PricePriority => "PRICE_PRIORITY",
-                LineItemType::House => "HOUSE",
-                LineItemType::LegacyDfp => "LEGACY_DFP",
-                LineItemType::ClickTracking => "CLICK_TRACKING",
-                LineItemType::Adsense => "ADSENSE",
-                LineItemType::AdExchange => "AD_EXCHANGE",
-                LineItemType::Bumper => "BUMPER",
-                LineItemType::Admob => "ADMOB",
-                LineItemType::PreferredDeal => "PREFERRED_DEAL",
+                Self::Unspecified => "LINE_ITEM_TYPE_UNSPECIFIED",
+                Self::Sponsorship => "SPONSORSHIP",
+                Self::Standard => "STANDARD",
+                Self::Network => "NETWORK",
+                Self::Bulk => "BULK",
+                Self::PricePriority => "PRICE_PRIORITY",
+                Self::House => "HOUSE",
+                Self::LegacyDfp => "LEGACY_DFP",
+                Self::ClickTracking => "CLICK_TRACKING",
+                Self::Adsense => "ADSENSE",
+                Self::AdExchange => "AD_EXCHANGE",
+                Self::Bumper => "BUMPER",
+                Self::Admob => "ADMOB",
+                Self::PreferredDeal => "PREFERRED_DEAL",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -5227,8 +5115,7 @@ pub mod line_item_type_enum {
 }
 /// Wrapper message for
 /// [ReservationStatus][google.ads.admanager.v1.ReservationStatusEnum.ReservationStatus].
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct ReservationStatusEnum {}
 /// Nested message and enum types in `ReservationStatusEnum`.
 pub mod reservation_status_enum {
@@ -5260,9 +5147,9 @@ pub mod reservation_status_enum {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                ReservationStatus::Unspecified => "RESERVATION_STATUS_UNSPECIFIED",
-                ReservationStatus::Reserved => "RESERVED",
-                ReservationStatus::Unreserved => "UNRESERVED",
+                Self::Unspecified => "RESERVATION_STATUS_UNSPECIFIED",
+                Self::Reserved => "RESERVED",
+                Self::Unreserved => "UNRESERVED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -5277,7 +5164,6 @@ pub mod reservation_status_enum {
     }
 }
 /// The LineItem resource.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LineItem {
     /// Identifier. The resource name of the LineItem.
@@ -5472,7 +5358,6 @@ pub struct LineItem {
     pub impression_limit: ::core::option::Option<Goal>,
 }
 /// Request object for GetLineItem method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetLineItemRequest {
     /// Required. The resource name of the LineItem.
@@ -5482,7 +5367,6 @@ pub struct GetLineItemRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request object for ListLineItems method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListLineItemsRequest {
     /// Required. The parent, which owns this collection of LineItems.
@@ -5518,7 +5402,6 @@ pub struct ListLineItemsRequest {
 }
 /// Response object for ListLineItemsRequest containing matching LineItem
 /// resources.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListLineItemsResponse {
     /// The LineItem from the specified network.
@@ -5544,11 +5427,17 @@ pub struct ListLineItemsResponse {
 }
 /// Generated server implementations.
 pub mod line_item_service_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with LineItemServiceServer.
     #[async_trait]
-    pub trait LineItemService: Send + Sync + 'static {
+    pub trait LineItemService: std::marker::Send + std::marker::Sync + 'static {
         /// API to retrieve a LineItem object.
         async fn get_line_item(
             &self,
@@ -5565,20 +5454,18 @@ pub mod line_item_service_server {
     }
     /// Provides methods for handling LineItem objects.
     #[derive(Debug)]
-    pub struct LineItemServiceServer<T: LineItemService> {
-        inner: _Inner<T>,
+    pub struct LineItemServiceServer<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: LineItemService> LineItemServiceServer<T> {
+    impl<T> LineItemServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -5628,8 +5515,8 @@ pub mod line_item_service_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for LineItemServiceServer<T>
     where
         T: LineItemService,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -5641,7 +5528,6 @@ pub mod line_item_service_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.ads.admanager.v1.LineItemService/GetLineItem" => {
                     #[allow(non_camel_case_types)]
@@ -5672,7 +5558,6 @@ pub mod line_item_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetLineItemSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -5719,7 +5604,6 @@ pub mod line_item_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListLineItemsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -5738,20 +5622,25 @@ pub mod line_item_service_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: LineItemService> Clone for LineItemServiceServer<T> {
+    impl<T> Clone for LineItemServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -5763,22 +5652,13 @@ pub mod line_item_service_server {
             }
         }
     }
-    impl<T: LineItemService> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: LineItemService> tonic::server::NamedService for LineItemServiceServer<T> {
-        const NAME: &'static str = "google.ads.admanager.v1.LineItemService";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.ads.admanager.v1.LineItemService";
+    impl<T> tonic::server::NamedService for LineItemServiceServer<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }
 /// The Network resource.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Network {
     /// Identifier. The resource name of the Network.
@@ -5820,7 +5700,6 @@ pub struct Network {
     pub network_id: i64,
 }
 /// Request to get Network
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetNetworkRequest {
     /// Required. Resource name of Network.
@@ -5830,11 +5709,17 @@ pub struct GetNetworkRequest {
 }
 /// Generated server implementations.
 pub mod network_service_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with NetworkServiceServer.
     #[async_trait]
-    pub trait NetworkService: Send + Sync + 'static {
+    pub trait NetworkService: std::marker::Send + std::marker::Sync + 'static {
         /// API to retrieve a Network object.
         async fn get_network(
             &self,
@@ -5843,20 +5728,18 @@ pub mod network_service_server {
     }
     /// Provides methods for handling Network objects.
     #[derive(Debug)]
-    pub struct NetworkServiceServer<T: NetworkService> {
-        inner: _Inner<T>,
+    pub struct NetworkServiceServer<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: NetworkService> NetworkServiceServer<T> {
+    impl<T> NetworkServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -5906,8 +5789,8 @@ pub mod network_service_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for NetworkServiceServer<T>
     where
         T: NetworkService,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -5919,7 +5802,6 @@ pub mod network_service_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.ads.admanager.v1.NetworkService/GetNetwork" => {
                     #[allow(non_camel_case_types)]
@@ -5950,7 +5832,6 @@ pub mod network_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetNetworkSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -5969,20 +5850,25 @@ pub mod network_service_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: NetworkService> Clone for NetworkServiceServer<T> {
+    impl<T> Clone for NetworkServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -5994,22 +5880,13 @@ pub mod network_service_server {
             }
         }
     }
-    impl<T: NetworkService> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: NetworkService> tonic::server::NamedService for NetworkServiceServer<T> {
-        const NAME: &'static str = "google.ads.admanager.v1.NetworkService";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.ads.admanager.v1.NetworkService";
+    impl<T> tonic::server::NamedService for NetworkServiceServer<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }
 /// The `Order` resource.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Order {
     /// Identifier. The resource name of the `Order`.
@@ -6165,14 +6042,14 @@ pub mod order {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Status::Unspecified => "STATUS_UNSPECIFIED",
-                Status::Draft => "DRAFT",
-                Status::PendingApproval => "PENDING_APPROVAL",
-                Status::Approved => "APPROVED",
-                Status::Disapproved => "DISAPPROVED",
-                Status::Paused => "PAUSED",
-                Status::Canceled => "CANCELED",
-                Status::Deleted => "DELETED",
+                Self::Unspecified => "STATUS_UNSPECIFIED",
+                Self::Draft => "DRAFT",
+                Self::PendingApproval => "PENDING_APPROVAL",
+                Self::Approved => "APPROVED",
+                Self::Disapproved => "DISAPPROVED",
+                Self::Paused => "PAUSED",
+                Self::Canceled => "CANCELED",
+                Self::Deleted => "DELETED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -6192,7 +6069,6 @@ pub mod order {
     }
 }
 /// Request object for `GetOrder` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetOrderRequest {
     /// Required. The resource name of the Order.
@@ -6201,7 +6077,6 @@ pub struct GetOrderRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request object for `ListOrders` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListOrdersRequest {
     /// Required. The parent, which owns this collection of Orders.
@@ -6237,7 +6112,6 @@ pub struct ListOrdersRequest {
 }
 /// Response object for `ListOrdersRequest` containing matching `Order`
 /// resources.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListOrdersResponse {
     /// The `Order` from the specified network.
@@ -6263,11 +6137,17 @@ pub struct ListOrdersResponse {
 }
 /// Generated server implementations.
 pub mod order_service_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with OrderServiceServer.
     #[async_trait]
-    pub trait OrderService: Send + Sync + 'static {
+    pub trait OrderService: std::marker::Send + std::marker::Sync + 'static {
         /// API to retrieve an Order object.
         async fn get_order(
             &self,
@@ -6289,20 +6169,18 @@ pub mod order_service_server {
     }
     /// Provides methods for handling `Order` objects.
     #[derive(Debug)]
-    pub struct OrderServiceServer<T: OrderService> {
-        inner: _Inner<T>,
+    pub struct OrderServiceServer<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: OrderService> OrderServiceServer<T> {
+    impl<T> OrderServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -6352,8 +6230,8 @@ pub mod order_service_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for OrderServiceServer<T>
     where
         T: OrderService,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -6365,7 +6243,6 @@ pub mod order_service_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.ads.admanager.v1.OrderService/GetOrder" => {
                     #[allow(non_camel_case_types)]
@@ -6396,7 +6273,6 @@ pub mod order_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetOrderSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -6442,7 +6318,6 @@ pub mod order_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListOrdersSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -6461,20 +6336,25 @@ pub mod order_service_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: OrderService> Clone for OrderServiceServer<T> {
+    impl<T> Clone for OrderServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -6486,24 +6366,15 @@ pub mod order_service_server {
             }
         }
     }
-    impl<T: OrderService> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: OrderService> tonic::server::NamedService for OrderServiceServer<T> {
-        const NAME: &'static str = "google.ads.admanager.v1.OrderService";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.ads.admanager.v1.OrderService";
+    impl<T> tonic::server::NamedService for OrderServiceServer<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }
 /// Wrapper message for
 /// [PlacementStatus][google.ads.admanager.v1.PlacementStatusEnum.PlacementStatus]
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct PlacementStatusEnum {}
 /// Nested message and enum types in `PlacementStatusEnum`.
 pub mod placement_status_enum {
@@ -6537,10 +6408,10 @@ pub mod placement_status_enum {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                PlacementStatus::Unspecified => "PLACEMENT_STATUS_UNSPECIFIED",
-                PlacementStatus::Active => "ACTIVE",
-                PlacementStatus::Inactive => "INACTIVE",
-                PlacementStatus::Archived => "ARCHIVED",
+                Self::Unspecified => "PLACEMENT_STATUS_UNSPECIFIED",
+                Self::Active => "ACTIVE",
+                Self::Inactive => "INACTIVE",
+                Self::Archived => "ARCHIVED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -6556,7 +6427,6 @@ pub mod placement_status_enum {
     }
 }
 /// The `Placement` resource.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Placement {
     /// Identifier. The resource name of the `Placement`.
@@ -6591,7 +6461,6 @@ pub struct Placement {
     pub update_time: ::core::option::Option<::prost_types::Timestamp>,
 }
 /// Request object for `GetPlacement` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetPlacementRequest {
     /// Required. The resource name of the Placement.
@@ -6600,7 +6469,6 @@ pub struct GetPlacementRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request object for `ListPlacements` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListPlacementsRequest {
     /// Required. The parent, which owns this collection of Placements.
@@ -6636,7 +6504,6 @@ pub struct ListPlacementsRequest {
 }
 /// Response object for `ListPlacementsRequest` containing matching `Placement`
 /// objects.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListPlacementsResponse {
     /// The `Placement` objects from the specified network.
@@ -6662,11 +6529,17 @@ pub struct ListPlacementsResponse {
 }
 /// Generated server implementations.
 pub mod placement_service_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with PlacementServiceServer.
     #[async_trait]
-    pub trait PlacementService: Send + Sync + 'static {
+    pub trait PlacementService: std::marker::Send + std::marker::Sync + 'static {
         /// API to retrieve a `Placement` object.
         async fn get_placement(
             &self,
@@ -6683,20 +6556,18 @@ pub mod placement_service_server {
     }
     /// Provides methods for handling `Placement` objects.
     #[derive(Debug)]
-    pub struct PlacementServiceServer<T: PlacementService> {
-        inner: _Inner<T>,
+    pub struct PlacementServiceServer<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: PlacementService> PlacementServiceServer<T> {
+    impl<T> PlacementServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -6746,8 +6617,8 @@ pub mod placement_service_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for PlacementServiceServer<T>
     where
         T: PlacementService,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -6759,7 +6630,6 @@ pub mod placement_service_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.ads.admanager.v1.PlacementService/GetPlacement" => {
                     #[allow(non_camel_case_types)]
@@ -6791,7 +6661,6 @@ pub mod placement_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetPlacementSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -6838,7 +6707,6 @@ pub mod placement_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListPlacementsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -6857,20 +6725,25 @@ pub mod placement_service_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: PlacementService> Clone for PlacementServiceServer<T> {
+    impl<T> Clone for PlacementServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -6882,22 +6755,13 @@ pub mod placement_service_server {
             }
         }
     }
-    impl<T: PlacementService> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: PlacementService> tonic::server::NamedService for PlacementServiceServer<T> {
-        const NAME: &'static str = "google.ads.admanager.v1.PlacementService";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.ads.admanager.v1.PlacementService";
+    impl<T> tonic::server::NamedService for PlacementServiceServer<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }
 /// The Report resource.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Report {
     /// Identifier. The resource name of the Report.
@@ -6907,7 +6771,6 @@ pub struct Report {
     pub name: ::prost::alloc::string::String,
 }
 /// Request proto for the configuration of a report run.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExportSavedReportRequest {
     /// The name of a particular saved report resource.
@@ -6975,10 +6838,10 @@ pub mod export_saved_report_request {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Format::Unspecified => "FORMAT_UNSPECIFIED",
-                Format::CsvDump => "CSV_DUMP",
-                Format::Xlsx => "XLSX",
-                Format::Xml => "XML",
+                Self::Unspecified => "FORMAT_UNSPECIFIED",
+                Self::CsvDump => "CSV_DUMP",
+                Self::Xlsx => "XLSX",
+                Self::Xml => "XML",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -6995,8 +6858,7 @@ pub mod export_saved_report_request {
 }
 /// The message stored in the google.longrunning.Operation.metadata field.
 /// Contains metadata regarding this execution.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct ExportSavedReportMetadata {
     /// The result generated in this report run.
     #[prost(int64, tag = "1")]
@@ -7004,7 +6866,6 @@ pub struct ExportSavedReportMetadata {
 }
 /// Message included in the longrunning Operation result.response field when
 /// the report completes successfully.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExportSavedReportResponse {
     /// The link to the exported file.
@@ -7013,11 +6874,17 @@ pub struct ExportSavedReportResponse {
 }
 /// Generated server implementations.
 pub mod report_service_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with ReportServiceServer.
     #[async_trait]
-    pub trait ReportService: Send + Sync + 'static {
+    pub trait ReportService: std::marker::Send + std::marker::Sync + 'static {
         /// Initiates the execution and export of a report asynchronously. Users can
         /// get the report by polling this operation via
         /// OperationsService.GetOperation.
@@ -7034,20 +6901,18 @@ pub mod report_service_server {
     }
     /// Provides methods for interacting with Reports.
     #[derive(Debug)]
-    pub struct ReportServiceServer<T: ReportService> {
-        inner: _Inner<T>,
+    pub struct ReportServiceServer<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: ReportService> ReportServiceServer<T> {
+    impl<T> ReportServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -7097,8 +6962,8 @@ pub mod report_service_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for ReportServiceServer<T>
     where
         T: ReportService,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -7110,7 +6975,6 @@ pub mod report_service_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.ads.admanager.v1.ReportService/ExportSavedReport" => {
                     #[allow(non_camel_case_types)]
@@ -7142,7 +7006,6 @@ pub mod report_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ExportSavedReportSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -7161,20 +7024,25 @@ pub mod report_service_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: ReportService> Clone for ReportServiceServer<T> {
+    impl<T> Clone for ReportServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -7186,22 +7054,13 @@ pub mod report_service_server {
             }
         }
     }
-    impl<T: ReportService> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: ReportService> tonic::server::NamedService for ReportServiceServer<T> {
-        const NAME: &'static str = "google.ads.admanager.v1.ReportService";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.ads.admanager.v1.ReportService";
+    impl<T> tonic::server::NamedService for ReportServiceServer<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }
 /// The Role resource.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Role {
     /// Identifier. The resource name of the Role.
@@ -7210,7 +7069,6 @@ pub struct Role {
     pub name: ::prost::alloc::string::String,
 }
 /// Request object for GetRole method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetRoleRequest {
     /// Required. The resource name of the Role.
@@ -7219,7 +7077,6 @@ pub struct GetRoleRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request object for ListRoles method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListRolesRequest {
     /// Required. The parent, which owns this collection of Roles.
@@ -7254,7 +7111,6 @@ pub struct ListRolesRequest {
 }
 /// Response object for ListRolesRequest containing matching Role
 /// resources.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListRolesResponse {
     /// The Role from the specified network.
@@ -7280,11 +7136,17 @@ pub struct ListRolesResponse {
 }
 /// Generated server implementations.
 pub mod role_service_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with RoleServiceServer.
     #[async_trait]
-    pub trait RoleService: Send + Sync + 'static {
+    pub trait RoleService: std::marker::Send + std::marker::Sync + 'static {
         /// API to retrieve a Role object.
         async fn get_role(
             &self,
@@ -7301,20 +7163,18 @@ pub mod role_service_server {
     }
     /// Provides methods for handling Role objects.
     #[derive(Debug)]
-    pub struct RoleServiceServer<T: RoleService> {
-        inner: _Inner<T>,
+    pub struct RoleServiceServer<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: RoleService> RoleServiceServer<T> {
+    impl<T> RoleServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -7364,8 +7224,8 @@ pub mod role_service_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for RoleServiceServer<T>
     where
         T: RoleService,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -7377,7 +7237,6 @@ pub mod role_service_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.ads.admanager.v1.RoleService/GetRole" => {
                     #[allow(non_camel_case_types)]
@@ -7408,7 +7267,6 @@ pub mod role_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetRoleSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -7454,7 +7312,6 @@ pub mod role_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListRolesSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -7473,20 +7330,25 @@ pub mod role_service_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: RoleService> Clone for RoleServiceServer<T> {
+    impl<T> Clone for RoleServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -7498,22 +7360,13 @@ pub mod role_service_server {
             }
         }
     }
-    impl<T: RoleService> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: RoleService> tonic::server::NamedService for RoleServiceServer<T> {
-        const NAME: &'static str = "google.ads.admanager.v1.RoleService";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.ads.admanager.v1.RoleService";
+    impl<T> tonic::server::NamedService for RoleServiceServer<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }
 /// The Team resource.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Team {
     /// Identifier. The resource name of the Team.
@@ -7522,7 +7375,6 @@ pub struct Team {
     pub name: ::prost::alloc::string::String,
 }
 /// Request object for GetTeam method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetTeamRequest {
     /// Required. The resource name of the Team.
@@ -7531,7 +7383,6 @@ pub struct GetTeamRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request object for ListTeams method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListTeamsRequest {
     /// Required. The parent, which owns this collection of Teams.
@@ -7566,7 +7417,6 @@ pub struct ListTeamsRequest {
 }
 /// Response object for ListTeamsRequest containing matching Team
 /// resources.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListTeamsResponse {
     /// The Team from the specified network.
@@ -7592,11 +7442,17 @@ pub struct ListTeamsResponse {
 }
 /// Generated server implementations.
 pub mod team_service_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with TeamServiceServer.
     #[async_trait]
-    pub trait TeamService: Send + Sync + 'static {
+    pub trait TeamService: std::marker::Send + std::marker::Sync + 'static {
         /// API to retrieve a Team object.
         async fn get_team(
             &self,
@@ -7613,20 +7469,18 @@ pub mod team_service_server {
     }
     /// Provides methods for handling Team objects.
     #[derive(Debug)]
-    pub struct TeamServiceServer<T: TeamService> {
-        inner: _Inner<T>,
+    pub struct TeamServiceServer<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: TeamService> TeamServiceServer<T> {
+    impl<T> TeamServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -7676,8 +7530,8 @@ pub mod team_service_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for TeamServiceServer<T>
     where
         T: TeamService,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -7689,7 +7543,6 @@ pub mod team_service_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.ads.admanager.v1.TeamService/GetTeam" => {
                     #[allow(non_camel_case_types)]
@@ -7720,7 +7573,6 @@ pub mod team_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetTeamSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -7766,7 +7618,6 @@ pub mod team_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListTeamsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -7785,20 +7636,25 @@ pub mod team_service_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: TeamService> Clone for TeamServiceServer<T> {
+    impl<T> Clone for TeamServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -7810,22 +7666,13 @@ pub mod team_service_server {
             }
         }
     }
-    impl<T: TeamService> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: TeamService> tonic::server::NamedService for TeamServiceServer<T> {
-        const NAME: &'static str = "google.ads.admanager.v1.TeamService";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.ads.admanager.v1.TeamService";
+    impl<T> tonic::server::NamedService for TeamServiceServer<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }
 /// The User resource.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct User {
     /// Identifier. The resource name of the User.
@@ -7867,7 +7714,6 @@ pub struct User {
     pub orders_ui_local_time_zone: ::prost::alloc::string::String,
 }
 /// Request object for GetUser method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetUserRequest {
     /// Required. The resource name of the User.
@@ -7876,7 +7722,6 @@ pub struct GetUserRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request object for ListUsers method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListUsersRequest {
     /// Required. The parent, which owns this collection of Users.
@@ -7910,7 +7755,6 @@ pub struct ListUsersRequest {
     pub skip: i32,
 }
 /// Response object for ListUsersRequest containing matching User resources.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListUsersResponse {
     /// The User from the specified network.
@@ -7936,11 +7780,17 @@ pub struct ListUsersResponse {
 }
 /// Generated server implementations.
 pub mod user_service_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with UserServiceServer.
     #[async_trait]
-    pub trait UserService: Send + Sync + 'static {
+    pub trait UserService: std::marker::Send + std::marker::Sync + 'static {
         /// API to retrieve a User object.
         async fn get_user(
             &self,
@@ -7957,20 +7807,18 @@ pub mod user_service_server {
     }
     /// Provides methods for handling User objects.
     #[derive(Debug)]
-    pub struct UserServiceServer<T: UserService> {
-        inner: _Inner<T>,
+    pub struct UserServiceServer<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: UserService> UserServiceServer<T> {
+    impl<T> UserServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -8020,8 +7868,8 @@ pub mod user_service_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for UserServiceServer<T>
     where
         T: UserService,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -8033,7 +7881,6 @@ pub mod user_service_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/google.ads.admanager.v1.UserService/GetUser" => {
                     #[allow(non_camel_case_types)]
@@ -8064,7 +7911,6 @@ pub mod user_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetUserSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -8110,7 +7956,6 @@ pub mod user_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ListUsersSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -8129,20 +7974,25 @@ pub mod user_service_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: UserService> Clone for UserServiceServer<T> {
+    impl<T> Clone for UserServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -8154,17 +8004,9 @@ pub mod user_service_server {
             }
         }
     }
-    impl<T: UserService> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: UserService> tonic::server::NamedService for UserServiceServer<T> {
-        const NAME: &'static str = "google.ads.admanager.v1.UserService";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "google.ads.admanager.v1.UserService";
+    impl<T> tonic::server::NamedService for UserServiceServer<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }
